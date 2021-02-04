@@ -1,0 +1,37 @@
+{
+  "name": "egenie-code-style",
+  "version": "0.0.0",
+  "description": "code style rule",
+  "main": "lib/index.js",
+  "keywords": [
+    "reactEslintRule",
+    "prettierRule",
+    "styleLintRule"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@commitlint/config-conventional": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "babel-eslint": "^10.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+    "stylelint-order": "^4.1.0"
+  },
+  "peerDependencies": {
+    "eslint": "^7.x",
+    "prettier": "^2.x",
+    "stylelint": "^13.x"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
