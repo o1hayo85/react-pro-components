@@ -123,10 +123,6 @@ module.exports = {
     2,
     'always',
   ],
-  'multiline-comment-style': [
-    2,
-    'bare-block',
-  ],
   'new-cap': 0,
   'new-parens': 2,
   'newline-per-chained-call': [
