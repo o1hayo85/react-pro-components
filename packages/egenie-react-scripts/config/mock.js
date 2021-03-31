@@ -1,5 +1,4 @@
 const assert = require('assert');
-const path = require('path');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const chokidar = require('chokidar');
@@ -105,7 +104,7 @@ function realApplyMock(devServer) {
     );
 
     mockRules.push({
-      path: path.resolve(keyParsed.path, '.'),
+      path: keyParsed.path,
       method: keyParsed.method,
       target: value,
     });

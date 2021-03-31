@@ -35,6 +35,8 @@ module.exports = function(proxy, allowedHost) {
     // Enable gzip compression of generated files.
     compress: true,
 
+    headers: { 'Access-Control-Allow-Origin': '*' },
+
     /*
      * Silence WebpackDevServer's own logs since they're generally not useful.
      * It will still show compile warnings and errors with this setting.
@@ -58,7 +60,7 @@ module.exports = function(proxy, allowedHost) {
      * use an image, put it in `src` and `import` it from JavaScript instead.
      */
     contentBase: paths.appPublic,
-    contentBasePublicPath: paths.publicUrlOrPath,
+    contentBasePublicPath: utils.publicUrlOrPath,
 
     // By default files from `contentBase` will not trigger a page reload.
     watchContentBase: true,
@@ -99,7 +101,7 @@ module.exports = function(proxy, allowedHost) {
      * from the root.
      * remove last slash so user can land on `/test` instead of `/test/`
      */
-    publicPath: paths.publicUrlOrPath.slice(0, -1),
+    publicPath: utils.publicUrlOrPath.slice(0, -1),
 
     /*
      * WebpackDevServer is noisy by default so we emit custom message instead
@@ -126,7 +128,7 @@ module.exports = function(proxy, allowedHost) {
        * See https://github.com/facebook/create-react-app/issues/387.
        */
       disableDotRule: true,
-      index: paths.publicUrlOrPath,
+      index: utils.publicUrlOrPath,
     },
     public: allowedHost,
 
@@ -153,7 +155,7 @@ module.exports = function(proxy, allowedHost) {
     },
     after(app) {
       // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
-      app.use(redirectServedPath(paths.publicUrlOrPath));
+      app.use(redirectServedPath(utils.publicUrlOrPath));
 
       /*
        * This service worker file is effectively a 'no-op' that will reset any
@@ -162,7 +164,7 @@ module.exports = function(proxy, allowedHost) {
        * it used the same host and port.
        * https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
        */
-      app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+      app.use(noopServiceWorkerMiddleware(utils.publicUrlOrPath));
     },
   };
 };
