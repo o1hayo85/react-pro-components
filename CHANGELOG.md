@@ -1,8 +1,9 @@
-# 0.0.0 (2021-04-07)
+# 0.0.0 (2021-04-20)
 
 ### Bug Fixes
 
 - **react-scripts:** 解决 ts 和 js 混用 ([7e236ca](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7e236ca57f897ea10bf8de2635915df64152eec4))
+- **react-scripts:** 解决文件重命名问题 ([5f7ef95](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5f7ef9506f4da8674b95fa57a6f8ce91ff1c9df5))
 
 ### Features
 

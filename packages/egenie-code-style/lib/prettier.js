@@ -15,11 +15,11 @@ module.exports = {
   overrides: [
     {
       files: '.prettierrc',
-      options: { parser: 'json' },
+      options: {parser: 'json'},
     },
     {
       files: '*.ejs',
-      options: { parser: 'html' },
+      options: {parser: 'html'},
     },
   ],
 };

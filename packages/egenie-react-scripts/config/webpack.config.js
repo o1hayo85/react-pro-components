@@ -26,7 +26,11 @@ const utils = require('./utils');
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 module.exports = function() {
   const initConfig = {
-    cache: { type: utils.isProduction ? 'filesystem' : 'memory' },
+    cache: utils.isProduction ? {
+      type: 'filesystem',
+      cacheDirectory: path.resolve(paths.appPath, '.cache'),
+    } : { type: 'memory' },
+
     mode: utils.isProduction ? 'production' : utils.isDevelopment && 'development',
 
     // Stop compilation early in production
