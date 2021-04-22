@@ -3169,7 +3169,7 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
-file-loader@6.2.0:
+file-loader@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npm.taobao.org/file-loader/download/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
   integrity sha1-uu98+OGEDfMl5DkLRISHlIDuvk0=
@@ -7561,7 +7561,7 @@ urix@^0.1.0:
 
 url-loader@4.1.1:
   version "4.1.1"
-  resolved "https://registry.npm.taobao.org/url-loader/download/url-loader-4.1.1.tgz#28505e905cae158cf07c92ca622d7f237e70a4e2"
+  resolved "https://registry.nlark.com/url-loader/download/url-loader-4.1.1.tgz#28505e905cae158cf07c92ca622d7f237e70a4e2"
   integrity sha1-KFBekFyuFYzwfJLKYi1/I35wpOI=
   dependencies:
     loader-utils "^2.0.0"
