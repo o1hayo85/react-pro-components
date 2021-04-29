@@ -1,0 +1,5 @@
+public
+dist
+coverage
+**/lib
+packages/egenie-utils/docs

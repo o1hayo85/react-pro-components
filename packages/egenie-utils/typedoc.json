@@ -1,0 +1,26 @@
+{
+  "entryPoints": [
+    "src/utils/request.ts",
+    "src/utils/helper/index.ts",
+    "src/utils/programme/programme.tsx",
+    "src/utils/programme/normalProgramme.tsx",
+    "src/utils/programme/filterItems/filterItems.tsx",
+    "src/utils/programme/filterItems/filterInputOrSelect.tsx",
+    "src/utils/programme/filterItems/common.ts",
+    "src/utils/programme/filterItems/filterCheckbox.tsx",
+    "src/utils/programme/filterItems/filterDate.tsx",
+    "src/utils/programme/filterItems/filterInputAndSelect.tsx",
+    "src/utils/programme/filterItems/filterInputNumberGroup.tsx",
+    "src/utils/programme/filterItems/filterRadio.tsx",
+    "src/utils/programme/filterItems/filterSelect.tsx",
+    "src/utils/programme/filterItems/filterInput.tsx",
+    "src/utils/programme/filterItems/filterCascader.tsx",
+    "src/utils/renderModal.ts",
+    "src/utils/batchReport/index.tsx"
+  ],
+  "out": "docs",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "name": "组件文档"
+}
