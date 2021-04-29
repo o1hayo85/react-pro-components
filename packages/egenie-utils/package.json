@@ -1,10 +1,9 @@
 {
   "name": "egenie-utils",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "license": "MIT",
   "main": "index.ts",
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.16",
     "@types/lodash": "^4.14.165",
