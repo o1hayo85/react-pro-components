@@ -1,5 +1,3 @@
-import { ValueAndLabelData } from '../programme';
-
 /**
  * 格式化number
  * @param num 数字
@@ -122,7 +120,7 @@ export interface DictData {
  * object转成字典数据格式
  * @param obj
  */
-export function objToDict(obj: DictData): ValueAndLabelData {
+export function objToDict(obj: DictData): Array<{ value: string; label: string; [key: string]: any; }> {
   return Object.entries(obj || {})
     .map(([
       value,
