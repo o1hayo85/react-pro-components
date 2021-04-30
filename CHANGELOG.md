@@ -22,3 +22,4 @@
 - **react-scripts:** 将 preload 改为 prefetch ([0b5079e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0b5079e591c43d6710fe310ec53b6dc5621fe9e8))
 - **react-scripts:** 解决 css 前缀自动被去掉。统一换行符格式,暂时在项目不更新 ([f431e33](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f431e3384dd248f8c51624065e4a0d39eb465aa1))
 - **react-scripts:** 解决 htmlWebpackPlugin 缓存问题 ([82acf12](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/82acf1247f70f2063b7c4a2575c75beb66f1bebf))
+- **utils:** 调整结构 ([8af23c5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8af23c584679073e4d19480c9de6870d0ec99407))
