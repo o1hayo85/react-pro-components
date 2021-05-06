@@ -18,6 +18,7 @@
 - **code-style:** 去掉废弃 ([d4c91d2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d4c91d2055b67040f7ce7a18d9bf9d0663c77cf3))
 - **packages:** add react-scripts test ([937bc0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/937bc0a9449fde173565606d6472f121c7da44d2))
 - **react-scripts:** update config ([72fcd0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/72fcd0a65460d80e893a056dd34c02c8e3f9c4de))
+- **react-scripts:** 优化打包时间 ([b6c9719](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b6c9719d1f1346062e9e89402f55dd63ac157e7c))
 - **react-scripts:** 内联 px2rem ([476983d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/476983d37bb26cee7eafdba30f844d40797b9d5a))
 - **react-scripts:** 将 file-loader 换为 url-loader ([74ae9e1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/74ae9e1e71389e5a251ca2a8df9fd371e9c8ce46))
 - **react-scripts:** 将 preload 改为 prefetch ([0b5079e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0b5079e591c43d6710fe310ec53b6dc5621fe9e8))
