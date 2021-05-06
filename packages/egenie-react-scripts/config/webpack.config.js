@@ -94,12 +94,6 @@ module.exports = function() {
       new CaseSensitivePathsPlugin(),
       utils.isDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
 
-      // ignore moment locale file
-      new webpack.IgnorePlugin({
-        resourceRegExp: /^\.\/locale$/,
-        contextRegExp: /moment$/,
-      }),
-
       // zip css with content hash
       utils.isProduction && new MiniCssExtractPlugin({
         filename: `${utils.resourceName.css}/[name].[contenthash].css`,
@@ -113,7 +107,7 @@ module.exports = function() {
       }),
 
       // gzip压缩
-      utils.isProduction && new compressionPlugin({
+      utils.isCompress && utils.isProduction && new compressionPlugin({
         filename: '[path][base].gz',
         test: /\.(js|css|html|svg)$/,
         algorithm: 'gzip',
@@ -125,7 +119,7 @@ module.exports = function() {
       }),
 
       // br压缩
-      utils.isProduction && parseInt(process.versions.node, 10) >= 12 && new compressionPlugin({
+      utils.isCompress && utils.isProduction && parseInt(process.versions.node, 10) >= 12 && new compressionPlugin({
         filename: '[path][base].br',
         algorithm: 'brotliCompress',
         test: /\.(js|css|html|svg)$/,

@@ -1,4 +1,4 @@
-# 0.0.0 (2021-04-30)
+# 0.0.0 (2021-05-06)
 
 ### Bug Fixes
 
@@ -13,6 +13,7 @@
 - migrate postcss plugin ([e430971](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e43097165a8f23729933abec74e962e6cb334dc8))
 - update eslint rule. update babel.config (mobile) update react-scripts (pxtorem and esbuild) ([15e76f7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e76f7ab047627960e77e9ebf05a39c961d6248))
 - 删除 lerna ([cd3e17e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cd3e17e7faf49b766e7551ac0e485552e484f862))
+- **babel-config:** remove plugin which included in preset-env ([ca27526](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ca27526b1895d30592d696e2ca12aac520daa7ce))
 - **code-style:** 兼容 windows 系统换行符、新增对象空格、操作符空格 ([bc3c57a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bc3c57a279dd1249ed83689cc6676ec5cadd400c))
 - **code-style:** 去掉废弃 ([d4c91d2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d4c91d2055b67040f7ce7a18d9bf9d0663c77cf3))
 - **packages:** add react-scripts test ([937bc0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/937bc0a9449fde173565606d6472f121c7da44d2))
