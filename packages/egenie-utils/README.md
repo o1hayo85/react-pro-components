@@ -299,7 +299,7 @@ printHelper.getPrinters().then((info) => {console.log(info)})
 printHelper.print({
   preview: false,
   printer: 打印机,
-  templateData: 后端返的模版数据),
+  templateData: 后端返的模版数据,
   contents: 后端返的数据,
 })
 ```
