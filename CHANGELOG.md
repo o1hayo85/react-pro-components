@@ -21,6 +21,7 @@
 - **packages:** add react-scripts test ([937bc0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/937bc0a9449fde173565606d6472f121c7da44d2))
 - **react-config:** extract postcss config ([a77976b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a77976b379618bb8609f700d14eaffd96915d36f))
 - **react-scripts:** migrate eslint-loader to eslint-webpack-plugin ([97b6d9d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b6d9da3d6f73bfb7239fe2eeab5e09cd16aa8f))
+- **react-scripts:** update cache type ([dad70a4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dad70a45055871cf83f10dcec2f47d4a6d8a7d85))
 - **react-scripts:** update config ([72fcd0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/72fcd0a65460d80e893a056dd34c02c8e3f9c4de))
 - **react-scripts:** 优化打包时间 ([b6c9719](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b6c9719d1f1346062e9e89402f55dd63ac157e7c))
 - **react-scripts:** 内联 px2rem ([476983d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/476983d37bb26cee7eafdba30f844d40797b9d5a))
