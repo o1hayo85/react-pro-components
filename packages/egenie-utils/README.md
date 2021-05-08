@@ -1,18 +1,41 @@
-## 创建查询方案
+## 查询项关键简介
+
+1. 关键字段说明
+
+- type 区分类型
+- field 区分每一个查询项。不可重复
+- label 为显示文字。不可重复
+- data 为数据的依赖
+- toProgramme 创建查询方案时对每个查询项值的处理
+- toParams 对外暴露的 params 的处理
+- formatValue 格式化查询项值
+- reset 查询项重置
+
+2. FilterBase 类。查询项基本类。抽取统一的字段和方法
+3. filterXXX。某个查询项类型。包括 model 和 component
+
+- model 继承 FilterBase，不同配置在 model 内部实现(toProgramme、toParams、formatValue、reset 等)
+
+4. FilterItems 类是对 FilterXXX 的 model 层管理，不实现组件，组件由具体的查询方案实现。具体配置参考说明文档
+
+## 左右查询方案
+
+1. 创建
 
 ```
-import { observer } from 'mobx-react';
+import { Programme, ProgrammeComponent, MainSubStructureModel } from 'egenie-utils';
 import React from 'react';
-import { Programme, ProgrammeComponent } from '../../utils';
 
-@observer
 export default class extends React.Component {
-  programme = new Programme({
-    gridModel: {
-      primaryKeyField: 'a',
-      columns: [],
+  public programme = new Programme({
+    gridModel: new MainSubStructureModel({
+      grid: {
+        primaryKeyField: 'a',
+        columns: [],
+      },
       api: { onQuery: () => Promise.resolve() },
-    },
+    }),
+
     fieldMap: {
       courier: 'courier_id-4-14',
       shop: 'shop_id-4-10',
@@ -26,6 +49,8 @@ export default class extends React.Component {
         selectValue: 'sale_order_status.pay_time',
         data: [
           {
+            // 下拉框加日期控件标识
+            showSelect: true,
             value: 'sale_order_status.pay_time',
             label: '付款时间',
           },
@@ -39,31 +64,13 @@ export default class extends React.Component {
           {
             value: 'sale_order_no-14-10',
             label: '订单号',
-            showInput: true
+
+            // 可选，可输入的标识
+            showInput: true,
           },
           {
             value: 'platform_order_code-15-10',
             label: '平台单号',
-          },
-        ],
-      },
-      {
-        type: 'radio',
-        label: '审核',
-        field: 'is_checked-3-1',
-        value: '',
-        data: [
-          {
-            value: '',
-            label: '全部',
-          },
-          {
-            value: 'true',
-            label: '已审核',
-          },
-          {
-            value: 'false',
-            label: '未审核',
           },
         ],
       },
@@ -75,14 +82,17 @@ export default class extends React.Component {
       },
       {
         type: 'select',
-        label: '支付方式',
-        field: 'pay_type-4-1',
-      },
-      {
-        type: 'select',
+
+        // 多选标识
         mode: 'multiple',
         label: '店铺',
         field: 'shop_id-4-10',
+        data: [],
+      },
+      {
+        type: 'select',
+        label: '级联',
+        field: 'cascader',
         data: [],
       },
       {
@@ -95,6 +105,24 @@ export default class extends React.Component {
         field: 'total_num-2-10',
         label: '宝贝数量',
       },
+      {
+        // 下拉框加输入框
+        type: 'inputAndSelect',
+        label: '单号',
+        field: 'wmsReceiveSourceType',
+        selectValue: 'wmsReceiveOrderNo',
+        placeholder: '来源单号/收货单编号',
+        data: [
+          {
+            value: 'sourceNo',
+            label: '来源单号',
+          },
+          {
+            value: 'wmsReceiveOrderNo',
+            label: '收货单编号',
+          },
+        ],
+      },
     ],
     moduleName: 'OMSOrders',
     dictList: 'order_type,blacklist_type,purchase_state_type,courier_print_mark_state,sku_purchase_state_type,origin_type,pay_type,cn_service,trade_from,system_order_state',
@@ -105,7 +133,6 @@ export default class extends React.Component {
     return <ProgrammeComponent store={this.programme}/>;
   }
 }
-
 ```
 
 - gridModel 为表格参数，详见表格文档
@@ -115,25 +142,25 @@ export default class extends React.Component {
 - radio。data 加参数 showInput 字段可以变为原来的 mixedInput
 - inputNumberGroup。也支持左侧下拉框选择。需要传入 data。和 date 类似
 
-## 更新查询项的值。以上面为基础
+2. 更新查询项的值。以上面为基础
 
 ```
 this.programme.filterItems.updateFilterItem(详见组件文档)
 ```
 
-## 动态添加查询项的值。以上面为基础
+3. 动态添加查询项的值。以上面为基础
 
 ```
 this.programme.filterItems.addItem(详见组件文档)
 ```
 
-## 获取查询项的参数。以上面为基础
+4. 获取查询项的参数。以上面为基础
 
 ```
 this.programme.filterItems.params
 ```
 
-## 设置查询项的数据。以上面为基础
+5. 设置查询项的数据。以上面为基础
 
 - 查询方案构造函数传入 dict 参数。key 和 item 的 field 对应
 - 组件内部设置。data 属性传入即可
@@ -144,7 +171,7 @@ this.programme.filterItems.params
 this.programme.filterItems.addDict({"is_checked-3-1": []})
 ```
 
-## 跳转页面，从 url 带入 item 默认的 value 时 url 拼接方式
+6. 跳转页面，从 url 带入 item 默认的 value 时 url 拼接方式
 
 - field 为 item 的 field。value 为带入的值。值为数组的需要转成 string 以,拼接
 - 常规: field=value
@@ -154,12 +181,13 @@ this.programme.filterItems.addDict({"is_checked-3-1": []})
 
 ## 创建一般查询方案(只含有查询项)
 
+1. 定义 model
+
 ```
-# 定义model
 import { Card } from 'antd';
-import { NormalProgramme, NormalProgrammeComponent } from './utils';
+import { NormalProgramme, NormalProgrammeComponent } from 'egenie-utils';
 const programme = new NormalProgramme({
-  // 查询项配置。和主子表配置一样
+  // 查询项配置。和左右查询方案配置一样
   filterItems: [],
 
   // 点击搜索回掉
@@ -168,9 +196,13 @@ const programme = new NormalProgramme({
   // 一行显示个数
   count: 5
 });
+```
 
-# 渲染组件。store为上一步定义的model
-# 布局一般用antd的卡片布局。现在card的布局抽离出去了
+2. 渲染组件
+
+```
+// store为上一步定义的model
+// 外层布局请自写。一般用antd的Card
 <Card>
   <NormalProgrammeComponent store={programme}/>
 <Card/>
@@ -217,21 +249,63 @@ renderModal(
 
 ## 复制(不要每个页面都复制一遍)
 
-- react 复制组件(react-copy-to-clipboard)
+1. react 复制组件(react-copy-to-clipboard)
 
 ```
+import { message } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 <CopyToClipboard
-  onCopy="回掉"
-  text="文字"
+  onCopy={() => message.success({
+    content: '复制成功',
+    key: id,
+  })}
+  text={文本}
 >
-  111
+  <span>
+    文本
+    &nbsp;
+    <i className="icon-copy"/>
+  </span>
 </CopyToClipboard>
 ```
 
-- 直接复制(copy-to-clipboard)
+2. 直接复制(copy-to-clipboard)
 
 ```
 import copy from 'copy-to-clipboard';
 copy('复制文字');
+```
+
+## 打印
+
+1. 实现关键简介
+
+- [菜鸟打印文档](https://www.cnblogs.com/micro-chen/p/8420944.html)
+- 首先对菜鸟、pdd、京东、新的插件打印做底层 ws 层或者插件层的封装(没有业务)。对外暴露 getPrinters、print 方法。具体由内部实现。如 RookieAndPddPrint 类
+- PrintHelper 类。对所有打印做管理，提供 getPrinters、print。处理一些通用的数据逻辑。采用状态模式。**具体调用 printHelper.print 的时候一定要切换打印类型(toggleToXXX),切具体类型由业务决定,不切换后果自负**
+- PrintWayBillModel 类。对电子面单的封装
+- CustomPrintModal 组件。自定义打印弹框的封装。打印逻辑自行实现
+
+2. printHelper 使用
+
+```
+// 引入
+import { printHelper } from 'egenie-utils';
+
+// 获取打印机列表
+printHelper.getPrinters().then((info) => {console.log(info)})
+
+// 打印
+printHelper.print({
+  preview: false,
+  printer: 打印机,
+  templateData: 后端返的模版数据),
+  contents: 后端返的数据,
+})
+```
+
+3. printWayBill 使用。详见组件说明文档。printSrc,tempType,checkPrint 最好和相关人员确认
+
+```
+import { printWayBill } from 'egenie-utils';
 ```

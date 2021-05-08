@@ -1,0 +1,5 @@
+- [eslint、prettier、stylelint、commitlint](./packages/egenie-code-style/README.md)
+- [babel 配置、postcss 配置](./packages/egenie-config/README.md)
+- [react 脚手架](./packages/egenie-react-scripts/README.md)
+- [react 测试工具](./packages/egenie-test)
+- [组件库](./packages/egenie-utils/README.md)

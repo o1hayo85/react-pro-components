@@ -5,6 +5,8 @@
 - **react-script:** 解决 rem 单位取整问题 ([3e6b9aa](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3e6b9aaf523da857d55be17d65913888adfd392d))
 - **react-scripts:** 解决 ts 和 js 混用 ([7e236ca](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7e236ca57f897ea10bf8de2635915df64152eec4))
 - **react-scripts:** 解决文件重命名问题 ([5f7ef95](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5f7ef9506f4da8674b95fa57a6f8ce91ff1c9df5))
+- **utils:** 更新文档 ([ca506a1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ca506a18836af1117671b9f121f8e89e3d0df3fd))
+- **utils:** 解决 routes 嵌套，title 错误 ([2209ef2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2209ef2e070f1aa9275aad8b71b6bb8da3962aa8))
 
 ### Features
 
