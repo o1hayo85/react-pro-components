@@ -1,4 +1,4 @@
-# 0.0.0 (2021-05-06)
+# 0.0.0 (2021-05-08)
 
 ### Bug Fixes
 
@@ -16,6 +16,7 @@
 - **babel-config:** remove plugin which included in preset-env ([ca27526](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ca27526b1895d30592d696e2ca12aac520daa7ce))
 - **code-style:** 兼容 windows 系统换行符、新增对象空格、操作符空格 ([bc3c57a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bc3c57a279dd1249ed83689cc6676ec5cadd400c))
 - **code-style:** 去掉废弃 ([d4c91d2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d4c91d2055b67040f7ce7a18d9bf9d0663c77cf3))
+- **config:** update babel config ([f9b4bb5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f9b4bb5b20986e2949946f97cc4390fd850bf40a))
 - **packages:** add react-scripts test ([937bc0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/937bc0a9449fde173565606d6472f121c7da44d2))
 - **react-config:** extract postcss config ([a77976b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a77976b379618bb8609f700d14eaffd96915d36f))
 - **react-scripts:** migrate eslint-loader to eslint-webpack-plugin ([97b6d9d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b6d9da3d6f73bfb7239fe2eeab5e09cd16aa8f))
