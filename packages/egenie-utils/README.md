@@ -175,7 +175,7 @@ this.programme.filterItems.addDict({"is_checked-3-1": []})
 
 - field 为 item 的 field。value 为带入的值。值为数组的需要转成 string 以,拼接
 - 常规: field=value
-- inputNumberGroup: field=min,max 或者 field=type(下拉框的值),min,value
+- inputNumberGroup: field=min,max 或者 field=type(下拉框的值),min,max
 - date: field=时间类型(下拉框的值),开始时间字符串,结束时间字符串
 - inputAndSelect: field=type(下拉框的值),value(输入框的值)
 

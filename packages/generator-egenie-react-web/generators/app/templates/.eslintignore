@@ -1,0 +1,7 @@
+public
+dist
+coverage
+docs
+
+.env.local
+src/**/*.js
