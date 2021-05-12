@@ -1,0 +1,126 @@
+import { Input, Typography } from 'antd';
+import _ from 'lodash';
+import { action, extendObservable, observable, toJS } from 'mobx';
+import { observer } from 'mobx-react';
+import React from 'react';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+
+export class FilterInput extends FilterBase {
+  constructor(options: Partial<FilterInput>) {
+    super(options);
+    extendObservable(this, {
+      toParams: this.toParams,
+      ...options,
+      showCollapse: false,
+    });
+    this.formatValue(this.value);
+    this.snapshot = this.value;
+  }
+
+  /**
+   * 类型标志
+   */
+  @observable public type: 'input' = ENUM_FILTER_ITEM_TYPE.input;
+
+  public toProgramme(): string {
+    return _.toString(this.value);
+  }
+
+  public toParams(this: FilterInput): {[key: string]: string; } {
+    if (this.value) {
+      return { [this.field]: this.toProgramme() };
+    } else {
+      return {};
+    }
+  }
+
+  @action
+  public formatValue(this: FilterInput, value?: string): void {
+    this.value = _.toString(value);
+  }
+
+  private snapshot = '';
+
+  @action public reset = (): void => {
+    this.value = this.snapshot;
+  };
+
+  /**
+   * 输入的值
+   */
+  @observable public value = '';
+
+  /**
+   * @internal
+   */
+  @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    this.value = event.target.value;
+  };
+
+  /**
+   * 输入框提示文字
+   */
+  @observable public placeholder = '请输入';
+
+  /**
+   * 是否可清除
+   */
+  @observable public allowClear = true;
+
+  /**
+   * 是否禁止
+   */
+  @observable public disabled = false;
+}
+
+/**
+ * @internal
+ */
+@observer
+export class FilterInputComponent extends React.Component<{ store: FilterInput; }> {
+  public handlePressEnter: React.KeyboardEventHandler = (event) => {
+    if (typeof this.props.store.onPressEnter === 'function') {
+      this.props.store.onPressEnter();
+    }
+  };
+
+  render() {
+    const {
+      value,
+      onChange,
+      placeholder,
+      allowClear,
+      disabled,
+      style,
+      className,
+      label,
+    } = this.props.store;
+    return (
+      <div
+        className={`filterInput ${className}`}
+        style={toJS(style)}
+      >
+        <div
+          className="filterLabel"
+          title={label}
+        >
+          <Typography.Title
+            ellipsis={{ rows: 1 }}
+            title={label}
+          >
+            {label}
+          </Typography.Title>
+        </div>
+        <Input
+          allowClear={allowClear}
+          bordered={false}
+          disabled={disabled}
+          onChange={onChange}
+          onPressEnter={this.handlePressEnter}
+          placeholder={placeholder}
+          value={value}
+        />
+      </div>
+    );
+  }
+}

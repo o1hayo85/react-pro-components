@@ -1,0 +1,194 @@
+import { message } from 'antd';
+import { getUUID } from '../utils';
+import { IParameters, TOrderType, IPrintResponse, RequestProtocol } from './interface';
+
+const JDSocket = null;
+const readyState = [
+  '正在连接',
+  '已建立连接',
+  '正在关闭连接',
+  '已关闭连接',
+];
+
+export class JDPrint {
+  constructor(host: string, port: number, openError: string) {
+    this.host = host;
+    this.port = port;
+    this.openError = openError;
+  }
+
+  private JDSocket: WebSocket;
+
+  private openError: string;
+
+  private readonly host: string;
+
+  private readonly port: number;
+
+  // 标准模板数据 实例
+  public standTempUrl = 'http://storage.jd.com/print-tmpl/template-88dc5829-f419-4ab7-b8ae-feb32605a189.1606983912784.txt';
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  private taskRequest = new Map<string, { request: RequestProtocol; resolve?: Function; reject?: Function; }>();
+
+  private taskQueue = [] as RequestProtocol[];
+
+  private connect = (ipStr = '127.0.0.1') => {
+    this.JDSocket = new WebSocket(`ws://${ipStr}:9113`);
+
+    // 打开Socket
+    this.JDSocket.onopen = (event) => {
+      console.log(`京东打印 onopen event:${JSON.stringify(event)}`);
+      this.refresh();
+    };
+
+    // 监听消息
+    this.JDSocket.onmessage = this.onmessage;
+
+    // 监听Socket的关闭
+    this.JDSocket.onclose = (event) => {
+      console.log(`京东打印 onclose event:${JSON.stringify(event)}`);
+    };
+
+    // JDprint error
+    this.JDSocket.onerror = (event): void => {
+      console.log(`browser onerror event:${JSON.stringify(event)}`);
+      message.error({
+        content: this.openError,
+        key: this.openError,
+      });
+    };
+  };
+
+  private onmessage = (event: MessageEvent) => {
+    const response: IPrintResponse = JSON.parse(event.data);
+    console.log(response, 'responseresponse');
+    const { reject, resolve } = (this.taskRequest.get(response.key) || {});
+    const { code, success, key, content, status } = response;
+    if (success === 'false') {
+      const msg = response?.message ?? '请求失败';
+      message.error(msg);
+      if (reject) {
+        reject(msg);
+      }
+    }
+    if (success === 'true') {
+      // 2：批量推送打印，6：获取打印机列表，8：预览
+      // 返回内容，获取打印机时，返回为 打印机逗号分隔字符串；获取预览时，返回为base64格式图片字符串
+      if (code === '2') {
+        // TODO: 打印完毕后执行回调函数
+      }
+      if (code === '6') {
+        if (resolve) {
+          resolve(content ? content.split(',') : []);
+        }
+      }
+      if (code === '8') {
+        if (content && resolve) {
+          this.downloadIamge(`data:image/png;base64, ${content}`);
+          resolve(content);
+
+          // TODO: 待处理返回内容   window.open(response.previewURL);
+        } else {
+          message.error('无预览内容！');
+        }
+      }
+    }
+
+    this.taskRequest.delete(response?.key);
+  };
+
+  private isSocketConnected = () => {
+    return this.JDSocket && this.JDSocket.readyState === 1;
+  };
+
+  private refresh = () => {
+    if (this.isSocketConnected()) {
+      const taskQueue = this.taskQueue;
+      this.taskQueue = [];
+      taskQueue.forEach((item) => {
+        this.JDSocket.send(JSON.stringify(item));
+      });
+    }
+  };
+
+  public sendToPrinter = (request: RequestProtocol): Promise<any> => {
+    console.log(request, 'requestrequest');
+    if (!this.isSocketConnected()) {
+      this.connect();
+    }
+    return new Promise((resolve, reject) => {
+      this.taskRequest.set(request.key, {
+        request,
+        resolve,
+        reject,
+      });
+
+      if (this.isSocketConnected()) {
+        this.JDSocket.send(JSON.stringify(request));
+      } else {
+        this.taskQueue.push(request);
+      }
+    });
+  };
+
+  // 打印机列表
+  public getPrinters = () => {
+    return this.sendToPrinter(this.getPrintParam('GET_Printers'));
+  };
+
+  // 打印
+  public print = ({
+    printer,
+    preview,
+    customData,
+    customTempUrl,
+    printData,
+    tempUrl,
+  }) => {
+    return this.sendToPrinter(this.getPrintParam(preview ? 'PRE_View' : 'PRINT', {
+      printName: printer,
+      customData,
+      customTempUrl,
+      printData: [printData],
+      tempUrl,
+    }));
+  };
+
+  /**
+   * 获取请求协议
+   */
+  private getPrintParam = (cmd: TOrderType, parameters: IParameters = {
+    tempUrl: '',
+    printName: '',
+    printData: [],
+  }): RequestProtocol => {
+    return {
+      orderType: cmd,
+      key: getUUID(8, 16),
+      parameters,
+    };
+  };
+
+  // 预览下载图片地址和图片名
+  private downloadIamge = (imgsrc: string, name?: string) => {
+    const image = new Image();
+
+    // 解决跨域 Canvas 污染问题
+    image.setAttribute('crossOrigin', 'anonymous');
+    image.onload = function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0, image.width, image.height);
+      const url = canvas.toDataURL('image/png'); // 得到图片的base64编码数据
+      const a = document.createElement('a'); // 生成一个a元素
+      const event = new MouseEvent('click'); // 创建一个单击事件
+      a.download = name || '预览图片'; // 设置图片名称
+      a.href = url; // 将生成的URL设置为a.href属性
+      a.dispatchEvent(event); // 触发a的单击事件
+    };
+    image.src = imgsrc;
+  };
+}
