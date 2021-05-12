@@ -1,0 +1,34 @@
+<% if (remUnit) { %>
+import 'amfe-flexible';
+<% } %>
+import './global.less';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { routes } from './routes';
+import { RenderRoutes, history } from './utils';
+
+function render() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <RenderRoutes
+        history={history}
+        loading=""
+        routes={routes}
+      />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
+
+render();
+
+// @ts-ignore
+if (module.hot) {
+// @ts-ignore
+  module.hot.accept([
+    './routes',
+    './utils',
+  ], () => {
+    render();
+  });
+}
