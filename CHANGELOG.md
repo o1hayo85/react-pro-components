@@ -11,7 +11,7 @@
 
 - add utils packages ([7fa476a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7fa476ab18699ccbe453e552816a71539796242b))
 - extract addGoodsModal ([a769c20](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a769c202e51b4ebba1f1f6756a90037a32591156))
-- extract layout ([f974c8b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f974c8b1229a07ceae4ba0079c0b626a6cf30044))
+- extract layout ([546c8a7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/546c8a7ba1a3b598d493cdbada226bdd0471d619))
 - init ([4ddb871](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4ddb8718b7a5eaddd348f87bb1578cc9e45abab1))
 - migrate postcss plugin ([e430971](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e43097165a8f23729933abec74e962e6cb334dc8))
 - update eslint rule. update babel.config (mobile) update react-scripts (pxtorem and esbuild) ([15e76f7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e76f7ab047627960e77e9ebf05a39c961d6248))
