@@ -1,0 +1,46 @@
+@import "~antd/lib/style/themes/default.less";
+
+.container {
+  .egGrid {
+    height: 231px;
+  }
+
+  .rows {
+    margin-top: 16px;
+    color: #333;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+
+    > span {
+      margin: 0 2px;
+      color: @primary-color;
+      font-weight: 500;
+    }
+  }
+}
+
+.modelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  :global {
+    .ant-select-selector {
+      border: 1px solid @border-color-base !important;
+      border-radius: 2px 0 0 2px !important;
+    }
+
+    .ant-input-affix-wrapper {
+      margin-left: -1px;
+      border-radius: 0 2px 2px 0 !important;
+    }
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

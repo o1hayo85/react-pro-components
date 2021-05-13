@@ -4,6 +4,8 @@ First, install [Yeoman](http://yeoman.io) generator-egenie-react-web using [npm]
 
 ```bash
 npm install -g yo@3.1.0
+
+# 下载最新generator-egenie-react-web。存在则更新
 npm install -g generator-egenie-react-web
 ```
 
