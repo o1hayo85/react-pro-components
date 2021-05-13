@@ -2,6 +2,9 @@
   "entryPoints": [
     "src/request.ts",
     "src/helper/index.ts",
+    "src/print/printHelper.ts",
+    "src/print/printWayBillModel.tsx",
+    "src/print/customPrint.tsx",
     "src/programme/programme.tsx",
     "src/programme/normalProgramme.tsx",
     "src/programme/filterItems/filterItems.tsx",
@@ -16,7 +19,8 @@
     "src/programme/filterItems/filterInput.tsx",
     "src/programme/filterItems/filterCascader.tsx",
     "src/renderModal.ts",
-    "src/batchReport/index.tsx"
+    "src/batchReport/index.tsx",
+    "src/addGoodsModal/addGoodsModal.tsx"
   ],
   "out": "docs",
   "excludePrivate": true,

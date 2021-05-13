@@ -56,7 +56,6 @@ class CustomPrintModel {
               <a
                 onClick={() => {
                   try {
-                    // @ts-ignore
                     window.top.egenie.openTab(`/page/print/printView/index.html?tempType=${row.tempType}&tempShow=${row.mysqlid}&category_no=`, 'printTemp', `编辑[${tempTypeList[row.tempType]}]模板`);
                   } catch (e) {
                     console.log(e);

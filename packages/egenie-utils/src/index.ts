@@ -1,3 +1,14 @@
+import { Egenie, JsonReader, Permission, User } from './layout/interface';
+
+declare global {
+  interface Window {
+    user: User;
+    jsonReader: JsonReader;
+    egenie: Egenie;
+    EgeniePermission: Permission;
+  }
+}
+
 export * from './helper';
 export * from './request';
 export * from './renderModal';
@@ -12,3 +23,5 @@ export * from './egGrid';
 export * from './addGoodsModal';
 export * from './constants';
 export * from './slideVerify';
+export * from './layout';
+

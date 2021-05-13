@@ -1,19 +1,8 @@
-import { Egenie, JsonReader, Permission, User } from './layout/interface';
-
 declare module '*.svg' {
   export function ReactComponent(props: React.SVGProps<SVGSVGElement>): React.ReactElement;
 
   const url: string;
   export default url;
-}
-
-declare global {
-  interface Window {
-    user: User;
-    jsonReader: JsonReader;
-    egenie: Egenie;
-    EgeniePermission: Permission;
-  }
 }
 
 declare module '*.bmp';
