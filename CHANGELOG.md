@@ -10,9 +10,10 @@
 ### Features
 
 - add utils packages ([7fa476a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7fa476ab18699ccbe453e552816a71539796242b))
+- extract addGoodsModal ([a769c20](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a769c202e51b4ebba1f1f6756a90037a32591156))
+- extract layout ([f974c8b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f974c8b1229a07ceae4ba0079c0b626a6cf30044))
 - init ([4ddb871](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4ddb8718b7a5eaddd348f87bb1578cc9e45abab1))
 - migrate postcss plugin ([e430971](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e43097165a8f23729933abec74e962e6cb334dc8))
-- update config ([816f0e0](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/816f0e01cfd39bbd0da1959f41c94c352331c788))
 - update eslint rule. update babel.config (mobile) update react-scripts (pxtorem and esbuild) ([15e76f7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e76f7ab047627960e77e9ebf05a39c961d6248))
 - 删除 lerna ([cd3e17e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cd3e17e7faf49b766e7551ac0e485552e484f862))
 - **babel-config:** remove plugin which included in preset-env ([ca27526](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ca27526b1895d30592d696e2ca12aac520daa7ce))
