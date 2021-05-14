@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 限制查询方案文字长度 ([ae4929d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ae4929dc7ff00635e94dbb18a693187e9c7fb9aa))
+- **utils:** 限制查询方案文字长度 ([9d37525](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9d375250e01e9a6589232e94a0aed505d3bb73a1))
 
 ## [0.0.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.22...v0.0.23) (2021-05-14)
 
