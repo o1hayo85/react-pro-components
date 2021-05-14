@@ -3,6 +3,7 @@
 **/*.jsx
 **.ts
 **.tsx
+packages/egenie-utils/docs
 public
 dist
 coverage
