@@ -8,6 +8,7 @@ const cleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -23,6 +24,11 @@ const getClientEnvironment = require('./env');
 const modules = require('./modules');
 const paths = require('./paths');
 const utils = require('./utils');
+
+const copyFiles = glob.sync(path.resolve(paths.appPublic, '**'), {
+  ignore: ['**/**.ejs'],
+  dot: true,
+}) || [];
 
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 module.exports = function() {
@@ -141,7 +147,7 @@ module.exports = function() {
       }),
 
       // 复制依赖文件
-      utils.isProduction && new copyWebpackPlugin({
+      utils.isProduction && copyFiles.length && new copyWebpackPlugin({
         patterns: [
           {
             from: path.resolve(paths.appPublic),

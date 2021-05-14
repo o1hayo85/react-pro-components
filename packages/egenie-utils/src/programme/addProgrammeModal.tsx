@@ -65,6 +65,10 @@ export function AddProgrammeModal({
               required: true,
               message: '方案名称为空',
             },
+            {
+              max: 15,
+              message: '长度超出',
+            },
           ]}
         >
           <Input

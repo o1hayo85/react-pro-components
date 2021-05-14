@@ -5,6 +5,18 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
 
+function formatValue(value: string, isTrimWhiteSpace: boolean) {
+  if (isTrimWhiteSpace) {
+    return _.flowRight([
+      _.trimEnd,
+      _.trimStart,
+      _.toString,
+    ])(value);
+  } else {
+    return _.toString(value);
+  }
+}
+
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {
     super(options);
@@ -23,11 +35,11 @@ export class FilterInput extends FilterBase {
   @observable public type: 'input' = ENUM_FILTER_ITEM_TYPE.input;
 
   public toProgramme(): string {
-    return _.toString(this.value);
+    return formatValue(this.value, this.isTrimWhiteSpace);
   }
 
   public toParams(this: FilterInput): {[key: string]: string; } {
-    if (this.value) {
+    if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
       return {};
@@ -56,6 +68,11 @@ export class FilterInput extends FilterBase {
   @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
   };
+
+  /**
+   * 是否去掉左右空格
+   */
+  @observable public isTrimWhiteSpace = true;
 
   /**
    * 输入框提示文字

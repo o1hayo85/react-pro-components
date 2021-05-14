@@ -1,4 +1,4 @@
-import { Anchor, Button, Collapse, Layout, message, Modal } from 'antd';
+import { Anchor, Button, Collapse, Layout, message, Modal, Typography } from 'antd';
 import classNames from 'classnames';
 import { action, computed, observable } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
@@ -535,9 +535,12 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
                 onClick={() => handleItemClick(item)}
                 style={item.scheme_name === activeProgramme && index !== 0 ? { borderLeftColor: '#e2e2e5' } : {}}
               >
-                <span title={item.scheme_name}>
+                <Typography.Text
+                  ellipsis
+                  title={item.scheme_name}
+                >
                   {item.scheme_name}
-                </span>
+                </Typography.Text>
                 {
                   !item.sys_setting ? (
                     <span
