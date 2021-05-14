@@ -1,3 +1,12 @@
+.containerDomWrapper {
+  position: absolute;
+  padding: 20px;
+  padding-top: 35px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(202, 202, 202, 0.5);
+}
+
 .slideVerifyContainer {
   .sliderBlock {
     position: absolute;
@@ -14,10 +23,10 @@
   .sliderContainer {
     position: relative;
     width: 310px;
-    height: 40px;
+    height: 34px;
     margin-top: 15px;
     color: #45494c;
-    line-height: 40px;
+    line-height: 34px;
     text-align: center;
     background: #f7f9fa;
     border: 1px solid #e4e7eb;
@@ -25,24 +34,24 @@
 
   .sliderContainerActive .slider {
     top: -1px;
-    height: 38px;
+    height: 34px;
     border: 1px solid #1991fa;
   }
 
   .sliderContainerActive .sliderMask {
-    height: 38px;
+    height: 34px;
     border-width: 1px;
   }
 
   .sliderContainerSuccess .slider {
     top: -1px;
-    height: 38px;
+    height: 34px;
     background-color: #52ccba !important;
     border: 1px solid #52ccba;
   }
 
   .sliderContainerSuccess .sliderMask {
-    height: 38px;
+    height: 34px;
     background-color: #d2f4ef;
     border: 1px solid #52ccba;
   }
@@ -53,20 +62,28 @@
 
   .sliderContainerFail .slider {
     top: -1px;
-    height: 38px;
+    height: 34px;
+    line-height: 34px;
     background-color: #f57a7a !important;
     border: 1px solid #f57a7a;
   }
 
   .sliderContainerFail .sliderMask {
-    height: 38px;
+    height: 34px;
+    line-height: 34px;
     background-color: #fce1e1;
     border: 1px solid #f57a7a;
   }
 
   .sliderContainerFail .sliderIcon {
-    top: 14px;
+    top: 10px;
     background-position: 0 -82px !important;
+  }
+
+  .sliderText {
+    padding-left: 6px;
+    color: #c5c3cb;
+    font-size: 12px;
   }
 
   .sliderContainerActive .sliderText,
@@ -79,7 +96,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 40px;
+    height: 34px;
     background: #d1e9fe;
     border: 0 solid #1991fa;
   }
@@ -88,8 +105,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     background: #fff;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -107,8 +124,8 @@
 
   .sliderIcon {
     position: absolute;
-    top: 15px;
-    left: 13px;
+    top: 12px;
+    left: 10px;
     width: 14px;
     height: 12px;
     background: url("https://front.runscm.com/static/source/img/iconlist.png") 0 -13px;
@@ -121,10 +138,10 @@
 
   .refreshIcon {
     position: absolute;
-    right: 5px;
-    bottom: 60px;
-    width: 30px;
-    height: 30px;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
     background: url("https://front.runscm.com/static/source/img/iconlist.png") 0 -233px;
     background-size: 32px 544px;
     cursor: pointer;
@@ -134,14 +151,21 @@
     background-position: 0 -266px;
   }
 
+  .title {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    color: #333;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
   .closeIcon {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 20px;
-    height: 18px;
-    background: url("https://front.runscm.com/static/source/img/iconlist.png") 0 -79px;
-    background-size: 32px 544px;
+    top: -24px;
+    right: 0;
+    color: #999ba4;
     cursor: pointer;
   }
 

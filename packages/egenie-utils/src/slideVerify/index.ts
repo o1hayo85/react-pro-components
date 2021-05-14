@@ -1,11 +1,15 @@
-/*
- * @Author: Lynshir
- * @Date: 2021-01-15 16:46:40
- * @LastEditTime: 2021-01-20 13:52:38
- * @LastEditors: Lynshir
- * @Description: Lynshir created or edited
- * @FilePath: /frontend-ejl-pms/src/utils/SlideVerify/index.js
- */
+/**
+ * 使用示例：
+ *  const slider = new SlideVerify({
+          onSuccess: () => {
+            console.log('验证成功');
+            slider.clear(); // 清除
+          },
+          onFail: () => {
+            console.log('验证失败');
+          },
+        })
+ * **/
 import styles from './index.less';
 
 interface IImgProps extends HTMLImageElement {
@@ -16,6 +20,10 @@ interface ISlideVerify {
   el?: HTMLElement;
   width?: number;
   height?: number;
+  x?: number;
+  y?: number;
+  parentId?: string;
+  sliderText?: string;
   onSuccess?: () => void;
   onFail?: () => void;
   onRefresh?: () => void;
@@ -121,21 +129,27 @@ export class SlideVerify {
 
   public height?: number;
 
+  public x?: number;
+
+  public y?: number;
+
+  public parentId?: string;
+
+  public sliderText?: string;
+
   public onSuccess?: () => void;
 
   public onFail?: () => void;
 
   public onRefresh?: () => void;
 
+  private containerDomWrapper?: HTMLElement;
+
   private loadingContainer?: HTMLElement;
 
   private sliderContainer?: HTMLElement;
 
   private img?: IImgProps;
-
-  private x?: number;
-
-  private y?: number;
 
   private canvasCtx?: CanvasRenderingContext2D;
 
@@ -161,23 +175,47 @@ export class SlideVerify {
 
   private handleDragEnd: (event?: DragEvent) => void;
 
-  constructor({ el, width = w, height = h, onSuccess, onFail, onRefresh }: ISlideVerify) {
+  constructor({
+    el,
+    width = w,
+    height = h,
+    x,
+    y,
+    parentId,
+    sliderText,
+    onSuccess,
+    onFail,
+    onRefresh,
+  }: ISlideVerify) {
     const posLeft = window.innerWidth / 2 - width / 2;
     const posTop = window.innerHeight / 2 - height / 2;
     let containerDom: HTMLElement = el || document.getElementsByClassName(styles.slideVerifyContainer)[0] as HTMLElement;
+    const containerDomWrapper = document.createElement('div');
+    setClass(containerDomWrapper, styles.containerDomWrapper);
+
     if (!containerDom) {
       containerDom = el || document.createElement('div');
       setClass(containerDom, styles.slideVerifyContainer);
-      document.body.append(containerDom);
     }
-    Object.assign(containerDom.style, {
-      position: 'absolute',
-      width: `${width}px`,
-      margin: '0 auto',
+    const parentEle = document.getElementById(`${parentId}`);
+    parentEle ? parentEle.append(containerDomWrapper) : document.body.append(containerDomWrapper);
+    containerDomWrapper.append(containerDom);
+    Object.assign(containerDomWrapper.style, {
+      left: `${x || posLeft}px`,
+      top: `${y || posTop}px`,
       zIndex: 100,
-      left: `${posLeft}px`,
-      top: `${posTop}px`,
+
     });
+    Object.assign(containerDom.style, {
+      position: 'relative',
+      margin: '0 auto',
+      width: `${width}px`,
+
+      // left: `${x || posLeft}px`,
+      // top: `${y || posTop}px`,
+    });
+    this.sliderText = sliderText;
+    this.containerDomWrapper = containerDomWrapper;
     this.el = containerDom;
     this.width = width;
     this.height = height;
@@ -194,20 +232,27 @@ export class SlideVerify {
   }
 
   public initDOM(): void {
-    const { width, height } = this;
+    const {
+      width,
+      height,
+      sliderText,
+    } = this;
     const canvas = createCanvas(width, height); // 画布
     const block = createCanvas(width, height); // 滑块
     setClass(block, styles.sliderBlock);
     const sliderContainer = createElement('div', styles.sliderContainer);
     sliderContainer.style.width = `${width}px`;
     sliderContainer.style.pointerEvents = 'none';
+
+    const title = createElement('span', ` ${styles.title}`);
+    title.innerText = '验证';
+    const closeIcon = createElement('span', `icon-close ${styles.closeIcon}`);
     const refreshIcon = createElement('div', styles.refreshIcon);
-    const closeIcon = createElement('div', styles.closeIcon);
     const sliderMask = createElement('div', styles.sliderMask);
     const slider = createElement('div', styles.slider);
     const sliderIcon = createElement('span', styles.sliderIcon);
     const text = createElement('span', styles.sliderText);
-    text.innerHTML = '向右滑动填充拼图';
+    text.innerHTML = sliderText || '向右滑动填充拼图';
 
     // 增加loading
     const loadingContainer = createElement('div', styles.loadingContainer);
@@ -221,6 +266,8 @@ export class SlideVerify {
 
     const el = this.el;
     el.appendChild(loadingContainer);
+
+    el.appendChild(title);
     el.appendChild(closeIcon);
     el.appendChild(canvas);
     el.appendChild(refreshIcon);
@@ -237,6 +284,8 @@ export class SlideVerify {
       sliderContainer,
       loadingContainer,
       refreshIcon,
+
+      title,
       closeIcon,
       slider,
       sliderMask,
@@ -261,7 +310,10 @@ export class SlideVerify {
   }
 
   public draw(img): void {
-    const { width, height } = this;
+    const {
+      width,
+      height,
+    } = this;
 
     // 随机位置创建拼图形状
     this.x = getRandomNumberByRange(L + 10, width - (L + 10));
@@ -291,7 +343,8 @@ export class SlideVerify {
       this.clear();
     };
 
-    let originX, originY,
+    let originX,
+      originY,
       isMouseDown = false;
     const trail = [];
 
@@ -334,13 +387,15 @@ export class SlideVerify {
       }
       removeClass(this.sliderContainer, styles.sliderContainerActive);
       this.trail = trail;
-      const { spliced, verified } = this.verify();
+      const {
+        spliced,
+        verified,
+      } = this.verify();
       if (spliced) {
         if (verified) {
           addClass(this.sliderContainer, styles.sliderContainerSuccess);
           typeof this.onSuccess === 'function' && this.onSuccess();
-
-          // this.clear()
+          setTimeout(() => this.clear(), 1000);
         } else {
           addClass(this.sliderContainer, styles.sliderContainerFail);
           this.text.innerHTML = '请再试一次';
@@ -369,7 +424,8 @@ export class SlideVerify {
     const deviations = arr.map((x) => x - average);
 
     // 标准差
-    const stddev = Math.sqrt(deviations.map(square).reduce(sum) / arr.length);
+    const stddev = Math.sqrt(deviations.map(square)
+      .reduce(sum) / arr.length);
     // eslint-disable-next-line radix
     const left = parseInt(this.block.style.left);
     return {
@@ -379,7 +435,10 @@ export class SlideVerify {
   }
 
   public reset(): void {
-    const { width, height } = this;
+    const {
+      width,
+      height,
+    } = this;
 
     // 重置样式
     setClass(this.sliderContainer, styles.sliderContainer);
@@ -398,8 +457,13 @@ export class SlideVerify {
   }
 
   public clear(): void {
-    const { handleDragStart, handleDragMove, handleDragEnd } = this;
+    const {
+      handleDragStart,
+      handleDragMove,
+      handleDragEnd,
+    } = this;
     this.el.innerHTML = '';
+    removeClass(this.containerDomWrapper, styles.containerDomWrapper);
     this.trail = [];
     this.slider.removeEventListener('mousedown', handleDragStart);
     this.slider.removeEventListener('touchstart', handleDragStart);
