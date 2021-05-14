@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.24...v0.0.0) (2021-05-14)
 
+### Features
+
+- **generator:** update cz config ([bcb13c9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bcb13c913d578ad6be628d16e5b3d221e48e9497))
+
 ## [0.0.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.23...v0.0.24) (2021-05-14)
 
 ### Features
