@@ -67,7 +67,15 @@ export class FilterInput extends FilterBase {
    */
   @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(formatValue(this.value, this.isTrimWhiteSpace));
+    }
   };
+
+  /**
+   * 改变值回掉
+   */
+  @action public onChangeCallback: (value?: string) => void;
 
   /**
    * 是否去掉左右空格

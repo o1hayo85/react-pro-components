@@ -76,7 +76,15 @@ export class FilterCheckbox extends FilterBase {
    */
   @action public onChange = (value: string[]) => {
     this.value = value || [];
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(this.value);
+    }
   };
+
+  /**
+   * 改变值回掉
+   */
+  @action public onChangeCallback: (value?: string[]) => void;
 
   /**
    * 是否禁止
