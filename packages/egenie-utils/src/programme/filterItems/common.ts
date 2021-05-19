@@ -21,6 +21,7 @@ export enum ENUM_FILTER_ITEM_TYPE {
   radio = 'radio',
   select = 'select',
   date = 'date',
+  dateRange = 'dateRange',
   checkbox = 'checkbox',
   inputOrSelect = 'inputOrSelect',
   cascader = 'cascader',
@@ -142,6 +143,7 @@ export function formatValueAndLabelData(data: ValueAndLabelData): ValueAndLabelD
   if (Array.isArray(data)) {
     return data.map((item) => ({
       ...item,
+      children: Array.isArray(item.children) && item.children.length ? formatValueAndLabelData(item.children) : undefined,
       value: _.toString(item.value),
       label: _.toString(item.label),
     }));

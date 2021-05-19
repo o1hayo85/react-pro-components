@@ -1,7 +1,7 @@
 import { DatePicker, Select, Typography } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
@@ -43,7 +43,7 @@ function formatTime(startTime: moment.Moment, endTime: moment.Moment, format: st
 export class FilterDate extends FilterBase {
   constructor(options: Partial<FilterDate>) {
     super();
-    extendObservable(this, {
+    set(this, {
       ...options,
       showCollapse: false,
     });
@@ -62,7 +62,7 @@ export class FilterDate extends FilterBase {
   /**
    * 类型标志
    */
-  @observable public type: 'date' = ENUM_FILTER_ITEM_TYPE.date;
+  @observable public type: 'date' | 'dateRange' = ENUM_FILTER_ITEM_TYPE.date;
 
   public toProgramme(): string | null {
     if (this.showSelect) {
@@ -207,7 +207,7 @@ export class FilterDateWrapperComponent extends React.Component<{ store: FilterD
       showSelect,
       disabled,
     } = this.props.store;
-    const newClassName = classNames(showSelect ? styles.filterDateSelect : styles.filterDateNormal, className);
+    const newClassName = classNames(showSelect ? 'filterDateSelect' : 'filterDateNormal', className);
     return (
       <div
         className={newClassName}
@@ -269,7 +269,7 @@ export class FilterDateWrapperComponent extends React.Component<{ store: FilterD
             showToday={format !== FormatType.defaultFormat}
             value={endTime}
           />
-          <span className={styles.gap}/>
+          <span className={styles.filterDateGap}/>
         </section>
       </div>
     );

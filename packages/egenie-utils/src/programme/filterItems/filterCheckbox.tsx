@@ -1,5 +1,5 @@
 import { Checkbox } from 'antd';
-import { action, extendObservable, intercept, observable, toJS } from 'mobx';
+import { action, intercept, observable, set, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -19,7 +19,7 @@ function formatValue(value?: string[] | string): string[] {
 export class FilterCheckbox extends FilterBase {
   constructor(options: Partial<FilterCheckbox>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: true,
@@ -77,14 +77,14 @@ export class FilterCheckbox extends FilterBase {
   @action public onChange = (value: string[]) => {
     this.value = value || [];
     if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(this.value);
+      this.onChangeCallback(toJS(this.value));
     }
   };
 
   /**
    * 改变值回掉
    */
-  @action public onChangeCallback: (value?: string[]) => void;
+  public onChangeCallback: (value?: string[]) => void;
 
   /**
    * 是否禁止

@@ -2,7 +2,7 @@ import { action, computed, observable, set } from 'mobx';
 import qs from 'qs';
 import React from 'react';
 import { FilterItemSettingItem } from '../filterItemSetting';
-import { ENUM_FILTER_ITEM_TYPE, FilterItem, FilterItemOptions, ValueAndLabelData } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterItem, FilterItemOptions, formatValueAndLabelData, ValueAndLabelData } from './common';
 import { FilterCascader, FilterCascaderComponent } from './filterCascader';
 import { FilterCheckbox, FilterCheckboxComponent } from './filterCheckbox';
 import { FilterDate, FilterDateWrapperComponent } from './filterDate';
@@ -63,6 +63,7 @@ function filterInstanceFactory(item: FilterItemOptions): FilterItem {
     case ENUM_FILTER_ITEM_TYPE.inputAndSelect:
       return new FilterInputAndSelect(item);
     case ENUM_FILTER_ITEM_TYPE.date:
+    case ENUM_FILTER_ITEM_TYPE.dateRange:
       return new FilterDate(item);
     case ENUM_FILTER_ITEM_TYPE.checkbox:
       return new FilterCheckbox(item);
@@ -114,6 +115,7 @@ export function filterComponentFactory(item: FilterItem): React.ReactNode {
         />
       );
     case ENUM_FILTER_ITEM_TYPE.date:
+    case ENUM_FILTER_ITEM_TYPE.dateRange:
       return (
         <FilterDateWrapperComponent
           key={item.field}
@@ -205,7 +207,7 @@ export class FilterItems {
   @action private init = (data: FilterItemOptions[], dict: FilterItemsParams['dict']): void => {
     for (const key in dict) {
       if (Object.prototype.hasOwnProperty.call(dict, key)) {
-        this.dict[key] = dict[key];
+        this.dict[key] = formatValueAndLabelData(dict[key]);
       }
     }
     this.originData = transformDataToInstance(dict, data);
@@ -255,7 +257,7 @@ export class FilterItems {
   @action public addDict = (dict: FilterItemsParams['dict']): void => {
     for (const key in dict) {
       if (Object.prototype.hasOwnProperty.call(dict, key)) {
-        this.dict[key] = dict[key];
+        this.dict[key] = formatValueAndLabelData(dict[key]);
       }
     }
     this.originData.forEach((instance) => transformDict(dict, instance));

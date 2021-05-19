@@ -1,6 +1,6 @@
 import { Input, Typography } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -20,7 +20,7 @@ function formatValue(value: string, isTrimWhiteSpace: boolean) {
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
@@ -67,6 +67,7 @@ export class FilterInput extends FilterBase {
    */
   @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
+
     if (typeof this.onChangeCallback === 'function') {
       this.onChangeCallback(formatValue(this.value, this.isTrimWhiteSpace));
     }
@@ -75,7 +76,7 @@ export class FilterInput extends FilterBase {
   /**
    * 改变值回掉
    */
-  @action public onChangeCallback: (value?: string) => void;
+  public onChangeCallback: (value?: string) => void;
 
   /**
    * 是否去掉左右空格

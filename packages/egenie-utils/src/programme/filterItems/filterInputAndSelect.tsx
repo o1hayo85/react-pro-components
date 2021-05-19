@@ -1,6 +1,6 @@
 import { Input, Select } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -9,7 +9,7 @@ import styles from './filterItems.less';
 export class FilterInputAndSelect extends FilterBase {
   constructor(options: Partial<FilterInputAndSelect>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
@@ -71,7 +71,15 @@ export class FilterInputAndSelect extends FilterBase {
    */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
+    if (typeof this.handleInputChangeCallback === 'function') {
+      this.handleInputChangeCallback(this.value);
+    }
   };
+
+  /**
+   * 输入框改变值回掉
+   */
+  public handleInputChangeCallback: (value?: string) => void;
 
   /**
    * 下拉框的值
@@ -81,10 +89,18 @@ export class FilterInputAndSelect extends FilterBase {
   /**
    * @internal
    */
-  @action public handleSelectChange = (selectValue) => {
+  @action public handleSelectChange = (selectValue: string | undefined) => {
     this.selectValue = selectValue;
     this.inputRef.current.focus();
+    if (typeof this.handleSelectChangeCallback === 'function') {
+      this.handleSelectChangeCallback(this.selectValue);
+    }
   };
+
+  /**
+   * 下拉框改变值回掉
+   */
+  public handleSelectChangeCallback: (value?: string | undefined) => void;
 
   /**
    * 输入框提示文字
@@ -95,6 +111,11 @@ export class FilterInputAndSelect extends FilterBase {
    * 是否可以清除
    */
   @observable public allowClear = false;
+
+  /**
+   * 下拉框-输入框禁止状态
+   */
+  @observable public disabled = false;
 }
 
 /**
@@ -119,14 +140,16 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
       handleSelectChange,
       selectValue,
       inputRef,
+      disabled,
     } = this.props.store;
     return (
       <div
-        className={`${styles.filterInputAndSelect} ${className}`}
+        className={`filterInputAndSelect ${className}`}
         style={toJS(style)}
       >
         <Select
           bordered={false}
+          disabled={disabled}
           onChange={handleSelectChange}
           options={data}
           placeholder="请选择"
@@ -136,6 +159,7 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
           allowClear
           bordered={false}
           className={`${styles.input}`}
+          disabled={disabled}
           onChange={handleInputChange}
           onPressEnter={this.handlePressEnter}
           placeholder={placeholder}

@@ -1,6 +1,6 @@
 import { Cascader, Typography } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, intercept, observable, set, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -8,13 +8,18 @@ import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
     });
     this.formatValue(this.value);
     this.snapshot = this.value;
+
+    intercept(this, 'value', (change) => {
+      change.newValue = Array.isArray(change.newValue) ? change.newValue : [];
+      return change;
+    });
   }
 
   /**
@@ -69,7 +74,21 @@ export class FilterCascader extends FilterBase {
     } else {
       this.value = [];
     }
+
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
   };
+
+  /**
+   * 动态加载选项
+   */
+  public loadData: (selectedOptions) => void;
+
+  /**
+   * 值改回掉
+   */
+  public onChangeCallback: (value?: string[]) => void;
 
   /**
    * 输入框提示文字
@@ -90,6 +109,15 @@ export class FilterCascader extends FilterBase {
    * 是否显示搜索框
    */
   @observable public showSearch = true;
+
+  /**
+   * 自定义 options 中 label name children 的字段
+   */
+  @observable public fieldNames: { value: string; label: string; children: string; } = {
+    label: 'label',
+    value: 'value',
+    children: 'children',
+  };
 }
 
 /**
@@ -109,6 +137,8 @@ export class FilterCascaderComponent extends React.Component<{ store: FilterCasc
       className,
       label,
       showSearch,
+      loadData,
+      fieldNames,
     } = this.props.store;
     return (
       <div
@@ -130,8 +160,10 @@ export class FilterCascaderComponent extends React.Component<{ store: FilterCasc
           allowClear={allowClear}
           bordered={false}
           disabled={disabled}
+          fieldNames={fieldNames}
+          loadData={loadData}
           onChange={onChange}
-          options={data}
+          options={toJS(data)}
           placeholder={placeholder}
           showSearch={showSearch}
           value={value}

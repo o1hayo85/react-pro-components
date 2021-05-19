@@ -1,5 +1,5 @@
 import { Button, Divider, Select, Typography } from 'antd';
-import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
+import { action, computed, set, intercept, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase, ValueAndLabelData } from './common';
@@ -23,7 +23,7 @@ function formatValue(oldValue, mode) {
 export class FilterSelect extends FilterBase {
   constructor(options: Partial<FilterSelect>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
@@ -106,7 +106,15 @@ export class FilterSelect extends FilterBase {
    */
   @action public onChange = (value: string | string[]) => {
     this.value = value;
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
   };
+
+  /**
+   * 值改变回掉
+   */
+  public onChangeCallback: (value?: string | string[] | undefined) => void;
 
   /**
    * @internal

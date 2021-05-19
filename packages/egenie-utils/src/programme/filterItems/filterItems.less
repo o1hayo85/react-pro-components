@@ -10,82 +10,6 @@
   height: 100%;
 }
 
-.filterInputOrSelect {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: @base-height;
-
-  > section {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: @base-height;
-    border: 1px solid @border-color-base;
-    border-radius: 2px;
-
-    .input {
-      flex-grow: 1;
-      height: 100%;
-      padding-top: 0;
-      padding-bottom: 0;
-      background: #fff;
-      border-radius: 0;
-
-      :global {
-        .ant-input {
-          width: 100%;
-        }
-      }
-    }
-
-    :global {
-      .ant-select {
-        width: 90px;
-        border-left: 1px solid @border-color-base;
-        .common-select();
-      }
-    }
-  }
-}
-
-.filterInputAndSelect {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: @base-height;
-  background: @filter-bg;
-  border: 1px solid @border-color-base;
-  border-radius: 2px;
-
-  .input {
-    flex-grow: 1;
-    height: 100%;
-    padding-top: 0;
-    padding-bottom: 0;
-    background: #fff;
-    border-radius: 0;
-
-    :global {
-      .ant-input {
-        width: 100%;
-      }
-    }
-  }
-
-  :global {
-    .ant-select-selector {
-      padding: 0 4px !important;
-    }
-
-    .ant-select {
-      width: 90px;
-      border-right: 1px solid @border-color-base;
-      .common-select();
-    }
-  }
-}
-
 .filterInputOrRadio {
   display: flex;
   align-items: center;
@@ -116,93 +40,6 @@
             border-radius: 0;
           }
         }
-      }
-    }
-  }
-}
-
-.filterDateSelect {
-  background: @filter-bg;
-  border: 1px solid @border-color-base;
-  border-radius: 2px;
-
-  > header {
-    display: flex;
-    align-items: center;
-    height: @base-height;
-    border-bottom: 1px solid @border-color-base;
-
-    > section {
-      height: 100%;
-      border-right: 1px solid @border-color-base;
-    }
-
-    :global {
-      .ant-select {
-        flex-grow: 1;
-        background: #fff;
-        .common-select();
-      }
-    }
-  }
-
-  > section {
-    padding: 12px;
-
-    > div {
-      display: flex;
-      align-items: center;
-      height: 26px;
-      padding-left: 8px;
-      color: #2b2e3e;
-      font-weight: 400;
-      font-size: 12px;
-    }
-
-    :global {
-      .ant-picker {
-        width: 100%;
-        background: #fff !important;
-        border: 1px solid @border-color-base;
-        border-radius: 2px;
-      }
-    }
-  }
-}
-
-.filterDateNormal {
-  display: flex;
-  align-items: center;
-
-  > section {
-    position: relative;
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    height: @base-height;
-    border: 1px solid @border-color-base;
-
-    .gap {
-      position: absolute;
-      left: calc(50% - 5px);
-      width: 11px;
-      border-top: 1px solid #c5c3cb;
-    }
-
-    :global {
-      .ant-picker {
-        .ant-picker-input {
-          input {
-            height: @base-height - 2px;
-          }
-        }
-
-        width: 50%;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        background: #fff !important;
-        border: none;
-        border-radius: 2px;
       }
     }
   }
@@ -249,7 +86,6 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    height: @base-height;
   }
 
   .filterInput {
@@ -272,7 +108,6 @@
 
     input {
       width: 100%;
-      height: @base-height;
       padding: 0 12px !important;
       border: 1px solid @border-color-base !important;
     }
@@ -287,12 +122,9 @@
         .ant-select-selector {
           display: flex;
           align-items: center;
-          height: @base-height;
-          max-height: @base-height;
         }
 
         flex-grow: 1;
-        height: @base-height;
         border: 1px solid @border-color-base;
       }
     }
@@ -307,14 +139,12 @@
       display: flex;
       flex-shrink: 0;
       align-items: center;
-      height: @base-height;
     }
 
     .filterInputNumberGroupContent {
       display: flex;
       flex-grow: 1;
       align-items: center;
-      height: @base-height;
       border: 1px solid #e2e2e5;
 
       > span {
@@ -331,12 +161,10 @@
 
       .ant-input-number {
         input {
-          height: @base-height;
           text-align: center;
         }
 
         width: 50%;
-        height: @base-height;
       }
     }
   }
@@ -355,9 +183,160 @@
       display: flex;
       align-items: center;
       width: 100%;
-      height: @base-height;
       padding: 0 12px !important;
       border: 1px solid @border-color-base !important;
     }
   }
+
+  .filterInputOrSelect {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    > section {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border: 1px solid @border-color-base;
+      border-radius: 2px;
+
+      .input {
+        flex-grow: 1;
+        height: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+        background: #fff;
+        border-radius: 0;
+
+        :global {
+          .ant-input {
+            width: 100%;
+          }
+        }
+      }
+
+      :global {
+        .ant-select {
+          width: 90px;
+          border-left: 1px solid @border-color-base;
+          .common-select();
+        }
+      }
+    }
+  }
+
+  .filterInputAndSelect {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid @border-color-base;
+    border-radius: 2px;
+
+    .input {
+      flex-grow: 1;
+      height: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+      background: #fff;
+      border-radius: 0;
+
+      :global {
+        .ant-input {
+          width: 100%;
+        }
+      }
+    }
+
+    :global {
+      .ant-select-selector {
+        padding: 0 4px !important;
+      }
+
+      .ant-select {
+        width: 90px;
+        border-right: 1px solid @border-color-base;
+        .common-select();
+      }
+    }
+  }
+
+  .filterDateSelect {
+    background: @filter-bg;
+    border: 1px solid @border-color-base;
+    border-radius: 2px;
+
+    > header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid @border-color-base;
+
+      > section {
+        height: 100%;
+        border-right: 1px solid @border-color-base;
+      }
+
+      :global {
+        .ant-select {
+          flex-grow: 1;
+          background: #fff;
+          .common-select();
+        }
+      }
+    }
+
+    > section {
+      padding: 12px;
+
+      > div {
+        display: flex;
+        align-items: center;
+        height: 26px;
+        padding-left: 8px;
+        color: #2b2e3e;
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      :global {
+        .ant-picker {
+          width: 100%;
+          background: #fff !important;
+          border: 1px solid @border-color-base;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+
+  .filterDateNormal {
+    display: flex;
+    align-items: center;
+
+    > section {
+      position: relative;
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      border: 1px solid @border-color-base;
+
+      :global {
+        .ant-picker {
+          width: 50%;
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+          background: #fff !important;
+          border: none;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+}
+
+.filterDateGap {
+  position: absolute;
+  left: calc(50% - 5px);
+  width: 11px;
+  border-top: 1px solid #c5c3cb;
 }

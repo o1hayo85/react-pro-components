@@ -1,5 +1,5 @@
 import { Input, Radio } from 'antd';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -8,7 +8,7 @@ import styles from './filterItems.less';
 export class FilterRadio extends FilterBase {
   constructor(options: Partial<FilterRadio>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: true,
@@ -103,6 +103,9 @@ export class FilterRadio extends FilterBase {
    */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.inputValue = event.target.value;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.inputValue);
+    }
   };
 
   /**
@@ -120,6 +123,10 @@ export class FilterRadio extends FilterBase {
         this.inputRef.current?.focus();
       }
     }
+
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.value);
+    }
   };
 
   /**
@@ -131,6 +138,11 @@ export class FilterRadio extends FilterBase {
    * @internal
    */
   @observable.ref public inputRef = React.createRef<Input>();
+
+  /**
+   * 值改变回掉
+   */
+  public handleChangeCallback: (value?: string | undefined) => void;
 
   /**
    * @internal

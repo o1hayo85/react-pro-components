@@ -2,6 +2,7 @@
 
 @base-height: 38px;
 @footer-height: 65px;
+@filter-bg: #f3f3f3;
 
 .container {
   width: 100%;
@@ -234,6 +235,34 @@
         border: none !important;
         border-radius: 0;
       }
+    }
+  }
+}
+
+.filterContentBase {
+  :global {
+    .filterLabel,
+    .filterInput input,
+    .filterSelect .ant-select-selector,
+    .filterSelect .ant-select,
+    .filterInputNumberGroup .ant-select,
+    .filterInputNumberGroup .filterInputNumberGroupContent,
+    .filterInputNumberGroup .filterInputNumberGroupContent .ant-input-number,
+    .filterInputNumberGroup .filterInputNumberGroupContent .ant-input-number input,
+    .filterCascader .ant-cascader-picker,
+    .filterInputOrSelect,
+    .filterInputAndSelect,
+    .filterDateSelect > header,
+    .filterDateNormal > section {
+      height: @base-height !important;
+    }
+
+    .filterInputAndSelect {
+      background: @filter-bg;
+    }
+
+    .filterDateNormal .ant-picker .ant-picker-input input {
+      height: @base-height -2px !important;
     }
   }
 }

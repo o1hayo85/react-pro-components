@@ -1,15 +1,14 @@
-import { Input, Select, Typography } from 'antd';
+import { Input, Select } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
-import styles from './filterItems.less';
 
 export class FilterInputOrSelect extends FilterBase {
   constructor(options: Partial<FilterInputOrSelect>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
@@ -78,6 +77,9 @@ export class FilterInputOrSelect extends FilterBase {
    */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.value);
+    }
   };
 
   @observable public selectValue = '';
@@ -87,7 +89,15 @@ export class FilterInputOrSelect extends FilterBase {
    */
   @action public handleSelectChange = (selectValue: string | undefined) => {
     this.selectValue = selectValue;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.selectValue);
+    }
   };
+
+  /**
+   * 值改变回掉
+   */
+  public handleChangeCallback: (value?: string | undefined) => void;
 
   /**
    * 输入框提示文字
@@ -98,6 +108,11 @@ export class FilterInputOrSelect extends FilterBase {
    * 是否可清除
    */
   @observable public allowClear = true;
+
+  /**
+   * 是否禁止
+   */
+  @observable public disabled = false;
 }
 
 /**
@@ -123,27 +138,18 @@ export class FilterInputOrSelectComponent extends React.Component<{ store: Filte
       label,
       selectValue,
       allowClear,
+      disabled,
     } = this.props.store;
     return (
       <div
-        className={`${styles.filterInputOrSelect} ${className}`}
+        className={`filterInputOrSelect ${className}`}
         style={toJS(style)}
       >
-        <div
-          className="filterLabel"
-          title={label}
-        >
-          <Typography.Title
-            ellipsis={{ rows: 1 }}
-            title={label}
-          >
-            {label}
-          </Typography.Title>
-        </div>
         <section>
           <Input
             allowClear={allowClear}
             bordered={false}
+            disabled={disabled}
             onChange={handleInputChange}
             onPressEnter={this.handlePressEnter}
             placeholder={placeholder}
@@ -152,6 +158,7 @@ export class FilterInputOrSelectComponent extends React.Component<{ store: Filte
           <Select
             allowClear
             bordered={false}
+            disabled={disabled}
             dropdownMatchSelectWidth={false}
             onChange={handleSelectChange}
             options={data}

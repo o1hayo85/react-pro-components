@@ -24,4 +24,5 @@ export * from './addGoodsModal';
 export * from './constants';
 export * from './slideVerify';
 export * from './layout';
+export * from './fullModal';
 

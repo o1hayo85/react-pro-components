@@ -1,5 +1,5 @@
 import { InputNumber, Select, Typography } from 'antd';
-import { action, extendObservable, observable, toJS } from 'mobx';
+import { action, set, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -26,7 +26,7 @@ function formatNumberString(value: [number, number]) {
 export class FilterInputNumberGroup extends FilterBase {
   constructor(options: Partial<FilterInputNumberGroup>) {
     super(options);
-    extendObservable(this, {
+    set(this, {
       toParams: this.toParams,
       ...options,
       showCollapse: false,
@@ -125,7 +125,20 @@ export class FilterInputNumberGroup extends FilterBase {
    */
   @action public handleSelectValue = (selectedValue: string | undefined) => {
     this.selectValue = selectedValue;
+    if (typeof this.handleSelectChangeCallback === 'function') {
+      this.handleSelectChangeCallback(this.selectValue);
+    }
   };
+
+  /**
+   * 下拉框改变值回掉
+   */
+  public handleSelectChangeCallback: (value?: string | undefined) => void;
+
+  /**
+   * number输入框改变值回掉
+   */
+  public handleChangeCallback: (value?: [number, number]) => void;
 
   /**
    * 值[min, max]
@@ -138,15 +151,27 @@ export class FilterInputNumberGroup extends FilterBase {
   /**
    * @internal
    */
-  @action public onMinChange = (min) => {
-    this.value[0] = min;
+  @action public onMinChange = (min: number | null) => {
+    this.value[0] = typeof min === 'number' ? min : null;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback([
+        this.value[0],
+        this.value[1],
+      ]);
+    }
   };
 
   /**
    * @internal
    */
-  @action public onMaxChange = (max) => {
-    this.value[1] = max;
+  @action public onMaxChange = (max: number | null) => {
+    this.value[1] = typeof max === 'number' ? max : null;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback([
+        this.value[0],
+        this.value[1],
+      ]);
+    }
   };
 
   /**
@@ -204,6 +229,7 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
             return data.length > 1 ? (
               <Select
                 bordered={false}
+                disabled={disabled}
                 onChange={handleSelectValue}
                 options={data}
                 placeholder="请选择"

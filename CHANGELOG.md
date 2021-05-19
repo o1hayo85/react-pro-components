@@ -1,4 +1,9 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.25...v0.0.0) (2021-05-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.25...v0.0.0) (2021-05-19)
+
+### Features
+
+- **utils:** add fullModal ([bc2658e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bc2658e28d778ada3d1d0e1bdf638e834a2f01b1))
+- **utils:** 扩展查询项 item ([6575f16](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6575f16083165651bf76be04ff15594f0b98621c))
 
 ## [0.0.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.24...v0.0.25) (2021-05-14)
 

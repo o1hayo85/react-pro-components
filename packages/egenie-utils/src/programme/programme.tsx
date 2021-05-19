@@ -428,7 +428,7 @@ export class ProgrammeComponent extends React.Component<{ store: Programme; clas
             width="300"
           >
             <div
-              className={styles.filterContent}
+              className={`${styles.filterContent} ${styles.filterContentBase}`}
               onScroll={handleScroll}
               ref={scrollContainerRef}
             >

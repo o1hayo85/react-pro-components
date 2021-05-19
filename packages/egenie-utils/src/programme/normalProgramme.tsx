@@ -119,10 +119,11 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
       },
     } = this.props;
     const colWidth = 100 / count;
-    const btnWidth = ((count - actualData.length % count) / count) * 100;
+    const patchCount = count >= 6 && Boolean(actualData.find((item) => (item.type === 'date' || item.type === 'dateRange') && item.format === 'YYYY-MM-DD HH:mm:ss')) ? 1 : 0;
+    const btnWidth = ((count - ((actualData.length + patchCount) % count)) / count) * 100;
     return (
       <div
-        className={`${styles.content} ${className}`}
+        className={`${styles.content} ${styles.contentBase} ${className}`}
         style={style}
       >
         <Row
@@ -133,7 +134,7 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
         >
           {actualData.map((item) => {
             let newWidth;
-            if (item.type === 'date' && item.format === 'YYYY-MM-DD HH:mm:ss' && count >= 6) {
+            if ((item.type === 'date' || item.type === 'dateRange') && item.format === 'YYYY-MM-DD HH:mm:ss' && count >= 6) {
               newWidth = colWidth * 2;
             } else {
               newWidth = colWidth;
