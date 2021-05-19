@@ -6,7 +6,6 @@ import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
-import styles from './filterItems.less';
 
 enum FormatType {
   defaultFormat = 'YYYY-MM-DD HH:mm:ss',
@@ -269,7 +268,7 @@ export class FilterDateWrapperComponent extends React.Component<{ store: FilterD
             showToday={format !== FormatType.defaultFormat}
             value={endTime}
           />
-          <span className={styles.filterDateGap}/>
+          <span/>
         </section>
       </div>
     );

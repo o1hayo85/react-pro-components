@@ -320,6 +320,13 @@
       align-items: center;
       border: 1px solid @border-color-base;
 
+      > span {
+        position: absolute;
+        left: calc(50% - 5px);
+        width: 11px;
+        border-top: 1px solid #c5c3cb;
+      }
+
       :global {
         .ant-picker {
           width: 50%;
@@ -332,11 +339,4 @@
       }
     }
   }
-}
-
-.filterDateGap {
-  position: absolute;
-  left: calc(50% - 5px);
-  width: 11px;
-  border-top: 1px solid #c5c3cb;
 }
