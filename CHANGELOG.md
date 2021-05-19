@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** add dateStart and dateEnd ([c412488](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c412488e65b870345074de683734983ddbe14aa2))
+- **utils:** add dateStart and dateEnd ([4cf1bc8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4cf1bc8c3445ace901816344c0ebc64aea9ea7be))
 - **utils:** add fullModal ([4a260f3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4a260f31370f85e02cb28f399abad9016b4d3ef8))
 
 ## [0.0.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.25...v0.0.26) (2021-05-19)
