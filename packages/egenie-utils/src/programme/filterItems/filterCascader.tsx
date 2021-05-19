@@ -1,6 +1,6 @@
 import { Cascader, Typography } from 'antd';
 import _ from 'lodash';
-import { action, intercept, observable, set, toJS } from 'mobx';
+import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -8,9 +8,13 @@ import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+
+    extendObservable(this, {
+      ...rest,
       showCollapse: false,
     });
     this.formatValue(this.value);

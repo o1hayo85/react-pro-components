@@ -1,6 +1,6 @@
 import { Input, Select } from 'antd';
 import _ from 'lodash';
-import { action, set, observable, toJS } from 'mobx';
+import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -9,14 +9,18 @@ import styles from './filterItems.less';
 export class FilterInputAndSelect extends FilterBase {
   constructor(options: Partial<FilterInputAndSelect>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+
+    extendObservable(this, {
+      ...rest,
       showCollapse: false,
     });
-    this.formatValue(`${_.toString(this.selectValue)},${_.toString(this.value)}`);
+    this.formatValue(`${_.toString(this.selectValue)},${_.toString(this.inputValue)}`);
     this.snapshot = {
-      value: this.value,
+      inputValue: this.inputValue,
       selectValue: this.selectValue,
     };
   }
@@ -27,24 +31,32 @@ export class FilterInputAndSelect extends FilterBase {
   @observable public type: 'inputAndSelect' = ENUM_FILTER_ITEM_TYPE.inputAndSelect;
 
   public toProgramme(): string {
-    return this.selectValue ? `${this.selectValue},${this.value}` : '';
+    if (this.selectValue) {
+      if (this.inputValue) {
+        return `${this.selectValue},${this.inputValue}`;
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   }
 
   public toParams(this: FilterInputAndSelect): {[key: string]: string; } {
-    if (this.selectValue && this.value != null) {
-      return { [this.selectValue]: this.value };
+    if (this.selectValue && this.inputValue) {
+      return { [this.selectValue]: this.inputValue };
     } else {
       return {};
     }
   }
 
-  private snapshot: { value: string | undefined; selectValue: string; } = {
-    value: '',
+  private snapshot: { inputValue: string | undefined; selectValue: string; } = {
+    inputValue: '',
     selectValue: '',
   };
 
   @action public reset = (): void => {
-    this.value = this.snapshot.value;
+    this.inputValue = this.snapshot.inputValue;
     this.selectValue = this.snapshot.selectValue;
   };
 
@@ -52,14 +64,14 @@ export class FilterInputAndSelect extends FilterBase {
   public formatValue(this: FilterInputAndSelect, value?: string): void {
     const keyAndValue = _.toString(value)
       .split(',');
-    this.value = _.toString(keyAndValue[1]);
+    this.inputValue = _.toString(keyAndValue[1]);
     this.selectValue = keyAndValue[0] ? keyAndValue[0] : undefined;
   }
 
   /**
    * 输入框的值
    */
-  @observable public value = '';
+  @observable public inputValue = '';
 
   /**
    * @internal
@@ -70,9 +82,9 @@ export class FilterInputAndSelect extends FilterBase {
    * @internal
    */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    this.value = event.target.value;
+    this.inputValue = event.target.value;
     if (typeof this.handleInputChangeCallback === 'function') {
-      this.handleInputChangeCallback(this.value);
+      this.handleInputChangeCallback(this.inputValue);
     }
   };
 
@@ -131,7 +143,7 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
 
   render() {
     const {
-      value,
+      inputValue,
       handleInputChange,
       placeholder,
       style,
@@ -164,7 +176,7 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
           onPressEnter={this.handlePressEnter}
           placeholder={placeholder}
           ref={inputRef}
-          value={value}
+          value={inputValue}
         />
       </div>
     );

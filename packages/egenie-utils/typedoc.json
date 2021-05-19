@@ -12,6 +12,7 @@
     "src/programme/filterItems/common.ts",
     "src/programme/filterItems/filterCheckbox.tsx",
     "src/programme/filterItems/filterDate.tsx",
+    "src/programme/filterItems/filterDateStartOrEnd.tsx",
     "src/programme/filterItems/filterInputAndSelect.tsx",
     "src/programme/filterItems/filterInputNumberGroup.tsx",
     "src/programme/filterItems/filterRadio.tsx",

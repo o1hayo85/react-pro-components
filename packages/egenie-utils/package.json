@@ -38,6 +38,6 @@
     "typescript": "4.2.4"
   },
   "scripts": {
-    "doc": "rm -rf ./docs && typedoc"
+    "doc": "typedoc"
   }
 }

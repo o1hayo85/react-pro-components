@@ -2,7 +2,7 @@ import { Button, Col, Row, Space } from 'antd';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { filterComponentFactory, FilterItems, FilterItemsParams } from './filterItems';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, FilterItems, FilterItemsParams, FormatType } from './filterItems';
 import styles from './normalProgramme.less';
 
 export interface NormalProgrammeParams extends FilterItemsParams {
@@ -119,7 +119,16 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
       },
     } = this.props;
     const colWidth = 100 / count;
-    const patchCount = count >= 6 && Boolean(actualData.find((item) => (item.type === 'date' || item.type === 'dateRange') && item.format === 'YYYY-MM-DD HH:mm:ss')) ? 1 : 0;
+    const patchCount = actualData.reduce((prev, item) => {
+      if (item.type === ENUM_FILTER_ITEM_TYPE.date || item.type === ENUM_FILTER_ITEM_TYPE.dateRange) {
+        if (item.format === FormatType.defaultFormat) {
+          if (count >= 6) {
+            return prev + 1;
+          }
+        }
+      }
+      return prev;
+    }, 0);
     const btnWidth = ((count - ((actualData.length + patchCount) % count)) / count) * 100;
     return (
       <div
@@ -133,11 +142,13 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
           ]}
         >
           {actualData.map((item) => {
-            let newWidth;
-            if ((item.type === 'date' || item.type === 'dateRange') && item.format === 'YYYY-MM-DD HH:mm:ss' && count >= 6) {
-              newWidth = colWidth * 2;
-            } else {
-              newWidth = colWidth;
+            let newWidth = colWidth;
+            if (item.type === ENUM_FILTER_ITEM_TYPE.date || item.type === ENUM_FILTER_ITEM_TYPE.dateRange) {
+              if (item.format === FormatType.defaultFormat) {
+                if (count >= 6) {
+                  newWidth = colWidth * 2;
+                }
+              }
             }
 
             return (

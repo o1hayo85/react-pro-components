@@ -1,5 +1,5 @@
 import { Checkbox } from 'antd';
-import { action, intercept, observable, set, toJS } from 'mobx';
+import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -19,9 +19,13 @@ function formatValue(value?: string[] | string): string[] {
 export class FilterCheckbox extends FilterBase {
   constructor(options: Partial<FilterCheckbox>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+
+    extendObservable(this, {
+      ...rest,
       showCollapse: true,
     });
 

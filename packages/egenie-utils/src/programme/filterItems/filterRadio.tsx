@@ -1,5 +1,5 @@
 import { Input, Radio } from 'antd';
-import { action, set, observable, toJS } from 'mobx';
+import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -8,19 +8,21 @@ import styles from './filterItems.less';
 export class FilterRadio extends FilterBase {
   constructor(options: Partial<FilterRadio>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+    extendObservable(this, {
+      ...rest,
       showCollapse: true,
     });
-    this.formatValue(this.inputValue || this.value);
+
+    this.formatValue(this.inputValue || this.inputValue);
     this.snapshot = {
       value: this.value,
       inputValue: this.inputValue,
     };
   }
-
-  public data: Array<{ value: string; label: string; showInput?: boolean; [key: string]: any; }>;
 
   /**
    * 类型标志

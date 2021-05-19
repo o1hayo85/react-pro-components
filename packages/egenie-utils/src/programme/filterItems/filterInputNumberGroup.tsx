@@ -1,5 +1,5 @@
 import { InputNumber, Select, Typography } from 'antd';
-import { action, set, observable, toJS } from 'mobx';
+import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -26,9 +26,13 @@ function formatNumberString(value: [number, number]) {
 export class FilterInputNumberGroup extends FilterBase {
   constructor(options: Partial<FilterInputNumberGroup>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+
+    extendObservable(this, {
+      ...rest,
       showCollapse: false,
     });
     this.formatValue(this.value);

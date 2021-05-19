@@ -1,6 +1,6 @@
 import { Input, Typography } from 'antd';
 import _ from 'lodash';
-import { action, set, observable, toJS } from 'mobx';
+import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
@@ -20,9 +20,13 @@ function formatValue(value: string, isTrimWhiteSpace: boolean) {
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {
     super(options);
-    set(this, {
-      toParams: this.toParams,
-      ...options,
+    const {
+      data,
+      ...rest
+    } = options;
+
+    extendObservable(this, {
+      ...rest,
       showCollapse: false,
     });
     this.formatValue(this.value);

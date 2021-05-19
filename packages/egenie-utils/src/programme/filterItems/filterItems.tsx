@@ -5,7 +5,8 @@ import { FilterItemSettingItem } from '../filterItemSetting';
 import { ENUM_FILTER_ITEM_TYPE, FilterItem, FilterItemOptions, formatValueAndLabelData, ValueAndLabelData } from './common';
 import { FilterCascader, FilterCascaderComponent } from './filterCascader';
 import { FilterCheckbox, FilterCheckboxComponent } from './filterCheckbox';
-import { FilterDate, FilterDateWrapperComponent } from './filterDate';
+import { FilterDate, FilterDateComponent } from './filterDate';
+import { FilterDateStartOrEnd, FilterDateStartOrEndComponent } from './filterDateStartOrEnd';
 import { FilterInput, FilterInputComponent } from './filterInput';
 import { FilterInputAndSelect, FilterInputAndSelectComponent } from './filterInputAndSelect';
 import { FilterInputNumberGroup, FilterInputNumberGroupComponent } from './filterInputNumberGroup';
@@ -65,6 +66,9 @@ function filterInstanceFactory(item: FilterItemOptions): FilterItem {
     case ENUM_FILTER_ITEM_TYPE.date:
     case ENUM_FILTER_ITEM_TYPE.dateRange:
       return new FilterDate(item);
+    case ENUM_FILTER_ITEM_TYPE.dateStart:
+    case ENUM_FILTER_ITEM_TYPE.dateEnd:
+      return new FilterDateStartOrEnd(item);
     case ENUM_FILTER_ITEM_TYPE.checkbox:
       return new FilterCheckbox(item);
     case ENUM_FILTER_ITEM_TYPE.inputOrSelect:
@@ -117,7 +121,15 @@ export function filterComponentFactory(item: FilterItem): React.ReactNode {
     case ENUM_FILTER_ITEM_TYPE.date:
     case ENUM_FILTER_ITEM_TYPE.dateRange:
       return (
-        <FilterDateWrapperComponent
+        <FilterDateComponent
+          key={item.field}
+          store={item}
+        />
+      );
+    case ENUM_FILTER_ITEM_TYPE.dateStart:
+    case ENUM_FILTER_ITEM_TYPE.dateEnd:
+      return (
+        <FilterDateStartOrEndComponent
           key={item.field}
           store={item}
         />

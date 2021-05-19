@@ -1,3 +1,5 @@
+## 具体 utils 组件文档，在 egenie-utils 仓库的 packages/egenie-utils 下执行 npm run doc，打开 docs 下的 index.html。(后期会部署到内网)
+
 ## 查询项关键简介
 
 1. 关键字段说明
@@ -23,8 +25,8 @@
 1. 创建
 
 ```
-import { Programme, ProgrammeComponent, MainSubStructureModel } from 'egenie-utils';
 import React from 'react';
+import { MainSubStructureModel, Programme, ProgrammeComponent } from 'egenie-utils';
 
 export default class extends React.Component {
   public programme = new Programme({
@@ -33,7 +35,12 @@ export default class extends React.Component {
         primaryKeyField: 'a',
         columns: [],
       },
-      api: { onQuery: () => Promise.resolve() },
+      api: {
+        onQuery: () => {
+          console.log(this.programme.filterItems.params);
+          return Promise.resolve();
+        },
+      },
     }),
 
     fieldMap: {
@@ -43,30 +50,13 @@ export default class extends React.Component {
     },
     filterItems: [
       {
-        type: 'date',
-        field: 'date',
-        label: '日期类型',
-        selectValue: 'sale_order_status.pay_time',
-        data: [
-          {
-            // 下拉框加日期控件标识
-            showSelect: true,
-            value: 'sale_order_status.pay_time',
-            label: '付款时间',
-          },
-        ],
-      },
-      {
         type: 'radio',
-        label: '单号',
+        label: 'radio',
         field: 'radio',
         data: [
           {
             value: 'sale_order_no-14-10',
             label: '订单号',
-
-            // 可选，可输入的标识
-            showInput: true,
           },
           {
             value: 'platform_order_code-15-10',
@@ -74,12 +64,67 @@ export default class extends React.Component {
           },
         ],
       },
+
+      // 开始时间
+      {
+        type: 'dateStart',
+        field: 'dateStart',
+        label: 'dateStart',
+        handleChangeCallback(a) {
+          console.log(a);
+        },
+      },
+
+      // 结束时间
+      {
+        format: 'YYYY-MM-DD',
+        type: 'dateEnd',
+        field: 'dateEnd',
+        label: 'dateEnd',
+        handleChangeCallback(a) {
+          console.log(a);
+        },
+      },
+
+      // 左右查询方案-时间范围
+      {
+        type: 'date',
+        field: 'date',
+        label: 'date',
+        selectValue: 'sale_order_status.pay_time',
+        data: [
+          {
+            value: 'sale_order_status.pay_time',
+            label: '付款时间',
+          },
+        ],
+      },
+
+      // 时间范围
+      {
+        type: 'dateRange',
+        field: 'dateRange',
+        label: 'dateRange',
+      },
+
+      // checkbox
       {
         type: 'checkbox',
         label: '快递公司',
         field: 'courier_id-4-14',
-        data: [],
+        data: [
+          {
+            value: 'sale_order_no-14-10',
+            label: '订单号',
+          },
+          {
+            value: 'platform_order_code-15-10',
+            label: '平台单号',
+          },
+        ],
       },
+
+      // 下拉框
       {
         type: 'select',
 
@@ -87,31 +132,73 @@ export default class extends React.Component {
         mode: 'multiple',
         label: '店铺',
         field: 'shop_id-4-10',
-        data: [],
+        data: [
+          {
+            value: 'sale_order_no-14-10',
+            label: '订单号',
+          },
+          {
+            value: 'platform_order_code-15-10',
+            label: '平台单号',
+          },
+        ],
       },
+
+      // 级联
       {
-        type: 'select',
-        label: '级联',
+        type: 'cascader',
+        label: 'cascader',
         field: 'cascader',
-        data: [],
+        data: [
+          {
+            value: 'sale_order_no-14-10',
+            label: '订单号',
+          },
+          {
+            value: 'platform_order_code-15-10',
+            label: '平台单号',
+          },
+        ],
       },
+
+      // 输入框
       {
         type: 'input',
         field: 'receiver_name-14-12',
-        label: '收货人',
+        label: 'input',
       },
+
+      // number组合框
       {
         type: 'inputNumberGroup',
         field: 'total_num-2-10',
-        label: '宝贝数量',
+        label: 'inputNumberGroup',
       },
+
+      // 下拉框加输入框
       {
-        // 下拉框加输入框
         type: 'inputAndSelect',
-        label: '单号',
-        field: 'wmsReceiveSourceType',
+        label: 'inputAndSelect',
+        field: 'inputAndSelect',
         selectValue: 'wmsReceiveOrderNo',
-        placeholder: '来源单号/收货单编号',
+        placeholder: 'inputAndSelect',
+        data: [
+          {
+            value: 'sourceNo',
+            label: '来源单号',
+          },
+          {
+            value: 'wmsReceiveOrderNo',
+            label: '收货单编号',
+          },
+        ],
+      },
+
+      // 下拉框加输入框
+      {
+        type: 'inputOrSelect',
+        label: 'inputOrSelect',
+        field: 'inputOrSelect',
         data: [
           {
             value: 'sourceNo',
@@ -130,7 +217,9 @@ export default class extends React.Component {
   });
 
   render() {
-    return <ProgrammeComponent store={this.programme}/>;
+    return (
+      <ProgrammeComponent store={this.programme}/>
+    );
   }
 }
 ```

@@ -4,6 +4,7 @@ import React from 'react';
 import { FilterCascader } from './filterCascader';
 import { FilterCheckbox } from './filterCheckbox';
 import { FilterDate } from './filterDate';
+import { FilterDateStartOrEnd } from './filterDateStartOrEnd';
 import { FilterInput } from './filterInput';
 import { FilterInputAndSelect } from './filterInputAndSelect';
 import { FilterInputNumberGroup } from './filterInputNumberGroup';
@@ -22,6 +23,8 @@ export enum ENUM_FILTER_ITEM_TYPE {
   select = 'select',
   date = 'date',
   dateRange = 'dateRange',
+  dateStart = 'dateStart',
+  dateEnd = 'dateEnd',
   checkbox = 'checkbox',
   inputOrSelect = 'inputOrSelect',
   cascader = 'cascader',
@@ -119,6 +122,7 @@ export abstract class FilterBase {
 
   /**
    * 查询项数据。为value、label形式。value必须为string，不然可能会出问题
+   * 当type为radio时，item的showInput为true时，此项为可选可输入
    */
   @observable public data: ValueAndLabelData = [];
 
@@ -155,7 +159,7 @@ export function formatValueAndLabelData(data: ValueAndLabelData): ValueAndLabelD
 /**
  * 查询项种类
  */
-export type FilterItem = FilterInput | FilterInputNumberGroup | FilterSelect | FilterRadio | FilterInputAndSelect | FilterDate | FilterCheckbox | FilterInputOrSelect | FilterCascader;
+export type FilterItem = FilterInput | FilterInputNumberGroup | FilterSelect | FilterRadio | FilterInputAndSelect | FilterDate | FilterCheckbox | FilterInputOrSelect | FilterCascader | FilterDateStartOrEnd;
 
 /**
  * 查询项参数
