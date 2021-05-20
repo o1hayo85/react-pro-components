@@ -1,31 +1,186 @@
 import { DatePicker, Select, Typography } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { action, observable, extendObservable, toJS } from 'mobx';
+import { action, observable, extendObservable, toJS, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import styles from './filterItems.less';
 
-export enum FormatType {
+export enum FormatDateType {
   defaultFormat = 'YYYY-MM-DD HH:mm:ss',
   day = 'YYYY-MM-DD',
 }
+
+export type FilterDateValue = 'today' | 'yesterday' | 'recentThreeDays' | 'thisWeek' | 'recentSevenDays' | 'recentFifteenDays' | 'thisMonth' | 'recentThirtyDays' | 'thisQuarter' | 'recentHalfYear' | 'thisYear' | 'recentYear';
+
+export interface FilterDateDict {
+  value: FilterDateValue;
+  label: string;
+  getTimes: () => [moment.Moment, moment.Moment];
+}
+
+export type FilterDateDateItem = FilterDateValue | { value: string; label: FilterDateDict['label']; getTimes: FilterDateDict['getTimes']; };
+
+export const filterDateDict: {[key: string]: FilterDateDict; } = {
+  today: {
+    value: 'today',
+    label: '今天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day'),
+        moment(),
+      ];
+    },
+  },
+  yesterday: {
+    value: 'yesterday',
+    label: '昨天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(1, 'days'),
+        moment()
+          .endOf('day')
+          .subtract(1, 'days'),
+      ];
+    },
+  },
+  recentThreeDays: {
+    value: 'recentThreeDays',
+    label: '近3日',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(2, 'days'),
+        moment(),
+      ];
+    },
+  },
+  thisWeek: {
+    value: 'thisWeek',
+    label: '本周',
+    getTimes() {
+      return [
+        moment()
+          .startOf('week'),
+        moment(),
+      ];
+    },
+  },
+  recentSevenDays: {
+    value: 'recentSevenDays',
+    label: '近7天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(6, 'days'),
+        moment(),
+      ];
+    },
+  },
+  recentFifteenDays: {
+    value: 'recentFifteenDays',
+    label: '近15天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(14, 'days'),
+        moment(),
+      ];
+    },
+  },
+  thisMonth: {
+    value: 'thisMonth',
+    label: '本月',
+    getTimes() {
+      return [
+        moment()
+          .startOf('month'),
+        moment(),
+      ];
+    },
+  },
+  recentThirtyDays: {
+    value: 'recentThirtyDays',
+    label: '近30天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(29, 'days'),
+        moment(),
+      ];
+    },
+  },
+  thisQuarter: {
+    value: 'thisQuarter',
+    label: '本季度',
+    getTimes() {
+      return [
+        moment()
+          .startOf('quarter'),
+        moment(),
+      ];
+    },
+  },
+  recentHalfYear: {
+    value: 'recentHalfYear',
+    label: '近180天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(179, 'days'),
+        moment(),
+      ];
+    },
+  },
+  thisYear: {
+    value: 'thisYear',
+    label: '本年',
+    getTimes() {
+      return [
+        moment()
+          .startOf('year'),
+        moment(),
+      ];
+    },
+  },
+  recentYear: {
+    value: 'recentYear',
+    label: '近365天',
+    getTimes() {
+      return [
+        moment()
+          .startOf('day')
+          .subtract(364, 'days'),
+        moment(),
+      ];
+    },
+  },
+};
 
 function formatTime(startTime: moment.Moment, endTime: moment.Moment, format: string): string {
   let startTimeString: string;
   let endTimeString: string;
 
   switch (format) {
-    case FormatType.defaultFormat:
-      startTimeString = startTime ? startTime.format(FormatType.defaultFormat) : '';
-      endTimeString = endTime ? endTime.format(FormatType.defaultFormat) : '';
+    case FormatDateType.defaultFormat:
+      startTimeString = startTime ? startTime.format(FormatDateType.defaultFormat) : '';
+      endTimeString = endTime ? endTime.format(FormatDateType.defaultFormat) : '';
       break;
-    case FormatType.day:
+    case FormatDateType.day:
       startTimeString = startTime ? startTime.startOf('day')
-        .format(FormatType.defaultFormat) : '';
+        .format(FormatDateType.defaultFormat) : '';
       endTimeString = endTime ? endTime.endOf('day')
-        .format(FormatType.defaultFormat) : '';
+        .format(FormatDateType.defaultFormat) : '';
       break;
     default:
       startTimeString = '';
@@ -157,7 +312,7 @@ export class FilterDate extends FilterBase {
   /**
    * 日期格式
    */
-  @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatType.defaultFormat;
+  @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
 
   /**
    * 开始时间
@@ -169,6 +324,7 @@ export class FilterDate extends FilterBase {
    */
   @action public handleStartChange = (startTime: moment.Moment | null) => {
     this.startTime = startTime;
+    this.dateDictValue = undefined;
 
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
@@ -184,6 +340,8 @@ export class FilterDate extends FilterBase {
   @action public handleRangeChange = (dates: [moment.Moment, moment.Moment]) => {
     this.startTime = dates?.[0];
     this.endTime = dates?.[1];
+    this.dateDictValue = undefined;
+
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
         this.startTime,
@@ -210,6 +368,7 @@ export class FilterDate extends FilterBase {
    */
   @action public handleEndChange = (endTime: moment.Moment | null) => {
     this.endTime = endTime;
+    this.dateDictValue = undefined;
 
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
@@ -226,6 +385,62 @@ export class FilterDate extends FilterBase {
     '开始时间',
     '结束时间',
   ];
+
+  /**
+   * 预设时间字典。可以根据实际选取，或者新增
+   */
+  @observable.ref public dateDict: FilterDateDateItem[] = Object.values(filterDateDict);
+
+  /**
+   * 字典值
+   */
+  @observable public dateDictValue = undefined;
+
+  /**
+   * @internal
+   */
+  @computed
+  public get realDateDict(): Array<{ value: string; label: FilterDateDict['label']; getTimes: FilterDateDict['getTimes']; }> {
+    const result: Array<{ value: string; label: FilterDateDict['label']; getTimes: FilterDateDict['getTimes']; }> = [];
+    this.dateDict.forEach((item) => {
+      if (typeof item === 'string') {
+        result.push({
+          value: item,
+          label: filterDateDict[item].label,
+          getTimes: filterDateDict[item].getTimes,
+        });
+      } else {
+        // @ts-ignore
+        result.push(item);
+      }
+    });
+
+    return result;
+  }
+
+  /**
+   * 字典值改变
+   */
+  @action public handleDateDictChange = (value: string | undefined) => {
+    this.dateDictValue = value;
+    const item = this.realDateDict.find((item) => item.value === value);
+    if (item.getTimes) {
+      const [
+        startTime,
+        endTime,
+      ] = item.getTimes();
+
+      this.startTime = startTime;
+      this.endTime = endTime;
+
+      if (typeof this.handleChangeCallback === 'function') {
+        this.handleChangeCallback([
+          this.startTime,
+          this.endTime,
+        ]);
+      }
+    }
+  };
 }
 
 /**
@@ -290,14 +505,17 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
           <DatePicker
             bordered={false}
             disabled={disabled[0]}
+            dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleStartChange}
             placeholder={Array.isArray(placeholder) ? placeholder[0] : placeholder}
-            showTime={format === FormatType.defaultFormat ? {
+            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
+            showNow={false}
+            showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,
               defaultValue: moment('00:00:00', 'HH:mm:ss'),
             } : false}
-            showToday
+            showToday={false}
             suffixIcon={null}
             value={startTime}
           />
@@ -307,13 +525,17 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
           <DatePicker
             bordered={false}
             disabled={disabled[1]}
+            dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleEndChange}
             placeholder={Array.isArray(placeholder) ? placeholder[1] : placeholder}
-            showTime={format === FormatType.defaultFormat ? {
+            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
+            showNow={false}
+            showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,
               defaultValue: moment('23:59:59', 'HH:mm:ss'),
             } : false}
+            showToday={false}
             value={endTime}
           />
         </section>
@@ -361,10 +583,12 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
             allowEmpty={allowEmpty}
             bordered={false}
             disabled={disabled}
+            dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleRangeChange}
             placeholder={placeholder}
-            showTime={format === FormatType.defaultFormat ? {
+            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
+            showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,
               defaultValue: [
                 moment('00:00:00', 'HH:mm:ss'),
@@ -378,6 +602,32 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
           />
         </section>
       </div>
+    );
+  }
+}
+
+/**
+ * @internal
+ */
+@observer
+class FilterDateDictComponent extends React.Component<{ store: FilterDate; }> {
+  render() {
+    const {
+      dateDictValue,
+      handleDateDictChange,
+      realDateDict,
+    } = this.props.store;
+    return (
+      <Select
+        allowClear
+        onChange={handleDateDictChange}
+        optionFilterProp="label"
+        options={realDateDict}
+        placeholder="请选择预设日期"
+        size="small"
+        style={{ width: 120 }}
+        value={dateDictValue}
+      />
     );
   }
 }

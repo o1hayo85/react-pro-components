@@ -2,7 +2,7 @@ import { Button, Col, Row, Space } from 'antd';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, FilterItems, FilterItemsParams, FormatType } from './filterItems';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, FilterItems, FilterItemsParams, FormatDateType } from './filterItems';
 import styles from './normalProgramme.less';
 
 export interface NormalProgrammeParams extends FilterItemsParams {
@@ -121,7 +121,7 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
     const colWidth = 100 / count;
     const patchCount = actualData.reduce((prev, item) => {
       if (item.type === ENUM_FILTER_ITEM_TYPE.date || item.type === ENUM_FILTER_ITEM_TYPE.dateRange) {
-        if (item.format === FormatType.defaultFormat) {
+        if (item.format === FormatDateType.defaultFormat) {
           if (count >= 6) {
             return prev + 1;
           }
@@ -144,7 +144,7 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
           {actualData.map((item) => {
             let newWidth = colWidth;
             if (item.type === ENUM_FILTER_ITEM_TYPE.date || item.type === ENUM_FILTER_ITEM_TYPE.dateRange) {
-              if (item.format === FormatType.defaultFormat) {
+              if (item.format === FormatDateType.defaultFormat) {
                 if (count >= 6) {
                   newWidth = colWidth * 2;
                 }

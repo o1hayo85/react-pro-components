@@ -1,8 +1,8 @@
 import { set, observable, action } from 'mobx';
 import { ReactEventHandler } from 'react';
 import { EgGridModel } from '../egGridModel';
-import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
 import { SubTableListModel } from './subTableListModel';
+import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
 import type { ISubTableModel } from './subTableModel';
 
 interface IButton {
@@ -15,7 +15,7 @@ interface IButton {
   group?: IButton[];
 }
 
-interface IMainSubStructureModel {
+export interface IMainSubStructureModel {
   grid: IEgGridModel;
   api: IEgGridApi;
   subTables?: {

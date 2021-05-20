@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
-import { FormatType } from './filterDate';
+import { FormatDateType } from './filterDate';
 
 function formatTime(value: moment.Moment | null, format: string, type: string): string {
   if (!value) {
@@ -13,18 +13,18 @@ function formatTime(value: moment.Moment | null, format: string, type: string): 
   }
 
   if (type === ENUM_FILTER_ITEM_TYPE.dateStart) {
-    if (format === FormatType.defaultFormat) {
-      return value.format(FormatType.defaultFormat);
+    if (format === FormatDateType.defaultFormat) {
+      return value.format(FormatDateType.defaultFormat);
     } else {
       return value.startOf('day')
-        .format(FormatType.defaultFormat);
+        .format(FormatDateType.defaultFormat);
     }
   } else {
-    if (format === FormatType.defaultFormat) {
-      return value.format(FormatType.defaultFormat);
+    if (format === FormatDateType.defaultFormat) {
+      return value.format(FormatDateType.defaultFormat);
     } else {
       return value.endOf('day')
-        .format(FormatType.defaultFormat);
+        .format(FormatDateType.defaultFormat);
     }
   }
 }
@@ -98,7 +98,7 @@ export class FilterDateStartOrEnd extends FilterBase {
   /**
    * 日期格式
    */
-  @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatType.defaultFormat;
+  @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
 
   /**
    * 时间
@@ -166,7 +166,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
             format={format}
             onChange={handleChange}
             placeholder={placeholder}
-            showTime={format === FormatType.defaultFormat ? {
+            showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,
               defaultValue: type === ENUM_FILTER_ITEM_TYPE.dateStart ? moment('00:00:00', 'HH:mm:ss') : moment('23:59:59', 'HH:mm:ss'),
             } : false}
