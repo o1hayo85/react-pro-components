@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { observable, action } from 'mobx';
 import qs from 'qs';
 import { request, BaseData } from '../request';
-import { SrcParams, User, Response, Menudata, API,Permission } from './interface';
+import { SrcParams, User, Response, Menudata, API, Permission } from './interface';
 
 export class LayoutStore {
   @observable public haveDashboard: false; // 是否展示dashboard, false首页则展示空白页
@@ -43,6 +43,7 @@ export class LayoutStore {
     blockWidth: 240,
     lineTop: 74,
   };
+
   public handleWindow = () => {
     window.top.user = {
       tenantType: '100001,100002,100007,100009',
@@ -103,15 +104,15 @@ export class LayoutStore {
       },
     };
     window.top.EgeniePermission = EgeniePermission;
+  };
 
-  }
   public handleInit = () => {
     this.getUserInfo();
     this.getMenuList();
     this.getUserPerms();
     this.handleDefaultOpenPage();
-    this.handleWindow()    
-  }
+    this.handleWindow();
+  };
 
   public getUserInfo = action(async() => {
     const res: User = await request({ url: '/api/dashboard/user' });

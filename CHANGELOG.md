@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.27...v0.0.0) (2021-05-20)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.28...v0.0.0) (2021-05-20)
+
+### Bug Fixes
+
+- **utils:** 菜单按钮权限 ([fc69329](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fc69329a14d021a161854917abb77d6978d07fcd))
+
+## [0.0.28](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.27...v0.0.28) (2021-05-20)
 
 ### Features
 

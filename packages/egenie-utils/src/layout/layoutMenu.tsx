@@ -17,8 +17,8 @@ const {
 @inject('layoutStore')
 @observer
 export class LayoutMenu extends React.Component<any> {
-  componentDidMount(): void { 
-    this.props.layoutStore.handleInit()
+  componentDidMount(): void {
+    this.props.layoutStore.handleInit();
   }
 
   public openNewPage = (child: Partial<{ url: string; name: string; }>): JSX.Element => {
