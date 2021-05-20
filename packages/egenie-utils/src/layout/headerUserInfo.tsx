@@ -18,11 +18,7 @@ const defaultOperations: Opera[] = [
     id: 'password',
     name: '修改密码',
   },
-  {
-    id: 'exit',
-    name: '退出登录',
-    url: '/logout',
-  },
+  
 ];
 
 @inject('layoutStore')
@@ -35,6 +31,11 @@ export class HeaderUserInfo extends React.Component<any> {
     const list = [
       ...defaultOperations,
       ...this.props.userInfoRight,
+      {
+        id: 'exit',
+        name: '退出登录',
+        url: '/logout',
+      },
     ];
     return (
       <Menu>
