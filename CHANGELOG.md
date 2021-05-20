@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.27...v0.0.0) (2021-05-20)
 
+### Features
+
+- **utils:** add inner dateDict ([d56d7a4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d56d7a4161cac6c7db1fff49ba2ce072a11527ef))
+
 ## [0.0.27](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.26...v0.0.27) (2021-05-19)
 
 ### Features
