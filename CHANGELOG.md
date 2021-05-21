@@ -4,6 +4,10 @@
 
 - **utils:** layout 二级菜单交互优化 ([c3b3bcf](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c3b3bcf089817356fb0df1fd1d6fbee5d5d5b24f))
 
+### Features
+
+- update packages ([59a413c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/59a413cecc9b4851b059bca6f6ebc19109dc5ff8))
+
 ## [0.0.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.29...v0.0.30) (2021-05-21)
 
 ### Bug Fixes
