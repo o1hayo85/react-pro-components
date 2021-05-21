@@ -84,22 +84,22 @@ export class LayoutStore {
           if (list.includes(`${resourceId}${id}`)) {
             return null;
           }
-    
+
           item.remove();
         });
       },
       getResourceId(iframe, iframeId) {
         return iframeId ? `${iframeId}_` : `${iframe.frameElement.id}_`;
       },
-    
+
       hasPermit(iframe, permission) {
         const list = EgeniePermission.permissionList;
         const resourceId = EgeniePermission.getResourceId(iframe);
-    
+
         if (!resourceId) {
           return null;
         }
-    
+
         return list.includes(`${resourceId}_${permission}`);
       },
     };
@@ -138,7 +138,7 @@ export class LayoutStore {
         return;
       }
       const { resource } = res.data;
-      this.handleOpenTab(`${resource.resourceUrl }?${params}`, resource.id, resource.resourceName, resource.icon);
+      this.handleOpenTab(`${resource.resourceUrl}?${params}`, resource.id, resource.resourceName, resource.icon);
     })
       .catch(() => {
         return { resource: null };
@@ -245,22 +245,18 @@ export class LayoutStore {
     const itemTotalHeight = itemHeight + itemMargin; // 叶子菜单高度+边距
     const marginBottom = blockMargin; // 菜单间的间距
     const contentHeight = window.innerHeight - lineTop; // 父级可使用高度
-
     this.menuData = data.map((item) => {
       const result: Menudata[][] = [[]];
       let line = 0; // 列数
       let currentHeight = 0;
+
       item.children.map((child) => {
         const height = titleTotalHeight + child.children.length * itemTotalHeight + marginBottom - itemMargin;
-     
-        if (currentHeight === 0 && line > 0) {
-          line += 1;
-        }
         currentHeight += height;
 
         if (currentHeight > contentHeight) {
           line += 1;
-          currentHeight = 0;
+          currentHeight = height;
         }
         (result[line] ? result[line] : result[line] = []).push(child);
       });
