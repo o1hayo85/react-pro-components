@@ -252,8 +252,12 @@ export class LayoutStore {
       let currentHeight = 0;
       item.children.map((child) => {
         const height = titleTotalHeight + child.children.length * itemTotalHeight + marginBottom - itemMargin;
-
+     
+        if (currentHeight === 0 && line > 0) {
+          line += 1;
+        }
         currentHeight += height;
+
         if (currentHeight > contentHeight) {
           line += 1;
           currentHeight = 0;
