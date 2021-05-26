@@ -321,13 +321,6 @@ export class LayoutStore {
   public handleUserOpertion = action((data, item) => {
     console.log('item.....', data, item);
     switch (data.key) {
-      case 'account':
-        this.handleOpenTab(
-          '/page/system/account_center/index.html',
-          'account_center',
-          '店铺账户中心',
-          'zc_pfs'
-        ); break;
       case 'password':
         this.togglePassword(true);
         break;

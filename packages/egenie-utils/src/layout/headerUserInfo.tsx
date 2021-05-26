@@ -11,14 +11,14 @@ interface Opera {
 
 const defaultOperations: Opera[] = [
   {
-    id: 'account',
-    name: '店铺账户中心',
-  },
-  {
     id: 'password',
     name: '修改密码',
   },
-  
+  {
+    id: 'exit',
+    name: '退出登录',
+    url: '/logout',
+  },
 ];
 
 @inject('layoutStore')
@@ -29,13 +29,8 @@ export class HeaderUserInfo extends React.Component<any> {
   public menu = () => {
     const { handleUserOpertion } = this.props.layoutStore;
     const list = [
-      ...defaultOperations,
       ...this.props.userInfoRight,
-      {
-        id: 'exit',
-        name: '退出登录',
-        url: '/logout',
-      },
+      ...defaultOperations,
     ];
     return (
       <Menu>
