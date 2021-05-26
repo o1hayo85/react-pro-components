@@ -202,6 +202,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       mode,
       showChooseAll,
       label,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -210,6 +211,10 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       >
         <div
           className="filterLabel"
+          style={{
+            width: labelWidth,
+            maxWidth: labelWidth,
+          }}
           title={label}
         >
           <Typography.Title

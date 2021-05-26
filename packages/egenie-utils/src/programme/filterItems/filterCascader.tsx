@@ -143,6 +143,7 @@ export class FilterCascaderComponent extends React.Component<{ store: FilterCasc
       showSearch,
       loadData,
       fieldNames,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -151,6 +152,10 @@ export class FilterCascaderComponent extends React.Component<{ store: FilterCasc
       >
         <div
           className="filterLabel"
+          style={{
+            width: labelWidth,
+            maxWidth: labelWidth,
+          }}
           title={label}
         >
           <Typography.Title

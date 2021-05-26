@@ -1,4 +1,4 @@
-import { DatePicker, Select, Typography } from 'antd';
+import { DatePicker, Row, Select, Tag, Typography } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { action, observable, extendObservable, toJS, computed } from 'mobx';
@@ -167,20 +167,20 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
   },
 };
 
-function formatTime(startTime: moment.Moment, endTime: moment.Moment, format: string): string {
+function formatTime(startTime: moment.Moment, endTime: moment.Moment, formatParams: string): string {
   let startTimeString: string;
   let endTimeString: string;
 
-  switch (format) {
+  switch (formatParams) {
     case FormatDateType.defaultFormat:
-      startTimeString = startTime ? startTime.format(FormatDateType.defaultFormat) : '';
-      endTimeString = endTime ? endTime.format(FormatDateType.defaultFormat) : '';
+      startTimeString = startTime ? startTime.format(formatParams) : '';
+      endTimeString = endTime ? endTime.format(formatParams) : '';
       break;
     case FormatDateType.day:
       startTimeString = startTime ? startTime.startOf('day')
-        .format(FormatDateType.defaultFormat) : '';
+        .format(formatParams) : '';
       endTimeString = endTime ? endTime.endOf('day')
-        .format(FormatDateType.defaultFormat) : '';
+        .format(formatParams) : '';
       break;
     default:
       startTimeString = '';
@@ -224,17 +224,17 @@ export class FilterDate extends FilterBase {
   public toProgramme(): string | null {
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
-        return `${this.selectValue},${formatTime(this.startTime, this.endTime, this.format)}`;
+        return `${this.selectValue},${formatTime(this.startTime, this.endTime, this.formatParams)}`;
       } else {
         return null;
       }
     } else {
-      return formatTime(this.startTime, this.endTime, this.format);
+      return formatTime(this.startTime, this.endTime, this.formatParams);
     }
   }
 
   public toParams(this: FilterDate): {[key: string]: string; } {
-    const timeString = formatTime(this.startTime, this.endTime, this.format);
+    const timeString = formatTime(this.startTime, this.endTime, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
         if (timeString) {
@@ -310,9 +310,14 @@ export class FilterDate extends FilterBase {
   };
 
   /**
-   * 日期格式
+   * 日期展示格式
    */
   @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
+
+  /**
+   * 日期转化成参数格式
+   */
+  @observable public formatParams: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
 
   /**
    * 开始时间
@@ -324,7 +329,6 @@ export class FilterDate extends FilterBase {
    */
   @action public handleStartChange = (startTime: moment.Moment | null) => {
     this.startTime = startTime;
-    this.dateDictValue = undefined;
 
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
@@ -340,7 +344,6 @@ export class FilterDate extends FilterBase {
   @action public handleRangeChange = (dates: [moment.Moment, moment.Moment]) => {
     this.startTime = dates?.[0];
     this.endTime = dates?.[1];
-    this.dateDictValue = undefined;
 
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
@@ -368,7 +371,6 @@ export class FilterDate extends FilterBase {
    */
   @action public handleEndChange = (endTime: moment.Moment | null) => {
     this.endTime = endTime;
-    this.dateDictValue = undefined;
 
     if (typeof this.handleChangeCallback === 'function') {
       this.handleChangeCallback([
@@ -390,11 +392,6 @@ export class FilterDate extends FilterBase {
    * 预设时间字典。可以根据实际选取，或者新增
    */
   @observable.ref public dateDict: FilterDateDateItem[] = Object.values(filterDateDict);
-
-  /**
-   * 字典值
-   */
-  @observable public dateDictValue = undefined;
 
   /**
    * @internal
@@ -421,8 +418,7 @@ export class FilterDate extends FilterBase {
   /**
    * 字典值改变
    */
-  @action public handleDateDictChange = (value: string | undefined) => {
-    this.dateDictValue = value;
+  @action public handleDateDictChange = (value: string) => {
     const item = this.realDateDict.find((item) => item.value === value);
     if (item.getTimes) {
       const [
@@ -477,6 +473,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
       className,
       style,
       disabled,
+      labelWidth,
     } = this.props.store;
     const newClassName = classNames('filterDateSelect', className);
     return (
@@ -485,7 +482,13 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
         style={toJS(style)}
       >
         <header>
-          <section className="filterLabel">
+          <section
+            className="filterLabel"
+            style={{
+              width: labelWidth,
+              maxWidth: labelWidth,
+            }}
+          >
             <Typography.Title
               ellipsis={{ rows: 1 }}
               title={label}
@@ -561,6 +564,7 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
       style,
       disabled,
       handleRangeChange,
+      labelWidth,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -569,7 +573,13 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
         style={toJS(style)}
       >
         <header>
-          <section className="filterLabel">
+          <section
+            className="filterLabel"
+            style={{
+              width: labelWidth,
+              maxWidth: labelWidth,
+            }}
+          >
             <Typography.Title
               ellipsis={{ rows: 1 }}
               title={label}
@@ -613,21 +623,26 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
 class FilterDateDictComponent extends React.Component<{ store: FilterDate; }> {
   render() {
     const {
-      dateDictValue,
       handleDateDictChange,
       realDateDict,
     } = this.props.store;
     return (
-      <Select
-        allowClear
-        onChange={handleDateDictChange}
-        optionFilterProp="label"
-        options={realDateDict}
-        placeholder="请选择预设日期"
-        size="small"
-        style={{ width: 120 }}
-        value={dateDictValue}
-      />
+      <Row
+        className={styles.dateSelect}
+        gutter={[
+          4,
+          4,
+        ]}
+      >
+        {realDateDict.map((item) => (
+          <Tag
+            color="blue"
+            onClick={() => handleDateDictChange(item.value)}
+          >
+            {item.label}
+          </Tag>
+        ))}
+      </Row>
     );
   }
 }

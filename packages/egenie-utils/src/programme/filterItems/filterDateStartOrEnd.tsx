@@ -7,24 +7,24 @@ import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
 import { FormatDateType } from './filterDate';
 
-function formatTime(value: moment.Moment | null, format: string, type: string): string {
+function formatTime(value: moment.Moment | null, formatParams: string, type: string): string {
   if (!value) {
     return '';
   }
 
   if (type === ENUM_FILTER_ITEM_TYPE.dateStart) {
-    if (format === FormatDateType.defaultFormat) {
-      return value.format(FormatDateType.defaultFormat);
+    if (formatParams === FormatDateType.defaultFormat) {
+      return value.format(formatParams);
     } else {
       return value.startOf('day')
-        .format(FormatDateType.defaultFormat);
+        .format(formatParams);
     }
   } else {
-    if (format === FormatDateType.defaultFormat) {
-      return value.format(FormatDateType.defaultFormat);
+    if (formatParams === FormatDateType.defaultFormat) {
+      return value.format(formatParams);
     } else {
       return value.endOf('day')
-        .format(FormatDateType.defaultFormat);
+        .format(formatParams);
     }
   }
 }
@@ -62,7 +62,7 @@ export class FilterDateStartOrEnd extends FilterBase {
   @observable public type: 'dateStart' | 'dateEnd' = ENUM_FILTER_ITEM_TYPE.dateStart;
 
   public toProgramme(): string | null {
-    return formatTime(this.value, this.format, this.type);
+    return formatTime(this.value, this.formatParams, this.type);
   }
 
   public toParams(this: FilterDateStartOrEnd): {[key: string]: string; } {
@@ -96,9 +96,14 @@ export class FilterDateStartOrEnd extends FilterBase {
   public handleChangeCallback: (value: moment.Moment | null) => void;
 
   /**
-   * 日期格式
+   * 日期展示格式
    */
   @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
+
+  /**
+   * 日期转化成参数格式
+   */
+  @observable public formatParams: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
 
   /**
    * 时间
@@ -142,6 +147,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
       style,
       disabled,
       type,
+      labelWidth,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -150,7 +156,13 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
         style={toJS(style)}
       >
         <header>
-          <section className="filterLabel">
+          <section
+            className="filterLabel"
+            style={{
+              width: labelWidth,
+              maxWidth: labelWidth,
+            }}
+          >
             <Typography.Title
               ellipsis={{ rows: 1 }}
               title={label}

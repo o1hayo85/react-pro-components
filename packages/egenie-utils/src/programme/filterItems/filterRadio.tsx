@@ -17,7 +17,7 @@ export class FilterRadio extends FilterBase {
       showCollapse: true,
     });
 
-    this.formatValue(this.inputValue || this.inputValue);
+    this.formatValue(this.inputValue || this.value);
     this.snapshot = {
       value: this.value,
       inputValue: this.inputValue,

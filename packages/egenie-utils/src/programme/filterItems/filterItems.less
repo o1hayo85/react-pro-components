@@ -218,7 +218,6 @@
 
       :global {
         .ant-select {
-          width: 90px;
           border-left: 1px solid @border-color-base;
           .common-select();
         }
@@ -254,7 +253,6 @@
       }
 
       .ant-select {
-        width: 90px;
         border-right: 1px solid @border-color-base;
         .common-select();
       }
@@ -351,8 +349,17 @@
       justify-content: space-between;
 
       .ant-picker-footer-extra {
+        flex-grow: 1;
         border: none;
+      }
+
+      .ant-picker-ranges {
+        flex-shrink: 0;
       }
     }
   }
+}
+
+.dateSelect {
+  padding: 8px 0;
 }

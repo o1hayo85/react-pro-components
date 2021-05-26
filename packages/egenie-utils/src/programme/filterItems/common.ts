@@ -77,6 +77,11 @@ export abstract class FilterBase {
   @observable public showItem = true;
 
   /**
+   * label显示宽度
+   */
+  @observable public labelWidth = 90;
+
+  /**
    * 查询项是否可以收缩。现在不需要传，内置了
    */
   @observable public showCollapse = false;

@@ -16,17 +16,17 @@ import { FilterSelect, FilterSelectComponent } from './filterSelect';
 
 function validParams(data: FilterItemOptions[]) {
   data.forEach((item) => {
-    if (!item.field) {
-      throw new Error('field必须填写');
-    }
-
-    if (!item.label) {
-      throw new Error('label必须填写');
-    }
-
     if (!(item.type in ENUM_FILTER_ITEM_TYPE)) {
       throw new Error(`当前type: ${item.type}。只支持${Object.values(ENUM_FILTER_ITEM_TYPE)
         .join('或者')}`);
+    }
+
+    if (!item.field) {
+      throw new Error(`${item.type}的field必须填写`);
+    }
+
+    if (!item.label) {
+      throw new Error(`${item.field}的label必须填写`);
     }
   });
 

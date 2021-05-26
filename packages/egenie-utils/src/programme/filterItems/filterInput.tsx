@@ -124,6 +124,7 @@ export class FilterInputComponent extends React.Component<{ store: FilterInput; 
       style,
       className,
       label,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -132,6 +133,10 @@ export class FilterInputComponent extends React.Component<{ store: FilterInput; 
       >
         <div
           className="filterLabel"
+          style={{
+            width: labelWidth,
+            maxWidth: labelWidth,
+          }}
           title={label}
         >
           <Typography.Title

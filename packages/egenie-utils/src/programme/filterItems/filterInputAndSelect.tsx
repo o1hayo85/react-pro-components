@@ -153,6 +153,7 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
       selectValue,
       inputRef,
       disabled,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -165,6 +166,10 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
           onChange={handleSelectChange}
           options={data}
           placeholder="请选择"
+          style={{
+            width: labelWidth,
+            maxWidth: labelWidth,
+          }}
           value={selectValue}
         />
         <Input

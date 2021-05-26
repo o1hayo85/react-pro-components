@@ -138,10 +138,10 @@ export class FilterInputOrSelectComponent extends React.Component<{ store: Filte
       className,
       data,
       handleSelectChange,
-      label,
       selectValue,
       allowClear,
       disabled,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -166,6 +166,10 @@ export class FilterInputOrSelectComponent extends React.Component<{ store: Filte
             onChange={handleSelectChange}
             options={data}
             placeholder="请选择"
+            style={{
+              width: labelWidth,
+              maxWidth: labelWidth,
+            }}
             value={selectValue}
           />
         </section>

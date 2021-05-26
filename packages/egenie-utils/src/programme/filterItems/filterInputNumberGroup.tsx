@@ -222,6 +222,7 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
       data,
       selectValue,
       handleSelectValue,
+      labelWidth,
     } = this.props.store;
     return (
       <div
@@ -237,11 +238,19 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
                 onChange={handleSelectValue}
                 options={data}
                 placeholder="请选择"
+                style={{
+                  width: labelWidth,
+                  maxWidth: labelWidth,
+                }}
                 value={selectValue}
               />
             ) : (
               <div
                 className="filterLabel"
+                style={{
+                  width: labelWidth,
+                  maxWidth: labelWidth,
+                }}
                 title={label}
               >
                 <Typography.Title
