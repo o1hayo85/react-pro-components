@@ -25,4 +25,8 @@ export * from './constants';
 export * from './slideVerify';
 export * from './layout';
 export * from './fullModal';
+export * from './common';
+export * from './loginForm/login';
+export * from './loginForm/findPassword';
+export * from './loginForm/registry';
 

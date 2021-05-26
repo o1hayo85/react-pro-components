@@ -1,0 +1,67 @@
+.loginForm {
+  .content {
+    position: absolute;
+    top: 50%;
+    right: 186px;
+    width: 486px;
+    padding: 40px;
+    padding-bottom: 24px;
+    background: #fff;
+    border-radius: 6px;
+    transform: translate(0, -50%);
+    .form {
+      position: relative;
+      :global {
+        #authImage {
+          display: flex;
+          img {
+            height: 50px;
+            margin-left: 10;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .error {
+      position: absolute;
+      bottom: 60px;
+      color: #ff4d4f;
+    }
+    .input {
+      height: 50px;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 6px;
+    }
+    .title {
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      color: @blue-6;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 20px;
+      text-align: center;
+      border-bottom: 1px solid #edeeef;
+    }
+
+    .submit {
+      width: 406px;
+      height: 50px;
+      margin-top: 6px;
+      font-size: 18px;
+      border-radius: 6px;
+    }
+    .others {
+      display: flex;
+      justify-content: space-between;
+      color: #a9a9ab;
+      font-size: 14px;
+      span {
+        cursor: pointer;
+      }
+    }
+    .registry {
+      color: @blue-6;
+    }
+  }
+}

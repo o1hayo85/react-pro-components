@@ -1,0 +1,75 @@
+.findPassword {
+  width: 864px;
+  margin: auto;
+  padding-bottom: 80px;
+  background: #fff;
+  border-radius: 4px;
+
+  .title {
+    height: 50px;
+    margin-bottom: 70px;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 114px;
+  }
+  // .steps {
+  // }
+  .form {
+    position: relative;
+    width: 450px;
+    margin: auto;
+    margin-top: 66px;
+
+    :global {
+      .ant-input {
+        font-size: 14px;
+      }
+      .ant-form-item-extra {
+        min-height: 14px;
+        color: #c5c3cb;
+        font-size: 10px;
+      }
+      label {
+        font-size: 14px;
+        &::before {
+          opacity: 0;
+        }
+      }
+      label[title="operation"] {
+        opacity: 0;
+      }
+      .smscode {
+        width: 114px;
+        height: 36px;
+        margin-left: 10px;
+      }
+      .footerOperation {
+        margin-top: 20px;
+        .default {
+          width: 120px;
+          height: 40px;
+        }
+        .primary {
+          width: 170px;
+          height: 40px;
+        }
+      }
+    }
+    .error {
+      position: relative;
+      left: 43%;
+      margin-top: -42px;
+      color: #ff4d4f;
+      font-size: 12px;
+    }
+  }
+}
