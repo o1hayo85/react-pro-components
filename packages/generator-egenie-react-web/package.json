@@ -1,6 +1,6 @@
 {
   "name": "generator-egenie-react-web",
-  "version": "0.0.31",
+  "version": "0.0.32-alpha.0",
   "description": "",
   "files": [
     "generators"

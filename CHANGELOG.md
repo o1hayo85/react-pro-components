@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 更改日期范围预设样式。增加日期转参数格式化。增加 label 宽度配置 ([5f2556f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5f2556fe159b29486e3177b52b314fef7d0f4122))
+- **utils:** 更改日期范围预设样式。增加日期转参数格式化。增加 label 宽度配置 ([50af01f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/50af01fad001bd4d0c68f1156e715d9ddc3a8e73))
 
 ## [0.0.31](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.30...v0.0.31) (2021-05-21)
 
