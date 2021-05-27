@@ -10,10 +10,16 @@ import { Response, Market, FindPasswordForm, SelectOption } from './interface';
 export class Store {
   constructor(options) {
     this.loginPath = options.route?.loginPath;
+    this.logoImg = options.route?.logoImg;
+    this.logoText = options.route?.logoText;
     console.log('options.....', options.route);
   }
 
   public loginPath: string;
+
+  public logoImg: string;
+
+  public logoText: string;
 
   /*
   *注册

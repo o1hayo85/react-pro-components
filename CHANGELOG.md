@@ -1,9 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32...v0.0.0) (2021-05-26)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32...v0.0.0) (2021-05-27)
 
 ### Features
 
 - **utils:** 修改用户默认配置，只保留修改密码&退出登录，店铺账户中心需要项目单独加 ([f70fc97](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f70fc97f09dc67e90c8257242634cb99dcbc0095))
 - **utils:** 新增登录组件 & 通用工具函数 ([51629dd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51629ddd9c04da2b7d27b82d04224df371d311fd))
+- **utils:** 修改用户默认配置，只保留修改密码&退出登录，店铺账户中心需要项目单独加 ([f70fc97](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f70fc97f09dc67e90c8257242634cb99dcbc0095))
 
 ## [0.0.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32-alpha.0...v0.0.32) (2021-05-26)
 
