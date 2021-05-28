@@ -51,7 +51,6 @@ git config --global core.autocrlf input
 ```
 // 创建.eslintrc.js文件
 module.exports = require('egenie-code-style').react;
-//
 ```
 
 - styleLint
@@ -59,7 +58,6 @@ module.exports = require('egenie-code-style').react;
 ```
 // 创建stylelint.config.js文件
 module.exports = require('egenie-code-style').stylelint;
-//
 ```
 
 - prettier
@@ -67,7 +65,6 @@ module.exports = require('egenie-code-style').stylelint;
 ```
 // 创建prettier.config.js文件
 module.exports = require('egenie-code-style').prettier;
-//
 ```
 
 - commitlint
@@ -75,5 +72,4 @@ module.exports = require('egenie-code-style').prettier;
 ```
 // 创建commitlint.config.js文件
 module.exports = require('egenie-code-style').commitlint;
-//
 ```
