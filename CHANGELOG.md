@@ -3,6 +3,8 @@
 ### Features
 
 - update packages ([41716db](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/41716dbf8875150bb57669fbb2a6663e58cc09d0))
+- 登录，注册新增 logo 和标题 props ([d47bfea](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d47bfeafdda64e0532730a873ab3ef2c2a24be6b))
+- 登录，注册新增 logo 和标题 props,样式 ([f440c82](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f440c82aa1febaf807d47e7cc1d9dcb76fdf3248))
 
 ## [0.0.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32...v0.0.33) (2021-05-26)
 
