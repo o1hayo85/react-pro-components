@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.33...v0.0.0) (2021-05-28)
 
+### Features
+
+- update packages ([41716db](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/41716dbf8875150bb57669fbb2a6663e58cc09d0))
+
 ## [0.0.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32...v0.0.33) (2021-05-26)
 
 ### Features

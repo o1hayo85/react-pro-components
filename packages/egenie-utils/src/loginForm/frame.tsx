@@ -7,9 +7,10 @@ import { Props } from './interface';
 
 export default class Index extends React.Component<Props> {
   public store = new Store(this.props);
-
+ 
   render(): JSX.Element {
-    const { goToLogin } = this.store;
+    const { goToLogin, logoImg, logoText } = this.store;
+    console.log('this.frame......', this.props, logoImg, logoText);
     return (
       <Provider store={this.store}>
         <div className={styles.frame}>
@@ -17,10 +18,10 @@ export default class Index extends React.Component<Props> {
             <div>
               <img
                 onClick={goToLogin}
-                src={`${api.oss}/images/logo.png`}
+                src={logoImg || `${api.oss}/images/logo.png`}
               />
               <span className={styles.title}>
-                最专业的服装供应链服务商
+                {logoText || '最专业的服装供应链服务商'}
               </span>
             </div>
             <span
