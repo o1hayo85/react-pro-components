@@ -21,7 +21,10 @@
     "src/programme/filterItems/filterCascader.tsx",
     "src/renderModal.ts",
     "src/batchReport/index.tsx",
-    "src/addGoodsModal/addGoodsModal.tsx"
+    "src/addGoodsModal/addGoodsModal.tsx",
+    "src/common.ts",
+    "src/layout/index.tsx",
+    "src/layout/interface.ts"
   ],
   "out": "docs",
   "excludePrivate": true,

@@ -26,8 +26,20 @@ export interface Egenie {
 }
 
 export interface Opera {
+
+  /**
+   * 菜单ID，可自定义
+   */
   id: string | number;
+
+  /**
+   * 菜单的名字，非菜单可以自定义
+   */
   name: string;
+
+  /**
+   * 菜单的地址
+   */
   url?: string;
   callback?: () => void;
 }
@@ -40,7 +52,16 @@ export interface Permission {
 }
 
 export interface SrcParams {
+
+  /**
+   * 菜单ID
+   */
   id: number;
+
+  /**
+   * 查询参数
+   * 例如：'name=123&sex=1'
+  */
   params: string;
 }
 

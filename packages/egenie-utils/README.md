@@ -398,3 +398,32 @@ printHelper.print({
 ```
 import { printWayBill } from 'egenie-utils';
 ```
+
+## 菜单-LayoutGuide
+
+1. 介绍
+
+- 包括左侧菜单导航栏；顶部 tab 拦，用户信息和下拉操作栏(hover 用户名展示)
+
+2. LayoutGuide 使用
+
+```
+
+//引入
+import {LayoutGuide} from 'egenie-utils';
+
+const defaultDashboard = (<div>首页</div>)
+const srcParams = [{id:506, params:'name=12&sex=0'}]
+const userInfoLeft =  (<div>用户信息左侧扩展内容</div>)
+
+//用户信息下拉列表
+const userInfoRight = [
+  {id:506,name:'销售开单', callback: () => top.egenie.openTab(url, id, name, icon)}
+]
+<LayoutGuide
+  defaultDashboard={defaultDashboard}
+  srcParams={srcParams}
+  userInfoLeft={userInfoLeft()}
+  userInfoRight={userInfoRight}
+/>
+```
