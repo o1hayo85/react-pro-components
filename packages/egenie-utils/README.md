@@ -427,3 +427,42 @@ const userInfoRight = [
   userInfoRight={userInfoRight}
 />
 ```
+
+## 登录相关-LoginForm
+
+1. 介绍
+
+- 包括登录，注册，忘记密码
+
+2. LoginForm 使用
+
+```
+
+//引入-第一步
+import { LoginForm } from 'egenie-utils';
+
+// registryPath有路由就展示按钮，反之不展示。changePasswordPath同理
+
+<LoginForm
+  registryPath=”/egenie-erp-home/registry“,
+  changePasswordPath=”/egenie-erp-home/findPassword“
+/>
+
+//routes.tsx文件补充路由-第二步
+import { FindPassword, Registry } from 'egenie-utils';
+[
+  {
+    path: '/egenie-erp-home/registry',
+    title: '注册‘,
+    exact:true,
+    component: Registry,
+    loginPath: 'egenie-erp-home/login,
+    logoImg: 'https://fronts.runscm.com/egenie-common/images/bossBg.png',
+    logoText: '衫数科技运营管理平台'
+  },
+  {
+    ....
+  }
+
+]
+```

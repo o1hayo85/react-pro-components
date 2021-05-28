@@ -24,7 +24,11 @@
     "src/addGoodsModal/addGoodsModal.tsx",
     "src/common.ts",
     "src/layout/index.tsx",
-    "src/layout/interface.ts"
+    "src/layout/interface.ts",
+    "src/loginForm/login/index.tsx",
+    "src/loginForm/findPassword/index.tsx",
+    "src/loginForm/registry/index.tsx",
+    "src/loginForm/interface.tsx"
   ],
   "out": "docs",
   "excludePrivate": true,
