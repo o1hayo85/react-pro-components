@@ -15,7 +15,7 @@ interface ModalProps {
 
 export const FullModal = observer((props: ModalProps) => {
   const {
-    style,
+    style = {},
     operation,
     onCancel,
     title,
@@ -42,24 +42,27 @@ export const FullModal = observer((props: ModalProps) => {
         top: scrollTop,
       }}
     >
-      <div className={`${styles.titleWrapper} ${titleClassName}`}>
-        <div className={styles.titleContent}>
-          <div
-            className={styles.closeIcon}
-            onClick={onCancel}
-          >
-            <CloseOutlined className={`${styles.cl3} ${styles.font14}`}/>
+      <div className={styles.contentWrapper}>
+
+        <div className={`${styles.titleWrapper} ${titleClassName}`}>
+          <div className={styles.titleContent}>
+            <div
+              className={styles.closeIcon}
+              onClick={onCancel}
+            >
+              <CloseOutlined/>
+            </div>
+            <span className={`${styles.title}`}>
+              {title}
+            </span>
           </div>
-          <span className={`${styles.title} ${styles.ml10}`}>
-            {title}
-          </span>
+          <div>
+            {operation}
+          </div>
         </div>
-        <div>
-          {operation}
+        <div className={styles.flex1}>
+          {children}
         </div>
-      </div>
-      <div>
-        {children}
       </div>
     </div>
   );
