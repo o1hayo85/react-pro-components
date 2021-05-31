@@ -3,6 +3,7 @@
 ### Features
 
 - test ci ([78aa2f4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/78aa2f43581785fdda23ce1164dddf7d764ca97b))
+- **generator:** lock important packages version ([5a77699](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5a77699206837e74a71043ddf1e60d92cd492874))
 - **utils:** update README ([e2dbf00](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e2dbf00e6ec2fb96ae8573f6998b206a7b51f6cd))
 
 ## [0.0.34](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.33...v0.0.34) (2021-05-28)

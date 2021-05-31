@@ -1,0 +1,6 @@
+react-data-grid@^7.0.0-canary.36:
+  version "7.0.0-canary.36"
+  resolved "https://registry.npm.taobao.org/react-data-grid/download/react-data-grid-7.0.0-canary.36.tgz#3b44fe2093aecee641fcf565a8fbe773d0be7da7"
+  integrity sha1-O0T+IJOuzuZB/PVlqPvnc9C+fac=
+  dependencies:
+    clsx "^1.1.1"

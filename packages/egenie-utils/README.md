@@ -384,7 +384,7 @@ const programme = new NormalProgramme({
 ## 显示批量报告(在你想要的时机)
 
 ```
-import { BatchReport, renderModal } from '../../utils';
+import { BatchReport, renderModal } from 'egenie-utils';
 
 const data = {
   status: 'Successful',
