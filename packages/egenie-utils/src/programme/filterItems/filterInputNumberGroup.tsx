@@ -35,7 +35,13 @@ export class FilterInputNumberGroup extends FilterBase {
       ...rest,
       showCollapse: false,
     });
-    this.formatValue(this.value);
+
+    if (this.data.length > 1) {
+      this.formatValue(`${this.selectValue},${formatNumberString(this.value)}`);
+    } else {
+      this.formatValue(formatNumberString(this.value));
+    }
+
     this.snapshot.value = toJS(this.value);
     this.snapshot.selectedValue = this.selectValue;
   }
@@ -46,7 +52,15 @@ export class FilterInputNumberGroup extends FilterBase {
   @observable public type: 'inputNumberGroup' = ENUM_FILTER_ITEM_TYPE.inputNumberGroup;
 
   public toProgramme(): string {
-    return this.data.length > 1 ? `${this.selectValue || ''},${formatNumberString(this.value)}` : formatNumberString(this.value);
+    if (this.data.length > 1) {
+      if (this.selectValue) {
+        return `${this.selectValue},${formatNumberString(this.value)}`;
+      } else {
+        return null;
+      }
+    } else {
+      return formatNumberString(this.value);
+    }
   }
 
   public toParams(this: FilterInputNumberGroup): {[key: string]: string; } {
@@ -111,23 +125,34 @@ export class FilterInputNumberGroup extends FilterBase {
       null,
       null,
     ],
-    selectedValue: undefined,
+    selectedValue: '',
   };
 
   @action public reset = (): void => {
     this.value = this.snapshot.value;
     this.selectValue = this.snapshot.selectedValue;
+
+    if (typeof this.handleSelectChangeCallback === 'function') {
+      this.handleSelectChangeCallback(this.selectValue);
+    }
+
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback([
+        this.value[0],
+        this.value[1],
+      ]);
+    }
   };
 
   /**
    * 下拉框的值。data的长度大于1才需要传。和filterDate类似
    */
-  @observable public selectValue: string | undefined = undefined;
+  @observable public selectValue = '';
 
   /**
    * @internal
    */
-  @action public handleSelectValue = (selectedValue: string | undefined) => {
+  @action public handleSelectValue = (selectedValue: string) => {
     this.selectValue = selectedValue;
     if (typeof this.handleSelectChangeCallback === 'function') {
       this.handleSelectChangeCallback(this.selectValue);

@@ -60,8 +60,15 @@ export class FilterCascader extends FilterBase {
 
   private snapshot = [];
 
+  @action private handleCallback = () => {
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
+  };
+
   @action public reset = (): void => {
     this.value = this.snapshot;
+    this.handleCallback();
   };
 
   /**
@@ -79,9 +86,7 @@ export class FilterCascader extends FilterBase {
       this.value = [];
     }
 
-    if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(toJS(this.value));
-    }
+    this.handleCallback();
   };
 
   /**

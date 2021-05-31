@@ -57,8 +57,15 @@ export class FilterInput extends FilterBase {
 
   private snapshot = '';
 
+  @action private handleCallback = () => {
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(formatValue(this.value, this.isTrimWhiteSpace));
+    }
+  };
+
   @action public reset = (): void => {
     this.value = this.snapshot;
+    this.handleCallback();
   };
 
   /**
@@ -71,10 +78,7 @@ export class FilterInput extends FilterBase {
    */
   @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
-
-    if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(formatValue(this.value, this.isTrimWhiteSpace));
-    }
+    this.handleCallback();
   };
 
   /**

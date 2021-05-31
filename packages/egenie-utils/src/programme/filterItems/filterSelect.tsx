@@ -95,8 +95,15 @@ export class FilterSelect extends FilterBase {
 
   private snapshot: string | undefined | string[] = undefined;
 
+  @action private handleCallback = () => {
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
+  };
+
   @action public reset = (): void => {
     this.value = this.snapshot;
+    this.handleCallback();
   };
 
   /**
@@ -109,9 +116,7 @@ export class FilterSelect extends FilterBase {
    */
   @action public onChange = (value: string | string[]) => {
     this.value = value;
-    if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(toJS(this.value));
-    }
+    this.handleCallback();
   };
 
   /**

@@ -66,8 +66,15 @@ export class FilterCheckbox extends FilterBase {
 
   private snapshot: string[] = [];
 
+  @action private handleCallback = () => {
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
+  };
+
   @action public reset = (): void => {
     this.value = this.snapshot;
+    this.handleCallback();
   };
 
   /**
@@ -80,9 +87,7 @@ export class FilterCheckbox extends FilterBase {
    */
   @action public onChange = (value: string[]) => {
     this.value = value || [];
-    if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(toJS(this.value));
-    }
+    this.handleCallback();
   };
 
   /**

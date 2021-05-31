@@ -58,6 +58,14 @@ export class FilterInputAndSelect extends FilterBase {
   @action public reset = (): void => {
     this.inputValue = this.snapshot.inputValue;
     this.selectValue = this.snapshot.selectValue;
+
+    if (typeof this.handleInputChangeCallback === 'function') {
+      this.handleInputChangeCallback(this.inputValue);
+    }
+
+    if (typeof this.handleSelectChangeCallback === 'function') {
+      this.handleSelectChangeCallback(this.selectValue);
+    }
   };
 
   @action

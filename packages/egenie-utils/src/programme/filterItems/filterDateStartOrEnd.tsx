@@ -86,8 +86,15 @@ export class FilterDateStartOrEnd extends FilterBase {
 
   private snapshot: moment.Moment = null;
 
+  @action private handleCallback = () => {
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.value);
+    }
+  };
+
   @action public reset = (): void => {
     this.value = this.snapshot;
+    this.handleCallback();
   };
 
   /**
@@ -115,9 +122,7 @@ export class FilterDateStartOrEnd extends FilterBase {
    */
   @action public handleChange = (value: moment.Moment | null) => {
     this.value = value;
-    if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback(this.value);
-    }
+    this.handleCallback();
   };
 
   /**

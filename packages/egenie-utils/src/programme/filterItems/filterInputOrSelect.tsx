@@ -16,7 +16,7 @@ export class FilterInputOrSelect extends FilterBase {
       ...rest,
       showCollapse: false,
     });
-    this.formatValue(this.value);
+    this.formatValue(this.value || this.selectValue);
     this.snapshot = {
       value: this.value,
       selectValue: this.selectValue,
@@ -29,11 +29,11 @@ export class FilterInputOrSelect extends FilterBase {
   @observable public type: 'inputOrSelect' = ENUM_FILTER_ITEM_TYPE.inputOrSelect;
 
   public toProgramme(): string {
-    if (this.selectValue != undefined) {
-      return this.selectValue;
+    if (this.value) {
+      return this.value;
     } else {
-      if (this.value) {
-        return this.value;
+      if (this.selectValue != undefined) {
+        return this.selectValue;
       } else {
         return null;
       }
@@ -50,12 +50,15 @@ export class FilterInputOrSelect extends FilterBase {
 
   private snapshot: { value: string; selectValue: string; } = {
     value: '',
-    selectValue: '',
+    selectValue: undefined,
   };
 
   @action public reset = (): void => {
     this.value = this.snapshot.value;
     this.selectValue = this.snapshot.selectValue;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.value || this.selectValue);
+    }
   };
 
   @action
@@ -85,7 +88,7 @@ export class FilterInputOrSelect extends FilterBase {
     }
   };
 
-  @observable public selectValue = '';
+  @observable public selectValue: string | undefined = undefined;
 
   /**
    * @internal

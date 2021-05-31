@@ -278,10 +278,20 @@ export class FilterDate extends FilterBase {
     selectValue: '',
   };
 
+  @action private handleCallback = () => {
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback([
+        this.startTime,
+        this.endTime,
+      ]);
+    }
+  };
+
   @action public reset = (): void => {
     this.startTime = this.snapshot.startTime;
     this.endTime = this.snapshot.endTime;
     this.selectValue = this.snapshot.selectValue;
+    this.handleCallback();
   };
 
   /**
@@ -329,13 +339,7 @@ export class FilterDate extends FilterBase {
    */
   @action public handleStartChange = (startTime: moment.Moment | null) => {
     this.startTime = startTime;
-
-    if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback([
-        this.startTime,
-        this.endTime,
-      ]);
-    }
+    this.handleCallback();
   };
 
   /**
@@ -344,13 +348,7 @@ export class FilterDate extends FilterBase {
   @action public handleRangeChange = (dates: [moment.Moment, moment.Moment]) => {
     this.startTime = dates?.[0];
     this.endTime = dates?.[1];
-
-    if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback([
-        this.startTime,
-        this.endTime,
-      ]);
-    }
+    this.handleCallback();
   };
 
   /**
@@ -371,13 +369,7 @@ export class FilterDate extends FilterBase {
    */
   @action public handleEndChange = (endTime: moment.Moment | null) => {
     this.endTime = endTime;
-
-    if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback([
-        this.startTime,
-        this.endTime,
-      ]);
-    }
+    this.handleCallback();
   };
 
   /**
@@ -429,12 +421,7 @@ export class FilterDate extends FilterBase {
       this.startTime = startTime;
       this.endTime = endTime;
 
-      if (typeof this.handleChangeCallback === 'function') {
-        this.handleChangeCallback([
-          this.startTime,
-          this.endTime,
-        ]);
-      }
+      this.handleCallback();
     }
   };
 }

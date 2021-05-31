@@ -70,6 +70,9 @@ export class FilterRadio extends FilterBase {
   @action public reset = (): void => {
     this.inputValue = this.snapshot.inputValue;
     this.value = this.snapshot.value;
+    if (typeof this.handleChangeCallback === 'function') {
+      this.handleChangeCallback(this.inputValue || this.value);
+    }
   };
 
   @action
