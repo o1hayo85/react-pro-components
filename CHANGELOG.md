@@ -2,6 +2,7 @@
 
 ### Features
 
+- 全屏弹窗修改 ([de05c41](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/de05c416e1e923bf0675ed1e7ebafa35815af036))
 - **utils:** add reset callback ([1524ef7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1524ef7de6827c12844d781a187af2060ad85e21))
 
 ## [0.0.35](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.34...v0.0.35) (2021-05-31)
