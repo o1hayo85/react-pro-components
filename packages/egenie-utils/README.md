@@ -1,6 +1,4 @@
-## 具体 utils 组件文档，在 egenie-utils 仓库的 packages/egenie-utils 下执行 npm run doc，打开 docs 下的 index.html。(后期会部署到内网)
-
-## 查询项关键简介 1
+## 查询项关键简介
 
 1. 关键字段说明
 
@@ -13,22 +11,269 @@
 - formatValue 格式化查询项值
 - reset 查询项重置
 
-2. FilterBase 类。查询项基本类。抽取统一的字段和方法
+2. **FilterBase**查询项基本类。抽取统一的字段和方法
 3. filterXXX。某个查询项类型。包括 model 和 component
 
 - model 继承 FilterBase，不同配置在 model 内部实现(toProgramme、toParams、formatValue、reset 等)
 
-4. FilterItems 类是对 FilterXXX 的 model 层管理，不实现组件，组件由具体的查询方案实现。具体配置参考说明文档
+4. **FilterItems 左右、上下查询方案底层都是这个** 对 FilterXXX 的 model 层管理，不实现组件，组件由具体的查询方案实现。具体配置参考说明文档
 
 ## 创建左右查询方案
 
 1. 创建
 
 ```
+
 import React from 'react';
-import { MainSubStructureModel, Programme, ProgrammeComponent } from 'egenie-utils';
+import { FilterItemOptions, MainSubStructureModel, Programme, ProgrammeComponent } from 'egenie-utils';
+
+const filterItems: FilterItemOptions[] = [
+  {
+    type: 'radio',
+    label: 'radio',
+    field: 'radio',
+
+    // 值改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+    data: [
+      {
+        value: 'sale_order_no-14-10',
+        label: '订单号',
+
+        // 此项是否显示输入框(可选可输入)
+        // showInput: true,
+      },
+      {
+        value: 'platform_order_code-15-10',
+        label: '平台单号',
+      },
+    ],
+  },
+
+  // 只含有开始时间
+  {
+    // 标签宽度。和设计师沟通确认，原则上是不允许改
+    labelWidth: 72,
+    type: 'dateStart',
+    field: 'dateStart',
+    label: 'dateStart',
+
+    // 时间改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+  },
+
+  // 只含有结束时间
+  {
+    // 显示格式化
+    format: 'YYYY-MM-DD',
+    type: 'dateEnd',
+    field: 'dateEnd',
+    label: 'dateEnd',
+
+    // 时间改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+  },
+
+  // 左右查询方案-时间范围
+  {
+    type: 'date',
+    field: 'date',
+    label: 'date',
+
+    // 时间改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+    formatParams: 'YYYY-MM-DD',
+    selectValue: 'sale_order_status.pay_time',
+    data: [
+      {
+        value: 'sale_order_status.pay_time',
+        label: '付款时间',
+      },
+    ],
+  },
+
+  // 时间范围
+  {
+    type: 'dateRange',
+    field: 'dateRange',
+    label: 'dateRange',
+    format: 'YYYY-MM-DD',
+
+    // 转化为params的时间格式
+    formatParams: 'YYYY-MM-DD',
+
+    // 时间改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+  },
+
+  // checkbox
+  {
+    type: 'checkbox',
+    label: '快递公司',
+    field: 'courier_id-4-14',
+
+    // 值改变回掉
+    onChangeCallback(value) {
+      console.log(value);
+    },
+    data: [
+      {
+        value: 'sale_order_no-14-10',
+        label: '订单号',
+      },
+      {
+        value: 'platform_order_code-15-10',
+        label: '平台单号',
+      },
+    ],
+  },
+
+  // 下拉框
+  {
+    type: 'select',
+
+    // 多选标识
+    mode: 'multiple',
+
+    // 值改变回掉
+    onChangeCallback(value) {
+      console.log(value);
+    },
+    label: '店铺',
+    field: 'shop_id-4-10',
+    data: [
+      {
+        value: 'sale_order_no-14-10',
+        label: '订单号',
+      },
+      {
+        value: 'platform_order_code-15-10',
+        label: '平台单号',
+      },
+    ],
+  },
+
+  // 级联
+  {
+    type: 'cascader',
+    label: 'cascader',
+    field: 'cascader',
+
+    // 值改变回掉
+    onChangeCallback(value) {
+      console.log(value);
+    },
+
+    // 动态加载项。逻辑参考antd
+    loadData(data) {
+      console.log(data);
+    },
+    data: [
+      {
+        value: 'sale_order_no-14-10',
+        label: '订单号',
+        isLeaf: false,
+      },
+      {
+        value: 'platform_order_code-15-10',
+        label: '平台单号',
+      },
+    ],
+  },
+
+  // 输入框
+  {
+    type: 'input',
+    field: 'receiver_name-14-12',
+    label: 'input',
+
+    // 值改变回掉
+    onChangeCallback(value) {
+      console.log(value);
+    },
+  },
+
+  // number组合框
+  {
+    type: 'inputNumberGroup',
+    field: 'total_num-2-10',
+    label: 'inputNumberGroup',
+
+    // 数字改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+
+    // 下拉框改变回掉。(前提得是下拉加number框的组合)
+    handleSelectChangeCallback(value) {
+      console.log(value);
+    },
+  },
+
+  // 下拉框加输入框
+  {
+    type: 'inputAndSelect',
+    label: 'inputAndSelect',
+    field: 'inputAndSelect',
+    selectValue: 'wmsReceiveOrderNo',
+    placeholder: 'inputAndSelect',
+
+    // 下拉框改变回掉
+    handleSelectChangeCallback(value) {
+      console.log(value);
+    },
+
+    // 输入框改变回掉
+    handleInputChangeCallback(value) {
+      console.log(value);
+    },
+    data: [
+      {
+        value: 'sourceNo',
+        label: '来源单号',
+      },
+      {
+        value: 'wmsReceiveOrderNo',
+        label: '收货单编号',
+      },
+    ],
+  },
+
+  // 下拉框加输入框
+  {
+    type: 'inputOrSelect',
+    label: 'inputOrSelect',
+    field: 'inputOrSelect',
+
+    // 值改变回掉
+    handleChangeCallback(value) {
+      console.log(value);
+    },
+    data: [
+      {
+        value: 'sourceNo',
+        label: '来源单号',
+      },
+      {
+        value: 'wmsReceiveOrderNo',
+        label: '收货单编号',
+      },
+    ],
+  },
+];
 
 export default class extends React.Component {
+  // 左右查询方案model
   public programme = new Programme({
     gridModel: new MainSubStructureModel({
       grid: {
@@ -48,169 +293,7 @@ export default class extends React.Component {
       shop: 'shop_id-4-10',
       pay_type: 'pay_type-4-1',
     },
-    filterItems: [
-      {
-        type: 'radio',
-        label: 'radio',
-        field: 'radio',
-        data: [
-          {
-            value: 'sale_order_no-14-10',
-            label: '订单号',
-          },
-          {
-            value: 'platform_order_code-15-10',
-            label: '平台单号',
-          },
-        ],
-      },
-
-      // 开始时间
-      {
-        type: 'dateStart',
-        field: 'dateStart',
-        label: 'dateStart',
-        handleChangeCallback(a) {
-          console.log(a);
-        },
-      },
-
-      // 结束时间
-      {
-        format: 'YYYY-MM-DD',
-        type: 'dateEnd',
-        field: 'dateEnd',
-        label: 'dateEnd',
-        handleChangeCallback(a) {
-          console.log(a);
-        },
-      },
-
-      // 左右查询方案-时间范围
-      {
-        type: 'date',
-        field: 'date',
-        label: 'date',
-        selectValue: 'sale_order_status.pay_time',
-        data: [
-          {
-            value: 'sale_order_status.pay_time',
-            label: '付款时间',
-          },
-        ],
-      },
-
-      // 时间范围
-      {
-        type: 'dateRange',
-        field: 'dateRange',
-        label: 'dateRange',
-      },
-
-      // checkbox
-      {
-        type: 'checkbox',
-        label: '快递公司',
-        field: 'courier_id-4-14',
-        data: [
-          {
-            value: 'sale_order_no-14-10',
-            label: '订单号',
-          },
-          {
-            value: 'platform_order_code-15-10',
-            label: '平台单号',
-          },
-        ],
-      },
-
-      // 下拉框
-      {
-        type: 'select',
-
-        // 多选标识
-        mode: 'multiple',
-        label: '店铺',
-        field: 'shop_id-4-10',
-        data: [
-          {
-            value: 'sale_order_no-14-10',
-            label: '订单号',
-          },
-          {
-            value: 'platform_order_code-15-10',
-            label: '平台单号',
-          },
-        ],
-      },
-
-      // 级联
-      {
-        type: 'cascader',
-        label: 'cascader',
-        field: 'cascader',
-        data: [
-          {
-            value: 'sale_order_no-14-10',
-            label: '订单号',
-          },
-          {
-            value: 'platform_order_code-15-10',
-            label: '平台单号',
-          },
-        ],
-      },
-
-      // 输入框
-      {
-        type: 'input',
-        field: 'receiver_name-14-12',
-        label: 'input',
-      },
-
-      // number组合框
-      {
-        type: 'inputNumberGroup',
-        field: 'total_num-2-10',
-        label: 'inputNumberGroup',
-      },
-
-      // 下拉框加输入框
-      {
-        type: 'inputAndSelect',
-        label: 'inputAndSelect',
-        field: 'inputAndSelect',
-        selectValue: 'wmsReceiveOrderNo',
-        placeholder: 'inputAndSelect',
-        data: [
-          {
-            value: 'sourceNo',
-            label: '来源单号',
-          },
-          {
-            value: 'wmsReceiveOrderNo',
-            label: '收货单编号',
-          },
-        ],
-      },
-
-      // 下拉框加输入框
-      {
-        type: 'inputOrSelect',
-        label: 'inputOrSelect',
-        field: 'inputOrSelect',
-        data: [
-          {
-            value: 'sourceNo',
-            label: '来源单号',
-          },
-          {
-            value: 'wmsReceiveOrderNo',
-            label: '收货单编号',
-          },
-        ],
-      },
-    ],
+    filterItems,
     moduleName: 'OMSOrders',
     dictList: 'order_type,blacklist_type,purchase_state_type,courier_print_mark_state,sku_purchase_state_type,origin_type,pay_type,cn_service,trade_from,system_order_state',
     itemList: 'shop,warehouse,dts_status_adapter,courier,wms_order_state',
@@ -222,6 +305,7 @@ export default class extends React.Component {
     );
   }
 }
+
 ```
 
 - gridModel 为表格参数，详见表格文档

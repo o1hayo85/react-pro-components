@@ -53,52 +53,6 @@ export interface TemplateData {
   };
 }
 
-/**
- * 打印参数
- */
-export interface PrintParams {
-
-  /**
-   * 模版数据
-   */
-  templateData?: TemplateData;
-
-  /**
-   * 是否预览
-   */
-  preview: boolean;
-
-  /**
-   * 数据
-   */
-  contents?: any[];
-
-  /**
-   * 打印机
-   */
-  printer?: string;
-
-  /**
-   * 京东打印自定义数据
-   */
-  customData?: any;
-
-  /**
-   * 京东打印自定义模板URL
-   */
-  customTempUrl?: string;
-
-  /**
-   * 京东打印固定数据
-   */
-  printData?: any;
-
-  /**
-   * 京东固定模板
-   */
-  tempUrl?: string;
-}
-
 export function getUUID(len?: number, radix?: number): string {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   const uuid = [];

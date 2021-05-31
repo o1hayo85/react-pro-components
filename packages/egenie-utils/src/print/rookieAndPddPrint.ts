@@ -1,5 +1,6 @@
 import { message } from 'antd';
-import { getUUID, isSocketConnected, PrintParams } from './utils';
+import { PrintParams } from './printHelper';
+import { getUUID, isSocketConnected } from './utils';
 
 interface RequestProtocol {
   cmd: string;

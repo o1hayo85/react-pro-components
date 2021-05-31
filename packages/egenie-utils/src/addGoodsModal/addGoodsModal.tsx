@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Select } from 'antd';
+import { Button, Input, Modal, ModalProps, Select } from 'antd';
 import { inject, observer, Provider } from 'mobx-react';
 import React from 'react';
 import { EgGrid } from '../egGrid';
@@ -37,7 +37,7 @@ export interface AddGoodsModalProps {
   /**
    * antd-Modal的props。取消的回掉自写,外层控制Modal的显隐
    */
-  modalProps: React.ComponentProps<typeof Modal>;
+  modalProps: ModalProps;
 
   /**
    * 是否展示临时表格(子表)

@@ -1,6 +1,6 @@
 import { JDPrint } from './jdPrint';
 import { RookieAndPddPrint } from './rookieAndPddPrint';
-import { PrintParams, TemplateData } from './utils';
+import { TemplateData } from './utils';
 
 const rookieOpenError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
 
@@ -29,6 +29,52 @@ function formatRookieData(printData: any[], printTemplate: TemplateData) {
   });
 
   return contents;
+}
+
+/**
+ * 打印参数
+ */
+export interface PrintParams {
+
+  /**
+   * 模版数据
+   */
+  templateData?: TemplateData;
+
+  /**
+   * 是否预览
+   */
+  preview: boolean;
+
+  /**
+   * 数据
+   */
+  contents?: any[];
+
+  /**
+   * 打印机
+   */
+  printer?: string;
+
+  /**
+   * 京东打印自定义数据
+   */
+  customData?: any;
+
+  /**
+   * 京东打印自定义模板URL
+   */
+  customTempUrl?: string;
+
+  /**
+   * 京东打印固定数据
+   */
+  printData?: any;
+
+  /**
+   * 京东固定模板
+   */
+  tempUrl?: string;
 }
 
 export class PrintHelper {

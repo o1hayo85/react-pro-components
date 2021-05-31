@@ -1,4 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.34...v0.0.0) (2021-05-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.34...v0.0.0) (2021-05-31)
+
+### Features
+
+- test ci ([78aa2f4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/78aa2f43581785fdda23ce1164dddf7d764ca97b))
 
 ## [0.0.34](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.33...v0.0.34) (2021-05-28)
 
