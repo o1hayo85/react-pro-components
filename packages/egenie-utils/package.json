@@ -38,6 +38,6 @@
     "typescript": "4.2.4"
   },
   "scripts": {
-    "doc": "typedoc"
+    "doc": "typedoc --includeVersion"
   }
 }
