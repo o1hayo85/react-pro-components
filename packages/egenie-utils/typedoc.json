@@ -19,6 +19,7 @@
     "src/programme/filterItems/filterSelect.tsx",
     "src/programme/filterItems/filterInput.tsx",
     "src/programme/filterItems/filterCascader.tsx",
+    "src/programme/filterItems/filterTreeSelect.tsx",
     "src/renderModal.ts",
     "src/batchReport/index.tsx",
     "src/addGoodsModal/addGoodsModal.tsx",
