@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** add treeSelect ([f0b47cb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f0b47cb7c45a07de9405601c382a7358a94d7277))
+- **utils:** add treeSelect ([51aeadb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51aeadb8d7c9a34db400889b21de2603905b4166))
 
 ## [0.0.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.35...v0.0.36) (2021-05-31)
 
