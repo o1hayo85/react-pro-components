@@ -3,6 +3,7 @@
 ### Features
 
 - **utils:** add treeSelect ([51aeadb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51aeadb8d7c9a34db400889b21de2603905b4166))
+- 完善 fullModal ([8c8812f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8c8812f1f813b1a26e38c6f8dae1a7a78862d83f))
 
 ## [0.0.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.35...v0.0.36) (2021-05-31)
 
