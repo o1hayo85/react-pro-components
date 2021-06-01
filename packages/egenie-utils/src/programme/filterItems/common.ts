@@ -11,6 +11,7 @@ import { FilterInputNumberGroup } from './filterInputNumberGroup';
 import { FilterInputOrSelect } from './filterInputOrSelect';
 import { FilterRadio } from './filterRadio';
 import { FilterSelect } from './filterSelect';
+import { FilterTreeSelect } from './filterTreeSelect';
 
 /**
  * 查询项类型
@@ -28,6 +29,7 @@ export enum ENUM_FILTER_ITEM_TYPE {
   checkbox = 'checkbox',
   inputOrSelect = 'inputOrSelect',
   cascader = 'cascader',
+  treeSelect = 'treeSelect',
 }
 
 /**
@@ -164,7 +166,7 @@ export function formatValueAndLabelData(data: ValueAndLabelData): ValueAndLabelD
 /**
  * 查询项种类
  */
-export type FilterItem = FilterInput | FilterInputNumberGroup | FilterSelect | FilterRadio | FilterInputAndSelect | FilterDate | FilterCheckbox | FilterInputOrSelect | FilterCascader | FilterDateStartOrEnd;
+export type FilterItem = FilterInput | FilterInputNumberGroup | FilterSelect | FilterRadio | FilterInputAndSelect | FilterDate | FilterCheckbox | FilterInputOrSelect | FilterCascader | FilterDateStartOrEnd | FilterTreeSelect;
 
 /**
  * 查询项参数

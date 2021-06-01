@@ -25,7 +25,7 @@
 ```
 
 import React from 'react';
-import { FilterItemOptions, MainSubStructureModel, Programme, ProgrammeComponent } from 'egenie-utils';
+import { FilterItemOptions, MainSubStructureModel, Programme, ProgrammeComponent } from '../../utils';
 
 const filterItems: FilterItemOptions[] = [
   {
@@ -189,6 +189,45 @@ const filterItems: FilterItemOptions[] = [
         label: '平台单号',
       },
     ],
+  },
+
+  // 树
+  {
+    type: 'treeSelect',
+    label: 'treeSelect',
+    field: 'treeSelect',
+    treeDataSimpleMode: true,
+    treeData: [
+      {
+        id: 1,
+        pId: null,
+        value: '1',
+        title: 'node1',
+      },
+      {
+        id: 2,
+        pId: 1,
+        value: '2',
+        title: 'node2',
+      },
+      {
+        id: 3,
+        pId: 1,
+        value: '3',
+        title: 'node3',
+      },
+      {
+        id: 4,
+        pId: null,
+        value: '4',
+        title: 'node4',
+      },
+    ],
+
+    // 值改变回掉
+    onChangeCallback(value) {
+      console.log(value);
+    },
   },
 
   // 输入框

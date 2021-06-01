@@ -295,6 +295,11 @@ export class FilterDate extends FilterBase {
   };
 
   /**
+   * 是否允许清除
+   */
+  @observable public allowClear = true;
+
+  /**
    * 允许起始项部分为空。type为dateRange生效
    */
   @observable public allowEmpty: [boolean, boolean] = [
@@ -461,6 +466,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
       style,
       disabled,
       labelWidth,
+      allowClear,
     } = this.props.store;
     const newClassName = classNames('filterDateSelect', className);
     return (
@@ -493,6 +499,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
         </header>
         <section>
           <DatePicker
+            allowClear={allowClear}
             bordered={false}
             disabled={disabled[0]}
             dropdownClassName={styles.dropdownDate}
@@ -513,6 +520,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             至
           </div>
           <DatePicker
+            allowClear={allowClear}
             bordered={false}
             disabled={disabled[1]}
             dropdownClassName={styles.dropdownDate}
@@ -552,6 +560,7 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
       disabled,
       handleRangeChange,
       labelWidth,
+      allowClear,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -577,6 +586,7 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
         </header>
         <section>
           <DatePicker.RangePicker
+            allowClear={allowClear}
             allowEmpty={allowEmpty}
             bordered={false}
             disabled={disabled}

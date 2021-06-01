@@ -58,7 +58,7 @@ export class FilterCascader extends FilterBase {
     }
   }
 
-  private snapshot = [];
+  private snapshot: string[] = [];
 
   @action private handleCallback = () => {
     if (typeof this.onChangeCallback === 'function') {

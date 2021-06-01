@@ -289,7 +289,10 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
           })()
         }
 
-        <div className="filterInputNumberGroupContent">
+        <div
+          className="filterInputNumberGroupContent"
+          style={{ borderRadius: data.length > 1 ? '0 2px 2px 0' : 2 }}
+        >
           <InputNumber
             bordered={false}
             disabled={disabled}

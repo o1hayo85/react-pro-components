@@ -13,6 +13,7 @@ import { FilterInputNumberGroup, FilterInputNumberGroupComponent } from './filte
 import { FilterInputOrSelect, FilterInputOrSelectComponent } from './filterInputOrSelect';
 import { FilterRadio, FilterRadioComponent } from './filterRadio';
 import { FilterSelect, FilterSelectComponent } from './filterSelect';
+import { FilterTreeSelect, FilterTreeSelectComponent } from './filterTreeSelect';
 
 function validParams(data: FilterItemOptions[]) {
   data.forEach((item) => {
@@ -75,6 +76,8 @@ function filterInstanceFactory(item: FilterItemOptions): FilterItem {
       return new FilterInputOrSelect(item);
     case ENUM_FILTER_ITEM_TYPE.cascader:
       return new FilterCascader(item);
+    case ENUM_FILTER_ITEM_TYPE.treeSelect:
+      return new FilterTreeSelect(item);
   }
 }
 
@@ -151,6 +154,13 @@ export function filterComponentFactory(item: FilterItem): React.ReactNode {
     case ENUM_FILTER_ITEM_TYPE.cascader:
       return (
         <FilterCascaderComponent
+          key={item.field}
+          store={item}
+        />
+      );
+    case ENUM_FILTER_ITEM_TYPE.treeSelect:
+      return (
+        <FilterTreeSelectComponent
           key={item.field}
           store={item}
         />

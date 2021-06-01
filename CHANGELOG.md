@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.35...v0.0.0) (2021-05-31)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.36...v0.0.0) (2021-06-01)
+
+### Features
+
+- **utils:** add treeSelect ([f0b47cb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f0b47cb7c45a07de9405601c382a7358a94d7277))
+
+## [0.0.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.35...v0.0.36) (2021-05-31)
 
 ### Features
 

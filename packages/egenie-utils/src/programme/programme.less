@@ -219,8 +219,10 @@
     .filterInput input,
     .filterSelect .ant-select,
     .filterInputNumberGroup .filterInputNumberGroupContent,
-    .filterCascader .ant-cascader-picker {
-      border-radius: 0 2px 2px 0;
+    .filterCascader .ant-cascader-picker,
+    .filterDateNormal > section,
+    .filterTreeSelect .ant-select {
+      border-radius: 0 2px 2px 0 !important;
     }
 
     .filterInputNumberGroup {
@@ -250,7 +252,8 @@
     .filterInputOrSelect,
     .filterInputAndSelect,
     .filterDateSelect > header,
-    .filterDateNormal > section {
+    .filterDateNormal > section,
+    .filterTreeSelect .ant-select {
       height: @base-height !important;
     }
 

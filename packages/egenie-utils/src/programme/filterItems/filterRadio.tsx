@@ -145,6 +145,11 @@ export class FilterRadio extends FilterBase {
   @observable.ref public inputRef = React.createRef<Input>();
 
   /**
+   * 是否禁止
+   */
+  @observable public disabled = false;
+
+  /**
    * 值改变回掉
    */
   public handleChangeCallback: (value?: string | undefined) => void;
@@ -180,13 +185,17 @@ export class FilterRadioComponent extends React.Component<{ store: FilterRadio; 
       value,
       inputRef,
       handleInputClick,
+      disabled,
     } = this.props.store;
     return (
       <div
         className={`${styles.filterInputOrRadio} ${className}`}
         style={toJS(style)}
       >
-        <Radio.Group value={value}>
+        <Radio.Group
+          disabled={disabled}
+          value={value}
+        >
           {
             data.map((item) => (
               <Radio

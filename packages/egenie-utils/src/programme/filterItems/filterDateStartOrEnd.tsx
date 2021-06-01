@@ -103,6 +103,11 @@ export class FilterDateStartOrEnd extends FilterBase {
   public handleChangeCallback: (value: moment.Moment | null) => void;
 
   /**
+   * 是否允许清除
+   */
+  @observable public allowClear = true;
+
+  /**
    * 日期展示格式
    */
   @observable public format: 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD' = FormatDateType.defaultFormat;
@@ -153,6 +158,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
       disabled,
       type,
       labelWidth,
+      allowClear,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -178,6 +184,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
         </header>
         <section>
           <DatePicker
+            allowClear={allowClear}
             bordered={false}
             disabled={disabled}
             format={format}
