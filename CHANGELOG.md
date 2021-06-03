@@ -1,4 +1,9 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.37...v0.0.0) (2021-06-01)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.37...v0.0.0) (2021-06-03)
+
+### Features
+
+- **utils:** add test ([b53299f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b53299f99f5bb014923aa45c75d34693577a0be4))
+- **utils:** update README.md ([1eb805d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1eb805dc7c29db7d84328e1020fe1c18be8f8b2c))
 
 ## [0.0.37](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.36...v0.0.37) (2021-06-01)
 

@@ -1,6 +1,6 @@
-import { add, formatPrice, multiple, thousandthSeparator, subtract, toFixed } from '../index';
+import { add, formatPrice, multiple, thousandthSeparator, subtract, toFixed, objToDict } from '../index';
 
-describe('price', () => {
+describe('helper', () => {
   test('add', () => {
     expect(add(1, 1))
       .toBe(2);
@@ -75,5 +75,26 @@ describe('price', () => {
       .toBe('1,234,567,894,532');
     expect(thousandthSeparator(673439.4542))
       .toBe('673,439.4542');
+  });
+
+  test('objToDict', () => {
+    expect(objToDict(null))
+      .toEqual([]);
+    expect(objToDict({}))
+      .toEqual([]);
+    expect(objToDict({
+      '0': 'a',
+      '1': 'b',
+    }))
+      .toEqual([
+        {
+          value: '0',
+          label: 'a',
+        },
+        {
+          value: '1',
+          label: 'b',
+        },
+      ]);
   });
 });

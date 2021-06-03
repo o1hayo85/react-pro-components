@@ -306,6 +306,13 @@ export class FilterItems {
   };
 
   /**
+   * 获取某一项查询项
+   */
+  public getFilterItem(field: string): FilterItem | undefined {
+    return this.originData.find((item) => item.field === field);
+  }
+
+  /**
    * @internal
    */
   @observable public originData: FilterItem[] = [];
