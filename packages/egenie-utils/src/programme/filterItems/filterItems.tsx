@@ -208,6 +208,11 @@ export interface FilterItemsParams {
   dict: {[key: string]: ValueAndLabelData; };
 }
 
+export interface ConnectListItem {
+  toParams: () => {[key: string]: string; };
+  reset?: () => void;
+}
+
 export class FilterItems {
   constructor({
     filterItems = [],
@@ -290,6 +295,11 @@ export class FilterItems {
    */
   @action public reset = (): void => {
     this.originData.forEach((item) => item.reset());
+    this.connectedList.forEach((item) => {
+      if (typeof item.reset === 'function') {
+        item.reset();
+      }
+    });
   };
 
   /**
@@ -330,9 +340,27 @@ export class FilterItems {
    */
   @computed
   public get params(): {[key: string]: string; } {
-    return this.actualData.reduce((prev, current) => ({
+    const params = this.actualData.reduce((prev, current) => ({
       ...prev,
       ...current.toParams.call(current),
     }), {});
+
+    return this.connectedList.reduce((prev, current) => ({
+      ...prev,
+      ...current.toParams(),
+    }), params);
+  }
+
+  /**
+   * 连接的列表
+   */
+  @observable private connectedList: ConnectListItem[] = [];
+
+  /**
+   * 外部model连接到查询项。如左侧tree
+   */
+  @action
+  public connect(connectListItem: ConnectListItem) {
+    this.connectedList.push(connectListItem);
   }
 }

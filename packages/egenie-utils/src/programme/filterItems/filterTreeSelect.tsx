@@ -77,15 +77,11 @@ export class FilterTreeSelect extends FilterBase {
 
   private snapshot: string[] = [];
 
-  @action private handleCallback = () => {
+  @action public reset = (): void => {
+    this.value = this.snapshot;
     if (typeof this.onChangeCallback === 'function') {
       this.onChangeCallback(toJS(this.value));
     }
-  };
-
-  @action public reset = (): void => {
-    this.value = this.snapshot;
-    this.handleCallback();
   };
 
   /**
@@ -105,13 +101,31 @@ export class FilterTreeSelect extends FilterBase {
       this.value = [];
     }
 
-    this.handleCallback();
+    if (typeof this.onChangeCallback === 'function') {
+      this.onChangeCallback(toJS(this.value));
+    }
   };
 
   /**
    * 值改回掉
    */
   public onChangeCallback: (value?: string[]) => void;
+
+  /**
+   * @internal
+   */
+  @action public onSelect = (value: string) => {
+    if (typeof value === 'string' || typeof value === 'number') {
+      if (typeof this.onChangeCallback === 'function') {
+        this.onSelectCallback(`${value}`);
+      }
+    }
+  };
+
+  /**
+   * 被选中回掉
+   */
+  public onSelectCallback: (value?: string) => void;
 
   /**
    * 输入框提示文字
@@ -124,9 +138,29 @@ export class FilterTreeSelect extends FilterBase {
   @observable public allowClear = false;
 
   /**
+   * 当多选模式下值被选择，自动清空搜索框
+   */
+  @observable public autoClearSearchValue = true;
+
+  /**
    * 是否禁止
    */
   @observable public disabled = false;
+
+  /**
+   * 是否显示 suffixIcon，单选模式下默认 true
+   */
+  @observable public showArrow: boolean | undefined = undefined;
+
+  /**
+   * 自定义的选择框后缀图标, 多选模式下必须同时设置 showArrow 为 true
+   */
+  @observable.ref public suffixIcon: React.ReactNode = undefined;
+
+  /**
+   * 自定义树节点的展开/折叠图标
+   */
+  @observable.ref public switcherIcon: React.ReactNode = undefined;
 
   /**
    * 是否显示搜索框
@@ -142,6 +176,11 @@ export class FilterTreeSelect extends FilterBase {
    * 下拉菜单和选择器同宽
    */
   @observable public dropdownMatchSelectWidth: number | boolean = true;
+
+  /**
+   * 下拉菜单的样式
+   */
+  @observable public dropdownStyle: React.CSSProperties = {};
 
   /**
    * 设置弹窗滚动高度
@@ -187,14 +226,34 @@ export class FilterTreeSelect extends FilterBase {
   @observable public treeDataSimpleMode = false;
 
   /**
+   * 默认展开所有树节点
+   */
+  @observable public treeDefaultExpandAll = false;
+
+  /**
+   * 默认展开的树节点
+   */
+  @observable public treeDefaultExpandedKeys: string[] | undefined = undefined;
+
+  /**
    * 展开的树节点
    */
-  @observable public treeExpandedKeys: string[] = [];
+  @observable public treeExpandedKeys: string[] | undefined = undefined;
+
+  /**
+   * 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式
+   */
+  @observable public treeIcon = false;
 
   /**
    * 输入项过滤对应的 treeNode 属性
    */
   @observable public treeNodeFilterProp = 'title';
+
+  /**
+   * 作为显示的 prop 设置
+   */
+  @observable public treeNodeLabelProp = 'title';
 
   /**
    * 设置 false 时关闭虚拟滚动
@@ -243,6 +302,15 @@ export class FilterTreeSelectComponent extends React.Component<{ store: FilterTr
       showCheckedStrategy,
       maxTagCount,
       treeDataSimpleMode,
+      autoClearSearchValue,
+      dropdownStyle,
+      showArrow,
+      suffixIcon,
+      switcherIcon,
+      treeDefaultExpandAll,
+      treeDefaultExpandedKeys,
+      treeIcon,
+      onSelect,
     } = this.props.store;
     return (
       <div
@@ -267,23 +335,32 @@ export class FilterTreeSelectComponent extends React.Component<{ store: FilterTr
         <section style={{ width: `calc(100% - ${labelWidth}px)` }}>
           <TreeSelect
             allowClear={allowClear}
+            autoClearSearchValue={autoClearSearchValue}
             bordered={false}
             disabled={disabled}
             dropdownClassName={dropdownClassName}
             dropdownMatchSelectWidth={dropdownMatchSelectWidth}
+            dropdownStyle={dropdownStyle}
             listHeight={listHeight}
             loadData={loadData}
             maxTagCount={maxTagCount}
             multiple={multiple}
             onChange={onChange}
+            onSelect={onSelect}
             onTreeExpand={onTreeExpand}
             placeholder={placeholder}
+            showArrow={showArrow}
             showCheckedStrategy={showCheckedStrategy}
             showSearch={showSearch}
+            suffixIcon={suffixIcon}
+            switcherIcon={switcherIcon}
             treeCheckable={treeCheckable}
             treeData={treeData}
             treeDataSimpleMode={treeDataSimpleMode}
+            treeDefaultExpandAll={treeDefaultExpandAll}
+            treeDefaultExpandedKeys={treeDefaultExpandedKeys}
             treeExpandedKeys={treeExpandedKeys}
+            treeIcon={treeIcon}
             treeNodeFilterProp={treeNodeFilterProp}
             value={value}
           />

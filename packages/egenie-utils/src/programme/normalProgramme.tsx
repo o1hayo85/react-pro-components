@@ -98,7 +98,7 @@ export class NormalProgramme {
    * @internal
    */
   @action public reset = () => {
-    this.filterItems.originData.forEach((item) => item.reset());
+    this.filterItems.reset();
   };
 }
 

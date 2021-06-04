@@ -1,9 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.37...v0.0.0) (2021-06-03)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.37...v0.0.0) (2021-06-04)
 
 ### Features
 
-- **utils:** add test ([b53299f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b53299f99f5bb014923aa45c75d34693577a0be4))
+- **utils:** add test ([c998950](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c998950b2f3a43b83d2d3ae018dd8d816acc96b4))
 - **utils:** update README.md ([1eb805d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1eb805dc7c29db7d84328e1020fe1c18be8f8b2c))
+- **utils:** update treeSelect config ([266f9e0](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/266f9e0f4968a8f8df546d29ea906a8eed130d3d))
 
 ## [0.0.37](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.36...v0.0.37) (2021-06-01)
 
