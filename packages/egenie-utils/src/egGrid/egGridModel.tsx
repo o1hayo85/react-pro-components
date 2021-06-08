@@ -66,7 +66,7 @@ export interface IEgGridModel {
     sidx?: StrOrNum;
     filterParams?: IObj;
   };
-  getFilterParams?: () => {[key: string]: string; };
+  getFilterParams?: () => { [key: string]: string; };
   parent?: IObj;
   wrapClassName?: string;
   showEmpty?: boolean;
@@ -78,34 +78,82 @@ export class EgGridModel {
 
   @observable public parent: IObj;
 
+  /**
+    * 列配置
+    * [{
+    *   key: 'wmsReceiveOrderNo',
+    *   name: '收货单编号',
+    *   width: 200,
+    *   sortable: true,
+    *   resizable: true
+    *  }]
+    */
   @observable public columns = []; // 列配置
 
-  @observable public rows = []; // 行数据，接口请求回来或者自己mock
+  /**
+   * 行数据，接口请求回来或者自己mock
+   */
+  @observable public rows = [];
 
-  @observable public primaryKeyField = ''; // 配置主键的字段， 必须配置
+  /**
+   * 配置主键的字段， 必须配置
+   */
+  @observable public primaryKeyField = '';
 
-  @observable public primaryKeyFieldValue: number | string = ''; // 主键的值
+  /**
+   * 主键的值
+   */
+  @observable public primaryKeyFieldValue: number | string = '';
 
-  @observable public showCheckBox = false; // 是否可以勾选
+  /**
+   * 是否可以勾选
+   */
+  @observable public showCheckBox = false;
 
-  @observable public rowHeight = 38; // 设置行高
+  /**
+   * 设置行高，默认38
+   */
+  @observable public rowHeight = 38;
 
-  @observable public headerRowHeight = 42; // 设置header高度
+  /**
+   * 表头高度，默认42
+   */
+  @observable public headerRowHeight = 42;
 
-  // 选中行的id组合
-  @observable public selectedIds = new Set<React.Key>([]); // 已选择的ids
+  /**
+   * 已选择的ids，使用时Array.from(selectedIds)
+   */
+  @observable public selectedIds = new Set<React.Key>([]);
 
-  @observable public sortColumnKey = ''; // 排序列的字段
+  /**
+   * 排序列的字段
+   */
+  @observable public sortColumnKey = '';
 
-  @observable public sortByLocal = true; // 是否本地排序
+  /**
+   * 是否本地排序
+   */
+  @observable public sortByLocal = true;
 
-  @observable public sortDirection: SortDirection = 'NONE'; // 排序方向
+  /**
+   * 排序方向
+   */
+  @observable public sortDirection: SortDirection = 'NONE';
 
-  @observable public size: 'default' | 'small' = 'small'; // 分页器大小
+  /**
+   * 分页器大小
+   */
+  @observable public size: 'default' | 'small' = 'small';
 
-  @observable public showQuickJumper = true; // 是否显示快速跳转
+  /**
+   * 是否显示快速跳转
+   */
+  @observable public showQuickJumper = true;
 
-  @observable public pageSizeOptions = [ // 指定每页可以显示多少条
+  /**
+   * 指定每页可以显示多少条
+   */
+  @observable public pageSizeOptions = [
     '10',
     '20',
     '50',
@@ -115,43 +163,97 @@ export class EgGridModel {
     '1000',
   ];
 
-  @observable public pageSize = 50; // 每页条数
+  /**
+   * 指每页条数
+   */
+  @observable public pageSize = 50;
 
-  @observable public current = 1; // 当前页码
+  /**
+   * 当前页码
+   */
+  @observable public current = 1;
 
-  @observable public scrollLeftIsZero = true; // 横向滚动是否为0
+  /**
+   * 横向滚动是否为0
+   */
+  @observable public scrollLeftIsZero = true;
 
-  @observable public cursorRow: IObj = {}; // 当前行
+  /**
+   * 当前行
+   */
+  @observable public cursorRow: IObj = {};
 
-  @observable public api: IEgGridApi; // 外部回调api, 行点击，排序，分页器
+  /**
+   * 外部回调api, 行点击，排序，分页器
+   */
+  @observable public api: IEgGridApi;
 
-  @observable public showSelectedTotal = true; // 隐藏勾选条数
+  /**
+   * 隐藏勾选总条数
+   */
+  @observable public showSelectedTotal = true;
 
-  @observable public showReset = true; // 隐藏重置按钮
+  /**
+   * 隐藏重置按钮
+   */
+  @observable public showReset = true;
 
-  @observable public showPagination = true; // 隐藏分页器
+  /**
+   * 隐藏分页器
+   */
+  @observable public showPagination = true;
 
-  @observable public showRefresh = true; // 隐藏刷新
+  /**
+   * 隐藏刷新
+   */
+  @observable public showRefresh = true;
 
-  @observable public showPager = true; // 隐藏分页整行
+  /**
+   * 隐藏分页器整行
+   */
+  @observable public showPager = true;
 
+  /**
+   * 表格包裹样式
+   */
   @observable public edgStyle: React.CSSProperties;
 
-  @observable public loading = false; // 表格数据加载loading
+  /**
+   * 表格数据加载loading
+   */
+  @observable public loading = false;
 
-  @observable public total = 0; // 总条数
+  /**
+   * 总条数
+   */
+  @observable public total = 0;
 
+  /**
+   * 最外层包裹样式
+   */
   @observable public wrapClassName = '';
 
+  /**
+   * 显示空状态
+   */
   @observable public showEmpty = false;
 
-  @observable public forceRowClick = false; // 是否强制每次点击行内事件都触发rowClick事件
+  /**
+   * 是否强制每次点击行内事件都触发rowClick事件
+   */
+  @observable public forceRowClick = false;
 
+  /**
+   * 获取的选择的行数据
+   */
   @computed public get selectRows() {
     const { selectedIds, rows, primaryKeyField } = this;
     return rows.filter((item) => selectedIds.has(item[primaryKeyField]));
   }
 
+  /**
+   * 组合序号列之后的行数据，渲染用，外部一般不用
+   */
   @computed public get _rows() {
     const { rows } = this;
     if (!rows || !rows.length) {
@@ -168,11 +270,17 @@ export class EgGridModel {
     return ret;
   }
 
+  /**
+   * 选择行的数量
+   */
   @computed public get selectedRowsLength(): number {
     const { selectedIds } = this;
     return Array.from(selectedIds).length;
   }
 
+  /**
+   * 查询表格数据参数
+   */
   @computed public get queryParam(): IEgGridModel['queryParam'] {
     const { pageSize, current, sortDirection, sortColumnKey } = this;
     const filterParams: IObj = typeof (this.getFilterParams) === 'function' ? { filterParams: this.getFilterParams() } : {};
@@ -200,10 +308,14 @@ export class EgGridModel {
     return row[this.primaryKeyField];
   };
 
-  // 查询方案植入该方法
-  public getFilterParams: () => {[key: string]: string; };
+  /**
+   * 查询方案注入此方法，可通过gridModel.getFilterParams获取参数
+   */
+  public getFilterParams: () => { [key: string]: string; };
 
-  // 行点击事件
+  /**
+   * 行点击事件
+   */
   public onRowClick = action((rowIdx, row) => {
     this.primaryKeyFieldValue = row[this.primaryKeyField];
 
@@ -218,30 +330,46 @@ export class EgGridModel {
     row && this.beforeIdx !== this.cursorIdx && this.triggerCursorRowClick();
   });
 
+  /**
+   * 触发当前行点击事件
+   */
   public triggerCursorRowClick = action(() => {
     this.api && this.api.onRowClick && this.api.onRowClick(this.cursorRow[this.primaryKeyField], this.cursorRow);
   });
 
-  // TODO: 待去抖
+  /**
+   * 距离左侧滚动距离，目前用来渲染固定列的阴影
+   * TODO: 待去抖
+   */
   public onScroll = action((e) => {
     const { scrollLeft } = e.currentTarget;
     this.scrollLeftIsZero = scrollLeft === 0;
   });
 
+  /**
+   * 选择行切换时触发行选择改变事件
+   */
   public onSelectedRowsChange = action((selectRows) => {
     this.selectedIds = selectRows;
     this.api?.onRowSelectChange && this.api.onRowSelectChange(selectRows);
   });
 
+
   public onResetSelected = action(() => {
     this.selectedIds = new Set([]);
   });
 
+  /**
+   * 重置行选择，触发外部行选择change事件
+   */
   public resetAllSelectedRows = action(() => {
     this.onResetSelected();
     this.api?.onRowSelectChange && this.api.onRowSelectChange(this.selectedIds);
   });
 
+  /**
+   * 重置聚焦行
+   */
   public resetCursorRow = action(() => {
     this.primaryKeyFieldValue = '';
     this.beforeIdx = this.cursorIdx;
@@ -250,11 +378,17 @@ export class EgGridModel {
     this.triggerCursorRowClick();
   });
 
+  /**
+   * 重置选择行和聚焦行
+   */
   public resetAll = action(() => {
     this.resetAllSelectedRows();
     this.resetCursorRow();
   });
 
+  /**
+   * 重置所有
+   */
   public clearToOriginal = action(() => {
     // 主表清空字表
     set(this, {
@@ -268,6 +402,9 @@ export class EgGridModel {
     this.resetAll();
   });
 
+  /**
+   * 设置聚焦行为表格第一行
+   */
   public setCursorRowToFirst = action(() => {
     if (!this.rows.length) {
       return this.resetCursorRow();
@@ -278,7 +415,9 @@ export class EgGridModel {
     this.triggerCursorRowClick();
   });
 
-  // 拖拽列
+  /**
+   * 组装拖拽列， TODO: 配置draggble参数
+   */
   public draggableColumns = () => {
     const { columns } = this;
     const HeaderRenderer = (props: HeaderRendererProps<IObj>) => {
@@ -317,7 +456,7 @@ export class EgGridModel {
   };
 
   /**
-   * 排序相关
+   * 本地排序
    */
   public localSort = action((sortColumn: string, sortDirection: SortDirection) => {
     console.log(sortColumn, sortDirection, '排序字段和方式');
@@ -349,6 +488,9 @@ export class EgGridModel {
     this.rows = rows;
   });
 
+  /**
+   * 远端排序
+   */
   public remoteSort = action((sortColumn, sortDirection) => {
     this.sortColumnKey = sortColumn;
     this.sortDirection = sortDirection;
@@ -364,6 +506,9 @@ export class EgGridModel {
     this.api.onSort && this.api.onSort(param);
   });
 
+  /**
+   * 触发表格刷新，调用api.onRefresh方法
+   */
   public onRefresh = action(() => {
     if (this.api.onRefresh) {
       this.loading = true;
@@ -400,6 +545,9 @@ export class EgGridModel {
     return 'reject';
   });
 
+  /**
+   * 表格查询事件，组合查询方案参数、重置所有
+   */
   public onQuery = action((): Promise<unknown> => {
     const { pageSize, current, sortDirection, sortColumnKey } = this;
     const filterParams = typeof (this.getFilterParams) === 'function' ? this.getFilterParams() : {};
@@ -418,6 +566,9 @@ export class EgGridModel {
     });
   });
 
+  /**
+   * 预处理列配置，组合序号列
+   */
   public prevHandleColumns = (options) => {
     const { columns = [], showCheckBox = true } = options;
     if (!columns.length) {

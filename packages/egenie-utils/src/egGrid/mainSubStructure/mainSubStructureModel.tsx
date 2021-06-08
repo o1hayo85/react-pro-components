@@ -33,19 +33,39 @@ export interface IMainSubStructureModel {
 
 export class MainSubStructureModel {
   public mainSubStructure?: true; // 主子表结构
-
+  /**
+   * 表格配置，参考IEgGridModel
+   */
   @observable public grid: IEgGridModel;
 
+  /**
+   * 表格配置，参考IEgGridApi
+   */
   @observable public api: IEgGridApi = {};
 
+  /**
+   * 实例化时内部设置，外部使用方式同独立表格使用，此处为主表的gridModel
+   */
   @observable public gridModel: EgGridModel;
 
+  /**
+   * 存储上一次查询参数
+   */
   @observable public history: IObj = {};
 
+  /**
+   * 子表model, 内部设置，无需外部调用
+   */
   @observable public subTablesModel: IObj = {};
 
+  /**
+   * 子表model，外部配置
+   */
   @observable public subTables: IMainSubStructureModel['subTables'];
 
+  /**
+   * 主表button，外部配置
+   */
   @observable public buttons: IMainSubStructureModel['buttons'];
 
   @observable public foldModel = {
@@ -80,7 +100,10 @@ export class MainSubStructureModel {
 
   @observable public hiddenSubTable = false; // 是否只有主表,默认主子表
 
-  public getFilterParams: () => {[key: string]: string; };
+  /**
+   * 查询方案注入此方法，可通过gridModel.getFilterParams获取参数
+   */
+  public getFilterParams: () => { [key: string]: string; };
 
   constructor({ ...options }: IMainSubStructureModel) {
     set(this, { ...(options || {}) });
@@ -96,6 +119,9 @@ export class MainSubStructureModel {
     });
   }
 
+  /**
+   * 设置主子表结构的主表gridModel，调用主表方式为：mainSubStructureModel.gridModel.xxxx
+   */
   public setMainGridModel = action((grid, api) => {
     const { onSort, onRowClick, onRefresh, handlePageChange, onShowSizeChange, onQuery } = this;
     this.gridModel = new EgGridModel({
@@ -103,7 +129,6 @@ export class MainSubStructureModel {
       columns: grid.getColumns?.(this) ?? grid.columns,
       api: {
         onPageChange: handlePageChange,
-
         onShowSizeChange,
         onSort, // 排序
         onRowClick, // 行点击
@@ -114,6 +139,9 @@ export class MainSubStructureModel {
     });
   });
 
+  /**
+   * 设置子表list
+   */
   public setSubTablesModel = action((subTables) => {
     this.subTablesModel = new SubTableListModel({
       ...subTables,
@@ -121,6 +149,9 @@ export class MainSubStructureModel {
     });
   });
 
+  /**
+   * 主表排序
+   */
   public onSort = action(({ sidx, sord }) => {
     const data = {
       ...this.history,
@@ -130,6 +161,9 @@ export class MainSubStructureModel {
     this.queryDataAndSetState(data);
   });
 
+  /**
+   * 主表行点击
+   */
   public onRowClick = action((id, row) => {
     // TODO: 刷新子表
     const { activeTab, listModel, tabsFlag } = this.subTablesModel;
@@ -143,12 +177,18 @@ export class MainSubStructureModel {
     this.api.onRowClick?.(id, row);
   });
 
+  /**
+   * 主表刷新
+   */
   public onRefresh = action(() => {
     const data = this.history;
     this.queryDataAndSetState(data);
     this.api.onRefresh?.(data);
   });
 
+  /**
+   * 主表pageChange
+   */
   public handlePageChange = action((page, pageSize) => {
     const data = {
       ...this.history,
@@ -159,6 +199,9 @@ export class MainSubStructureModel {
     this.api.onPageChange?.(page, pageSize);
   });
 
+  /**
+   * 主表pageSizeChange
+   */
   public onShowSizeChange = action((page, pageSize) => {
     const data = {
       ...this.history,
@@ -169,6 +212,9 @@ export class MainSubStructureModel {
     this.api.onShowSizeChange?.(page, pageSize);
   });
 
+  /**
+   * 主表查询事件，组合查询方案参数、重置所有
+   */
   public onQuery = action((): Promise<unknown> => {
     const filterParams = typeof this.getFilterParams === 'function' ? this.getFilterParams() : {};
     const params = Object.assign(this.gridModel.queryParam, { filterParams });

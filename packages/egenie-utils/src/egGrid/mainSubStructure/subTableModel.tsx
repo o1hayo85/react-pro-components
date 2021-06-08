@@ -6,11 +6,11 @@ import { EgGridModel } from '../egGridModel';
 import { MainSubStructureModel } from './mainSubStructureModel';
 import { SubTableListModel } from './subTableListModel';
 
-export interface ICustomModel{
+export interface ICustomModel {
   [key: string]: any;
 }
-export type TCustomModel = ICustomModel| IObservableObject;
-export interface ISubTableModel{
+export type TCustomModel = ICustomModel | IObservableObject;
+export interface ISubTableModel {
   parent?: Partial<SubTableListModel>;
   tab?: {
     name: string;
@@ -24,10 +24,19 @@ export interface ISubTableModel{
 }
 
 export class SubTableModel {
+  /**
+   * parent为子表list
+   */
   @observable public parent: Partial<SubTableListModel> = {};
 
+  /**
+   * 顶层主子表Model
+   */
   @observable public top: Partial<MainSubStructureModel> = {};
 
+  /**
+   * 是否展示子表
+   */
   @observable public showSubTable: true;
 
   @observable public tab = {
@@ -35,26 +44,56 @@ export class SubTableModel {
     value: '',
   };
 
+  /**
+  * 子表gridModel
+  */
   @observable public grid?: IEgGridModel;
 
+  /**
+   * 子表api，同gridModel的api
+   */
   @observable public api: IEgGridApi = {};
 
+  /**
+   * 子表是否为表格
+   */
   @observable public notGrid = false;
 
+  /**
+   * 存储上次查询参数
+   */
   @observable public history: IObj = {};
 
+  /**
+   * 子表gridModel
+   */
   @observable public gridModel: EgGridModel;
 
+  /**
+   * 自定义子表
+   */
   @observable public isCustom: boolean;
 
+  /**
+   * 自定义子表的model
+   */
   @observable public customModel: ICustomModel;
 
+  /**
+   * 自定义View
+   */
   public CustomView: React.ReactNode;
 
+  /**
+   * 是否为当前tab
+   */
   @computed public get isCursor(): boolean {
     return this.parent.activeTab === this.tab.value;
   }
 
+  /**
+   * 是否初始化过
+   */
   @computed public get isInited(): StrOrNum {
     return this.parent.tabsFlag.inited[this.tab.value];
   }
@@ -215,7 +254,9 @@ export class SubTableModel {
     return true;
   });
 
-  // 包装子表的查询接口，如果快速多次调用查询接口，忽略前边的请求，只接受最后一个请求返回的数据
+  /**
+   * 包装子表的查询接口，如果快速多次调用查询接口，忽略前边的请求，只接受最后一个请求返回的数据
+   */
   public requestOry = (onQuery) => {
     let rejectOfLastRequest = null;
     let i = 0;

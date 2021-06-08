@@ -29,7 +29,11 @@
     "src/loginForm/login/index.tsx",
     "src/loginForm/findPassword/index.tsx",
     "src/loginForm/registry/index.tsx",
-    "src/loginForm/interface.tsx"
+    "src/loginForm/interface.tsx",
+    "src/egGrid/egGridModel.tsx",
+    "src/egGrid/mainSubStructure/mainSubStructureModel.tsx",
+    "src/egGrid/mainSubStructure/subTableListModel.tsx",
+    "src/egGrid/mainSubStructure/subTableModel.tsx"
   ],
   "out": "docs",
   "excludePrivate": true,

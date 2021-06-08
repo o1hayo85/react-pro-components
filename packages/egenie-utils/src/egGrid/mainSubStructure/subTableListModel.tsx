@@ -15,6 +15,9 @@ export interface ISubTableListModel {
 }
 
 export class SubTableListModel {
+  /**
+   * 子表激活tab
+   */
   @observable public activeTab = '';
 
   @observable public tabsFlag = {
@@ -22,12 +25,24 @@ export class SubTableListModel {
     searched: {},
   };
 
+  /**
+  * 子表model与上层model链接参数
+  */
   @observable public top: Partial<MainSubStructureModel> = {};
 
+  /**
+   * 子表配置list，由上层传入
+   */
   @observable public list = [];
 
+  /**
+   * 基于上层传入的子表gridModel组成的list,实例化子表,形成子表gridModel的list
+   */
   @observable public listModel = [];
 
+  /**
+   * 获取聚焦子表
+   */
   @computed public get cursorTabModel() {
     return this.listModel.find((el) => el.tab.value === this.activeTab);
   }
@@ -37,6 +52,9 @@ export class SubTableListModel {
     this.setListModel(this.list);
   }
 
+  /**
+   * 子表tab切换
+   */
   public onClickTab = action((tabName: string) => {
     this.activeTab = tabName;
     const {
@@ -54,6 +72,9 @@ export class SubTableListModel {
     }
   });
 
+  /**
+   * 设置子表listModel
+   */
   public setListModel = action((list) => {
     this.listModel = list.map((el) => {
       return new SubTableModel({
