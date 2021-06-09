@@ -23,7 +23,7 @@ export const BatchReport: React.FC<BatchReportData<Object>['data'] & {
 
     // @ts-ignore
   ].concat(props.columns || []);
-  const dataSource = (props.list || []).map((item, index) => ({
+  const dataSource = (props.list || props.failedList || []).map((item, index) => ({
     ...item,
     _index: index + 1,
   }));

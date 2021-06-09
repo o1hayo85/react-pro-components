@@ -154,7 +154,8 @@ export interface BatchReportData<T = unknown> {
     successed: number;
     operationName: string;
     failed: number;
-    list: T[];
+    list?: T[];
+    failedList?: T[];
   };
 }
 

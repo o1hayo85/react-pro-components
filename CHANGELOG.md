@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.39...v0.0.0) (2021-06-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.40...v0.0.0) (2021-06-09)
+
+### Features
+
+- **utils:** 增加批量报告错误的字段名称兼容 ([9ddf20d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9ddf20d8d5c2efdaa1768e033d657aec042d1eb3))
+
+## [0.0.40](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.39...v0.0.40) (2021-06-09)
 
 ### Features
 
