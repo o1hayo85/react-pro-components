@@ -1,8 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.38...v0.0.0) (2021-06-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.39...v0.0.0) (2021-06-09)
 
 ### Features
 
-- **utils/request:** 增加默认 header ([ad645e3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ad645e33cdf8ad2f8cd673f5abd52a959e247a87))
+- **utils/request:** 增加默认 header ([3b4fddb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3b4fddbf8447f1537ba8e383e22f7dac4b9581d6))
+
+## [0.0.39](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.38...v0.0.39) (2021-06-08)
+
+### Features
+
 - 表格组件添加注释 ([50ad18d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/50ad18d457e0e1e5cbf3a12aba33cd10512a229a))
 
 ## [0.0.38](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.37...v0.0.38) (2021-06-04)
