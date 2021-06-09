@@ -18,7 +18,17 @@ const singleton = (function() {
       .interceptors
       .request
       .use((config) => {
-        config.headers = { ...config.headers };
+        const baseHeader: {[ket: string]: number|string; } = {};
+
+        // @ts-ignore
+        if (window.__config__ && window.__config__.originProject) {
+          // @ts-ignore
+          baseHeader['Origin-Project'] = window.__config__.originProject;
+        }
+        config.headers = {
+          ...config.headers,
+          ...baseHeader,
+        };
         return config;
       }, (error: AxiosError) => {
         Toast.fail(error?.message ?? '请求失败');

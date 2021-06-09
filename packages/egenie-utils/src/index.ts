@@ -6,6 +6,10 @@ declare global {
     jsonReader: JsonReader;
     egenie: Egenie;
     EgeniePermission: Permission;
+    __config__: {
+      originProject: string;
+      [key: string]: any;
+    };
   }
 }
 

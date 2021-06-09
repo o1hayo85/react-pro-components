@@ -66,7 +66,7 @@ export interface IEgGridModel {
     sidx?: StrOrNum;
     filterParams?: IObj;
   };
-  getFilterParams?: () => { [key: string]: string; };
+  getFilterParams?: () => {[key: string]: string; };
   parent?: IObj;
   wrapClassName?: string;
   showEmpty?: boolean;
@@ -311,7 +311,7 @@ export class EgGridModel {
   /**
    * 查询方案注入此方法，可通过gridModel.getFilterParams获取参数
    */
-  public getFilterParams: () => { [key: string]: string; };
+  public getFilterParams: () => {[key: string]: string; };
 
   /**
    * 行点击事件
@@ -353,7 +353,6 @@ export class EgGridModel {
     this.selectedIds = selectRows;
     this.api?.onRowSelectChange && this.api.onRowSelectChange(selectRows);
   });
-
 
   public onResetSelected = action(() => {
     this.selectedIds = new Set([]);

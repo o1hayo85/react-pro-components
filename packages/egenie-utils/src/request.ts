@@ -18,7 +18,14 @@ const singleton = (function() {
       .interceptors
       .request
       .use((config) => {
-        config.headers = { ...config.headers };
+        const baseHeader: {[ket: string]: number|string; } = {};
+        if (window.__config__ && window.__config__.originProject) {
+          baseHeader['Origin-Project'] = window.__config__.originProject;
+        }
+        config.headers = {
+          ...config.headers,
+          ...baseHeader,
+        };
         return config;
       }, (error: AxiosError) => {
         message.error(error?.message ?? '请求失败');
