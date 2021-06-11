@@ -325,7 +325,8 @@ export class LayoutStore {
         this.togglePassword(true);
         break;
       case 'exit':
-        console.log('登出'); break;
+        request({ url: '/api/iac/logout' });
+        break;
       case data.key:
         item.callback && item.callback();
 
@@ -355,7 +356,7 @@ export class LayoutStore {
       message.success('修改成功，请重新登录！');
       this.togglePassword(false);
       setTimeout(() => {
-        window.location.href = '/logout';
+        request({ url: '/api/iac/logout' });
       }, 2000);
     })
       .catch((errorInfo) => {
