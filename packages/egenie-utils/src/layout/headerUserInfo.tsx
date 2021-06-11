@@ -17,7 +17,7 @@ const defaultOperations: Opera[] = [
   {
     id: 'exit',
     name: '退出登录',
-    url: '/logout',
+   
   },
 ];
 

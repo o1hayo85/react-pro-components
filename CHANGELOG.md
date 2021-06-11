@@ -1,4 +1,14 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.41...v0.0.0) (2021-06-11)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.42...v0.0.0) (2021-06-11)
+
+### Features
+
+- **utils:** 增加 select 的搜索回掉 ([fef75a6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fef75a6178d6f15d540e7ee0fde42d29e646ac22))
+
+## [0.0.42](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.41...v0.0.42) (2021-06-11)
+
+### Features
+
+- **utils:** 登录接口调整 ([58a81a8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/58a81a8f779c872fd5907df281917e587d68ba36))
 
 ## [0.0.41](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.40...v0.0.41) (2021-06-09)
 
