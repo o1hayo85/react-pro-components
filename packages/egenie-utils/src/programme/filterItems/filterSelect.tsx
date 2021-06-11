@@ -129,7 +129,15 @@ export class FilterSelect extends FilterBase {
    */
   @action public onSearch = (searchValue: string) => {
     this.searchValue = typeof searchValue === 'string' ? searchValue : '';
+    if (typeof this.onSearchCallback === 'function') {
+      this.onSearchCallback(this.searchValue);
+    }
   };
+
+  /**
+   * 搜索值改变回掉
+   */
+  public onSearchCallback: (value?: string) => void;
 
   /**
    * 是否禁止
