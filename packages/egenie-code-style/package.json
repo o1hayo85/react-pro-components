@@ -8,6 +8,9 @@
     "prettierRule",
     "styleLintRule"
   ],
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "dependencies": {
     "@commitlint/config-conventional": "^12.1.1",

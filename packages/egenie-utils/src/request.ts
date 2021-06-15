@@ -18,7 +18,7 @@ const singleton = (function() {
       .interceptors
       .request
       .use((config) => {
-        const baseHeader: {[ket: string]: number|string; } = {};
+        const baseHeader: {[key: string]: number | string; } = {};
         if (window.__config__ && window.__config__.originProject) {
           baseHeader['Origin-Project'] = window.__config__.originProject;
         }

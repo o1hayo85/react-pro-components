@@ -3,7 +3,10 @@
   "version": "0.0.43",
   "description": "",
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.15",
     "@babel/plugin-proposal-export-default-from": "^7.12.13",
