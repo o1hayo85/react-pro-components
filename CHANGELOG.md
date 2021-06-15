@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.43...v0.0.0) (2021-06-15)
 
+### Features
+
+- 增加 package.json 的 files ([1b41829](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1b41829d9bf828bd48dee88813e5be751eedf2a2))
+
 ## [0.0.43](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.42...v0.0.43) (2021-06-11)
 
 ### Features
