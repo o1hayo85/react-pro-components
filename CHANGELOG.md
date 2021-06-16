@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.44...v0.0.0) (2021-06-16)
 
+### Features
+
+- **utils:** 增加首页 logo 配置，登出配置参数 ([96cf003](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/96cf0035bd984b5ea51f69b6fe8f78b9af381a48))
+
 ## [0.0.44](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.43...v0.0.44) (2021-06-15)
 
 ### Features
