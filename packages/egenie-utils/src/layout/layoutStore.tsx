@@ -6,6 +6,12 @@ import { request, BaseData } from '../request';
 import { SrcParams, User, Response, Menudata, API, Permission } from './interface';
 
 export class LayoutStore {
+  @observable public project = {
+    name: 'E精灵',
+    value: 'egenie-erp-home',
+  }
+  ;
+
   @observable public haveDashboard: false; // 是否展示dashboard, false首页则展示空白页
 
   @observable public isHoverShowPanel = false; // 是否hover展示子菜单，解决频繁展开子菜单问题
@@ -106,12 +112,15 @@ export class LayoutStore {
     window.top.EgeniePermission = EgeniePermission;
   };
 
-  public handleInit = () => {
+  public handleInit = (project) => {
     this.getUserInfo();
     this.getMenuList();
     this.getUserPerms();
     this.handleDefaultOpenPage();
     this.handleWindow();
+    if (project) {
+      this.project = project;
+    }
   };
 
   public getUserInfo = action(async() => {
@@ -325,7 +334,7 @@ export class LayoutStore {
         this.togglePassword(true);
         break;
       case 'exit':
-        request({ url: '/api/iac/logout' });
+        this.handleLogout();
         break;
       case data.key:
         item.callback && item.callback();
@@ -356,7 +365,7 @@ export class LayoutStore {
       message.success('修改成功，请重新登录！');
       this.togglePassword(false);
       setTimeout(() => {
-        request({ url: '/api/iac/logout' });
+        this.handleLogout();
       }, 2000);
     })
       .catch((errorInfo) => {
@@ -367,7 +376,10 @@ export class LayoutStore {
   @action public togglePanel = (flag: boolean): void => {
     this.isHoverShowPanel = flag;
   };
-}
 
+  public handleLogout = (): void => {
+    window.location.href = `/logout?project=${this.project?.value}`;
+  };
+}
 export const layoutStore = new LayoutStore();
 

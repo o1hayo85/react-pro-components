@@ -1,6 +1,6 @@
 import { Provider } from 'mobx-react';
 import React from 'react';
-import { SrcParams, Opera, Permission } from './interface';
+import { SrcParams, Opera, Project } from './interface';
 import { LayoutMenu } from './layoutMenu';
 import { layoutStore } from './layoutStore';
 
@@ -30,7 +30,12 @@ export interface Props {
   /**
    * iframe页面src携带参数
    */
-  srcParams?: SrcParams[]; //
+  srcParams?: SrcParams[];
+
+  /**
+   * 项目信息
+   */
+  project?: Project;
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
   console.log('props.....root', props);
@@ -39,6 +44,7 @@ export const LayoutGuide: React.FC<Props> = (props: Props) => {
       <LayoutMenu
         defaultDashboard={props.defaultDashboard}
         haveDashboard={props.haveDashboard}
+        project={props.project}
         srcParams={props.srcParams}
         userInfoLeft={props.userInfoLeft}
         userInfoRight={props.userInfoRight || []}

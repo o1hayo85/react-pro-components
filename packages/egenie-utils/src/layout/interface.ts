@@ -83,3 +83,8 @@ export interface API {
   data?: string[];
   status: string;
 }
+
+export interface Project {
+  name: string;
+  value: string;
+}

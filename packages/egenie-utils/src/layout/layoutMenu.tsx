@@ -18,7 +18,7 @@ const {
 @observer
 export class LayoutMenu extends React.Component<any> {
   componentDidMount(): void {
-    this.props.layoutStore.handleInit();
+    this.props.layoutStore.handleInit(this.props?.project);
   }
 
   public openNewPage = (child: Partial<{ url: string; name: string; }>): JSX.Element => {
@@ -59,6 +59,7 @@ export class LayoutMenu extends React.Component<any> {
       userInfoLeft,
       userInfoRight,
       defaultDashboard,
+      project,
     } = this.props;
     const {
       menuData,
@@ -87,7 +88,7 @@ export class LayoutMenu extends React.Component<any> {
               className={styles.rootLayoutLogo}
               onClick={getActiveSubMenu.bind(this, tabList[0])}
             >
-              E精灵
+              {project.name}
             </div>
             <Menu
               mode="inline"
