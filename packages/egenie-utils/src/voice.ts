@@ -9,7 +9,6 @@ function playVoice(url: string): void {
   const audio = new Audio();
   audio.src = url;
   audio.autoplay = true;
-  audio.play();
 }
 
 function getVoiceToken(): Promise<string> {
