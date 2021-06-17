@@ -1,6 +1,6 @@
 'use strict';
 
-const postcss = require('packages/egenie-config/lib/postcss');
+const postcss = require('postcss');
 const Px2rem = require('px2rem');
 
 function px2rem(options) {

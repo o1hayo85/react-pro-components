@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.45...v0.0.0) (2021-06-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.46...v0.0.0) (2021-06-17)
+
+### Bug Fixes
+
+- **config/postcss:** 解决文件移动位置，包名重新命名 ([feb242b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/feb242bcd22bcecc99a4dda65cacf5480d261631))
+
+## [0.0.46](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.45...v0.0.46) (2021-06-17)
 
 ### Features
 
