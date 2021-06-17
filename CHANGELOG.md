@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.0...v0.0.0) (2021-06-17)
 
+### Features
+
+- **utils:** 重构 voice ([db2457f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/db2457f9cef0f990f05deb6efbcda1f2939b7599))
+
 # [0.1.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.46...v0.1.0) (2021-06-17)
 
 ### Bug Fixes
