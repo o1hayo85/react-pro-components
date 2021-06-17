@@ -33,4 +33,4 @@ export * from './common';
 export * from './loginForm/login';
 export * from './loginForm/findPassword';
 export * from './loginForm/registry';
-
+export * from './voice';
