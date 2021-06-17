@@ -1,31 +1,31 @@
 import { BaseData, request } from './request';
+import { LocalStorageExpire } from './storage';
 
-let token = '';
-const voiceList = new Map<string, string>();
+const voiceCache = new LocalStorageExpire('egenie-voice');
+const tokenKey = 'token';
+const tokenExpire = 1000 * 60 * 60 * 24;
 
 function playVoice(url: string): void {
   const audio = new Audio();
   audio.src = url;
   audio.autoplay = true;
+  audio.play();
 }
 
-/**
- * 获取声音token
- */
 function getVoiceToken(): Promise<string> {
+  const token = voiceCache.getItem(tokenKey) as string;
   if (token) {
     return Promise.resolve(token);
   } else {
     return request<BaseData<string>>({ url: '/api/wms/rest/voice/getToken' })
       .then((res) => {
-        token = res.data || '';
-        return token;
+        voiceCache.setItem(tokenKey, res.data || '', tokenExpire);
+        return res.data || '';
       });
   }
 }
 
 /**
- * 暂时放内存缓存，后期考虑localStorage做缓存
  * @param tex 语音文本
  * @param per 声音类型
  */
@@ -34,9 +34,11 @@ export async function getAndPlayVoice(tex: string, per = '0'): Promise<void> {
     return Promise.reject('填写声音');
   }
 
-  const nameKey = `${per}_${tex}`;
-  if (voiceList.has(nameKey)) {
-    playVoice(voiceList.get(nameKey));
+  const key = `${per}_${tex}`;
+  const value = voiceCache.getItem(key) as string;
+
+  if (value) {
+    playVoice(value);
   } else {
     const tok = await getVoiceToken();
     const voiceData = {
@@ -55,7 +57,7 @@ export async function getAndPlayVoice(tex: string, per = '0'): Promise<void> {
       data: voiceData,
     })
       .then((res) => {
-        voiceList.set(nameKey, res.data);
+        voiceCache.setItem(key, res.data);
         playVoice(res.data);
       });
   }
