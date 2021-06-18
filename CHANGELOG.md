@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.1...v0.0.0) (2021-06-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.2...v0.0.0) (2021-06-18)
+
+### Features
+
+- **utils:** 登出配置参数 ([230927e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/230927e73a68051cb9ad555b8fc2e935e5ab6f4d))
+
+## [0.1.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.1...v0.1.2) (2021-06-17)
 
 ### Features
 
@@ -23,7 +29,6 @@
 - **utils:** add voice ([f757297](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f757297c874e92a22b20bf61b47a66d1211ec977))
 
 ## [0.0.45](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.44...v0.0.45) (2021-06-16)
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.44...v0.0.0) (2021-06-18)
 
 ### Features
 
