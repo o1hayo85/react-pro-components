@@ -59,7 +59,6 @@ export class LayoutMenu extends React.Component<any> {
       userInfoLeft,
       userInfoRight,
       defaultDashboard,
-      project,
     } = this.props;
     const {
       menuData,
@@ -71,6 +70,7 @@ export class LayoutMenu extends React.Component<any> {
       getActiveSubMenu,
       togglePanel,
       immutableStyle,
+      project,
     } = this.props.layoutStore;
 
     const result: Menudata = menuData.filter((item) => item.id === activeMenuId)[0];
