@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 更新浏览器兼容版本 ([cd96a59](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cd96a59f55e2fa4260c18812ee09fbdb9874a268))
+- **utils:** 更新浏览器兼容版本 ([0abcade](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0abcadefb246a167c6d2c09694e120e1c974390f))
 
 ## [0.1.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.3...v0.1.4) (2021-06-18)
 
