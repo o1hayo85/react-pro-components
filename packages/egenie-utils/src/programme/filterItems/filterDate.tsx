@@ -31,7 +31,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
       return [
         moment()
           .startOf('day'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -57,7 +58,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(2, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -68,7 +70,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
       return [
         moment()
           .startOf('week'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -80,7 +83,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(6, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -92,7 +96,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(14, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -103,7 +108,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
       return [
         moment()
           .startOf('month'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -115,7 +121,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(29, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -126,7 +133,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
       return [
         moment()
           .startOf('quarter'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -138,7 +146,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(179, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -149,7 +158,8 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
       return [
         moment()
           .startOf('year'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
@@ -161,30 +171,37 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
         moment()
           .startOf('day')
           .subtract(364, 'days'),
-        moment(),
+        moment()
+          .endOf('day'),
       ];
     },
   },
 };
 
-function formatTime(startTime: moment.Moment, endTime: moment.Moment, formatParams: string): string {
+function formatTime(startTime: moment.Moment, endTime: moment.Moment, format: string, formatParams: string): string {
   let startTimeString: string;
   let endTimeString: string;
 
-  switch (formatParams) {
-    case FormatDateType.defaultFormat:
-      startTimeString = startTime ? startTime.format(formatParams) : '';
-      endTimeString = endTime ? endTime.format(formatParams) : '';
-      break;
-    case FormatDateType.day:
-      startTimeString = startTime ? startTime.startOf('day')
-        .format(formatParams) : '';
-      endTimeString = endTime ? endTime.endOf('day')
-        .format(formatParams) : '';
-      break;
-    default:
-      startTimeString = '';
-      endTimeString = '';
+  if (startTime) {
+    if (format === FormatDateType.defaultFormat) {
+      startTimeString = startTime.format(formatParams);
+    } else {
+      startTimeString = startTime.startOf('day')
+        .format(formatParams);
+    }
+  } else {
+    startTimeString = '';
+  }
+
+  if (endTime) {
+    if (format === FormatDateType.defaultFormat) {
+      endTimeString = endTime.format(formatParams);
+    } else {
+      endTimeString = endTime.endOf('day')
+        .format(formatParams);
+    }
+  } else {
+    endTimeString = '';
   }
 
   if (startTimeString || endTimeString) {
@@ -222,7 +239,7 @@ export class FilterDate extends FilterBase {
   @observable public type: 'date' | 'dateRange' = ENUM_FILTER_ITEM_TYPE.date;
 
   public toProgramme(): string | null {
-    const timeString = formatTime(this.startTime, this.endTime, this.formatParams);
+    const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
         if (timeString) {
@@ -243,7 +260,7 @@ export class FilterDate extends FilterBase {
   }
 
   public toParams(this: FilterDate): {[key: string]: string; } {
-    const timeString = formatTime(this.startTime, this.endTime, this.formatParams);
+    const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
         if (timeString) {

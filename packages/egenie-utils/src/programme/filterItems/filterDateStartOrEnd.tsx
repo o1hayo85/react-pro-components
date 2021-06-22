@@ -7,20 +7,20 @@ import React from 'react';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 import { FormatDateType } from './filterDate';
 
-function formatTime(value: moment.Moment | null, formatParams: string, type: string): string {
+function formatTime(value: moment.Moment | null, format: string, formatParams: string, type: string): string {
   if (!value) {
     return '';
   }
 
   if (type === ENUM_FILTER_ITEM_TYPE.dateStart) {
-    if (formatParams === FormatDateType.defaultFormat) {
+    if (format === FormatDateType.defaultFormat) {
       return value.format(formatParams);
     } else {
       return value.startOf('day')
         .format(formatParams);
     }
   } else {
-    if (formatParams === FormatDateType.defaultFormat) {
+    if (format === FormatDateType.defaultFormat) {
       return value.format(formatParams);
     } else {
       return value.endOf('day')
@@ -62,8 +62,8 @@ export class FilterDateStartOrEnd extends FilterBase {
   @observable public type: 'dateStart' | 'dateEnd' = ENUM_FILTER_ITEM_TYPE.dateStart;
 
   public toProgramme(): string | null {
-    if (formatTime(this.value, this.formatParams, this.type)) {
-      return formatTime(this.value, this.formatParams, this.type);
+    if (formatTime(this.value, this.format, this.formatParams, this.type)) {
+      return formatTime(this.value, this.format, this.formatParams, this.type);
     } else {
       return null;
     }
