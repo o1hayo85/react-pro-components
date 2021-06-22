@@ -1,8 +1,8 @@
-import { Button, Divider, Select, Typography } from 'antd';
+import { Button, Divider, Select } from 'antd';
 import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase, ValueAndLabelData } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel, ValueAndLabelData } from './common';
 
 function formatValue(oldValue, mode) {
   if (mode) {
@@ -216,27 +216,18 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       showChooseAll,
       label,
       labelWidth,
+      required,
     } = this.props.store;
     return (
       <div
         className={`filterSelect ${className}`}
         style={toJS(style)}
       >
-        <div
-          className="filterLabel"
-          style={{
-            width: labelWidth,
-            maxWidth: labelWidth,
-          }}
-          title={label}
-        >
-          <Typography.Title
-            ellipsis={{ rows: 1 }}
-            title={label}
-          >
-            {label}
-          </Typography.Title>
-        </div>
+        <FilterItemLabel
+          label={label}
+          labelWidth={labelWidth}
+          required={required}
+        />
         <Select
           allowClear={allowClear}
           bordered={false}

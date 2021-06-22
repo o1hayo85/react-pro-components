@@ -1,11 +1,11 @@
-import { DatePicker, Row, Select, Tag, Typography } from 'antd';
+import { DatePicker, Row, Select, Tag } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { action, observable, extendObservable, toJS, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 import styles from './filterItems.less';
 
 export enum FormatDateType {
@@ -222,14 +222,23 @@ export class FilterDate extends FilterBase {
   @observable public type: 'date' | 'dateRange' = ENUM_FILTER_ITEM_TYPE.date;
 
   public toProgramme(): string | null {
+    const timeString = formatTime(this.startTime, this.endTime, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
-        return `${this.selectValue},${formatTime(this.startTime, this.endTime, this.formatParams)}`;
+        if (timeString) {
+          return `${this.selectValue},${timeString}`;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
     } else {
-      return formatTime(this.startTime, this.endTime, this.formatParams);
+      if (timeString) {
+        return timeString;
+      } else {
+        return null;
+      }
     }
   }
 
@@ -467,6 +476,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
       disabled,
       labelWidth,
       allowClear,
+      required,
     } = this.props.store;
     const newClassName = classNames('filterDateSelect', className);
     return (
@@ -475,20 +485,11 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
         style={toJS(style)}
       >
         <header>
-          <section
-            className="filterLabel"
-            style={{
-              width: labelWidth,
-              maxWidth: labelWidth,
-            }}
-          >
-            <Typography.Title
-              ellipsis={{ rows: 1 }}
-              title={label}
-            >
-              {label}
-            </Typography.Title>
-          </section>
+          <FilterItemLabel
+            label={label}
+            labelWidth={labelWidth}
+            required={required}
+          />
           <Select
             bordered={false}
             onChange={handleSelectChange}
@@ -561,6 +562,7 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
       handleRangeChange,
       labelWidth,
       allowClear,
+      required,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -569,20 +571,11 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
         style={toJS(style)}
       >
         <header>
-          <section
-            className="filterLabel"
-            style={{
-              width: labelWidth,
-              maxWidth: labelWidth,
-            }}
-          >
-            <Typography.Title
-              ellipsis={{ rows: 1 }}
-              title={label}
-            >
-              {label}
-            </Typography.Title>
-          </section>
+          <FilterItemLabel
+            label={label}
+            labelWidth={labelWidth}
+            required={required}
+          />
         </header>
         <section>
           <DatePicker.RangePicker

@@ -1,8 +1,8 @@
-import { InputNumber, Select, Typography } from 'antd';
+import { InputNumber, Select } from 'antd';
 import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 function formatNumber(num: unknown): number {
   const newNum = Number(num);
@@ -51,29 +51,42 @@ export class FilterInputNumberGroup extends FilterBase {
    */
   @observable public type: 'inputNumberGroup' = ENUM_FILTER_ITEM_TYPE.inputNumberGroup;
 
-  public toProgramme(): string {
+  public toProgramme(): string | null {
+    const numberString = formatNumberString(this.value);
     if (this.data.length > 1) {
       if (this.selectValue) {
-        return `${this.selectValue},${formatNumberString(this.value)}`;
+        if (numberString) {
+          return `${this.selectValue},${numberString}`;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
     } else {
-      return formatNumberString(this.value);
+      if (numberString) {
+        return `${this.selectValue},${numberString}`;
+      } else {
+        return null;
+      }
     }
   }
 
   public toParams(this: FilterInputNumberGroup): {[key: string]: string; } {
-    const num = formatNumberString(this.value);
+    const numberString = formatNumberString(this.value);
     if (this.data.length > 1) {
-      if (this.selectValue && num) {
-        return { [this.selectValue]: num };
+      if (this.selectValue) {
+        if (numberString) {
+          return { [this.selectValue]: numberString };
+        } else {
+          return {};
+        }
       } else {
         return {};
       }
     } else {
-      if (num) {
-        return { [this.field]: num };
+      if (numberString) {
+        return { [this.field]: numberString };
       } else {
         return {};
       }
@@ -248,6 +261,7 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
       selectValue,
       handleSelectValue,
       labelWidth,
+      required,
     } = this.props.store;
     return (
       <div
@@ -270,21 +284,11 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
                 value={selectValue}
               />
             ) : (
-              <div
-                className="filterLabel"
-                style={{
-                  width: labelWidth,
-                  maxWidth: labelWidth,
-                }}
-                title={label}
-              >
-                <Typography.Title
-                  ellipsis={{ rows: 1 }}
-                  title={label}
-                >
-                  {label}
-                </Typography.Title>
-              </div>
+              <FilterItemLabel
+                label={label}
+                labelWidth={labelWidth}
+                required={required}
+              />
             );
           })()
         }

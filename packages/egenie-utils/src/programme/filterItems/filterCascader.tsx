@@ -1,9 +1,9 @@
-import { Cascader, Typography } from 'antd';
+import { Cascader } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {
@@ -149,27 +149,18 @@ export class FilterCascaderComponent extends React.Component<{ store: FilterCasc
       loadData,
       fieldNames,
       labelWidth,
+      required,
     } = this.props.store;
     return (
       <div
         className={`filterCascader ${className}`}
         style={toJS(style)}
       >
-        <div
-          className="filterLabel"
-          style={{
-            width: labelWidth,
-            maxWidth: labelWidth,
-          }}
-          title={label}
-        >
-          <Typography.Title
-            ellipsis={{ rows: 1 }}
-            title={label}
-          >
-            {label}
-          </Typography.Title>
-        </div>
+        <FilterItemLabel
+          label={label}
+          labelWidth={labelWidth}
+          required={required}
+        />
         <Cascader
           allowClear={allowClear}
           bordered={false}

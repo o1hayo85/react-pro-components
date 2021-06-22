@@ -68,16 +68,22 @@ export class NormalProgramme {
    * @internal
    */
   @action public handleSearch = () => {
-    if (typeof this.searchCallback === 'function') {
-      try {
-        this.isSearch = true;
-        this.searchCallback()
-          .finally(() => this.isSearch = false);
-      } catch (error) {
-        this.isSearch = false;
-        console.log('error:筛选组件 handleSearch', error);
-      }
-    }
+    this.isSearch = true;
+
+    this.filterItems.validator()
+      .then(() => {
+        if (typeof this.searchCallback === 'function') {
+          try {
+            return this.searchCallback();
+          } catch (error) {
+            console.log('error:筛选组件 handleSearch', error);
+            return Promise.reject();
+          }
+        } else {
+          return Promise.resolve();
+        }
+      })
+      .finally(() => this.isSearch = false);
   };
 
   /**
@@ -138,7 +144,7 @@ export class NormalProgrammeComponent extends React.Component<{ store: NormalPro
         <Row
           gutter={[
             8,
-            8,
+            16,
           ]}
         >
           {actualData.map((item) => {

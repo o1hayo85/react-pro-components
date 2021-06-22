@@ -1,9 +1,9 @@
-import { Input, Typography } from 'antd';
+import { Input } from 'antd';
 import _ from 'lodash';
 import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 function formatValue(value: string, isTrimWhiteSpace: boolean) {
   if (isTrimWhiteSpace) {
@@ -38,8 +38,12 @@ export class FilterInput extends FilterBase {
    */
   @observable public type: 'input' = ENUM_FILTER_ITEM_TYPE.input;
 
-  public toProgramme(): string {
-    return formatValue(this.value, this.isTrimWhiteSpace);
+  public toProgramme(): string | null {
+    if (formatValue(this.value, this.isTrimWhiteSpace)) {
+      return formatValue(this.value, this.isTrimWhiteSpace);
+    } else {
+      return null;
+    }
   }
 
   public toParams(this: FilterInput): {[key: string]: string; } {
@@ -129,27 +133,18 @@ export class FilterInputComponent extends React.Component<{ store: FilterInput; 
       className,
       label,
       labelWidth,
+      required,
     } = this.props.store;
     return (
       <div
         className={`filterInput ${className}`}
         style={toJS(style)}
       >
-        <div
-          className="filterLabel"
-          style={{
-            width: labelWidth,
-            maxWidth: labelWidth,
-          }}
-          title={label}
-        >
-          <Typography.Title
-            ellipsis={{ rows: 1 }}
-            title={label}
-          >
-            {label}
-          </Typography.Title>
-        </div>
+        <FilterItemLabel
+          label={label}
+          labelWidth={labelWidth}
+          required={required}
+        />
         <Input
           allowClear={allowClear}
           bordered={false}

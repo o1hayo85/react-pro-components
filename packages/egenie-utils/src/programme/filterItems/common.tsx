@@ -1,3 +1,4 @@
+import { Typography } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable } from 'mobx';
 import React from 'react';
@@ -145,6 +146,26 @@ export abstract class FilterBase {
    * 是否是动态添加字段（方案保存、方案设置等需要过滤）
    */
   @observable public isDynamic = false;
+
+  /**
+   * 是否为必选字段
+   */
+  @observable public required = false;
+
+  /**
+   * 自定义校验
+   */
+  @action public validator = (): Promise<string> => {
+    if (this.required) {
+      if (this.toProgramme() == null) {
+        return Promise.reject(`请填写:${this.label}`);
+      } else {
+        return Promise.resolve('');
+      }
+    } else {
+      return Promise.resolve('');
+    }
+  };
 }
 
 /**
@@ -172,3 +193,41 @@ export type FilterItem = FilterInput | FilterInputNumberGroup | FilterSelect | F
  * 查询项参数
  */
 export type FilterItemOptions = Partial<FilterItem>;
+
+/**
+ * @internal
+ */
+export function FilterItemLabel({
+  labelWidth,
+  label,
+  required,
+}: { labelWidth: number; label: string; required: boolean; }) {
+  return (
+    <div
+      className="filterLabel mark-option"
+      style={{
+        width: labelWidth,
+        maxWidth: labelWidth,
+      }}
+      title={label}
+    >
+      <Typography.Title
+        ellipsis={{ rows: 1 }}
+        title={label}
+      >
+        {
+          required ? (
+            <span style={{
+              verticalAlign: 'middle',
+              color: '#ff4d4f',
+            }}
+            >
+              *
+            </span>
+          ) : null
+        }
+        {label}
+      </Typography.Title>
+    </div>
+  );
+}

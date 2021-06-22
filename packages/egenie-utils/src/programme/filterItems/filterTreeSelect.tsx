@@ -1,9 +1,9 @@
-import { Typography, TreeSelect } from 'antd';
+import { TreeSelect } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 /**
  * TreeData数据类型
@@ -311,27 +311,18 @@ export class FilterTreeSelectComponent extends React.Component<{ store: FilterTr
       treeDefaultExpandedKeys,
       treeIcon,
       onSelect,
+      required,
     } = this.props.store;
     return (
       <div
         className={`filterTreeSelect ${className}`}
         style={toJS(style)}
       >
-        <div
-          className="filterLabel"
-          style={{
-            width: labelWidth,
-            maxWidth: labelWidth,
-          }}
-          title={label}
-        >
-          <Typography.Title
-            ellipsis={{ rows: 1 }}
-            title={label}
-          >
-            {label}
-          </Typography.Title>
-        </div>
+        <FilterItemLabel
+          label={label}
+          labelWidth={labelWidth}
+          required={required}
+        />
         <section style={{ width: `calc(100% - ${labelWidth}px)` }}>
           <TreeSelect
             allowClear={allowClear}

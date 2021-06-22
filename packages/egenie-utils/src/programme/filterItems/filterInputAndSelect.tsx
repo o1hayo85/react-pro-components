@@ -30,15 +30,15 @@ export class FilterInputAndSelect extends FilterBase {
    */
   @observable public type: 'inputAndSelect' = ENUM_FILTER_ITEM_TYPE.inputAndSelect;
 
-  public toProgramme(): string {
+  public toProgramme(): string | null {
     if (this.selectValue) {
       if (this.inputValue) {
         return `${this.selectValue},${this.inputValue}`;
       } else {
-        return '';
+        return null;
       }
     } else {
-      return '';
+      return null;
     }
   }
 

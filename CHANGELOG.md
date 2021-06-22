@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.4...v0.0.0) (2021-06-21)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.5...v0.0.0) (2021-06-22)
+
+### Features
+
+- **utils:** 增加查询项是否必须,和其校验 ([b4ebcbb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b4ebcbbee897b0541de1bbe945a307329e69a97e))
+
+## [0.1.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.4...v0.1.5) (2021-06-21)
 
 ### Features
 

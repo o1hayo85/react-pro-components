@@ -245,14 +245,18 @@ export class Programme {
    * @internal
    */
   @action public handleSearch = () => {
-    try {
-      this.isSearch = true;
-      this.gridModel.onQuery()
-        .finally(() => this.isSearch = false);
-    } catch (error) {
-      this.isSearch = false;
-      console.log('error:筛选组件 handleSearch', error);
-    }
+    this.isSearch = true;
+
+    this.filterItems.validator()
+      .then(() => {
+        try {
+          return this.gridModel.onQuery();
+        } catch (error) {
+          console.log('error:筛选组件 handleSearch', error);
+          return Promise.reject();
+        }
+      })
+      .finally(() => this.isSearch = false);
   };
 
   /**
@@ -627,7 +631,24 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
                         onChange={() => item.toggleCollapse()}
                       >
                         <Collapse.Panel
-                          header={item.label}
+                          header={(
+                            <>
+                              {
+                                item.required ? (
+                                  <span style={{
+                                    color: '#ff4d4f',
+                                    paddingTop: 4,
+                                  }}
+                                  >
+                                    *
+                                  </span>
+                                ) : null
+                              }
+                              <span>
+                                {item.label}
+                              </span>
+                            </>
+                          )}
                           key="0"
                         >
                           {filterComponentFactory(item)}

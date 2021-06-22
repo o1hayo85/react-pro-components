@@ -28,7 +28,7 @@ export class FilterInputOrSelect extends FilterBase {
    */
   @observable public type: 'inputOrSelect' = ENUM_FILTER_ITEM_TYPE.inputOrSelect;
 
-  public toProgramme(): string {
+  public toProgramme(): string | null {
     if (this.value) {
       return this.value;
     } else {

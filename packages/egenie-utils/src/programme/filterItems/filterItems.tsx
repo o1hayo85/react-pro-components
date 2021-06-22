@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { action, computed, observable, set } from 'mobx';
 import qs from 'qs';
 import React from 'react';
@@ -211,6 +212,7 @@ export interface FilterItemsParams {
 export interface ConnectListItem {
   toParams: () => {[key: string]: string; };
   reset?: () => void;
+  validator?: () => Promise<string>;
 }
 
 export class FilterItems {
@@ -357,10 +359,40 @@ export class FilterItems {
   @observable private connectedList: ConnectListItem[] = [];
 
   /**
-   * 外部model连接到查询项。如左侧tree
+   * 外部model连接到查询项
    */
   @action
   public connect(connectListItem: ConnectListItem) {
     this.connectedList.push(connectListItem);
   }
+
+  /**
+   * 校验配置项
+   */
+  @action public validator = async(): Promise<string> => {
+    await Promise.all(this.actualData.map((item) => item.validator()))
+      .catch((info: string) => {
+        message.warning({
+          key: String(info),
+          content: String(info),
+        });
+        throw String(info);
+      });
+
+    const connectedList = this.connectedList;
+    for (let i = 0; i < connectedList.length; i++) {
+      if (connectedList[i].validator) {
+        await connectedList[i].validator()
+          .catch((info) => {
+            message.warning({
+              key: String(info),
+              content: String(info),
+            });
+            throw String(info);
+          });
+      }
+    }
+
+    return Promise.resolve('');
+  };
 }

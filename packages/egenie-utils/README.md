@@ -60,6 +60,9 @@ const filterItems: FilterItemOptions[] = [
     field: 'dateStart',
     label: 'dateStart',
 
+    // 是否必须
+    required: true,
+
     // 时间改变回掉
     handleChangeCallback(value) {
       console.log(value);
@@ -149,6 +152,12 @@ const filterItems: FilterItemOptions[] = [
     onChangeCallback(value) {
       console.log(value);
     },
+
+    // 搜索的回掉
+    onSearchCallback(value) {
+      console.log(value);
+    },
+
     label: '店铺',
     field: 'shop_id-4-10',
     data: [
@@ -589,7 +598,9 @@ import { FindPassword, Registry } from 'egenie-utils';
 
 ]
 ```
+
 ## 表格
+
 ### 主子表使用方式
 
 > 常规使用直接使用下面代码即可, 详细配置项查看下方
@@ -617,7 +628,7 @@ const mainSubModel = new MainSubStructureModel({
   grid: {
     columns: [
       {
-        key: 'operate', 
+        key: 'operate',
         name: '操作',
         width: 150,
         frozen: true, // 冻结列
@@ -740,7 +751,9 @@ const mainSubModel = new MainSubStructureModel({
   },
 });
 ```
+
 ### 常用配置项说明
+
 #### 1.列配置项
 
 ```js
@@ -798,7 +811,8 @@ const mainSubModel = new MainSubStructureModel({
     /** 是否隐藏列，默认false */
     ejlHidden?: boolean;
 ```
-#### 2.egGrid配置项
+
+#### 2.egGrid 配置项
 
 ```js
   /** 列配置，参考列配置项说明 */
@@ -866,7 +880,8 @@ const mainSubModel = new MainSubStructureModel({
   /** 是否强制点击事件，默认false,设为true后，每次点击同一行也会调用接口 */
   forceRowClick?: boolean;
 ```
-#### 3.表格接口api配置说明
+
+#### 3.表格接口 api 配置说明
 
 ```js
   /** 行点击回调 */

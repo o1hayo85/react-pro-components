@@ -1,10 +1,10 @@
-import { DatePicker, Typography } from 'antd';
+import { DatePicker } from 'antd';
 import classNames from 'classnames';
 import { action, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 import { FormatDateType } from './filterDate';
 
 function formatTime(value: moment.Moment | null, formatParams: string, type: string): string {
@@ -62,7 +62,11 @@ export class FilterDateStartOrEnd extends FilterBase {
   @observable public type: 'dateStart' | 'dateEnd' = ENUM_FILTER_ITEM_TYPE.dateStart;
 
   public toProgramme(): string | null {
-    return formatTime(this.value, this.formatParams, this.type);
+    if (formatTime(this.value, this.formatParams, this.type)) {
+      return formatTime(this.value, this.formatParams, this.type);
+    } else {
+      return null;
+    }
   }
 
   public toParams(this: FilterDateStartOrEnd): {[key: string]: string; } {
@@ -159,6 +163,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
       type,
       labelWidth,
       allowClear,
+      required,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -167,20 +172,11 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
         style={toJS(style)}
       >
         <header>
-          <section
-            className="filterLabel"
-            style={{
-              width: labelWidth,
-              maxWidth: labelWidth,
-            }}
-          >
-            <Typography.Title
-              ellipsis={{ rows: 1 }}
-              title={label}
-            >
-              {label}
-            </Typography.Title>
-          </section>
+          <FilterItemLabel
+            label={label}
+            labelWidth={labelWidth}
+            required={required}
+          />
         </header>
         <section>
           <DatePicker
