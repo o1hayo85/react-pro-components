@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.6...v0.0.0) (2021-06-22)
 
+### Features
+
+- **utils:** 修改日期组件-格式化日期(antd 不带 HH:mm:ss 默认是当前日期--->天的结束) ([132f81d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/132f81d010a4970b3cd82059f5a39665a13bf31d))
+
 ## [0.1.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.5...v0.1.6) (2021-06-22)
 
 ### Features
