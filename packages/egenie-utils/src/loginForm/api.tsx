@@ -26,7 +26,7 @@ export const api = {
   userCheck: '/api/iac/user/check', // 验证手机号是否存在
 
   // 忘记密码
-  checkUserName: '/api/iac/user/anon', // 验证用户是否存在
+  checkUserName: '/api/iac/user/anon/findByUsername', // 验证用户是否存在
   sendCode: '/api/iac/validCode/anon/send', // 发送验证码
   validateCode: '/api/iac/validCode/anon/password/reset/validate', // 验证手机号验证码
   newPassword: '/api/iac/user/anon/password/reset', // 修改密码

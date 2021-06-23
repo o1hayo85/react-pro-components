@@ -500,7 +500,7 @@ export class Store {
 
   // 验证账号
   public checkoutUserName = action((data: FindPasswordForm) => {
-    request({ url: `${api.checkUserName}/${data.username}` }).then((res: Response) => {
+    request({ url: `${api.checkUserName}?username=${data.username}` }).then((res: Response) => {
       if (res.data && !res.data.mobile) {
         this.errorInfo = '账号不存在';
         return;

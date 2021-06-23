@@ -126,11 +126,14 @@ export class HeaderUserInfo extends React.Component<any> {
           overlay={this.menu()}
           placement="bottomLeft"
         >
-          <span>
-            {userInfo.name}
-          </span>
+          <div>
+            <span>
+              {userInfo.name}
+            </span>
+            <img src="https://front.runscm.com/egenie-common/images/avator.png"/>
+          </div>
         </Dropdown>
-        <img src="https://front.runscm.com/egenie-common/images/avator.png"/>
+        
         {showPassord && this.passwordModal()}
       </div>
     );
