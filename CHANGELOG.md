@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.7...v0.0.0) (2021-06-23)
 
+### Features
+
+- **utils:** 忘记密码接口替换，hover 用户操作热区扩展到头像 ([5767de0](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5767de07ac834098804e760f7263f7c24fab9b7d))
+
 ## [0.1.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.6...v0.1.7) (2021-06-22)
 
 ### Features
