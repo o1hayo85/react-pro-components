@@ -1,5 +1,4 @@
-import { Button } from 'antd';
-import { observable, toJS } from 'mobx';
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React, { Component, CSSProperties, ReactNode } from 'react';
 import { MainSubStructure, MainSubStructureModel, IMainSubStructureModel } from '../egGrid';
@@ -8,7 +7,7 @@ import styles from './index.less';
 
 interface IStore {
   grid: IMainSubStructureModel;
-  programe: Partial<NormalProgrammeParams>;
+  programme: Partial<NormalProgrammeParams>;
   dict?: {[key: string]: ValueAndLabelData; };
   className?: string;
   style?: CSSProperties;
@@ -22,33 +21,33 @@ export class SearchListModal {
         hiddenSubTable: true,
       });
 
-      this.programe = new NormalProgramme({
-        ...props.programe,
+      this.programme = new NormalProgramme({
+        ...props.programme,
         dict: props.dict,
         handleSearch: this.grid.onQuery,
       });
     };
 
     init();
-    this.grid.getFilterParams = () => this.programe.filterItems.params;
+    this.grid.getFilterParams = () => this.programme.filterItems.params;
   }
 
   @observable public grid: MainSubStructureModel;
 
-  @observable public programe: NormalProgramme;
+  @observable public programme: NormalProgramme;
 }
 
 @observer
 export class SearchListStructure extends Component<{ store: SearchListModal; className?: string; style?: CSSProperties; }> {
   render(): ReactNode {
-    const { store: { programe, grid }, className = '', style = {}} = this.props;
+    const { store: { programme, grid }, className = '', style = {}} = this.props;
     return (
       <div
         className={`${styles.searchListStructure} ${className}`}
         style={style}
       >
         <div className={`${styles.pd16} ${styles.bgf} ${styles.filter}`}>
-          <NormalProgrammeComponent store={programe}/>
+          <NormalProgrammeComponent store={programme}/>
         </div>
         <div className={`${styles.flex1} ${styles.mt16}`}>
           <MainSubStructure store={grid}/>
