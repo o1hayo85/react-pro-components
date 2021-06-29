@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.9...v0.0.0) (2021-06-29)
 
+### Features
+
+- 按钮权限、空状态 ([a5481a9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a5481a9b886a14e25fe8d6d7f37e7da9bb7939c7))
+
 ## [0.1.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.8...v0.1.9) (2021-06-23)
 
 ### Features
