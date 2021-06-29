@@ -1,7 +1,7 @@
 import { Button, Tabs, Menu, Dropdown } from 'antd';
 import { observer } from 'mobx-react';
 import { nanoid } from 'nanoid';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../egGridStyle.less';
 import { EgGrid } from '../index';
 
@@ -11,7 +11,7 @@ const ButtonHeader = observer(
   ({
     store,
     store: {
-      buttons,
+      _buttons,
       foldModel: { fullScreen },
     },
   }) => {
@@ -20,7 +20,7 @@ const ButtonHeader = observer(
         className={styles.btnHeaderWrap}
         style={{ display: fullScreen ? 'none' : '' }}
       >
-        {buttons.map((el) => {
+        {_buttons.map((el) => {
           const { group } = el;
           return group ? (
             <Dropdown.Button
@@ -91,6 +91,11 @@ const ButtonHeader = observer(
 );
 
 export const MainSubStructure = observer(({ store }) => {
+  useEffect(() => {
+    if (store.pageId) {
+      store.getPermission();
+    }
+  }, []);
   const { subTablesModel: {
     activeTab, onClickTab, listModel,
   }, foldModel: {

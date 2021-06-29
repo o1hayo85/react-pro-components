@@ -5,7 +5,8 @@ import DataGrid from 'react-data-grid';
 import { DragAndDropHOC } from '../dragAndDropHOC';
 import { EgGridModel } from './egGridModel';
 import styles from './egGridStyle.less';
-import noRowUrl from './img/noRow.png';
+import empty from './img/empty.png';
+import searchEmpty from './img/searchEmpty.png';
 
 interface IProps {
   store?: EgGridModel;
@@ -39,6 +40,8 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     edgStyle,
     wrapClassName,
     showEmpty,
+    showNoSearchEmpty,
+    showNormalEmpty,
   } = store;
 
   return (
@@ -63,8 +66,8 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                   {showEmpty ? (
                     <>
                       <Empty
-                        description="暂无数据哦"
-                        image={noRowUrl}
+                        description="点击立即查询后，呈现数据！"
+                        image={searchEmpty}
                       />
                       <Button
                         onClick={onQuery}
@@ -72,8 +75,27 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                       >
                         点击查询
                       </Button>
+                      
                     </>
                   ) : null}
+
+                  {
+                    showNoSearchEmpty && (
+                      <Empty
+                        description="查询后，呈现数据！"
+                        image={searchEmpty}
+                      />
+                    )
+                  }
+
+                  {
+                    showNormalEmpty && (
+                      <Empty
+                        description="暂无数据哦！"
+                        image={empty}
+                      />
+                    )
+                  }
 
                 </div>
               );

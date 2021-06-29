@@ -71,6 +71,8 @@ export interface IEgGridModel {
   wrapClassName?: string;
   showEmpty?: boolean;
   forceRowClick?: boolean;
+  showNoSearchEmpty?: boolean;
+  showNormalEmpty?: boolean;
 }
 
 export class EgGridModel {
@@ -234,9 +236,19 @@ export class EgGridModel {
   @observable public wrapClassName = '';
 
   /**
-   * 显示空状态
+   * 显示空状态,有查询按钮
    */
   @observable public showEmpty = false;
+
+  /**
+   * 显示空状态，无查询按钮
+   */
+  @observable public showNoSearchEmpty = false;
+
+  /**
+   * 显示普通空态
+   */
+  @observable public showNormalEmpty = false;
 
   /**
    * 是否强制每次点击行内事件都触发rowClick事件

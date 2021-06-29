@@ -1,8 +1,9 @@
-import { set, observable, action } from 'mobx';
-import { ReactEventHandler } from 'react';
+import { set, observable, action, computed, toJS } from 'mobx';
+import { ReactEventHandler, CSSProperties } from 'react';
+import { request, BaseData } from '../../request';
 import { EgGridModel } from '../egGridModel';
-import { SubTableListModel } from './subTableListModel';
 import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
+import { SubTableListModel } from './subTableListModel';
 import type { ISubTableModel } from './subTableModel';
 
 interface IButton {
@@ -13,6 +14,8 @@ interface IButton {
   idx?: string | number;
   display?: (rows?) => boolean;
   group?: IButton[];
+  style?: CSSProperties;
+  isHide?: boolean; // 按钮组是否隐藏（整组按钮都没有权限时使用,不需要外部传参）
 }
 
 export interface IMainSubStructureModel {
@@ -29,6 +32,7 @@ export interface IMainSubStructureModel {
   history?: IObj;
   hiddenSubTable?: boolean;
   buttons?: IButton[];
+  pageId?: string;
 }
 
 export class MainSubStructureModel {
@@ -68,6 +72,75 @@ export class MainSubStructureModel {
    * 主表button，外部配置
    */
   @observable public buttons: IMainSubStructureModel['buttons'];
+
+  /**
+   * 页面pageId,请求按钮权限使用，外部配置，
+   */
+  @observable public pageId: string;
+
+  /**
+   * 按钮权限，从后台获取
+   */
+  @observable public permissionOfButton: string[];
+
+  @computed public get _buttons(): IMainSubStructureModel['buttons'] {
+    const { permissionOfButton, buttons } = this;
+    console.log('按钮权限配置', permissionOfButton);
+    if (!buttons.length) {
+      return buttons;
+    }
+
+    // 没有权限控制，则全部显示
+    if (!permissionOfButton) {
+      return buttons;
+    }
+    const btns = buttons
+      .filter((el) => {
+        const { permissionId, group } = el;
+        if (group) {
+          return true;
+        } // group留给下一步处理
+        if (!permissionId) {
+          return true;
+        } // 没有permissionId字段说明不受权限影响
+        return permissionOfButton.indexOf(permissionId) !== -1;
+      })
+      .map((button) => {
+        const { group, ...firstButton } = button;
+        if (!group) {
+          return button;
+        }
+        const _group = toJS(group);
+        _group.unshift(firstButton);
+        const arr = _group.filter((el) => !el.permissionId || permissionOfButton.indexOf(el.permissionId) !== -1); // 过滤掉没权限的
+        if (!arr.length) {
+          return {
+            ...button,
+            isHide: true,
+          };
+        } // 如果都没权限，返回isHide: true，留给下一步再过滤掉
+        const ret = arr.shift(); // 提出第一项为主按钮
+        if (!arr.length) {
+          return ret;
+        } // 如果剩余的是空数组，直接返回第一项作为按钮而不是按钮组
+        ret.group = arr; // 否则把剩余arr的装配个ret
+        return ret;
+      })
+      .filter((button) => !button.isHide); // 过滤掉false
+    return btns;
+  }
+
+  // 获取按钮权限
+  @observable public getPermission = async(): Promise<void> => {
+    const res = await request<BaseData<any>>({
+      url: `/api/iac/role/user/perms?resourceId=${this.pageId}`,
+      method: 'get',
+    });
+
+    this.permissionOfButton = res.data.map((el) => {
+      return el.replace(`${this.pageId}_`, '');
+    });
+  };
 
   @observable public foldModel = {
     tabPaneheight: 350,
