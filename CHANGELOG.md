@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.12...v0.0.0) (2021-07-02)
 
+### Features
+
+- 主表按钮行额外元素 ([b8fbefb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b8fbefb1f7eb8363d538e3e0b59a708e378c424e))
+
 ## [0.1.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.11...v0.1.12) (2021-07-02)
 
 ### Features
