@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 替换组件库样式 ([ebaec3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ebaec3dc92f03524b721c37d227eb411a92a67a1))
+- **utils:** 替换组件库样式 ([ec430c3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ec430c36c209b4de9f51cb8a0ce4af9b3b4881a2))
 
 ## [0.1.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.11...v0.1.12) (2021-07-02)
 

@@ -29,15 +29,46 @@
 
 .btnHeaderWrap {
   display: flex;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+  flex-wrap: wrap;
+  width: 100%;
 
   .headerButton {
     display: flex;
     align-items: center;
     height: 30px;
     margin-right: 8px;
+    margin-bottom: 10px;
     padding: 0 10px;
+    font-weight: 400;
     font-size: 12px;
+  }
+
+  .btnExtraleftWrap {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 8px 16px;
+    color: #2b2e3e;
+    font-size: 12px;
+    background: rgba(251, 7, 31, 0.05);
+    border-radius: 2px;
+  }
+  .warnIcon {
+    margin-right: 4px;
+    color: #fa6866;
+    font-size: 14px;
+  }
+
+  .linkBtn {
+    margin-left: 4px;
+    color: #1978ff;
+    text-decoration: underline;
+  }
+
+  .btnExtraRight {
+    flex: 1;
+    text-align: right;
   }
 }
 .headerButtonDropDown {

@@ -1,3 +1,4 @@
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Tabs, Menu, Dropdown } from 'antd';
 import { observer } from 'mobx-react';
 import { nanoid } from 'nanoid';
@@ -13,6 +14,8 @@ const ButtonHeader = observer(
     store: {
       _buttons,
       foldModel: { fullScreen },
+      btnExtraLeft,
+      btnExtraRight,
     },
   }) => {
     return (
@@ -85,6 +88,38 @@ const ButtonHeader = observer(
             </Button>
           );
         })}
+        {
+          btnExtraLeft && (
+            <div className={styles.btnExtraleftWrap}>
+              <InfoCircleOutlined
+                className={styles.warnIcon}
+                style={{ display: btnExtraLeft.isWarnIcon ? 'inline' : 'none' }}
+              />
+              {btnExtraLeft.text}
+              
+              {
+                btnExtraLeft.linkBtnText && (
+                  <a
+                    className={styles.linkBtn}
+
+                    onClick={btnExtraLeft.handleLinkBtnClick || null}
+                  >
+                    { btnExtraLeft.linkBtnText}
+                    
+                  </a>
+                )
+              }
+             
+            </div>
+          )
+        }
+        {
+          btnExtraRight && (
+            <div className={styles.btnExtraRight}>
+              {btnExtraRight}
+            </div>
+          )
+        }
       </div>
     );
   }
