@@ -3,6 +3,7 @@
 ## antd 主题的 less 变量(对应 pc 设计规范)
 
 ```
+// .egenie-secondary-content的css类为次重要按钮封装样式
 // 颜色
 const color = {
   // 主色调

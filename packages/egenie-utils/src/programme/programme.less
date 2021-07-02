@@ -1,8 +1,4 @@
-@import "~antd/lib/style/themes/default.less";
-
-@base-height: 38px;
 @footer-height: 65px;
-@filter-bg: #f3f3f3;
 
 .container {
   width: 100%;
@@ -20,7 +16,7 @@
       width: 14px;
       height: 36px;
       background: #fff;
-      border-radius: 0 2px 2px 0;
+      border-radius: 0 @egenie-border-radius-base @egenie-border-radius-base 0;
 
       svg {
         width: 14px;
@@ -30,7 +26,7 @@
     .ant-layout-content {
       display: flex;
       flex-direction: column;
-      padding-left: 16px;
+      padding-left: @egenie-spacing-md;
     }
   }
 
@@ -40,8 +36,8 @@
     justify-content: space-between;
     width: 100%;
     height: @footer-height;
-    padding: 0 16px;
-    border-top: 1px solid @border-color-base;
+    padding: 0 @egenie-spacing-md;
+    border-top: 1px solid @egenie-border-color-base;
   }
 
   .tableWrapper {
@@ -55,10 +51,10 @@
     align-items: center;
     width: 100%;
     max-width: 100%;
-    height: 32px;
-    margin-bottom: 16px;
+    height: @egenie-height-md;
+    margin-bottom: @egenie-spacing-md;
     overflow-x: auto;
-    border-radius: 4px 4px 0 0;
+    border-radius: @egenie-border-radius-base @egenie-border-radius-base 0 0;
 
     section {
       &.active {
@@ -74,17 +70,16 @@
       position: relative;
       display: flex;
       align-items: center;
-      min-width: 120px;
       max-width: 280px;
       height: 100%;
       margin-right: -1px;
-      padding-right: 36px;
-      padding-left: 18px;
-      color: #2b2e3e;
+      padding-right: @egenie-spacing-md;
+      padding-left: @egenie-spacing-md;
+      color: @egenie-heading-color;
       font-weight: 400;
-      font-size: 14px;
-      background: #f6f7f8;
-      border: 1px solid @border-color-base;
+      font-size: @egenie-font-size-md;
+      background: @egenie-list-heading-bg;
+      border: 1px solid @egenie-border-color-base;
       cursor: pointer;
       transition: all linear 0.3s;
 
@@ -97,14 +92,14 @@
         align-items: center;
         justify-content: center;
         width: 48px;
-        color: #999ba4;
+        color: @egenie-text-color-secondary;
       }
     }
 
     .emptyBorder {
       flex-grow: 1;
       height: 100%;
-      border-bottom: 1px solid @border-color-base;
+      border-bottom: 1px solid @egenie-border-color-base;
     }
   }
 }
@@ -113,21 +108,21 @@
   :global {
     .ant-select {
       width: 124px;
-      border: 1px solid #c5c3cb;
+      border: 1px solid @egenie-input-placeholder-color;
       border-radius: 2px;
     }
 
     .ant-table {
-      border: 1px solid @border-color-base;
+      border: 1px solid @egenie-border-color-base;
     }
   }
 
   .dropOverDownward td {
-    border-bottom: 2px dashed @primary-color !important;
+    border-bottom: 2px dashed @egenie-primary-color !important;
   }
 
   .dropOverUpward td {
-    border-top: 2px dashed @primary-color !important;
+    border-top: 2px dashed @egenie-primary-color !important;
   }
 }
 
@@ -136,26 +131,27 @@
   height: 100%;
 
   .filterItemContainer {
-    padding-bottom: 10px;
+    padding-bottom: @egenie-spacing-sm;
 
     :global {
       .ant-collapse-header {
         display: flex;
         align-items: center;
-        height: @base-height;
-        padding-left: 12px !important;
-        color: #2b2e3e;
-        font-size: 14px;
-        background: #f3f3f3;
-        border-radius: 2px;
+        height: @egenie-height-lg;
+        padding-left: @egenie-spacing-sm !important;
+        color: @egenie-heading-color;
+        font-weight: 500;
+        font-size: @egenie-font-size-md;
+        background: @egenie-combine-filter-bg;
+        border-radius: @egenie-border-radius-base;
 
         svg {
-          color: #999ba4;
+          color: @egenie-text-color-secondary;
         }
       }
 
       .ant-collapse-content-box {
-        padding: 12px 12px 0 !important;
+        padding: @egenie-spacing-sm @egenie-spacing-sm 0 !important;
       }
     }
   }
@@ -167,9 +163,9 @@
   right: -156px;
   z-index: 1;
   width: 140px;
-  padding: 20px 10px;
+  padding: @egenie-spacing-mdl @egenie-spacing-sm;
   background-color: #fff;
-  box-shadow: 0 2px 7px 0 rgba(178, 178, 178, 0.5);
+  box-shadow: @egenie-shadow;
 
   .scrollContent {
     > div {
@@ -182,7 +178,7 @@
         overflow-y: auto !important;
 
         .ant-anchor-ink {
-          left: 4px;
+          left: @egenie-spacing-xss;
         }
 
         .ant-anchor {
@@ -203,17 +199,15 @@
 
 .filterContent {
   position: relative;
-  height: calc(100% - @footer-height - 16px);
-  margin-top: 16px;
-  padding: 0 16px;
+  height: calc(100% - @footer-height - @egenie-spacing-md);
+  margin-top: @egenie-spacing-md;
+  padding: 0 @egenie-spacing-md;
   overflow-y: auto;
 
   :global {
     .filterLabel {
-      justify-content: center;
-      padding: 0 4px;
-      background-color: #f3f3f3;
-      border-radius: 2px 0 0 2px;
+      background-color: @egenie-combine-filter-bg;
+      border-radius: @egenie-border-radius-base 0 0 @egenie-border-radius-base;
     }
 
     .filterInput input,
@@ -222,12 +216,12 @@
     .filterCascader .ant-cascader-picker,
     .filterDateNormal > section,
     .filterTreeSelect .ant-select {
-      border-radius: 0 2px 2px 0 !important;
+      border-radius: 0 @egenie-border-radius-base @egenie-border-radius-base 0 !important;
     }
 
     .filterInputNumberGroup {
       .ant-select {
-        background: #f3f3f3;
+        background: @egenie-combine-filter-bg;
       }
 
       .ant-input-number {
@@ -254,15 +248,11 @@
     .filterDateSelect > header,
     .filterDateNormal > section,
     .filterTreeSelect .ant-select {
-      height: @base-height !important;
-    }
-
-    .filterInputAndSelect {
-      background: @filter-bg;
+      height: @egenie-height-lg !important;
     }
 
     .filterDateNormal .ant-picker .ant-picker-input input {
-      height: @base-height -2px !important;
+      height: @egenie-height-lg -2px !important;
     }
   }
 }

@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.11...v0.0.0) (2021-07-02)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.12...v0.0.0) (2021-07-02)
+
+### Features
+
+- **utils:** 替换组件库样式 ([ebaec3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ebaec3dc92f03524b721c37d227eb411a92a67a1))
+
+## [0.1.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.11...v0.1.12) (2021-07-02)
 
 ### Features
 

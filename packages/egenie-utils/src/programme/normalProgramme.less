@@ -1,14 +1,7 @@
-@base-height: 34px;
-
 .content {
   width: 100%;
 
   :global {
-    .filterLabel {
-      justify-content: flex-end;
-      padding-right: 4px;
-    }
-
     .ant-select {
       overflow: hidden;
     }
@@ -37,17 +30,13 @@
     .filterDateSelect > header,
     .filterDateNormal > section,
     .filterTreeSelect .ant-select {
-      height: @base-height !important;
+      height: @egenie-height-md !important;
     }
 
     .filterInputNumberGroup .ant-select {
-      border-top: 1px solid @border-color-base;
-      border-bottom: 1px solid @border-color-base;
-      border-left: 1px solid @border-color-base;
-    }
-
-    .filterDateNormal .ant-picker .ant-picker-input input {
-      height: @base-height -2px !important;
+      border-top: 1px solid @egenie-border-color-base;
+      border-bottom: 1px solid @egenie-border-color-base;
+      border-left: 1px solid @egenie-border-color-base;
     }
   }
 }

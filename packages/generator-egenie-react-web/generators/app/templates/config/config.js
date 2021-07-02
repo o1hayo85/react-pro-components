@@ -3,17 +3,7 @@ module.exports = function(utils) {
     babel: { include: [/egenie-utils/]},
     less: {
       moduleInclude: [/egenie-utils/],
-      theme: {
-        'blue-6': '#1978ff',
-        'font-size-base': '12px',
-        'border-color-base': '#e2e2e5',
-        'background-color-light': '#f6f7f8',
-        'table-selected-row-bg': '#d3e5ff',
-        'modal-footer-border-width': 0,
-        'card-shadow': '2px 2px 5px 0 rgba(230 225 225 0.5)',
-        'card-padding-base': '16px',
-        'zindex-message': 9999,
-      },
+      theme: require('egenie-config/lib/theme/index.js')(),
     },
     otherConfig: {
       optimization: utils.isProduction ? {

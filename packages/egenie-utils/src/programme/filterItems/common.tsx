@@ -213,6 +213,7 @@ export function FilterItemLabel({
     >
       <Typography.Title
         ellipsis={{ rows: 1 }}
+        level={3}
         title={label}
       >
         {
