@@ -216,7 +216,7 @@ export class MainSubStructureModel {
    * 设置主子表结构的主表gridModel，调用主表方式为：mainSubStructureModel.gridModel.xxxx
    */
   public setMainGridModel = action((grid, api) => {
-    const { onSort, onRowClick, onRefresh, handlePageChange, onShowSizeChange, onQuery } = this;
+    const { onSort, onRowClick, onRefresh, handlePageChange, onShowSizeChange, onQuery, onRowSelectChange } = this;
     this.gridModel = new EgGridModel({
       ...grid,
       columns: grid.getColumns?.(this) ?? grid.columns,
@@ -227,6 +227,7 @@ export class MainSubStructureModel {
         onRowClick, // 行点击
         onRefresh,
         onQuery,
+        onRowSelectChange,
       },
       parent: this,
     });
@@ -303,6 +304,13 @@ export class MainSubStructureModel {
     };
     this.queryDataAndSetState(data);
     this.api.onShowSizeChange?.(page, pageSize);
+  });
+
+  /**
+   * 主表onRowSelectChange
+   */
+  public onRowSelectChange = action((selectRows) => {
+    this.api.onRowSelectChange?.(selectRows);
   });
 
   /**
