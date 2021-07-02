@@ -34,7 +34,7 @@ const color = {
   'egenie-table-row-hover-bg': '#ededed',
 
   // 表格选中背景
-  'egenie-table-selected-row-bg': '#f3f8ff',
+  'egenie-table-selected-row-bg': '#bfd9ff',
 
   // 表格点击背景
   'egenie-table-click-bg-color': '#bfd9ff',

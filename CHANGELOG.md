@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.0.0) (2021-07-02)
 
+### Features
+
+- 表格支持 onRowSelectChange ([534d13a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/534d13a232ff8ca1a13824a8d2b903a4a31de303))
+
 ## [0.1.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.12...v0.1.13) (2021-07-02)
 
 ### Features
