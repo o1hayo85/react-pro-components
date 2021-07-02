@@ -5,3 +5,4 @@
 - [组件库](./packages/egenie-utils/README.md)
 - [react 的 web 端项目模版](./packages/generator-egenie-react-web/README.md)
 - [react 的 h5 端项目模版](./packages/generator-egenie-react-h5/README.md)
+- [重要更新](./importantChange.md)
