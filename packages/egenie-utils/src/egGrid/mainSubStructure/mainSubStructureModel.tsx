@@ -1,5 +1,5 @@
 import { set, observable, action, computed, toJS } from 'mobx';
-import { ReactEventHandler, CSSProperties } from 'react';
+import { ReactEventHandler, CSSProperties, ReactNode } from 'react';
 import { request, BaseData } from '../../request';
 import { EgGridModel } from '../egGridModel';
 import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
@@ -18,6 +18,13 @@ interface IButton {
   isHide?: boolean; // 按钮组是否隐藏（整组按钮都没有权限时使用,不需要外部传参）
 }
 
+export interface IBtnExtraLeft {
+  isWarnIcon: boolean; // 警告icon
+  text: ReactNode; // 文字说明
+  linkBtnText?: string; // 按钮
+  handleLinkBtnClick?: (event: ReactEventHandler) => void; // 按钮点击事件
+}
+
 export interface IMainSubStructureModel {
   grid: IEgGridModel;
   api: IEgGridApi;
@@ -32,6 +39,8 @@ export interface IMainSubStructureModel {
   history?: IObj;
   hiddenSubTable?: boolean;
   buttons?: IButton[];
+  btnExtraLeft?: IBtnExtraLeft;
+  btnExtraRight?: ReactNode;
   pageId?: string;
 }
 
@@ -72,6 +81,16 @@ export class MainSubStructureModel {
    * 主表button，外部配置
    */
   @observable public buttons: IMainSubStructureModel['buttons'];
+
+  /**
+   * 主表button 左侧警告提示，跟在按钮后面，外部配置
+   */
+  @observable public btnExtraLeft: IMainSubStructureModel['btnExtraLeft'];
+
+  /**
+   * 主表button 右侧信息展示，位置在按钮最后一行右侧，外部配置
+   */
+  @observable public btnExtraRight: IMainSubStructureModel['btnExtraRight'];
 
   /**
    * 页面pageId,请求按钮权限使用，外部配置，
