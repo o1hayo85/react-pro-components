@@ -1,14 +1,24 @@
+import _ from 'lodash';
 import { set, observable, action, toJS, computed } from 'mobx';
 import React from 'react';
-import type { Column, HeaderRendererProps, SortDirection } from 'react-data-grid';
+import type { Column, HeaderRendererProps, SortDirection, SortColumn } from 'react-data-grid';
 import { SelectColumn } from 'react-data-grid';
+import { ColumnSettingModel } from './columnSetting';
 import { DraggableHeaderRenderer } from './headerRenderers/draggableHeaderRenderer';
+import { getUser, getColumnsConfig, saveColumnsConfig, cache } from './request';
+
+declare global {
+  interface Window {
+    tenantUserName: string;
+  }
+}
 
 export type StrOrNum = number | string;
 
 export interface EnhanceColumn<TRow, TSummaryRow = unknown> extends Column<TRow> {
   sidx?: string;
   ejlHidden?: boolean;
+  nameText?: string; // 如果表头是自定义了，要配置这个字段，这个字段用来做表格列拖拽设置的文字显示
 }
 
 export interface IObj {
@@ -73,6 +83,8 @@ export interface IEgGridModel {
   forceRowClick?: boolean;
   showNoSearchEmpty?: boolean;
   showNormalEmpty?: boolean;
+  setColumnsDisplay?: boolean;
+  gridIdForColumnConfig?: string;
 }
 
 export class EgGridModel {
@@ -128,9 +140,14 @@ export class EgGridModel {
   @observable public selectedIds = new Set<React.Key>([]);
 
   /**
-   * 排序列的字段
+   * rdg36排序列的字段
    */
   @observable public sortColumnKey = '';
+
+  /**
+   * rdg49排序列的字段，改为了数组
+   */
+  @observable public sortColumns: SortColumn[] = [];
 
   /**
    * 是否本地排序
@@ -140,7 +157,7 @@ export class EgGridModel {
   /**
    * 排序方向
    */
-  @observable public sortDirection: SortDirection = 'NONE';
+  @observable public sortDirection: SortDirection = 'ASC';
 
   /**
    * 分页器大小
@@ -236,24 +253,34 @@ export class EgGridModel {
   @observable public wrapClassName = '';
 
   /**
-   * 显示空状态,有查询按钮
+   * 显示空状态
    */
   @observable public showEmpty = false;
 
   /**
-   * 显示空状态，无查询按钮
+   * 是否强制每次点击行内事件都触发rowClick事件
    */
   @observable public showNoSearchEmpty = false;
+  @observable public forceRowClick = false;
+
+  @observable public columnSettingModel: ColumnSettingModel;
 
   /**
    * 显示普通空态
    */
   @observable public showNormalEmpty = false;
+  @observable public gridIdForColumnConfig = '';
 
   /**
    * 是否强制每次点击行内事件都触发rowClick事件
    */
-  @observable public forceRowClick = false;
+  @observable public setColumnsDisplay = false;
+
+  @observable public user = '';
+
+  @computed public get cacheKeyForColumnsConfig(): string {
+    return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
+  }
 
   /**
    * 获取的选择的行数据
@@ -283,6 +310,34 @@ export class EgGridModel {
   }
 
   /**
+   * 组合序号列之后的列数据，渲染用，外部一般不用
+   */
+  @computed public get _columns() {
+    const { columns = [], showCheckBox = true } = this;
+    if (!columns.length) {
+      return columns;
+    }
+    const ret = (showCheckBox ? [SelectColumn] : []).concat([
+      {
+        key: 'gridOrderNo',
+        width: 50,
+        name: '序号',
+        frozen: true,
+        sortable: false,
+        ejlHidden: false,
+        formatter: ({ row }) => (
+          <div style={{ textAlign: 'left' }}>
+            {row.gridOrderNo}
+          </div>
+        ),
+      },
+      ...columns,
+    ]).filter((el: EnhanceColumn<IObj>) => !el.ejlHidden);
+
+    return ret;
+  }
+
+  /**
    * 选择行的数量
    */
   @computed public get selectedRowsLength(): number {
@@ -291,17 +346,33 @@ export class EgGridModel {
   }
 
   /**
+   * 获取排序方式
+   */
+  @computed public get sortType() {
+    const { sortColumns } = this;
+    if (!sortColumns.length) {
+      return {
+        sord: '',
+        sidx: '',
+      };
+    }
+    const { columnKey, direction } = sortColumns[0];
+    return {
+      sord: direction,
+      sidx: columnKey,
+    };
+  }
+
+  /**
    * 查询表格数据参数
    */
   @computed public get queryParam(): IEgGridModel['queryParam'] {
-    const { pageSize, current, sortDirection, sortColumnKey } = this;
+    const { pageSize, current } = this;
     const filterParams: IObj = typeof (this.getFilterParams) === 'function' ? { filterParams: this.getFilterParams() } : {};
     return Object.assign(filterParams, {
       pageSize,
       page: current,
-      sord: sortDirection === 'NONE' ? '' : sortDirection,
-      sidx: sortColumnKey,
-    });
+    }, this.sortType);
   }
 
   public defaultRows: IObj[];
@@ -311,9 +382,10 @@ export class EgGridModel {
   @observable private cursorIdx: StrOrNum = '';
 
   constructor({ ...options }: IEgGridModel) {
-    // const { columns, showCheckBox = true } = options;
-    options.columns = this.prevHandleColumns(options);
+    // FIXME: 注意执行顺序，务必设置store在先，实例化滞后
     set(this, { ...(options || {}) });
+    this.columnSettingModel = new ColumnSettingModel({ parent: this });
+    this.getUser();
   }
 
   public rowKeyGetter = (row: IObj) => {
@@ -430,7 +502,7 @@ export class EgGridModel {
    * 组装拖拽列， TODO: 配置draggble参数
    */
   public draggableColumns = () => {
-    const { columns } = this;
+    const { _columns, handleColumnsReorder } = this;
     const HeaderRenderer = (props: HeaderRendererProps<IObj>) => {
       return (
         <DraggableHeaderRenderer
@@ -440,21 +512,7 @@ export class EgGridModel {
       );
     };
 
-    const handleColumnsReorder = (sourceKey: string, targetKey: string) => {
-      const sourceColumnIndex = columns.findIndex((c) => c.key === sourceKey);
-      const targetColumnIndex = columns.findIndex((c) => c.key === targetKey);
-      const reorderedColumns = [...columns];
-
-      reorderedColumns.splice(
-        targetColumnIndex,
-        0,
-        reorderedColumns.splice(sourceColumnIndex, 1)[0]
-      );
-
-      this.columns = reorderedColumns;
-    };
-
-    return columns.map((c) => {
+    return _columns.map((c) => {
       const key = c.key;
       if (key === 'select-row' || key === 'gridOrderNo' || key === this.primaryKeyField || c.frozen) {
         return c;
@@ -467,53 +525,106 @@ export class EgGridModel {
   };
 
   /**
+   * 交换顺序之后的回调
+   */
+  public handleColumnsReorder = action((sourceKey: string, targetKey: string) => {
+    const { columns, columnSettingModel: { pannelItems }} = this;
+    const sourceColumnIndex = columns.findIndex((c) => c.key === sourceKey);
+    const targetColumnIndex = columns.findIndex((c) => c.key === targetKey);
+    const pannelSourceIndex = pannelItems.findIndex((c) => c.key === sourceKey);
+    const pannelTargetIndex = pannelItems.findIndex((c) => c.key === targetKey);
+    const reorderedColumns = [...columns];
+
+    pannelItems.splice(
+      pannelTargetIndex,
+      0,
+      pannelItems.splice(pannelSourceIndex, 1)[0]
+    );
+
+    reorderedColumns.splice(
+      targetColumnIndex,
+      0,
+      reorderedColumns.splice(sourceColumnIndex, 1)[0]
+    );
+    console.log(toJS(reorderedColumns), '交换顺序');
+    this.columns = reorderedColumns;
+    const storage = this.getStorageParam(_.cloneDeep(reorderedColumns));
+    this.saveColumnsConfig(storage);
+  });
+
+  /**
+   * 拖拽列大小之后的回调
+   */
+  public onColumnResize = action(_.debounce(((index, width) => {
+    const _columns = _.cloneDeep(this._columns);
+    const columns = this.columns;
+    const key = _columns[index].key;
+    const item = columns.find((v) => v.key === key);
+    item.width = width;
+
+    const storage = this.getStorageParam(_.cloneDeep(columns));
+    this.saveColumnsConfig(storage);
+  }), 500));
+
+  /**
    * 本地排序
    */
-  public localSort = action((sortColumn: string, sortDirection: SortDirection) => {
-    console.log(sortColumn, sortDirection, '排序字段和方式');
-    this.sortColumnKey = sortColumn;
-    this.sortDirection = sortDirection;
-    if (sortDirection === 'ASC') {
+  public localSort = action((sortColumns: SortColumn[]) => {
+    console.log(sortColumns, '排序字段和方式');
+    this.sortColumns = sortColumns;
+    if (!sortColumns.length) {
+      this.rows = toJS(this.defaultRows);
+      return;
+    }
+    const { columnKey, direction } = sortColumns[0];
+    this.sortColumnKey = columnKey;
+    this.sortDirection = direction;
+    if (direction === 'ASC') {
       this.defaultRows = toJS(this.rows).map(({ ...el }) => {
         return { ...el };
       });
     }
 
     const comparer = (a, b) => {
-      const res = Number(a[sortColumn]) - Number(b[sortColumn]);
+      const res = Number(a[columnKey]) - Number(b[columnKey]);
       if (Number.isNaN(res)) {
-        a = a[sortColumn] ? `${a[sortColumn]}` : '';
-        b = b[sortColumn] ? `${b[sortColumn]}` : '';
+        a = a[columnKey] ? `${a[columnKey]}` : '';
+        b = b[columnKey] ? `${b[columnKey]}` : '';
       }
       const ret = Number.isNaN(res) ? a.toLowerCase().localeCompare(b.toLowerCase()) : res;
-      if (sortDirection === 'ASC') {
+      if (direction === 'ASC') {
         return ret;
       }
-      if (sortDirection === 'DESC') {
+      if (direction === 'DESC') {
         return -ret;
       }
     };
-
-    const rows = sortDirection === 'NONE' ? toJS(this.defaultRows) : this.rows.sort(comparer);
-
-    this.rows = rows;
+    this.rows = this.rows.sort(comparer);
   });
 
   /**
    * 远端排序
    */
-  public remoteSort = action((sortColumn, sortDirection) => {
-    this.sortColumnKey = sortColumn;
-    this.sortDirection = sortDirection;
-    const col = this.columns.find((v) => v.key === sortColumn);
-    const realSortColumn = col && col.sidx ? col.sidx : sortColumn;
-    const param = sortDirection === 'NONE' ? {
-      sidx: '',
-      sord: '',
-    } : {
-      sidx: realSortColumn,
-      sord: sortDirection.toLowerCase(),
-    };
+  public remoteSort = action((sortColumns: SortColumn[]) => {
+    console.log('远端排序sortColumns', sortColumns);
+    let param: { sidx?: string; sord?: string; } = {};
+    this.sortColumns = sortColumns;
+    if (sortColumns.length) {
+      const { columnKey, direction } = sortColumns[0];
+      this.sortColumnKey = columnKey;
+      this.sortDirection = direction;
+      const col = this.columns.find((v) => v.key === columnKey);
+      const realSortColumn = col && col.sidx ? col.sidx : columnKey;
+      param = {
+        sidx: realSortColumn,
+        sord: direction.toLowerCase(),
+      };
+    } else {
+      param = {
+        sidx: '',
+        sord: '',
+      };
+    }
     this.api.onSort && this.api.onSort(param);
   });
 
@@ -577,32 +688,91 @@ export class EgGridModel {
     });
   });
 
-  /**
-   * 预处理列配置，组合序号列
-   */
-  public prevHandleColumns = (options) => {
-    const { columns = [], showCheckBox = true } = options;
-    if (!columns.length) {
-      return columns;
-    }
-    const ret = (showCheckBox ? [SelectColumn] : []).concat([
-      {
-        key: 'gridOrderNo',
-        width: 50,
-        name: '序号',
-        frozen: true,
-        sortable: false,
-        ejlHidden: false,
-        formatter: ({ row }) => (
-          <div style={{ textAlign: 'left' }}>
-            {row.gridOrderNo}
-          </div>
-        ),
-      },
-      ...columns,
-    ]);
+  // 获取当前租户登录账号
+  public getUser = action(() => {
+    Promise.resolve(getUser()).then((v: { username?: string;[key: string]: any; }) => {
+      const { username } = v;
+      this.user = username;
+    })
+      .then(this.getColumnsConfig);
+  });
 
-    return ret;
+  public getColumnsConfig = action(() => {
+    getColumnsConfig(this.cacheKeyForColumnsConfig).then(
+      action((v: { data?: string; }) => {
+        console.log('获取列配置', v);
+        const copyColumns = this.columns.slice();
+        const res = v.data;
+        cache.setStorage({
+          cacheKey: this.cacheKeyForColumnsConfig,
+          cacheValue: res || JSON.stringify({}),
+        });
+        if (!res) {
+          return;
+        }
+        const storage = JSON.parse(res);
+        if (!storage || (storage && !storage.length)) {
+          return;
+        }
+
+        // 如果被删过某一列，不再操作，直接返回原始列
+        if (storage.length > copyColumns.length) {
+          return;
+        }
+
+        this.updateColumns(storage);
+      })
+    );
+  });
+
+  public getStorageParam = (columns: ColumnType) => {
+    const storage = [];
+    for (let k = 0, len = columns.length; k < len; k++) {
+      const { width, ejlHidden, frozen, key, name } = columns[k];
+      storage.push({
+        key,
+        frozen: frozen || false,
+        ejlHidden: ejlHidden || false,
+        ...(width ? { width: Math.floor(Number(width)) } : {}),
+      });
+    }
+    return storage;
   };
+
+  public saveColumnsConfig = action((config) => {
+    if (this.setColumnsDisplay) {
+      const data = {
+        cacheKey: this.cacheKeyForColumnsConfig,
+        cacheValue: JSON.stringify(config),
+      };
+      saveColumnsConfig(data).then((v: { status?: string ; }) => {
+        if (v.status === 'Successful') {
+          console.log('保存成功！');
+        }
+      });
+    }
+  });
+
+  public updateColumns = action((columnsConfig) => {
+    console.log('🚀 ~ file: egGridModel.tsx ~ line 698 ~ EgGridModel ~ updateColumns=action ~ columnsConfig', columnsConfig);
+    const { columns } = this;
+    const tempColumns = [];
+    const columnsMap = new Map();
+    for (let i = 0; i < columns.length; i++) {
+      const { key } = columns[i];
+      columnsMap.set(key, columns[i]);
+    }
+    for (let i = 0; i < columnsConfig.length; i++) {
+      const { key, ejlHidden, width } = columnsConfig[i];
+      const item = columnsMap.get(key);
+      item.ejlHidden = ejlHidden;
+      if (width) {
+        item.width = width;
+      }
+      tempColumns.push(item);
+    }
+    this.columns = tempColumns;
+    this.columnSettingModel.pannelItems = _.cloneDeep(tempColumns);
+  });
 }
 

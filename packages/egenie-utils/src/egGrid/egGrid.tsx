@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import DataGrid from 'react-data-grid';
 import { DragAndDropHOC } from '../dragAndDropHOC';
+import { ColumnSettingModal } from './columnSetting';
 import { EgGridModel } from './egGridModel';
 import styles from './egGridStyle.less';
 import empty from './img/empty.png';
@@ -29,7 +30,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     selectedIds,
     onSelectedRowsChange,
     onQuery,
-    sortColumnKey,
+    sortColumns,
     sortByLocal,
     localSort,
     remoteSort,
@@ -42,6 +43,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     showEmpty,
     showNoSearchEmpty,
     showNormalEmpty,
+    onColumnResize,
   } = store;
 
   return (
@@ -75,7 +77,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                       >
                         点击查询
                       </Button>
-                      
+
                     </>
                   ) : null}
 
@@ -101,17 +103,17 @@ export const EgGrid = observer(({ store, children }: IProps) => {
               );
             }}
             headerRowHeight={headerRowHeight}
+            onColumnResize={onColumnResize}
             onRowClick={onRowClick}
             onScroll={onScroll}
             onSelectedRowsChange={onSelectedRowsChange}
-            onSort={sortByLocal ? localSort : remoteSort}
+            onSortColumnsChange={sortByLocal ? localSort : remoteSort}
             rowClass={(row) => (row[primaryKeyField] === primaryKeyFieldValue ? `${styles.edgHightCursorRow}` : '')}
             rowHeight={rowHeight}
             rowKeyGetter={rowKeyGetter}
             rows={_rows}
             selectedRows={selectedIds}
-            sortColumn={sortColumnKey}
-            sortDirection={sortDirection}
+            sortColumns={sortColumns}
             style={{ ...edgStyle }}
           />
         </DragAndDropHOC>
@@ -150,7 +152,10 @@ const PaginationOfPager = observer(({ store, children }: IProps) => {
 });
 
 const Pager = observer(({ store, children }: IProps) => {
-  const { selectedRowsLength, resetAllSelectedRows, showSelectedTotal, showReset, showPagination, showRefresh, onRefresh } = store;
+  const { selectedRowsLength, resetAllSelectedRows, showSelectedTotal, showReset, showPagination, showRefresh, onRefresh,
+    columnSettingModel, columnSettingModel: {
+      openColumnSetting,
+    }} = store;
   return (
     <div className={`${styles.edgPagerWrapper}`}>
       { showSelectedTotal ? (
@@ -183,8 +188,15 @@ const Pager = observer(({ store, children }: IProps) => {
             刷新
           </span>
         )}
+        <span
+          className={styles.refreshWrap}
+          onClick={openColumnSetting}
+        >
+          <i className={`${styles.edgBlue} icon-setup`}/>
+          设置
+        </span>
       </div>
-
+      <ColumnSettingModal store={columnSettingModel}/>
     </div>
   );
 });
