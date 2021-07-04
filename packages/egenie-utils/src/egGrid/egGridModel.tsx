@@ -765,11 +765,13 @@ export class EgGridModel {
     for (let i = 0; i < columnsConfig.length; i++) {
       const { key, ejlHidden, width } = columnsConfig[i];
       const item = columnsMap.get(key);
-      item.ejlHidden = ejlHidden;
+      if (item) {
+         item.ejlHidden = ejlHidden;
       if (width) {
         item.width = width;
       }
       tempColumns.push(item);
+     }
     }
     this.columns = tempColumns;
     this.columnSettingModel.pannelItems = _.cloneDeep(tempColumns);
