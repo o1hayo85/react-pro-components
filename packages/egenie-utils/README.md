@@ -4,6 +4,10 @@
 
 ```
 // .egenie-secondary-content的css类为次重要按钮封装样式
+// h1、h2、h3为主要的标题。默认字体行高都已经设置
+// 需要字体设置行高的建议用Typography.Text、Typography.Title、Typography.Paragraph
+// PageHeader能简单实现页面头部的导航
+// Statistic简单统计值(能满足需求就可以用)
 // 颜色
 const color = {
   // 主色调
@@ -40,7 +44,7 @@ const color = {
   'egenie-table-row-hover-bg': '#ededed',
 
   // 表格选中背景
-  'egenie-table-selected-row-bg': '#f3f8ff',
+  'egenie-table-selected-row-bg': '#bfd9ff',
 
   // 表格点击背景
   'egenie-table-click-bg-color': '#bfd9ff',
