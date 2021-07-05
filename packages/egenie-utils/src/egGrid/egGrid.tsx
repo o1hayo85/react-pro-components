@@ -153,6 +153,7 @@ const PaginationOfPager = observer(({ store, children }: IProps) => {
 
 const Pager = observer(({ store, children }: IProps) => {
   const { selectedRowsLength, resetAllSelectedRows, showSelectedTotal, showReset, showPagination, showRefresh, onRefresh,
+    setColumnsDisplay,
     columnSettingModel, columnSettingModel: {
       openColumnSetting,
     }} = store;
@@ -188,13 +189,15 @@ const Pager = observer(({ store, children }: IProps) => {
             刷新
           </span>
         )}
-        <span
-          className={styles.refreshWrap}
-          onClick={openColumnSetting}
-        >
-          <i className={`${styles.edgBlue} icon-setup`}/>
-          设置
-        </span>
+        { setColumnsDisplay && (
+          <span
+            className={styles.refreshWrap}
+            onClick={openColumnSetting}
+          >
+            <i className={`${styles.edgBlue} icon-setup`}/>
+            设置
+          </span>
+        )}
       </div>
       <ColumnSettingModal store={columnSettingModel}/>
     </div>
