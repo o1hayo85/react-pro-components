@@ -690,11 +690,13 @@ export class EgGridModel {
 
   // 获取当前租户登录账号
   public getUser = action(() => {
-    Promise.resolve(getUser()).then((v: { username?: string;[key: string]: any; }) => {
-      const { username } = v;
-      this.user = username;
-    })
-      .then(this.getColumnsConfig);
+    if (this.setColumnsDisplay) {
+      Promise.resolve(getUser()).then((v: { username?: string;[key: string]: any; }) => {
+        const { username } = v;
+        this.user = username;
+      })
+        .then(this.getColumnsConfig);
+    }
   });
 
   public getColumnsConfig = action(() => {
