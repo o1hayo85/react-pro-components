@@ -1,4 +1,23 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.17...v0.0.0) (2021-07-04)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.18...v0.0.0) (2021-07-05)
+
+### Bug Fixes
+
+- 修复设置列滚动条 ([647e196](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/647e196a56c069bc0aee033f9613e2e569806510))
+
+## [0.1.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.14...v0.1.15) (2021-07-02)
+
+### Features
+
+- 表格支持 onRowSelectChange ([534d13a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/534d13a232ff8ca1a13824a8d2b903a4a31de303))
+- **utils:** 更新查询方案删除间距 ([fd4eb83](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fd4eb8305b40c7921218358ee2a8b6c6d6530158))
+
+## [0.1.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.1.14) (2021-07-02)
+
+### Features
+
+- **utils:** 替换组件库样式 ([ec430c3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ec430c36c209b4de9f51cb8a0ce4af9b3b4881a2))
+
+## [0.1.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.17...v0.1.18) (2021-07-04)
 
 ### Bug Fixes
 
@@ -11,11 +30,23 @@
 - 更新表格版本 ([7477915](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/747791502cf8641e1337e4f2c0e060f9425321c2))
 - 更新表格保存 ([28b383e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/28b383ed74575d69fa037ce8bb187b5f16b30b59))
 
-## [0.1.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.1.16) (2021-07-02)
+## [0.1.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.15...v0.1.16) (2021-07-02)
 
 ### Features
 
 - 表格支持 onRowSelectChange ([0549660](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0549660ddecc42ab0f1589fa8a4d8f32ed330054))
+
+## [0.1.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.14...v0.1.15) (2021-07-02)
+
+### Features
+
+- 表格支持 onRowSelectChange ([534d13a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/534d13a232ff8ca1a13824a8d2b903a4a31de303))
+
+## [0.1.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.1.14) (2021-07-02)
+
+### Features
+
+- **utils:** 替换组件库样式 ([ec430c3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ec430c36c209b4de9f51cb8a0ce4af9b3b4881a2))
 
 ## [0.1.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.12...v0.1.13) (2021-07-02)
 
