@@ -2,6 +2,7 @@
 
 ### Features
 
+- 表格支持 onRowSelectChange ([534d13a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/534d13a232ff8ca1a13824a8d2b903a4a31de303))
 - **utils:** 更新查询方案删除间距 ([fd4eb83](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fd4eb8305b40c7921218358ee2a8b6c6d6530158))
 
 ## [0.1.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.1.14) (2021-07-02)
