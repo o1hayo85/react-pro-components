@@ -12,6 +12,7 @@
   height: 100%;
 
   :global {
+
     // 控制spin包裹容器的样式
     .ant-spin-nested-loading {
       display: flex;
@@ -89,6 +90,7 @@
   height: 100%;
 
   :global {
+
     // 控制spin包裹容器的样式
     .ant-spin-nested-loading {
       display: flex;
@@ -156,6 +158,10 @@
     .rdg-header-row {
       color: @clblack;
     }
+
+    .rdg-cell-resizable::after {
+      border-right: 1px solid #eee;
+    }
   }
 
   .edgf14 {
@@ -197,7 +203,7 @@
         box-shadow: none !important;
       }
 
-      .rdg-checkbox-input:checked + .rdg-checkbox {
+      .rdg-checkbox-input:checked+.rdg-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;

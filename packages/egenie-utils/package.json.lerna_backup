@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.1.19",
+  "version": "0.1.16",
   "description": "",
   "license": "MIT",
   "main": "index.ts",
@@ -36,5 +36,9 @@
     "react-sortable-hoc": "^2.0.0",
     "typedoc": "^0.20.36",
     "typescript": "4.2.4"
+  },
+  "scripts": {
+    "test": "egenie-test react",
+    "doc": "typedoc --includeVersion"
   }
 }
