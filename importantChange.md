@@ -2,16 +2,16 @@
 
 - 升级步骤
 
-- 第一步更新 egenie-utils 包
+- 第一步更新包
 
 ```shell
-yarn upgrade egenie-utils@latest
+yarn upgrade egenie-utils egenie-config --latest
 ```
 
 - 第二步更新 config/config.js 文件
 
 ```shell
-# 将less下面的theme的value替换为require('egenie-config/lib/theme/index.js')()
+# 将less下面的theme的值替换为require('egenie-config/lib/theme/index.js')()
 ```
 
 - 第三步更新 src/global.less 文件
