@@ -1,14 +1,9 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.20...v0.0.0) (2021-07-05)
-
-### Bug Fixes
-
-- 修复表格列设置配置 ([a1d2185](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a1d2185c79e853fe5c42928e835a51ec1fa96cdc))
-
-## [0.1.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.18...v0.1.20) (2021-07-05)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.18...v0.0.0) (2021-07-06)
 
 ### Bug Fixes
 
 - 修复设置列滚动条 ([647e196](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/647e196a56c069bc0aee033f9613e2e569806510))
+- 修复表格列设置配置 ([a1d2185](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a1d2185c79e853fe5c42928e835a51ec1fa96cdc))
 
 ## [0.1.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.14...v0.1.15) (2021-07-02)
 
