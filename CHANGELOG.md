@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 更改查询项标题 font-weight ([71bf814](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/71bf8142ecd29c12c258c4f7573b33246abd8179))
+- **utils:** 更改查询项标题 font-weight ([873da5e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/873da5e15159f7b860d4758f7c8ea1957f4c6fd0))
 
 ## [0.1.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.22...v0.1.23) (2021-07-06)
 
