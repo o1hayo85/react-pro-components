@@ -37,6 +37,9 @@ export interface IEgGridApi {
   onQuery?: (params?) => Promise<unknown>;
 }
 
+export type TSummaryRows = string[] | IObj[] | ((rows?: IObj[]) => IObj[]);
+
+export type TSumColumns = string[] | Array<{ key: string; name: string; rule?: (arg1?) => unknown; tag?: 'price' | 'number' ; decimal?: number ; }>;
 export interface IEgGridModel {
   columns: Array<EnhanceColumn<IObj>>;
   getColumns?: (topClass: IObj, selfClass: IObj) => Array<EnhanceColumn<IObj>>;
@@ -59,6 +62,7 @@ export interface IEgGridModel {
   total?: number;
 
   showSelectedTotal?: boolean;
+  showPagination?: boolean;
   showReset?: boolean;
   showPager?: boolean;
   showRefresh?: boolean;
@@ -85,6 +89,10 @@ export interface IEgGridModel {
   showNormalEmpty?: boolean;
   setColumnsDisplay?: boolean;
   gridIdForColumnConfig?: string;
+  summaryRows?: TSummaryRows ;
+  sumColumns?: TSumColumns;
+  onSelectSum?: boolean;
+  searchReduce?: boolean;
 }
 
 export class EgGridModel {
@@ -257,10 +265,11 @@ export class EgGridModel {
    */
   @observable public showEmpty = false;
 
+  @observable public showNoSearchEmpty = false;
+
   /**
    * 是否强制每次点击行内事件都触发rowClick事件
    */
-  @observable public showNoSearchEmpty = false;
   @observable public forceRowClick = false;
 
   @observable public columnSettingModel: ColumnSettingModel;
@@ -269,21 +278,48 @@ export class EgGridModel {
    * 显示普通空态
    */
   @observable public showNormalEmpty = false;
+
+  /**
+   * 表格保存列必须要配置
+   */
   @observable public gridIdForColumnConfig = '';
 
   /**
-   * 是否强制每次点击行内事件都触发rowClick事件
+   * 是否允许设置列显隐
    */
   @observable public setColumnsDisplay = false;
 
+  /**
+   * 当前用户的username,保存列配置时使用
+   */
   @observable public user = '';
+
+  /**
+   * 第一种行汇总方式，配置此字段将会在表格行的尾部增加一条row数据
+   */
+  @observable public summaryRows: TSummaryRows;
+
+  /**
+   * 第二种行汇总方式，配置此字段将会在表格的pager部分显示汇总信息
+   */
+  @observable public sumColumns: TSumColumns = [];
+
+  /**
+   * 第二种行汇总方式使用，是否勾选汇总，默认true, 设为false将会统计本页数据
+   */
+  @observable public onSelectSum = true;
+
+  /**
+   * 第二种行汇总方式使用，是否每次查询表格数据之后调用接口请求数据，默认false
+   */
+  @observable public searchReduce = false;
 
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
   }
 
   /**
-   * 获取的选择的行数据
+   * 获取选择的行数据
    */
   @computed public get selectRows() {
     const { selectedIds, rows, primaryKeyField } = this;
@@ -387,6 +423,27 @@ export class EgGridModel {
     this.columnSettingModel = new ColumnSettingModel({ parent: this });
     this.getUser();
   }
+
+  public getSummaryRows = () => {
+    const { rows, summaryRows } = this;
+    let summaryRowArray = [];
+    if (typeof summaryRows === 'function') {
+      summaryRowArray = summaryRows(rows);
+    }
+    if (Array.isArray(summaryRows)) {
+      summaryRowArray = [
+        (summaryRows as string[]).reduce((pre, cur: string) => {
+          return {
+            [cur]: rows.reduce((rPre, rCur) => {
+              return rPre + (Number(rCur[cur]) || 0);
+            }, 0),
+            ...pre,
+          };
+        }, {}),
+      ];
+    }
+    return summaryRowArray.length ? summaryRowArray : null;
+  };
 
   public rowKeyGetter = (row: IObj) => {
     return row[this.primaryKeyField];
@@ -768,12 +825,12 @@ export class EgGridModel {
       const { key, ejlHidden, width } = columnsConfig[i];
       const item = columnsMap.get(key);
       if (item) {
-         item.ejlHidden = ejlHidden;
-      if (width) {
-        item.width = width;
+        item.ejlHidden = ejlHidden;
+        if (width) {
+          item.width = width;
+        }
+        tempColumns.push(item);
       }
-      tempColumns.push(item);
-     }
     }
     this.columns = tempColumns;
     this.columnSettingModel.pannelItems = _.cloneDeep(tempColumns);

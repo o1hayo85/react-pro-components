@@ -44,6 +44,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     showNoSearchEmpty,
     showNormalEmpty,
     onColumnResize,
+    getSummaryRows,
   } = store;
 
   return (
@@ -115,6 +116,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
             selectedRows={selectedIds}
             sortColumns={sortColumns}
             style={{ ...edgStyle }}
+            summaryRows={getSummaryRows()}
           />
         </DragAndDropHOC>
         {showPager && <Pager store={store}/>}
@@ -153,29 +155,94 @@ const PaginationOfPager = observer(({ store, children }: IProps) => {
 
 const Pager = observer(({ store, children }: IProps) => {
   const { selectedRowsLength, resetAllSelectedRows, showSelectedTotal, showReset, showPagination, showRefresh, onRefresh,
-    setColumnsDisplay,
+    setColumnsDisplay, sumColumns, onSelectSum, searchReduce, rows, columns, selectRows,
     columnSettingModel, columnSettingModel: {
       openColumnSetting,
     }} = store;
   return (
     <div className={`${styles.edgPagerWrapper}`}>
-      { showSelectedTotal ? (
-        <div className={`${styles.edgPagerResetWrapper}`}>
-          已勾选
-          <span className={`${styles.edgBlue} ${styles.edgHasSelectedCount}`}>
-            {selectedRowsLength}
-          </span>
-          条
-          {showReset && (
-            <span
-              className={`${styles.edgBlue} ${styles.edgReset}`}
-              onClick={resetAllSelectedRows}
-            >
-              重置
+      <div className={styles.checkAndSummaryWrapper}>
+        { showSelectedTotal ? (
+          <div className={`${styles.edgPagerResetWrapper}`}>
+            已勾选
+            <span className={`${styles.edgBlue} ${styles.edgHasSelectedCount}`}>
+              {selectedRowsLength}
             </span>
-          )}
+            条
+            {showReset && (
+              <span
+                className={`${styles.edgBlue} ${styles.edgReset}`}
+                onClick={resetAllSelectedRows}
+              >
+                重置
+              </span>
+            )}
+          </div>
+        ) : <div/>}
+        <div className={styles.sumRowWrapper}>
+          {sumColumns.length
+            ? [...sumColumns].reduce((res, columnKey) => {
+              let item, field;
+              if (typeof columnKey === 'object') {
+                const { name, key } = columnKey;
+                item = columns.find((el) => el.key === key);
+                field = name || '';
+              } else {
+                item = columns.find((el) => el.key === columnKey);
+              }
+              if (!item) {
+                return res;
+              }
+              const labelName = field || (item?.name || '');
+              const label = (
+                <label
+                  className={styles.labelName}
+                  key={labelName}
+                >
+                  {labelName}
+                </label>
+              );
+              let value;
+              const reduceRows = onSelectSum ? selectRows : rows;
+              if (typeof columnKey === 'object') {
+                const { key, rule, tag, decimal } = columnKey;
+                value = reduceRows.reduce((res, row) => {
+                  if (rule) {
+                    return res + (rule(row) || 0);
+                  }
+                  return res + Number(row[key] || 0);
+                }, 0);
+                value = tag === 'price' ? value.toFixed(decimal || 4) : decimal ? value.toFixed(decimal) : parseInt(value, 10);
+              } else {
+                value = reduceRows.reduce((res, row) => {
+                  return res + Number(row[columnKey] || 0);
+                }, 0);
+                value = Number(value) || 0;
+              }
+              return res.concat([
+                label,
+                value,
+              ]);
+            }, [])
+            : null}
         </div>
-      ) : <div/>}
+        {searchReduce ? (
+          <strong>
+            <span style={{ fontSize: 12 }}>
+              查询汇总统计
+            </span>
+            <span style={{
+              marginLeft: 10,
+              fontSize: 16,
+              fontWeight: 400,
+            }}
+            >
+              |
+            </span>
+          </strong>
+        ) : null}
+      </div>
+
       <div className={styles.paginationWrap}>
         {
           showPagination && <PaginationOfPager store={store}/>

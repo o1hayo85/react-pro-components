@@ -55,6 +55,7 @@
     background: rgba(251, 7, 31, 0.05);
     border-radius: 2px;
   }
+
   .warnIcon {
     margin-right: 4px;
     color: #fa6866;
@@ -72,11 +73,13 @@
     text-align: right;
   }
 }
+
 .headerButtonDropDown {
   button {
     height: 30px !important;
   }
 }
+
 .headerButtonMenu {
   display: flex;
   align-items: center;
@@ -104,7 +107,7 @@
       height: 100%;
     }
 
-    .ant-tabs-top > .ant-tabs-nav {
+    .ant-tabs-top>.ant-tabs-nav {
       margin: 0 0 10px;
     }
   }
@@ -187,6 +190,14 @@
         -webkit-touch-callout: default !important;
       }
 
+      .rdg-summary-row {
+        .rdg-cell {
+          text-align: right;
+          border-top: 1px solid @clf3;
+          // border-right: 1px solid @clf3;
+        }
+      }
+
       .rdg-row-selected {
         background-color: #e9f2ff !important;
 
@@ -199,11 +210,15 @@
         box-shadow: none !important;
       }
 
+      .rdg-cell[aria-selected="true"] {
+        box-shadow: none !important;
+      }
+
       .rdg-cell-frozen-last {
         box-shadow: none !important;
       }
 
-      .rdg-checkbox-input:checked + .rdg-checkbox {
+      .rdg-checkbox-input:checked+.rdg-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -256,6 +271,7 @@
     margin: 8px 0;
 
     :global {
+
       .ant-pagination,
       .ant-select-selection-item,
       .ant-select-item-option {
@@ -326,5 +342,22 @@
     justify-content: space-around;
     width: 40px;
     cursor: pointer;
+  }
+
+  .checkAndSummaryWrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .sumRowWrapper {
+    margin-left: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  .labelName {
+    margin-left: 5px;
   }
 }
