@@ -1,5 +1,12 @@
 ## 0.1.14(抽取了 antd 主题---less 变量见组件库文档)
 
+- 升级如果出现下面问题，请升级下包版本(yarn upgrade stylelint@13.12.0)
+
+```
+Unknown rule declaration-block-no-duplicate-custom-properties  declaration-block-no-duplicate-custom-properties
+ 1:1  ×  Unknown rule named-grid-areas-no-invalid                       named-grid-areas-no-invalid
+```
+
 - 升级步骤
 
 - 第一步更新包
