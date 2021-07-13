@@ -71,3 +71,48 @@ ol {
 /* 新的内容---项目自己定义的全局样式不用删除 */
 @import '~egenie-config/lib/theme/theme.less';
 ```
+
+
+## 0.1.25
+  - 增加列拖拽保存
+      - 现有设计原则：若新增列，删除列，将会还原列配置。
+   ```js
+     grid: {
+       ...
+        setColumnsDisplay: true;  // 是否允许设置列显隐 , 默认false，设为true允许显示列设置面板
+        gridIdForColumnConfig: 'wmsReceiveOrderMainTable'; // 缓存到localstorage中的key,如果setColumnsDisplay为true，此配置必须配置，配置规则尽可能以ts__开头，避免与原js项目中的表格配置冲突
+       ...
+      }
+   ```
+   - 添加汇总行
+     - 目前汇总有两种方式，一种和原js项目保持一致，另一种会在表格内的底部增加一条row数据。第二种方式适用于需要汇总大量字段使用
+    ```js
+     // 第一种
+      grid: {
+       ...
+          sumColumns?: ['count', { key: 'count1', name: '可以自定义显示name'}];
+          onSelectSum?: true; // 是否根据选择行汇总，设为false会汇总当前页信息
+       ...
+      }
+
+      // 第二种
+      grid: {
+       ...
+       columns: {
+         key: 'totalNumber',
+         name: '关闭状态',
+         width: 100,
+         summaryFormatter({ row }) {
+          return (
+            <strong>
+              {row.totalNumber}
+            </strong>
+          );
+         }
+        }
+        ...
+       summaryRows: ['totalNumber'],;
+  
+      }
+          
+      ```

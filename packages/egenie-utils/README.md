@@ -960,6 +960,7 @@ const mainSubModel = new MainSubStructureModel({
     sidx?: string;
     /** 是否隐藏列，默认false */
     ejlHidden?: boolean;
+
 ```
 
 #### 2.egGrid 配置项
@@ -1029,6 +1030,16 @@ const mainSubModel = new MainSubStructureModel({
   showEmpty?: boolean;
   /** 是否强制点击事件，默认false,设为true后，每次点击同一行也会调用接口 */
   forceRowClick?: boolean;
+  /** 表格保存列必须要配置 */
+  gridIdForColumnConfig?: string;
+  /** 是否允许设置列显隐 */
+  setColumnsDisplay?: boolean;
+  /** 是够勾选汇总 */
+  onSelectSum?: boolean;
+  /** 需要汇总列的key[] */
+  sumColumns?: key[];
+  /** 需要汇总列的key[] */
+  summaryRows?: ({row}) => [{[key]: number}];
 ```
 
 #### 3.表格接口 api 配置说明
