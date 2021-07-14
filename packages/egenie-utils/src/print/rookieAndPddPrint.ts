@@ -1,5 +1,4 @@
 import { message } from 'antd';
-import { PrintParams } from './printHelper';
 import { getUUID, isSocketConnected } from './utils';
 
 interface RequestProtocol {
@@ -154,7 +153,7 @@ export class RookieAndPddPrint {
     preview,
     contents,
     printer,
-  }: PrintParams): Promise<any> => {
+  }): Promise<any> => {
     if (Array.isArray(contents) && contents.length) {
       const documents = [
         {
@@ -176,10 +175,12 @@ export class RookieAndPddPrint {
           documents,
         },
       };
-
-      console.log(JSON.stringify(request));
       return this.sendToPrinter<any>(request);
     } else {
+      message.warning({
+        key: '没数据',
+        content: '没数据',
+      });
       return Promise.reject();
     }
   };

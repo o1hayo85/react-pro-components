@@ -2,7 +2,8 @@ import { Button, Input, message, Modal, Row, Select } from 'antd';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { MainSubStructure, MainSubStructureModel } from '../egGrid';
+import { MainSubStructureModel, MainSubStructure } from '../egGrid';
+import { destroyModal, renderModal } from '../renderModal';
 import { request } from '../request';
 import { printHelper } from './printHelper';
 
@@ -103,6 +104,7 @@ class CustomPrintModel {
                   label: item,
                 }))}
                 placeholder="请选择"
+                size="small"
                 style={{ width: '100%' }}
                 value={this.gridModel.gridModel.rows[rowIdx]?.printerName}
               />
@@ -142,8 +144,8 @@ class CustomPrintModel {
       ],
       rows: [],
       primaryKeyField: 'id',
-      pageSize: 20,
-      showPager: true,
+      pageSize: 1000,
+      showPager: false,
       showEmpty: true,
       showCheckBox: true,
       sortByLocal: false,
@@ -173,6 +175,13 @@ class CustomPrintModel {
   });
 }
 
+interface CustomPrintParam {
+  preview?: boolean;
+  tempType?: string | number;
+  templateId?: number | string;
+  printer?: string;
+}
+
 /**
  * Modal的props。外层自己控制显示和隐藏
  */
@@ -182,7 +191,7 @@ export interface CustomPrintModalProps {
    * 打印或者预览callback
    * @param params
    */
-  callback?: (params: { preview?: boolean; tempType?: string | number; templateId?: number | string; printer?: string; }) => void;
+  callback?: (params: CustomPrintParam) => void;
 
   /**
    * 初始化筛选的模版类型
@@ -291,3 +300,33 @@ export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
   }
 }
 
+export async function getCustomPrintParam(tempType: string): Promise<CustomPrintParam> {
+  // 防止多次渲染Modal
+  await new Promise((resolve, reject) => {
+    Modal.confirm({
+      content: '确定自定义打印?',
+      onOk: () => resolve(true),
+      onCancel: () => reject(),
+    });
+  });
+
+  return new Promise((resolve, reject) => {
+    function handleOk(customParams) {
+      resolve(customParams);
+      destroyModal();
+    }
+
+    function handleCancel() {
+      reject();
+      destroyModal();
+    }
+
+    renderModal(
+      <CustomPrintModal
+        callback={handleOk}
+        handleCancel={handleCancel}
+        tempType={tempType}
+      />
+    );
+  });
+}

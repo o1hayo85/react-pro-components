@@ -7,6 +7,7 @@ export interface IParameters {
   customTempUrl?: string;
   customData?: any[];
 }
+
 export type TOrderType = 'PRE_View' | 'GET_Printers' | 'PRINT';
 
 export interface RequestProtocol {

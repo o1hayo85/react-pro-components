@@ -1,3 +1,3 @@
 export * from './printHelper';
-export * from './printWayBillModel';
+export * from './printWayBill';
 export * from './customPrint';

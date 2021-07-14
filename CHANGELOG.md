@@ -1,7 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.24...v0.0.0) (2021-07-12)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.24...v0.0.0) (2021-07-14)
 
 ### Features
 
+- **utils:** 集成 pdd 打印和 jd 打印 ([e295576](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e295576b4c431fb82a4c61566a4d8694c6995d9d))
 - 添加汇总行配置 ([e3c7a8e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e3c7a8e5e99619c4c5f38cf2a1e8c689219edb5e))
 
 ## [0.1.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.23...v0.1.24) (2021-07-07)
