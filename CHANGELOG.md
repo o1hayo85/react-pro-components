@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 增加切换版本 ([b442285](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b4422853e0aec45fc018357853ea20db5891f314))
+- **utils:** 增加切换版本 ([3b74248](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3b74248d2251179d6298b9ab367feb9d7b9a8d14))
 
 ## [0.1.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.25...v0.1.26) (2021-07-14)
 
