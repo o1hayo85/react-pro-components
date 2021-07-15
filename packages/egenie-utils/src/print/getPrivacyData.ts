@@ -6,7 +6,7 @@ const APP_KEY = '4A7DD276D1A709CB16AF06DE925B8BF7';
 const CUSTOMER_ID = 11211;
 const cpCodeSpecial = 'SF';
 
-export interface DecryptUserInfo {
+interface DecryptUserInfo {
   receiverProvince: string;
   pin: string;
   receiverCity: string;
@@ -18,11 +18,12 @@ export interface DecryptUserInfo {
   receiverMobile: string;
 }
 
-async function getSensitiveData(platform_order_code: string, token: string, cpCode: string): Promise<DecryptUserInfo[]> {
+export async function getSensitiveData(shopType: number | string, shopId: number | string, platformOrderCode: string, cpCode: string): Promise<DecryptUserInfo[]> {
   const timestamp = new Date().getTime();
   const dateStr = new Date(timestamp).toISOString()
     .replace(/\.\d{3}Z$/, 'Z')
     .replace(/[:-]|\.\d{3}/g, '');
+  const token = await getShopToken(shopType, shopId);
 
   const uuidResultJSON = await request<{ auth: string; uuid: string; }>({
     method: 'POST',
@@ -37,7 +38,7 @@ async function getSensitiveData(platform_order_code: string, token: string, cpCo
       method: 'jingdong.hufu.order.getSensitiveData',
     },
     data: {
-      orders_nos: platform_order_code,
+      orders_nos: platformOrderCode,
       token,
       extendProps: cpCode === cpCodeSpecial ? { decryptMobile: true } : null,
       timestamp,
@@ -49,7 +50,7 @@ async function getSensitiveData(platform_order_code: string, token: string, cpCo
     {
       method: 'POST',
       body: JSON.stringify({
-        orders_nos: platform_order_code,
+        orders_nos: platformOrderCode,
         token,
         ...(cpCode === cpCodeSpecial ? { extendProps: { decryptMobile: true }} : {}),
       }),
@@ -61,7 +62,8 @@ async function getSensitiveData(platform_order_code: string, token: string, cpCo
         authorization: uuidResultJSON.auth,
       }),
     }
-  ).then((data) => data.json());
+  )
+    .then((data) => data.json());
 
   if (Array.isArray(result?.orderSensitiveInfo?.orderList) && result.orderSensitiveInfo.orderList.length) {
     return result.orderSensitiveInfo.orderList;
@@ -74,51 +76,50 @@ async function getSensitiveData(platform_order_code: string, token: string, cpCo
   }
 }
 
-let shopTokenDic = {};
+const shopTokenDic: {[key: string]: {[key: string]: string; }; } = Object.create(null);
 
-// 获取店铺对应token,通过平台单号找到行内数据对应的店铺id, 然后在shopTokenDic取token
-async function getToken() {
-  if (Object.keys(shopTokenDic).length) {
-    return shopTokenDic;
+async function getShopToken(shopType: number | string, shopId: number | string): Promise<string> {
+  if (shopType in shopTokenDic) {
+    if (shopId in shopTokenDic[shopType]) {
+      return shopTokenDic[shopType][shopId];
+    } else {
+      throw new Error('没有店铺信息');
+    }
+  } else {
+    const res = await request<BaseData<{[key: string]: string; }>>({
+      method: 'POST',
+      url: '/api/baseinfo/rest/shop/getToken',
+      data: { ids: `${shopType}` },
+    });
+    shopTokenDic[shopType] = res.data || {};
+    return getShopToken(shopType, shopId);
   }
-
-  const res = await request<BaseData<{[key: string]: string; }>>({
-    method: 'POST',
-    url: '/api/baseinfo/rest/shop/getToken',
-    data: { ids: '2' },
-  });
-  shopTokenDic = res.data || {};
-  return shopTokenDic;
 }
 
 export async function getWayBillSensitiveData(userDataList: any[], cpCode: string): Promise<void> {
   if (cpCodeSpecial === cpCode) {
-    const shopTokenDic = await getToken();
-    const tokenToPlatformOrderCode = userDataList.reduce((previous, current) => {
+    const shopIdToPlatformOrderCode = userDataList.reduce((previous, current) => {
       const {
         shop_id,
         platform_order_code,
         platform_type,
       } = current.wmsOrder;
       if (platform_type === EnumShopType.jd) {
-        const token = shopTokenDic[shop_id];
-        if (token) {
-          if (previous[token]) {
-            previous[token] = `${previous[token]},${platform_order_code}`;
-          } else {
-            previous[token] = platform_order_code;
-          }
+        if (previous[shop_id]) {
+          previous[shop_id] = `${previous[shop_id]},${platform_order_code}`;
+        } else {
+          previous[shop_id] = `${platform_order_code}`;
         }
       }
       return previous;
     }, {});
-    console.log('店铺token和平台单号的映射: ', tokenToPlatformOrderCode);
+    console.log('店铺id和平台单号的映射: ', shopIdToPlatformOrderCode);
 
-    const tokens = Object.keys(tokenToPlatformOrderCode);
-    if (tokens.length) {
+    const shopIds = Object.keys(shopIdToPlatformOrderCode);
+    if (shopIds.length) {
       const decryptUserList: DecryptUserInfo[] = [];
-      for (let i = 0; i < tokens.length; i++) {
-        const decryptInfo: DecryptUserInfo[] = await getSensitiveData(tokenToPlatformOrderCode[tokens[i]], tokens[i], cpCode);
+      for (let i = 0; i < shopIds.length; i++) {
+        const decryptInfo: DecryptUserInfo[] = await getSensitiveData(EnumShopType.jd, shopIds[i], shopIdToPlatformOrderCode[shopIds[i]], cpCode);
         decryptUserList.push(...decryptInfo);
       }
 
