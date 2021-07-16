@@ -11,6 +11,11 @@ export interface User {
   username: string;
 }
 
+export enum EnumVersion {
+  oldVersion = 1,
+  newVersion = 2
+}
+
 export interface JsonReader {
   root: string;
   page: string;
@@ -23,6 +28,7 @@ export interface Egenie {
   openTab: (url: string, tabId: number | string, tabName: string, icon?: string) => void;
   openTabId: (id: number, params?: string) => void;
   closeTab: (tabId: number | string) => void;
+  toggleVersion: (resourceId: number | string, versionType: EnumVersion) => Promise<void>;
 }
 
 export interface Opera {
@@ -61,7 +67,7 @@ export interface SrcParams {
   /**
    * 查询参数
    * 例如：'name=123&sex=1'
-  */
+   */
   params: string;
 }
 
@@ -77,6 +83,8 @@ export interface Menudata {
   url?: string;
   icon?: string;
   parentId?: number;
+  newUrl?: string;
+  oldUrl?: string;
 }
 
 export interface API {

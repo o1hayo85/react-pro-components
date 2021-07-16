@@ -1,9 +1,9 @@
 import { message } from 'antd';
 import _ from 'lodash';
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 import qs from 'qs';
-import { request, BaseData } from '../request';
-import { SrcParams, User, Response, Menudata, API, Permission } from './interface';
+import { BaseData, request } from '../request';
+import { API, Egenie, EnumVersion, Menudata, Permission, Response, SrcParams, User } from './interface';
 
 export class LayoutStore {
   @observable public project = {
@@ -74,6 +74,7 @@ export class LayoutStore {
       openTab: this.handleOpenTab, // 打开菜单，需要传入完整的菜单信息
       openTabId: this.handleOpenTabId, // 打开菜单，只需要传入菜单ID
       closeTab: this.handleTabRemove,
+      toggleVersion: this.toggleVersion,
     };
     const EgeniePermission: Permission = {
       permissionList: [],
@@ -112,6 +113,51 @@ export class LayoutStore {
     window.top.EgeniePermission = EgeniePermission;
   };
 
+  @action public toggleVersion: Egenie['toggleVersion'] = async(resourceId, versionType) => {
+    let menuItem: Partial<Menudata>;
+    (function dfs(data: Array<Partial<Menudata>>) {
+      (data || []).forEach((item) => {
+        if (Number(item.id) === Number(resourceId)) {
+          menuItem = item;
+        } else {
+          // @ts-ignore
+          // FIXME 菜单树的数据第一层的children结构被处理成二维数组了，暂时不敢动原来逻辑
+          if (item && item.length) {
+            // @ts-ignore
+            dfs(item);
+          }
+
+          if (item.children && item.children.length) {
+            dfs(item.children);
+          }
+        }
+      });
+    })(this.menuData);
+
+    if (menuItem) {
+      if (versionType === EnumVersion.oldVersion) {
+        menuItem.url = menuItem.oldUrl;
+      } else if (versionType === EnumVersion.newVersion) {
+        menuItem.url = menuItem.newUrl;
+      }
+
+      try {
+        await request({
+          url: '/api/iac/resource/version/change',
+          method: 'POST',
+          data: {
+            resourceId,
+            versionType,
+          },
+        });
+      } finally {
+        this.handleOpenTab(menuItem.url, menuItem.id, menuItem.name, menuItem.icon);
+      }
+    } else {
+      throw new Error(`${resourceId}: 不存在`);
+    }
+  };
+
   public handleInit = (project) => {
     this.getUserInfo();
     this.getMenuList();
@@ -142,13 +188,14 @@ export class LayoutStore {
 
   // 根据菜单id 打开菜单
   public handleOpenTabId = action((id: number, params?: string) => {
-    request<BaseData<{ resource?: { resourceUrl?: string; resourceName?: string; icon: string; id: string | number; }; }>>({ url: `/api/iac/resource/getResource/${id}` }).then((res): void => {
-      if (!res.data || !res.data.resource) {
-        return;
-      }
-      const { resource } = res.data;
-      this.handleOpenTab(`${resource.resourceUrl}?${params}`, resource.id, resource.resourceName, resource.icon);
-    })
+    request<BaseData<{ resource?: { resourceUrl?: string; resourceName?: string; icon: string; id: string | number; }; }>>({ url: `/api/iac/resource/getResource/${id}` })
+      .then((res): void => {
+        if (!res.data || !res.data.resource) {
+          return;
+        }
+        const { resource } = res.data;
+        this.handleOpenTab(`${resource.resourceUrl}?${params}`, resource.id, resource.resourceName, resource.icon);
+      })
       .catch(() => {
         return { resource: null };
       });
@@ -249,7 +296,14 @@ export class LayoutStore {
   });
 
   public handleMenuItemHeight = action((data) => {
-    const { titleHeight, titleMargin, itemHeight, itemMargin, blockMargin, lineTop } = this.immutableStyle;
+    const {
+      titleHeight,
+      titleMargin,
+      itemHeight,
+      itemMargin,
+      blockMargin,
+      lineTop,
+    } = this.immutableStyle;
     const titleTotalHeight = titleHeight + titleMargin; // 标题高度+边距
     const itemTotalHeight = itemHeight + itemMargin; // 叶子菜单高度+边距
     const marginBottom = blockMargin; // 菜单间的间距
@@ -282,9 +336,10 @@ export class LayoutStore {
     if (jsessionId && jsessionId.includes('JSESSIONID=') && jsessionId.length > 11) {
       document.cookie = `${jsessionId};path=/`;
     }
-    request({ url: `/api/iac/role/user/perms?${jsessionId}` }).then((res: API) => {
-      window.top.EgeniePermission.permissionList = res.data;
-    });
+    request({ url: `/api/iac/role/user/perms?${jsessionId}` })
+      .then((res: API) => {
+        window.top.EgeniePermission.permissionList = res.data;
+      });
   };
 
   public handleTabRemove = action((key: string) => {
@@ -348,26 +403,30 @@ export class LayoutStore {
   });
 
   public handleChangePassword = action((formInstance) => {
-    formInstance.current.validateFields().then(async(values) => {
-      const { oldPassword, newPassword } = values;
-      const res: Response = await request({
-        url: '/api/iac/user/changePassword',
-        method: 'post',
-        data: {
+    formInstance.current.validateFields()
+      .then(async(values) => {
+        const {
           oldPassword,
           newPassword,
-        },
-      });
-      if (!res && res.status !== 'Successful') {
-        return message.error(res.data);
-      }
+        } = values;
+        const res: Response = await request({
+          url: '/api/iac/user/changePassword',
+          method: 'post',
+          data: {
+            oldPassword,
+            newPassword,
+          },
+        });
+        if (!res && res.status !== 'Successful') {
+          return message.error(res.data);
+        }
 
-      message.success('修改成功，请重新登录！');
-      this.togglePassword(false);
-      setTimeout(() => {
-        this.handleLogout();
-      }, 2000);
-    })
+        message.success('修改成功，请重新登录！');
+        this.togglePassword(false);
+        setTimeout(() => {
+          this.handleLogout();
+        }, 2000);
+      })
       .catch((errorInfo) => {
         console.log('errorinfo.....', errorInfo);
       });
@@ -381,5 +440,6 @@ export class LayoutStore {
     window.location.href = `/logout?project=${this.project?.value}`;
   };
 }
+
 export const layoutStore = new LayoutStore();
 

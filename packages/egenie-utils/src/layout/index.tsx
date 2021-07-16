@@ -38,7 +38,6 @@ export interface Props {
   project?: Project;
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
-  console.log('props.....root', props);
   return (
     <Provider layoutStore={layoutStore}>
       <LayoutMenu
