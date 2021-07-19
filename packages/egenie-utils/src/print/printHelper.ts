@@ -62,7 +62,7 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
   // 一页打多个条码
   if (height >= 1 && width >= 1 && (height > 1 || width > 1)) {
     const pageSize = width * height;
-    const totalPage = (data.length / pageSize) >>> 0;
+    const totalPage = Math.ceil(data.length / pageSize);
     const result = Array(totalPage)
       .fill(null);
 
