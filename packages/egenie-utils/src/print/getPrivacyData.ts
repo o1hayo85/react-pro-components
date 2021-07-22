@@ -24,6 +24,21 @@ export async function getSensitiveData(shopType: number | string, shopId: number
     .replace(/\.\d{3}Z$/, 'Z')
     .replace(/[:-]|\.\d{3}/g, '');
   const token = await getShopToken(shopType, shopId);
+  if (!token) {
+    return [
+      {
+        pin: null,
+        ordersNo: null,
+        receiverProvince: null,
+        receiverCity: null,
+        receiverDistrict: null,
+        receiverAddress: null,
+        receiverName: null,
+        receiverMobile: null,
+        receiverTelephone: null,
+      },
+    ];
+  }
 
   const uuidResultJSON = await request<{ auth: string; uuid: string; }>({
     method: 'POST',
@@ -80,11 +95,7 @@ const shopTokenDic: {[key: string]: {[key: string]: string; }; } = Object.create
 
 async function getShopToken(shopType: number | string, shopId: number | string): Promise<string> {
   if (shopType in shopTokenDic) {
-    if (shopId in shopTokenDic[shopType]) {
-      return shopTokenDic[shopType][shopId];
-    } else {
-      throw new Error('没有店铺信息');
-    }
+    return shopTokenDic[shopType][shopId];
   } else {
     const res = await request<BaseData<{[key: string]: string; }>>({
       method: 'POST',
@@ -138,7 +149,7 @@ export async function getWayBillSensitiveData(userDataList: any[], cpCode: strin
             receiverTelephone,
           } = newUserInfo;
 
-          const platformOrderCodeEqualItem = originUserInfoList.find((val) => (`${val.platform_order_code}`).includes(`${ordersNo}`));
+          const platformOrderCodeEqualItem = originUserInfoList.find((val) => ordersNo && (`${val.platform_order_code}`).includes(`${ordersNo}`));
           if (platformOrderCodeEqualItem) {
             platformOrderCodeEqualItem.province_name = receiverProvince;
             platformOrderCodeEqualItem.city_name = receiverCity;
