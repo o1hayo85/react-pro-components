@@ -155,13 +155,6 @@ export class RookieAndPddPrint {
     printer,
   }): Promise<any> => {
     if (Array.isArray(contents) && contents.length) {
-      const documents = [
-        {
-          documentID: getUUID(),
-          contents,
-        },
-      ];
-
       const request = {
         cmd: 'print',
         requestID: getUUID(),
@@ -172,7 +165,7 @@ export class RookieAndPddPrint {
           previewType: 'pdf',
           printer,
           notifyType: ['render'],
-          documents,
+          documents: contents,
         },
       };
       return this.sendToPrinter<any>(request);

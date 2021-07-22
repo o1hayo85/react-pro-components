@@ -1,6 +1,6 @@
 import { JDPrint } from './jdPrint';
 import { RookieAndPddPrint } from './rookieAndPddPrint';
-import { TemplateData } from './utils';
+import { getUUID, TemplateData } from './utils';
 
 const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
 
@@ -13,42 +13,59 @@ function formatPrintName(tempData: TemplateData, printerName?: string) {
 }
 
 function formatRookieData(printData: any[], printTemplate: TemplateData) {
-  const contents = [];
+  const documents = [];
 
   (printData || []).forEach((item) => {
     if (Number(printTemplate?.content?.cainiaoTemp) === 1 && item.newCaiNiao) {
-      contents.push(JSON.parse(item.newCaiNiao));
+      documents.push(JSON.parse(item.newCaiNiao));
     }
 
     delete item.newCaiNiao;
 
-    contents.push({
+    documents.push({
       data: item,
       templateURL: item.templateURL ? item.templateURL : `${window.location.origin}/api/print/getCainiaoTempXml/${printTemplate?.id}`,
     });
   });
 
-  return contents;
+  if (documents.length) {
+    return [
+      {
+        documentID: getUUID(),
+        contents: documents,
+      },
+    ];
+  } else {
+    return [];
+  }
 }
 
 function formatPddData(printData: any[], printTemplate: TemplateData, courierPrintType: number) {
-  const contents = [];
+  const documents = [];
 
   (printData || []).forEach((item) => {
+    const content = [];
     if (item.newCaiNiao) {
-      contents.push(JSON.parse(item.newCaiNiao));
+      content.push(JSON.parse(item.newCaiNiao));
     }
     delete item.newCaiNiao;
 
     if (item.pinduoduo) {
-      contents.push({
+      content.push({
         data: JSON.parse(item.pinduoduo),
         templateURL: courierPrintType ? 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_yilian_template.xml' : 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_seller_area_template.xml',
       });
     }
+
+    if (content.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents: content,
+      });
+    }
   });
 
-  return contents;
+  return documents;
 }
 
 export function formatBarcodeData(row: number, col: number, data: any[]): any[] {

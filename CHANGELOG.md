@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.30...v0.0.0) (2021-07-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.31...v0.0.0) (2021-07-22)
+
+### Bug Fixes
+
+- **utils/print:** 解决 pdd 打印数据格式问题 ([04dd840](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/04dd840252a15b32a2f7e81831d1ce3823ca4dac))
+
+## [0.1.31](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.30...v0.1.31) (2021-07-22)
 
 ### Features
 
