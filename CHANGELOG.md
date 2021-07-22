@@ -1,8 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.29...v0.0.0) (2021-07-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.30...v0.0.0) (2021-07-22)
 
 ### Features
 
-- **utils/getPrivacyData:** 增加测试环境京东获取私密信息对于店铺的兼容(没有店铺 id 不做处理) ([f9e2dba](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f9e2dbaae8bacc01fe02df15344559a5db260e6c))
+- **utils/getPrivacyData:** 增加测试环境京东获取私密信息对于店铺的兼容(没有店铺 id 不做处理) ([81f56b8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/81f56b8c08c31e7c97bc568c5bcc213ebad5fd49))
+
+## [0.1.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.29...v0.1.30) (2021-07-22)
+
+### Features
+
 - 二级菜单自适应高度 ([30ba23a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/30ba23a679f59b7049a01982367897ba7122e3f9))
 
 ## [0.1.29](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.28...v0.1.29) (2021-07-19)
