@@ -215,6 +215,7 @@ export class SubTableModel {
               this.gridModel.current = data.page;
               this.gridModel.pageSize = data.pageSize;
             }
+            this.api.callbackAfterQuery?.(this);
             if (v.status !== 'Successful') {
               this.gridModel.rows = [];
               this.gridModel.total = 0;

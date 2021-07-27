@@ -155,7 +155,7 @@ const PaginationOfPager = observer(({ store, children }: IProps) => {
 
 const Pager = observer(({ store, children }: IProps) => {
   const { selectedRowsLength, resetAllSelectedRows, showSelectedTotal, showReset, showPagination, showRefresh, onRefresh,
-    setColumnsDisplay, sumColumns, onSelectSum, searchReduce, rows, columns, selectRows,
+    setColumnsDisplay, sumColumns, onSelectSum, searchReduceConfig, rows, columns, selectRows,
     columnSettingModel, columnSettingModel: {
       openColumnSetting,
     }} = store;
@@ -225,22 +225,37 @@ const Pager = observer(({ store, children }: IProps) => {
               ]);
             }, [])
             : null}
+          {searchReduceConfig?.length ? (
+            <strong>
+              <span style={{
+                fontSize: 12,
+                marginLeft: '10px',
+              }}
+              >
+                查询汇总统计
+              </span>
+            </strong>
+          ) : null}
+          {
+            searchReduceConfig?.length ? searchReduceConfig.reduce((pre, cur) => {
+              const labelName = cur.name || '';
+              const value = cur.value || 0;
+              const label = (
+                <label
+                  className={styles.labelName}
+                  key={labelName}
+                >
+                  {labelName}
+                </label>
+              );
+              return pre.concat([
+                label,
+                value,
+              ]);
+            }, []) : null
+          }
         </div>
-        {searchReduce ? (
-          <strong>
-            <span style={{ fontSize: 12 }}>
-              查询汇总统计
-            </span>
-            <span style={{
-              marginLeft: 10,
-              fontSize: 16,
-              fontWeight: 400,
-            }}
-            >
-              |
-            </span>
-          </strong>
-        ) : null}
+
       </div>
 
       <div className={styles.paginationWrap}>

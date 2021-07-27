@@ -35,11 +35,14 @@ export interface IEgGridApi {
   onPageChange?: (page: StrOrNum, pageSize: StrOrNum) => void;
   onShowSizeChange?: (page: StrOrNum, pageSize: StrOrNum) => void;
   onQuery?: (params?) => Promise<unknown>;
+  callbackAfterQuery?: (params?) => void;
 }
 
 export type TSummaryRows = string[] | IObj[] | ((rows?: IObj[]) => IObj[]);
 
 export type TSumColumns = string[] | Array<{ key: string; name: string; rule?: (arg1?) => unknown; tag?: 'price' | 'number' ; decimal?: number ; }>;
+
+export type TLabelName = Array<{ name: string;value: number | string ; }>;
 export interface IEgGridModel {
   columns: Array<EnhanceColumn<IObj>>;
   getColumns?: (topClass: IObj, selfClass: IObj) => Array<EnhanceColumn<IObj>>;
@@ -93,6 +96,7 @@ export interface IEgGridModel {
   sumColumns?: TSumColumns;
   onSelectSum?: boolean;
   searchReduce?: boolean;
+  searchReduceConfig?: TLabelName;
 }
 
 export class EgGridModel {
@@ -313,6 +317,11 @@ export class EgGridModel {
    * 第二种行汇总方式使用，是否每次查询表格数据之后调用接口请求数据，默认false
    */
   @observable public searchReduce = false;
+
+  /**
+   * 第二种行汇总方式使用，是否每次查询表格数据之后调用接口请求数据，默认false
+   */
+  @observable public searchReduceConfig: TLabelName = [];
 
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
@@ -734,6 +743,7 @@ export class EgGridModel {
       return Promise.reject();
     }
     this.resetAll();
+    this.api.callbackAfterQuery?.(this);
 
     // @ts-ignore
     return this.api.onQuery({

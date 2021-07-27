@@ -338,6 +338,7 @@ export class MainSubStructureModel {
           this.gridModel.pageSize = data.pageSize >>> 0;
           this.gridModel.rows = v.data.list || [];
           this.gridModel.total = v.data.totalCount >>> 0;
+          this.api.callbackAfterQuery?.(this);
           return data;
         })
       )
