@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.32...v0.0.0) (2021-07-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.33...v0.0.0) (2021-07-28)
+
+### Features
+
+- **utils/print:** 集成抖音打印 ([1e6316d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1e6316dd0f56f9fcbb4086698532a7547360fe14))
+
+## [0.1.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.32...v0.1.33) (2021-07-27)
 
 ### Features
 
