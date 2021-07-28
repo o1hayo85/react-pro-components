@@ -8,7 +8,7 @@ interface RequestProtocol {
   [key: string]: any;
 }
 
-export class RookieAndPddPrint {
+export class RookieAndPddAndDyPrint {
   constructor(host: string, port: number, openError: string) {
     this.host = host;
     this.port = port;

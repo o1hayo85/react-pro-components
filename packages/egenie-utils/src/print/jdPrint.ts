@@ -1,6 +1,32 @@
 import { message } from 'antd';
-import { getUUID } from '../utils';
-import { IParameters, TOrderType, IPrintResponse, RequestProtocol } from './interface';
+import { getUUID } from './utils';
+
+interface IParameters {
+  printName: string;
+  offsetTop?: number;
+  offsetLeft?: number;
+  tempUrl: string;
+  printData: any[];
+  customTempUrl?: string;
+  customData?: any[];
+}
+
+ type TOrderType = 'PRE_View' | 'GET_Printers' | 'PRINT';
+
+interface RequestProtocol {
+  orderType: TOrderType;
+  key?: string;
+  parameters: IParameters;
+}
+
+interface IPrintResponse {
+  code: '2' | '6' | '8';
+  success: string;
+  message: string;
+  key?: string;
+  content?: string;
+  status?: string;
+}
 
 // 预览下载图片地址和图片名
 function downloadImage(imgSrc: string, name?: string): void {
@@ -24,7 +50,7 @@ function downloadImage(imgSrc: string, name?: string): void {
   image.src = imgSrc;
 }
 
-export class JDPrint {
+export class JdPrint {
   constructor(host: string, port: number, openError: string) {
     this.host = host;
     this.port = port;

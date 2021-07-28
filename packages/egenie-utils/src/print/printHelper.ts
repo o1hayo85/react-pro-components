@@ -1,5 +1,5 @@
-import { JDPrint } from './jdPrint';
-import { RookieAndPddPrint } from './rookieAndPddPrint';
+import { JdPrint } from './jdPrint';
+import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
 import { getUUID, TemplateData } from './utils';
 
 const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
@@ -38,6 +38,33 @@ function formatRookieData(printData: any[], printTemplate: TemplateData) {
   } else {
     return [];
   }
+}
+
+function formatDyData(printData: any[], printTemplate: TemplateData) {
+  const documents = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+    if (item?.dyData?.printData) {
+      contents.push(JSON.parse(item?.dyData?.printData));
+    }
+
+    if (item?.dyData?.customData) {
+      contents.push({
+        data: JSON.parse(item?.dyData?.customData),
+        templateURL: item?.dyData?.customTempUrl ? item?.dyData?.customTempUrl : 'https://front.runscm.com/customer-source/printTemp/dy2.xml',
+      });
+    }
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+      });
+    }
+  });
+
+  return documents;
 }
 
 function formatPddData(printData: any[], printTemplate: TemplateData, courierPrintType: number) {
@@ -135,6 +162,17 @@ export type RookiePrintParams = {
 } & CommonParams;
 
 /**
+ * 抖音打印参数
+ */
+export type DyPrintParams = {
+
+  /**
+   * 数据
+   */
+  contents?: any[];
+} & CommonParams;
+
+/**
  * pdd打印参数
  */
 export type PddPrintParams = {
@@ -181,13 +219,15 @@ export class PrintHelper {
     this.toggleToRookie();
   }
 
-  private state: RookieAndPddPrint | JDPrint;
+  private state: RookieAndPddAndDyPrint | JdPrint;
 
-  private rookiePrint: RookieAndPddPrint = new RookieAndPddPrint('127.0.0.1', 13528, openError('CAINIAO'));
+  private rookiePrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13528, openError('CAINIAO'));
 
-  private pddPrint: RookieAndPddPrint = new RookieAndPddPrint('127.0.0.1', 5000, openError('拼多多'));
+  private pddPrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 5000, openError('拼多多'));
 
-  private jdPrint: JDPrint = new JDPrint('127.0.0.1', 9113, openError('京东'));
+  private dyPrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13888, openError('抖音'));
+
+  private jdPrint: JdPrint = new JdPrint('127.0.0.1', 9113, openError('京东'));
 
   /**
    * 切换到菜鸟
@@ -206,9 +246,15 @@ export class PrintHelper {
   /**
    * 切换到jd
    */
-
   public toggleToJd = () => {
     this.state = this.jdPrint;
+  };
+
+  /**
+   * 切换到dy
+   */
+  public toggleToDy = () => {
+    this.state = this.dyPrint;
   };
 
   /**
@@ -237,6 +283,14 @@ export class PrintHelper {
     } else if (this.state === this.rookiePrint) {
       const newParams: RookiePrintParams = params;
       const contents = formatRookieData(newParams.contents, newParams.templateData);
+      return this.state.print({
+        preview: newParams.preview,
+        contents,
+        printer: formatPrintName(newParams.templateData, newParams.printer),
+      });
+    } else if (this.state === this.dyPrint) {
+      const newParams: DyPrintParams = params;
+      const contents = formatDyData(newParams.contents, newParams.templateData);
       return this.state.print({
         preview: newParams.preview,
         contents,

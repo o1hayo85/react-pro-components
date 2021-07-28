@@ -10,6 +10,7 @@ export enum EnumShopType {
   rookie = 0,
   pdd = 1,
   jd = 2,
+  dy = 3,
 }
 
 interface PrintData {
@@ -267,8 +268,16 @@ export class PrintWayBill {
           await this.handleJDPrint(params, userData, tempData, cpCode);
         } else if (shopType === EnumShopType.pdd) {
           await this.handlePddPrint(params, userData, tempData, courierPrintType);
-        } else {
+        } else if (shopType === EnumShopType.rookie) {
           await this.handleRookiePrint(params, userData, tempData);
+        } else if (shopType === EnumShopType.dy) {
+          await this.handleDyPrint(params, userData, tempData);
+        } else {
+          message.error({
+            key: `店铺类型:${shopType}不存在`,
+            content: `店铺类型:${shopType}不存在`,
+          });
+          throw new Error(`店铺类型:${shopType}不存在`);
         }
 
         await this.updateStatus(callbackData);
@@ -318,6 +327,19 @@ export class PrintWayBill {
     };
 
     printHelper.toggleToPdd();
+    await printHelper.print(printerData);
+  };
+
+  // 抖音打印逻辑处理
+  private handleDyPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    const printerData = {
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    };
+
+    printHelper.toggleToDy();
     await printHelper.print(printerData);
   };
 
