@@ -143,16 +143,21 @@ export class PrintWayBill {
     await new Promise((resolve, reject) => {
       Modal.confirm({
         content: preview ? '确定预览' : '确定打印',
-        onOk: () => resolve(true),
+        onOk: async() => {
+          try {
+            await this.getDataAndPrint({
+              preview,
+              ...rest,
+              printSrc: '1',
+              checkPrint: true,
+            });
+            resolve(true);
+          } catch (e) {
+            reject();
+          }
+        },
         onCancel: () => reject(),
       });
-    });
-
-    await this.getDataAndPrint({
-      preview,
-      ...rest,
-      printSrc: '1',
-      checkPrint: true,
     });
   };
 
@@ -246,7 +251,12 @@ export class PrintWayBill {
               receiver_mobile,
               receiver_name,
               receiver_phone,
-              orderSender: { sender_address, sender_mobile, sender_name, sender_phone },
+              orderSender: {
+                sender_address,
+                sender_mobile,
+                sender_name,
+                sender_phone,
+              },
             },
           } = item;
           Object.assign(item, {
