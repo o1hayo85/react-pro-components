@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.34...v0.0.0) (2021-07-29)
 
+### Bug Fixes
+
+- **generator:** 解决 package.json 引号没写 ([cc33162](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cc3316247c09c33b730634f202afb00b6e95f708))
+
 ### Features
 
 - **utils/print:** 更改前置打印弹框方式 ([26ce31e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/26ce31ef9c3b7e2f9446162be17261461b207d9a))
