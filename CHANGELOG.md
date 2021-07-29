@@ -1,4 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.34...v0.0.0) (2021-07-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.34...v0.0.0) (2021-07-29)
+
+### Features
+
+- **utils/print:** 更改前置打印弹框方式 ([26ce31e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/26ce31ef9c3b7e2f9446162be17261461b207d9a))
 
 ## [0.1.34](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.33...v0.1.34) (2021-07-28)
 
