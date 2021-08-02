@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "",
   "license": "MIT",
   "main": "index.ts",
