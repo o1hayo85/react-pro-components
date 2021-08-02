@@ -1,4 +1,4 @@
-import React, { ReactElement, CSSProperties, ReactNode } from 'react';
+import React, { ReactElement, CSSProperties, ReactNode, useState, useEffect } from 'react';
 import { request, BaseData } from '../request';
 
 export interface IPermission {
@@ -7,9 +7,9 @@ export interface IPermission {
   style?: CSSProperties;
   children?: ReactNode;
 }
-
 export const getPerms = async(): Promise<void> => {
   if (window.top.EgeniePermission?.permissionList.length) {
+    console.log('getPerms', window.top.EgeniePermission?.permissionList.length);
     return;
   }
   await request<BaseData<string[]>>({ url: '/api/iac/role/user/perms' })
@@ -34,9 +34,10 @@ export const getPerms = async(): Promise<void> => {
     });
 };
 
-export const hasPermission = async(permissionId: string): Promise<boolean> => {
+export const hasPermission = (permissionId: string): boolean => {
   if (!window.top.EgeniePermission?.permissionList.length) {
-    await getPerms();
+    console.log('hasPermission', window.top.EgeniePermission?.permissionList.length);
+    getPerms();
     return false;
   } else {
     return window.top.EgeniePermission.permissionList.includes(permissionId);
@@ -44,12 +45,19 @@ export const hasPermission = async(permissionId: string): Promise<boolean> => {
 };
 
 export const Permission = (props: IPermission): ReactElement => {
+  const [
+    display,
+    setDisplay,
+  ] = useState<boolean>(false);
+  useEffect(() => {
+    setDisplay(hasPermission(props.permissionId));
+  }, [window.top.EgeniePermission?.permissionList.length]);
   return (
     <div
       className={props.className}
       style={{
         ...props.style,
-        display: hasPermission(props.permissionId) ? 'inline-block' : 'none',
+        display: display ? 'inline-block' : 'none',
       }}
     >
       {props.children}
