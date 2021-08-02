@@ -1,4 +1,4 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Tabs, Menu, Dropdown } from 'antd';
 import { observer } from 'mobx-react';
 import { nanoid } from 'nanoid';
@@ -18,75 +18,108 @@ const ButtonHeader = observer(
       btnExtraRight,
     },
   }) => {
+    const overlay = (group) => {
+      return (
+        <Menu>
+          {group.map((item) => (
+            <Menu.Item
+              className={`${styles.headerButtonMenu} ${styles.btnHeaderWrap} ${item.className || ''}`}
+              disabled={item.disabled}
+              key={nanoid(5)}
+              onClick={item.handleClick.bind(store)}
+              style={{ ...(item.style || {}) }}
+            >
+              {item.icon ? (
+                <i
+                  className={item.icon}
+                  style={{ marginRight: 3 }}
+                />
+              ) : null}
+              {item.text}
+            </Menu.Item>
+          ))}
+        </Menu>
+      );
+    };
     return (
       <div
         className={styles.btnHeaderWrap}
         style={{ display: fullScreen ? 'none' : '' }}
       >
         {_buttons.map((el) => {
-          const { group } = el;
-          return group ? (
-            <Dropdown.Button
-              className={`${styles.headerButtonDropDown} ${el.className || ''}`}
-              disabled={el.disabled}
+          const { group, type } = el;
+          return group ? type === 'dropdown' ? (
+            <Dropdown
               key={nanoid(5)}
-              onClick={el.handleClick.bind(store)}
-              overlay={(
-                <Menu>
-                  {group.map((item) => (
-                    <Menu.Item
-                      className={`${styles.headerButtonMenu} ${styles.btnHeaderWrap} ${item.className || ''}`}
-                      disabled={item.disabled}
-                      key={nanoid(5)}
-                      onClick={item.handleClick.bind(store)}
-                      style={{ ...(item.style || {}) }}
-                    >
-                      {item.icon ? (
-                        <i
-                          className={item.icon}
-                          style={{ marginRight: 3 }}
-                        />
-                      ) : null}
-                      {item.text}
-                    </Menu.Item>
-                  ))}
-                </Menu>
-              )}
-              size="small"
-              style={{ marginRight: 10 }}
+              overlay={overlay(group)}
             >
-              {el.icon ? (
-                <i
-                  className={el.icon}
-                  style={{
-                    marginRight: 3,
-                    color: '#1978FF',
-                  }}
-                />
-              ) : null}
-              {el.text}
-            </Dropdown.Button>
-          ) : (
-            <Button
-              className={styles.headerButton}
-              disabled={el.disabled}
-              key={nanoid(5)}
-              onClick={el.handleClick.bind(store)}
-              size="small"
-              style={{ ...(el.style || {}) }}
-            >
-              {el.icon ? (
-                <i
-                  className={el.icon}
-                  style={{
-                    marginRight: 3,
-                    color: '#20A0FF',
-                  }}
-                />
-              ) : null}
-              {el.text}
-            </Button>
-          );
+              <Button
+                className={`${styles.headerButtonDropDown} ${el.className || ''}`}
+                style={{
+                  marginRight: 10,
+                  height: 30,
+                  padding: '5px 8px',
+                }}
+                
+              >
+                {el.icon ? (
+                  <i
+                    className={el.icon}
+                    style={{
+                      marginRight: 3,
+                      color: '#1978FF',
+                    }}
+                  />
+                ) : null}
+                {el.text}
+                {' '}
+                <DownOutlined/>
+              </Button>
+            </Dropdown>
+          )
+            : (
+              <Dropdown.Button
+                className={`${styles.headerButtonDropDown} ${el.className || ''}`}
+                disabled={el.disabled}
+                key={nanoid(5)}
+                onClick={el.handleClick.bind(store)}
+                overlay={overlay(group)}
+                size="small"
+                style={{ marginRight: 10 }}
+              >
+                {el.icon ? (
+                  <i
+                    className={el.icon}
+                    style={{
+                      marginRight: 3,
+                      color: '#1978FF',
+                    }}
+                  />
+                ) : null}
+                {el.text}
+              </Dropdown.Button>
+            )
+            : (
+              <Button
+                className={styles.headerButton}
+                disabled={el.disabled}
+                key={nanoid(5)}
+                onClick={el.handleClick.bind(store)}
+                size="small"
+                style={{ ...(el.style || {}) }}
+              >
+                {el.icon ? (
+                  <i
+                    className={el.icon}
+                    style={{
+                      marginRight: 3,
+                      color: '#20A0FF',
+                    }}
+                  />
+                ) : null}
+                {el.text}
+              </Button>
+            );
         })}
         {
           btnExtraLeft && (
@@ -127,9 +160,7 @@ const ButtonHeader = observer(
 
 export const MainSubStructure = observer(({ store }) => {
   useEffect(() => {
-    if (store.pageId) {
-      store.getPermission();
-    }
+    store.getPermission();
   }, []);
   const { subTablesModel: {
     activeTab, onClickTab, listModel,

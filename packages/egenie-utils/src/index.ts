@@ -36,3 +36,4 @@ export * from './loginForm/registry';
 export * from './voice';
 export * from './storage';
 export * from './searchListStructure';
+export * from './permission';

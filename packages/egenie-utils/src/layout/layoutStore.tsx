@@ -2,6 +2,7 @@ import { message } from 'antd';
 import _ from 'lodash';
 import { action, observable } from 'mobx';
 import qs from 'qs';
+import { getPerms } from '../permission';
 import { BaseData, request } from '../request';
 import { API, Egenie, EnumVersion, Menudata, Permission, Response, SrcParams, User } from './interface';
 
@@ -161,7 +162,7 @@ export class LayoutStore {
   public handleInit = (project) => {
     this.getUserInfo();
     this.getMenuList();
-    this.getUserPerms();
+    getPerms();
     this.handleDefaultOpenPage();
     this.handleWindow();
     if (project) {

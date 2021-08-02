@@ -1,5 +1,6 @@
 import { set, observable, action, computed, toJS } from 'mobx';
 import { ReactEventHandler, CSSProperties, ReactNode } from 'react';
+import { getPerms } from '../../permission';
 import { request, BaseData } from '../../request';
 import { EgGridModel } from '../egGridModel';
 import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
@@ -9,12 +10,13 @@ import type { ISubTableModel } from './subTableModel';
 interface IButton {
   text: string; // 必填
   permissionId?: string; // 必填
-  handleClick: (event: ReactEventHandler) => void; // 必填
+  handleClick?: (event: ReactEventHandler) => void; // 必填
   icon?: string;
   idx?: string | number;
   display?: (rows?) => boolean;
   group?: IButton[];
   style?: CSSProperties;
+  type?: string;
   isHide?: boolean; // 按钮组是否隐藏（整组按钮都没有权限时使用,不需要外部传参）
 }
 
@@ -102,6 +104,10 @@ export class MainSubStructureModel {
    */
   @observable public permissionOfButton: string[];
 
+  @observable public getPermissionId = (permissionId: string): string => {
+    return permissionId.indexOf('_') === -1 ? `${this.pageId}_${permissionId}` : permissionId;
+  };
+
   @computed public get _buttons(): IMainSubStructureModel['buttons'] {
     const { permissionOfButton, buttons } = this;
     console.log('按钮权限配置', permissionOfButton);
@@ -122,23 +128,30 @@ export class MainSubStructureModel {
         if (!permissionId) {
           return true;
         } // 没有permissionId字段说明不受权限影响
-        return permissionOfButton.indexOf(permissionId) !== -1;
+        return permissionOfButton.includes(this.getPermissionId(permissionId));
       })
       .map((button) => {
-        const { group, ...firstButton } = button;
+        const { group, type, ...firstButton } = button;
         if (!group) {
           return button;
         }
         const _group = toJS(group);
-        _group.unshift(firstButton);
-        const arr = _group.filter((el) => !el.permissionId || permissionOfButton.indexOf(el.permissionId) !== -1); // 过滤掉没权限的
+
+        // dropdown 类型 第一个按钮没有作用 也没有权限 如果其下的所有按钮都没有权限 那么整组按钮不显示
+        if (type !== 'dropdown') {
+          _group.unshift(firstButton);
+        }
+        const arr = _group.filter((el) => !el.permissionId || permissionOfButton.includes(this.getPermissionId(el.permissionId))); // 过滤掉没权限的
         if (!arr.length) {
           return {
             ...button,
             isHide: true,
           };
         } // 如果都没权限，返回isHide: true，留给下一步再过滤掉
-        const ret = arr.shift(); // 提出第一项为主按钮
+        const ret = type !== 'dropdown' ? arr.shift() : {
+          ...firstButton,
+          type,
+        }; // 提出第一项为主按钮
         if (!arr.length) {
           return ret;
         } // 如果剩余的是空数组，直接返回第一项作为按钮而不是按钮组
@@ -151,14 +164,10 @@ export class MainSubStructureModel {
 
   // 获取按钮权限
   @observable public getPermission = async(): Promise<void> => {
-    const res = await request<BaseData<any>>({
-      url: `/api/iac/role/user/perms?resourceId=${this.pageId}`,
-      method: 'get',
-    });
-
-    this.permissionOfButton = res.data.map((el) => {
-      return el.replace(`${this.pageId}_`, '');
-    });
+    if (!window.top.EgeniePermission?.permissionList.length) {
+      await getPerms();
+    }
+    this.permissionOfButton = window.top.EgeniePermission.permissionList;
   };
 
   @observable public foldModel = {
@@ -339,6 +348,11 @@ export class MainSubStructureModel {
           this.gridModel.rows = v.data.list || [];
           this.gridModel.total = v.data.totalCount >>> 0;
           this.api.callbackAfterQuery?.(this);
+          if (!this.gridModel.rows.length) {
+            this.gridModel.showEmpty = false;
+            this.gridModel.showNoSearchEmpty = false;
+            this.gridModel.showNormalEmpty = true;
+          }
           return data;
         })
       )
