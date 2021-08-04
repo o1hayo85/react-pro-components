@@ -95,6 +95,29 @@ function formatPddData(printData: any[], printTemplate: TemplateData, courierPri
   return documents;
 }
 
+function sliceData(data: any[], count = 500): any[] {
+  if (!(Array.isArray(data) && data.length)) {
+    return [];
+  }
+
+  const result: any[] = [];
+  data.forEach((item, index) => {
+    const currentPage = (index / count) >>> 0;
+    if (result[currentPage]) {
+      result[currentPage].push(item);
+    } else {
+      result[currentPage] = [item];
+    }
+  });
+  return result;
+}
+
+/**
+ * 格式化条码数据
+ * @param row 一页的行
+ * @param col 一页的列
+ * @param data 打印数据
+ */
 export function formatBarcodeData(row: number, col: number, data: any[]): any[] {
   if (!(Array.isArray(data) && data.length)) {
     return [];
@@ -133,6 +156,11 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
  * 公共参数
  */
 export interface CommonParams {
+
+  /**
+   * 一次打印数据个数
+   */
+  count?: number;
 
   /**
    * 模版数据
@@ -268,11 +296,11 @@ export class PrintHelper {
    * 打印(先切换打印机类型,否则后果自负)
    * @param params
    */
-  public print = (params: RookiePrintParams | PddPrintParams | JDParams): Promise<any> => {
+  public print = async(params: RookiePrintParams | PddPrintParams | JDParams): Promise<any> => {
     if (this.state === this.jdPrint) {
       const newParams: JDParams = params;
       const customTempUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
-      return this.state.print({
+      await this.state.print({
         preview: newParams.preview,
         printer: formatPrintName(newParams.templateData, newParams.printer),
         customData: newParams.customData ? [JSON.parse(newParams.customData)] : newParams.customData,
@@ -282,28 +310,40 @@ export class PrintHelper {
       });
     } else if (this.state === this.rookiePrint) {
       const newParams: RookiePrintParams = params;
-      const contents = formatRookieData(newParams.contents, newParams.templateData);
-      return this.state.print({
-        preview: newParams.preview,
-        contents,
-        printer: formatPrintName(newParams.templateData, newParams.printer),
-      });
+      const pageData = sliceData(newParams.contents, newParams.count);
+
+      for (let i = 0; i < pageData.length; i++) {
+        const contents = formatRookieData(pageData[i], newParams.templateData);
+        await this.state.print({
+          preview: newParams.preview,
+          contents,
+          printer: formatPrintName(newParams.templateData, newParams.printer),
+        });
+      }
     } else if (this.state === this.dyPrint) {
       const newParams: DyPrintParams = params;
-      const contents = formatDyData(newParams.contents, newParams.templateData);
-      return this.state.print({
-        preview: newParams.preview,
-        contents,
-        printer: formatPrintName(newParams.templateData, newParams.printer),
-      });
+      const pageData = sliceData(newParams.contents, newParams.count);
+
+      for (let i = 0; i < pageData.length; i++) {
+        const contents = formatDyData(pageData[i], newParams.templateData);
+        await this.state.print({
+          preview: newParams.preview,
+          contents,
+          printer: formatPrintName(newParams.templateData, newParams.printer),
+        });
+      }
     } else if (this.state === this.pddPrint) {
       const newParams: PddPrintParams = params;
-      const contents = formatPddData(newParams.contents, newParams.templateData, newParams.courierPrintType);
-      return this.state.print({
-        preview: newParams.preview,
-        contents,
-        printer: formatPrintName(newParams.templateData, newParams.printer),
-      });
+      const pageData = sliceData(newParams.contents, newParams.count);
+
+      for (let i = 0; i < pageData.length; i++) {
+        const contents = formatPddData(pageData[i], newParams.templateData, newParams.courierPrintType);
+        await this.state.print({
+          preview: newParams.preview,
+          contents,
+          printer: formatPrintName(newParams.templateData, newParams.printer),
+        });
+      }
     } else {
       return Promise.reject();
     }
