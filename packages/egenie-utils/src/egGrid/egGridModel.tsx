@@ -134,7 +134,7 @@ export class EgGridModel {
   /**
    * 是否可以勾选
    */
-  @observable public showCheckBox = false;
+  @observable public showCheckBox = true;
 
   /**
    * 设置行高，默认38
