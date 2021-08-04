@@ -1,12 +1,25 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.35...v0.0.0) (2021-08-04)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.38...v0.0.0) (2021-08-04)
+
+### Features
+
+- **utils/print:** 增加一次打印页数限制 ([a8ae422](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a8ae422d68e35fa7daf066f6dc50ccbe24391ff6))
+
+## [0.1.38](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.37...v0.1.38) (2021-08-04)
+
+### Bug Fixes
+
+- 默认 showCheckBox 为 true ([58926a8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/58926a860497f0735cc74aeb91deaec9b90cbba1))
+
+## [0.1.37](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.36...v0.1.37) (2021-08-02)
 
 ### Bug Fixes
 
 - 权限部分渲染问题 ([c4725e1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c4725e1407b7c6fecbe20c9f4aaa674ee2e73ac8))
 
+## [0.1.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.35...v0.1.36) (2021-08-02)
+
 ### Features
 
-- **utils/print:** 增加一次打印页数限制 ([35a0f04](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/35a0f044ba08949d97a08d875f01ced853217705))
 - 权限配置 ([e16be97](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e16be97fa9255f0816d23e5e82081c1cc379e746))
 
 ## [0.1.35](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.34...v0.1.35) (2021-07-29)
