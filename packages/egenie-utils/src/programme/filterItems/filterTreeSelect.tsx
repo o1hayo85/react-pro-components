@@ -56,6 +56,37 @@ export class FilterTreeSelect extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterTreeSelect): string {
+    if (Array.isArray(this.value) && this.value.length) {
+      const flattenTree = new Map<string, FilterTreeSelectItem>();
+      (function dfs(data: FilterTreeSelectItem[]) {
+        if (Array.isArray(data)) {
+          data.forEach((item) => {
+            flattenTree.set(item.value, item);
+            dfs(item.children);
+          });
+        }
+      })(this.treeData);
+
+      const translatePath: string[] = this.value.map((item) => {
+        const node = flattenTree.get(item);
+        if (node) {
+          if (typeof node.title === 'string') {
+            return node.title;
+          } else {
+            return '';
+          }
+        } else {
+          return '';
+        }
+      });
+
+      return `${this.label}:${translatePath.join(',')}`;
+    } else {
+      return '';
+    }
+  }
+
   public toParams(this: FilterTreeSelect): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };

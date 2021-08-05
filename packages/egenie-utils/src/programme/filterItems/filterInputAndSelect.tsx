@@ -50,6 +50,18 @@ export class FilterInputAndSelect extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterInputAndSelect): string {
+    if (this.selectValue) {
+      if (this.inputValue) {
+        return `${this.data.find((item) => item.value === this.selectValue)?.label || ''}:${this.inputValue}`;
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
   private snapshot: { inputValue: string | undefined; selectValue: string; } = {
     inputValue: '',
     selectValue: '',

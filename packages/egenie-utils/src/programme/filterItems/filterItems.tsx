@@ -354,6 +354,15 @@ export class FilterItems {
   }
 
   /**
+   * 获取查询项翻译的值
+   */
+  @computed
+  public get translateParams(): string[] {
+    return this.actualData.map((item) => item.translateParams.call(item))
+      .filter(Boolean);
+  }
+
+  /**
    * 连接的列表
    */
   @observable private connectedList: ConnectListItem[] = [];

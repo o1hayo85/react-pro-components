@@ -13,6 +13,10 @@ class CommonBase extends FilterBase {
   public reset() {
   }
 
+  public translateParams(): string {
+    return '';
+  }
+
   public toProgramme(): string | null {
     return undefined;
   }

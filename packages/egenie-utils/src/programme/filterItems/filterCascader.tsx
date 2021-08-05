@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel, ValueAndLabelData } from './common';
 
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {
@@ -44,6 +44,27 @@ export class FilterCascader extends FilterBase {
       return { [this.field]: this.toProgramme() };
     } else {
       return {};
+    }
+  }
+
+  public translateParams(this: FilterCascader): string {
+    if (Array.isArray(this.value) && this.value.length) {
+      const translatePath: string[] = [];
+      let currentData = this.data;
+      for (let i = 0; i < this.value.length; i++) {
+        const item = currentData.find((val) => val.value === this.value[i]);
+        if (item) {
+          currentData = item.children || [];
+          translatePath.push(item.label);
+        } else {
+          currentData = [];
+          translatePath.push('');
+        }
+      }
+
+      return `${this.label}:${translatePath.join(',')}`;
+    } else {
+      return '';
     }
   }
 

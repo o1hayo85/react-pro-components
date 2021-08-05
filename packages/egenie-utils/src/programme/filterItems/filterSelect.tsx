@@ -72,6 +72,16 @@ export class FilterSelect extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterSelect): string {
+    if (this.toProgramme() == null) {
+      return '';
+    } else {
+      return `${this.label}:${[].concat(this.value)
+        .map((item) => this.data.find((val) => val.value === item)?.label || '')
+        .join(',')}`;
+    }
+  }
+
   @action
   public formatValue(this: FilterSelect, value?: string | undefined | string[]): void {
     if (this.mode) {

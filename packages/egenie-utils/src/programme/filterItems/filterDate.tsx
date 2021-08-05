@@ -259,6 +259,27 @@ export class FilterDate extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterDate): string {
+    const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams).replace(',', '至');
+    if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
+      if (this.selectValue) {
+        if (timeString) {
+          return `${this.data.find((item) => item.value === this.selectValue)?.label || ''}:${timeString}`;
+        } else {
+          return '';
+        }
+      } else {
+        return '';
+      }
+    } else {
+      if (timeString) {
+        return `${this.label}:${timeString}`;
+      } else {
+        return '';
+      }
+    }
+  }
+
   public toParams(this: FilterDate): {[key: string]: string; } {
     const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {

@@ -54,6 +54,31 @@ export class FilterRadio extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterRadio): string {
+    const inputItem = this.data.find((item) => item.showInput);
+    if (inputItem) {
+      if (this.value == undefined) {
+        if (this.inputValue) {
+          return `${this.label}:${this.inputValue}`;
+        } else {
+          return '';
+        }
+      } else {
+        if (inputItem.value === this.value && this.inputValue) {
+          return `${this.label}:${this.inputValue}`;
+        } else {
+          return `${this.label}:${this.data.find((item) => item.value === this.value)?.label || ''}`;
+        }
+      }
+    } else {
+      if (this.value == undefined) {
+        return '';
+      } else {
+        return `${this.label}:${this.data.find((item) => item.value === this.value)?.label || ''}`;
+      }
+    }
+  }
+
   public toParams(this: FilterRadio): {[key: string]: string; } {
     if (this.toProgramme() == undefined) {
       return {};

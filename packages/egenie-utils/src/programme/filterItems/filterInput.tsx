@@ -54,6 +54,14 @@ export class FilterInput extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterInput): string {
+    if (this.toProgramme()) {
+      return `${this.label}:${this.toProgramme()}`;
+    } else {
+      return '';
+    }
+  }
+
   @action
   public formatValue(this: FilterInput, value?: string): void {
     this.value = _.toString(value);

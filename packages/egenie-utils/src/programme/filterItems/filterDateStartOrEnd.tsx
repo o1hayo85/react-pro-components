@@ -77,6 +77,14 @@ export class FilterDateStartOrEnd extends FilterBase {
     }
   }
 
+  public translateParams(this: FilterDateStartOrEnd): string {
+    if (this.toProgramme()) {
+      return `${this.label}:${this.toProgramme()}`;
+    } else {
+      return '';
+    }
+  }
+
   @action
   public formatValue(this: FilterDateStartOrEnd, value?: string | moment.Moment | null): void {
     if (!value) {

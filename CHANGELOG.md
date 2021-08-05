@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.38...v0.0.0) (2021-08-04)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.39...v0.0.0) (2021-08-05)
+
+### Features
+
+- **utils/filterItems:** 增加查询项 fanyi ([7868034](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7868034ca1360c617bae189d9b48f03ffec65e50))
+
+## [0.1.39](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.38...v0.1.39) (2021-08-04)
 
 ### Features
 
