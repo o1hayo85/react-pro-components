@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils/filterItems:** 增加查询项 fanyi ([7868034](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7868034ca1360c617bae189d9b48f03ffec65e50))
+- **utils/filterItems:** 增加查询项翻译 ([c8eea13](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c8eea135b8475bfc0a389b07015590a115f3ac26))
 
 ## [0.1.39](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.38...v0.1.39) (2021-08-04)
 
