@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** remove voice ([b14d389](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b14d389af38317b7fb9412361b091240263dedb1))
+- **utils:** remove voice ([a43d8e4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a43d8e4053bc15d2004eb28493fad183947b0688))
 
 ## [0.1.40](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.39...v0.1.40) (2021-08-05)
 
