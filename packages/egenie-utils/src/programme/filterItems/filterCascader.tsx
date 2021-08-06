@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel, ValueAndLabelData } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {

@@ -333,7 +333,7 @@ export class FilterItems {
    * @internal
    */
   @computed
-  public get actualData() {
+  public get actualData(): FilterItem[] {
     return this.originData.filter((item) => item.showItem);
   }
 
@@ -371,7 +371,7 @@ export class FilterItems {
    * 外部model连接到查询项
    */
   @action
-  public connect(connectListItem: ConnectListItem) {
+  public connect(connectListItem: ConnectListItem): void {
     this.connectedList.push(connectListItem);
   }
 

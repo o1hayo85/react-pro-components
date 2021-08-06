@@ -1,7 +1,6 @@
 import { Menu, Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { OSS } from '../constants';
 import { HeaderTabs } from './headerTabs';
 import { HeaderUserInfo } from './headerUserInfo';
 import { Home } from './home';
@@ -108,7 +107,7 @@ export class LayoutMenu extends React.Component<any> {
                 >
                   <img
                     id={styles.menuIcon}
-                    src={`${OSS}/menu/${item.icon}`}
+                    src={`https://front.runscm.com/egenie-cloud-wms/menu/${item.icon}`}
                   />
                   <span className={styles.menuName}>
                     {item.name}
