@@ -2,6 +2,7 @@
 
 ### Features
 
+- **utils:** add exportModal ([7f17ab8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7f17ab84e2aad2998241d0f29e7ebb9016f71fc8))
 - 新增新版导出 ([761452e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/761452ebd0cf87e83de29768f5e8055503395a3b))
 
 # [0.2.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.40...v0.2.0) (2021-08-06)
