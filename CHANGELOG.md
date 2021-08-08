@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.1...v0.0.0) (2021-08-08)
 
+### Features
+
+- **utils:** add exportModal ([85e0a80](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/85e0a805786ead028d9f3003ff8614f0052235a4))
+
 ## [0.2.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.0...v0.2.1) (2021-08-08)
 
 ### Features
