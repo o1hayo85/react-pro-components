@@ -34,3 +34,4 @@ export * from './loginForm/findPassword';
 export * from './loginForm/registry';
 export * from './searchListStructure';
 export * from './permission';
+export * from './exportModal';
