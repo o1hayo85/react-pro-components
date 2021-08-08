@@ -7,7 +7,7 @@ import api from './api';
 import styles from './index.less';
 import { Template, Fields } from './interface';
 
-export default class ExportStore {
+export class ExportStore {
   constructor(props?) {
     this.parent = props.parent ? props.parent : null;
   }

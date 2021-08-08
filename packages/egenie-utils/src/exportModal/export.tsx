@@ -3,14 +3,14 @@ import { Button, Input, Select, Modal, Table, Form } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React, { Component, ReactNode } from 'react';
-import Store from './exportStore';
+import { ExportStore } from './exportStore';
 import styles from './index.less';
 
 const Option = Select.Option;
 
 // 导出弹窗
 @observer
-export default class ExportModal extends Component<{ store?: Store; }> {
+export class ExportModal extends Component<{ store?: ExportStore; }> {
   render(): ReactNode {
     const { visible, commitLoading, templateList, column, fileName, templateColumnList, editId, selectTemplateId, setForm, onSelectTemplate, onChangeFileName, onExport, onClose, newTemplateClick } = this.props.store;
     const EditableCell = ({
@@ -75,7 +75,7 @@ export default class ExportModal extends Component<{ store?: Store; }> {
         }),
       };
     });
-  
+
     return (
       <Modal
         className={styles.exportModal}
