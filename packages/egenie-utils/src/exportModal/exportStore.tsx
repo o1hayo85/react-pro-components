@@ -117,7 +117,9 @@ export class ExportStore {
         ),
         width: 500,
       });
-      this.parent && this.parent.exportCallBack();
+      if (this.parent && this.parent.exportCallBack) {
+        this.parent.exportCallBack();
+      }
     } finally {
       this.commitLoading = false;
     }
