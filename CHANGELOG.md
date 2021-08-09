@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.2...v0.0.0) (2021-08-09)
 
+### Bug Fixes
+
+- **utils:** 使用导出时父组件未写回调会报错 bug ([a75eb59](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a75eb59830a3a1c939dc281b999147f6153ca5ed))
+
 ## [0.2.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.1...v0.2.2) (2021-08-08)
 
 ### Features
