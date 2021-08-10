@@ -267,7 +267,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           placeholder={placeholder}
           searchValue={searchValue}
           showSearch={showSearch}
-          style={{ display: 'block' }}
+          style={{ width: `calc(100% - ${labelWidth}px)` }}
           value={toJS(value)}
         />
       </div>

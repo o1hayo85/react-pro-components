@@ -475,11 +475,12 @@ class Footer extends React.Component<{ programme?: Programme; }> {
     return (
       <>
         <div className={styles.footer}>
-          <Button onClick={() => handleShowSetting(true)}>
-            设置
-          </Button>
+          <a onClick={() => handleShowSetting(true)}>
+            <i className="icon-btn_sz"/>
+          </a>
+
           <Button onClick={() => handleShowProgramme(true)}>
-            方案
+            生成方案
           </Button>
           <Button
             className="ghost-bg-btn"

@@ -260,7 +260,8 @@ export class FilterDate extends FilterBase {
   }
 
   public translateParams(this: FilterDate): string {
-    const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams).replace(',', '至');
+    const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams)
+      .replace(',', '至');
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
         if (timeString) {
@@ -338,6 +339,10 @@ export class FilterDate extends FilterBase {
     this.startTime = this.snapshot.startTime;
     this.endTime = this.snapshot.endTime;
     this.selectValue = this.snapshot.selectValue;
+    this.open = [
+      false,
+      false,
+    ];
     this.handleCallback();
   };
 
@@ -472,10 +477,21 @@ export class FilterDate extends FilterBase {
 
       this.startTime = startTime;
       this.endTime = endTime;
-
+      this.open = [
+        false,
+        false,
+      ];
       this.handleCallback();
     }
   };
+
+  /**
+   * @internal
+   */
+  @observable public open: [boolean, boolean] = [
+    false,
+    false,
+  ];
 }
 
 /**
@@ -515,6 +531,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
       labelWidth,
       allowClear,
       required,
+      open,
     } = this.props.store;
     const newClassName = classNames('filterDateSelect', className);
     return (
@@ -544,6 +561,8 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleStartChange}
+            onOpenChange={(isOpen: boolean) => this.props.store.open[0] = Boolean(isOpen)}
+            open={open[0]}
             placeholder={Array.isArray(placeholder) ? placeholder[0] : placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
             showNow={false}
@@ -565,6 +584,8 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleEndChange}
+            onOpenChange={(isOpen: boolean) => this.props.store.open[1] = Boolean(isOpen)}
+            open={open[1]}
             placeholder={Array.isArray(placeholder) ? placeholder[1] : placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
             showNow={false}
@@ -601,6 +622,7 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
       labelWidth,
       allowClear,
       required,
+      open,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
@@ -624,6 +646,11 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleRangeChange}
+            onOpenChange={(isOpen: boolean) => this.props.store.open = [
+              Boolean(isOpen),
+              Boolean(isOpen),
+            ]}
+            open={open[0]}
             placeholder={placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
             showTime={format === FormatDateType.defaultFormat ? {
@@ -664,7 +691,9 @@ class FilterDateDictComponent extends React.Component<{ store: FilterDate; }> {
       >
         {realDateDict.map((item) => (
           <Tag
+            className="egenie-secondary-content"
             color="blue"
+            key={item.value}
             onClick={() => handleDateDictChange(item.value)}
           >
             {item.label}

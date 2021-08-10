@@ -359,17 +359,13 @@
 .dropdownDate {
   :global {
     .ant-picker-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
       .ant-picker-footer-extra {
-        flex-grow: 1;
         border: none;
       }
 
       .ant-picker-ranges {
-        flex-shrink: 0;
+        padding-top: 0;
+        padding-bottom: 0;
       }
     }
   }
@@ -377,4 +373,12 @@
 
 .dateSelect {
   padding: @egenie-spacing-xs 0;
+
+  :global {
+    .ant-tag {
+      margin-right: @egenie-spacing-xss;
+      padding-right: @egenie-spacing-xss;
+      padding-left: @egenie-spacing-xss;
+    }
+  }
 }

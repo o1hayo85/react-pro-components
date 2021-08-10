@@ -1,4 +1,6 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.2...v0.0.0) (2021-08-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.3...v0.0.0) (2021-08-10)
+
+## [0.2.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.2...v0.2.3) (2021-08-09)
 
 ### Bug Fixes
 

@@ -38,6 +38,10 @@
     height: @footer-height;
     padding: 0 @egenie-spacing-md;
     border-top: 1px solid @egenie-border-color-base;
+
+    > a > i {
+      font-size: @egenie-font-size-xl;
+    }
   }
 
   .tableWrapper {
@@ -56,15 +60,16 @@
     overflow-x: auto;
     border-radius: @egenie-border-radius-base @egenie-border-radius-base 0 0;
 
-    section {
+    > section {
       &.active {
-        color: @primary-color;
         background-color: #fff;
         border-color: transparent;
-      }
 
-      &:hover {
-        color: @primary-color;
+        :global {
+          .ant-typography {
+            color: @egenie-primary-color !important;
+          }
+        }
       }
 
       position: relative;
