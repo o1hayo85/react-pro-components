@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.5...v0.0.0) (2021-08-11)
 
+### Features
+
+- 更改 ui 样式 ([d842254](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d8422543e1f6f4ec4946bd775d91d69cfa994713))
+
 ## [0.2.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.4...v0.2.5) (2021-08-11)
 
 ### Bug Fixes
