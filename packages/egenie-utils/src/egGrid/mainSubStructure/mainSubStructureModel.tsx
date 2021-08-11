@@ -226,6 +226,7 @@ export class MainSubStructureModel {
    */
   public setMainGridModel = action((grid, api) => {
     const { onSort, onRowClick, onRefresh, handlePageChange, onShowSizeChange, onQuery, onRowSelectChange } = this;
+    const { onToggleOrDeleteSubRow } = api;
     this.gridModel = new EgGridModel({
       ...grid,
       columns: grid.getColumns?.(this) ?? grid.columns,
@@ -237,6 +238,7 @@ export class MainSubStructureModel {
         onRefresh,
         onQuery,
         onRowSelectChange,
+        onToggleOrDeleteSubRow,
       },
       parent: this,
     });

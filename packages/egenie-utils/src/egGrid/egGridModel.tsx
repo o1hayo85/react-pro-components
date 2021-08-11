@@ -3,7 +3,9 @@ import { set, observable, action, toJS, computed } from 'mobx';
 import React from 'react';
 import type { Column, HeaderRendererProps, SortDirection, SortColumn } from 'react-data-grid';
 import { SelectColumn } from 'react-data-grid';
+import { CellExpanderFormatter, ChildRowDeleteButton, SubRowAction, subRowReducer } from './cellFormatter/treeFormatter';
 import { ColumnSettingModel } from './columnSetting';
+import styles from './egGridStyle.less';
 import { DraggableHeaderRenderer } from './headerRenderers/draggableHeaderRenderer';
 import { getUser, getColumnsConfig, saveColumnsConfig, cache } from './request';
 
@@ -19,6 +21,7 @@ export interface EnhanceColumn<TRow, TSummaryRow = unknown> extends Column<TRow>
   sidx?: string;
   ejlHidden?: boolean;
   nameText?: string; // 如果表头是自定义了，要配置这个字段，这个字段用来做表格列拖拽设置的文字显示
+  treeExpand?: boolean; // 如果列定义了这个字段，意味着这个单元格用来折叠和收起tree子表
 }
 
 export interface IObj {
@@ -26,6 +29,10 @@ export interface IObj {
 }
 
 export type ColumnType = Array<EnhanceColumn<IObj>>;
+export interface ISubRow {
+  parentId?: number | string;
+  [key: string]: any;
+}
 
 export interface IEgGridApi {
   onRowClick?: (rowId: StrOrNum, row?: IObj) => void;
@@ -36,6 +43,7 @@ export interface IEgGridApi {
   onShowSizeChange?: (page: StrOrNum, pageSize: StrOrNum) => void;
   onQuery?: (params?) => Promise<unknown>;
   callbackAfterQuery?: (params?) => void;
+  onToggleOrDeleteSubRow?: (rest?: SubRowAction) => Promise<ISubRow[] | boolean>;
 }
 
 export type TSummaryRows = string[] | IObj[] | ((rows?: IObj[]) => IObj[]);
@@ -358,10 +366,60 @@ export class EgGridModel {
    * 组合序号列之后的列数据，渲染用，外部一般不用
    */
   @computed public get _columns() {
-    const { columns = [], showCheckBox = true } = this;
+    const { columns = [], showCheckBox = true, toggleOrDeleteSubRow, primaryKeyField } = this;
     if (!columns.length) {
       return columns;
     }
+
+    const prevHandleColumns = columns.map((v) => {
+      const { treeExpand, formatter, key } = v;
+      const formatterCell = treeExpand ? {
+        formatter({ row, isCellSelected }) {
+          const hasChildren = row.children !== undefined;
+          const hasParentId = row.parentId !== undefined;
+          return (
+            <div className={styles.rdgCellValue}>
+              {formatter && formatter({
+                row,
+                isCellSelected,
+              }) }
+              {!formatter && row[key]}
+              <div className={styles.rdgCellValue}>
+                {hasChildren && (
+                  <CellExpanderFormatter
+                    expanded={row.isExpanded === true}
+                    isCellSelected={isCellSelected}
+                    onCellExpand={() => toggleOrDeleteSubRow({
+                      id: row[primaryKeyField],
+                      type: 'toggleSubRow',
+                      primaryKeyField,
+                    })}
+                  />
+                ) }
+                {
+                  (hasParentId) && (
+                    <div className={styles.rdgCellValue}>
+                      <ChildRowDeleteButton
+                        isCellSelected={isCellSelected}
+                        onDeleteSubRow={() => toggleOrDeleteSubRow({
+                          id: row[primaryKeyField],
+                          type: 'deleteSubRow',
+                          primaryKeyField,
+                        })}
+                      />
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          );
+        },
+      } : {};
+      return {
+        ...v,
+        ...formatterCell,
+      };
+    });
     const ret = (showCheckBox ? [SelectColumn] : []).concat([
       {
         key: 'gridOrderNo',
@@ -376,7 +434,7 @@ export class EgGridModel {
           </div>
         ),
       },
-      ...columns,
+      ...prevHandleColumns,
     ]).filter((el: EnhanceColumn<IObj>) => !el.ejlHidden);
 
     return ret;
@@ -462,6 +520,45 @@ export class EgGridModel {
    * 查询方案注入此方法，可通过gridModel.getFilterParams获取参数
    */
   public getFilterParams: () => {[key: string]: string; };
+
+  public toggleOrDeleteSubRow = action(async({ id, type, primaryKeyField }: SubRowAction): Promise<void> => {
+    const { rows } = this;
+
+    if (type === 'toggleSubRow') {
+      const rowIndex = rows.findIndex((r) => r[primaryKeyField] === id);
+      const row = rows[rowIndex];
+      if (!(row && row.isExpanded)) {
+        const reqRows = await this.api.onToggleOrDeleteSubRow?.({
+          id,
+          type,
+          primaryKeyField,
+        }) as ISubRow[];
+        row.children = reqRows.map((v) => ({
+          ...v,
+          parentId: id,
+        }));
+      }
+    }
+
+    // 删除行且需要调用后端，且删除失败，那么什么都不做
+    if (type === 'deleteSubRow' && this.api.onToggleOrDeleteSubRow) {
+      const reqDeleteRow = await this.api.onToggleOrDeleteSubRow({
+        id,
+        type,
+        primaryKeyField,
+      });
+      if (!reqDeleteRow) {
+        return;
+      }
+    }
+    const newRows = subRowReducer(rows, {
+      id,
+      type,
+      primaryKeyField,
+    });
+    console.log(newRows, 'newRows');
+    this.rows = newRows;
+  });
 
   /**
    * 行点击事件
