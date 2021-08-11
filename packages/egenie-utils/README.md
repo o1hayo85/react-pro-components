@@ -668,8 +668,9 @@ printHelper.getPrinters().then((info) => {console.log(info)})
 
 // 打印
 printHelper.print({
-  preview: false,
-  printer: 打印机,
+  count: 一次打印页数。默认500,
+  preview: 是否预览,
+  printer: 打印机(可选),
   templateData: 后端返的模版数据,
   contents: 后端返的数据,
 })
@@ -679,6 +680,29 @@ printHelper.print({
 
 ```
 import { printWayBill } from 'egenie-utils';
+```
+
+4. formatBarcodeData 格式化条码数据(有可能一页打多个条码)---然后打印
+
+```
+import { formatBarcodeData, printHelper } from 'egenie-utils';
+const tempData = 后端返的模版数据;
+const printList = 后端返的打印数据;
+printHelper.toggleToRookie();
+await printHelper.print({
+    preview: 是否预览,
+    printer: 打印机(可选),
+    templateData: tempData,
+    contents: formatBarcodeData(tempData?.rowCount, tempData?.colsCount, printList),
+  });
+```
+
+5. getCustomPrintParam 获取自定义打印参数---打印请自写(参考上面打印的文档)
+
+```
+import { getCustomPrintParam } from 'egenie-utils';
+const customPrintParam = await getCustomPrintParam(模版类型);
+console.log(customPrintParam);
 ```
 
 ## 菜单-LayoutGuide
