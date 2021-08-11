@@ -164,3 +164,66 @@ ol {
 /* 新的内容---项目自己定义的全局样式不用删除 */
 @import '~egenie-config/lib/theme/theme.less';
 ```
+## v0.2.5 添加表格tree
+1. 增加列配置字段：treeExpand?:boolean;需要在哪一列添加展开折叠功能，就在哪一列配置。
+2. 可自行对数据做处理，也可让后端直接返回。若通过点击展开按钮动态获取子表信息，则需要在表格的api里配置`onToggleOrDeleteSubRow`方法，在此方法里请求回来的数据再自行做处理。
+3. `onToggleOrDeleteSubRow({id?: string | number, type: 'toggleSubRow' | 'deleteSubRow', primaryKeyField})`
+      1. `id`为点击行的`rowId`
+      2. `toggleSubRow`：点击了展开折叠按钮，`deleteSubRow`点击了子表删除按钮，通过此字段区分
+      3. `primaryKeyField`为表格配置的`primaryKeyField`字段
+4. tree对表格数据的限制：
+      - 必须有`children`字段
+      - children的key要与主表的key字段一致。比如主表的主键是wmsOrderId,children里的每一项也要有wmsOrderId字段，暂不支持子表key自定义。
+      - children的每一项必须要有`parentId`字段，parentId的值要与上一层父表的key的值全等。
+> 示例： 
+
+
+```js
+  {
+    column: [
+      {
+        key: 'wmsReceiveOrderNo',
+        name: '收货单编号',
+        width: 200,
+        sortable: true,
+        treeExpand: true, // 这一列用来控制展开折叠
+      },
+    ],
+    api: {
+      // 从后端请求回来的分页数据一般为{ status: 'Successful', data: { list: [], ... } }
+     onToggleOrDeleteSubRow: async({ id, type, primaryKeyField }) => {
+      // 点击了展开折叠按钮，拿回来的数据就是点击的rowId对应的子表数据
+      if (type === 'toggleSubRow') {
+        const result = await request<PaginationData<IReveiveDataList>>({
+          url: api.receiveOrder,
+          method: 'POST',
+          data: {
+            page: 1,
+            pageSize: 50,
+            sidx: '',
+            sord: '',
+          },
+        });
+        const list = result.data.list;
+        list.forEach((el, i) => {
+          // 这里手动给子表的每一行强制加主键和父表的主键一致
+          // parenId在组件库底层处理，这里无需处理
+          el[primaryKeyField] = `${id}__${i}`;
+        });
+        result.data.list = list;
+        return result;
+      }
+      // 点击了子表的删除按钮
+      if (type === 'deleteSubRow') {
+        // 调用删除接口操作
+         const result = await request({...})
+        // return true | false;
+        // true, 删除成功
+        // false 删除失败
+       }
+        return true;
+      }
+    }
+  }
+ 
+```
