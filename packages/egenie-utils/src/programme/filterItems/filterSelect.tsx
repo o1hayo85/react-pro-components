@@ -198,6 +198,11 @@ export class FilterSelect extends FilterBase {
       .includes(this.searchValue.toLowerCase()))
       .slice(0, this.maxItemsLength);
   }
+
+  /**
+   * 是否显示下拉小箭头
+   */
+  @observable public showArrow = true;
 }
 
 /**
@@ -227,6 +232,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       label,
       labelWidth,
       required,
+      showArrow,
     } = this.props.store;
     return (
       <div
@@ -266,6 +272,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           options={options}
           placeholder={placeholder}
           searchValue={searchValue}
+          showArrow={showArrow}
           showSearch={showSearch}
           style={{ width: `calc(100% - ${labelWidth}px)` }}
           value={toJS(value)}
