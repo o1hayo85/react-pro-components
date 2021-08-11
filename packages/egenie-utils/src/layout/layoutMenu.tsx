@@ -58,6 +58,7 @@ export class LayoutMenu extends React.Component<any> {
       userInfoLeft,
       userInfoRight,
       defaultDashboard,
+      logoImg,
     } = this.props;
     const {
       menuData,
@@ -80,15 +81,21 @@ export class LayoutMenu extends React.Component<any> {
         <Layout hasSider>
           <Sider
             id={styles.rootSider}
-
             width="60"
           >
-            <div
-              className={styles.rootLayoutLogo}
-              onClick={getActiveSubMenu.bind(this, tabList[0])}
-            >
-              {project.name}
-            </div>
+            {logoImg ? (
+              <div className={styles.logoImg}>
+                {logoImg}
+              </div>
+            )
+              : (
+                <div
+                  className={styles.rootLayoutLogo}
+                  onClick={getActiveSubMenu.bind(this, tabList[0])}
+                >
+                  {project.name}
+                </div>
+              )}
             <Menu
               mode="inline"
               theme="dark"

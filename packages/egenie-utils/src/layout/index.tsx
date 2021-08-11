@@ -36,6 +36,11 @@ export interface Props {
    * 项目信息
    */
   project?: Project;
+
+  /**
+   * log图片
+   */
+  logoImg?: React.ReactNode;
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
   return (
@@ -43,6 +48,7 @@ export const LayoutGuide: React.FC<Props> = (props: Props) => {
       <LayoutMenu
         defaultDashboard={props.defaultDashboard}
         haveDashboard={props.haveDashboard}
+        logoImg={props.logoImg}
         project={props.project}
         srcParams={props.srcParams}
         userInfoLeft={props.userInfoLeft}
