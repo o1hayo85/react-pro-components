@@ -103,11 +103,11 @@ export class ExportStore {
       this.onClose();
       Modal.success({
         title: '导出',
-        content: () => (
+        content: (
           <div>
             系统正在执行导出，请稍后到
             <span
-              className="exportCenterLink"
+              className={styles.exportCenterLink}
               onClick={this.handleGotoExportCenter}
             >
               导出任务中心
