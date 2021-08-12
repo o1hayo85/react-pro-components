@@ -58,11 +58,16 @@ export class Store {
       ],
       type: 'input',
       placeholder: '请输入公司名称',
-      
+
     },
     easyName: {
-      label: '公司简称',
+      label: {
+        ERP: '档口拿货简称',
+        SIMPLEERP: '公司简称',
+      },
+      tooltip: { ERP: '请填写在档口拿货时拿货条码上使用的名称，如果没有请填写店铺简称。' },
       required: true,
+      differentLabel: true,
       systemType: [
         'ERP',
         'SIMPLEERP',
@@ -70,12 +75,15 @@ export class Store {
       rules: [
         {
           required: true,
-          message: '请输入公司简称',
+          message: '请输入',
         },
       ],
       type: 'input',
-      placeholder: '请输入公司简称',
-     
+      placeholder: {
+        ERP: '请输入档口拿货条码上使用的名称/店铺简称',
+        SIMPLEERP: '请输入公司简称',
+      },
+
     },
     marketFloor: {
       label: '市场楼层',
@@ -135,7 +143,7 @@ export class Store {
       type: 'input',
       placeholder: '请输入门店招牌',
     },
-    
+
     contact: {
       label: '联系人',
       required: true,
@@ -144,11 +152,11 @@ export class Store {
           required: true,
           message: '请输入联系人姓名',
         },
-        
+
       ],
       type: 'input',
       placeholder: '请输入联系人姓名',
-     
+
     },
     mobile: {
       label: '账号',
@@ -177,7 +185,7 @@ export class Store {
       ],
       type: 'input',
       placeholder: '请输入手机号码',
-     
+
     },
     password: {
       label: '密码',
@@ -217,9 +225,9 @@ export class Store {
       type: 'input',
       prop: 'password',
       placeholder: '请再次输入密码',
-     
+
     },
-    
+
     smsCode: {
       label: '验证码',
       required: true,
@@ -231,7 +239,7 @@ export class Store {
       ],
       type: 'input',
       placeholder: '请输入验证码',
-     
+
     },
     email: {
       label: '邮箱地址',
@@ -247,14 +255,14 @@ export class Store {
       ],
       type: 'input',
       placeholder: '请输入邮箱地址',
-     
+
     },
   };
 
   @observable public countDown = 60;
 
   @observable public timer;
-  
+
   @observable public systemType = 'POS'; // null, ERP,POS
 
   @observable public stepType = 0; // 0-选择系统, 1-注册, 2-注册成功

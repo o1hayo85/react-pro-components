@@ -1,4 +1,5 @@
-import { Button, Form, Input, Select, Checkbox, Row, Col, Cascader } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Select, Checkbox, Row, Col, Cascader, Tooltip } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { Props } from '../interface';
@@ -47,13 +48,29 @@ export default class Index extends React.Component<Props> {
     const { systemType, registryFormData } = this.props.store;
     let result: JSX.Element[] = [];
     const formItemKeys = Object.keys(registryFormData);
-    
+
     result = formItemKeys.map((keyName: string) => {
       const data = registryFormData[keyName];
       if (!(!data.systemType || data.systemType.includes(systemType))) {
         return null;
       }
       let itemEle = null;
+      let label = '';
+      let placeholder = '';
+      let rules = data?.rules;
+      if (data.differentLabel && typeof data.label === 'object') {
+        label = data.label[systemType];
+        placeholder = data.placeholder[systemType];
+        rules = rules?.map((_item) => {
+          return {
+            ..._item,
+            message: data.placeholder[systemType],
+          };
+        });
+      } else {
+        label = data.label;
+        placeholder = data.placeholder;
+      }
       if (data.type === 'select') {
         itemEle = (
           <Select>
@@ -73,14 +90,22 @@ export default class Index extends React.Component<Props> {
             ? (
               <Input.Password
                 autoComplete="new-password"
-                placeholder={data.placeholder}
+                placeholder={placeholder}
                 visibilityToggle={false}
               />
             )
             : (
               <Input
                 autoComplete="off"
-                placeholder={data.placeholder}
+                placeholder={placeholder}
+                suffix={data.differentLabel && data.tooltip[systemType] ? (
+                  <Tooltip title={data.tooltip[systemType]}>
+                    <QuestionCircleOutlined
+                      className={styles.suffix}
+                      style={{ fontSize: 14 }}
+                    />
+                  </Tooltip>
+                ) : undefined}
                 type={data.prop}
               />
             )
@@ -100,10 +125,10 @@ export default class Index extends React.Component<Props> {
           className={!data.required && 'norequired'}
           extra={data.help}
           key={keyName}
-          label={data.label}
+          label={label}
           name={keyName}
           required={data.required}
-          rules={data.rules}
+          rules={rules}
         >
           {itemEle}
         </Form.Item>
@@ -130,7 +155,6 @@ export default class Index extends React.Component<Props> {
             <Form
               {...layout}
               colon={false}
-              labelAlign="left"
               onFieldsChange={handleFieldChange}
               onFinish={handleRegistrySubmit}
               ref={registryformRef}
@@ -142,11 +166,12 @@ export default class Index extends React.Component<Props> {
               {this.formList()}
               <Form.Item
                 className="norequired"
-                labelCol={{ span: 3 }}
+                label={' '}
+                labelCol={{ span: 6 }}
                 name="agreement"
                 rules={[{ validator: (_, value) => (value ? Promise.resolve() : Promise.reject(new Error('需要同意协议'))) }]}
                 valuePropName="checked"
-                wrapperCol={{ span: 24 }}
+                wrapperCol={{ span: 18 }}
               >
                 <Checkbox>
                   <div className={styles.agreeProtocol}>
@@ -170,7 +195,7 @@ export default class Index extends React.Component<Props> {
                 >
                   上一步
                 </Button>
-                
+
                 <Button
                   className={styles.submit}
                   disabled={registryDisabled}
