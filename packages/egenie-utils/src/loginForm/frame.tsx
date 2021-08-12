@@ -2,12 +2,12 @@ import { Provider } from 'mobx-react';
 import React from 'react';
 import { api } from './api';
 import styles from './index.less';
-import { Store } from './store';
 import { Props } from './interface';
+import { Store } from './store';
 
 export default class Index extends React.Component<Props> {
   public store = new Store(this.props);
- 
+
   render(): JSX.Element {
     const { goToLogin, logoImg, logoText } = this.store;
     console.log('this.frame......', this.props, logoImg, logoText);
