@@ -1,8 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.6...v0.0.0) (2021-08-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.7...v0.0.0) (2021-08-13)
 
 ### Features
 
-- add deploy.sh ([bae4b7c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bae4b7ce9330478bf73ff4e61a57914f2c79d25f))
+- add deploy.sh ([3affe4f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3affe4fb8859f8cb210a2f6ff3f6f05c1c8c01b6))
+
+## [0.2.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.6...v0.2.7) (2021-08-12)
+
+### Features
+
 - **4702:** eRP 注册信息优化 ([934db8b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/934db8b51c58363267b3c09919dd5727ff9ea7c5))
 
 ## [0.2.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.5...v0.2.6) (2021-08-11)
