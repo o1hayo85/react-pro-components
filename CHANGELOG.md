@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 
-- **15958:** 点击方案查询，平台单号及买家昵称 sku 编码会被清空 ([d4f2e69](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d4f2e695ecba3d831468c833a29dd772a427af4b))
+- **15958:** 点击方案查询，平台单号及买家昵称 sku 编码会被清空 ([022fc0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/022fc0a557f6812e269b6d4b04e1f948c3937b50))
 
 ## [0.2.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.8...v0.2.9) (2021-08-16)
 
