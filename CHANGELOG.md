@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 更改 date、inputNumberGroup 对于下拉框在查询方案保存时值处理方式 ([27a986d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/27a986d56c01ea2f31eb2f452b3a4a7ad04649bd))
+- **utils:** 更改 date、inputNumberGroup 对于下拉框在查询方案保存时值处理方式 ([a7abc09](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a7abc09c4babe0741a5f74cf3de5765bf1769643))
 
 ## [0.2.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.11...v0.2.12) (2021-08-16)
 
