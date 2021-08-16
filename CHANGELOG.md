@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.7...v0.0.0) (2021-08-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.8...v0.0.0) (2021-08-16)
+
+### Bug Fixes
+
+- **select:** 解决下拉框选项滚动定位问题 ([929967b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/929967be9062211c73132fb17c529028b4455573))
+
+## [0.2.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.7...v0.2.8) (2021-08-13)
 
 ### Features
 

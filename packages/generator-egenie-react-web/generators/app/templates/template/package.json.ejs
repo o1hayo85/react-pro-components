@@ -6,7 +6,7 @@
 <% } %>
     "axios": "0.21.0",
     "classnames": "^2.2.6",
-    "egenie-utils": "0.2.7",
+    "egenie-utils": "0.2.9",
     "lodash": "4.17.20",
     "mobx": "5.15.7",
     "mobx-react": "6.3.1",
@@ -91,9 +91,10 @@
   },
   "scripts": {
     "start": "egenie-react-scripts start",
-    "build": "npm run fix-pagination && egenie-react-scripts build",
+    "build": "npm run fix-pagination && num run fix-data-grid && egenie-react-scripts build",
     "test": "egenie-test react",
     "fix-pagination": "cat ./pagination.js > ./node_modules/rc-pagination/es/Pagination.js",
+    "fix-data-grid": "cat ./bundle.js > ./node_modules/react-data-grid/lib/bundle.js",
     "commit": "git add . && cz",
     "lint-staged": "lint-staged --allow-empty",
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",

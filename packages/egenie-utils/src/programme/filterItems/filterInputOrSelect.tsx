@@ -178,6 +178,7 @@ export class FilterInputOrSelectComponent extends React.Component<{ store: Filte
             bordered={false}
             disabled={disabled}
             dropdownMatchSelectWidth={false}
+            getPopupContainer={(triggerNode) => triggerNode.parentElement}
             onChange={handleSelectChange}
             options={data}
             placeholder="请选择"
