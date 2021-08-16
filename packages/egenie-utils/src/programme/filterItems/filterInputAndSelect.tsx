@@ -35,7 +35,7 @@ export class FilterInputAndSelect extends FilterBase {
       if (this.inputValue) {
         return `${this.selectValue},${this.inputValue}`;
       } else {
-        return null;
+        return `${this.selectValue}`;
       }
     } else {
       return null;
@@ -43,8 +43,12 @@ export class FilterInputAndSelect extends FilterBase {
   }
 
   public toParams(this: FilterInputAndSelect): {[key: string]: string; } {
-    if (this.selectValue && this.inputValue) {
-      return { [this.selectValue]: this.inputValue };
+    if (this.selectValue) {
+      if (this.inputValue) {
+        return { [this.selectValue]: this.inputValue };
+      } else {
+        return {};
+      }
     } else {
       return {};
     }

@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.8...v0.0.0) (2021-08-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.9...v0.0.0) (2021-08-16)
+
+### Bug Fixes
+
+- **15958:** 点击方案查询，平台单号及买家昵称 sku 编码会被清空 ([d4f2e69](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d4f2e695ecba3d831468c833a29dd772a427af4b))
+
+## [0.2.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.8...v0.2.9) (2021-08-16)
 
 ### Bug Fixes
 
