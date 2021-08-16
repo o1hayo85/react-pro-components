@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.9...v0.0.0) (2021-08-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.10...v0.0.0) (2021-08-16)
+
+### Bug Fixes
+
+- **15967:** 日期选择，开始时间可以选择截止时间之后，没有校验 ([0b428e8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0b428e80c25eb93b421d7bf33d3bb5eb2b4c2043))
+
+## [0.2.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.9...v0.2.10) (2021-08-16)
 
 ### Bug Fixes
 

@@ -513,6 +513,32 @@ export class FilterDateComponent extends React.Component<{ store: FilterDate; }>
  */
 @observer
 class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
+  public disableStartDate = (current: moment.Moment): boolean => {
+    const { endTime } = this.props.store;
+    if (endTime) {
+      if (current) {
+        return current.valueOf() >= endTime.valueOf();
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
+  public disableEndDate = (current: moment.Moment): boolean => {
+    const { startTime } = this.props.store;
+    if (startTime) {
+      if (current) {
+        return current.valueOf() <= startTime.valueOf();
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const {
       startTime,
@@ -559,6 +585,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             allowClear={allowClear}
             bordered={false}
             disabled={disabled[0]}
+            disabledDate={this.disableStartDate}
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleStartChange}
@@ -582,6 +609,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             allowClear={allowClear}
             bordered={false}
             disabled={disabled[1]}
+            disabledDate={this.disableEndDate}
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleEndChange}
