@@ -2,7 +2,11 @@
 
 ### Bug Fixes
 
-- **select:** 解决下拉框选项滚动定位问题 ([929967b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/929967be9062211c73132fb17c529028b4455573))
+- **select:** 解决下拉框选项滚动定位问题 ([51d95d3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51d95d39bb81a9daf95f9d076408f74dce2cc6ca))
+
+### Features
+
+- **react-scripts:** 移除 scss 样式文件支持(拖慢下载速度) ([a84d0d6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a84d0d6f97b638118d7297a2f7c4b6ee01eb5a55))
 
 ## [0.2.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.7...v0.2.8) (2021-08-13)
 
