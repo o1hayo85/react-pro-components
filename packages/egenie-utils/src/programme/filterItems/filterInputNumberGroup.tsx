@@ -58,7 +58,7 @@ export class FilterInputNumberGroup extends FilterBase {
         if (numberString) {
           return `${this.selectValue},${numberString}`;
         } else {
-          return null;
+          return `${this.selectValue}`;
         }
       } else {
         return null;

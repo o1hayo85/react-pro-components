@@ -245,7 +245,7 @@ export class FilterDate extends FilterBase {
         if (timeString) {
           return `${this.selectValue},${timeString}`;
         } else {
-          return null;
+          return `${this.selectValue}`;
         }
       } else {
         return null;
@@ -319,6 +319,30 @@ export class FilterDate extends FilterBase {
       this.endTime = keyAndValues[1] ? moment(keyAndValues[1]) : null;
     }
   }
+
+  @action public validator = (): Promise<string> => {
+    if (this.required) {
+      if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
+        if (this.selectValue) {
+          if (this.startTime || this.endTime) {
+            return Promise.resolve('');
+          } else {
+            return Promise.reject('请选择时间范围');
+          }
+        } else {
+          return Promise.reject('请选择时间类型');
+        }
+      } else {
+        if (this.toProgramme() == null) {
+          return Promise.reject(`请填写:${this.label}`);
+        } else {
+          return Promise.resolve('');
+        }
+      }
+    } else {
+      return Promise.resolve('');
+    }
+  };
 
   private snapshot: { startTime: moment.Moment | null; endTime: moment.Moment | null; selectValue: string; } = {
     startTime: null,
