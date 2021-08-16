@@ -517,7 +517,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
     const { endTime } = this.props.store;
     if (endTime) {
       if (current) {
-        return current.valueOf() >= endTime.valueOf();
+        return new Date(current.format(FormatDateType.defaultFormat)).valueOf() >= new Date(endTime.format(FormatDateType.defaultFormat)).valueOf();
       } else {
         return false;
       }
@@ -530,7 +530,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
     const { startTime } = this.props.store;
     if (startTime) {
       if (current) {
-        return current.valueOf() <= startTime.valueOf();
+        return new Date(current.format(FormatDateType.defaultFormat)).valueOf() <= new Date(startTime.format(FormatDateType.defaultFormat)).valueOf();
       } else {
         return false;
       }
