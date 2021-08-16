@@ -6,7 +6,7 @@
 
 ### Features
 
-- **react-scripts:** 移除 scss 样式文件支持(拖慢下载速度) ([a84d0d6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a84d0d6f97b638118d7297a2f7c4b6ee01eb5a55))
+- **react-scripts:** 移除 scss 样式文件支持(拖慢下载速度) ([84c1707](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/84c170741a25abcd9b6b2f3bbe6da64e6440d620))
 
 ## [0.2.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.7...v0.2.8) (2021-08-13)
 
