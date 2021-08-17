@@ -206,7 +206,7 @@ export class FilterTreeSelect extends FilterBase {
   /**
    * 下拉菜单和选择器同宽
    */
-  @observable public dropdownMatchSelectWidth: number | boolean = true;
+  @observable public dropdownMatchSelectWidth: number | boolean = false;
 
   /**
    * 下拉菜单的样式

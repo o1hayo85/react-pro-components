@@ -248,6 +248,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           allowClear={allowClear}
           bordered={false}
           disabled={disabled}
+          dropdownMatchSelectWidth={false}
           dropdownRender={mode && showChooseAll ? (menu) => {
             return (
               <>
@@ -264,7 +265,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
               </>
             );
           } : null}
-          getPopupContainer={() => document.body}
+          getPopupContainer={(nodeItem) => nodeItem.parentElement}
           maxTagCount="responsive"
           mode={mode}
           onChange={onChange}
