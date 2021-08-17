@@ -3,6 +3,10 @@
   "version": "0.2.16",
   "description": "",
   "license": "MIT",
+  "sideEffects": [
+    "*.less",
+    "*.css"
+  ],
   "main": "index.ts",
   "files": [
     "src"
