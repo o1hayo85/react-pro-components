@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.16...v0.0.0) (2021-08-17)
 
+### Features
+
+- **utils:** 增加 tree shaking 配置 ([43bde99](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/43bde99ee709f56f97195644efc6608036633342))
+
 ## [0.2.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.15...v0.2.16) (2021-08-17)
 
 ### Bug Fixes
