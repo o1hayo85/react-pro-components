@@ -105,6 +105,7 @@ export interface IEgGridModel {
   onSelectSum?: boolean;
   searchReduce?: boolean;
   searchReduceConfig?: TLabelName;
+  showGridOrderNo?: boolean;
 }
 
 export class EgGridModel {
@@ -331,6 +332,11 @@ export class EgGridModel {
    */
   @observable public searchReduceConfig: TLabelName = [];
 
+  /**
+   * 是否展示序号列
+   */
+  @observable public showGridOrderNo = true;
+
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
   }
@@ -366,7 +372,7 @@ export class EgGridModel {
    * 组合序号列之后的列数据，渲染用，外部一般不用
    */
   @computed public get _columns() {
-    const { columns = [], showCheckBox = true, toggleOrDeleteSubRow, primaryKeyField } = this;
+    const { columns = [], showCheckBox = true, toggleOrDeleteSubRow, primaryKeyField, showGridOrderNo } = this;
     if (!columns.length) {
       return columns;
     }
@@ -420,7 +426,7 @@ export class EgGridModel {
         ...formatterCell,
       };
     });
-    const ret = (showCheckBox ? [SelectColumn] : []).concat([
+    const ret = (showCheckBox ? [SelectColumn] : []).concat(showGridOrderNo ? [
       {
         key: 'gridOrderNo',
         width: 50,
@@ -434,8 +440,8 @@ export class EgGridModel {
           </div>
         ),
       },
-      ...prevHandleColumns,
-    ]).filter((el: EnhanceColumn<IObj>) => !el.ejlHidden);
+    ] as ColumnType : []).concat([...prevHandleColumns])
+      .filter((el: EnhanceColumn<IObj>) => !el.ejlHidden);
 
     return ret;
   }
