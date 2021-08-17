@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.16...v0.0.0) (2021-08-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.17...v0.0.0) (2021-08-17)
+
+### Features
+
+- **utils:** 更改模版配置 ([c7fd65f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c7fd65fe17b5297990a74a5cf2c6ef356a90b007))
+
+## [0.2.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.16...v0.2.17) (2021-08-17)
 
 ### Features
 
