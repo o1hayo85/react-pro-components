@@ -1,8 +1,18 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.13...v0.0.0) (2021-08-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.14...v0.0.0) (2021-08-17)
 
 ### Bug Fixes
 
 - **utils/select:** 下拉框选项的 popContainer 宽度和位置 ([d324b48](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d324b48de25aa7afafee67067a09b04bc99c011f))
+
+## [0.2.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.13...v0.2.14) (2021-08-17)
+
+### Bug Fixes
+
+- 树切换展开折叠 ([190be96](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/190be961535ff72a88c976a0a0cf4dd1f47481a1))
+
+### Features
+
+- 序号列可配置 ([da67ca2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/da67ca265100593ff091af1d85bc617315cd1064))
 
 ## [0.2.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.12...v0.2.13) (2021-08-16)
 
