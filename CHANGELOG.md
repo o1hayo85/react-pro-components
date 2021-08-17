@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 更改模版配置 ([c7fd65f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c7fd65fe17b5297990a74a5cf2c6ef356a90b007))
+- **utils:** 更改模版配置 ([df1a468](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/df1a468c7bc09d9d2d9ba6337c408a5f209a156e))
 
 ## [0.2.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.16...v0.2.17) (2021-08-17)
 
