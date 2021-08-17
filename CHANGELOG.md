@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 
+- **utils/select:** 下拉框选项的 popContainer 宽度和位置 ([9bafeee](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9bafeeeed7af4d700ed4550e30d24ed80b4efeb7))
 - **utils/select:** 下拉框选项的 popContainer 宽度和位置 ([d324b48](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d324b48de25aa7afafee67067a09b04bc99c011f))
 
 ## [0.2.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.13...v0.2.14) (2021-08-17)
