@@ -528,13 +528,13 @@ export class EgGridModel {
   public getFilterParams: () => {[key: string]: string; };
 
   public toggleOrDeleteSubRow = action(async({ id, type, primaryKeyField }: SubRowAction): Promise<void> => {
-    const { rows } = this;
+    const { rows, api: { onToggleOrDeleteSubRow }} = this;
 
-    if (type === 'toggleSubRow') {
+    if (type === 'toggleSubRow' && onToggleOrDeleteSubRow) {
       const rowIndex = rows.findIndex((r) => r[primaryKeyField] === id);
       const row = rows[rowIndex];
       if (!(row && row.isExpanded)) {
-        const reqRows = await this.api.onToggleOrDeleteSubRow?.({
+        const reqRows = await onToggleOrDeleteSubRow({
           id,
           type,
           primaryKeyField,
@@ -547,8 +547,8 @@ export class EgGridModel {
     }
 
     // 删除行且需要调用后端，且删除失败，那么什么都不做
-    if (type === 'deleteSubRow' && this.api.onToggleOrDeleteSubRow) {
-      const reqDeleteRow = await this.api.onToggleOrDeleteSubRow({
+    if (type === 'deleteSubRow' && onToggleOrDeleteSubRow) {
+      const reqDeleteRow = await onToggleOrDeleteSubRow({
         id,
         type,
         primaryKeyField,
