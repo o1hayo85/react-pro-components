@@ -295,7 +295,7 @@ export class FilterInputNumberGroupComponent extends React.Component<{ store: Fi
               <Select
                 bordered={false}
                 disabled={disabled}
-                getPopupContainer={(triggerNode) => triggerNode.parentElement}
+                getPopupContainer={() => document.body}
                 onChange={handleSelectValue}
                 options={data}
                 placeholder="请选择"

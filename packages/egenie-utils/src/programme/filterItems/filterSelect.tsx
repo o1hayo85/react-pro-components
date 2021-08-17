@@ -264,7 +264,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
               </>
             );
           } : null}
-          getPopupContainer={(triggerNode) => triggerNode.parentElement}
+          getPopupContainer={() => document.body}
           maxTagCount="responsive"
           mode={mode}
           onChange={onChange}

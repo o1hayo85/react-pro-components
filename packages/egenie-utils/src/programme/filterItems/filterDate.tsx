@@ -597,7 +597,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
           />
           <Select
             bordered={false}
-            getPopupContainer={(triggerNode) => triggerNode.parentElement}
+            getPopupContainer={() => document.body}
             onChange={handleSelectChange}
             options={data}
             placeholder="请选择"
