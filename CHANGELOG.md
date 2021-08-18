@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.17...v0.0.0) (2021-08-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.18...v0.0.0) (2021-08-19)
+
+### Features
+
+- **egenie-web-common:** 增加包 ([ba4416d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ba4416d07df5f4e7a24b61b1b4547f46c48697db))
+
+## [0.2.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.17...v0.2.18) (2021-08-17)
 
 ### Features
 
