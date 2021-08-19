@@ -12,9 +12,7 @@ export default {
     remove: false,
     grid: true,
   },
-  cssModules: {
-    generateScopedName: '[name]__[local]--[hash:base64:8]',
-  },
+  cssModules: { generateScopedName: '[name]__[local]--[hash:base64:8]' },
   extractCSS: true,
   extraExternals: [
     'antd',
