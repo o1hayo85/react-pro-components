@@ -2,7 +2,7 @@
 
 ### Features
 
-- **egenie-web-common:** 增加包 ([77bdc1b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/77bdc1b60718b70a09fc6169ca2d6925ff719c3f))
+- **egenie-web-common:** 增加包 ([9878586](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9878586e3b16bcc141b4dc5a5644969a93244a30))
 
 # [0.3.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.18...v0.3.0) (2021-08-19)
 
