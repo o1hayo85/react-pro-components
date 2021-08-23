@@ -155,7 +155,7 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
 /**
  * 公共参数
  */
-export interface CommonParams {
+interface CommonParams {
 
   /**
    * 一次打印数据个数
@@ -181,7 +181,7 @@ export interface CommonParams {
 /**
  * 菜鸟打印参数
  */
-export type RookiePrintParams = {
+type RookiePrintParams = {
 
   /**
    * 数据
@@ -192,7 +192,7 @@ export type RookiePrintParams = {
 /**
  * 抖音打印参数
  */
-export type DyPrintParams = {
+type DyPrintParams = {
 
   /**
    * 数据
@@ -203,7 +203,7 @@ export type DyPrintParams = {
 /**
  * pdd打印参数
  */
-export type PddPrintParams = {
+type PddPrintParams = {
 
   /**
    * 数据
@@ -219,7 +219,7 @@ export type PddPrintParams = {
 /**
  * jd打印参数
  */
-export type JDParams = {
+type JDParams = {
 
   /**
    * 京东打印自定义数据
@@ -242,7 +242,7 @@ export type JDParams = {
   tempUrl?: string;
 } & CommonParams;
 
-export class PrintHelper {
+class PrintHelper {
   constructor() {
     this.toggleToRookie();
   }

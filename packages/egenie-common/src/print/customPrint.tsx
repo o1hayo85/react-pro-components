@@ -224,7 +224,7 @@ interface CustomPrintParam {
 /**
  * Modal的props。外层自己控制显示和隐藏
  */
-export interface CustomPrintModalProps {
+interface CustomPrintModalProps {
 
   /**
    * 打印或者预览callback

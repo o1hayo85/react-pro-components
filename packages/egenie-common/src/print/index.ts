@@ -1,4 +1,4 @@
-export * from './printHelper';
-export * from './printWayBill';
-export * from './customPrint';
+export { printHelper, formatBarcodeData } from './printHelper';
+export { printWayBill } from './printWayBill';
+export { CustomPrintModal, getCustomPrintParam } from './customPrint';
 export { getSensitiveData } from './getPrivacyData';

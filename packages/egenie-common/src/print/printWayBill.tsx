@@ -23,7 +23,7 @@ interface PrintData {
 /**
  * 重要参数preview、userDataIds、tempType、printSrc
  */
-export interface PrintWayBillParams {
+interface PrintWayBillParams {
 
   /**
    * 模版类型
@@ -123,7 +123,7 @@ export interface PrintWayBillParams {
   [key: string]: any;
 }
 
-export class PrintWayBill {
+class PrintWayBill {
   /**
    * 前置打印
    * @param preview
