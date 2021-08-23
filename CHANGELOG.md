@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.5...v0.0.0) (2021-08-23)
 
+### Features
+
+- **generator-egenie-react-web:** 更新 routes 的 interface 引入方式 ([aebefd5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/aebefd58cc452677235b2b3fcf1656c15d5e21c7))
+
 ## [0.4.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.4...v0.4.5) (2021-08-23)
 
 ### Features
