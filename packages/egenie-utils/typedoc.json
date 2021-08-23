@@ -4,7 +4,7 @@
     "src/programme/normalProgramme.tsx",
     "src/programme/filterItems/filterItems.tsx",
     "src/programme/filterItems/filterInputOrSelect.tsx",
-    "src/programme/filterItems/common.ts",
+    "src/programme/filterItems/common.tsx",
     "src/programme/filterItems/filterCheckbox.tsx",
     "src/programme/filterItems/filterDate.tsx",
     "src/programme/filterItems/filterDateStartOrEnd.tsx",
