@@ -2,7 +2,7 @@
 
 ### Features
 
-- **common:** 增加类型导出 ([594a76b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/594a76b7375bc04d5049c310c32ffc01ed3a2b73))
+- **common:** 增加类型导出 ([4d825d7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4d825d7b46c5426bdbfa72368bad6927f0f02873))
 
 ## [0.4.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.3...v0.4.4) (2021-08-23)
 
