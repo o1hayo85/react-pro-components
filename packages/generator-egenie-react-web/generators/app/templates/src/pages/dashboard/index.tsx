@@ -1,4 +1,4 @@
-import { request } from 'egenie-utils';
+import { request } from 'egenie-common';
 import React from 'react';
 import styles from './index.module.less';
 

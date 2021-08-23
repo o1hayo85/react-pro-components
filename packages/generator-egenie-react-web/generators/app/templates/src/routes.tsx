@@ -1,4 +1,4 @@
-import { MenuDataItem } from 'egenie-utils';
+import { MenuDataItem } from 'egenie-common';
 import React from 'react';
 
 export const routes: MenuDataItem[] = [
