@@ -1,7 +1,7 @@
 import { Form, Input, Button } from 'antd';
+import { history } from 'egenie-common';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { history } from '../../index';
 import { Props } from '../interface';
 import styles from './index.less';
 

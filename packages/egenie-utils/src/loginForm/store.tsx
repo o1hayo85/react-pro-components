@@ -1,9 +1,9 @@
 import { message, FormInstance } from 'antd';
+import { history } from 'egenie-common';
 import * as _ from 'lodash';
 import { action, observable } from 'mobx';
 import React from 'react';
-
-import { request, history, SlideVerify, passwordReg, phoneReg, emailReg } from '../index';
+import { request, SlideVerify, passwordReg, phoneReg, emailReg } from '../index';
 import { api } from './api';
 import { Response, Market, FindPasswordForm, SelectOption } from './interface';
 

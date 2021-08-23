@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.3.0...v0.0.0) (2021-08-19)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.3.1...v0.0.0) (2021-08-23)
+
+### Features
+
+- **utils:** 移除 egenie-utils 包和 egenie-common 重叠部分 ([4f00cb8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4f00cb8111082127a3f24b014cb837876fe28fd9))
+
+## [0.3.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.3.0...v0.3.1) (2021-08-19)
 
 ### Features
 
