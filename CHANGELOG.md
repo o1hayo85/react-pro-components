@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 移除 egenie-utils 包和 egenie-common 重叠部分 ([7691f80](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7691f8051e238be0fae8a0aba14d76cc8f68df88))
+- **utils:** 移除 egenie-utils 包和 egenie-common 重叠部分 ([e61cdd5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e61cdd54c67e078afa71070800b30177a2677cf0))
 
 # [0.4.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.3.1...v0.4.0) (2021-08-23)
 
