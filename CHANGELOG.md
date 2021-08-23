@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.2...v0.0.0) (2021-08-23)
 
+### Features
+
+- **generator-egenie-react-web:** 增加 egenie-common 依赖 ([8493072](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/849307227bddd64820dce3b4a6a3c70fe0826073))
+
 ## [0.4.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.1...v0.4.2) (2021-08-23)
 
 ### Features
