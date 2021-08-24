@@ -1,13 +1,6 @@
 export default {
-  esm: {
-    type: 'rollup',
-    mjs: true,
-    minify: true,
-  },
-  cjs: {
-    type: 'rollup',
-    minify: true,
-  },
+  esm: 'rollup',
+  cjs: 'rollup',
   autoprefixer: {
     remove: false,
     grid: true,
