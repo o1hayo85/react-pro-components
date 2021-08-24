@@ -13,7 +13,7 @@ function formatPrintName(tempData: TemplateData, printerName?: string) {
 }
 
 function formatRookieData(printData: any[], printTemplate: TemplateData) {
-  const documents = [];
+  const documents: any[] = [];
 
   (printData || []).forEach((item) => {
     if (Number(printTemplate?.content?.cainiaoTemp) === 1 && item.newCaiNiao) {
@@ -41,7 +41,7 @@ function formatRookieData(printData: any[], printTemplate: TemplateData) {
 }
 
 function formatDyData(printData: any[], printTemplate: TemplateData) {
-  const documents = [];
+  const documents: any[] = [];
 
   (printData || []).forEach((item) => {
     const contents = [];
@@ -68,7 +68,7 @@ function formatDyData(printData: any[], printTemplate: TemplateData) {
 }
 
 function formatPddData(printData: any[], printTemplate: TemplateData, courierPrintType: number) {
-  const documents = [];
+  const documents: any[] = [];
 
   (printData || []).forEach((item) => {
     const content = [];
@@ -181,7 +181,7 @@ interface CommonParams {
 /**
  * 菜鸟打印参数
  */
-type RookiePrintParams = {
+export type RookiePrintParams = {
 
   /**
    * 数据
@@ -219,7 +219,7 @@ type PddPrintParams = {
 /**
  * jd打印参数
  */
-type JDParams = {
+export type JDParams = {
 
   /**
    * 京东打印自定义数据

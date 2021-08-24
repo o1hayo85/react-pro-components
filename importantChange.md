@@ -1,4 +1,4 @@
-## 0.4.8 新增 egenie-common 包。迁移 egenie-utils 包一些方法到 egenie-common
+## 0.4.10 新增 egenie-common 包。迁移 egenie-utils 包一些方法到 egenie-common
 
 1. 设计函数、组件等(下面是具体迁移内容、ts 项目和 js 项目都可用)---request、BaseData, PaginationData, BatchReportData, PureData 暂时不受影响
 

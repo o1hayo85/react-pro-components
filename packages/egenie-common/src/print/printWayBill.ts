@@ -1,5 +1,4 @@
 import { message, Modal } from 'antd';
-import React from 'react';
 import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
 import { getWayBillSensitiveData } from './getPrivacyData';
@@ -288,7 +287,7 @@ class PrintWayBill {
     }
   };
 
-  private handleNotify = async(waybillData) => {
+  private handleNotify = async(waybillData: PrintData['waybillData']) => {
     const notHaveCourierNo = waybillData.notHaveCourierNo;
     const havePrintList = waybillData.havePrintList;
     let step1 = true;
@@ -386,7 +385,12 @@ class PrintWayBill {
     }
   };
 
-  private updateStatus = (data): Promise<any> => {
+  private updateStatus = (data: {
+    callbackIds: string | number;
+    checkSku: boolean;
+    printSrc: string | number;
+    docIds: string;
+  }): Promise<any> => {
     return request({
       url: '/api/print/wms/waybill/updateWaybillPrintCallback',
       method: 'post',

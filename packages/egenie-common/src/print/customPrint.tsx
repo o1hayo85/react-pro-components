@@ -67,7 +67,7 @@ class CustomPrintModel {
       .then((printers) => this.printers = printers);
   };
 
-  @action public handleChangeTempName = (event) => {
+  @action public handleChangeTempName = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.tempName = event.target.value;
   };
 
@@ -80,9 +80,9 @@ class CustomPrintModel {
 
   @observable public loading = false;
 
-  @observable public rowSelection = {
+  @observable public rowSelection: { selectedRowKeys: number[]; onChange: (selectedRowKeys: number[]) => void; type: string; fixed: boolean; } = {
     selectedRowKeys: [],
-    onChange: (selectedRowKeys) => {
+    onChange: (selectedRowKeys: number[]) => {
       this.rowSelection.selectedRowKeys = selectedRowKeys || [];
     },
     type: 'radio',
@@ -104,7 +104,7 @@ class CustomPrintModel {
       dataIndex: 'mysqlno',
       title: '模版编号',
       width: 200,
-      render: (text, row) => {
+      render: (text: string, row: Item) => {
         return (
           <a
             onClick={() => {
@@ -132,7 +132,7 @@ class CustomPrintModel {
       dataIndex: 'tempType',
       title: '模版类型',
       width: 120,
-      render: (text) => (tempTypeList[text]),
+      render: (text: string | number) => (tempTypeList[text]),
     },
     {
       ellipsis: true,
@@ -144,7 +144,7 @@ class CustomPrintModel {
       dataIndex: 'printerName',
       title: '打印机名称',
       width: 200,
-      render: (text, row) => {
+      render: (text: string, row: Item) => {
         return (
           <Observer>
             {
@@ -246,7 +246,7 @@ interface CustomPrintModalProps {
 
 @observer
 export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
-  constructor(props) {
+  constructor(props: CustomPrintModalProps) {
     super(props);
     this.store = new CustomPrintModel(props.tempType);
   }
@@ -369,7 +369,7 @@ export async function getCustomPrintParam(tempType: string): Promise<CustomPrint
   });
 
   return new Promise((resolve, reject) => {
-    function handleOk(customParams) {
+    function handleOk(customParams: CustomPrintParam) {
       resolve(customParams);
       destroyModal();
     }

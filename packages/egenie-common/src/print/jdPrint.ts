@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { JDParams } from './printHelper';
 import { getUUID } from './utils';
 
 interface IParameters {
@@ -52,18 +53,12 @@ function downloadImage(imgSrc: string, name?: string): void {
 
 export class JdPrint {
   constructor(host: string, port: number, openError: string) {
-    this.host = host;
-    this.port = port;
     this.openError = openError;
   }
 
   private JDSocket: WebSocket;
 
   private openError: string;
-
-  private readonly host: string;
-
-  private readonly port: number;
 
   // 标准模板数据 实例
   public standTempUrl = 'http://storage.jd.com/print-tmpl/template-88dc5829-f419-4ab7-b8ae-feb32605a189.1606983912784.txt';
@@ -191,7 +186,7 @@ export class JdPrint {
     customTempUrl,
     printData,
     tempUrl,
-  }) => {
+  }: JDParams) => {
     return this.sendToPrinter(this.getPrintParam(preview ? 'PRE_View' : 'PRINT', {
       printName: printer,
       customData,

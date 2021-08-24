@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.8...v0.0.0) (2021-08-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.9...v0.0.0) (2021-08-24)
+
+### Features
+
+- **common:** 增加 tsconfig.json 配置，严格验证类型 ([417ad26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/417ad26d04e812ace168d56cb354b8648bcbebb2))
+
+## [0.4.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.8...v0.4.9) (2021-08-24)
 
 ### Features
 

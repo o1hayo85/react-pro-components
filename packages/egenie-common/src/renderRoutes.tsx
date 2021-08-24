@@ -1,6 +1,7 @@
 import { History } from 'history';
 import React from 'react';
 import { Redirect, Router, Route, Switch } from 'react-router-dom';
+import type { RouteComponentProps } from 'react-router-dom';
 
 export interface MenuDataItem {
 
@@ -87,7 +88,7 @@ const WrapperRoute: React.FC<any> = ({
   );
 };
 
-function renderRoutes(routes: MenuDataItem[], extraProps = {}, switchProps = {}, loading) {
+function renderRoutes(routes: MenuDataItem[], extraProps = {}, switchProps = {}, loading?: React.ReactNode) {
   if (Array.isArray(routes) && routes.length) {
     return (
       <Switch {...switchProps}>
@@ -109,7 +110,7 @@ function renderRoutes(routes: MenuDataItem[], extraProps = {}, switchProps = {},
                 key={route.key || index}
                 loading={loading}
                 path={route.path}
-                render={(props) => {
+                render={(props: RouteComponentProps<any>) => {
                   const childRoutes = renderRoutes(route.children, extraProps, { location: props.location }, loading);
                   if (route.component) {
                     const { component: Component } = route;

@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { RookiePrintParams } from './printHelper';
 import { getUUID, isSocketConnected } from './utils';
 
 interface RequestProtocol {
@@ -122,7 +123,7 @@ export class RookieAndPddAndDyPrint {
         }
       } else if (response.cmd === 'getPrinters') {
         if (requestIDItem && requestIDItem.resolve) {
-          requestIDItem.resolve((response.printers || []).map((item) => item.name));
+          requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
         }
       } else {
         // 暂时只考虑获取打印机列表和打印成功
@@ -153,7 +154,7 @@ export class RookieAndPddAndDyPrint {
     preview,
     contents,
     printer,
-  }): Promise<any> => {
+  }: RookiePrintParams): Promise<any> => {
     if (Array.isArray(contents) && contents.length) {
       const request = {
         cmd: 'print',
