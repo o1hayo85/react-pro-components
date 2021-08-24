@@ -1,3 +1,116 @@
+## 0.4.8 新增 egenie-common 包。迁移 egenie-utils 包一些方法到 egenie-common
+
+1. 设计函数、组件等(下面是具体迁移内容、ts 项目和 js 项目都可用)---request、BaseData, PaginationData, BatchReportData, PureData 暂时不受影响
+
+```ts
+export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict } from './helper';
+export type { DictData } from './helper';
+export { request } from './request';
+export type { BaseData, PaginationData, BatchReportData, PureData } from './request';
+export { renderModal, destroyModal, destroyAllModal } from './renderModal';
+export { Locale } from './locale';
+export { RenderRoutes } from './renderRoutes';
+export type { MenuDataItem } from './renderRoutes';
+export { history } from './history';
+export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData } from './print';
+```
+
+2. ts 项目注意点----DictData、MenuDataItem 这个 2 个导出的类型现在需要如下引入。request、BaseData, PaginationData, BatchReportData, PureData 这些接口 2 个包都维护，建议后面从 egenie-common 引入。涉及类型引入的参考下面
+
+```ts
+import type { MenuDataItem } from 'egenie-common';
+```
+
+3. js 项目注意点
+
+   - axios 引入方式(下面 2 选 1)
+
+     - 直接下载依赖到 package.json
+     - 通过 cdn 引入(建议)
+
+       ```
+       // 在项目的public/index.html的body标签下面添加下面内容
+       <script type="text/javascript" src="https://front.runscm.com/customer-source/common/axios.min.js?v=0.21.0"></script>
+
+       // 增加webpack的externals配置
+       externals: {
+         axios: {
+           commonjs: 'axios',
+           commonjs2: 'axios',
+           amd: 'axios',
+           root: 'axios',
+         },
+       }
+
+       // 增加webpack的output的libraryTarget
+       libraryTarget: 'umd'，
+       ```
+
+## v0.2.5 添加表格 tree
+
+1. 增加列配置字段：treeExpand?:boolean;需要在哪一列添加展开折叠功能，就在哪一列配置。
+2. 可自行对数据做处理，也可让后端直接返回。若通过点击展开按钮动态获取子表信息，则需要在表格的 api 里配置`onToggleOrDeleteSubRow`方法，在此方法里请求回来的数据再自行做处理。
+3. `onToggleOrDeleteSubRow({id?: string | number, type: 'toggleSubRow' | 'deleteSubRow', primaryKeyField})`
+4. `id`为点击行的`rowId`
+5. `toggleSubRow`：点击了展开折叠按钮，`deleteSubRow`点击了子表删除按钮，通过此字段区分
+6. `primaryKeyField`为表格配置的`primaryKeyField`字段
+7. tree 对表格数据的限制：
+
+- 必须有`children`字段
+- children 的 key 要与主表的 key 字段一致。比如主表的主键是 wmsOrderId,children 里的每一项也要有 wmsOrderId 字段，暂不支持子表 key 自定义。
+- children 的每一项必须要有`parentId`字段，parentId 的值要与上一层父表的 key 的值全等。
+  > 示例：
+
+```js
+  {
+    column: [
+      {
+        key: 'wmsReceiveOrderNo',
+        name: '收货单编号',
+        width: 200,
+        sortable: true,
+        treeExpand: true, // 这一列用来控制展开折叠
+      },
+    ],
+    api: {
+      // 从后端请求回来的分页数据一般为{ status: 'Successful', data: { list: [], ... } }
+     onToggleOrDeleteSubRow: async({ id, type, primaryKeyField }) => {
+      // 点击了展开折叠按钮，拿回来的数据就是点击的rowId对应的子表数据
+      if (type === 'toggleSubRow') {
+        const result = await request<PaginationData<IReveiveDataList>>({
+          url: api.receiveOrder,
+          method: 'POST',
+          data: {
+            page: 1,
+            pageSize: 50,
+            sidx: '',
+            sord: '',
+          },
+        });
+        const list = result.data.list;
+        list.forEach((el, i) => {
+          // 这里手动给子表的每一行强制加主键和父表的主键一致
+          // parenId在组件库底层处理，这里无需处理
+          el[primaryKeyField] = `${id}__${i}`;
+        });
+        result.data.list = list;
+        return result;
+      }
+      // 点击了子表的删除按钮
+      if (type === 'deleteSubRow') {
+        // 调用删除接口操作
+         const result = await request({...})
+        // return true | false;
+        // true, 删除成功
+        // false 删除失败
+       }
+        return true;
+      }
+    }
+  }
+
+```
+
 ## 0.1.28(增加版本切换)
 
 - 首先明白 oldUrl(老的 url 地址)、newUrl(新的 url 地址)、pageId(页面 id)
@@ -163,67 +276,4 @@ ol {
 
 /* 新的内容---项目自己定义的全局样式不用删除 */
 @import '~egenie-config/lib/theme/theme.less';
-```
-## v0.2.5 添加表格tree
-1. 增加列配置字段：treeExpand?:boolean;需要在哪一列添加展开折叠功能，就在哪一列配置。
-2. 可自行对数据做处理，也可让后端直接返回。若通过点击展开按钮动态获取子表信息，则需要在表格的api里配置`onToggleOrDeleteSubRow`方法，在此方法里请求回来的数据再自行做处理。
-3. `onToggleOrDeleteSubRow({id?: string | number, type: 'toggleSubRow' | 'deleteSubRow', primaryKeyField})`
-      1. `id`为点击行的`rowId`
-      2. `toggleSubRow`：点击了展开折叠按钮，`deleteSubRow`点击了子表删除按钮，通过此字段区分
-      3. `primaryKeyField`为表格配置的`primaryKeyField`字段
-4. tree对表格数据的限制：
-      - 必须有`children`字段
-      - children的key要与主表的key字段一致。比如主表的主键是wmsOrderId,children里的每一项也要有wmsOrderId字段，暂不支持子表key自定义。
-      - children的每一项必须要有`parentId`字段，parentId的值要与上一层父表的key的值全等。
-> 示例： 
-
-
-```js
-  {
-    column: [
-      {
-        key: 'wmsReceiveOrderNo',
-        name: '收货单编号',
-        width: 200,
-        sortable: true,
-        treeExpand: true, // 这一列用来控制展开折叠
-      },
-    ],
-    api: {
-      // 从后端请求回来的分页数据一般为{ status: 'Successful', data: { list: [], ... } }
-     onToggleOrDeleteSubRow: async({ id, type, primaryKeyField }) => {
-      // 点击了展开折叠按钮，拿回来的数据就是点击的rowId对应的子表数据
-      if (type === 'toggleSubRow') {
-        const result = await request<PaginationData<IReveiveDataList>>({
-          url: api.receiveOrder,
-          method: 'POST',
-          data: {
-            page: 1,
-            pageSize: 50,
-            sidx: '',
-            sord: '',
-          },
-        });
-        const list = result.data.list;
-        list.forEach((el, i) => {
-          // 这里手动给子表的每一行强制加主键和父表的主键一致
-          // parenId在组件库底层处理，这里无需处理
-          el[primaryKeyField] = `${id}__${i}`;
-        });
-        result.data.list = list;
-        return result;
-      }
-      // 点击了子表的删除按钮
-      if (type === 'deleteSubRow') {
-        // 调用删除接口操作
-         const result = await request({...})
-        // return true | false;
-        // true, 删除成功
-        // false 删除失败
-       }
-        return true;
-      }
-    }
-  }
- 
 ```

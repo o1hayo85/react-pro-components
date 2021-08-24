@@ -355,10 +355,10 @@ dom-align@^1.7.0:
   resolved "https://registry.npm.taobao.org/dom-align/download/dom-align-1.12.0.tgz?cache=0&sync_timestamp=1589854754211&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdom-align%2Fdownload%2Fdom-align-1.12.0.tgz#56fb7156df0b91099830364d2d48f88963f5a29c"
   integrity sha1-VvtxVt8LkQmYMDZNLUj4iWP1opw=
 
-egenie-common@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/egenie-common/-/egenie-common-0.3.1.tgz#a267212dfe00b569264cc673e1d77c47c1bdaa7c"
-  integrity sha512-HLz+2qTko5ZORPq4ldBnQOc8c1CVk3/6SVGdUEdS9M7nKheg2qpbz/Dj0OIwSUWnS+f3ysxhZJqxKsSw5F6TBQ==
+egenie-common@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.npmjs.org/egenie-common/-/egenie-common-0.4.8.tgz#591f2cb8461cae214a2c7072a36cab62151f9362"
+  integrity sha512-NtSrMsSMHPEOCI+gjrnLOEgmNYMFunLzukVBq2UYGiawuyfUAENX3la8bxnSsiP2qB5OjwJBtisy67wcvaSQ6Q==
 
 follow-redirects@^1.10.0:
   version "1.14.0"
