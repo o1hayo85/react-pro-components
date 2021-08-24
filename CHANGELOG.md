@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.7...v0.0.0) (2021-08-24)
 
+### Features
+
+- **egenie-common:** 打包兼容 js 项目 ([89a4aaf](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/89a4aaf1a96943b5fceef340675dff8fc939fa9a))
+
 ## [0.4.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.6...v0.4.7) (2021-08-23)
 
 ### Features
