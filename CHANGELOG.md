@@ -2,7 +2,7 @@
 
 ### Features
 
-- 更新文档 ([49d08e2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/49d08e23723d69c4df21b115c94d45f81bd43f7a))
+- 更新文档 ([5565f9d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5565f9d29c06f8cfe13f62cc24844952515ee0b7))
 
 ## [0.4.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.7...v0.4.8) (2021-08-24)
 
