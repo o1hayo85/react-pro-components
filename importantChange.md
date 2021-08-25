@@ -1,3 +1,17 @@
+## 0.4.11 表格行高支持动态计算
+
+> `rowHeight字段默认是38，现支持配置函数用于动态计算每一行的高度，执行原理是每一行数据渲染都会执行一次rowHeight函数`
+ ```js
+  rowHeight: (args) => {
+      const { row: {
+        // 某个需要计算高度的字段,比如
+        sku,
+      }} = args;
+      // 比如某一行的高度由展示的SKU个数决定 ，有N个sku，每个SKU高度是20 ，那么该行的高度就是N*20, 直接 return  N * 20;
+      // 此处展示随机高度
+      return Math.random() * 50 + 30;
+    },
+ ```
 ## 0.4.10 新增 egenie-common 包。迁移 egenie-utils 包一些方法到 egenie-common
 
 1. 设计函数、组件等(下面是具体迁移内容、ts 项目和 js 项目都可用)---request、BaseData, PaginationData, BatchReportData, PureData 暂时不受影响
