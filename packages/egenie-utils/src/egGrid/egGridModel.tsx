@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { set, observable, action, toJS, computed } from 'mobx';
 import React from 'react';
-import type { Column, HeaderRendererProps, SortDirection, SortColumn } from 'react-data-grid';
+import type { Column, HeaderRendererProps, SortDirection, SortColumn, RowHeightArgs } from 'react-data-grid';
 import { SelectColumn } from 'react-data-grid';
 import { CellExpanderFormatter, ChildRowDeleteButton, SubRowAction, subRowReducer } from './cellFormatter/treeFormatter';
 import { ColumnSettingModel } from './columnSetting';
@@ -57,7 +57,7 @@ export interface IEgGridModel {
   rows?: IObj[];
   cursorRow?: IObj[];
   primaryKeyField: string;
-  rowHeight?: number;
+  rowHeight?: number | ((args: RowHeightArgs<IObj>) => number) | null;
   headerRowHeight?: number;
   showCheckBox?: boolean;
   selectedIds?: Set<React.Key>;
