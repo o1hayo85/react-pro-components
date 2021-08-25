@@ -1,5 +1,5 @@
 ---
-title: egenie-react-scripts
+title: 项目打包工具
 order: 1
 nav:
   title: 常见包
@@ -46,37 +46,37 @@ module.exports = function(utils) {
 ```
 
 - 具体说明
-  - PUBLIC_URL
+  - `PUBLIC_URL`
     - 静态资源前缀
     - 建议通过 cross-env 配合 shell 脚本打包。不要写死
-  - IMAGE_INLINE_SIZE_LIMIT
+  - `IMAGE_INLINE_SIZE_LIMIT`
     - 图片 inline 大小(字节)
-  - PORT
+  - `PORT`
     - 启动端口
   - SPLIT_CHUNK_MIN_SIZE
     - 分包的最小尺寸
-  - MOCK
+  - `MOCK`
     - 是否启用 mock 数据功能
     - YES 开启
   - SERVICE_WORKER
     - 是否打包生成 serviceWorker 文件。注册请自写
     - YES 开启
-  - SOURCEMAP
+  - `SOURCEMAP`
     - sourcemap 方式
-  - ALLOW_ESLINT
+  - `ALLOW_ESLINT`
     - 是否开启 eslint
     - NO 不开启
-  - IS_ANALYZE
+  - `IS_ANALYZE`
     - 是否开启打包大小分析
     - YES 开启
-  - USE_ESBUILD
+  - `USE_ESBUILD`
     - 是否使用 esbuild-webpack-plugin
     - YES 开启
-  - IS_COMPRESS
+  - `IS_COMPRESS`
     - 是否开启 gzip 和 br 压缩
     - YES 开启
 
-## mock 数据
+## `mock 数据`
 
 - 配置环境变量(.env.development 文件): MOCK=YES
 - 约定式 \_mock 文件(src 目录下\_mock 目录下面的所有 js 文件)

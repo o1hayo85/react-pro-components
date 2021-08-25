@@ -2,7 +2,8 @@
 
 ### Features
 
-- 集成 dumi ([8acce74](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8acce743946a33a5b1aa8a5e396b04417cbd9770))
+- 集成 dumi ([62788a9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/62788a9870756323c36b51b2f34f745de28dbb46))
+- 集成 dumi ([7bf434d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7bf434d130ecb05430fce965b137f095253e543d))
 
 ## [0.4.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.9...v0.4.10) (2021-08-24)
 
