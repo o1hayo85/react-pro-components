@@ -8,5 +8,6 @@
       "message": "chore(release): publish",
       "registry": "https://registry.npmjs.org/"
     }
-  }
+  },
+  "ignoreChanges": ["**/*.md", "**/__tests__/**"]
 }

@@ -5,7 +5,9 @@ node_modules
 .idea
 # testing
 coverage
-
+.umi
+.umi-production
+docs-dist
 dist
 
 # misc

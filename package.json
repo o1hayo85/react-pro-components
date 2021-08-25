@@ -9,6 +9,7 @@
     "commitizen": "^4.2.2",
     "conventional-changelog-cli": "^2.1.1",
     "cz-conventional-changelog": "^3.3.0",
+    "dumi": "^1.1.25",
     "egenie-code-style": "0.0.12",
     "eslint": "7.23.0",
     "husky": "4.3.0",
@@ -16,6 +17,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "10.5.2",
     "prettier": "2.2.1",
+    "react": "^17.0.2",
     "stylelint": "13.12.0",
     "typescript": "4.2.4",
     "validate-commit-msg": "^2.14.0"
@@ -58,6 +60,8 @@
     "lint:style-less": "stylelint --fix \"**/*.less\" --syntax less",
     "lint:style-scss": "stylelint --fix \"**/*.scss\" --syntax scss",
     "lint:js": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx .",
-    "prettier": "prettier -c --write \"**/*.{css,less,scss,md,html,json}\""
+    "prettier": "prettier -c --write \"**/*.{css,less,scss,md,html,json}\"",
+    "docs:start": "dumi dev",
+    "docs:build": "dumi build"
   }
 }
