@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.9...v0.0.0) (2021-08-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.0.0) (2021-08-25)
+
+### Features
+
+- 集成 dumi ([8acce74](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8acce743946a33a5b1aa8a5e396b04417cbd9770))
+
+## [0.4.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.9...v0.4.10) (2021-08-24)
 
 ### Features
 
