@@ -1,4 +1,9 @@
-## Installation
+---
+title: web项目生成器
+order: 4
+---
+
+## 下载
 
 First, install [Yeoman](http://yeoman.io) generator-egenie-react-web using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
@@ -9,7 +14,7 @@ npm install -g yo@3.1.0
 npm install -g generator-egenie-react-web
 ```
 
-Then generate your new project:
+## 生成
 
 ```bash
 mkdir 目录名称 && cd 目录名称

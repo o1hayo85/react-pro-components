@@ -5,7 +5,7 @@ order: 2
 
 ## `换行符(windows)`
 
-```shell
+```bash
 # 提交时验证
 # 拒绝提交包含混合换行符的文件
 git config --global core.safecrlf true
@@ -25,11 +25,13 @@ git config --global core.autocrlf input
 
 # 提交检出均不转换
 git config --global core.autocrlf false
+```
 
-# 参考配置
+- `windows参考配置`
+
+```bash
 git config --global core.safecrlf false
 git config --global core.autocrlf input
-
 ```
 
 ## lint 工具说明
