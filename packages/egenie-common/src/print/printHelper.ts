@@ -296,7 +296,7 @@ class PrintHelper {
    * 打印(先切换打印机类型,否则后果自负)
    * @param params
    */
-  public print = async(params: RookiePrintParams | PddPrintParams | JDParams): Promise<any> => {
+  public print = async(params: RookiePrintParams | PddPrintParams | JDParams | DyPrintParams): Promise<any> => {
     if (this.state === this.jdPrint) {
       const newParams: JDParams = params;
       const customTempUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
