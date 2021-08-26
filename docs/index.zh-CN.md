@@ -1,7 +1,10 @@
 ---
-title: 首页
+title: 杉数前端文档
+order: 1
+hero:
+  title: 杉数前端文档
+  desc: 杉数前端文档
+  actions:
+    - text: 快速上手
+      link: /packages/generator-egenie-react-web
 ---
-
-## 快捷入口
-
-- [pc 端设计规范](/packages/egenie-config#pc-端设计规范)
