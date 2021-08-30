@@ -4,7 +4,7 @@
 
 - 完善文档 ([c0e1f28](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c0e1f28bff31d5ac565f314405264afa013e18af))
 - 完善文档 ([e2d9987](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e2d9987e6f9cf0491ffd98ebfcfe15cf619271f2))
-- **docs:** 增加 egenie-common 的文档 ([637a196](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/637a1967aeda75ab164759cbf7dec5e2bacc4398))
+- **docs:** 增加 egenie-common 下 helper、request、history 文档 ([9d73567](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9d73567bec4ec699fd120f7907d47827860a71e1))
 - **docs:** 迁移文档 ([66f546d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/66f546d3c70630575ee6067b937d510cd3b29f30))
 
 ## [0.4.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.4.11) (2021-08-25)
