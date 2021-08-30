@@ -19,3 +19,5 @@ dist
 
 *.log
 packages/zhouhaifei-utils/es
+
+.history/
