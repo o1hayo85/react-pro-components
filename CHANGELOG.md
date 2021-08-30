@@ -1,10 +1,16 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.0.0) (2021-08-30)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.11...v0.0.0) (2021-08-30)
 
 ### Features
 
-- 完善文档 ([cf0023e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cf0023e302b2841b20235ec1c0c902bffc65b246))
+- 完善文档 ([c0e1f28](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c0e1f28bff31d5ac565f314405264afa013e18af))
 - 完善文档 ([e2d9987](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e2d9987e6f9cf0491ffd98ebfcfe15cf619271f2))
+- **docs:** 增加 egenie-common 的文档 ([637a196](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/637a1967aeda75ab164759cbf7dec5e2bacc4398))
 - **docs:** 迁移文档 ([66f546d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/66f546d3c70630575ee6067b937d510cd3b29f30))
+
+## [0.4.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.4.11) (2021-08-25)
+
+### Features
+
 - rowHeight 支持函数动态返回行高 ([5470cc5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5470cc522403dfd8b70ff9d99c27d1facc72caff))
 - 集成 dumi ([915e53a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/915e53a571760530a2024ca4bb36a90638b2596c))
 - 集成 dumi ([7bf434d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7bf434d130ecb05430fce965b137f095253e543d))
