@@ -78,7 +78,7 @@ export abstract class FilterBase {
    * 查询项翻译的值
    * 外层一般不需要重写
    */
-  abstract translateParams(): string;
+  abstract translateParams(): string[];
 
   /**
    * 是否显示查询项

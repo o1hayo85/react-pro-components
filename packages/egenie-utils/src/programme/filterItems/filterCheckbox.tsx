@@ -59,12 +59,15 @@ export class FilterCheckbox extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterCheckbox): string {
+  public translateParams(this: FilterCheckbox): string[] {
     if (Array.isArray(this.value) && this.value.length) {
-      return `${this.label}:${this.value.map((item) => this.data.find((val) => val.value === item)?.label || '')
-        .join(',')}`;
+      return [
+        this.label,
+        this.value.map((item) => this.data.find((val) => val.value === item)?.label || '')
+          .join(','),
+      ];
     } else {
-      return '';
+      return [];
     }
   }
 

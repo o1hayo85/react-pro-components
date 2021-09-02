@@ -259,24 +259,30 @@ export class FilterDate extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterDate): string {
+  public translateParams(this: FilterDate): string[] {
     const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams)
       .replace(',', '至');
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
         if (timeString) {
-          return `${this.data.find((item) => item.value === this.selectValue)?.label || ''}:${timeString}`;
+          return [
+            this.data.find((item) => item.value === this.selectValue)?.label || '',
+            timeString,
+          ];
         } else {
-          return '';
+          return [];
         }
       } else {
-        return '';
+        return [];
       }
     } else {
       if (timeString) {
-        return `${this.label}:${timeString}`;
+        return [
+          this.label,
+          timeString,
+        ];
       } else {
-        return '';
+        return [];
       }
     }
   }
@@ -516,6 +522,34 @@ export class FilterDate extends FilterBase {
     false,
     false,
   ];
+
+  /**
+   * @internal
+   */
+  @observable public containerRef = React.createRef<HTMLDivElement>();
+
+  /**
+   * @internal
+   */
+  @action public fixPanelHideNotSetTime = (isOpen: boolean): void => {
+    const containerRef = this.containerRef;
+    const startPlaceHolder = this.placeholder[0];
+    const endPlaceHolder = this.placeholder[1];
+
+    if (!isOpen) {
+      if (containerRef.current) {
+        const startElement: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${startPlaceHolder}]`);
+        if (startElement && startElement.value) {
+          this.startTime = moment(startElement.value);
+        }
+
+        const endElement: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${endPlaceHolder}]`);
+        if (endElement && endElement.value) {
+          this.endTime = moment(endElement.value);
+        }
+      }
+    }
+  };
 }
 
 /**
@@ -537,6 +571,9 @@ export class FilterDateComponent extends React.Component<{ store: FilterDate; }>
  */
 @observer
 class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
+  /**
+   * @internal
+   */
   public disableStartDate = (current: moment.Moment): boolean => {
     const { endTime } = this.props.store;
     if (endTime) {
@@ -582,11 +619,14 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
       allowClear,
       required,
       open,
+      containerRef,
+      fixPanelHideNotSetTime,
     } = this.props.store;
     const newClassName = classNames('filterDateSelect', className);
     return (
       <div
         className={newClassName}
+        ref={containerRef}
         style={toJS(style)}
       >
         <header>
@@ -614,7 +654,10 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleStartChange}
-            onOpenChange={(isOpen: boolean) => this.props.store.open[0] = Boolean(isOpen)}
+            onOpenChange={(isOpen: boolean) => {
+              fixPanelHideNotSetTime(isOpen);
+              this.props.store.open[0] = isOpen;
+            }}
             open={open[0]}
             placeholder={Array.isArray(placeholder) ? placeholder[0] : placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
@@ -638,7 +681,10 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleEndChange}
-            onOpenChange={(isOpen: boolean) => this.props.store.open[1] = Boolean(isOpen)}
+            onOpenChange={(isOpen: boolean) => {
+              fixPanelHideNotSetTime(isOpen);
+              this.props.store.open[1] = Boolean(isOpen);
+            }}
             open={open[1]}
             placeholder={Array.isArray(placeholder) ? placeholder[1] : placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
@@ -677,11 +723,14 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
       allowClear,
       required,
       open,
+      containerRef,
+      fixPanelHideNotSetTime,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
       <div
         className={newClassName}
+        ref={containerRef}
         style={toJS(style)}
       >
         <header>
@@ -700,10 +749,13 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
             dropdownClassName={styles.dropdownDate}
             format={format}
             onChange={handleRangeChange}
-            onOpenChange={(isOpen: boolean) => this.props.store.open = [
-              Boolean(isOpen),
-              Boolean(isOpen),
-            ]}
+            onOpenChange={(isOpen: boolean) => {
+              fixPanelHideNotSetTime(isOpen);
+              this.props.store.open = [
+                Boolean(isOpen),
+                Boolean(isOpen),
+              ];
+            }}
             open={open[0]}
             placeholder={placeholder}
             renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}

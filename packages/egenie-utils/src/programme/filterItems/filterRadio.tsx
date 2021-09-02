@@ -54,27 +54,39 @@ export class FilterRadio extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterRadio): string {
+  public translateParams(this: FilterRadio): string[] {
     const inputItem = this.data.find((item) => item.showInput);
     if (inputItem) {
       if (this.value == undefined) {
         if (this.inputValue) {
-          return `${this.label}:${this.inputValue}`;
+          return [
+            this.label,
+            this.inputValue,
+          ];
         } else {
-          return '';
+          return [];
         }
       } else {
         if (inputItem.value === this.value && this.inputValue) {
-          return `${this.label}:${this.inputValue}`;
+          return [
+            this.label,
+            this.inputValue,
+          ];
         } else {
-          return `${this.label}:${this.data.find((item) => item.value === this.value)?.label || ''}`;
+          return [
+            this.label,
+            this.data.find((item) => item.value === this.value)?.label || '',
+          ];
         }
       }
     } else {
       if (this.value == undefined) {
-        return '';
+        return [];
       } else {
-        return `${this.label}:${this.data.find((item) => item.value === this.value)?.label || ''}`;
+        return [
+          this.label,
+          this.data.find((item) => item.value === this.value)?.label || '',
+        ];
       }
     }
   }

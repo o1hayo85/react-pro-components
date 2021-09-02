@@ -13,8 +13,8 @@ class CommonBase extends FilterBase {
   public reset() {
   }
 
-  public translateParams(): string {
-    return '';
+  public translateParams(): string[] {
+    return [];
   }
 
   public toProgramme(): string | null {

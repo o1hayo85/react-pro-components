@@ -48,14 +48,20 @@ export class FilterInputOrSelect extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInputOrSelect): string {
+  public translateParams(this: FilterInputOrSelect): string[] {
     if (this.value) {
-      return `${this.label}:${this.value}`;
+      return [
+        this.label,
+        this.value,
+      ];
     } else {
       if (this.selectValue != undefined) {
-        return `${this.label}:${this.data.find((item) => item.value === this.selectValue)?.label || ''}`;
+        return [
+          this.label,
+          this.data.find((item) => item.value === this.selectValue)?.label || '',
+        ];
       } else {
-        return '';
+        return [];
       }
     }
   }

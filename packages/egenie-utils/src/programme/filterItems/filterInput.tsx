@@ -54,11 +54,14 @@ export class FilterInput extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInput): string {
+  public translateParams(this: FilterInput): string[] {
     if (this.toProgramme()) {
-      return `${this.label}:${this.toProgramme()}`;
+      return [
+        this.label,
+        this.toProgramme(),
+      ];
     } else {
-      return '';
+      return [];
     }
   }
 

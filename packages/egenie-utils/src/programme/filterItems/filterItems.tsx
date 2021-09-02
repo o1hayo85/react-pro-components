@@ -53,7 +53,7 @@ function validParams(data: FilterItemOptions[]) {
 }
 
 // @ts-ignore
-function filterInstanceFactory(item: FilterItemOptions): FilterItem {
+export function filterInstanceFactory(item: FilterItemOptions): FilterItem {
   switch (item.type) {
     case ENUM_FILTER_ITEM_TYPE.input:
       return new FilterInput(item);
@@ -354,12 +354,20 @@ export class FilterItems {
   }
 
   /**
+   * 获取查询项翻译列表
+   */
+  @computed
+  public get translateParamsList(): string[][] {
+    return this.actualData.map((item) => item.translateParams.call(item) as string[])
+      .filter((item: string[]) => item.length);
+  }
+
+  /**
    * 获取查询项翻译的值
    */
   @computed
   public get translateParams(): string[] {
-    return this.actualData.map((item) => item.translateParams.call(item))
-      .filter(Boolean);
+    return this.translateParamsList.map((item: string[]) => item.join(':'));
   }
 
   /**

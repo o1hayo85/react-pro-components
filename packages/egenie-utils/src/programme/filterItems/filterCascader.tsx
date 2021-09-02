@@ -47,7 +47,7 @@ export class FilterCascader extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterCascader): string {
+  public translateParams(this: FilterCascader): string[] {
     if (Array.isArray(this.value) && this.value.length) {
       const translatePath: string[] = [];
       let currentData = this.data;
@@ -62,9 +62,12 @@ export class FilterCascader extends FilterBase {
         }
       }
 
-      return `${this.label}:${translatePath.join(',')}`;
+      return [
+        this.label,
+        translatePath.join(','),
+      ];
     } else {
-      return '';
+      return [];
     }
   }
 

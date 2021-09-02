@@ -1,4 +1,4 @@
-import { Anchor, Button, Collapse, Layout, message, Modal, Typography } from 'antd';
+import { Anchor, Button, Collapse, Layout, message, Modal, Popover, Typography } from 'antd';
 import classNames from 'classnames';
 import { action, computed, observable, autorun } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
@@ -6,7 +6,7 @@ import React from 'react';
 import { MainSubStructure, MainSubStructureModel } from '../egGrid';
 import { BaseData, request } from '../request';
 import { AddProgrammeModal } from './addProgrammeModal';
-import { filterComponentFactory, FilterItem, FilterItems, FilterItemsParams } from './filterItems';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory, FilterItem, FilterItemOptions, FilterItems, FilterItemsParams } from './filterItems';
 import { FilterItemSettingItem, FilterItemSettingModal } from './filterItemSetting';
 import { FilterConfigData, formatFilterConfigData } from './formatFilterConfigData';
 import styles from './programme.less';
@@ -390,6 +390,40 @@ export class Programme {
     event.stopPropagation();
     this.showScroll = true;
   };
+
+  /**
+   * @internal
+   */
+  public getTranslateData = (schemeValue: string): string[][] => {
+    try {
+      const result: FilterItem[] = [];
+      const parsedValue = JSON.parse(schemeValue);
+      const originFilterItems = this.filterItems.originData;
+      originFilterItems.forEach((item) => {
+        if (item.field in parsedValue && parsedValue[item.field] !== null && parsedValue[item.field] !== undefined) {
+          const options: FilterItemOptions = {
+            field: item.field,
+            type: item.type,
+            label: item.label,
+            data: item.data,
+          };
+
+          const instance = filterInstanceFactory(options);
+          instance.formatValue.call(instance, parsedValue[item.field]);
+          if (item.type === ENUM_FILTER_ITEM_TYPE.treeSelect && instance.type === ENUM_FILTER_ITEM_TYPE.treeSelect) {
+            instance.treeData = item.treeData;
+          }
+          result.push(instance);
+        }
+      });
+
+      return result.map((item) => item.translateParams.call(item) as string[])
+        .filter((item) => item.length);
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
 }
 
 @observer
@@ -565,26 +599,43 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
       activeProgramme,
       handleItemClick,
       handleItemDelete,
+      filterItems,
+      getTranslateData,
     } = this.props.programme;
     return (
       <div className={styles.programmeList}>
+        <section
+          className={classNames({ [styles.active]: programmeList[0].scheme_name === activeProgramme })}
+          onClick={() => handleItemClick(programmeList[0])}
+        >
+          <Typography.Text
+            ellipsis
+            title={programmeList[0].scheme_name}
+          >
+            {programmeList[0].scheme_name}
+          </Typography.Text>
+        </section>
         {
-          programmeList.map((item, index) => {
-            return (
-              <section
-                className={classNames({ [styles.active]: item.scheme_name === activeProgramme })}
-                key={item.scheme_name}
-                onClick={() => handleItemClick(item)}
-                style={item.scheme_name === activeProgramme && index !== 0 ? { borderLeftColor: '#e2e2e5' } : {}}
-              >
-                <Typography.Text
-                  ellipsis
-                  title={item.scheme_name}
+          programmeList.slice(1)
+            .map((item) => {
+              return (
+                <Popover
+                  content={<FilterItemsTranslate data={item.scheme_name === activeProgramme ? filterItems.translateParamsList : getTranslateData(item.scheme_value)}/>}
+                  destroyTooltipOnHide
+                  key={item.scheme_name}
+                  placement="bottom"
                 >
-                  {item.scheme_name}
-                </Typography.Text>
-                {
-                  !item.sys_setting ? (
+                  <section
+                    className={classNames({ [styles.active]: item.scheme_name === activeProgramme })}
+                    onClick={() => handleItemClick(item)}
+                    style={item.scheme_name === activeProgramme ? { borderLeftColor: '#e2e2e5' } : {}}
+                  >
+                    <Typography.Text
+                      ellipsis
+                      title={item.scheme_name}
+                    >
+                      {item.scheme_name}
+                    </Typography.Text>
                     <span
                       className={styles.del}
                       onClick={(event) => {
@@ -594,11 +645,10 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
                     >
                       x
                     </span>
-                  ) : null
-                }
-              </section>
-            );
-          })
+                  </section>
+                </Popover>
+              );
+            })
         }
         <div className={styles.emptyBorder}/>
       </div>
@@ -709,3 +759,29 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
     );
   }
 }
+
+let id = 0;
+const FilterItemsTranslate: React.FC<{ data: string[][]; }> = (props) => {
+  return (
+    <div className={styles.translateContainer}>
+      {props.data.map((item) => {
+        return (
+          <section key={id++}>
+            <Typography.Text
+              ellipsis
+              title={item[0]}
+            >
+              {item[0]}
+            </Typography.Text>
+            <span>
+              :
+            </span>
+            <span>
+              {item[1]}
+            </span>
+          </section>
+        );
+      })}
+    </div>
+  );
+};

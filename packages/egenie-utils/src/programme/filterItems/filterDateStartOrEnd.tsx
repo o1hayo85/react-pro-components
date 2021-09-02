@@ -77,11 +77,14 @@ export class FilterDateStartOrEnd extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterDateStartOrEnd): string {
+  public translateParams(this: FilterDateStartOrEnd): string[] {
     if (this.toProgramme()) {
-      return `${this.label}:${this.toProgramme()}`;
+      return [
+        this.label,
+        this.toProgramme(),
+      ];
     } else {
-      return '';
+      return [];
     }
   }
 
@@ -151,6 +154,28 @@ export class FilterDateStartOrEnd extends FilterBase {
    * 输入框提示文字
    */
   @observable public placeholder = '';
+
+  /**
+   * @internal
+   */
+  @observable public containerRef = React.createRef<HTMLDivElement>();
+
+  /**
+   * @internal
+   */
+  @action public fixPanelHideNotSetTime = (isOpen: boolean): void => {
+    const containerRef = this.containerRef;
+    const placeholder = this.placeholder;
+
+    if (!isOpen) {
+      if (containerRef.current) {
+        const element: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${placeholder}]`);
+        if (element && element.value) {
+          this.value = moment(element.value);
+        }
+      }
+    }
+  };
 }
 
 /**
@@ -172,11 +197,14 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
       labelWidth,
       allowClear,
       required,
+      containerRef,
+      fixPanelHideNotSetTime,
     } = this.props.store;
     const newClassName = classNames('filterDateNormal', className);
     return (
       <div
         className={newClassName}
+        ref={containerRef}
         style={toJS(style)}
       >
         <header>
@@ -193,6 +221,7 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
             disabled={disabled}
             format={format}
             onChange={handleChange}
+            onOpenChange={fixPanelHideNotSetTime}
             placeholder={placeholder}
             showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,

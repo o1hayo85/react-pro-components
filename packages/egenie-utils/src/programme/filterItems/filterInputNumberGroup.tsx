@@ -93,23 +93,29 @@ export class FilterInputNumberGroup extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInputNumberGroup): string {
+  public translateParams(this: FilterInputNumberGroup): string[] {
     const numberString = formatNumberString(this.value).replace(',', '至');
     if (this.data.length > 1) {
       if (this.selectValue) {
         if (numberString) {
-          return `${this.data.find((item) => item.value === this.selectValue)?.label || ''}:${numberString}`;
+          return [
+            this.data.find((item) => item.value === this.selectValue)?.label || '',
+            numberString,
+          ];
         } else {
-          return '';
+          return [];
         }
       } else {
-        return '';
+        return [];
       }
     } else {
       if (numberString) {
-        return `${this.label}:${numberString}`;
+        return [
+          this.label,
+          numberString,
+        ];
       } else {
-        return '';
+        return [];
       }
     }
   }
