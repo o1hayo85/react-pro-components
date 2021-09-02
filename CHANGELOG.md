@@ -8,6 +8,7 @@
 - **docs:** 增加 egenie-utils 文档 ([a30253c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a30253cc34df6cdfd296f7e3e0bfb4ec7bda1f46))
 - **docs:** 增加打印文档 ([0ce328e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0ce328e58472848e7f05abefe8b71c8613734986))
 - **docs:** 迁移文档 ([66f546d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/66f546d3c70630575ee6067b937d510cd3b29f30))
+- **utils:** 增加方案 hover 显示翻译值 ([cc67be3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cc67be3ad80e6b2884864762a62c2e2ac43a83dd))
 - **utils:** 增加查询项设置查询值高亮 ([6332410](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/63324100ac7ecfc1a6e697c0553a4c0e247c5ae4))
 
 ## [0.4.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.4.11) (2021-08-25)
