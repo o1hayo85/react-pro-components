@@ -1,4 +1,6 @@
 @footer-height: 65px;
+@param-active: #ddebff;
+@field-active: rgba(red(@egenie-primary-color), green(@egenie-primary-color), blue(@egenie-primary-color), 0.6);
 
 .container {
   width: 100%;
@@ -136,27 +138,60 @@
   height: 100%;
 
   .filterItemContainer {
-    padding-bottom: @egenie-spacing-sm;
+    padding-bottom: @egenie-spacing-xs;
+
+    &.paramActive {
+      :global {
+        .filterLabel,
+        .ant-collapse-header,
+        .filterInputOrSelect .ant-select,
+        .filterInputAndSelect .ant-select {
+          background: @param-active !important;
+        }
+      }
+    }
+
+    &.fieldActive,
+    &.paramActive.fieldActive {
+      :global {
+        .filterLabel,
+        .ant-collapse-header,
+        .filterInputOrSelect .ant-select,
+        .filterInputAndSelect .ant-select {
+          background: @field-active !important;
+        }
+      }
+    }
 
     :global {
       .ant-collapse-header {
         display: flex;
         align-items: center;
-        height: @egenie-height-lg;
+        height: @egenie-height-md;
         padding-left: @egenie-spacing-xss !important;
         color: @egenie-heading-color;
         font-weight: 400;
         font-size: @egenie-font-size-md;
         background: @egenie-combine-filter-bg;
         border-radius: @egenie-border-radius-base;
+        transition: all 0.3s linear;
 
-        svg {
-          color: @egenie-text-color-secondary;
+        .ant-collapse-arrow {
+          top: 0 !important;
+          right: @egenie-spacing-xs !important;
+
+          svg {
+            color: @egenie-text-color-secondary;
+          }
         }
       }
 
       .ant-collapse-content-box {
-        padding: @egenie-spacing-sm @egenie-spacing-sm 0 !important;
+        padding: @egenie-spacing-xs 0 0 @egenie-spacing-xss !important;
+
+        .ant-radio-wrapper .ant-radio + span {
+          padding-right: 0 !important;
+        }
       }
     }
   }
@@ -254,11 +289,11 @@
     .filterDateSelect > header,
     .filterDateNormal > section,
     .filterTreeSelect .ant-select {
-      height: @egenie-height-lg !important;
+      height: @egenie-height-md !important;
     }
 
     .filterDateNormal .ant-picker .ant-picker-input input {
-      height: @egenie-height-lg -2px !important;
+      height: @egenie-height-md -2px !important;
     }
   }
 }

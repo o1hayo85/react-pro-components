@@ -1,6 +1,6 @@
 import { Anchor, Button, Collapse, Layout, message, Modal, Typography } from 'antd';
 import classNames from 'classnames';
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, autorun } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
 import React from 'react';
 import { MainSubStructure, MainSubStructureModel } from '../egGrid';
@@ -92,6 +92,11 @@ export class Programme {
     initProgramme();
     initGridModel();
   }
+
+  /**
+   * @internal
+   */
+  @observable public clickedField = '';
 
   @action private getParams = () => {
     return this.filterItems.params;
@@ -390,16 +395,48 @@ export class Programme {
 @observer
 export class ProgrammeComponent extends React.Component<{ store: Programme; className?: string; style?: React.CSSProperties; }> {
   componentDidMount() {
+    this.initParamsBgActive();
+
     document.querySelector(`.${styles.scrollContainer}`)
       ?.addEventListener('click', this.props.store.clickPreventCloseScroll);
     window.addEventListener('click', this.props.store.clickCloseScroll, true);
   }
 
   componentWillUnmount() {
+    if (this.paramsDisposer) {
+      this.paramsDisposer();
+    }
+
     document.querySelector(`.${styles.scrollContainer}`)
       ?.removeEventListener('click', this.props.store.clickPreventCloseScroll);
     window.removeEventListener('click', this.props.store.clickCloseScroll);
   }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  public paramsDisposer?: Function;
+
+  public initParamsBgActive = () => {
+    this.paramsDisposer = autorun(() => {
+      const totalField: string[] = this.props.store.filterItems.actualData.map((item) => item.field);
+      const paramsField: string[] = this.props.store.filterItems.actualData.filter((item) => Object.keys(item.toParams.call(item)).length > 0)
+        .map((item) => item.field);
+      const paramsActiveClassName = styles.paramActive;
+
+      totalField.forEach((field) => {
+        const element: HTMLDivElement = document.querySelector(`#${filterItemsCollapsePrefix}${field}`);
+        if (element) {
+          element.classList.remove(paramsActiveClassName);
+        }
+      });
+
+      paramsField.forEach((field) => {
+        const element: HTMLDivElement = document.querySelector(`#${filterItemsCollapsePrefix}${field}`);
+        if (element) {
+          element.classList.add(paramsActiveClassName);
+        }
+      });
+    });
+  };
 
   render() {
     const {
@@ -592,7 +629,7 @@ class FilterItemsScroll extends React.Component<{ programme?: Programme; }> {
           <Anchor getContainer={scrollContainerRef.current ? () => scrollContainerRef.current : undefined}>
             {actualData.map((item) => (
               <Anchor.Link
-                href={`#${item.field}`}
+                href={`#${filterItemsCollapsePrefix}${item.field}`}
                 key={item.field}
                 title={item.label}
               />
@@ -618,7 +655,7 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
           return (
             <div
               className={styles.filterItemContainer}
-              id={item.field}
+              id={`${filterItemsCollapsePrefix}${item.field}`}
               key={item.field}
             >
               {

@@ -75,9 +75,11 @@
     align-items: center;
     padding-right: @egenie-spacing-xss;
     padding-left: @egenie-spacing-xss;
+    transition: all 0.3s linear;
 
     h3 {
       font-weight: 400 !important;
+      font-size: @egenie-font-size-sm !important;
     }
   }
 
@@ -239,6 +241,8 @@
       :global {
         .ant-select {
           border-left: 1px solid @egenie-border-color-base;
+          transition: all 0.3s linear;
+
           .common-select();
         }
       }
@@ -274,6 +278,8 @@
 
       .ant-select {
         border-right: 1px solid @egenie-border-color-base;
+        transition: all 0.3s linear;
+
         .common-select();
       }
     }
@@ -281,7 +287,6 @@
 
   .filterDateSelect {
     background: @egenie-combine-filter-bg;
-    border: 1px solid @egenie-border-color-base;
     border-radius: @egenie-border-radius-base;
 
     > header {
@@ -297,8 +302,8 @@
         .ant-select {
           flex-grow: 1;
           background: #fff;
-          border-bottom: 1px solid @egenie-border-color-base;
-          border-left: 1px solid @egenie-border-color-base;
+          border-top: 1px solid @egenie-combine-filter-bg;
+          border-right: 1px solid @egenie-combine-filter-bg;
           .common-select();
         }
       }
