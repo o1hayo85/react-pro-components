@@ -30,7 +30,7 @@ export class ExportStore {
 
   @observable public templateList: Template[] = []; // 模板列表
 
-  @observable public selectTemplateId = null; // 选中行
+  @observable public selectTemplateId: number = null; // 选中行
 
   @observable public editId = null; // 编辑行id
 
@@ -116,6 +116,8 @@ export class ExportStore {
           </div>
         ),
         width: 500,
+        okText: '去导出任务中心',
+        onOk: this.handleGotoExportCenter,
       });
       if (this.parent && this.parent.exportCallBack) {
         this.parent.exportCallBack();
@@ -147,6 +149,9 @@ export class ExportStore {
   public queryTemplateList = async(): Promise<void> => {
     const res: BaseData<Template[]> = await request({ url: `${api.templateList}?exportType=${this.exportType}` });
     this.templateList = res.data;
+    if (this.templateList.length > 0 && !this.selectTemplateId) {
+      this.selectTemplateId = this.templateList[0].id;
+    }
   };
 
   // 查询模板字段列表
@@ -218,7 +223,7 @@ export class ExportStore {
       message.error('模板字段不能为空');
       return;
     }
-    await request({
+    const res: BaseData<number> = await request({
       url: api.saveTemplate,
       method: 'POST',
       data: {
@@ -231,6 +236,7 @@ export class ExportStore {
     message.success('保存成功');
     this.editId = null;
     this.queryTemplateList();
+    this.selectTemplateId = res.data;
   };
 
   // 取消编辑
