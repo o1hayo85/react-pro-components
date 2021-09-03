@@ -215,9 +215,25 @@ class CustomPrintModel {
 }
 
 interface CustomPrintParam {
+
+  /**
+   * 是否预览
+   */
   preview?: boolean;
+
+  /**
+   * 模版类型
+   */
   tempType?: string | number;
+
+  /**
+   * 模版id
+   */
   templateId?: number | string;
+
+  /**
+   * 打印机
+   */
   printer?: string;
 }
 

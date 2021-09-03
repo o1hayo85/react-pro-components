@@ -67,7 +67,7 @@ export declare function multiple(num1: unknown, num2: unknown): number;
 /**
  * 保留小数点位数。Number.prototype.toFixed有bug
  * @param num 数字
- * @param decimalLength 小数点位数
+ * @param decimalLength 小数点位数(默认0)
  */
 export declare function toFixed(num: unknown, decimalLength?: number): string;
 ```
@@ -92,7 +92,7 @@ toFixed(111.222, 2);
 /**
  * 格式化价格
  * @param price 价格
- * @param decimalLength 小数点位数
+ * @param decimalLength 小数点位数(默认2)
  */
 export declare function formatPrice(price: unknown, decimalLength?: number): number;
 ```

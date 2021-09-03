@@ -158,7 +158,7 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
 interface CommonParams {
 
   /**
-   * 一次打印数据个数
+   * 一次打印数据页数(默认500)
    */
   count?: number;
 
@@ -184,7 +184,7 @@ interface CommonParams {
 export type RookiePrintParams = {
 
   /**
-   * 数据
+   * 打印数据
    */
   contents?: any[];
 } & CommonParams;
@@ -195,7 +195,7 @@ export type RookiePrintParams = {
 type DyPrintParams = {
 
   /**
-   * 数据
+   * 打印数据
    */
   contents?: any[];
 } & CommonParams;
@@ -206,7 +206,7 @@ type DyPrintParams = {
 type PddPrintParams = {
 
   /**
-   * 数据
+   * 打印数据
    */
   contents?: any[];
 
