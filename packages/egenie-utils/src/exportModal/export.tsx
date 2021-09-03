@@ -23,7 +23,12 @@ export class ExportModal extends Component<{ store?: ExportStore; }> {
       inputType,
       ...restProps
     }) => {
-      const inputNode = inputType === 'input' ? <Input/> : (
+      const inputNode = inputType === 'input' ? (
+        <Input
+          autoFocus
+          maxLength={10}
+        />
+      ) : (
         <Select
           className={styles.templateColumnSelect}
           filterOption={(input, option) => {
