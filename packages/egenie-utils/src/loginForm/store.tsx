@@ -203,7 +203,7 @@ export class Store {
       type: 'input',
       prop: 'password',
       placeholder: '请输入密码',
-      help: '必须包含字母、数字、特殊字符的任意两种组合，且长度不小于8位',
+      help: '密码需包括字母和数字，且长度不小于8位',
     },
     repeatPassword: {
       label: '确认密码',

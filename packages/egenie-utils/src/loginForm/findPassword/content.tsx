@@ -92,7 +92,7 @@ export default class Content extends React.Component<Props> {
               {currentStep === 2 && (
                 <>
                   <Form.Item
-                    extra="必须包含字母、数字、特殊字符的任意两种组合，且长度不小于8位"
+                    extra="密码需包括字母和数字，且长度不小于8位"
                     label="输入新密码"
                     name="newPassword"
                     rules={[
@@ -101,7 +101,7 @@ export default class Content extends React.Component<Props> {
                         message: '请输入密码',
                       },
                       {
-                        pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)(?![~!@#$%^&*_]+$)[0-9A-Za-z~!@#$%^&*_]{8,16}$/,
+                        pattern: /^.*(?=.{8,16})(?=.*\d+)(?=.*[a-zA-Z]+)(?=.*[!@#$%^&*?\(\)]*).*$/,
                         message: '密码格式不正确',
                       },
                     ]}
