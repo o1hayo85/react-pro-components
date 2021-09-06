@@ -101,7 +101,7 @@ export default class Content extends React.Component<Props> {
                         message: '请输入密码',
                       },
                       {
-                        pattern: /^.*(?=.{8,16})(?=.*\d)(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[!@#$%^&*?\(\)]*).*$/,
+                        pattern: /^.*(?=.{8,16})(?=.*\d+)(?=.*[a-zA-Z]+)(?=.*[!@#$%^&*?\(\)]*).*$/,
                         message: '密码格式不正确',
                       },
                     ]}
