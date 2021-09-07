@@ -1,6 +1,6 @@
-import { Anchor, Button, Collapse, Layout, message, Modal, Popover, Typography } from 'antd';
+import { Anchor, Button, Collapse, Dropdown, Layout, Menu, message, Modal, Popover, Typography } from 'antd';
 import classNames from 'classnames';
-import { action, computed, observable, autorun } from 'mobx';
+import { action, autorun, computed, observable } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
 import React from 'react';
 import { MainSubStructure, MainSubStructureModel } from '../egGrid';
@@ -16,12 +16,13 @@ const filterItemsSettingPrefix = 'filterItemsSettingPrefix_';
 const defaultProgrammeName = '默认方案';
 const defaultProgramme = [
   {
-    scheme_name: defaultProgrammeName,
-    scheme_value: JSON.stringify({}),
-    display_setting: JSON.stringify({}),
-    sys_setting: true,
+    schemeName: defaultProgrammeName,
+    schemeValue: JSON.stringify({}),
+    displaySetting: JSON.stringify({}),
+    sysSetting: true,
   },
 ];
+let id = 0;
 
 function validParams(params?: Partial<ProgrammeParams>) {
   if (!params.moduleName) {
@@ -30,10 +31,11 @@ function validParams(params?: Partial<ProgrammeParams>) {
 }
 
 export interface ProgrammeListItem {
-  scheme_name: string;
-  scheme_value: string;
-  display_setting: string;
-  sys_setting: boolean;
+  id?: number;
+  schemeName: string;
+  schemeValue: string;
+  displaySetting: string;
+  sysSetting: boolean;
 }
 
 export interface ProgrammeParams extends FilterItemsParams {
@@ -93,11 +95,6 @@ export class Programme {
     initGridModel();
   }
 
-  /**
-   * @internal
-   */
-  @observable public clickedField = '';
-
   @action private getParams = () => {
     return this.filterItems.params;
   };
@@ -114,15 +111,17 @@ export class Programme {
 
   @action private getProgrammeList = (dictList = '', itemList = '', fieldMap = {}) => {
     request<FilterConfigData>({
-      url: '/api/filterSet2/getConfig2',
-      params: {
+      url: '/api/boss/baseinfo/rest/filterSet/config',
+      method: 'post',
+      data: {
         module: this.moduleName,
         dictList,
         itemList,
       },
     })
       .then((info) => {
-        this.programmeList = defaultProgramme.concat(info.data.old_set || []);
+        this.programmeList = defaultProgramme.concat(info?.data?.oldSet || []);
+
         const list = formatFilterConfigData(info, fieldMap);
         this.filterItems.addDict(list.reduce((prev, current) => ({
           ...prev,
@@ -147,19 +146,20 @@ export class Programme {
   /**
    * @internal
    */
-  @action public createProgramme = (params: { scheme_name: string; }): Promise<unknown> => {
+  @action public createProgramme = (params: { schemeName: string; }): Promise<unknown> => {
     const schemeValue = this.filterItems.actualData.filter((item) => !item.isDynamic)
       .reduce((prev, current) => ({
         ...prev,
         [current.field]: current.toProgramme(),
       }), {});
     return request({
-      url: `/api/filterSet2/save/${this.moduleName}`,
+      url: '/api/boss/baseinfo/rest/filterSet/queryScheme/save',
       method: 'post',
       data: {
-        display_setting: JSON.stringify({}),
-        scheme_value: JSON.stringify(schemeValue),
-        ...params,
+        displaySetting: JSON.stringify({}),
+        module: this.moduleName,
+        schemeValue: JSON.stringify(schemeValue),
+        schemeName: params.schemeName,
       },
     })
       .then(() => {
@@ -172,18 +172,48 @@ export class Programme {
   /**
    * @internal
    */
+  @action public editProgramme = (): void => {
+    const schemeValue = this.filterItems.actualData.filter((item) => !item.isDynamic)
+      .reduce((prev, current) => ({
+        ...prev,
+        [current.field]: current.toProgramme(),
+      }), {});
+
+    Modal.confirm({
+      content: '确认更新方案吗?',
+      onOk: () => request({
+        url: '/api/boss/baseinfo/rest/filterSet/queryScheme/save',
+        method: 'post',
+        data: {
+          displaySetting: JSON.stringify({}),
+          module: this.moduleName,
+          schemeValue: JSON.stringify(schemeValue),
+          schemeName: this.activeProgramme,
+          id: this.programmeList.find((item) => item.schemeName === this.activeProgramme)?.id,
+        },
+      })
+        .then(() => {
+          message.success('编辑成功');
+          this.getProgrammeList();
+        }),
+    });
+  };
+
+  /**
+   * @internal
+   */
   @observable public activeProgramme = defaultProgrammeName;
 
   /**
    * @internal
    */
   @action public handleItemClick = (item: ProgrammeListItem) => {
-    if (this.activeProgramme !== item.scheme_name) {
-      this.activeProgramme = item.scheme_name;
+    if (this.activeProgramme !== item.schemeName) {
+      this.activeProgramme = item.schemeName;
       this.filterItems.reset();
-      if (item.scheme_value) {
+      if (item.schemeValue) {
         try {
-          const schemeValue = JSON.parse(item.scheme_value) || {};
+          const schemeValue = JSON.parse(item.schemeValue) || {};
           this.filterItems.originData.forEach((item) => {
             if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
               item.formatValue.call(item, schemeValue[item.field]);
@@ -204,16 +234,16 @@ export class Programme {
     Modal.confirm({
       content: '确定删除吗?',
       onOk: () => request({
-        url: '/api/filterSet/deleteFilterSet',
+        url: '/api/boss/baseinfo/rest/filterSet/queryScheme/delete',
         method: 'post',
         data: {
-          name: item.scheme_name,
+          name: item.schemeName,
           module: this.moduleName,
         },
       })
         .then(action(() => {
           message.success('删除成功');
-          if (this.activeProgramme === item.scheme_name) {
+          if (this.activeProgramme === item.schemeName) {
             this.activeProgramme = defaultProgrammeName;
             this.filterItems.reset();
             this.handleSearch();
@@ -390,40 +420,6 @@ export class Programme {
     event.stopPropagation();
     this.showScroll = true;
   };
-
-  /**
-   * @internal
-   */
-  public getTranslateData = (schemeValue: string): string[][] => {
-    try {
-      const result: FilterItem[] = [];
-      const parsedValue = JSON.parse(schemeValue);
-      const originFilterItems = this.filterItems.originData;
-      originFilterItems.forEach((item) => {
-        if (item.field in parsedValue && parsedValue[item.field] !== null && parsedValue[item.field] !== undefined) {
-          const options: FilterItemOptions = {
-            field: item.field,
-            type: item.type,
-            label: item.label,
-            data: item.data,
-          };
-
-          const instance = filterInstanceFactory(options);
-          instance.formatValue.call(instance, parsedValue[item.field]);
-          if (item.type === ENUM_FILTER_ITEM_TYPE.treeSelect && instance.type === ENUM_FILTER_ITEM_TYPE.treeSelect) {
-            instance.treeData = item.treeData;
-          }
-          result.push(instance);
-        }
-      });
-
-      return result.map((item) => item.translateParams.call(item) as string[])
-        .filter((item) => item.length);
-    } catch (e) {
-      console.log(e);
-      return [];
-    }
-  };
 }
 
 @observer
@@ -542,6 +538,9 @@ class Footer extends React.Component<{ programme?: Programme; }> {
       showSetting,
       handleSettingSave,
       originSettingData,
+      activeProgramme,
+      programmeList,
+      editProgramme,
     } = this.props.programme;
     return (
       <>
@@ -549,10 +548,28 @@ class Footer extends React.Component<{ programme?: Programme; }> {
           <a onClick={() => handleShowSetting(true)}>
             <i className="icon-btn_sz"/>
           </a>
-
-          <Button onClick={() => handleShowProgramme(true)}>
-            生成方案
-          </Button>
+          {
+            activeProgramme === programmeList[0].schemeName ? (
+              <Button onClick={() => handleShowProgramme(true)}>
+                生成方案
+              </Button>
+            ) : (
+              <Dropdown.Button
+                onClick={() => handleShowProgramme(true)}
+                overlay={(
+                  <Menu onClick={() => editProgramme()}>
+                    <Menu.Item key="1">
+                      更新方案
+                    </Menu.Item>
+                  </Menu>
+                )}
+                placement="topCenter"
+                trigger={['click']}
+              >
+                生成方案
+              </Dropdown.Button>
+            )
+          }
           <Button
             className="ghost-bg-btn"
             onClick={reset}
@@ -599,20 +616,19 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
       activeProgramme,
       handleItemClick,
       handleItemDelete,
-      filterItems,
-      getTranslateData,
     } = this.props.programme;
+
     return (
       <div className={styles.programmeList}>
         <section
-          className={classNames({ [styles.active]: programmeList[0].scheme_name === activeProgramme })}
+          className={classNames({ [styles.active]: programmeList[0].schemeName === activeProgramme })}
           onClick={() => handleItemClick(programmeList[0])}
         >
           <Typography.Text
             ellipsis
-            title={programmeList[0].scheme_name}
+            title={programmeList[0].schemeName}
           >
-            {programmeList[0].scheme_name}
+            {programmeList[0].schemeName}
           </Typography.Text>
         </section>
         {
@@ -620,21 +636,26 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
             .map((item) => {
               return (
                 <Popover
-                  content={<FilterItemsTranslate data={item.scheme_name === activeProgramme ? filterItems.translateParamsList : getTranslateData(item.scheme_value)}/>}
+                  content={(
+                    <FilterItemsTranslate
+                      schemeName={item.schemeName}
+                      schemeValue={item.schemeValue}
+                    />
+                  )}
                   destroyTooltipOnHide
-                  key={item.scheme_name}
+                  key={id++}
                   placement="bottom"
                 >
                   <section
-                    className={classNames({ [styles.active]: item.scheme_name === activeProgramme })}
+                    className={classNames({ [styles.active]: item.schemeName === activeProgramme })}
                     onClick={() => handleItemClick(item)}
-                    style={item.scheme_name === activeProgramme ? { borderLeftColor: '#e2e2e5' } : {}}
+                    style={item.schemeName === activeProgramme ? { borderLeftColor: '#e2e2e5' } : {}}
                   >
                     <Typography.Text
                       ellipsis
-                      title={item.scheme_name}
+                      title={item.schemeName}
                     >
-                      {item.scheme_name}
+                      {item.schemeName}
                     </Typography.Text>
                     <span
                       className={styles.del}
@@ -691,9 +712,6 @@ class FilterItemsScroll extends React.Component<{ programme?: Programme; }> {
   }
 }
 
-/**
- * @internal
- */
 @inject('filterItems')
 @observer
 class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; }> {
@@ -760,28 +778,72 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
   }
 }
 
-let id = 0;
-const FilterItemsTranslate: React.FC<{ data: string[][]; }> = (props) => {
-  return (
-    <div className={styles.translateContainer}>
-      {props.data.map((item) => {
-        return (
-          <section key={id++}>
-            <Typography.Text
-              ellipsis
-              title={item[0]}
-            >
-              {item[0]}
-            </Typography.Text>
-            <span>
-              :
-            </span>
-            <span>
-              {item[1]}
-            </span>
-          </section>
-        );
-      })}
-    </div>
-  );
-};
+@inject('programme')
+@observer
+class FilterItemsTranslate extends React.Component<{ programme?: Programme; schemeName: string; schemeValue: string; }> {
+  @computed public get translateData(): string[][] {
+    if (this.props.schemeName === this.props.programme.activeProgramme) {
+      return this.props.programme.filterItems.translateParamsList;
+    } else {
+      try {
+        const result: FilterItem[] = [];
+        const parsedValue = JSON.parse(this.props.schemeValue);
+        const originFilterItems = this.props.programme.filterItems.originData;
+        originFilterItems.forEach((item) => {
+          if (item.field in parsedValue && parsedValue[item.field] !== null && parsedValue[item.field] !== undefined) {
+            const options: FilterItemOptions = {
+              field: item.field,
+              type: item.type,
+              label: item.label,
+              data: item.data,
+            };
+
+            const instance = filterInstanceFactory(options);
+            instance.formatValue.call(instance, parsedValue[item.field]);
+            if (item.type === ENUM_FILTER_ITEM_TYPE.treeSelect && instance.type === ENUM_FILTER_ITEM_TYPE.treeSelect) {
+              instance.treeData = item.treeData;
+            }
+
+            if (item.type === ENUM_FILTER_ITEM_TYPE.select && instance.type === ENUM_FILTER_ITEM_TYPE.select) {
+              instance.mode = item.mode;
+            }
+            result.push(instance);
+          }
+        });
+
+        return result.map((item) => item.translateParams.call(item) as string[])
+          .filter((item) => item.length);
+      } catch (e) {
+        console.log(e);
+        return [];
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div className={styles.translateContainer}>
+        {
+          this.translateData.map((item) => {
+            return (
+              <section key={id++}>
+                <Typography.Text
+                  ellipsis
+                  title={item[0]}
+                >
+                  {item[0]}
+                </Typography.Text>
+                <span>
+                  :
+                </span>
+                <span>
+                  {item[1]}
+                </span>
+              </section>
+            );
+          })
+        }
+      </div>
+    );
+  }
+}

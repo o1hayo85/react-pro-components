@@ -2,7 +2,7 @@ import { Form, Modal, Input } from 'antd';
 import React from 'react';
 
 interface AddProgrammeModalProps {
-  callback: (params: { scheme_name: string; }) => Promise<unknown>;
+  callback: (params: { schemeName: string; }) => Promise<unknown>;
   // eslint-disable-next-line @typescript-eslint/ban-types
   onCancel: Function;
 }
@@ -59,7 +59,7 @@ export function AddProgrammeModal({
       >
         <Form.Item
           label="方案名称"
-          name="scheme_name"
+          name="schemeName"
           rules={[
             {
               required: true,
