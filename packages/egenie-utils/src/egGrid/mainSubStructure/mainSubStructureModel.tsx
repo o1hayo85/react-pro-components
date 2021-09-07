@@ -210,7 +210,7 @@ export class MainSubStructureModel {
   constructor({ ...options }: IMainSubStructureModel) {
     set(this, { ...(options || {}) });
     this.setMainGridModel(options.grid, options.api);
-    this.setSubTablesModel(options.subTables);
+    this.setSubTablesModel(options.subTables || {});
     set(this, {
       history: {
         pageSize: options.grid.pageSize || 50,
