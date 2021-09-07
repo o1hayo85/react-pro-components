@@ -1,9 +1,14 @@
-# [0.0.0](http://192.168.200.111:9980/tom/egenie-utils/compare/v0.4.12...v0.0.0) (2021-09-06)
+# [0.0.0](http://192.168.200.111:9980/tom/egenie-utils/compare/v0.4.13...v0.0.0) (2021-09-07)
 
 ### Features
 
 - **4518:** 注册及忘记密码页面 密码正则修改 ([f749f0d](http://192.168.200.111:9980/tom/egenie-utils/commits/f749f0d18532426a0f45c6ab272d62380b6b104f))
 - **4518:** 注册及忘记密码页面 密码正则修改 ([48d3396](http://192.168.200.111:9980/tom/egenie-utils/commits/48d33964252c3a8469f3d0c107201941234633c5))
+
+## [0.4.13](http://192.168.200.111:9980/tom/egenie-utils/compare/v0.4.12...v0.4.13) (2021-09-06)
+
+### Features
+
 - **4518:** 注册及忘记密码页面 密码正则修改 ([362645c](http://192.168.200.111:9980/tom/egenie-utils/commits/362645c49708d76b594bce4ceb395152a9ffca36))
 - **docs:** 补充 egenie-common 文档 ([983ec77](http://192.168.200.111:9980/tom/egenie-utils/commits/983ec77e0d26e9a827072c84bfe05ea1c4bef8c8))
 
