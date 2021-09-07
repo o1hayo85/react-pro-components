@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.14...v0.0.0) (2021-09-07)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.15...v0.0.0) (2021-09-07)
+
+### Bug Fixes
+
+- 兼容不传子表对象 ([d2c6f23](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d2c6f239e7fb038c7ad4d38d8fc25880447e3f58))
+
+## [0.4.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.14...v0.4.15) (2021-09-07)
 
 ### Features
 
