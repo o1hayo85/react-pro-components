@@ -31,11 +31,12 @@ export enum ENUM_FILTER_ITEM_TYPE {
 ## `FilterItem`
 
 - 查询项种类
-- 类型: FilterInput | FilterInputNumberGroup | FilterSelect | FilterRadio | FilterInputAndSelect | FilterDate | FilterCheckbox | FilterInputOrSelect | FilterCascader | FilterDateStartOrEnd | FilterTreeSelect;
+- 类型: [FilterInput](./filter-input) | [FilterInputNumberGroup](./filter-input-number-group) | [FilterSelect](./filter-select) | [FilterRadio](./filter-radio) | [FilterInputAndSelect](./filter-input-and-select) | [FilterDate](./filter-date) | [FilterCheckbox](./filter-checkbox) | [FilterInputOrSelect](./filter-input-or-select) | [FilterCascader](./filter-cascader) | [FilterDateStartOrEnd](./filter-date-start-or-end) | [FilterTreeSelect](./filter-tree-select);
 
 ## `FilterItemOptions`
 
-- 类型: `Partial<FilterItem>`
+- 查询项参数
+- 类型: Partial<[FilterItem](#filteritem)>
 
 ## `FilterBase`
 

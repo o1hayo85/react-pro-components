@@ -2,7 +2,8 @@
 
 ### Features
 
-- **docs:** add egenie-utils doc ([4484287](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4484287c556547a0e7e5ce3124601e9a0709837c))
+- **docs/egenie-utils:** add filterItems doc ([6b5df5e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6b5df5e3873ad333281796953c932d8945443407))
+- **docs/egenie-utils:** add programme doc ([78aed95](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/78aed958c3278f18afada51f41eab51517109514))
 
 ## [0.4.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.19...v0.4.20) (2021-09-09)
 
