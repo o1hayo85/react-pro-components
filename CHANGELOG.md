@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.19...v0.0.0) (2021-09-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-09)
+
+### Features
+
+- **docs:** add egenie-utils doc ([4484287](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4484287c556547a0e7e5ce3124601e9a0709837c))
+
+## [0.4.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.19...v0.4.20) (2021-09-09)
 
 ## [0.4.19](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.18...v0.4.19) (2021-09-09)
 
