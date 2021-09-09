@@ -3,9 +3,71 @@ title: FilterSelect
 order: 5
 ---
 
-## 建设中
+## `value`
 
-- 描述: 是否显示查询项
+- 描述: 选中值
+- 类型: string | undefined | string[]
+  - 单选为: string | undefined 多选为: string[]
+- 默认值: undefined
+
+## `onChangeCallback`
+
+- 描述: 值改变回掉
+- 类型?: (value?: string | string[] | undefined) => void
+  - 单选为: string | undefined 多选为: string[]
+- 默认值: 无
+
+## `onSearchCallback`
+
+- 描述: 搜索值改变回掉
+- 类型?: (value?: string) => void
+- 默认值: 无
+
+## `disabled`
+
+- 描述: 是否禁止
+- 类型: boolean
+- 默认值: false
+
+## `allowClear`
+
+- 描述: 是否可清除
+- 类型: boolean
+- 默认值: true
+
+## `placeholder`
+
+- 描述: 输入框提示文字
+- 类型: string
+- 默认值: 单选: 请选择 多选: 请选择(可多选)
+
+## `showSearch`
+
+- 描述: 是否可搜索
+- 类型: boolean
+- 默认值: true
+
+## `showChooseAll`
+
+- 描述: 是否可以选中全部。多选才能生效
+- 类型: boolean
+- 默认值: false
+
+## `maxItemsLength`
+
+- 描述: 最多显示数量
+- 类型: number
+- 默认值: 1000
+
+## `mode`
+
+- 描述: 模式。默认单选、`multiple为多选`
+- 类型: `'multiple' | undefined`
+- 默认值: undefined
+
+## `showArrow`
+
+- 描述: 是否显示下拉小箭头
 - 类型: boolean
 - 默认值: true
 

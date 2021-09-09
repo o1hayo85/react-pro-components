@@ -185,7 +185,7 @@ export class FilterInputNumberGroup extends FilterBase {
   };
 
   /**
-   * 下拉框的值。data的长度大于1才需要传。和filterDate类似
+   * 下拉框的值。data的长度大于1才需要传。和inputAndSelect类似
    */
   @observable public selectValue = '';
 
