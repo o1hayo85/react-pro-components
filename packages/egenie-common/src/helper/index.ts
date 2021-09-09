@@ -112,7 +112,7 @@ export function thousandthSeparator(num: unknown): string {
 /**
  * 字典类型
  */
-export interface DictData {
+export class DictData {
   [key: string]: string;
 }
 

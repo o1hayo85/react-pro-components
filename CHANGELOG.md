@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.17...v0.0.0) (2021-09-08)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.18...v0.0.0) (2021-09-09)
+
+### Features
+
+- **egenie-common:** 更改 interface 为 class ([0194767](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0194767ef6a6773d4a89981b352fecf0a893c588))
+
+## [0.4.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.17...v0.4.18) (2021-09-08)
 
 ### Features
 

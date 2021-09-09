@@ -1,10 +1,7 @@
-export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict } from './helper';
-export type { DictData } from './helper';
-export { request } from './request';
-export type { BaseData, PaginationData, BatchReportData, PureData } from './request';
+export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict, DictData } from './helper';
+export { request, BaseData, PaginationData, BatchReportData, PureData } from './request';
 export { renderModal, destroyModal, destroyAllModal } from './renderModal';
 export { Locale } from './locale';
-export { RenderRoutes } from './renderRoutes';
-export type { MenuDataItem } from './renderRoutes';
+export { RenderRoutes, MenuDataItem } from './renderRoutes';
 export { history } from './history';
 export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData } from './print';

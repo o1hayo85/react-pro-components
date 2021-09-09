@@ -119,22 +119,29 @@ export function request<T = unknown>(options: AxiosRequestConfig = {}): Promise<
 /**
  * 常见的后端数据返回结构。以泛型传递给request
  */
-export interface BaseData<T = unknown> {
-  status?: string;
-  info?: string;
-  data: T;
+export class BaseData<T = unknown> {
+  public status?: string;
+
+  public info?: string;
+
+  public data: T;
 }
 
 /**
  * 常见的后端分页的数据返回结构。以泛型传递给request
  */
-export interface PaginationData<T = unknown> {
-  status?: string;
-  info?: string;
-  success?: boolean;
-  errorMsg?: string;
-  errorCode?: number;
-  data: {
+export class PaginationData<T = unknown> {
+  public status?: string;
+
+  public info?: string;
+
+  public success?: boolean;
+
+  public errorMsg?: string;
+
+  public errorCode?: number;
+
+  public data: {
     list: T[];
     totalCount: number;
     page: number;
@@ -148,10 +155,12 @@ export interface PaginationData<T = unknown> {
 /**
  * 批量报告的数据返回结构。以泛型传递给request
  */
-export interface BatchReportData<T = unknown> {
-  status: string;
-  info: string;
-  data: {
+export class BatchReportData<T = unknown> {
+  public status: string;
+
+  public info: string;
+
+  public data: {
     total: number;
     successedList: T[];
     successed: number;
@@ -165,12 +174,18 @@ export interface BatchReportData<T = unknown> {
 /**
  * 后端直接返回data对象
  */
-export interface PureData<T = unknown> {
-  calTotalPageCount: number;
-  first: [];
-  list: T[];
-  page: number;
-  pageSize: number;
-  totalCount: number;
-  totalPageCount: number;
+export class PureData<T = unknown> {
+  public calTotalPageCount: number;
+
+  public first: [];
+
+  public list: T[];
+
+  public page: number;
+
+  public pageSize: number;
+
+  public totalCount: number;
+
+  public totalPageCount: number;
 }

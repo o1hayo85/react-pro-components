@@ -3,33 +3,36 @@ import React from 'react';
 import { Redirect, Router, Route, Switch } from 'react-router-dom';
 import type { RouteComponentProps } from 'react-router-dom';
 
-export interface MenuDataItem {
-
+export class MenuDataItem {
   // react-router的exact
-  exact?: boolean;
+  public exact?: boolean;
 
   // react-router的sensitive
-  sensitive?: boolean;
+  public sensitive?: boolean;
 
   // react-router的strict
-  strict?: boolean;
+  public strict?: boolean;
 
   // 标题
-  title?: string;
+  public title?: string;
 
   // 路径
-  path?: string;
+  public path?: string;
 
   // 子路由-支持n级
-  children?: MenuDataItem[];
+  public children?: MenuDataItem[];
 
   // 子组件-支持n级
-  component?: React.ReactType;
+  public component?: React.ReactType;
 
-  hideChildrenInMenu?: boolean;
-  hideInMenu?: boolean;
-  icon?: string;
-  locale?: string;
+  public hideChildrenInMenu?: boolean;
+
+  public hideInMenu?: boolean;
+
+  public icon?: string;
+
+  public locale?: string;
+
   [key: string]: any;
 }
 
