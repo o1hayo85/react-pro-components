@@ -2,7 +2,7 @@
 
 ### Features
 
-- **egenie-common:** 更改 interface 为 class ([0194767](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0194767ef6a6773d4a89981b352fecf0a893c588))
+- **egenie-common:** 更改 interface 为 class ([4d30e52](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4d30e52b460255b764f22da21786aadfa511db6b))
 
 ## [0.4.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.17...v0.4.18) (2021-09-08)
 
