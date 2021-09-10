@@ -3,6 +3,12 @@ title: FilterInput
 order: 3
 ---
 
+## `type`
+
+- 描述: 类型标志
+- 类型: 'input'
+- 默认值: 'input'
+
 ## `value`
 
 - 描述: 输入的值

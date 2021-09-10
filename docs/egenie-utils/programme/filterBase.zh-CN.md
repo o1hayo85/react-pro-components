@@ -96,7 +96,7 @@ export enum ENUM_FILTER_ITEM_TYPE {
 
 ### `data`
 
-- 描述: `查询项数据。当type为radio时，item的showInput为true时，此项为可选可输入`
+- 描述: `查询项数据`
 - 类型: [ValueAndLabelData](#valueandlabeldata)
 - 默认值: []
 

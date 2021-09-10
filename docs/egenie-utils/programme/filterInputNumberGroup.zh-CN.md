@@ -3,6 +3,18 @@ title: FilterInputNumberGroup
 order: 4
 ---
 
+## `type`
+
+- 描述: 类型标志
+- 类型: 'inputNumberGroup'
+- 默认值: 'inputNumberGroup'
+
+## `data`
+
+- 描述: `下拉框数据`
+- 类型: [ValueAndLabelData](./filter-base#valueandlabeldata)
+- 默认值: []
+
 ## `selectValue`
 
 - 描述: 下拉框的值。`data的长度大于1才需要传`。和 filterInputAndSelect 类似

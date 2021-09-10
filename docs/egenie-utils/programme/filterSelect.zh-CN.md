@@ -3,6 +3,18 @@ title: FilterSelect
 order: 5
 ---
 
+## `type`
+
+- 描述: 类型标志
+- 类型: 'select'
+- 默认值: 'select'
+
+## `data`
+
+- 描述: `下拉框数据`
+- 类型: [ValueAndLabelData](./filter-base#valueandlabeldata)
+- 默认值: []
+
 ## `value`
 
 - 描述: 选中值

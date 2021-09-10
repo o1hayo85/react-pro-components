@@ -152,7 +152,7 @@ export class FilterInputAndSelect extends FilterBase {
   @observable public allowClear = false;
 
   /**
-   * 下拉框-输入框禁止状态
+   * 禁止状态
    */
   @observable public disabled = false;
 }

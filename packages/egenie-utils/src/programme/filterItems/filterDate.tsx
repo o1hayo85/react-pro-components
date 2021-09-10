@@ -397,7 +397,7 @@ export class FilterDate extends FilterBase {
   /**
    * 日期改变回掉
    */
-  public handleChangeCallback: (date: [moment.Moment, moment.Moment]) => void;
+  public handleChangeCallback: (date?: [moment.Moment, moment.Moment]) => void;
 
   /**
    * @internal
@@ -495,7 +495,7 @@ export class FilterDate extends FilterBase {
   }
 
   /**
-   * 字典值改变
+   * @internal
    */
   @action public handleDateDictChange = (value: string) => {
     const item = this.realDateDict.find((item) => item.value === value);
