@@ -1,8 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-10)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-13)
 
 ### Features
 
-- **docs/egenie-utils:** add filterItems doc ([baceae5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/baceae5a784ba99c7dabbc1d5a3d54c16e52d652))
+- **docs/egenie-utils:** add filterItems doc ([f473e44](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f473e447bb227d497c8063e79e4e78d26d245c9b))
 - **docs/egenie-utils:** add filterItems doc ([3923941](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3923941370bcc03d1a137c6f3a9ec58d2ee31660))
 - **docs/egenie-utils:** add filterItems doc ([97b2cfd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b2cfd2bdffbec2e3903e335d591d820070895f))
 - **docs/egenie-utils:** add programme doc ([78aed95](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/78aed958c3278f18afada51f41eab51517109514))

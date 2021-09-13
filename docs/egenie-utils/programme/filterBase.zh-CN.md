@@ -3,26 +3,6 @@ title: FilterBase
 order: 2
 ---
 
-## ENUM_FILTER_ITEM_TYPE
-
-```ts
-export enum ENUM_FILTER_ITEM_TYPE {
-  input = 'input',
-  inputAndSelect = 'inputAndSelect',
-  inputNumberGroup = 'inputNumberGroup',
-  radio = 'radio',
-  select = 'select',
-  date = 'date',
-  dateRange = 'dateRange',
-  dateStart = 'dateStart',
-  dateEnd = 'dateEnd',
-  checkbox = 'checkbox',
-  inputOrSelect = 'inputOrSelect',
-  cascader = 'cascader',
-  treeSelect = 'treeSelect',
-}
-```
-
 ## `ValueAndLabelData`
 
 - 查询项 data 的统一格式(`value必须是string`)
@@ -67,7 +47,7 @@ export enum ENUM_FILTER_ITEM_TYPE {
 ### `type`
 
 - 描述: `查询项类型`
-- 类型: [ENUM_FILTER_ITEM_TYPE](#enum_filter_item_type)
+- 类型: 'input' | 'inputAndSelect' | 'inputNumberGroup' | 'radio' | 'select' | 'date' | 'dateRange' | 'dateStart' | 'dateEnd' | 'checkbox' | 'inputOrSelect' | 'cascader' | 'treeSelect'
 - 默认值: 无
 
 ### `field`
