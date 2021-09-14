@@ -8,7 +8,7 @@ import styles from './normalProgramme.less';
 export interface NormalProgrammeParams extends FilterItemsParams {
 
   /**
-   * 回车回掉。自定义也需要传
+   * 回车、查询回调
    */
   handleSearch?: (...args: any) => Promise<any>;
 

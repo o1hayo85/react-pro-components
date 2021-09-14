@@ -46,12 +46,12 @@ export interface ProgrammeParams extends FilterItemsParams {
   moduleName: string;
 
   /**
-   * 字典列表。需要和后端确认。字典需要从方案配置接口获取就传入、不需要就不传入
+   * 字典列表。需要和后端确认。字典需要从方案配置接口获取就传入、不需要就不传入(云仓不要传了)
    */
   dictList: string;
 
   /**
-   * 类似字典列表
+   * 类似字典列表(云仓不要传了)
    */
   itemList: string;
 

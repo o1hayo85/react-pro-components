@@ -9,22 +9,17 @@ order: 14
 
 ## 构造函数参数
 
-- [FilterItemOptions](./filter-base#filteritemoptions)
-- [ValueAndLabelData](./filter-base#valueandlabeldata)
+### `filterItems`
 
-```ts
-export interface FilterItemsParams {
-  /**
-   * 查询项配置
-   */
-  filterItems?: FilterItemOptions[];
+- 描述: 查询项配置
+- 类型?: [FilterItemOptions](./filter-base#filteritemoptions)[]
+- 默认值: []
 
-  /**
-   * 字典
-   */
-  dict?: { [key: string]: ValueAndLabelData };
-}
-```
+### `dict`
+
+- 描述: 字典
+- 类型?: { [key: string]: [ValueAndLabelData](./filter-base#valueandlabeldata) }
+- 默认值: {}
 
 ## 实例属性和方法
 

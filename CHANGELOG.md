@@ -2,7 +2,8 @@
 
 ### Bug Fixes
 
-- **docs:** 增加 egenie-utils 文档 ([fe64d10](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fe64d1005c72d25b254045a8804697e7b79df843))
+- **docs:** 增加 egenie-utils 文档 ([f51242c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f51242c682ea0ae83809637790dfce6de574e6b2))
+- **docs:** 增加 egenie-utils 文档 ([1763e89](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1763e895036eb0a61f41748b8be2876ebfe4c8c0))
 
 ### Features
 
