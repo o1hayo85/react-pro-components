@@ -224,7 +224,7 @@ export class FilterItems {
   }
 
   /**
-   *字典。key，value格式
+   * 字典数据(查询项的data属性)
    */
   @observable public dict: FilterItemsParams['dict'] = {};
 
@@ -268,7 +268,7 @@ export class FilterItems {
   };
 
   /**
-   * 动态添加item。field、label、type必须
+   * 动态添加查询项。field、label、type必须
    * @param data item数据
    */
   @action public addItem = (data: FilterItemOptions[]): void => {
@@ -280,7 +280,7 @@ export class FilterItems {
   };
 
   /**
-   * 动态添加字典
+   * 动态添加字典数据
    * @param dict 字典数据
    */
   @action public addDict = (dict: FilterItemsParams['dict']): void => {
@@ -293,7 +293,7 @@ export class FilterItems {
   };
 
   /**
-   * 重置所有item的值为construct时的状态
+   * 重置所有查询项的值为初始的状态
    */
   @action public reset = (): void => {
     this.originData.forEach((item) => item.reset());
@@ -305,7 +305,7 @@ export class FilterItems {
   };
 
   /**
-   * 更新item的值。filed必须、type建议写、其它需要更新的字段
+   * 更新查询项的值。filed必须、type建议写、其它需要更新的字段
    * @param data 更新数据
    */
   @action public updateFilterItem = (data: FilterItemOptions[]): void => {
@@ -338,7 +338,7 @@ export class FilterItems {
   }
 
   /**
-   * 获取查询项的参数
+   * 获取查询项的查询参数
    */
   @computed
   public get params(): {[key: string]: string; } {
@@ -384,7 +384,7 @@ export class FilterItems {
   }
 
   /**
-   * 校验配置项
+   * 校验查询项(配合查询项的require属性)
    */
   @action public validator = async(): Promise<string> => {
     await Promise.all(this.actualData.map((item) => item.validator()))

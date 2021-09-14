@@ -1,7 +1,12 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-14)
+
+### Bug Fixes
+
+- **docs:** 增加 egenie-utils 文档 ([fe64d10](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fe64d1005c72d25b254045a8804697e7b79df843))
 
 ### Features
 
+- **docs/egenie-utils:** add filterItems doc ([e2462a4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e2462a4c66efb99a1314e23fbba52a7ad25a2e6d))
 - **docs/egenie-utils:** add filterItems doc ([f473e44](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f473e447bb227d497c8063e79e4e78d26d245c9b))
 - **docs/egenie-utils:** add filterItems doc ([3923941](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3923941370bcc03d1a137c6f3a9ec58d2ee31660))
 - **docs/egenie-utils:** add filterItems doc ([97b2cfd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b2cfd2bdffbec2e3903e335d591d820070895f))
