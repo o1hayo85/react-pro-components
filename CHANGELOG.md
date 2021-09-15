@@ -1,8 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-14)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.0.0) (2021-09-15)
 
 ### Bug Fixes
 
-- **docs:** 增加 egenie-utils 文档 ([f51242c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f51242c682ea0ae83809637790dfce6de574e6b2))
+- **docs:** 增加 egenie-utils 文档 ([b443112](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b443112683728eff66df72e2fb3b684fa02bdd73))
 - **docs:** 增加 egenie-utils 文档 ([1763e89](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1763e895036eb0a61f41748b8be2876ebfe4c8c0))
 
 ### Features

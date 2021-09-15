@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { JdPrint } from './jdPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
 import { getUUID, TemplateData } from './utils';
@@ -312,37 +313,61 @@ class PrintHelper {
       const newParams: RookiePrintParams = params;
       const pageData = sliceData(newParams.contents, newParams.count);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatRookieData(pageData[i], newParams.templateData);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
+      if (Array.isArray(pageData) && pageData.length) {
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatRookieData(pageData[i], newParams.templateData);
+          await this.state.print({
+            preview: newParams.preview,
+            contents,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
+      } else {
+        message.warning({
+          key: '没数据',
+          content: '没数据',
         });
+        return Promise.reject();
       }
     } else if (this.state === this.dyPrint) {
       const newParams: DyPrintParams = params;
       const pageData = sliceData(newParams.contents, newParams.count);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatDyData(pageData[i], newParams.templateData);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
+      if (Array.isArray(pageData) && pageData.length) {
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatDyData(pageData[i], newParams.templateData);
+          await this.state.print({
+            preview: newParams.preview,
+            contents,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
+      } else {
+        message.warning({
+          key: '没数据',
+          content: '没数据',
         });
+        return Promise.reject();
       }
     } else if (this.state === this.pddPrint) {
       const newParams: PddPrintParams = params;
       const pageData = sliceData(newParams.contents, newParams.count);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatPddData(pageData[i], newParams.templateData, newParams.courierPrintType);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
+      if (Array.isArray(pageData) && pageData.length) {
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatPddData(pageData[i], newParams.templateData, newParams.courierPrintType);
+          await this.state.print({
+            preview: newParams.preview,
+            contents,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
+      } else {
+        message.warning({
+          key: '没数据',
+          content: '没数据',
         });
+        return Promise.reject();
       }
     } else {
       return Promise.reject();

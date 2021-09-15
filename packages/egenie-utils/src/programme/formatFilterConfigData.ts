@@ -13,7 +13,7 @@ interface FilterSetItem {
 export type FilterConfigData = BaseData<FilterSetItem>;
 type FilterConfigTransformData = Array<{ field: string; data: ValueAndLabelData; }>;
 
-export function formatFilterConfigData(info: FilterConfigData, fieldMap: {[key: string]: string; }): FilterConfigTransformData {
+export function formatFilterConfigData(info: FilterConfigData, fieldMap: {[key: string]: string | string[]; }): FilterConfigTransformData {
   const list: FilterConfigTransformData = [];
 
   // 处理itemList，兼容新老版本

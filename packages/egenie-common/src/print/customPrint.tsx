@@ -50,11 +50,17 @@ interface Item {
 }
 
 class CustomPrintModel {
-  constructor(tempType = '') {
+  constructor(tempType = '', ids = '', idType = '') {
     this.tempType = tempType;
+    this.ids = ids;
+    this.idType = idType;
     this.getPrinters();
     this.handleQuery();
   }
+
+  private ids = '';
+
+  private idType = '';
 
   private tempType = '';
 
@@ -199,18 +205,39 @@ class CustomPrintModel {
     this.dataSource = [];
     this.rowSelection.selectedRowKeys = [];
     this.loading = true;
-    request<{ list: Item[]; }>({
-      method: 'post',
-      url: '/api/print/querybyctgr',
-      data: new URLSearchParams(Object.entries({
-        sidx: '',
-        sord: 'asc',
-        tempName: this.tempName,
-        tempType: this.tempType,
-      })),
-    })
-      .then((info) => this.dataSource = info?.list || [])
-      .finally(() => this.loading = false);
+    if (this.idType && this.ids) {
+      request<{ data: { list: Item[]; }; }>({
+        method: 'post',
+        url: '/api/wms/rest/print/template/list',
+        data: {
+          sidx: '',
+          sord: 'asc',
+          page: 1,
+          pageSize: 10000,
+          tempName: this.tempName,
+          tempType: this.tempType,
+          ids: this.ids,
+          idType: this.idType,
+        },
+      })
+        .then((info) => this.dataSource = info?.data?.list || [])
+        .finally(() => this.loading = false);
+    } else {
+      request<{ list: Item[]; }>({
+        method: 'post',
+        url: '/api/print/querybyctgr',
+        data: new URLSearchParams(Object.entries({
+          sidx: '',
+          sord: 'asc',
+          page: '1',
+          pageSize: '10000',
+          tempName: this.tempName,
+          tempType: this.tempType,
+        })),
+      })
+        .then((info) => this.dataSource = info?.list || [])
+        .finally(() => this.loading = false);
+    }
   };
 }
 
@@ -254,6 +281,16 @@ interface CustomPrintModalProps {
   tempType?: string;
 
   /**
+   * 云仓主表的id
+   */
+  ids?: string;
+
+  /**
+   * 云仓主表的id类型
+   */
+  idType?: string;
+
+  /**
    * 关闭回掉
    */
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -264,7 +301,7 @@ interface CustomPrintModalProps {
 export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
   constructor(props: CustomPrintModalProps) {
     super(props);
-    this.store = new CustomPrintModel(props.tempType);
+    this.store = new CustomPrintModel(props.tempType, props.ids, props.idType);
   }
 
   private handlePrint = (preview: boolean) => {
@@ -374,7 +411,7 @@ export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
   }
 }
 
-export async function getCustomPrintParam(tempType: string): Promise<CustomPrintParam> {
+export async function getCustomPrintParam(tempType: string, ids = '', idType = ''): Promise<CustomPrintParam> {
   // 防止多次渲染Modal
   await new Promise((resolve, reject) => {
     Modal.confirm({
@@ -399,6 +436,8 @@ export async function getCustomPrintParam(tempType: string): Promise<CustomPrint
       <CustomPrintModal
         callback={handleOk}
         handleCancel={handleCancel}
+        idType={idType}
+        ids={ids}
         tempType={tempType}
       />
     );
