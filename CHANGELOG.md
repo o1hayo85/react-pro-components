@@ -12,6 +12,7 @@
 - **docs/egenie-utils:** add filterItems doc ([3923941](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3923941370bcc03d1a137c6f3a9ec58d2ee31660))
 - **docs/egenie-utils:** add filterItems doc ([97b2cfd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b2cfd2bdffbec2e3903e335d591d820070895f))
 - **docs/egenie-utils:** add programme doc ([78aed95](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/78aed958c3278f18afada51f41eab51517109514))
+- **egenie-common:** 更改自定义打印弹框参数 ([77cffec](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/77cffecbb2f0e7478f3c26f77fc01bf37ab302e8))
 
 ## [0.4.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.19...v0.4.20) (2021-09-09)
 
