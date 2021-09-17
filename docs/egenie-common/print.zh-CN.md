@@ -7,6 +7,14 @@ order: 2
 
 ![大体打印流程](../assets/printProcess.png)
 
+## 前置
+
+- 要想做打印需求请先熟悉下面。`不熟悉不要做`
+- `windows系统下载菜鸟打印插件(需要重启浏览器)`
+- 熟悉菜鸟打印的官方文档(`preview`、`printer`、`documents`)
+- 根据上面流程图和下面菜鸟打印封装的文档熟悉内部源码(只用看`printHelper里面关于菜鸟打印的处理`和`rookieAndPddAndDyPrint`这个文件对于菜鸟的 socket 封装)---搞清楚为数不多的`参数的含义`
+- 在`打印模版`配置模版信息
+
 ## 简介
 
 - [菜鸟打印文档](https://www.cnblogs.com/micro-chen/p/8420944.html)
