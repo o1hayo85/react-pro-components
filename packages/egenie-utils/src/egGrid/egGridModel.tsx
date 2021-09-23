@@ -153,7 +153,7 @@ export class EgGridModel {
   /**
    * 表头高度，默认42
    */
-  @observable public headerRowHeight = 42;
+  @observable public headerRowHeight = 38;
 
   /**
    * 已选择的ids，使用时Array.from(selectedIds)
@@ -429,11 +429,12 @@ export class EgGridModel {
     const ret = (showCheckBox ? [SelectColumn] : []).concat(showGridOrderNo ? [
       {
         key: 'gridOrderNo',
-        width: 50,
+        width: 30,
         name: '序号',
         frozen: true,
         sortable: false,
         ejlHidden: false,
+        resizable: true,
         formatter: ({ row }) => (
           <div style={{ textAlign: 'left' }}>
             {row.gridOrderNo}
