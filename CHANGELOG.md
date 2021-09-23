@@ -2,6 +2,7 @@
 
 ### Features
 
+- 优化样式 ([1379c3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1379c3dd044a56ac8ae8b67d46b7300f07c7e26e))
 - **docs/print:** 更新打印文档 ([9e586b4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9e586b4191c46796e1d2e9c179a2f1cdf6c6bce1))
 
 ## [0.4.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.4.21) (2021-09-15)
