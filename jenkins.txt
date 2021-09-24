@@ -1,0 +1,45 @@
+env.wspath = '/var/lib/jenkins/workspace/'+ env.JOB_NAME
+// 服务器ip
+env.web_ip = '192.168.200.93'
+// 程序目录
+env.frontend_path = '/var/front-common'
+credentials_id =  'c24503c8-cb48-41ee-bde7-e761520af403'
+LIST = LIST.tokenize(',')
+ll = LIST.join(',')
+println 'BRANCH_NAME: '+BRANCH_NAME
+node {
+    try {
+    def mvnHome = tool 'M3'
+    def javahome = tool 'jdk8'
+    env.PATH = "${mvnHome}/bin:${javahome}/bin:${env.PATH}:/home/appusr/.nvm/versions/node/v14.15.5/bin"
+
+    if (LIST.contains('egenie-utils')) {
+        sh """
+        #!/bin/bash
+        if [ ! -x $wspath/egenie-utils ]; then
+        mkdir -p $wspath/egenie-utils
+        fi
+        """
+
+        stage 'Buildegenie-utils'
+            dir('egenie-utils') {
+                git branch: BRANCH_NAME, credentialsId: credentials_id,  url: 'http://192.168.200.111:9980/egFrontend/egenie-utils.git'
+                sh """
+                yarn install
+                yarn run docs:build
+                """
+            }
+        stage 'Deployegenie-utils'
+                sh """
+                #!/bin/bash
+                scp -r $wspath/egenie-utils/docs-dist appusr@${web_ip}:${frontend_path}
+                """
+
+    }
+
+    result = 'Success'
+    } catch(exc) {
+        result = 'Failure'
+        throw exc
+     }
+}

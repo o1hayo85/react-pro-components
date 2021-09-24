@@ -62,19 +62,19 @@ order: 14
 ### `params`
 
 - 描述: 获取查询项的查询参数(`计算属性`)
-- 类型: readonly params: `{[p: string]: string; };`
+- 类型: `{[p: string]: string; };`
 - 默认值: {}
 
 ### `translateParamsList`
 
 - 描述: 获取查询项翻译列表(`计算属性`)
-- 类型: readonly translateParamsList: `string[][]`
+- 类型: `string[][]`
 - 默认值: []
 
 ### `translateParams`
 
 - 描述: 获取查询项翻译的值(`计算属性`)
-- 类型: readonly translateParams: `string[]`;
+- 类型: `string[]`;
 - 默认值: []
 
 ### `validator`
