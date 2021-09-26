@@ -2,6 +2,7 @@
 
 ### Features
 
+- egenie-data-grid ([6237df2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6237df2c45bbb615e8efeffda06bd022340cf65b))
 - **docs:** 增加服务器 docs 配置 ([a0eb781](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a0eb781e197c1400d3c3496d288430a2d9a3b4dc))
 
 ## [0.4.22](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.21...v0.4.22) (2021-09-23)
