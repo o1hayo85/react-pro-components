@@ -1,8 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.21...v0.0.0) (2021-09-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.22...v0.0.0) (2021-09-26)
 
 ### Features
 
-- **docs:** 增加服务器 docs 配置 ([b102cb8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b102cb8ac5875050ee2a9a3bfa7ee1e40b802ce0))
+- **docs:** 增加服务器 docs 配置 ([a0eb781](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a0eb781e197c1400d3c3496d288430a2d9a3b4dc))
+
+## [0.4.22](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.21...v0.4.22) (2021-09-23)
+
+### Features
+
 - 优化样式 ([1379c3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1379c3dd044a56ac8ae8b67d46b7300f07c7e26e))
 - **docs/print:** 更新打印文档 ([9e586b4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9e586b4191c46796e1d2e9c179a2f1cdf6c6bce1))
 
