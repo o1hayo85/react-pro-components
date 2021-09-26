@@ -1,7 +1,7 @@
 import { Pagination, Spin, Button, Empty } from 'antd';
+import DataGrid from 'egenie-data-grid';
 import { observer } from 'mobx-react';
 import React from 'react';
-import DataGrid from 'react-data-grid';
 import { DragAndDropHOC } from '../dragAndDropHOC';
 import { ColumnSettingModal } from './columnSetting';
 import { EgGridModel } from './egGridModel';

@@ -1,6 +1,6 @@
+import { SortableHeaderCell } from 'egenie-data-grid';
+import type { HeaderRendererProps } from 'egenie-data-grid';
 import React from 'react';
-import { SortableHeaderCell } from 'react-data-grid';
-import type { HeaderRendererProps } from 'react-data-grid';
 import { useDrag, useDrop } from 'react-dnd';
 import type { DragObjectWithType } from 'react-dnd';
 
