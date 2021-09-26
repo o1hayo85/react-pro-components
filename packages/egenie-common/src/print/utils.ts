@@ -20,37 +20,110 @@ export function isSocketConnected(socket: WebSocket, openError: string): boolean
   }
 }
 
-export interface TemplateData {
-  mysqlid?: number;
-  mysqlno?: string;
-  _id?: number;
-  id?: number;
-  templateType?: any;
-  content?: {
-    colsCount?: string;
-    ddlfontsize?: number;
-    category_no?: string;
-    pageHeight?: string;
-    bkimgHeight?: string;
-    pageWidth?: string;
-    inRow?: string;
-    tempName?: string;
-    cainiaoTempXml?: string;
-    id?: string;
-    rowCount?: string;
-    backgrd?: string;
-    moren_fontfamliy?: string;
-    courierNo?: any;
-    tempType?: string;
-    productType?: any;
-    inCols?: string;
-    textAlign?: string;
-    printerName?: string;
-    mysqlno?: string;
-    updateTime?: string;
-    mysqlid?: string;
-    cainiaoTemp?: string;
-  };
+export class TemplateData {
+  public _id?: number | string;
+
+  public id?: number | string;
+
+  public templateType?: any;
+
+  public colsCount?: string;
+
+  public ddlfontsize?: number;
+
+  public category_no?: string;
+
+  public pageHeight?: string;
+
+  public bkimgHeight?: string;
+
+  public pageWidth?: string;
+
+  public inRow?: string;
+
+  public empName?: string;
+
+  public cainiaoTempXml?: string;
+
+  public rowCount?: string;
+
+  public backgrd?: string;
+
+  public moren_fontfamliy?: string;
+
+  public courierNo?: any;
+
+  public tempType?: string;
+
+  public productType?: any;
+
+  public inCols?: string;
+
+  public textAlign?: string;
+
+  public printerName?: string;
+
+  public mysqlno?: string;
+
+  public updateTime?: string;
+
+  public mysqlid?: string | number;
+
+  public cainiaoTemp?: string;
+
+  /**
+   * 1---纵(正)向打印，固定纸张
+   * 2---横向打印，固定纸张
+   * 3---纵(正)向打印，宽度固定，高度按打印内容的高度自适应；
+   */
+  public intOrient?: 1 | 2 | 3;
+
+  public itemList?: LodopItem[];
+
+  public strPageName?: string;
+
+  public content?: TemplateData;
+}
+
+export enum EnumLodopItemType {
+  customText = '0',
+  noTitleText = '1',
+  hasTitleText = '2',
+  tableInlineText = '3',
+  printTime = 'printTime',
+  qrCode = 'erweima',
+  barCode = 'tiaoxingma',
+  img = 'customImge',
+  horizontalLine = 'hengxian',
+  verticalLine = 'shuxian',
+  rect = 'juxing',
+  skuDetail = 'skudetail'
+}
+
+export class LodopItem {
+  public txt?: string;
+
+  public fontFamily?: string;
+
+  public top?: number;
+
+  public left?: number;
+
+  public width?: number;
+
+  public weight?: number;
+
+  public fontSize?: number;
+
+  public id?: string;
+
+  public txttype?: EnumLodopItemType;
+
+  public alignment?: string;
+
+  public height?: number;
+
+  public hideText?: string;
 }
 
 export function getUUID(len?: number, radix?: number): string {
@@ -79,4 +152,71 @@ export enum EnumShopType {
   pdd = 1,
   jd = 2,
   dy = 3,
+}
+
+export function getTemplateData(tempData: TemplateData): Omit<TemplateData, 'content'> {
+  if (tempData?.content && tempData.content && Object.keys(tempData.content).length > 0) {
+    const {
+      content,
+      ...rest
+    } = tempData;
+
+    return {
+      ...rest,
+      ...content,
+    };
+  } else {
+    return tempData;
+  }
+}
+
+export function formatPrintName(tempData: TemplateData, printerName?: string) {
+  if (printerName) {
+    return printerName;
+  } else {
+    return getTemplateData(tempData)?.printerName;
+  }
+}
+
+export function sliceData(data: any[], count = 500): any[][] {
+  if (!(Array.isArray(data) && data.length)) {
+    return [];
+  }
+
+  const result: any[][] = [];
+  data.forEach((item, index) => {
+    const currentPage = (index / count) >>> 0;
+    if (result[currentPage]) {
+      result[currentPage].push(item);
+    } else {
+      result[currentPage] = [item];
+    }
+  });
+  return result;
+}
+
+/**
+ * 公共参数
+ */
+export interface CommonPrintParams {
+
+  /**
+   * 一次打印数据页数(默认500)
+   */
+  count?: number;
+
+  /**
+   * 模版数据
+   */
+  templateData?: TemplateData;
+
+  /**
+   * 是否预览
+   */
+  preview: boolean;
+
+  /**
+   * 打印机
+   */
+  printer?: string;
 }

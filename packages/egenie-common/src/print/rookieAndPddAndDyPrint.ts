@@ -154,7 +154,7 @@ export class RookieAndPddAndDyPrint {
     preview,
     contents,
     printer,
-  }: RookiePrintParams): Promise<any> => {
+  }: Omit<RookiePrintParams, 'count'>): Promise<any> => {
     if (Array.isArray(contents) && contents.length) {
       const request = {
         cmd: 'print',

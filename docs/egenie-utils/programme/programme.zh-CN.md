@@ -27,7 +27,7 @@ order: 16
 
 ```ts
 const path = '/egenie-cloud-wms/index';
-const moduleName = egenieCloudWmsIndex;
+const moduleName = 'egenieCloudWmsIndex';
 ```
 
 ### `dictList`

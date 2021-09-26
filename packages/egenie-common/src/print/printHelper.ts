@@ -1,23 +1,16 @@
 import { message } from 'antd';
 import { JdPrint } from './jdPrint';
+import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
-import { getUUID, TemplateData } from './utils';
+import { CommonPrintParams, formatPrintName, getTemplateData, getUUID, sliceData, TemplateData } from './utils';
 
 const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
-
-function formatPrintName(tempData: TemplateData, printerName?: string) {
-  if (printerName) {
-    return printerName;
-  } else {
-    return tempData?.content?.printerName;
-  }
-}
 
 function formatRookieData(printData: any[], printTemplate: TemplateData) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
-    if (Number(printTemplate?.content?.cainiaoTemp) === 1 && item.newCaiNiao) {
+    if (Number(getTemplateData(printTemplate)?.cainiaoTemp) === 1 && item.newCaiNiao) {
       documents.push(JSON.parse(item.newCaiNiao));
     }
 
@@ -25,7 +18,7 @@ function formatRookieData(printData: any[], printTemplate: TemplateData) {
 
     documents.push({
       data: item,
-      templateURL: item.templateURL ? item.templateURL : `${window.location.origin}/api/print/getCainiaoTempXml/${printTemplate?.id}`,
+      templateURL: item.templateURL ? item.templateURL : `${window.location.origin}/api/print/getCainiaoTempXml/${getTemplateData(printTemplate)?.id}`,
     });
   });
 
@@ -41,7 +34,7 @@ function formatRookieData(printData: any[], printTemplate: TemplateData) {
   }
 }
 
-function formatDyData(printData: any[], printTemplate: TemplateData) {
+function formatDyData(printData: any[]) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -68,7 +61,7 @@ function formatDyData(printData: any[], printTemplate: TemplateData) {
   return documents;
 }
 
-function formatPddData(printData: any[], printTemplate: TemplateData, courierPrintType: number) {
+function formatPddData(printData: any[], courierPrintType: number) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -94,23 +87,6 @@ function formatPddData(printData: any[], printTemplate: TemplateData, courierPri
   });
 
   return documents;
-}
-
-function sliceData(data: any[], count = 500): any[] {
-  if (!(Array.isArray(data) && data.length)) {
-    return [];
-  }
-
-  const result: any[] = [];
-  data.forEach((item, index) => {
-    const currentPage = (index / count) >>> 0;
-    if (result[currentPage]) {
-      result[currentPage].push(item);
-    } else {
-      result[currentPage] = [item];
-    }
-  });
-  return result;
 }
 
 /**
@@ -154,30 +130,9 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
 }
 
 /**
- * 公共参数
+ * lodop打印参数
  */
-interface CommonParams {
-
-  /**
-   * 一次打印数据页数(默认500)
-   */
-  count?: number;
-
-  /**
-   * 模版数据
-   */
-  templateData?: TemplateData;
-
-  /**
-   * 是否预览
-   */
-  preview: boolean;
-
-  /**
-   * 打印机
-   */
-  printer?: string;
-}
+export type LodopPrintParams = CommonPrintParams & { contents: any[]; };
 
 /**
  * 菜鸟打印参数
@@ -188,7 +143,7 @@ export type RookiePrintParams = {
    * 打印数据
    */
   contents?: any[];
-} & CommonParams;
+} & CommonPrintParams;
 
 /**
  * 抖音打印参数
@@ -199,7 +154,7 @@ type DyPrintParams = {
    * 打印数据
    */
   contents?: any[];
-} & CommonParams;
+} & CommonPrintParams;
 
 /**
  * pdd打印参数
@@ -215,7 +170,7 @@ type PddPrintParams = {
    * 快递类型
    */
   courierPrintType?: number;
-} & CommonParams;
+} & CommonPrintParams;
 
 /**
  * jd打印参数
@@ -241,14 +196,14 @@ export type JDParams = {
    * 京东固定模板
    */
   tempUrl?: string;
-} & CommonParams;
+} & CommonPrintParams;
 
 class PrintHelper {
   constructor() {
     this.toggleToRookie();
   }
 
-  private state: RookieAndPddAndDyPrint | JdPrint;
+  private state: RookieAndPddAndDyPrint | JdPrint | LodopPrint;
 
   private rookiePrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13528, openError('CAINIAO'));
 
@@ -257,6 +212,15 @@ class PrintHelper {
   private dyPrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13888, openError('抖音'));
 
   private jdPrint: JdPrint = new JdPrint('127.0.0.1', 9113, openError('京东'));
+
+  private lodopPrint: LodopPrint = new LodopPrint();
+
+  /**
+   * 切换到lodop
+   */
+  public toggleToLodop = () => {
+    this.state = this.lodopPrint;
+  };
 
   /**
    * 切换到菜鸟
@@ -297,7 +261,7 @@ class PrintHelper {
    * 打印(先切换打印机类型,否则后果自负)
    * @param params
    */
-  public print = async(params: RookiePrintParams | PddPrintParams | JDParams | DyPrintParams): Promise<any> => {
+  public print = async(params: RookiePrintParams | PddPrintParams | JDParams | DyPrintParams | LodopPrintParams): Promise<any> => {
     if (this.state === this.jdPrint) {
       const newParams: JDParams = params;
       const customTempUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
@@ -335,7 +299,7 @@ class PrintHelper {
 
       if (Array.isArray(pageData) && pageData.length) {
         for (let i = 0; i < pageData.length; i++) {
-          const contents = formatDyData(pageData[i], newParams.templateData);
+          const contents = formatDyData(pageData[i]);
           await this.state.print({
             preview: newParams.preview,
             contents,
@@ -355,11 +319,30 @@ class PrintHelper {
 
       if (Array.isArray(pageData) && pageData.length) {
         for (let i = 0; i < pageData.length; i++) {
-          const contents = formatPddData(pageData[i], newParams.templateData, newParams.courierPrintType);
+          const contents = formatPddData(pageData[i], newParams.courierPrintType);
           await this.state.print({
             preview: newParams.preview,
             contents,
             printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
+      } else {
+        message.warning({
+          key: '没数据',
+          content: '没数据',
+        });
+        return Promise.reject();
+      }
+    } else if (this.state === this.lodopPrint) {
+      const newParams: LodopPrintParams = params as LodopPrintParams;
+      const pageData = sliceData(newParams.contents, newParams.count);
+      if (Array.isArray(pageData) && pageData.length) {
+        for (let i = 0; i < pageData.length; i++) {
+          await this.state.print({
+            preview: newParams.preview,
+            printer: newParams.printer,
+            contents: pageData[i],
+            templateData: newParams.templateData,
           });
         }
       } else {

@@ -5,6 +5,7 @@ import React from 'react';
 import { destroyModal, renderModal } from '../renderModal';
 import { request } from '../request';
 import { printHelper } from './printHelper';
+import { TemplateData } from './utils';
 
 const tempTypeList = {
   '4': '商品信息',
@@ -17,50 +18,18 @@ const tempTypeList = {
   '27': '打印唯一码',
 };
 
-interface Item {
-  colsCount?: string;
-  ddlfontsize?: number;
-  category_no?: string;
-  pageHeight?: string;
-  bkimgHeight?: string;
-  pageWidth?: string;
-  inRow?: string;
-  tempName?: string;
-  cainiaoTempXml?: string;
-  id?: number;
-  rowCount?: string;
-  backgrd?: string;
-  moren_fontfamliy?: string;
-  courierNo?: string;
-  tempType?: string;
-  productType?: string;
-  logoFlg?: string;
-  inCols?: string;
-  textAlign?: string;
-  defalt?: number;
-  mysqlno?: string;
-  printerName?: string;
-  updateTime?: string;
-  version?: number;
-  mysqlid?: number;
-  LianDan?: string;
-  cainiaoTemp?: string;
-  vaLign?: string;
-  _id?: number;
-}
-
 class CustomPrintModel {
-  constructor(tempType = '', ids = '', idType = '') {
+  constructor(tempType = '', customUrl = '', customParams: {[key: string]: any; } = {}) {
     this.tempType = tempType;
-    this.ids = ids;
-    this.idType = idType;
+    this.customUrl = customUrl;
+    this.customParams = customParams;
     this.getPrinters();
     this.handleQuery();
   }
 
-  private ids = '';
+  private customUrl = '';
 
-  private idType = '';
+  private customParams: {[key: string]: any; } = {};
 
   private tempType = '';
 
@@ -82,7 +51,7 @@ class CustomPrintModel {
     this.handleQuery();
   };
 
-  @observable public dataSource: Item[] = [];
+  @observable public dataSource: TemplateData[] = [];
 
   @observable public loading = false;
 
@@ -96,7 +65,7 @@ class CustomPrintModel {
   };
 
   @computed
-  public get selectedRows(): Item | null {
+  public get selectedRows(): TemplateData | null {
     if (this.rowSelection.selectedRowKeys.length) {
       return this.dataSource.find((item) => item.id === this.rowSelection.selectedRowKeys[0]);
     } else {
@@ -110,7 +79,7 @@ class CustomPrintModel {
       dataIndex: 'mysqlno',
       title: '模版编号',
       width: 200,
-      render: (text: string, row: Item) => {
+      render: (text: string, row: TemplateData) => {
         return (
           <a
             onClick={() => {
@@ -150,7 +119,7 @@ class CustomPrintModel {
       dataIndex: 'printerName',
       title: '打印机名称',
       width: 200,
-      render: (text: string, row: Item) => {
+      render: (text: string, row: TemplateData) => {
         return (
           <Observer>
             {
@@ -205,10 +174,10 @@ class CustomPrintModel {
     this.dataSource = [];
     this.rowSelection.selectedRowKeys = [];
     this.loading = true;
-    if (this.idType && this.ids) {
-      request<{ data: { list: Item[]; }; }>({
+    if (this.customUrl) {
+      request<{ data: { list: TemplateData[]; }; }>({
         method: 'post',
-        url: '/api/wms/rest/print/template/list',
+        url: this.customUrl,
         data: {
           sidx: '',
           sord: 'asc',
@@ -216,14 +185,13 @@ class CustomPrintModel {
           pageSize: 10000,
           tempName: this.tempName,
           tempType: this.tempType,
-          ids: this.ids,
-          idType: this.idType,
+          ...this.customParams,
         },
       })
         .then((info) => this.dataSource = info?.data?.list || [])
         .finally(() => this.loading = false);
     } else {
-      request<{ list: Item[]; }>({
+      request<{ list: TemplateData[]; }>({
         method: 'post',
         url: '/api/print/querybyctgr',
         data: new URLSearchParams(Object.entries({
@@ -281,14 +249,14 @@ interface CustomPrintModalProps {
   tempType?: string;
 
   /**
-   * 云仓主表的id
+   * 自定义的url的参数
    */
-  ids?: string;
+  customParams?: {[key: string]: any; };
 
   /**
-   * 云仓主表的id类型
+   * 自定义的url
    */
-  idType?: string;
+  customUrl?: string;
 
   /**
    * 关闭回掉
@@ -301,7 +269,7 @@ interface CustomPrintModalProps {
 export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
   constructor(props: CustomPrintModalProps) {
     super(props);
-    this.store = new CustomPrintModel(props.tempType, props.ids, props.idType);
+    this.store = new CustomPrintModel(props.tempType, props.customUrl, props.customParams);
   }
 
   private handlePrint = (preview: boolean) => {
@@ -411,7 +379,7 @@ export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
   }
 }
 
-export async function getCustomPrintParam(tempType: string, ids = '', idType = ''): Promise<CustomPrintParam> {
+export async function getCustomPrintParam(tempType: string, customUrl = '', customParams: {[key: string]: any; } = {}): Promise<CustomPrintParam> {
   // 防止多次渲染Modal
   await new Promise((resolve, reject) => {
     Modal.confirm({
@@ -435,9 +403,9 @@ export async function getCustomPrintParam(tempType: string, ids = '', idType = '
     renderModal(
       <CustomPrintModal
         callback={handleOk}
+        customParams={customParams}
+        customUrl={customUrl}
         handleCancel={handleCancel}
-        idType={idType}
-        ids={ids}
         tempType={tempType}
       />
     );
