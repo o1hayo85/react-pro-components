@@ -2,7 +2,7 @@
 
 ### Features
 
-- **print:** add lodopPrint ([9756351](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9756351a15d1328c53d6593bc1843966b9fcf2c1))
+- **print:** add lodopPrint ([3ad346e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3ad346e2cc9d9871ceb4a9ca0beb6a695c003d88))
 
 ## [0.4.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.22...v0.4.23) (2021-09-26)
 
