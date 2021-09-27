@@ -1,17 +1,8 @@
 {
-  "name": "react-data-grid",
-  "version": "7.0.0-canary.49",
+  "name": "egenie-data-grid",
+  "version": "0.0.2",
   "license": "MIT",
-  "description": "Excel-like grid component built with React, with editors, keyboard navigation, copy & paste, and the like",
-  "keywords": [
-    "react",
-    "react-data-grid",
-    "data-grid"
-  ],
-  "repository": "github:adazzle/react-data-grid",
-  "bugs": {
-    "url": "https://github.com/adazzle/react-data-grid/issues"
-  },
+  "description": "egenie表格组件库",
   "type": "module",
   "exports": {
     ".": {
@@ -40,7 +31,7 @@
     "prettier:format": "prettier --write .",
     "typecheck": "tsc -p tsconfig.all.json",
     "build-storybook": "build-storybook --quiet",
-    "prepublishOnly": "npm install && npm run build && npm run build:types",
+    "prepublishOnly": "npm run build && npm run build:types",
     "postpublish": "git push --follow-tags origin HEAD"
   },
   "dependencies": {

@@ -69,6 +69,7 @@ type DefaultColumnOptions<R, SR> = Pick<
   'formatter' | 'minWidth' | 'resizable' | 'sortable'
 >;
 
+const globalThis = window.globalThis || window;
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 const body = globalThis.document?.body;
 
