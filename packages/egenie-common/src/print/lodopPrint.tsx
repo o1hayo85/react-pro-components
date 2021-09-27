@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import React from 'react';
 import { LodopPrintParams } from './printHelper';
-import { EnumLodopItemType, formatPrintName, getTemplateData, getUUID, LodopItem, TemplateData } from './utils';
+import { EnumLodopItemType, getTemplateData, getUUID, LodopItem, TemplateData } from './utils';
 
 declare global {
   interface Window {
@@ -10,8 +10,9 @@ declare global {
   }
 }
 
-function zero75(size: number): number {
-  return size * 0.75;
+enum EnumJsLoadState {
+  init,
+  finish
 }
 
 /*
@@ -22,6 +23,87 @@ function isWindows(): boolean {
 function is64(): boolean {
   return /x64/i.test(navigator.userAgent);
 }*/
+
+function zero75(size: number): number {
+  return size * 0.75;
+}
+
+function getCodeType(text: string): string {
+  if (text.includes('128')) {
+    return '128Auto';
+  } else if (text.includes('Code39')) {
+    return 'Code39';
+  } else {
+    return 'Code93';
+  }
+}
+
+function get(data: any, path: string[]): any {
+  let value = data;
+  for (let i = 0; i < path.length; i++) {
+    if ((typeof value === 'object' && value !== null) || Array.isArray(value)) {
+      value = value[path[i]];
+    }
+  }
+
+  return value;
+}
+
+function getText(data: any, id: string): any {
+  const path: string[] = [];
+  const [
+    key1,
+    key2,
+  ] = id.split('-');
+
+  const key1Path: string[] = typeof key1 === 'string' ? key1.split('.') : [];
+  for (let i = 0; i < key1Path.length; i++) {
+    path.push(key1Path[i]);
+  }
+
+  const key2Path: string[] = typeof key2 === 'string' ? key2.split('.') : [];
+  for (let i = 0; i < key2Path.length; i++) {
+    path.push(key2Path[i]);
+  }
+
+  return get(data, path.filter(Boolean));
+
+  /*  if (typeof value === 'string') {
+      return value.replace('[$data]', '')
+        .replace('[&', '')
+        .replace(']', '');
+    } else {
+      return value;
+    }*/
+}
+
+function setSkuDetail(itemData: LodopItem, data: any): string {
+  const {
+    id,
+    fontFamily,
+    fontSize,
+    alignment,
+    weight,
+  } = itemData;
+  const idArray: string[] = id.split(',')
+    .filter(Boolean);
+  const userDataItem: any[] = data[idArray[0].split('-')[0]] || []; // 取userData中的skuList对应的array
+  const trStr: string[] = userDataItem.map((item) => {
+    return [
+      '<tr>',
+      idArray.map((idItem) => `<td>${getText(item, idItem)}</td>`)
+        .join(''),
+      '</tr>',
+    ].join('');
+  });
+
+  return [
+    `<style>td{border: 0px solid #000;height:18px;font-size:${zero75(fontSize)}px;font-family:${fontFamily};font-weight:${weight};text-align:${alignment};}</style>`,
+    '<table border="0" cellSpacing="0" cellPadding="0"  width="100%" bordercolor="#000000" style="border-collapse:collapse">',
+    trStr.join(''),
+    '</table>',
+  ].join('');
+}
 
 function loadScripts(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -63,11 +145,6 @@ function notifyUserDownloadPlugin() {
   });
 }
 
-enum EnumJsLoadState {
-  init,
-  finish
-}
-
 export class LodopPrint {
   public static url8000 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
 
@@ -90,64 +167,122 @@ export class LodopPrint {
 
   private jsLoadState: EnumJsLoadState = EnumJsLoadState.init;
 
-  private createItem = (itemList: LodopItem[], data: any) => {
-    function getTxt(key: string, userDataCollection: any): string {
-      let dataValue: string;
-      const propsArr = key.split('.');
-      if (propsArr.length <= 1) { // 字符串无小数点拆分直接取值，有小数点的转换后取值
-        dataValue = userDataCollection[key];
-      } else {
-        dataValue = propsArr.reduce((takePre, takeCur) => takePre[takeCur], userDataCollection);
-      }
-
-      return (typeof dataValue === 'string' && dataValue && dataValue.length && dataValue.replace('[$data]', '')
-        .replace('[&', '')
-        .replace(']', '')) || dataValue;
+  private createTable(itemDetailList: {[key: string]: LodopItem; }, data: any): void {
+    if (itemDetailList == null || Object.keys(itemDetailList).length === 0) {
+      return;
     }
 
-    function getCodeType(text: string): string {
-      if (text.includes('128')) {
-        return '128Auto';
-      } else if (text.includes('Code39')) {
-        return 'Code39';
-      } else {
-        return 'Code93';
-      }
-    }
-
-    function setSkuDetail(itemData: LodopItem, userData: any): string {
-      const {
-        id,
-        fontFamily,
-        fontSize,
-        alignment,
-        weight,
-      } = itemData;
-      const idSplitArr: string[] = id.split(','); // id = 第一种 "skuList-sku.sku_no"  第二种"skuList-num"
-      const collectionName = idSplitArr[0].split('-')[0];
-      const userDataItem: string[] = userData[collectionName]; // 取userData中的skuList对应的集合
-      const trStr: string[] = userDataItem.map((item) => {
-        const tdStr: string[] = idSplitArr.map((tdCur) => {
-          const takeValue = tdCur.split('-')[1];
-          const propsArr = takeValue.split('.');
-          if (propsArr.length <= 1) { // id是第二种直接取值 ,第一种需要转换小数点取值
-            return `<td>${item[takeValue]}</td>`;
-          } else {
-            return `<td>${propsArr.reduce((takePre, takeCur) => takePre[takeCur], item)}</td>`;
-          }
-        });
-
-        return `<tr>${tdStr.join('')}</tr>`;
-      });
-
+    function getStyle(): string {
       return [
-        `<style>td{border: 0px solid #000;height:18px;font-size:${zero75(fontSize)}px;font-family:${fontFamily};font-weight:${weight};text-align:${alignment};}</style>`,
-        '<table border="0" cellSpacing="0" cellPadding="0"  width="100%" bordercolor="#000000" style="border-collapse:collapse">',
-        trStr.join(''),
-        '</table>',
+        '<style>',
+        '.orderNum {font-size: 9px; width: 50px; text-align: center;}',
+        'table {width:\'100%\';color: #333333;border-color: #000000;border-collapse: collapse;}',
+        'table th {border: 1px solid #000000;}',
+        'table td {border: 1px solid #000000;}',
+        '</style>',
       ].join('');
     }
 
+    function getThead(idArray: string[], idMap: {[key: string]: LodopItem; }): string {
+      return [
+        '<thead><tr>',
+        '<th class="orderNum">序号</th>',
+        idArray.map((currentId) => {
+          return `<th style="${getCellStyle(idMap[currentId])}">${idMap[currentId].txt}</th>`;
+        })
+          .join(''),
+        '</tr></thead>',
+      ].join('');
+    }
+
+    function getTbody(tableData: any[], idArray: string[], idMap: {[key: string]: LodopItem; }): string {
+      return tableData.map((item, index) => {
+        return [
+          '<tr>',
+          `<td class="orderNum">${index + 1}</td>`,
+          idArray.map((currentId) => {
+            const {
+              id,
+              height,
+              txttype,
+              width,
+              txt,
+              hideText,
+            } = idMap[currentId];
+
+            const cellText = getText(item, currentId.split('-')[1]);
+
+            if (txttype === EnumLodopItemType.detailQrCode || txttype === EnumLodopItemType.detailBarCode) {
+              const idStr = `${id}-${getUUID()}`;
+              const codeType = txttype === EnumLodopItemType.detailQrCode ? 'QRCode' : getCodeType(txt);
+              return [
+                '<td >',
+                `<object id="${idStr}" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="${width}px" height="${height}px"><param name="Color" value="white"></object>`,
+                '<script>',
+                `let _lodop = document.getElementById(${idStr});`,
+                `_lodop.PRINT_INITA(0,0,${width},${height},${cellText});`,
+                `_lodop.ADD_PRINT_BARCODE(0,0,${width},${height},${codeType},${cellText});`,
+                `_lodop.SET_PRINT_STYLEA(0, 'ShowBarText', Boolean(${hideText}));`,
+                '</script>',
+                '</td>',
+              ].join('');
+            } else {
+              return `<td style="${getCellStyle(idMap[currentId])}">${cellText}</td>`;
+            }
+          })
+            .join(''),
+          '</tr>',
+        ].join('');
+      })
+        .join('');
+    }
+
+    function getCellStyle(item: LodopItem): string {
+      const {
+        alignment,
+        fontFamily,
+        fontSize,
+        height,
+        weight,
+        width,
+      } = item;
+      return `width:${width}px;height:${height}px;font-size:${zero75(fontSize)}px;font-family:${fontFamily};font-weight:${weight};text-align:${alignment};`;
+    }
+
+    function getTableWidth(idArray: string[], idMap: {[key: string]: LodopItem; }): number {
+      return idArray.reduce((prev, currentId) => prev + idMap[currentId].width, 50);
+    }
+
+    function trimMultiLine(str: string): string {
+      return str.replace(/ *[\r|\n] */gm, '');
+    }
+
+    const {
+      orderTitle,
+      ...restDetail
+    } = itemDetailList;
+    const {
+      orderValue,
+      left,
+      top,
+    } = orderTitle;
+    const orderValueList: string[] = orderValue.split(',');
+    const theadHtml = getThead(orderValueList, restDetail);
+    const tbodyHtml = getTbody(data[orderValueList[0].split('-')[0]] || [], orderValueList, restDetail);
+
+    const fullHtml = [
+      `<head>${getStyle()}</head>`,
+      '<body><table>',
+      theadHtml,
+      `<tbody>${tbodyHtml}</tbody>`,
+      '</table></body>',
+    ].join('');
+
+    console.log(fullHtml, '表格组装数据');
+    this.instance.ADD_PRINT_TABLE(top, left, getTableWidth(orderValueList, restDetail), '100%', trimMultiLine(fullHtml));
+  }
+
+  private createItem = (itemList: LodopItem[], data: any): void => {
     for (let i = 0; i < itemList.length; i++) {
       const {
         id,
@@ -163,10 +298,6 @@ export class LodopPrint {
         left,
         top,
       } = itemList[i];
-      const [
-        collectionName,
-        key,
-      ] = id.split('-'); // 如wmsOrder-receiver_phone-40644-4870-uwrnik1g  collectionName = wmsOrder key = receiver_phone
 
       if (
         txttype === EnumLodopItemType.customText ||
@@ -175,7 +306,7 @@ export class LodopPrint {
         txttype === EnumLodopItemType.tableInlineText ||
         txttype === EnumLodopItemType.printTime
       ) {
-        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== EnumLodopItemType.customText ? getTxt(key, data[collectionName]) : txt);
+        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== EnumLodopItemType.customText ? getText(data, id) : txt);
         this.instance.SET_PRINT_STYLEA(id, 'Alignment', alignment);
         this.instance.SET_PRINT_STYLEA(id, 'FontName', fontFamily);
         this.instance.SET_PRINT_STYLEA(id, 'FontSize', zero75(fontSize));
@@ -183,13 +314,13 @@ export class LodopPrint {
           this.instance.SET_PRINT_STYLEA(id, 'Bold', 1); // 1 粗体 0非粗
         }
       } else if (txttype === EnumLodopItemType.qrCode) {
-        this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', getTxt(key, data[collectionName]));
+        this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', getText(data, id));
       } else if (txttype === EnumLodopItemType.barCode) {
         const showBarText = hideText ? !hideText.includes('不显示码值') : true;
-        this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), getTxt(key, data[collectionName]));
+        this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), getText(data, id));
         this.instance.SET_PRINT_STYLEA(0, 'ShowBarText', showBarText);
       } else if (txttype === EnumLodopItemType.img) {
-        this.instance.ADD_PRINT_IMAGE(top, left, width, height, `<img src="${getTxt(key, data[collectionName])}" height="${height}px" width="${width}px"/>`);
+        this.instance.ADD_PRINT_IMAGE(top, left, width, height, `<img src="${getText(data, id)}" height="${height}px" width="${width}px"/>`);
 
         // TODO:设置“text文本”时，1代表两端对齐，0代表不处理（默认）； 设置“barcode条码文字”时，0-两端对齐(默认)  1-左靠齐  2-居中  3-右靠齐；
         //    LODOP.SET_PRINT_STYLEA(0, 'AlignJustify', alignment);
@@ -236,6 +367,7 @@ export class LodopPrint {
       // 新的一页
       this.instance.NewPage();
       this.createItem(Array.isArray(templateData.itemList) ? templateData.itemList : [], contents[i]);
+      this.createTable(templateData.itemDetailList, contents[i]);
     }
 
     // 打印任务
@@ -243,7 +375,7 @@ export class LodopPrint {
     this.instance.SET_PRINT_MODE('CUSTOM_TASK_NAME', taskId);
 
     // 设置打印机
-    this.instance.SET_PRINTER_INDEX(formatPrintName(templateData, printer) || 0);
+    this.instance.SET_PRINTER_INDEX(printer || 0);
 
     if (!preview) {
       this.instance.SET_PRINT_MODE('CATCH_PRINT_STATUS', true);

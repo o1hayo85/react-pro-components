@@ -1,23 +1,52 @@
 import { message } from 'antd';
 
-export function isSocketConnected(socket: WebSocket, openError: string): boolean {
-  if (null == socket) {
-    message.error({
-      content: openError,
-      key: openError,
-    });
-    return false;
-  } else {
-    if (socket.readyState === WebSocket.OPEN) {
-      return true;
-    } else {
-      message.warn({
-        key: '打印机正在连接',
-        content: '打印机正在连接',
-      });
-      return false;
-    }
-  }
+export enum EnumShopType {
+  rookie = 0,
+  pdd = 1,
+  jd = 2,
+  dy = 3,
+}
+
+export enum EnumLodopItemType {
+  customText = '0',
+  noTitleText = '1',
+  hasTitleText = '2',
+  tableInlineText = '3',
+  printTime = 'printTime',
+  qrCode = 'erweima',
+  detailQrCode = 'erweima-detail',
+  barCode = 'tiaoxingma',
+  detailBarCode = 'tiaoxingma-detail',
+  img = 'customImge',
+  horizontalLine = 'hengxian',
+  verticalLine = 'shuxian',
+  rect = 'juxing',
+  skuDetail = 'skudetail'
+}
+
+/**
+ * 公共参数
+ */
+export class CommonPrintParams {
+  /**
+   * 一次打印数据页数(默认500)
+   */
+  public count?: number;
+
+  /**
+   * 模版数据
+   */
+  public templateData?: TemplateData;
+
+  /**
+   * 是否预览
+   */
+  public preview: boolean;
+
+  /**
+   * 打印机
+   */
+  public printer?: string;
 }
 
 export class TemplateData {
@@ -80,27 +109,16 @@ export class TemplateData {
 
   public itemList?: LodopItem[];
 
+  public itemDetailList?: {[key: string]: LodopItem; };
+
   public strPageName?: string;
 
   public content?: TemplateData;
 }
 
-export enum EnumLodopItemType {
-  customText = '0',
-  noTitleText = '1',
-  hasTitleText = '2',
-  tableInlineText = '3',
-  printTime = 'printTime',
-  qrCode = 'erweima',
-  barCode = 'tiaoxingma',
-  img = 'customImge',
-  horizontalLine = 'hengxian',
-  verticalLine = 'shuxian',
-  rect = 'juxing',
-  skuDetail = 'skudetail'
-}
-
 export class LodopItem {
+  public orderValue?: string;
+
   public txt?: string;
 
   public fontFamily?: string;
@@ -147,13 +165,6 @@ export function getUUID(len?: number, radix?: number): string {
   return uuid.join('');
 }
 
-export enum EnumShopType {
-  rookie = 0,
-  pdd = 1,
-  jd = 2,
-  dy = 3,
-}
-
 export function getTemplateData(tempData: TemplateData): Omit<TemplateData, 'content'> {
   if (tempData?.content && tempData.content && Object.keys(tempData.content).length > 0) {
     const {
@@ -195,28 +206,22 @@ export function sliceData(data: any[], count = 500): any[][] {
   return result;
 }
 
-/**
- * 公共参数
- */
-export interface CommonPrintParams {
-
-  /**
-   * 一次打印数据页数(默认500)
-   */
-  count?: number;
-
-  /**
-   * 模版数据
-   */
-  templateData?: TemplateData;
-
-  /**
-   * 是否预览
-   */
-  preview: boolean;
-
-  /**
-   * 打印机
-   */
-  printer?: string;
+export function isSocketConnected(socket: WebSocket, openError: string): boolean {
+  if (null == socket) {
+    message.error({
+      content: openError,
+      key: openError,
+    });
+    return false;
+  } else {
+    if (socket.readyState === WebSocket.OPEN) {
+      return true;
+    } else {
+      message.warn({
+        key: '打印机正在连接',
+        content: '打印机正在连接',
+      });
+      return false;
+    }
+  }
 }

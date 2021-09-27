@@ -340,7 +340,7 @@ class PrintHelper {
         for (let i = 0; i < pageData.length; i++) {
           await this.state.print({
             preview: newParams.preview,
-            printer: newParams.printer,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
             contents: pageData[i],
             templateData: newParams.templateData,
           });
