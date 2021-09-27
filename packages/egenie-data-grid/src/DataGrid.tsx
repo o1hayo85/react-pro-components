@@ -166,6 +166,11 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   /** The node where the editor portal should mount. */
   editorPortalTarget?: Element | null;
   rowClass?: ((row: R) => string | undefined | null) | null;
+
+  /** Function called whenever a row is out or in. */
+  onMouseInRow?: ((rowIdx: number, row: R) => void) | null;
+  onMouseOverRow?: ((rowIdx: number, row: R) => void) | null;
+
 }
 
 /**
@@ -218,7 +223,9 @@ function DataGrid<R, SR, K extends Key>(
     // ARIA
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
-    'aria-describedby': ariaDescribedBy
+    'aria-describedby': ariaDescribedBy,
+    onMouseInRow,
+    onMouseOverRow,
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
 ) {
@@ -1015,6 +1022,8 @@ function DataGrid<R, SR, K extends Key>(
           key={key}
           rowIdx={rowIdx}
           row={row}
+          onMouseInRow={onMouseInRow}
+          onMouseOverRow={onMouseOverRow}
           viewportColumns={viewportColumns}
           isRowSelected={isRowSelected}
           onRowClick={onRowClick}

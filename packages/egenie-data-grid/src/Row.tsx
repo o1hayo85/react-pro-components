@@ -29,6 +29,8 @@ function Row<R, SR>(
     height,
     onRowChange,
     selectCell,
+    onMouseInRow,
+    onMouseOverRow,
     ...props
   }: RowRendererProps<R, SR>,
   ref: React.Ref<HTMLDivElement>
@@ -97,11 +99,13 @@ function Row<R, SR>(
   const onMouseMove = ():void => {
     console.log('进入', rowIdx, row)
     setClassName('rdg-hover-row')
+    onMouseInRow?.(rowIdx, row)
     // TODO: 添加
   }
   const onMouseOut = ():void => {
     console.log('离开', rowIdx)
     setClassName('')
+    onMouseOverRow?.(rowIdx, row)
   }
   return (
     <RowSelectionProvider value={isRowSelected}>
