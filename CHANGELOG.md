@@ -2,7 +2,7 @@
 
 ### Features
 
-- **print:** add lodopPrint 打印表格 ([9cb6d0b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9cb6d0b66f40b7f3cde50df9e2cd08772eff6da3))
+- **print:** add lodopPrint 打印表格 ([858eda6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/858eda630d93d5f05dc99727a9770dd14b349e5f))
 
 ## [0.4.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.23...v0.4.24) (2021-09-27)
 
