@@ -31,8 +31,7 @@
     "prettier:format": "prettier --write .",
     "typecheck": "tsc -p tsconfig.all.json",
     "build-storybook": "build-storybook --quiet",
-    "prepublishOnly": "npm run build && npm run build:types",
-    "postpublish": "git push --follow-tags origin HEAD"
+    "prepublish": "npm run build && npm run build:types"
   },
   "dependencies": {
     "clsx": "^1.1.1"
