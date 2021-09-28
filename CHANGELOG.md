@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.25...v0.0.0) (2021-09-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.26...v0.0.0) (2021-09-28)
+
+### Bug Fixes
+
+- 修复 egenie-data-grid ([a8bee83](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a8bee8327335d6bd6d59f54b5d8d2bfef8c83083))
+
+## [0.4.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.25...v0.4.26) (2021-09-28)
 
 ### Features
 
