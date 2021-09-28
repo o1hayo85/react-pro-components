@@ -151,14 +151,6 @@ export interface CellRendererProps<TRow, TSummaryRow>
     | undefined
     | null;
   selectCell: SelectCellFn;
-//   onMouseInRow:
-//   | ((rowIdx: number, row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void)
-//   | undefined
-//   | null;
-// onMouseOverRow:
-//   | ((rowIdx: number, row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void)
-//   | undefined
-//   | null;
 }
 
 export interface RowRendererProps<TRow, TSummaryRow = unknown>
@@ -175,20 +167,14 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
   selectedCellProps: EditCellProps<TRow> | SelectedCellProps | undefined;
   onRowChange: (rowIdx: number, row: TRow) => void;
   onRowClick:
-    | ((rowIdx: number, row: TRow) => void)
+    | ((rowIdx: number, row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void)
     | undefined
     | null;
   rowClass: ((row: TRow) => string | undefined | null) | undefined | null;
   setDraggedOverRowIdx: ((overRowIdx: number) => void) | undefined;
   selectCell: SelectCellFn;
-  onMouseInRow:
-  | ((rowIdx: number, row: TRow) => void)
-  | undefined
-  | null;
-  onMouseOverRow:
-  | ((rowIdx: number, row: TRow) => void)
-  | undefined
-  | null;
+  onMouseInRow: ((rowIdx: number, row: TRow) => void) | undefined | null;
+  onMouseOverRow: ((rowIdx: number, row: TRow) => void) | undefined | null;
 }
 
 export interface RowsChangeData<R, SR = unknown> {
