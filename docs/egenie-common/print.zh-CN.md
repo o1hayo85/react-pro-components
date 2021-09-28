@@ -318,3 +318,30 @@ printWayBill.executePrint(
   [],
 );
 ```
+
+## lodop 打印
+
+- `确保egenie-common版本大于等于0.4.25`
+- 此打印比较特殊。不属于上面流程图。简单概括`加载clodop的js文件`--->`获取插件实例`--->`请求数据`--->`根据模版数据调用插件api`--->`返回Promise`
+- [官方文档](http://lodop.net/LodopDemo.html)
+
+### 正常打印
+
+```ts
+import { printHelper } from 'egenie-common';
+
+const templateData = {};
+const printList = [];
+
+printHelper.toggleToLodop();
+printHelper.print({
+  preview: false,
+  templateData: templateData,
+  contents: printList,
+});
+```
+
+### 自定义打印
+
+1. [获取自定义打印参数](#获取自定义打印参数)
+2. [正常打印](#正常打印)
