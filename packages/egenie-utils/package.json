@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.4.27",
+  "version": "0.4.28",
   "description": "",
   "license": "MIT",
   "sideEffects": [
@@ -23,7 +23,7 @@
     "axios": "0.21.0",
     "classnames": "^2.2.6",
     "egenie-common": "^0.4.27",
-    "egenie-data-grid": "^0.4.27",
+    "egenie-data-grid": "^0.4.28",
     "lodash": "4.17.20",
     "mobx": "5.15.7",
     "mobx-react": "6.3.1",

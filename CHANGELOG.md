@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.26...v0.0.0) (2021-09-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.27...v0.0.0) (2021-09-28)
+
+### Features
+
+- 添加构建产物 ([8c96aad](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8c96aad45687c4fcfb2f3e331d3a78eb50def432))
+
+## [0.4.27](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.26...v0.4.27) (2021-09-28)
 
 ### Bug Fixes
 
