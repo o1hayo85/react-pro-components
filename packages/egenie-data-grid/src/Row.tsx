@@ -96,14 +96,14 @@ function Row<R, SR>(
       />
     );
   }
-  const onMouseMove = ():void => {
-    console.log('进入', rowIdx, row)
+  const onMouseMove = (event: React.UIEvent<HTMLDivElement>):void => {
+    event.stopPropagation();
     setClassName('rdg-hover-row')
     onMouseInRow?.(rowIdx, row)
     // TODO: 添加
   }
-  const onMouseOut = ():void => {
-    console.log('离开', rowIdx)
+  const onMouseOut = (event: React.UIEvent<HTMLDivElement>):void => {
+    event.stopPropagation();
     setClassName('')
     onMouseOverRow?.(rowIdx, row)
   }
