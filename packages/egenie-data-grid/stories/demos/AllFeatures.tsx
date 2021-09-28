@@ -244,6 +244,14 @@ export function AllFeatures() {
     setIsLoading(false);
   }
 
+  function onMouseInRow(rowIdx: number, row: Row) {
+    console.log( '外部进入', rowIdx, row)
+  }
+  function onMouseOverRow(rowIdx: number, row: Row) {
+    console.log( '外部离开', rowIdx, row)
+  }
+
+
   return (
     <>
       <DataGrid
@@ -257,6 +265,8 @@ export function AllFeatures() {
         selectedRows={selectedRows}
         onScroll={handleScroll}
         onSelectedRowsChange={setSelectedRows}
+        onMouseInRow={onMouseInRow}
+        onMouseOverRow={onMouseOverRow}
         className="fill-grid"
         rowClass={(row) => (row.id.includes('7') ? highlightClassname : undefined)}
       />
