@@ -54,6 +54,8 @@ export class TemplateData {
 
   public id?: number | string;
 
+  public defalt?: number;
+
   public templateType?: any;
 
   public colsCount?: string;
