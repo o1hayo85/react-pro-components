@@ -2,7 +2,7 @@
 title: 项目打包工具
 order: 1
 nav:
-  title: 常见包
+  title: 基础包
   order: 1
 ---
 

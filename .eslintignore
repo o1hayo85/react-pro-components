@@ -2,7 +2,7 @@ public
 dist
 coverage
 **/lib
-packages/egenie-utils/docs
 .umi
 .umi-production
 docs-dist
+packages/egenie-data-grid

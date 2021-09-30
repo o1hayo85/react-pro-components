@@ -5,7 +5,7 @@ import React from 'react';
 import { destroyModal, renderModal } from '../renderModal';
 import { request } from '../request';
 import { printHelper } from './printHelper';
-import { TemplateData } from './utils';
+import { getTemplateData, TemplateData } from './utils';
 
 const tempTypeList = {
   '4': '商品信息',
@@ -410,4 +410,32 @@ export async function getCustomPrintParam(tempType: string, customUrl = '', cust
       />
     );
   });
+}
+
+export async function getCustomPrintParamByDefaultTemplate(tempType: string): Promise<CustomPrintParam> {
+  const info = await request<{ list: TemplateData[]; }>({
+    method: 'post',
+    url: '/api/print/querybyctgr',
+    data: new URLSearchParams(Object.entries({
+      sidx: '',
+      sord: 'asc',
+      page: '1',
+      pageSize: '10000',
+      tempName: '',
+      tempType,
+    })),
+  });
+
+  const defaultTemplateItem = (info.list || []).map((item) => getTemplateData(item))
+    .find((item) => item.defalt);
+  if (defaultTemplateItem) {
+    return {
+      preview: false,
+      tempType,
+      printer: defaultTemplateItem.printerName,
+      templateId: defaultTemplateItem.id,
+    };
+  } else {
+    return getCustomPrintParam(tempType);
+  }
 }

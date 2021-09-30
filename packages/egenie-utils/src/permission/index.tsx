@@ -1,10 +1,8 @@
-import React, { ReactElement, CSSProperties, ReactNode, useState, useEffect } from 'react';
+import React, { CSSProperties, ReactNode, useState, useEffect } from 'react';
 import { request, BaseData } from '../request';
 
 export interface IPermission {
   permissionId: string;
-  className?: string;
-  style?: CSSProperties;
   children?: ReactNode;
 }
 export const getPerms = async(): Promise<void> => {
@@ -44,7 +42,7 @@ export const hasPermission = (permissionId: string): boolean => {
   }
 };
 
-export const Permission = (props: IPermission): ReactElement => {
+export const Permission = (props: IPermission): ReactNode => {
   const [
     display,
     setDisplay,
@@ -52,15 +50,9 @@ export const Permission = (props: IPermission): ReactElement => {
   useEffect(() => {
     setDisplay(hasPermission(props.permissionId));
   }, [window.top.EgeniePermission?.permissionList.length]);
-  return (
-    <div
-      className={props.className}
-      style={{
-        ...props.style,
-        display: display ? 'inline-block' : 'none',
-      }}
-    >
-      {props.children}
-    </div>
-  );
+
+  if (!display) {
+    return null;
+  }
+  return props.children;
 };
