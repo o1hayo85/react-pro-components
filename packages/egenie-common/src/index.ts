@@ -4,4 +4,4 @@ export { renderModal, destroyModal, destroyAllModal } from './renderModal';
 export { Locale } from './locale';
 export { RenderRoutes, MenuDataItem } from './renderRoutes';
 export { history } from './history';
-export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData } from './print';
+export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData, getCustomPrintParamByDefaultTemplate } from './print';

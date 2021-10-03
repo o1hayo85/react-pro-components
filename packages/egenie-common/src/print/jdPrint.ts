@@ -12,7 +12,7 @@ interface IParameters {
   customData?: any[];
 }
 
- type TOrderType = 'PRE_View' | 'GET_Printers' | 'PRINT';
+type TOrderType = 'PRE_View' | 'GET_Printers' | 'PRINT';
 
 interface RequestProtocol {
   orderType: TOrderType;
