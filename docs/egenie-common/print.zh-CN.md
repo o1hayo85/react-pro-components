@@ -67,6 +67,12 @@ interface CustomPrintParam {
 
 > 示例:
 
+```ts
+import { getCustomPrintParam } from 'egenie-common';
+
+getCustomPrintParam('27');
+```
+
 ## `获取打印参数(默认模版)`
 
 - `确保egenie-common版本大于等于0.4.29`
