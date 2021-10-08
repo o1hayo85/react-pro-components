@@ -2,7 +2,6 @@
 
 ### Features
 
-- **docs:** 增加 windows 安装 ubuntu 双系统文档 ([3ae75c8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3ae75c871f10965b2d3d1fe4e3a6dbe0b11579ef))
 - **egenie-common/print:** add getCustomPrintParamByDefaultTemplate ([5c4bf3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5c4bf3dc4ec550be668887c00d4ca587475775b6))
 - data-grid ([1d0f74b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1d0f74b4a6c7f1998321de58756db8440e91476e))
 
