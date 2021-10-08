@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.29...v0.0.0) (2021-10-08)
 
+### Features
+
+- **code-style:** 增加引入 type、interface 强制方式 ([f6b9c1c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f6b9c1c3c03b03d136359dc0b9874d1b1a63086b))
+
 ## [0.4.29](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.28...v0.4.29) (2021-10-08)
 
 ### Features

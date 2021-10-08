@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, AxiosInstance } f
 const singleton = (function() {
   let instance: AxiosInstance;
 
-  function init() {
+  function init(): AxiosInstance {
     const axiosInstance: AxiosInstance = axios.create({
       timeout: 30000,
       timeoutErrorMessage: '请求超时',
@@ -62,8 +62,10 @@ const singleton = (function() {
         if (successfulTag.includes(info.data.status)) {
           return Promise.resolve(info);
         } else if (info.data.status === 'Unauthenticated' || info.data.status === 'redirected') {
-          message.destroy();
-          message.error('未登录，请重新登录');
+          message.error({
+            key: '未登录，请重新登录',
+            content: '未登录，请重新登录',
+          });
           if (process.env.NODE_ENV === 'production') {
             if (typeof top !== 'undefined') {
               top.location.href = info.data.data || '/login';
@@ -73,7 +75,11 @@ const singleton = (function() {
           }
           return Promise.reject(info);
         } else {
-          message.error(String(info.data.info || info.data.data || '请求失败'));
+          const errorMsg = String(info.data.info || info.data.data || '请求失败');
+          message.error({
+            key: errorMsg,
+            content: errorMsg,
+          });
           return Promise.reject(info);
         }
       } else {
@@ -99,7 +105,12 @@ const singleton = (function() {
 
   return {
     getInstance(): AxiosInstance {
-      return instance ? instance : instance = init();
+      if (instance) {
+        return instance;
+      } else {
+        instance = init();
+        return instance;
+      }
     },
   };
 }());
