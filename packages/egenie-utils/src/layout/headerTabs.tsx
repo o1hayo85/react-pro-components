@@ -2,7 +2,7 @@ import { Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import styles from './layoutMenu.less';
-import { LayoutStore } from './layoutStore';
+import type { LayoutStore } from './layoutStore';
 
 const { TabPane } = Tabs;
 

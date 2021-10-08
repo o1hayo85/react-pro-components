@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import type { SortEndHandler } from 'react-sortable-hoc';
-import { EgGridModel, ColumnType } from '../egGridModel';
+import type { EgGridModel, ColumnType } from '../egGridModel';
 import styles from './columnSetting.less';
 
 export class ColumnSettingModel {

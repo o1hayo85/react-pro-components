@@ -2,7 +2,7 @@ import { Button, message, Modal, Table } from 'antd';
 import { destroyModal } from 'egenie-common';
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { BatchReportData } from '../request';
+import type { BatchReportData } from '../request';
 import styles from './index.less';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

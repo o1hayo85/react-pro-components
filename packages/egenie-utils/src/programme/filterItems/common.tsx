@@ -2,17 +2,17 @@ import { Typography } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable } from 'mobx';
 import React from 'react';
-import { FilterCascader } from './filterCascader';
-import { FilterCheckbox } from './filterCheckbox';
-import { FilterDate } from './filterDate';
-import { FilterDateStartOrEnd } from './filterDateStartOrEnd';
-import { FilterInput } from './filterInput';
-import { FilterInputAndSelect } from './filterInputAndSelect';
-import { FilterInputNumberGroup } from './filterInputNumberGroup';
-import { FilterInputOrSelect } from './filterInputOrSelect';
-import { FilterRadio } from './filterRadio';
-import { FilterSelect } from './filterSelect';
-import { FilterTreeSelect } from './filterTreeSelect';
+import type { FilterCascader } from './filterCascader';
+import type { FilterCheckbox } from './filterCheckbox';
+import type { FilterDate } from './filterDate';
+import type { FilterDateStartOrEnd } from './filterDateStartOrEnd';
+import type { FilterInput } from './filterInput';
+import type { FilterInputAndSelect } from './filterInputAndSelect';
+import type { FilterInputNumberGroup } from './filterInputNumberGroup';
+import type { FilterInputOrSelect } from './filterInputOrSelect';
+import type { FilterRadio } from './filterRadio';
+import type { FilterSelect } from './filterSelect';
+import type { FilterTreeSelect } from './filterTreeSelect';
 
 /**
  * 查询项类型

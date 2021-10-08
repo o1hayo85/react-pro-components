@@ -1,11 +1,12 @@
-import { message, FormInstance } from 'antd';
+import type { FormInstance } from 'antd';
+import { message } from 'antd';
 import { history } from 'egenie-common';
 import * as _ from 'lodash';
 import { action, observable } from 'mobx';
 import React from 'react';
 import { request, SlideVerify, passwordReg, phoneReg, emailReg } from '../index';
 import { api } from './api';
-import { Response, Market, FindPasswordForm, SelectOption } from './interface';
+import type { Response, Market, FindPasswordForm, SelectOption } from './interface';
 
 export class Store {
   constructor(options) {

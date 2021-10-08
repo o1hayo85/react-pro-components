@@ -1,7 +1,8 @@
 import { message } from 'antd';
 import React from 'react';
-import { LodopPrintParams } from './printHelper';
-import { EnumLodopItemType, getTemplateData, getUUID, LodopItem, TemplateData } from './utils';
+import type { LodopPrintParams } from './printHelper';
+import type { LodopItem, TemplateData } from './utils';
+import { EnumLodopItemType, getTemplateData, getUUID } from './utils';
 
 enum EnumJsLoadState {
   init,

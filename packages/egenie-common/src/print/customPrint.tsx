@@ -5,7 +5,8 @@ import React from 'react';
 import { destroyModal, renderModal } from '../renderModal';
 import { request } from '../request';
 import { printHelper } from './printHelper';
-import { getTemplateData, TemplateData } from './utils';
+import type { TemplateData } from './utils';
+import { getTemplateData } from './utils';
 
 const tempTypeList = {
   '4': '商品信息',

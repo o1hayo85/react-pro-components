@@ -2,8 +2,9 @@ import { Button, message } from 'antd';
 import { action, observable, toJS } from 'mobx';
 import React from 'react';
 import { ImgFormatter, MainSubStructureModel } from '../egGrid';
-import { request, PaginationData } from '../request';
-import { GoodsItem } from './addGoodsModal';
+import type { PaginationData } from '../request';
+import { request } from '../request';
+import type { GoodsItem } from './addGoodsModal';
 
 export const selectData = {
   skuNo: {

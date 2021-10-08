@@ -1,6 +1,6 @@
 import { UpSquareOutlined, DownSquareOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useState, useReducer, useMemo } from 'react';
-import { IObj as Row } from '../egGridModel';
+import type { IObj as Row } from '../egGridModel';
 import styles from '../egGridStyle.less';
 import { useFocusRef } from './useFocusRef';
 

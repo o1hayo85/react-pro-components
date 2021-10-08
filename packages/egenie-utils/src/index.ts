@@ -1,4 +1,4 @@
-import { Egenie, JsonReader, Permission, User } from './layout/interface';
+import type { Egenie, JsonReader, Permission, User } from './layout/interface';
 
 declare global {
   interface Window {

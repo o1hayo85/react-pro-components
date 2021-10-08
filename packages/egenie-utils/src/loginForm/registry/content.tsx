@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { Props } from '../interface';
+import type { Props } from '../interface';
 import ChoiceSystem from './choiceSystem';
 import FormInfo from './formInfo';
 import styles from './index.less';

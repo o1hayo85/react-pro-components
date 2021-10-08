@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import Frame from '../frame';
-import { Props } from '../interface';
+import type { Props } from '../interface';
 import Content from './content';
 
 /**

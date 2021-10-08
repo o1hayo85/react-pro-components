@@ -1,7 +1,7 @@
 import { Steps, Form, Input, Button, Row, Col } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { Props } from '../interface';
+import type { Props } from '../interface';
 import styles from './index.less';
 
 @inject('store')

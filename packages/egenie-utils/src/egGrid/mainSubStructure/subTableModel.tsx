@@ -3,8 +3,8 @@ import { observable, action, computed, set } from 'mobx';
 import type { IObservableObject } from 'mobx';
 import type { IObj, IEgGridModel, IEgGridApi, StrOrNum } from '../egGridModel';
 import { EgGridModel } from '../egGridModel';
-import { MainSubStructureModel } from './mainSubStructureModel';
-import { SubTableListModel } from './subTableListModel';
+import type { MainSubStructureModel } from './mainSubStructureModel';
+import type { SubTableListModel } from './subTableListModel';
 
 export interface ICustomModel {
   [key: string]: any;

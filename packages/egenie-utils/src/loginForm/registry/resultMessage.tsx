@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { api } from '../api';
-import { Props } from '../interface';
+import type { Props } from '../interface';
 import styles from './index.less';
 
 @inject('store')

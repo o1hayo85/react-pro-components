@@ -1,4 +1,5 @@
-import { Button, Input, Modal, ModalProps, Select } from 'antd';
+import type { ModalProps } from 'antd';
+import { Button, Input, Modal, Select } from 'antd';
 import { inject, observer, Provider } from 'mobx-react';
 import React from 'react';
 import { EgGrid } from '../egGrid';

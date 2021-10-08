@@ -2,7 +2,8 @@ import { Button, Col, Row, Space } from 'antd';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, FilterItems, FilterItemsParams, FormatDateType } from './filterItems';
+import type { FilterItemsParams } from './filterItems';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, FilterItems, FormatDateType } from './filterItems';
 import styles from './normalProgramme.less';
 
 export interface NormalProgrammeParams extends FilterItemsParams {

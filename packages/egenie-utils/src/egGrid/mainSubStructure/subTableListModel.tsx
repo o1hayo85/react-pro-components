@@ -1,6 +1,6 @@
 import { set, observable, action, computed } from 'mobx';
 import type { IObj } from '../egGridModel';
-import { MainSubStructureModel } from './mainSubStructureModel';
+import type { MainSubStructureModel } from './mainSubStructureModel';
 import type { ISubTableModel } from './subTableModel';
 import { SubTableModel } from './subTableModel';
 

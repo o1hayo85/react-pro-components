@@ -1,5 +1,6 @@
-import React, { FC, createContext, ReactNode, ReactElement } from 'react';
-import { EgGridModel } from '../egGridModel';
+import type { FC, ReactNode, ReactElement } from 'react';
+import React, { createContext } from 'react';
+import type { EgGridModel } from '../egGridModel';
 
 export const StoreContext = createContext<EgGridModel>({} as EgGridModel);
 

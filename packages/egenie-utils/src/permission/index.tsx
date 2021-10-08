@@ -1,5 +1,7 @@
-import React, { CSSProperties, ReactNode, useState, useEffect } from 'react';
-import { request, BaseData } from '../request';
+import type { ReactNode } from 'react';
+import React, { CSSProperties, useState, useEffect } from 'react';
+import type { BaseData } from '../request';
+import { request } from '../request';
 
 export interface IPermission {
   permissionId: string;

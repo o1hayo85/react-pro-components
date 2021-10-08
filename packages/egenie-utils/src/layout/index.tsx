@@ -1,6 +1,6 @@
 import { Provider } from 'mobx-react';
 import React from 'react';
-import { SrcParams, Opera, Project } from './interface';
+import type { SrcParams, Opera, Project } from './interface';
 import { LayoutMenu } from './layoutMenu';
 import { layoutStore } from './layoutStore';
 

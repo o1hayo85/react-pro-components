@@ -2,7 +2,8 @@ import { Button, Divider, Select } from 'antd';
 import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel, ValueAndLabelData } from './common';
+import type { ValueAndLabelData } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 function formatValue(oldValue, mode) {
   if (mode) {

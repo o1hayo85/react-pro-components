@@ -4601,10 +4601,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-code-style@0.0.12:
-  version "0.0.12"
-  resolved "https://registry.nlark.com/egenie-code-style/download/egenie-code-style-0.0.12.tgz#34d554def8ff0d6b677d180aa56c96c2a176ebc0"
-  integrity sha1-NNVU3vj/DWtnfRgKpWyWwqF268A=
+egenie-code-style@0.4.30:
+  version "0.4.30"
+  resolved "https://registry.npmjs.org/egenie-code-style/-/egenie-code-style-0.4.30.tgz#406bdfec236a6476c1dad534af9cf7365486236e"
+  integrity sha512-ntieZGB6fVLvuZuW/+MBV+BX/jQVGM/1h7za8uxyrWJMpSUAOW2NrwcwZw7L9MhufSR9Lf2VeCI4SWdmbMetpw==
   dependencies:
     "@commitlint/config-conventional" "^12.1.1"
     "@typescript-eslint/eslint-plugin" "^4.21.0"

@@ -2,7 +2,7 @@ import { Form, Input, Button } from 'antd';
 import { history } from 'egenie-common';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { Props } from '../interface';
+import type { Props } from '../interface';
 import styles from './index.less';
 
 if (!localStorage.browserCode) {

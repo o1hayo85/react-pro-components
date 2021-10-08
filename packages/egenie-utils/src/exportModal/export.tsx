@@ -2,8 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Input, Select, Modal, Table, Form } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import React, { Component, ReactNode } from 'react';
-import { ExportStore } from './exportStore';
+import type { ReactNode } from 'react';
+import React, { Component } from 'react';
+import type { ExportStore } from './exportStore';
 import styles from './index.less';
 
 const Option = Select.Option;

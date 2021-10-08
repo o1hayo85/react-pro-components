@@ -1,10 +1,11 @@
-import { message, FormInstance } from 'antd';
+import type { FormInstance } from 'antd';
+import { message } from 'antd';
 import { action, observable } from 'mobx';
 import qs from 'qs';
 import React from 'react';
 import { request } from '../../index';
 import { api } from '../api';
-import { LoginParams, Response, LoginForm } from '../interface';
+import type { LoginParams, Response, LoginForm } from '../interface';
 
 export class Store {
   @observable public username: string;

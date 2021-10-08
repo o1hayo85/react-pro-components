@@ -1,5 +1,5 @@
 import { Dropdown, Menu, Modal, Input, Form } from 'antd';
-import { FormInstance } from 'antd/lib/form';
+import type { FormInstance } from 'antd/lib/form';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 

@@ -1,11 +1,12 @@
 import { Tag, message, Button, Popover, Modal } from 'antd';
-import { FormInstance } from 'antd/lib/form';
+import type { FormInstance } from 'antd/lib/form';
 import { observable, action, toJS } from 'mobx';
 import React from 'react';
-import { request, BaseData } from '../request';
+import type { BaseData } from '../request';
+import { request } from '../request';
 import api from './api';
 import styles from './index.less';
-import { Template, Fields } from './interface';
+import type { Template, Fields } from './interface';
 
 export class ExportStore {
   constructor(props?) {

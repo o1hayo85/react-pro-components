@@ -2,7 +2,7 @@ import { Provider } from 'mobx-react';
 import React from 'react';
 import { api } from './api';
 import styles from './index.less';
-import { Props } from './interface';
+import type { Props } from './interface';
 import { Store } from './store';
 
 export default class Index extends React.Component<Props> {

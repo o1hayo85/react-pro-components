@@ -4,7 +4,7 @@ import React from 'react';
 import { HeaderTabs } from './headerTabs';
 import { HeaderUserInfo } from './headerUserInfo';
 import { Home } from './home';
-import { Menudata } from './interface';
+import type { Menudata } from './interface';
 import styles from './layoutMenu.less';
 
 const {

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { DragAndDropHOC } from '../dragAndDropHOC';
 import { ColumnSettingModal } from './columnSetting';
-import { EgGridModel } from './egGridModel';
+import type { EgGridModel } from './egGridModel';
 import styles from './egGridStyle.less';
 import empty from './img/empty.png';
 import searchEmpty from './img/searchEmpty.png';

@@ -1,6 +1,6 @@
-import { BaseData } from '../request';
-import { ValueAndLabelData } from './filterItems';
-import { ProgrammeListItem } from './programme';
+import type { BaseData } from '../request';
+import type { ValueAndLabelData } from './filterItems';
+import type { ProgrammeListItem } from './programme';
 
 interface FilterSetItem {
   oldSet?: ProgrammeListItem[];

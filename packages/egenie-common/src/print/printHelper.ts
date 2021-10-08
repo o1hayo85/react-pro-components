@@ -2,7 +2,8 @@ import { message } from 'antd';
 import { JdPrint } from './jdPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
-import { CommonPrintParams, formatPrintName, getTemplateData, getUUID, sliceData, TemplateData } from './utils';
+import type { CommonPrintParams, TemplateData } from './utils';
+import { formatPrintName, getTemplateData, getUUID, sliceData } from './utils';
 
 const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
 

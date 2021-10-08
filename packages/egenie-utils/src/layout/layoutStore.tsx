@@ -3,8 +3,10 @@ import _ from 'lodash';
 import { action, observable } from 'mobx';
 import qs from 'qs';
 import { getPerms } from '../permission';
-import { BaseData, request } from '../request';
-import { API, Egenie, EnumVersion, Menudata, Permission, Response, SrcParams, User } from './interface';
+import type { BaseData } from '../request';
+import { request } from '../request';
+import type { API, Egenie, Menudata, Permission, Response, SrcParams, User } from './interface';
+import { EnumVersion } from './interface';
 
 export class LayoutStore {
   @observable public project = {

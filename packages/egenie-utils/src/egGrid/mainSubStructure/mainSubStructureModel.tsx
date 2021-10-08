@@ -1,5 +1,5 @@
 import { set, observable, action, computed, toJS } from 'mobx';
-import { ReactEventHandler, CSSProperties, ReactNode } from 'react';
+import type { ReactEventHandler, CSSProperties, ReactNode } from 'react';
 import { getPerms } from '../../permission';
 import { request, BaseData } from '../../request';
 import { EgGridModel } from '../egGridModel';
