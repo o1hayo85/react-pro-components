@@ -3,13 +3,6 @@ import React from 'react';
 import { LodopPrintParams } from './printHelper';
 import { EnumLodopItemType, getTemplateData, getUUID, LodopItem, TemplateData } from './utils';
 
-declare global {
-  interface Window {
-    getCLodop?: any;
-    CLODOP?: any;
-  }
-}
-
 enum EnumJsLoadState {
   init,
   finish
@@ -377,14 +370,11 @@ export class LodopPrint {
     // 设置打印机
     this.instance.SET_PRINTER_INDEX(printer || 0);
 
-    if (!preview) {
-      this.instance.SET_PRINT_MODE('CATCH_PRINT_STATUS', true);
-    }
-
     // 预览逻辑
     if (preview) {
       this.instance.PREVIEW();
     } else {
+      this.instance.SET_PRINT_MODE('CATCH_PRINT_STATUS', true);
       this.instance.PRINT();
     }
   };
@@ -415,6 +405,7 @@ export class LodopPrint {
         console.log('加载lodop文件结束');
 
         // 获取instance
+        // @ts-ignore
         this.instance = window.getCLodop();
         console.log('获取lodop插件instance成功');
 

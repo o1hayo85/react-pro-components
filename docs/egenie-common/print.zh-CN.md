@@ -67,10 +67,42 @@ interface CustomPrintParam {
 
 > 示例:
 
-```ts
-import { getCustomPrintParam } from 'egenie-common';
+## `获取打印参数(默认模版)`
 
-getCustomPrintParam('0');
+- `确保egenie-common版本大于等于0.4.29`
+- 参数: 模版类型`string`
+- 返回值: `Promise<CustomPrintParam>`
+
+```ts
+interface CustomPrintParam {
+  /**
+   * 是否预览
+   */
+  preview: boolean;
+
+  /**
+   * 模版类型
+   */
+  tempType: string | number;
+
+  /**
+   * 模版id
+   */
+  templateId: number | string;
+
+  /**
+   * 打印机
+   */
+  printer: string;
+}
+```
+
+> 示例:
+
+```ts
+import { getCustomPrintParamByDefaultTemplate } from 'egenie-common';
+
+getCustomPrintParamByDefaultTemplate('27');
 ```
 
 ## `一般打印-菜鸟打印`
