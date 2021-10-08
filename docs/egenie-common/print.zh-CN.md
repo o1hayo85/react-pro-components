@@ -321,7 +321,7 @@ printWayBill.executePrint(
 
 ## lodop 打印
 
-- `确保egenie-common版本大于等于0.4.25`
+- `确保egenie-common版本大于等于0.4.29`
 - 此打印比较特殊。不属于上面流程图。简单概括`加载clodop的js文件`--->`获取插件实例`--->`请求数据`--->`根据模版数据调用插件api`--->`返回Promise`
 - [官方文档](http://lodop.net/LodopDemo.html)
 
