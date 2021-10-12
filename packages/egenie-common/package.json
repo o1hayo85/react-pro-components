@@ -22,7 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublish": "yarn run build",
     "build": "father-build"
   },
   "devDependencies": {

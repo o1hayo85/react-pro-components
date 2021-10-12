@@ -32,7 +32,7 @@ order: 14
 ### `addDict`
 
 - 描述: 动态添加字典数据
-- 类型: (dict: [ValueAndLabelData](./filter-base#valueandlabeldata)) => void
+- 类型: (dict: { [key: string]: [ValueAndLabelData](./filter-base#valueandlabeldata) }) => void
 - 默认值: 无
 
 ### `addItem`

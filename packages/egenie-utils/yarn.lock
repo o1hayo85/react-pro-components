@@ -327,10 +327,17 @@ dom-align@^1.7.0:
   resolved "https://registry.npm.taobao.org/dom-align/download/dom-align-1.12.0.tgz?cache=0&sync_timestamp=1589854754211&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdom-align%2Fdownload%2Fdom-align-1.12.0.tgz#56fb7156df0b91099830364d2d48f88963f5a29c"
   integrity sha1-VvtxVt8LkQmYMDZNLUj4iWP1opw=
 
-egenie-common@^0.4.10:
-  version "0.4.10"
-  resolved "https://registry.nlark.com/egenie-common/download/egenie-common-0.4.10.tgz#5b2a4efff8185a979556ef899efdd51c929274b7"
-  integrity sha1-WypO//gYWpeVVu+Jnv3VHJKSdLc=
+egenie-common@^0.4.30:
+  version "0.4.30"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.4.30.tgz#44285ae349dbff9d0f7fe486856f2b4561db8b4b"
+  integrity sha1-RCha40nb/50Pf+SGhW8rRWHbi0s=
+
+egenie-data-grid@^0.4.29:
+  version "0.4.29"
+  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.4.29.tgz#67de14e1516dd12396b8590534ba92002b3829ab"
+  integrity sha1-Z94U4VFt0SOWuFkFNLqSACs4Kas=
+  dependencies:
+    clsx "^1.1.1"
 
 follow-redirects@^1.10.0:
   version "1.14.0"
@@ -822,13 +829,6 @@ react-copy-to-clipboard@^5.0.3:
   dependencies:
     copy-to-clipboard "^3"
     prop-types "^15.5.8"
-
-react-data-grid@^7.0.0-canary.49:
-  version "7.0.0-canary.49"
-  resolved "https://registry.npmjs.org/react-data-grid/-/react-data-grid-7.0.0-canary.49.tgz#31625d271b6c7e48b2f3d12fb2cae378f619744d"
-  integrity sha512-Jg83CRnJtnv8FF7XeByke0KiJBdfXbnrsS08yxHcqyfTEICFmMdtQXFK8SCH7prYR3HiGtI6NqYcju/Te2Kl6w==
-  dependencies:
-    clsx "^1.1.1"
 
 react-dnd-html5-backend@^11.1.3:
   version "11.1.3"
