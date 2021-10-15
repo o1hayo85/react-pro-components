@@ -2,7 +2,7 @@
 
 ### Features
 
-- **generator-web:** 更新依赖版本 ([5a3a07b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5a3a07bc4e41be8486bad66e03be6b3e228ca084))
+- **generator-web:** 更新依赖版本 ([b69fab1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b69fab147f1c320faf2f68598f78132af147465e))
 
 ## [0.4.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.29...v0.4.30) (2021-10-08)
 
