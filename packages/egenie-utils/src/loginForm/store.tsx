@@ -447,6 +447,7 @@ export class Store {
         ...(_.omit(data, ['marketFloor'])),
         ...marketFloorData,
         tenantModule,
+        sysType: 1,
       },
     }).then(() => {
       this.stepType += 1;
