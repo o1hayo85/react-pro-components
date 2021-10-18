@@ -68,6 +68,14 @@ export class RookieAndPddAndDyPrint {
         content: this.openError,
         key: this.openError,
       });
+
+      for (const value of this.taskRequest.values()) {
+        if (value.reject) {
+          value.reject();
+        }
+      }
+
+      this.taskRequest.clear();
     };
 
     // 关闭

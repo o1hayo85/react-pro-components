@@ -1,7 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.30...v0.0.0) (2021-10-15)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.30...v0.0.0) (2021-10-18)
 
 ### Features
 
+- **generator-web:** 更新依赖版本 ([306ad8c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/306ad8c0224b411924e3486f6743c756b3994bb1))
 - **generator-web:** 更新依赖版本 ([b69fab1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b69fab147f1c320faf2f68598f78132af147465e))
 
 ## [0.4.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.29...v0.4.30) (2021-10-08)
