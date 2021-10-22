@@ -2,7 +2,7 @@
 
 ### Features
 
-- **config/theme:** 调整文本颜色 ([656cd8a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/656cd8a620452d5f6462ad59a5e0bd76ea841929))
+- **config/theme:** 调整文本颜色 ([b65d036](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b65d0369226c430441888b302c6916e1f1f4ad0e))
 
 ## [0.4.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.30...v0.4.32) (2021-10-22)
 
