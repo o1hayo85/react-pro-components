@@ -24,21 +24,21 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run changelog && git add . && lint-staged",
+      "pre-commit": "yarn run changelog && git add . && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && validate-commit-msg"
     }
   },
   "lint-staged": {
     "**/*.less": [
-      "npm run lint:style-less",
+      "yarn run lint:style-less",
       "git add ."
     ],
     "**/*.scss": [
-      "npm run lint:style-scss",
+      "yarn run lint:style-scss",
       "git add ."
     ],
     "**/*.{js,jsx,ts,tsx}": [
-      "npm run lint:js",
+      "yarn run lint:js",
       "git add ."
     ],
     "**/*.{css,less,scss,md,html,json}": [
