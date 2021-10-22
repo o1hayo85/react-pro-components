@@ -642,6 +642,7 @@ class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
             onChange={handleSelectChange}
             options={data}
             placeholder="请选择"
+            style={{ width: `calc(100% - ${labelWidth}px)` }}
             value={selectValue}
           />
         </header>

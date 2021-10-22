@@ -8,7 +8,7 @@ module.exports = {
   'label-required-color': '@error-color',
   'highlight-color': '@egenie-highlight-color',
   'heading-color': '@egenie-heading-color',
-  'text-color': '@egenie-text-color',
+  'text-color': '@egenie-heading-color',
   'input-placeholder-color': '@egenie-input-placeholder-color',
   'text-color-secondary': '@egenie-text-color-secondary',
   'border-color-base': '@egenie-border-color-base',
@@ -20,6 +20,7 @@ module.exports = {
   'disabled-color': '@egenie-disabled-color',
   'primary-1': '#e5f0ff',
   'divider-color': '@egenie-text-color',
+  'shadow-2': '@egenie-shadow',
 
   // 字体
   'font-size-base': '@egenie-font-size-sm',
@@ -48,7 +49,7 @@ module.exports = {
   'modal-header-padding-vertical': '13px',
   'modal-header-padding-horizontal': '@egenie-spacing-lg',
   'modal-header-close-size': '48px',
-  'modal-body-padding': '@egenie-spacing-lg',
+  'modal-body-padding': '@egenie-spacing-sm',
   'modal-footer-padding-vertical': '@egenie-spacing-xs',
   'modal-footer-padding-horizontal': '@egenie-spacing-lg',
   'modal-confirm-body-padding': '@egenie-spacing-md @egenie-spacing-lg @egenie-spacing-xs @egenie-spacing-lg',

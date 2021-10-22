@@ -32,7 +32,10 @@ const ButtonHeader = observer(
               {item.icon ? (
                 <i
                   className={item.icon}
-                  style={{ marginRight: 3 }}
+                  style={{
+                    marginRight: 3,
+                    color: '#1978FF',
+                  }}
                 />
               ) : null}
               {item.text}
@@ -60,7 +63,7 @@ const ButtonHeader = observer(
                   height: 30,
                   padding: '5px 8px',
                 }}
-                
+
               >
                 {el.icon ? (
                   <i
@@ -113,7 +116,7 @@ const ButtonHeader = observer(
                     className={el.icon}
                     style={{
                       marginRight: 3,
-                      color: '#20A0FF',
+                      color: '#1978FF',
                     }}
                   />
                 ) : null}
@@ -129,7 +132,7 @@ const ButtonHeader = observer(
                 style={{ display: btnExtraLeft.isWarnIcon ? 'inline' : 'none' }}
               />
               {btnExtraLeft.text}
-              
+
               {
                 btnExtraLeft.linkBtnText && (
                   <a
@@ -138,11 +141,11 @@ const ButtonHeader = observer(
                     onClick={btnExtraLeft.handleLinkBtnClick || null}
                   >
                     { btnExtraLeft.linkBtnText}
-                    
+
                   </a>
                 )
               }
-             
+
             </div>
           )
         }

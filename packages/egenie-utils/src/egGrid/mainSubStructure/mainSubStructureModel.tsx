@@ -1,7 +1,6 @@
 import { set, observable, action, computed, toJS } from 'mobx';
 import type { ReactEventHandler, CSSProperties, ReactNode } from 'react';
 import { getPerms } from '../../permission';
-import { request, BaseData } from '../../request';
 import { EgGridModel } from '../egGridModel';
 import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
 import { SubTableListModel } from './subTableListModel';

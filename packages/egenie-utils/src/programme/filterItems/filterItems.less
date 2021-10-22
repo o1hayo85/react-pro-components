@@ -117,6 +117,10 @@
         .ant-select-selector {
           display: flex;
           align-items: center;
+
+          .ant-select-selection-overflow {
+            flex-wrap: nowrap;
+          }
         }
 
         flex-grow: 1;
@@ -300,7 +304,6 @@
 
       :global {
         .ant-select {
-          flex-grow: 1;
           background: #fff;
           border-top: 1px solid @egenie-combine-filter-bg;
           border-right: 1px solid @egenie-combine-filter-bg;

@@ -55,7 +55,7 @@ const color = {
   'egenie-highlight-color': '#f2270a',
 
   // 阴影
-  'egenie-shadow': '2px 2px 8px 0px #f0f0f0',
+  'egenie-shadow': ' 0px 12px 48px 16px rgba(0, 0, 0, 0.03), 0px 9px 28px 0px rgba(0, 0, 0, 0.05), 0px 6px 16px -8px rgba(0, 0, 0, 0.08)',
 
   // 禁用背景
   'egenie-disabled-bg': '@egenie-combine-filter-bg',
