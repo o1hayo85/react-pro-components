@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.32...v0.0.0) (2021-10-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.33...v0.0.0) (2021-10-25)
+
+### Features
+
+- **utils:** 增加时间格式化兼容 ([e12ce74](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e12ce74fc46534b1371ff1de5efc670f00f6f1fb))
+
+## [0.4.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.32...v0.4.33) (2021-10-22)
 
 ### Features
 
