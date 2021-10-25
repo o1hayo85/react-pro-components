@@ -1122,7 +1122,7 @@ function DataGrid<R, SR, K extends Key>(
             onKeyDown={handleKeyDown}
             onFocus={onGridFocus}
           />
-          {/* <div style={{ height: max(totalRowHeight, clientHeight) }} /> */}
+          <div style={{ height: max(totalRowHeight, clientHeight) }} />
           <RowSelectionChangeProvider value={selectRowLatest}>
             {getViewportRows()}
           </RowSelectionChangeProvider>
