@@ -32,7 +32,7 @@ import {
   isCtrlKeyHeldDown,
   isDefaultCellInput,
   getColSpan,
-  max,
+  // max,
   sign
 } from './utils';
 
