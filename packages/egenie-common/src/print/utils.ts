@@ -174,9 +174,18 @@ export function getTemplateData(tempData: TemplateData): Omit<TemplateData, 'con
       ...rest
     } = tempData;
 
+    const newContent = {};
+    for (const contentKey in content) {
+      if (Object.prototype.hasOwnProperty.call(content, contentKey)) {
+        if (content[contentKey]) {
+          newContent[contentKey] = content[contentKey];
+        }
+      }
+    }
+
     return {
       ...rest,
-      ...content,
+      ...newContent,
     };
   } else {
     return tempData;

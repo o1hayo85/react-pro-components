@@ -1,4 +1,9 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.40...v0.0.0) (2021-10-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.40...v0.0.0) (2021-11-02)
+
+### Bug Fixes
+
+- **printHelper:** 兼容模板 content 的 id 为空 ([6d95f55](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6d95f55aea83446209aea0213cd97bab27959546))
+- 暂时去掉无用变量 ([f5cad33](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f5cad33d0f64fc1411f02315550bce69cd92c94f))
 
 ## [0.4.40](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.39...v0.4.40) (2021-10-25)
 
