@@ -100,7 +100,7 @@ export class ExportModal extends Component<{ store?: ExportStore; }> {
             onChange={onChangeFileName}
             value={fileName}
           />
-          <div className="redTips">
+          <div className={styles.redTips}>
             {showTips ? '文件名称不能包含特殊符号?、:*\\/“”<>|' : ''}
           </div>
         </div>
