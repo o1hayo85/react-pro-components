@@ -13,7 +13,7 @@ const Option = Select.Option;
 @observer
 export class ExportModal extends Component<{ store?: ExportStore; }> {
   render(): ReactNode {
-    const { visible, commitLoading, templateList, column, fileName, templateColumnList, editId, selectTemplateId, setForm, onSelectTemplate, onChangeFileName, onExport, onClose, newTemplateClick } = this.props.store;
+    const { visible, commitLoading, templateList, column, fileName, showTips, templateColumnList, editId, selectTemplateId, setForm, onSelectTemplate, onChangeFileName, onExport, onClose, newTemplateClick } = this.props.store;
     const EditableCell = ({
       editing,
       dataIndex,
@@ -100,6 +100,9 @@ export class ExportModal extends Component<{ store?: ExportStore; }> {
             onChange={onChangeFileName}
             value={fileName}
           />
+          <div className="redTips">
+            {showTips ? '文件名称不能包含特殊符号?、:*\\/“”<>|' : ''}
+          </div>
         </div>
         <div>
           选择模板：
