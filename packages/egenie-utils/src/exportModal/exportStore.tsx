@@ -19,6 +19,8 @@ export class ExportStore {
 
   @observable public fileName = ''; // 文件名称
 
+  @observable public showTips = false; // 是否显示错误提示
+
   @observable public exportType = '';// 导出类型
 
   @observable private queryParam = {}; // 查询条件原始参数
@@ -64,6 +66,7 @@ export class ExportStore {
     this.visible = false;
     this.editId = null;
     this.fileName = '';
+    this.showTips = false;
     this.templateList = [];
     this.exportType = null;
     this.selectedIds = '';
@@ -77,6 +80,10 @@ export class ExportStore {
   public onExport = async(): Promise<void> => {
     if (this.editId !== null) {
       message.error('请先保存模板或取消编辑');
+      return;
+    }
+    if (this.showTips) {
+      message.error('文件名称格式不正确');
       return;
     }
     if (!this.fileName) {
@@ -129,14 +136,20 @@ export class ExportStore {
   };
 
   private handleGotoExportCenter = () => {
-    // eslint-disable-next-line no-restricted-globals
-    window.top.egenie.openTab('/egenie-ts-baseinfo/exportList/index', 'export_task_center', '导出任务中心', 'zc_pfs');
+    try {
+      // eslint-disable-next-line no-restricted-globals
+      top.egenie.openTab('/egenie-ts-baseinfo/exportList/index', 'export_task_center', '导出任务中心', 'zc_pfs');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // 改变文件名称
   @action
   public onChangeFileName = (e): void => {
     const fileName = e.target.value.trim();
+    const reg = new RegExp(/^[^\\/?？*|"<>、“”":：]*$/);
+    this.showTips = !reg.test(fileName);
     const template = this.templateList.find((item) => item.templateName === fileName && item.id !== this.editId);
     if (template) {
       message.error(`当前已存在名称为【${fileName}】的模板，请重新输入`);
