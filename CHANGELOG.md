@@ -2,7 +2,7 @@
 
 ### Features
 
-- **utils:** 增加输入框去掉空格配置 ([89435e7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/89435e765b8e23b8970c4d58a35168fb882e9411))
+- **utils:** 增加输入框去掉空格配置 ([97b5ec8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b5ec83f3d05db6f46eb7b0b2caa053ec8129a3))
 
 ## [0.4.44](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.43...v0.4.44) (2021-11-08)
 
