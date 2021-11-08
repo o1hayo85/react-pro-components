@@ -3,19 +3,7 @@ import _ from 'lodash';
 import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
-
-function formatValue(value: string, isTrimWhiteSpace: boolean) {
-  if (isTrimWhiteSpace) {
-    return _.flowRight([
-      _.trimEnd,
-      _.trimStart,
-      _.toString,
-    ])(value);
-  } else {
-    return _.toString(value);
-  }
-}
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel, trimWhiteSpace } from './common';
 
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {
@@ -39,8 +27,8 @@ export class FilterInput extends FilterBase {
   @observable public type: 'input' = ENUM_FILTER_ITEM_TYPE.input;
 
   public toProgramme(): string | null {
-    if (formatValue(this.value, this.isTrimWhiteSpace)) {
-      return formatValue(this.value, this.isTrimWhiteSpace);
+    if (trimWhiteSpace(this.value, this.isTrimWhiteSpace)) {
+      return trimWhiteSpace(this.value, this.isTrimWhiteSpace);
     } else {
       return null;
     }
@@ -67,14 +55,14 @@ export class FilterInput extends FilterBase {
 
   @action
   public formatValue(this: FilterInput, value?: string): void {
-    this.value = _.toString(value);
+    this.value = trimWhiteSpace(this.value, this.isTrimWhiteSpace);
   }
 
   private snapshot = '';
 
   @action private handleCallback = () => {
     if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(formatValue(this.value, this.isTrimWhiteSpace));
+      this.onChangeCallback(_.toString(this.value));
     }
   };
 

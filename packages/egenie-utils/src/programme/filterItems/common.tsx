@@ -238,3 +238,15 @@ export function FilterItemLabel({
     </div>
   );
 }
+
+export function trimWhiteSpace(value: string, isTrimWhiteSpace: boolean): string {
+  if (isTrimWhiteSpace) {
+    return _.flowRight([
+      _.trimEnd,
+      _.trimStart,
+      _.toString,
+    ])(value);
+  } else {
+    return _.toString(value);
+  }
+}

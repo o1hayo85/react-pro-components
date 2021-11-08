@@ -1,9 +1,33 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.40...v0.0.0) (2021-11-02)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.44...v0.0.0) (2021-11-08)
+
+### Features
+
+- **utils:** 增加输入框去掉空格配置 ([89435e7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/89435e765b8e23b8970c4d58a35168fb882e9411))
+
+## [0.4.44](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.43...v0.4.44) (2021-11-08)
+
+### Features
+
+- **eggrid:** 树组件批量折叠展开 ([ce58a86](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ce58a864a0170376645766a0e8ed6a06975ff6af))
+
+## [0.4.43](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.42...v0.4.43) (2021-11-04)
 
 ### Bug Fixes
 
-- 暂时去掉无用变量 ([f5cad33](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f5cad33d0f64fc1411f02315550bce69cd92c94f))
+- 新版导出文件名称限制提示样式修改 ([c6682ce](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c6682cea6675ad7efcf988eeeb162decdc43d5c3))
+
+## [0.4.42](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.41...v0.4.42) (2021-11-04)
+
+### Bug Fixes
+
+- 导出组件文件名称增加限制和提示 ([8d98d10](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8d98d10f9e85f7c7e20fcfd23e6577911d0578fc))
+
+## [0.4.41](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.40...v0.4.41) (2021-11-02)
+
+### Bug Fixes
+
 - **printHelper:** 兼容模板 content 的 id 为空 ([e910435](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e910435c25b0cb797b4d8a3182e54a693c933155))
+- 暂时去掉无用变量 ([f5cad33](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f5cad33d0f64fc1411f02315550bce69cd92c94f))
 
 ## [0.4.40](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.39...v0.4.40) (2021-10-25)
 
@@ -64,8 +88,8 @@
 
 ### Features
 
-- data-grid ([1d0f74b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1d0f74b4a6c7f1998321de58756db8440e91476e))
 - **egenie-common/print:** add getCustomPrintParamByDefaultTemplate ([5c4bf3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5c4bf3dc4ec550be668887c00d4ca587475775b6))
+- data-grid ([1d0f74b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1d0f74b4a6c7f1998321de58756db8440e91476e))
 
 ## [0.4.28](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.27...v0.4.28) (2021-09-28)
 
@@ -83,11 +107,11 @@
 
 ### Features
 
-- **docs:** 增加 lodop 打印文档 ([d78101a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d78101abc6b399e8409b7694a0dd522ed752dd3f))
 - add egenie-data-grid ([d40774e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d40774ee6953dbab176787a319e6412c4de8577c))
 - 添加 rowhover 事件 ([e9abda9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e9abda986709631f5506b29a325388c2fd5ea1b6))
 - 添加 storybook ([8f208e5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8f208e5978131ef77ba13ecebf9c0c06c60845ce))
 - 添加阻止事件冒泡 ([64cbb26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/64cbb269c9e052460853d994d13a38878e0ebb7d))
+- **docs:** 增加 lodop 打印文档 ([d78101a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d78101abc6b399e8409b7694a0dd522ed752dd3f))
 
 ## [0.4.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.24...v0.4.25) (2021-09-27)
 
@@ -105,15 +129,15 @@
 
 ### Features
 
-- **docs:** 增加服务器 docs 配置 ([a0eb781](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a0eb781e197c1400d3c3496d288430a2d9a3b4dc))
 - egenie-data-grid ([6237df2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6237df2c45bbb615e8efeffda06bd022340cf65b))
+- **docs:** 增加服务器 docs 配置 ([a0eb781](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a0eb781e197c1400d3c3496d288430a2d9a3b4dc))
 
 ## [0.4.22](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.21...v0.4.22) (2021-09-23)
 
 ### Features
 
-- **docs/print:** 更新打印文档 ([9e586b4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9e586b4191c46796e1d2e9c179a2f1cdf6c6bce1))
 - 优化样式 ([1379c3d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1379c3dd044a56ac8ae8b67d46b7300f07c7e26e))
+- **docs/print:** 更新打印文档 ([9e586b4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9e586b4191c46796e1d2e9c179a2f1cdf6c6bce1))
 
 ## [0.4.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.20...v0.4.21) (2021-09-15)
 
@@ -194,10 +218,10 @@
 
 ### Features
 
+- rowHeight 支持函数动态返回行高 ([5470cc5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5470cc522403dfd8b70ff9d99c27d1facc72caff))
 - 集成 dumi ([915e53a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/915e53a571760530a2024ca4bb36a90638b2596c))
 - 集成 dumi ([7bf434d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7bf434d130ecb05430fce965b137f095253e543d))
 - 集成 dumi ([8acce74](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8acce743946a33a5b1aa8a5e396b04417cbd9770))
-- rowHeight 支持函数动态返回行高 ([5470cc5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5470cc522403dfd8b70ff9d99c27d1facc72caff))
 
 ## [0.4.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.9...v0.4.10) (2021-08-24)
 
@@ -368,8 +392,8 @@
 
 ### Features
 
-- 左侧菜单顶部支持传入项目 logo ([2e4930e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2e4930e81f5836441563cd15c4b9b8b1c9cbae5d))
 - 添加表格 tree ([fd54f29](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fd54f29cc44b8055b851192dfb46a9304edaa75b))
+- 左侧菜单顶部支持传入项目 logo ([2e4930e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2e4930e81f5836441563cd15c4b9b8b1c9cbae5d))
 
 ## [0.2.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.2.3...v0.2.4) (2021-08-10)
 
@@ -389,8 +413,8 @@
 
 ### Features
 
-- 新增新版导出 ([761452e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/761452ebd0cf87e83de29768f5e8055503395a3b))
 - **utils:** add exportModal ([7f17ab8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7f17ab84e2aad2998241d0f29e7ebb9016f71fc8))
+- 新增新版导出 ([761452e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/761452ebd0cf87e83de29768f5e8055503395a3b))
 
 # [0.2.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.40...v0.2.0) (2021-08-06)
 
@@ -520,8 +544,8 @@
 
 ### Features
 
-- **utils:** 更新查询方案删除间距 ([fd4eb83](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fd4eb8305b40c7921218358ee2a8b6c6d6530158))
 - 表格支持 onRowSelectChange ([534d13a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/534d13a232ff8ca1a13824a8d2b903a4a31de303))
+- **utils:** 更新查询方案删除间距 ([fd4eb83](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fd4eb8305b40c7921218358ee2a8b6c6d6530158))
 
 ## [0.1.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.13...v0.1.14) (2021-07-02)
 
@@ -700,15 +724,15 @@
 
 ### Features
 
-- 完善 fullModal ([8c8812f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8c8812f1f813b1a26e38c6f8dae1a7a78862d83f))
 - **utils:** add treeSelect ([51aeadb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51aeadb8d7c9a34db400889b21de2603905b4166))
+- 完善 fullModal ([8c8812f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8c8812f1f813b1a26e38c6f8dae1a7a78862d83f))
 
 ## [0.0.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.35...v0.0.36) (2021-05-31)
 
 ### Features
 
-- 全屏弹窗修改 ([de05c41](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/de05c416e1e923bf0675ed1e7ebafa35815af036))
 - update packages ([00dbe10](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/00dbe10e742659b9b1e00bedbc578d33e1271850))
+- 全屏弹窗修改 ([de05c41](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/de05c416e1e923bf0675ed1e7ebafa35815af036))
 - **utils:** add reset callback ([1524ef7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1524ef7de6827c12844d781a187af2060ad85e21))
 
 ## [0.0.35](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.34...v0.0.35) (2021-05-31)

@@ -1,9 +1,8 @@
 import { Input, Select } from 'antd';
-import _ from 'lodash';
 import { action, extendObservable, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { ENUM_FILTER_ITEM_TYPE, FilterBase } from './common';
+import { ENUM_FILTER_ITEM_TYPE, FilterBase, trimWhiteSpace } from './common';
 
 export class FilterInputOrSelect extends FilterBase {
   constructor(options: Partial<FilterInputOrSelect>) {
@@ -29,8 +28,8 @@ export class FilterInputOrSelect extends FilterBase {
   @observable public type: 'inputOrSelect' = ENUM_FILTER_ITEM_TYPE.inputOrSelect;
 
   public toProgramme(): string | null {
-    if (this.value) {
-      return this.value;
+    if (trimWhiteSpace(this.value, this.isTrimWhiteSpace)) {
+      return trimWhiteSpace(this.value, this.isTrimWhiteSpace);
     } else {
       if (this.selectValue != undefined) {
         return this.selectValue;
@@ -49,10 +48,10 @@ export class FilterInputOrSelect extends FilterBase {
   }
 
   public translateParams(this: FilterInputOrSelect): string[] {
-    if (this.value) {
+    if (trimWhiteSpace(this.value, this.isTrimWhiteSpace)) {
       return [
         this.label,
-        this.value,
+        trimWhiteSpace(this.value, this.isTrimWhiteSpace),
       ];
     } else {
       if (this.selectValue != undefined) {
@@ -75,7 +74,7 @@ export class FilterInputOrSelect extends FilterBase {
     this.value = this.snapshot.value;
     this.selectValue = this.snapshot.selectValue;
     if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback(this.value || this.selectValue);
+      this.handleChangeCallback(trimWhiteSpace(this.value, this.isTrimWhiteSpace) || this.selectValue);
     }
   };
 
@@ -86,7 +85,7 @@ export class FilterInputOrSelect extends FilterBase {
       this.selectValue = item.value;
       this.value = '';
     } else {
-      this.value = _.toString(value);
+      this.value = trimWhiteSpace(value, this.isTrimWhiteSpace);
       this.selectValue = undefined;
     }
   }
@@ -102,7 +101,7 @@ export class FilterInputOrSelect extends FilterBase {
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
     if (typeof this.handleChangeCallback === 'function') {
-      this.handleChangeCallback(this.value);
+      this.handleChangeCallback(trimWhiteSpace(this.value, this.isTrimWhiteSpace));
     }
   };
 
@@ -137,6 +136,11 @@ export class FilterInputOrSelect extends FilterBase {
    * 是否禁止
    */
   @observable public disabled = false;
+
+  /**
+   * 是否去掉输入框左右空格
+   */
+  @observable public isTrimWhiteSpace = true;
 }
 
 /**

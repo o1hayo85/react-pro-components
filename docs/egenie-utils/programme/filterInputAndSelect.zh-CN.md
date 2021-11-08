@@ -57,4 +57,10 @@ order: 7
 - 类型: boolean
 - 默认值: false
 
+## `isTrimWhiteSpace`
+
+- 描述: 是否去掉输入框左右空格
+- 类型: boolean
+- 默认值: true
+
 ## [其他](./filter-base#filterbase)
