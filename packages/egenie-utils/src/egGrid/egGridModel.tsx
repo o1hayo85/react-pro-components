@@ -1,7 +1,7 @@
 import type { Column, HeaderRendererProps, SortDirection, SortColumn, RowHeightArgs } from 'egenie-data-grid';
 import { SelectColumn } from 'egenie-data-grid';
 import _ from 'lodash';
-import { set, observable, action, toJS, computed } from 'mobx';
+import { set, observable, action, toJS, computed, reaction } from 'mobx';
 import React from 'react';
 import type { SubRowAction } from './cellFormatter/treeFormatter';
 import { CellExpanderFormatter, ChildRowDeleteButton, subRowReducer } from './cellFormatter/treeFormatter';
@@ -107,6 +107,7 @@ export interface IEgGridModel {
   searchReduce?: boolean;
   searchReduceConfig?: TLabelName;
   showGridOrderNo?: boolean;
+  batchToogleSubRow?: boolean;
 }
 
 export class EgGridModel {
@@ -338,6 +339,11 @@ export class EgGridModel {
    */
   @observable public showGridOrderNo = true;
 
+  /**
+   * 是否批量展开
+   */
+  @observable public batchToogleSubRow = false;
+
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
   }
@@ -496,6 +502,10 @@ export class EgGridModel {
     // FIXME: 注意执行顺序，务必设置store在先，实例化滞后
     set(this, { ...(options || {}) });
     this.columnSettingModel = new ColumnSettingModel({ parent: this });
+    reaction(() => this.batchToogleSubRow,
+      (isExpanded, reaction) => {
+        this.batchToggleOrDeleteSubRow(isExpanded);
+      });
     this.getUser();
   }
 
@@ -564,8 +574,44 @@ export class EgGridModel {
       type,
       primaryKeyField,
     });
-    console.log(newRows, 'newRows');
     this.rows = newRows;
+  });
+
+  public batchToggleOrDeleteSubRow = action((isExpanded: boolean) => {
+    const { rows, primaryKeyField } = this;
+    const type = isExpanded ? 'toggleSubRow' : 'deleteSubRow';
+    console.log(type, '全部展开');
+
+    if (isExpanded) {
+      let _rows = toJS(rows);
+      for (let i = 0; i < _rows.length; i++) {
+        const id = _rows[i][primaryKeyField];
+        _rows = subRowReducer(_rows, {
+          id,
+          type,
+          primaryKeyField,
+          isBatch: true,
+        });
+      }
+      this.rows = _rows;
+    } else {
+      let i = rows.length;
+      let _rows = toJS(rows);
+      while (i >= 0) {
+        if (_rows[i]) {
+          const id = _rows[i][primaryKeyField];
+          _rows[i].isExpanded = false;
+          _rows = subRowReducer(_rows, {
+            id,
+            type,
+            primaryKeyField,
+            isBatch: true,
+          });
+        }
+        i--;
+      }
+      this.rows = _rows;
+    }
   });
 
   /**
