@@ -1,5 +1,6 @@
 ---
-title: FilterInputOrSelect order: 10
+title: FilterInputOrSelect
+order: 10
 ---
 
 ## `type`
