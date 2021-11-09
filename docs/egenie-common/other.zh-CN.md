@@ -161,3 +161,34 @@ request<BaseData<string>>({
   console.log(info);
 });
 ```
+
+## 声音
+
+- 前提: `egenie-common版本大于等于0.4.46`
+
+### playVoice
+
+- 描述: 播放声音
+- 类型: (url: string) => void
+  - url: 声音 url 地址
+- 默认值: 无
+
+### getAndPlayVoice
+
+- 描述: 获取声音数据并播放
+- 类型: (tex: string, per?: string) => void
+  - tex: 语音文本
+  - per: 声音类型(默认'0',女声)
+- 默认值: 无
+
+> `示例:`
+
+```ts
+import { playVoice, getAndPlayVoice } from 'egenie-common';
+
+// 播放声音
+playVoice('https://front.runscm.com/customer-source/ring/di.mp3');
+
+// 获取声音数据并播放
+getAndPlayVoice('通过');
+```

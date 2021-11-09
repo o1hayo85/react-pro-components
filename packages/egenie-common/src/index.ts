@@ -5,3 +5,4 @@ export { Locale } from './locale';
 export { RenderRoutes, MenuDataItem } from './renderRoutes';
 export { history } from './history';
 export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData, getCustomPrintParamByDefaultTemplate } from './print';
+export { playVoice, getAndPlayVoice } from './voice';

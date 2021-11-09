@@ -1,4 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.45...v0.0.0) (2021-11-08)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.45...v0.0.0) (2021-11-09)
+
+### Features
+
+- **egenie-common:** add voice ([48fc22c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/48fc22cd68f80b85c96fe3e71812d81d6270c2a8))
 
 ## [0.4.45](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.44...v0.4.45) (2021-11-08)
 

@@ -10,15 +10,13 @@ import { routes } from './routes';
 
 function render() {
   ReactDOM.render(
-    <React.StrictMode>
-      <Locale>
-        <RenderRoutes
-          history={history}
-          loading={<Spin size="large"/>}
-          routes={routes}
-        />
-      </Locale>
-    </React.StrictMode>,
+    <Locale>
+      <RenderRoutes
+        history={history}
+        loading={<Spin size="large"/>}
+        routes={routes}
+      />
+    </Locale>,
     document.getElementById('root')
   );
 }
