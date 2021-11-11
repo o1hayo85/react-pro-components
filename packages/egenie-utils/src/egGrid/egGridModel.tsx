@@ -864,6 +864,7 @@ export class EgGridModel {
       current: page,
       pageSize,
     });
+    this.resetAll();
     this.api.onPageChange && this.api.onPageChange(page, pageSize);
   });
 
