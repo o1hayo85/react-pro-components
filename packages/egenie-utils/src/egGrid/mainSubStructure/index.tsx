@@ -1,5 +1,5 @@
-import { InfoCircleOutlined, DownOutlined } from '@ant-design/icons';
-import { Button, Tabs, Menu, Dropdown } from 'antd';
+import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, Tabs, Menu, Dropdown, Badge, Select, Input } from 'antd';
 import { observer } from 'mobx-react';
 import { nanoid } from 'nanoid';
 import React, { useEffect } from 'react';
@@ -161,12 +161,280 @@ const ButtonHeader = observer(
   }
 );
 
+const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
+  if (!_buttons.length) {
+    return null;
+  }
+  return (
+    <div
+      className={`${styles.subTableHeaderButtonWrap}`}
+    >
+      {_buttons.map((el, index) => {
+        const { group } = el;
+        return group ? (
+          <Dropdown.Button
+            className={`${styles.headerButtonDropDown} ${el.className || ''}`}
+            disabled={el.disabled}
+            key={nanoid(5)}
+            onClick={el.handleClick.bind(store)}
+            overlay={(
+              <Menu>
+                {group.map((item) => (
+                  <Menu.Item
+                    className={`${styles.headerButtonMenu} ${styles.btnHeaderWrap} ${item.className || ''}`}
+                    disabled={item.disabled}
+                    key={nanoid(5)}
+                    onClick={item.handleClick.bind(store)}
+                    style={{ ...(item.style || {}) }}
+                  >
+                    {el.icon ? (
+                      <i
+                        className={el.icon}
+                        style={{ marginRight: 3 }}
+                      />
+                    ) : null}
+                    {item.text}
+                  </Menu.Item>
+                ))}
+              </Menu>
+            )}
+            size="small"
+            style={{ marginRight: 10 }}
+          >
+            {el.icon ? (
+              <i
+                className={el.icon}
+                style={{
+                  marginRight: 3,
+                  color: '#1978FF',
+                }}
+              />
+            ) : null}
+            {el.text}
+          </Dropdown.Button>
+        ) : (
+          <Button
+            className={styles.headerButton}
+            disabled={el.disabled}
+            key={nanoid(5)}
+            onClick={el.handleClick.bind(store)}
+            size="small"
+            style={{ ...(el.style || {}) }}
+          >
+            {el.icon ? (
+              <i
+                className={el.icon}
+                style={{
+                  marginRight: 3,
+                  color: '#20A0FF',
+                }}
+              />
+            ) : null}
+            {el.text}
+          </Button>
+        );
+      })}
+    </div>
+  );
+});
+
+const FilterItemsOfSubTable = observer(
+  ({
+    store: {
+      filterItems,
+      onFilterValueChange,
+      onSearch,
+      allFilterItemsInOneGroup,
+      cursorFilterItem,
+      onCursorFilterItemFieldChange,
+      numOfHasValue,
+      getDisplayValueOfFilterItem,
+    },
+  }) => {
+    return filterItems.length ? (
+      <div className={styles.filterWrap}>
+        {allFilterItemsInOneGroup
+          ? [
+            <Badge
+              className={numOfHasValue ? '' : 'count0'}
+              count={numOfHasValue}
+              key="1"
+              offset={[
+                -135,
+                5,
+              ]}
+              size="small"
+            >
+              <Select
+                className={styles.filterSelect}
+                onChange={onCursorFilterItemFieldChange}
+                optionLabelProp="label"
+                placeholder="请选择"
+                size="small"
+                value={cursorFilterItem?.field || undefined}
+              >
+                {filterItems.map((el) => {
+                  const { field, label } = el;
+                  return (
+                    <Select.Option
+                      key={field}
+                      label={label}
+                      value={field}
+                    >
+                      <span style={{
+                        float: 'left',
+                        fontSize: 11,
+                      }}
+                      >
+                        {label}
+                      </span>
+                      <span
+                        style={{
+                          float: 'right',
+                          color: '#ff4949',
+                          fontSize: 11,
+                          maxWidth: 100,
+                          whiteSpace: 'nowrap',
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {getDisplayValueOfFilterItem(el)}
+                      </span>
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            </Badge>,
+            cursorFilterItem && cursorFilterItem.type === 'select' ? (
+              <Select
+                allowClear
+                className={styles.filterSelect}
+                key="2"
+                onChange={onFilterValueChange.bind(this, cursorFilterItem.field)}
+                size="small"
+                style={{ marginRight: 10 }}
+                value={cursorFilterItem.value}
+              >
+                {cursorFilterItem.options.map((el) => {
+                  const { value, label } = el;
+                  return (
+                    <Select.Option
+                      key={value}
+                      label={label}
+                      value={value}
+                    >
+                      {
+                        label
+                      }
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            ) : (
+              <Input
+                className={styles.filterSelect}
+                key="2"
+                onChange={(e) => onFilterValueChange(cursorFilterItem?.field, e.target.value)}
+                onKeyUp={(e) => {
+                  e.stopPropagation();
+                  if (e.keyCode == 13) {
+                    onSearch();
+                  }
+                }}
+                size="small"
+                style={{ marginRight: 10 }}
+                value={cursorFilterItem?.value || ''}
+              />
+            ),
+          ]
+          : filterItems.map((el, index) => {
+            const { label, field, type, value, options } = el;
+            return (
+              <label
+                key={nanoid(5)}
+                style={{
+                  display: 'flex',
+                  whiteSpace: 'nowrap',
+                  alignItems: 'center',
+                  marginRight: 10,
+                  width: 170,
+                }}
+              >
+                {`${label }:`}
+                {type === 'select' ? (
+                  <Select
+                    allowClear
+                    key={nanoid(5)}
+                    onChange={onFilterValueChange.bind(this, field)}
+                    size="small"
+                    style={{
+                      marginRight: 10,
+                      flex: 'auto',
+                    }}
+                    value={value}
+                  >
+                    {options.map((el) => {
+                      const { value, label } = el;
+                      return (
+                        <Select.Option
+                          key={value}
+                          label={label}
+                          value={value}
+                        >
+                          {
+                            label
+                          }
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
+                ) : (
+                  <Input
+                    key={nanoid(5)}
+                    onChange={onFilterValueChange.bind(this, field)}
+                    onKeyUp={(e) => {
+                      e.stopPropagation();
+                      if (e.keyCode == 13) {
+                        return onSearch();
+                      }
+                    }}
+                    size="small"
+                    style={{ marginRight: 10 }}
+                    value={value}
+                  />
+                )}
+              </label>
+            );
+          })}
+        <Button
+          className={styles.headerButton}
+          icon={<SearchOutlined/>}
+          onClick={onSearch}
+          size="small"
+        >
+          查询
+        </Button>
+      </div>
+    ) : null;
+  }
+);
+
+const HeaderExtraContentOfSubTable = observer(({ store }) => {
+  return (
+    <div className={`${styles.subTableHeaderWrap}`}>
+      <ButtonsOfSubTable store={store}/>
+      <FilterItemsOfSubTable store={store}/>
+    </div>
+  );
+});
+
 export const MainSubStructure = observer(({ store }) => {
   useEffect(() => {
     store.getPermission();
   }, []);
   const { subTablesModel: {
-    activeTab, onClickTab, listModel,
+    activeTab, onClickTab, listModel, cursorTabModel,
   }, foldModel: {
     tabPaneheight,
     onDragStart,
@@ -195,41 +463,40 @@ export const MainSubStructure = observer(({ store }) => {
         />
       )}
       {!hiddenSubTable && (
-        <div className={`${styles.subCotent}`}>
-          <Tabs
-            activeKey={activeTab}
-            className={`${styles.subContentTabs}`}
-            defaultActiveKey={activeTab}
-            onTabClick={onClickTab}
-            style={{ height: tabPaneheight }}
-          >
-            {
-              listModel.map((v) => {
-                const { tab: { name, value }, gridModel, isCustom, CustomView, customModel } = v;
-                const { cursorRow, primaryKeyField } = mainGridModel;
-                const pid = cursorRow?.[primaryKeyField];
+        <Tabs
+          activeKey={activeTab}
+          className={`${styles.subContentTabs}`}
+          defaultActiveKey={activeTab}
+          onTabClick={onClickTab}
+          style={{ height: tabPaneheight }}
+          tabBarExtraContent={<HeaderExtraContentOfSubTable store={cursorTabModel}/>}
+        >
+          {
+            listModel.map((v) => {
+              const { tab: { name, value }, gridModel, isCustom, CustomView, customModel } = v;
+              const { cursorRow, primaryKeyField } = mainGridModel;
+              const pid = cursorRow?.[primaryKeyField];
 
-                return (
-                  <TabPane
-                    className={`${styles.subtableContentPane}`}
-                    key={value}
-                    tab={name}
-                  >
-                    {
-                      isCustom ? (
-                        <CustomView
-                          cursorRow={cursorRow}
-                          pid={pid}
-                        />
-                      ) : <EgGrid store={gridModel}/>
-                    }
+              return (
+                <TabPane
+                  className={`${styles.subTableContentPane}`}
+                  key={value}
+                  tab={name}
+                >
+                  {
+                    isCustom ? (
+                      <CustomView
+                        cursorRow={cursorRow}
+                        pid={pid}
+                      />
+                    ) : <EgGrid store={gridModel}/>
+                  }
 
-                  </TabPane>
-                );
-              })
-            }
-          </Tabs>
-        </div>
+                </TabPane>
+              );
+            })
+          }
+        </Tabs>
       )}
     </div>
   );

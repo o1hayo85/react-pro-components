@@ -6,7 +6,7 @@ import type { IObj, IEgGridApi, IEgGridModel } from '../egGridModel';
 import { SubTableListModel } from './subTableListModel';
 import type { ISubTableModel } from './subTableModel';
 
-interface IButton {
+export interface IButton {
   text: string; // 必填
   permissionId?: string; // 必填
   handleClick?: (event: ReactEventHandler) => void; // 必填
@@ -17,6 +17,8 @@ interface IButton {
   style?: CSSProperties;
   type?: string;
   isHide?: boolean; // 按钮组是否隐藏（整组按钮都没有权限时使用,不需要外部传参）
+  disabled?: boolean;
+  isLabel?: boolean | string;
 }
 
 export interface IBtnExtraLeft {
