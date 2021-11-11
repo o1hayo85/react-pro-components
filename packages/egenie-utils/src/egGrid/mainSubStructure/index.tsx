@@ -1,4 +1,4 @@
-import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Tabs, Menu, Dropdown, Badge, Select, Input } from 'antd';
 import { observer } from 'mobx-react';
 import { nanoid } from 'nanoid';
