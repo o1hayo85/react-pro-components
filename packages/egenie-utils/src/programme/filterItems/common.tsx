@@ -54,31 +54,31 @@ export abstract class FilterBase {
    * 创建查询方案时对每个查询项值的处理
    * 外层一般不需要重写
    */
-  abstract toProgramme(): string | null;
+  public abstract toProgramme(): string | null;
 
   /**
    * 对外暴露的params的处理
    * 外层一般不需要重写
    */
-  abstract toParams(this: this): {[key: string]: string; };
+  public abstract toParams(this: this): {[key: string]: string; };
 
   /**
    * 格式化查询项值
    * 外层一般不需要重写
    */
-  abstract formatValue(this: this, value?: string): void;
+  public abstract formatValue(this: this, value?: string): void;
 
   /**
    * 查询项重置
    * 外层一般不需要重写
    */
-  abstract reset(): void;
+  public abstract reset(): void;
 
   /**
    * 查询项翻译的值
    * 外层一般不需要重写
    */
-  abstract translateParams(): string[];
+  public abstract translateParams(): string[];
 
   /**
    * 是否显示查询项

@@ -19,7 +19,7 @@ const singleton = (function() {
       .interceptors
       .request
       .use((config) => {
-        const baseHeader: {[ket: string]: number|string; } = {};
+        const baseHeader: {[ket: string]: number | string; } = {};
 
         // @ts-ignore
         if (window.__config__ && window.__config__.originProject) {
