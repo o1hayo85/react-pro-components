@@ -271,8 +271,8 @@ classnames@2.x, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classna
 
 clsx@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.npm.taobao.org/clsx/download/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
-  integrity sha1-mLMTT5q73yOyZjSRrOE8XAOnMYg=
+  resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -327,15 +327,15 @@ dom-align@^1.7.0:
   resolved "https://registry.npm.taobao.org/dom-align/download/dom-align-1.12.0.tgz?cache=0&sync_timestamp=1589854754211&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdom-align%2Fdownload%2Fdom-align-1.12.0.tgz#56fb7156df0b91099830364d2d48f88963f5a29c"
   integrity sha1-VvtxVt8LkQmYMDZNLUj4iWP1opw=
 
-egenie-common@^0.4.30:
-  version "0.4.30"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.4.30.tgz#44285ae349dbff9d0f7fe486856f2b4561db8b4b"
-  integrity sha1-RCha40nb/50Pf+SGhW8rRWHbi0s=
+egenie-common@^0.4.46:
+  version "0.4.46"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.4.46.tgz#40a505e3ed01abf450e463cb6ecf4719a5a3cbf1"
+  integrity sha512-KfqQGaNuMCWQrQtrx9RtthfjVC/z3c6yqjxAKAAIPnjfKk9sKM0259mb55FO6ol0Q/vEUONVCcLHfG/nli6mJw==
 
-egenie-data-grid@^0.4.29:
-  version "0.4.29"
-  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.4.29.tgz#67de14e1516dd12396b8590534ba92002b3829ab"
-  integrity sha1-Z94U4VFt0SOWuFkFNLqSACs4Kas=
+egenie-data-grid@0.4.40:
+  version "0.4.40"
+  resolved "https://registry.npmjs.org/egenie-data-grid/-/egenie-data-grid-0.4.40.tgz#5004bc80a9f51d7061df8381c909682b647f270d"
+  integrity sha512-5EsM9sJDjQLAEenPw8JBWhpDMYC+OA+NUMGxt1b2zsBLejSeqUiwqGASk02rFz1eQ6yQ3qRox0u0ID3GW1/xoA==
   dependencies:
     clsx "^1.1.1"
 
@@ -937,10 +937,10 @@ toggle-selection@^1.0.6:
   resolved "https://registry.npm.taobao.org/toggle-selection/download/toggle-selection-1.0.6.tgz#6e45b1263f2017fa0acc7d89d78b15b8bf77da32"
   integrity sha1-bkWxJj8gF/oKzH2J14sVuL932jI=
 
-typescript@4.2.4:
-  version "4.2.4"
-  resolved "https://registry.nlark.com/typescript/download/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
-  integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
+typescript@4.4.4:
+  version "4.4.4"
+  resolved "https://registry.npmmirror.com/typescript/download/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
+  integrity sha1-LNAaGh8WBwTTEB/VpY/w+fy4Aww=
 
 warning@^4.0.1, warning@^4.0.3:
   version "4.0.3"

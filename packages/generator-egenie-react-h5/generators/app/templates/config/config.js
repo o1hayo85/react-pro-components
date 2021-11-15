@@ -1,20 +1,6 @@
 module.exports = function(utils) {
   return {
     otherConfig: {
-      optimization: utils.isProduction ? {
-        splitChunks: {
-          cacheGroups: {
-            // 拆分第三方库
-            vendors: {
-              test: /node_modules/,
-              name: 'vendors',
-              chunks: 'initial',
-              minChunks: 2,
-              priority: 1,
-            },
-          },
-        },
-      } : {},
       externals: {
         lodash: {
           commonjs: 'lodash',

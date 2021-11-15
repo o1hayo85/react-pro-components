@@ -1,4 +1,28 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.45...v0.0.0) (2021-11-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.49...v0.0.0) (2021-11-15)
+
+### Features
+
+- 升级包 ([3d21574](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3d215742b5f7e3382410c1068d8150712e3ecbfe))
+
+## [0.4.49](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.48...v0.4.49) (2021-11-11)
+
+### Features
+
+- 修复下拉箭头图标 ([345befd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/345befd43c1839fbff83907f11c1974be9093118))
+
+## [0.4.48](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.47...v0.4.48) (2021-11-11)
+
+### Features
+
+- 分页重置勾选 ([08204d5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/08204d5801952161045d0eeb1da093658e253bb1))
+
+## [0.4.47](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.46...v0.4.47) (2021-11-11)
+
+### Features
+
+- 子表按钮和查询组件 ([d81d9f8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d81d9f89e0433de1f560301ea217daacc68118dd))
+
+## [0.4.46](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.45...v0.4.46) (2021-11-09)
 
 ### Features
 

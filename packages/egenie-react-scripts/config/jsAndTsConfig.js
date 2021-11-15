@@ -18,9 +18,9 @@ module.exports = [
         loader: require.resolve('thread-loader'),
         options: {
           /*
-           * number of jobs a worker processes in parallel
-           * defaults to 20
-           */
+             * number of jobs a worker processes in parallel
+             * defaults to 20
+             */
           workerParallelJobs: 50,
 
           // additional node.js arguments

@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const compressionPlugin = require('compression-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const copyWebpackPlugin = require('copy-webpack-plugin');
@@ -12,7 +11,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const ModuleScopePlugin = require('../react-dev-utils/ModuleScopePlugin');
-const WatchMissingNodeModulesPlugin = require('../react-dev-utils/WatchMissingNodeModulesPlugin');
 const bundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const { merge } = require('webpack-merge');
@@ -23,8 +21,12 @@ const getClientEnvironment = require('./env');
 const modules = require('./modules');
 const paths = require('./paths');
 const utils = require('./utils');
+const createEnvironmentHash = require('../react-dev-utils/createEnvironmentHash');
 
+const env = getClientEnvironment(utils.publicUrlOrPath);
 const useTypeScript = fs.existsSync(paths.appTsConfig);
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 module.exports = function() {
   const initConfig = {
     watchOptions: {
@@ -32,7 +34,20 @@ module.exports = function() {
       poll: false,
       ignored: /node_modules/,
     },
-    cache: { type: 'filesystem' },
+    cache: {
+      type: 'filesystem',
+      version: createEnvironmentHash(env.raw),
+      cacheDirectory: paths.appWebpackCache,
+      store: 'pack',
+      buildDependencies: {
+        defaultWebpack: ['webpack/lib/'],
+        config: [__filename],
+        tsconfig: [
+          paths.appTsConfig,
+          paths.appJsConfig,
+        ].filter((f) => fs.existsSync(f)),
+      },
+    },
 
     mode: utils.isProduction ? 'production' : utils.isDevelopment && 'development',
 
@@ -45,7 +60,7 @@ module.exports = function() {
     resolve: {
       modules: [
         'node_modules',
-        paths.appNodeModules,
+        paths.appSrc,
       ],
 
       extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`)
@@ -65,7 +80,6 @@ module.exports = function() {
     module: {
       strictExportPresence: true,
       rules: [
-        { parser: { requireEnsure: false }},
         {
           oneOf: [
             ...require('./jsAndTsConfig'),
@@ -76,7 +90,8 @@ module.exports = function() {
       ].filter(Boolean),
     },
     plugins: [
-      new webpack.DefinePlugin(getClientEnvironment(utils.publicUrlOrPath).stringified),
+      new SpeedMeasurePlugin(),
+      new webpack.DefinePlugin(env.stringified),
 
       // eslint
       utils.allowEslint && new ESLintPlugin({
@@ -102,16 +117,13 @@ module.exports = function() {
       // preload
       utils.isProduction && new PreloadWebpackPlugin({ rel: 'prefetch' }),
 
-      new CaseSensitivePathsPlugin(),
-      utils.isDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-
       // zip css with content hash
       utils.isProduction && new MiniCssExtractPlugin({
         filename: `${utils.resourceName.css}/[name].[contenthash].css`,
         chunkFilename: `${utils.resourceName.css}/[name].[contenthash].css`,
       }),
 
-      new webpackBar({ profile: false }),
+      new webpackBar({ profile: true }),
       utils.isProduction && utils.isAnalyze && new bundleAnalyzerPlugin({
         openAnalyzer: false,
         analyzerPort: utils.port + 1,

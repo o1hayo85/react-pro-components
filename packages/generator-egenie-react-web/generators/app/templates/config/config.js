@@ -6,18 +6,9 @@ module.exports = function(utils) {
       theme: require('egenie-config/lib/theme/index.js')(),
     },
     otherConfig: {
-      optimization: utils.isProduction ? {
+      optimization: {
         splitChunks: {
           cacheGroups: {
-            // 拆分第三方库
-            vendors: {
-              test: /node_modules/,
-              name: 'vendors',
-              chunks: 'initial',
-              minChunks: 2,
-              priority: 1,
-            },
-
             // 拆导入导出
             excel: {
               test: /egenie-import-export/,
@@ -28,7 +19,7 @@ module.exports = function(utils) {
             },
           },
         },
-      } : {},
+      },
       externals: {
         lodash: {
           commonjs: 'lodash',
