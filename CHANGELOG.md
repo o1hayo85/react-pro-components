@@ -2,7 +2,7 @@
 
 ### Features
 
-- 升级包 ([3d21574](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3d215742b5f7e3382410c1068d8150712e3ecbfe))
+- 升级包 ([22ac936](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/22ac93664ae7063a8b3536f21fb2da9a16526889))
 
 ## [0.4.49](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.48...v0.4.49) (2021-11-11)
 
