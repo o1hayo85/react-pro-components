@@ -1,5 +1,10 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.0...v0.0.0) (2021-11-15)
 
+### Features
+
+- 升级包 ([bc69926](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bc699260185422faba747b222507458442a82e31))
+- **docs:** 增加升级文档 ([d6b30b1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d6b30b136392f1c1f3f105ec4bc92ae1f7195797))
+
 # [0.5.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.49...v0.5.0) (2021-11-15)
 
 ### Features
