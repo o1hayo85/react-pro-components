@@ -251,7 +251,7 @@ const FilterItemsOfSubTable = observer(
       getDisplayValueOfFilterItem,
     },
   }) => {
-    return filterItems.length ? (
+    return filterItems && filterItems.length ? (
       <div className={styles.filterWrap}>
         {allFilterItemsInOneGroup
           ? [

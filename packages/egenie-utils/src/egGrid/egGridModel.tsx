@@ -397,6 +397,7 @@ export class EgGridModel {
                 isCellSelected,
               }) }
               {!formatter && row[key]}
+              <span> </span>
               <div className={styles.rdgCellValue}>
                 {hasChildren && (
                   <CellExpanderFormatter

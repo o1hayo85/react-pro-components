@@ -127,24 +127,24 @@ export class SubTableModel {
    * 当前已选择条件的数量
    */
   @computed public get numOfHasValue(): number {
-    return this.filterItems.reduce((res, el) => Number(Boolean(el.value)) + res, 0);
+    return this.filterItems?.reduce((res, el) => Number(Boolean(el.value)) + res, 0);
   }
 
   /**
    * 获取查询数据
    */
   @computed public get searchData(): ICustomModel {
-    return this.filterItems.reduce((data, item) => {
+    return this.filterItems?.reduce((data, item) => {
       data[item.field] = `${item.value }`;
       return data;
     }, {});
   }
 
   /**
-   * 获取查询数据
+   * 获取当前查询项
    */
   @computed public get cursorFilterItem(): IFilterItems {
-    return this.filterItems.find(({ field }) => field === this.cursorFilterItemField);
+    return this.filterItems?.find(({ field }) => field === this.cursorFilterItemField);
   }
   
   /**
