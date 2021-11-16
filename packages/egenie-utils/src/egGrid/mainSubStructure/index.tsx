@@ -1,11 +1,11 @@
 import { InfoCircleOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Tabs, Menu, Dropdown, Badge, Select, Input } from 'antd';
 import { observer } from 'mobx-react';
-import { nanoid } from 'nanoid';
 import React, { useEffect } from 'react';
 import styles from '../egGridStyle.less';
 import { EgGrid } from '../index';
 
+let i = 0;
 const { TabPane } = Tabs;
 
 const ButtonHeader = observer(
@@ -25,7 +25,7 @@ const ButtonHeader = observer(
             <Menu.Item
               className={`${styles.headerButtonMenu} ${styles.btnHeaderWrap} ${item.className || ''}`}
               disabled={item.disabled}
-              key={nanoid(5)}
+              key={i++}
               onClick={item.handleClick.bind(store)}
               style={{ ...(item.style || {}) }}
             >
@@ -53,7 +53,7 @@ const ButtonHeader = observer(
           const { group, type } = el;
           return group ? type === 'dropdown' ? (
             <Dropdown
-              key={nanoid(5)}
+              key={i++}
               overlay={overlay(group)}
             >
               <Button
@@ -84,7 +84,7 @@ const ButtonHeader = observer(
               <Dropdown.Button
                 className={`${styles.headerButtonDropDown} ${el.className || ''}`}
                 disabled={el.disabled}
-                key={nanoid(5)}
+                key={i++}
                 onClick={el.handleClick.bind(store)}
                 overlay={overlay(group)}
                 size="small"
@@ -106,7 +106,7 @@ const ButtonHeader = observer(
               <Button
                 className={styles.headerButton}
                 disabled={el.disabled}
-                key={nanoid(5)}
+                key={i++}
                 onClick={el.handleClick.bind(store)}
                 size="small"
                 style={{ ...(el.style || {}) }}
@@ -175,7 +175,7 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
           <Dropdown.Button
             className={`${styles.headerButtonDropDown} ${el.className || ''}`}
             disabled={el.disabled}
-            key={nanoid(5)}
+            key={i++}
             onClick={el.handleClick.bind(store)}
             overlay={(
               <Menu>
@@ -183,7 +183,7 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
                   <Menu.Item
                     className={`${styles.headerButtonMenu} ${styles.btnHeaderWrap} ${item.className || ''}`}
                     disabled={item.disabled}
-                    key={nanoid(5)}
+                    key={i++}
                     onClick={item.handleClick.bind(store)}
                     style={{ ...(item.style || {}) }}
                   >
@@ -216,7 +216,7 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
           <Button
             className={styles.headerButton}
             disabled={el.disabled}
-            key={nanoid(5)}
+            key={i++}
             onClick={el.handleClick.bind(store)}
             size="small"
             style={{ ...(el.style || {}) }}
@@ -352,7 +352,7 @@ const FilterItemsOfSubTable = observer(
             const { label, field, type, value, options } = el;
             return (
               <label
-                key={nanoid(5)}
+                key={i++}
                 style={{
                   display: 'flex',
                   whiteSpace: 'nowrap',
@@ -365,7 +365,7 @@ const FilterItemsOfSubTable = observer(
                 {type === 'select' ? (
                   <Select
                     allowClear
-                    key={nanoid(5)}
+                    key={i++}
                     onChange={onFilterValueChange.bind(this, field)}
                     size="small"
                     style={{
@@ -391,7 +391,7 @@ const FilterItemsOfSubTable = observer(
                   </Select>
                 ) : (
                   <Input
-                    key={nanoid(5)}
+                    key={i++}
                     onChange={onFilterValueChange.bind(this, field)}
                     onKeyUp={(e) => {
                       e.stopPropagation();

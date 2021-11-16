@@ -1,4 +1,12 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.0...v0.0.0) (2021-11-15)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.2...v0.0.0) (2021-11-16)
+
+## [0.5.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.1...v0.5.2) (2021-11-15)
+
+### Features
+
+- 修复日志表崩溃&修复展开表格样式 ([e39e01b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e39e01b1699cd85613c82b73c0c2a1e8b698c863))
+
+## [0.5.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.0...v0.5.1) (2021-11-15)
 
 ### Features
 

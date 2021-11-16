@@ -178,7 +178,7 @@ export const filterDateDict: {[key: string]: FilterDateDict; } = {
   },
 };
 
-function formatTime(startTime: moment.Moment, endTime: moment.Moment, format: string, formatParams: string): string {
+function formatTime(startTime: moment.Moment | null, endTime: moment.Moment | null, format: string, formatParams: string): string {
   let startTimeString: string;
   let endTimeString: string;
 
