@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.2...v0.0.0) (2021-11-16)
 
+### Features
+
+- **utils:** 增加 father 打包 ([b7b7132](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b7b71327f81ad1dd9455393f300239f4d721b495))
+
 ## [0.5.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.1...v0.5.2) (2021-11-15)
 
 ### Features
