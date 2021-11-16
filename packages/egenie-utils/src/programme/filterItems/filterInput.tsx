@@ -55,7 +55,7 @@ export class FilterInput extends FilterBase {
 
   @action
   public formatValue(this: FilterInput, value?: string): void {
-    this.value = trimWhiteSpace(this.value, this.isTrimWhiteSpace);
+    this.value = trimWhiteSpace(value, this.isTrimWhiteSpace);
   }
 
   private snapshot = '';
