@@ -3,10 +3,7 @@
   "version": "0.5.3",
   "description": "",
   "license": "MIT",
-  "sideEffects": [
-    "*.less",
-    "*.css"
-  ],
+  "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
@@ -25,6 +22,7 @@
     "@types/react-router-dom": "^5.1.6",
     "antd": "4.12.2",
     "axios": "0.21.0",
+    "egenie-config": "^0.5.3",
     "father-build": "^1.19.8",
     "mobx": "5.15.7",
     "mobx-react": "6.3.1",
