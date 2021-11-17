@@ -16,7 +16,7 @@ module.exports = function(utils) {
           },
         },
       },
-      externals: require('egenie-config').webpackConfig,
+      externals: require('egenie-config').webpackConfig.externals,
     },
   };
 };

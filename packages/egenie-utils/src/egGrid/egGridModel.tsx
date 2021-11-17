@@ -859,8 +859,12 @@ export class EgGridModel {
   /**
    * 分页器change事件
    */
+  // @ts-ignore
   public onPageChange = action((page, pageSize) => {
-    console.log('onPageChange', page, pageSize);
+    if (this.current === page && this.pageSize === pageSize) {
+      return 'reject';
+    }
+
     set(this, {
       current: page,
       pageSize,
@@ -873,7 +877,6 @@ export class EgGridModel {
    * 分页pageSizeChange
    */
   public onShowSizeChange = action((page, pageSize) => {
-    console.log('onShowSizeChange', page, pageSize);
     const { resetAll } = this;
 
     set(this, {
