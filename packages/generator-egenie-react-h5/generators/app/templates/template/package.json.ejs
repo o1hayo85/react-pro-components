@@ -74,7 +74,7 @@
       "npm run lint:js",
       "git add ."
     ],
-    "**/*.{css,less,md,html,json}": [
+    "**/*.{css,md,html,json}": [
       "prettier --write",
       "git add ."
     ]
@@ -92,6 +92,6 @@
     "lint-staged": "lint-staged --allow-empty",
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",
     "lint:js": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx .",
-    "prettier": "prettier -c --write \"**/*.{css,less,md,html,json}\""
+    "prettier": "prettier -c --write \"**/*.{css,md,html,json}\""
   }
 }

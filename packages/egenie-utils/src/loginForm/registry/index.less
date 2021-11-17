@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .title {
     height: 28px;
     // margin-top: 110px;
@@ -12,10 +13,12 @@
     font-size: 28px;
     line-height: 28px;
   }
+
   .content {
     display: flex;
     flex: 1;
   }
+
   .item {
     width: 442px;
     height: 404px;
@@ -28,19 +31,23 @@
     &:hover {
       box-shadow: 0 0 10px 0 rgba(202, 202, 202, 0.5);
     }
+
     &:focus {
       border: 2px solid #007dff;
     }
   }
+
   .icon {
     width: 160px;
     height: 160px;
   }
+
   .name {
     margin: 40px 0;
     color: #000;
     font-size: 20px;
   }
+
   .description {
     width: 100%;
     height: 108px;
@@ -59,12 +66,15 @@
   margin: auto;
   padding-bottom: 26px;
   background: #fff;
+
   .form {
     width: 380px;
+
     .agreeProtocol {
       display: inline-block;
       color: #333;
       font-size: 12px;
+
       .protocolText {
         color: @blue-6;
       }
@@ -81,19 +91,24 @@
     line-height: 50px;
     border-bottom: 1px solid #f1f1f1;
   }
+
   .content {
     display: flex;
     justify-content: center;
+
     :global {
       .ant-form-item {
         margin-bottom: 18px;
+
         .ant-input {
           font-size: 12px;
         }
+
         label {
           font-size: 12px;
         }
       }
+
       .ant-form-item-explain,
       .ant-form-item-extra {
         min-height: 12px;
@@ -111,21 +126,25 @@
 
     .operation {
       margin-left: 12px;
+
       :global {
         .ant-form-item-control {
           max-width: 100%;
         }
+
         .ant-form-item-control-input-content {
           display: flex;
           justify-content: space-between;
         }
       }
     }
+
     .previousStep {
       width: 104px;
       margin-left: 26px;
       color: @blue-6;
     }
+
     .submit {
       width: 150px;
       margin-right: 16px;
@@ -139,11 +158,13 @@
       height: 450px;
       margin-left: 88px;
       border: 1px solid #d7dbe0;
+
       .content {
         flex: 1;
         overflow-y: auto;
       }
     }
+
     .title {
       height: 44px;
       margin-bottom: 0;
@@ -153,6 +174,7 @@
       line-height: 50px;
     }
   }
+
   .smscode {
     width: 100%;
     margin-left: 10px;
@@ -170,10 +192,12 @@
   margin: auto;
   background: #fff;
   border-radius: 4px;
+
   .choice {
     width: 64px;
     height: 64px;
   }
+
   .title {
     margin-top: 30px;
     margin-bottom: 20px;
@@ -182,11 +206,13 @@
     font-size: 18px;
     line-height: 18px;
   }
+
   .tips {
     color: #999;
     font-size: 12px;
     line-height: 12px;
   }
+
   .primaryButton {
     width: 170px;
     height: 40px;
@@ -196,6 +222,7 @@
     // border-radius: 6px;
   }
 }
+
 .suffix {
   position: absolute;
   right: -20px;

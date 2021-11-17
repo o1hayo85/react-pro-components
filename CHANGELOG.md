@@ -1,4 +1,9 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.4...v0.0.0) (2021-11-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.4...v0.0.0) (2021-11-17)
+
+### Bug Fixes
+
+- **utils:** 解决打包后样式错乱 ([1ffe91e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1ffe91ed0414868f639d9bdc71222f8c8e715dbd))
+- **utils/filterInput:** 解决格式化 input 的值复制错误 ([926e6b0](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/926e6b0ce66a468cd781cc2193e533ea0dcc391b))
 
 ## [0.5.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.3...v0.5.4) (2021-11-16)
 

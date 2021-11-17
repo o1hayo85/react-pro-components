@@ -1,10 +1,6 @@
 module.exports = function(utils) {
   return {
-    babel: { include: [/egenie-utils/]},
-    less: {
-      moduleInclude: [/egenie-utils/],
-      theme: require('egenie-config/lib/theme/index.js')(),
-    },
+    less: { theme: require('egenie-config/lib/theme/index.js')() },
     otherConfig: {
       optimization: {
         splitChunks: {

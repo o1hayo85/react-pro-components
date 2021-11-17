@@ -80,8 +80,8 @@
 }
 
 .headerButtonMenu {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .mainSubStructureWrap {
@@ -142,10 +142,12 @@
     .ant-tabs-content.ant-tabs-content-top {
       height: 100%;
     }
-    .ant-tabs-nav-wrap{
+
+    .ant-tabs-nav-wrap {
       flex: initial !important;
     }
-    .ant-tabs-extra-content{
+
+    .ant-tabs-extra-content {
       flex: auto;
     }
   }
@@ -153,18 +155,21 @@
   .subTableContentPane {
     display: flex;
   }
+
   .subTableHeaderWrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 3px;
   }
-  .filterWrap{
+
+  .filterWrap {
     display: flex;
     align-items: center;
     justify-content: flex-start;
   }
-  .filterSelect{
+
+  .filterSelect {
     width: 135px;
   }
 }
@@ -205,9 +210,6 @@
         font-size: @fz12;
         border-right: 0;
         border-bottom-color: rgb(240, 240, 240) !important;
-        -webkit-user-select: text !important;
-        -moz-user-select: text !important;
-        -ms-user-select: text !important;
         user-select: text !important;
         -webkit-touch-callout: default !important;
       }
@@ -257,10 +259,6 @@
           border: 1px solid #fff;
           border-top: none;
           border-right: none;
-          -webkit-transform: rotate(-45deg);
-          -moz-transform: rotate(-45deg);
-          -o-transform: rotate(-45deg);
-          -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
           opacity: 1;
           content: "";
