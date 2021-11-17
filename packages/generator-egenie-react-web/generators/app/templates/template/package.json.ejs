@@ -92,9 +92,8 @@
   },
   "scripts": {
     "start": "egenie-react-scripts start",
-    "build": "npm run fix-pagination && egenie-react-scripts build",
+    "build": "egenie-react-scripts build",
     "test": "egenie-test react",
-    "fix-pagination": "cat ./pagination.js > ./node_modules/rc-pagination/es/Pagination.js",
     "commit": "git add . && cz",
     "lint-staged": "lint-staged --allow-empty",
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",
