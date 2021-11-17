@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.7...v0.0.0) (2021-11-17)
 
+### Features
+
+- **generator-web:** remove pagination.js ([db039b1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/db039b1321f0b8d190a5d71aae28cfcc46f2a92b))
+
 ## [0.5.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.6...v0.5.7) (2021-11-17)
 
 ### Features
