@@ -236,13 +236,16 @@ export class SubTableModel {
     // 最终页面展示的buttons，跟cashRows联动
     const {
       buttonsPassPermissionValidate,
-      gridModel: { selectRows },
     } = this;
 
     // 如果没有cashRows就不处理直接返回,这种处理方式被废弃
     if (!buttonsPassPermissionValidate.length) {
       return buttonsPassPermissionValidate;
     }
+    
+    const {
+      gridModel: { selectRows },
+    } = this;
 
     return buttonsPassPermissionValidate.map((button: IButton) => {
       const { group, ...firstButton } = button;
