@@ -185,7 +185,7 @@ function transformDict(dict: FilterItemsParams['dict'], instance: FilterItem): v
   }
 }
 
-function transformDataToInstance(dict, data): FilterItem[] {
+function transformDataToInstance(dict: FilterItemsParams['dict'], data: FilterItemOptions[]): FilterItem[] {
   validParams(data);
 
   return data.map((item) => {

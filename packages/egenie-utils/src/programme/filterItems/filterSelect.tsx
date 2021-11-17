@@ -5,7 +5,7 @@ import React from 'react';
 import type { ValueAndLabelData } from './common';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
-function formatValue(oldValue, mode) {
+function formatValue(oldValue: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
   if (mode) {
     if (Array.isArray(oldValue)) {
       return oldValue.map((item) => String(item));

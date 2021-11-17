@@ -1,10 +1,8 @@
-// const target = 'https://hzuat.ejlerp.cn';
-
 // const target = 'http://192.168.200.112';
-const target = 'http://192.168.200.93';
+// const target = 'http://testwms.ejlerp.cn';
+const target = 'http://cdwms.ejlerp.cn';
 
-// const target = 'https://dev.ejlerp.cn';
-// const target = 'http://192.168.200.112';
+// const target = 'http://dapwms.runscm.com';
 const context = [
   '/api',
   '/sku',

@@ -25,7 +25,8 @@ node {
             dir('egenie-utils') {
                 git branch: BRANCH_NAME, credentialsId: credentials_id,  url: 'http://192.168.200.111:9980/egFrontend/egenie-utils.git'
                 sh """
-                yarn install
+                rm -rf node_modules
+                yarn install --ignore-engines
                 yarn run docs:build
                 """
             }
