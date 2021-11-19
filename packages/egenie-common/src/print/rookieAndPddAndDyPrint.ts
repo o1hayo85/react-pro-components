@@ -173,7 +173,7 @@ export class RookieAndPddAndDyPrint {
           preview: Boolean(preview),
           previewType: 'pdf',
           printer,
-          notifyType: ['render'],
+          notifyType: ['print'],
           documents: contents,
         },
       };

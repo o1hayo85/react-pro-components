@@ -169,7 +169,7 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
 
   /** Function called whenever a row is out or in. */
   onMouseInRow?: ((rowIdx: number, row: R) => void) | null;
-  onMouseOverRow?: ((rowIdx: number, row: R) => void) | null;
+  onMouseOutRow?: ((rowIdx: number, row: R) => void) | null;
 
 }
 
@@ -225,7 +225,7 @@ function DataGrid<R, SR, K extends Key>(
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
     onMouseInRow,
-    onMouseOverRow,
+    onMouseOutRow,
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
 ) {
@@ -1023,7 +1023,7 @@ function DataGrid<R, SR, K extends Key>(
           rowIdx={rowIdx}
           row={row}
           onMouseInRow={onMouseInRow}
-          onMouseOverRow={onMouseOverRow}
+          onMouseOutRow={onMouseOutRow}
           viewportColumns={viewportColumns}
           isRowSelected={isRowSelected}
           onRowClick={onRowClick}

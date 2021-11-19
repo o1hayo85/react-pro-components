@@ -247,7 +247,7 @@ export function AllFeatures() {
   function onMouseInRow(rowIdx: number, row: Row) {
     console.log( '外部进入', rowIdx, row)
   }
-  function onMouseOverRow(rowIdx: number, row: Row) {
+  function onMouseOutRow(rowIdx: number, row: Row) {
     console.log( '外部离开', rowIdx, row)
   }
 
@@ -266,7 +266,7 @@ export function AllFeatures() {
         onScroll={handleScroll}
         onSelectedRowsChange={setSelectedRows}
         onMouseInRow={onMouseInRow}
-        onMouseOverRow={onMouseOverRow}
+        onMouseOutRow={onMouseOutRow}
         className="fill-grid"
         rowClass={(row) => (row.id.includes('7') ? highlightClassname : undefined)}
       />

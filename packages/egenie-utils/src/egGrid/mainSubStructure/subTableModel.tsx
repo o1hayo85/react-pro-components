@@ -303,6 +303,7 @@ export class SubTableModel {
     if (options.isCustom) {
       this.CustomView = options.customView;
     } else {
+      const { onToggleOrDeleteSubRow, onMouseInRow, onMouseOutRow } = (options.api || {});
       this.gridModel = new EgGridModel({
         ...options.grid,
         columns: options.grid.getColumns?.(this.top, this) ?? options.grid.columns,
@@ -312,6 +313,9 @@ export class SubTableModel {
           onSort, // 排序
           onRowClick, // 行点击
           onRefresh,
+          onToggleOrDeleteSubRow,
+          onMouseInRow,
+          onMouseOutRow,
         },
         parent: this,
       });

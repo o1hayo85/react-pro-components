@@ -45,6 +45,8 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     showNormalEmpty,
     onColumnResize,
     getSummaryRows,
+    onMouseInRow,
+    onMouseOutRow,
   } = store;
 
   return (
@@ -105,6 +107,8 @@ export const EgGrid = observer(({ store, children }: IProps) => {
             }}
             headerRowHeight={headerRowHeight}
             onColumnResize={onColumnResize}
+            onMouseInRow={onMouseInRow}
+            onMouseOutRow={onMouseOutRow}
             onRowClick={onRowClick}
             onScroll={onScroll}
             onSelectedRowsChange={onSelectedRowsChange}

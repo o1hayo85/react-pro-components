@@ -174,7 +174,7 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
   setDraggedOverRowIdx: ((overRowIdx: number) => void) | undefined;
   selectCell: SelectCellFn;
   onMouseInRow: ((rowIdx: number, row: TRow) => void) | undefined | null;
-  onMouseOverRow: ((rowIdx: number, row: TRow) => void) | undefined | null;
+  onMouseOutRow: ((rowIdx: number, row: TRow) => void) | undefined | null;
 }
 
 export interface RowsChangeData<R, SR = unknown> {

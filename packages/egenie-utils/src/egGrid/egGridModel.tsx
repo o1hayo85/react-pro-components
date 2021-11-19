@@ -45,6 +45,8 @@ export interface IEgGridApi {
   onQuery?: (params?) => Promise<unknown>;
   callbackAfterQuery?: (params?) => void;
   onToggleOrDeleteSubRow?: (rest?: SubRowAction) => Promise<ISubRow[] | boolean>;
+  onMouseInRow?: ((rowIdx: number, row: IObj) => void) | null;
+  onMouseOutRow?: ((rowIdx: number, row: IObj) => void) | null;
 }
 
 export type TSummaryRows = string[] | IObj[] | ((rows?: IObj[]) => IObj[]);
@@ -637,6 +639,20 @@ export class EgGridModel {
    */
   public triggerCursorRowClick = action(() => {
     this.api && this.api.onRowClick && this.api.onRowClick(this.cursorRow[this.primaryKeyField], this.cursorRow);
+  });
+  
+  /**
+   * 行悬浮进入事件
+   */
+  public onMouseInRow = action((rowIdx, row) => {
+    this.api?.onMouseInRow?.(rowIdx, row);
+  });
+
+  /**
+   * 行悬浮离开事件
+   */
+  public onMouseOutRow = action((rowIdx, row) => {
+    this.api?.onMouseOutRow?.(rowIdx, row);
   });
 
   /**

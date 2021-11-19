@@ -29,7 +29,7 @@ function Row<R, SR>(
     onRowChange,
     selectCell,
     onMouseInRow,
-    onMouseOverRow,
+    onMouseOutRow,
     ...props
   }: RowRendererProps<R, SR>,
   ref: React.Ref<HTMLDivElement>
@@ -104,7 +104,7 @@ function Row<R, SR>(
   const onMouseOut = (event: React.UIEvent<HTMLDivElement>):void => {
     event.stopPropagation();
     setClassName('')
-    onMouseOverRow?.(rowIdx, row)
+    onMouseOutRow?.(rowIdx, row)
   }
   return (
     <RowSelectionProvider value={isRowSelected}>

@@ -3079,15 +3079,15 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.5.0.tgz#a2711da22cc88cd99d3d7b0223686607c9a512a9"
-  integrity sha512-99z25O8ahCdH8ps76Mkk+CR94Ef7Bs4mJaNNPHUcgC0W1KjajFzgsYZtOC60hSyqleW08+iAu1tR8czfRtZaeg==
+egenie-common@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.5.6.tgz#25310b80d9060f5e0e42869b6a3457d14df38222"
+  integrity sha512-U30EKWABuJ4eapbfc+OIPqb+ZZL6yKzauOq+q1+MHdGdmJWSOBvka+lHXfUQcKOamTYq3yzeSXX8nCDJrEytvg==
 
-egenie-config@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.5.1.tgz#1921b4e403369ea3d0f45f82c2409a74f51ed185"
-  integrity sha512-Hjfn3GQJ6InU2XcKeihh1iMj323PGLfD6fQI7GLbX4LlazNlzmIjxXiZ6Dmg0ccfEuYark0dnMyAyZ1VC3g7pw==
+egenie-config@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.5.6.tgz#7eed9c3cd478d9dd1edc20eba1147de019ad0b7e"
+  integrity sha512-0I7DDLqkS8aXGtVeqcnKZeqRc7I1FzjK9xDGdO9KtRb78VXCPftOe1l0EFJ+Yi+8ZRG1MhTNSRBTPnBDr2m3pQ==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.14.5"
     "@babel/plugin-proposal-decorators" "^7.15.8"
