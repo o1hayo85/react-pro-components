@@ -9,6 +9,8 @@ import type { API, Egenie, Menudata, Permission, Response, SrcParams, User } fro
 import { EnumVersion } from './interface';
 
 export class LayoutStore {
+  public srcParams: SrcParams[] = [];
+
   @observable public project = {
     name: 'E精灵',
     value: 'egenie-erp-home',
@@ -154,7 +156,12 @@ export class LayoutStore {
           },
         });
       } finally {
-        this.handleOpenTab(menuItem.url, menuItem.id, menuItem.name, menuItem.icon);
+        this.getActiveSubMenu({
+          url: menuItem.url,
+          id: menuItem.id,
+          name: menuItem.name,
+          icon: menuItem.icon,
+        }, this.srcParams);
       }
     } else {
       throw new Error(`${resourceId}: 不存在`);

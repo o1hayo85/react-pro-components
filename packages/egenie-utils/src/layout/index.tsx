@@ -43,6 +43,7 @@ export interface Props {
   logoImg?: React.ReactNode;
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
+  layoutStore.srcParams = props.srcParams || [];
   return (
     <Provider layoutStore={layoutStore}>
       <LayoutMenu

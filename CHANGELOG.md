@@ -1,8 +1,36 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.8...v0.0.0) (2021-11-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.12...v0.0.0) (2021-11-19)
 
 ### Features
 
-- **docs:** 更新 0.6.0 文档 ([152c0d3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/152c0d3a540275061f6510d03b2378967e7884e1))
+- **layout:** 切换版本增加参数 ([795f2ab](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/795f2ab49c25e5a547b6cc991c1d1b25f63d8c6c))
+
+## [0.5.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.11...v0.5.12) (2021-11-19)
+
+### Features
+
+- 修改 utils 对 egGrid 版本依赖 ([38d3f65](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/38d3f6522552765de30521fa499bc9e3aeba188b))
+
+## [0.5.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.10...v0.5.11) (2021-11-19)
+
+### Bug Fixes
+
+- 回滚 common 修改 ([6dbe6a6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6dbe6a66c4395f6497f718721eb02140fd0361ae))
+
+## [0.5.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.9...v0.5.10) (2021-11-19)
+
+### Features
+
+- 表格添加行悬浮事件 ([01d3303](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/01d33030cc9e8716e6353716645895ef979148e9))
+
+## [0.5.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.8...v0.5.9) (2021-11-17)
+
+### Bug Fixes
+
+- 修复字表非表格奔溃 ([c215971](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c215971cde3f649f94354dd810c640fd55b35afd))
+
+### Features
+
+- **docs:** 更新 0.6.0 文档 ([4f5512f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4f5512f9087209a06025ea200c43032270c806fe))
 
 ## [0.5.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.7...v0.5.8) (2021-11-17)
 
