@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "classnames": "2.2.6",
-    "egenie-data-grid": "^0.4.40",
+    "egenie-data-grid": "^0.5.10",
     "react-copy-to-clipboard": "5.0.3"
   }
 }

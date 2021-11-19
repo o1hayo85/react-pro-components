@@ -3079,10 +3079,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.5.6.tgz#25310b80d9060f5e0e42869b6a3457d14df38222"
-  integrity sha512-U30EKWABuJ4eapbfc+OIPqb+ZZL6yKzauOq+q1+MHdGdmJWSOBvka+lHXfUQcKOamTYq3yzeSXX8nCDJrEytvg==
+egenie-common@^0.5.11:
+  version "0.5.10"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.5.10.tgz?cache=0&sync_timestamp=1637304969838&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fegenie-common%2Fdownload%2Fegenie-common-0.5.10.tgz#644173f247a1b7f4529e3d03c4e93207f92aef49"
+  integrity sha512-Zrfx4QumEiMSWxBbTPbk2UMVM8LlLOkYKGvjKHqAXs9pUExgKSlYId5QF5UaYX1qc7hahKNkG040/GoUuION2w==
 
 egenie-config@^0.5.6:
   version "0.5.6"
@@ -3105,10 +3105,10 @@ egenie-config@^0.5.6:
     postcss-preset-env "6.7.0"
     px2rem "0.5.0"
 
-egenie-data-grid@^0.4.40:
-  version "0.4.40"
-  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.4.40.tgz#5004bc80a9f51d7061df8381c909682b647f270d"
-  integrity sha512-5EsM9sJDjQLAEenPw8JBWhpDMYC+OA+NUMGxt1b2zsBLejSeqUiwqGASk02rFz1eQ6yQ3qRox0u0ID3GW1/xoA==
+egenie-data-grid@^0.5.10:
+  version "0.5.10"
+  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.5.10.tgz#f693391ecc5c69c0561f71279d27e1074e5992cb"
+  integrity sha512-1F2VdiP/NuAok1XuHxhZmm/0FfXeQJcU0WvIV0Bze50nHzZ9UhybIj+n2NMPIQYVQBPOExPdND418PfxflSHrQ==
   dependencies:
     clsx "^1.1.1"
 
