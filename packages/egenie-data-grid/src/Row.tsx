@@ -98,13 +98,13 @@ function Row<R, SR>(
   const onMouseMove = (event: React.UIEvent<HTMLDivElement>):void => {
     event.stopPropagation();
     setClassName('rdg-hover-row')
-    onMouseInRow?.(rowIdx, row)
+    onMouseInRow?.(rowIdx, row, event)
     // TODO: 添加
   }
   const onMouseOut = (event: React.UIEvent<HTMLDivElement>):void => {
     event.stopPropagation();
     setClassName('')
-    onMouseOutRow?.(rowIdx, row)
+    onMouseOutRow?.(rowIdx, row, event)
   }
   return (
     <RowSelectionProvider value={isRowSelected}>

@@ -45,8 +45,8 @@ export interface IEgGridApi {
   onQuery?: (params?) => Promise<unknown>;
   callbackAfterQuery?: (params?) => void;
   onToggleOrDeleteSubRow?: (rest?: SubRowAction) => Promise<ISubRow[] | boolean>;
-  onMouseInRow?: ((rowIdx: number, row: IObj) => void) | null;
-  onMouseOutRow?: ((rowIdx: number, row: IObj) => void) | null;
+  onMouseInRow?: ((rowIdx: number, row: IObj, event?: React.UIEvent<HTMLDivElement>) => void) | null;
+  onMouseOutRow?: ((rowIdx: number, row: IObj, event?: React.UIEvent<HTMLDivElement>) => void) | null;
 }
 
 export type TSummaryRows = string[] | IObj[] | ((rows?: IObj[]) => IObj[]);
@@ -644,15 +644,15 @@ export class EgGridModel {
   /**
    * 行悬浮进入事件
    */
-  public onMouseInRow = action((rowIdx, row) => {
-    this.api?.onMouseInRow?.(rowIdx, row);
+  public onMouseInRow = action((rowIdx, row, event?: React.UIEvent<HTMLDivElement>) => {
+    this.api?.onMouseInRow?.(rowIdx, row, event);
   });
 
   /**
    * 行悬浮离开事件
    */
-  public onMouseOutRow = action((rowIdx, row) => {
-    this.api?.onMouseOutRow?.(rowIdx, row);
+  public onMouseOutRow = action((rowIdx, row, event?: React.UIEvent<HTMLDivElement>) => {
+    this.api?.onMouseOutRow?.(rowIdx, row, event);
   });
 
   /**

@@ -168,8 +168,8 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   rowClass?: ((row: R) => string | undefined | null) | null;
 
   /** Function called whenever a row is out or in. */
-  onMouseInRow?: ((rowIdx: number, row: R) => void) | null;
-  onMouseOutRow?: ((rowIdx: number, row: R) => void) | null;
+  onMouseInRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
+  onMouseOutRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
 
 }
 
