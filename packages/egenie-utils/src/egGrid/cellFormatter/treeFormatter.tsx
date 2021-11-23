@@ -1,4 +1,4 @@
-import { UpSquareOutlined, DownSquareOutlined, DeleteOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useState, useReducer, useMemo } from 'react';
 import type { IObj as Row } from '../egGridModel';
 import styles from '../egGridStyle.less';
@@ -117,11 +117,11 @@ export function CellExpanderFormatter({
       tabIndex={-1}
     >
       {expanded ? (
-        <UpSquareOutlined
+        <UpOutlined
           className={styles.squareOutlined}
         />
       ) : (
-        <DownSquareOutlined
+        <DownOutlined
           className={styles.squareOutlined}
         />
       )}

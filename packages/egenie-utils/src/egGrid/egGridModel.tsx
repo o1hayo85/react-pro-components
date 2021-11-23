@@ -110,6 +110,7 @@ export interface IEgGridModel {
   searchReduceConfig?: TLabelName;
   showGridOrderNo?: boolean;
   batchToogleSubRow?: boolean;
+  emptyStatusView?: React.ReactNode;
 }
 
 export class EgGridModel {
@@ -345,6 +346,11 @@ export class EgGridModel {
    * 是否批量展开
    */
   @observable public batchToogleSubRow = false;
+
+  /**
+   * 空状态自定义传入
+   */
+  @observable public emptyStatusView?: React.ReactNode | null;
 
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;
@@ -640,7 +646,7 @@ export class EgGridModel {
   public triggerCursorRowClick = action(() => {
     this.api && this.api.onRowClick && this.api.onRowClick(this.cursorRow[this.primaryKeyField], this.cursorRow);
   });
-  
+
   /**
    * 行悬浮进入事件
    */

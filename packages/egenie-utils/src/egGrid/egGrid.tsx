@@ -47,6 +47,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     getSummaryRows,
     onMouseInRow,
     onMouseOutRow,
+    emptyStatusView,
   } = store;
 
   return (
@@ -67,41 +68,48 @@ export const EgGrid = observer(({ store, children }: IProps) => {
             columns={draggableColumns()}
             emptyRowsRenderer={function EmptyRowsRenderer() {
               return (
-                <div className={styles.emptyRows}>
-                  {showEmpty ? (
-                    <>
-                      <Empty
-                        description="点击立即查询后，呈现数据！"
-                        image={searchEmpty}
-                      />
-                      <Button
-                        onClick={onQuery}
-                        type="primary"
-                      >
-                        点击查询
-                      </Button>
-
-                    </>
-                  ) : null}
-
+                <div style={{ height: 'calc(100% - 38px)' }}>
                   {
-                    showNoSearchEmpty && (
-                      <Empty
-                        description="查询后，呈现数据！"
-                        image={searchEmpty}
-                      />
-                    )
-                  }
+                    emptyStatusView ||
+                      (
+                        <div className={styles.emptyRows}>
+                          {showEmpty ? (
+                            <>
+                              <Empty
+                                description="点击立即查询后，呈现数据！"
+                                image={searchEmpty}
+                              />
+                              <Button
+                                onClick={onQuery}
+                                type="primary"
+                              >
+                                点击查询
+                              </Button>
 
-                  {
-                    showNormalEmpty && (
-                      <Empty
-                        description="暂无数据哦！"
-                        image={empty}
-                      />
-                    )
-                  }
+                            </>
+                          ) : null}
 
+                          {
+                            showNoSearchEmpty && (
+                              <Empty
+                                description="查询后，呈现数据！"
+                                image={searchEmpty}
+                              />
+                            )
+                          }
+
+                          {
+                            showNormalEmpty && (
+                              <Empty
+                                description="暂无数据哦！"
+                                image={empty}
+                              />
+                            )
+                          }
+
+                        </div>
+                      )
+                  }
                 </div>
               );
             }}
