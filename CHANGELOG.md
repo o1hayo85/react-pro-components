@@ -1,4 +1,16 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.12...v0.0.0) (2021-11-19)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.14...v0.0.0) (2021-11-23)
+
+### Features
+
+- **utils/layout:** 增加切换版本 url 参数的兼容 ([0187a85](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0187a855a8774f7969997f31b30322c916f0367f))
+
+## [0.5.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.13...v0.5.14) (2021-11-22)
+
+### Features
+
+- 外放 rowEvent 事件 ([9093481](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/90934812ebcb60ee44b965790fe821a31a87c65b))
+
+## [0.5.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.12...v0.5.13) (2021-11-19)
 
 ### Features
 

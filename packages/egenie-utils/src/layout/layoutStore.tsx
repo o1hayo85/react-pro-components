@@ -8,6 +8,22 @@ import { request } from '../request';
 import type { API, Egenie, Menudata, Permission, Response, SrcParams, User } from './interface';
 import { EnumVersion } from './interface';
 
+function combineUrl(oldUrl: string, params: string): string {
+  if (typeof oldUrl === 'string') {
+    if (typeof params === 'string' && params.length) {
+      if (oldUrl.indexOf('?') === -1) {
+        return `${oldUrl}?${params}`;
+      } else {
+        return `${oldUrl}&${params}`;
+      }
+    } else {
+      return oldUrl;
+    }
+  } else {
+    return '';
+  }
+}
+
 export class LayoutStore {
   public srcParams: SrcParams[] = [];
 
@@ -118,7 +134,7 @@ export class LayoutStore {
     window.top.EgeniePermission = EgeniePermission;
   };
 
-  @action public toggleVersion: Egenie['toggleVersion'] = async(resourceId, versionType) => {
+  @action public toggleVersion: Egenie['toggleVersion'] = async(resourceId, versionType, params = '') => {
     let menuItem: Partial<Menudata>;
     (function dfs(data: Array<Partial<Menudata>>) {
       (data || []).forEach((item) => {
@@ -157,7 +173,7 @@ export class LayoutStore {
         });
       } finally {
         this.getActiveSubMenu({
-          url: menuItem.url,
+          url: combineUrl(menuItem.url, params),
           id: menuItem.id,
           name: menuItem.name,
           icon: menuItem.icon,
@@ -248,7 +264,7 @@ export class LayoutStore {
     ]);
     const result = {
       ...item,
-      url: haveParams ? `${item.url}?${haveParams.params}` : item.url,
+      url: combineUrl(item.url, haveParams.params),
     };
 
     // 定时器解决页面动画卡顿问题

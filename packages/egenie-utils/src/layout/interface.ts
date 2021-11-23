@@ -28,7 +28,7 @@ export interface Egenie {
   openTab: (url: string, tabId: number | string, tabName: string, icon?: string) => void;
   openTabId: (id: number, params?: string) => void;
   closeTab: (tabId: number | string) => void;
-  toggleVersion: (resourceId: number | string, versionType: EnumVersion) => Promise<void>;
+  toggleVersion: (resourceId: number | string, versionType: EnumVersion, params?: string) => Promise<void>;
 }
 
 export interface Opera {
