@@ -264,7 +264,7 @@ export class LayoutStore {
     ]);
     const result = {
       ...item,
-      url: combineUrl(item.url, haveParams.params),
+      url: combineUrl(item.url, haveParams?.params),
     };
 
     // 定时器解决页面动画卡顿问题
