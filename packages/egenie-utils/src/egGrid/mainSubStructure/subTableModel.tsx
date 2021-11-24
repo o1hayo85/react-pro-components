@@ -135,7 +135,13 @@ export class SubTableModel {
    */
   @computed public get searchData(): ICustomModel {
     return this.filterItems?.reduce((data, item) => {
-      data[item.field] = `${item.value }`;
+      const ItemValue = item.value;
+
+      // 过滤空值和undefined
+      if (!ItemValue) {
+        return data;
+      }
+      data[item.field] = typeof ItemValue === 'string' ? ItemValue.trim() : ItemValue;
       return data;
     }, {});
   }
@@ -146,7 +152,7 @@ export class SubTableModel {
   @computed public get cursorFilterItem(): IFilterItems {
     return this.filterItems?.find(({ field }) => field === this.cursorFilterItemField);
   }
-  
+
   /**
    * 是否为当前tab
    */
@@ -242,7 +248,7 @@ export class SubTableModel {
     if (!buttonsPassPermissionValidate.length) {
       return buttonsPassPermissionValidate;
     }
-    
+
     const {
       gridModel: { selectRows },
     } = this;

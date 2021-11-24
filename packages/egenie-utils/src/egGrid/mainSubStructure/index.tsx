@@ -352,7 +352,7 @@ const FilterItemsOfSubTable = observer(
             const { label, field, type, value, options } = el;
             return (
               <label
-                key={i++}
+                key={field}
                 style={{
                   display: 'flex',
                   whiteSpace: 'nowrap',
@@ -365,7 +365,6 @@ const FilterItemsOfSubTable = observer(
                 {type === 'select' ? (
                   <Select
                     allowClear
-                    key={i++}
                     onChange={onFilterValueChange.bind(this, field)}
                     size="small"
                     style={{
@@ -391,8 +390,7 @@ const FilterItemsOfSubTable = observer(
                   </Select>
                 ) : (
                   <Input
-                    key={i++}
-                    onChange={onFilterValueChange.bind(this, field)}
+                    onChange={(e) => onFilterValueChange(field, e.target.value)}
                     onKeyUp={(e) => {
                       e.stopPropagation();
                       if (e.keyCode == 13) {
