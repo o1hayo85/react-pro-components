@@ -23,6 +23,7 @@
     "antd": "4.12.2",
     "axios": "0.21.0",
     "egenie-config": "^0.6.0",
+    "egenie-test": "^0.6.0",
     "father-build": "^1.19.8",
     "mobx": "5.15.7",
     "mobx-react": "6.3.1",
@@ -35,6 +36,8 @@
   "gitHead": "086018ec24b9ae6bbecf1e21244e07b9068377f9",
   "scripts": {
     "prepublish": "yarn run build",
-    "build": "father-build"
+    "build": "father-build",
+    "test": "egenie-test react",
+    "test-match": "egenie-test react --testMatch=your test file path"
   }
 }

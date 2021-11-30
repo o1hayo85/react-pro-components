@@ -43,7 +43,7 @@
     //不生成输出文件
     "experimentalDecorators": true,
     //启用实验性的ES装饰器
-    "emitDecoratorMetadata": false,
+    "emitDecoratorMetadata": true,
     //给源码里的装饰器声明加上设计类型元数据
     "noImplicitAny": false,
     //在表达式和声明上有隐含的 any类型时报错

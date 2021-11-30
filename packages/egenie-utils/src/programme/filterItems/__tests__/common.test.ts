@@ -26,14 +26,10 @@ class CommonBase extends FilterBase {
   }
 }
 
-let commonBase: CommonBase;
-
 describe('filterItemsCommon', () => {
-  beforeEach(() => {
-    commonBase = new CommonBase();
-  });
-
   test('filterItemsCommon init', () => {
+    const commonBase = new CommonBase();
+    console.log(commonBase.showItem);
     expect(commonBase.showItem)
       .toBeDefined();
     expect(commonBase.labelWidth)

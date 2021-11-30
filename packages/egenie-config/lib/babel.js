@@ -48,11 +48,8 @@ module.exports = function(isWeb = true) {
         plugins,
       },
       test: {
-        presets: [
-          require.resolve('@babel/preset-env'),
-          require.resolve('@babel/preset-typescript'),
-        ],
-        plugins: [require.resolve('@babel/plugin-transform-runtime')],
+        presets,
+        plugins,
       },
     },
   };
