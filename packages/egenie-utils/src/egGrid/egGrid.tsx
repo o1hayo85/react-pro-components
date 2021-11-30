@@ -48,6 +48,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
     onMouseInRow,
     onMouseOutRow,
     emptyStatusView,
+    enableCellScroll,
   } = store;
 
   return (
@@ -113,6 +114,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                 </div>
               );
             }}
+            enableCellScroll={enableCellScroll}
             headerRowHeight={headerRowHeight}
             onColumnResize={onColumnResize}
             onMouseInRow={onMouseInRow}

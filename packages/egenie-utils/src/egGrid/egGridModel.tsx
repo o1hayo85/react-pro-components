@@ -111,6 +111,7 @@ export interface IEgGridModel {
   showGridOrderNo?: boolean;
   batchToogleSubRow?: boolean;
   emptyStatusView?: React.ReactNode;
+  enableCellScroll?: boolean;
 }
 
 export class EgGridModel {
@@ -351,6 +352,11 @@ export class EgGridModel {
    * 空状态自定义传入
    */
   @observable public emptyStatusView?: React.ReactNode | null;
+
+  /**
+   * 是否启用单元格滚动
+   */
+  @observable public enableCellScroll?: boolean = true;
 
   @computed public get cacheKeyForColumnsConfig(): string {
     return `${this.user}_tsGrid_${ this.gridIdForColumnConfig}`;

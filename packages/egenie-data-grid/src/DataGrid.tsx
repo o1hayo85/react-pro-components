@@ -171,6 +171,8 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   onMouseInRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
   onMouseOutRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
 
+  /** 是否启用表格滚动 */
+  enableCellScroll?: boolean;
 }
 
 /**
@@ -226,6 +228,7 @@ function DataGrid<R, SR, K extends Key>(
     'aria-describedby': ariaDescribedBy,
     onMouseInRow,
     onMouseOutRow,
+    enableCellScroll
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
 ) {
@@ -776,6 +779,7 @@ function DataGrid<R, SR, K extends Key>(
   function scrollToCell({ idx, rowIdx }: Partial<Position>): void {
     const { current } = gridRef;
     if (!current) return;
+    if (!enableCellScroll) return;
 
     if (typeof idx === 'number' && idx > lastFrozenColumnIndex) {
       rowIdx ??= selectedPosition.rowIdx;
