@@ -1,8 +1,14 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.0...v0.0.0) (2021-11-30)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.1...v0.0.0) (2021-12-01)
 
 ### Features
 
-- **packages:** 增加 test 工具 ([cb55340](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cb55340c91fda3c2e52505dcf4038bfe52d6075c))
+- **packages:** 增加 test 工具 ([22eb847](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/22eb847332ad418cd2af9ada1b86a840cf4da711))
+
+## [0.6.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.0...v0.6.1) (2021-11-30)
+
+### Features
+
+- 表格添加单元格是否启用滚动选项 ([078792d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/078792da655c27e87a2c8d09b3e8d724b380cc18))
 
 # [0.6.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.5.19...v0.6.0) (2021-11-30)
 

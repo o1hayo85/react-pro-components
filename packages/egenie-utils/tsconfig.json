@@ -55,5 +55,5 @@
     //以严格模式解析并为每个源文件生成 "use strict"语句
   },
   "include": ["src", "reactAppEnv.d.ts"],
-  "exclude": ["node_modules", "lib", "es", "dist", "**/__test__", "test", "docs", "tests"]
+  "exclude": ["node_modules", "lib", "es", "dist", "docs"]
 }
