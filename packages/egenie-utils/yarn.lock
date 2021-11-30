@@ -3870,10 +3870,10 @@ egenie-config@^0.6.1:
     postcss-preset-env "6.7.0"
     px2rem "0.5.0"
 
-egenie-data-grid@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.6.0.tgz#bc986537ea9e7f74ff6204e2a46f81ee3104e38b"
-  integrity sha512-m/7OCznaTvgBL1rjZ+BeRBPMe788JMttDDgp23OcQ5l7KdNaeUCVd/jYTl4QxR1mxjrC5CoOT4cd540JNXf+gQ==
+egenie-data-grid@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.npmjs.org/egenie-data-grid/-/egenie-data-grid-0.6.1.tgz#6fd07101a1bb0de333fecc5326e221e506effccc"
+  integrity sha512-B2D85kjeDwGlughaaP1WnqplMStI439yImoa3h8AhL2ejs2ZAfpZCfBsJMDIVHWWJ1HaDulgSzPJgGdLlJrgRg==
   dependencies:
     clsx "^1.1.1"
 

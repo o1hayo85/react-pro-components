@@ -28,6 +28,19 @@ export interface IBtnExtraLeft {
   handleLinkBtnClick?: (event: ReactEventHandler) => void; // 按钮点击事件
 }
 
+export interface ICollectData {
+  name: string;
+  value: string | number | ReactNode;
+  color?: string;
+}
+
+export interface ICollectData {
+  name: string;
+  value: string | number | ReactNode;
+  color?: string;
+  style?: CSSProperties;
+}
+
 export interface IMainSubStructureModel {
   grid: IEgGridModel;
   api: IEgGridApi;
@@ -45,6 +58,7 @@ export interface IMainSubStructureModel {
   btnExtraLeft?: IBtnExtraLeft;
   btnExtraRight?: ReactNode;
   pageId?: string;
+  collectData?: ICollectData[];
 }
 
 export class MainSubStructureModel {
@@ -104,6 +118,11 @@ export class MainSubStructureModel {
    * 按钮权限，从后台获取
    */
   @observable public permissionOfButton: string[];
+
+  /**
+   * 按钮上方的数据汇总行
+   */
+  @observable public collectData?: ICollectData[] = [];
 
   @observable public getPermissionId = (permissionId: string): string => {
     return permissionId.indexOf('_') === -1 ? `${this.pageId}_${permissionId}` : permissionId;

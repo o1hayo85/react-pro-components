@@ -238,6 +238,34 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
   );
 });
 
+const CollectDataView = observer(({ store: { collectData }}) => {
+  return (
+    <div className={styles.collectWrap}>
+      {
+        collectData.map(({ name, value, color, style }, index) => {
+          return (
+            <div
+              className={styles.collectDataWrap}
+              key={name}
+              style={{
+                color: color || '#2b2e3e',
+                ...style,
+              }}
+            >
+              {name}
+              ：
+              {value}
+              {index + 1 < collectData.length ? (
+                <span className={`headerCollectSplit ${styles.collectSplit}`}/>
+              ) : null }
+            </div>
+          );
+        })
+      }
+    </div>
+  );
+});
+
 const FilterItemsOfSubTable = observer(
   ({
     store: {
@@ -437,11 +465,15 @@ export const MainSubStructure = observer(({ store }) => {
     tabPaneheight,
     onDragStart,
     onDragStop,
-  }, hiddenSubTable, buttons, gridModel: mainGridModel } = store;
+  }, hiddenSubTable, buttons, gridModel: mainGridModel, collectData } = store;
 
   const showButtons = Array.isArray(buttons) && buttons.length;
   return (
     <div className={`${styles.mainSubStructureWrap}`}>
+      {collectData.length ? (
+        <CollectDataView store={store}/>
+      ) : null}
+
       {
         showButtons ? (
           <div className="btnGroup">
