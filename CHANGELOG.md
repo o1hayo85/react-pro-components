@@ -1,8 +1,15 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.1...v0.0.0) (2021-12-01)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.2...v0.0.0) (2021-12-01)
 
 ### Features
 
-- **packages:** 增加 test 工具 ([22eb847](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/22eb847332ad418cd2af9ada1b86a840cf4da711))
+- **packages:** 增加 test 工具 ([28bd57f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/28bd57f7f5fc9a59ccb2de5bc628cc0605024a43))
+
+## [0.6.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.1...v0.6.2) (2021-11-30)
+
+### Features
+
+- 添加表头上方统计行 ([6b84214](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6b8421498e5b7941d502138b20efddcb7984d8c3))
+- **packages:** 增加 test 工具 ([54e7d8d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/54e7d8dfbac591b8ee3ad198227c0f1efe47be26))
 
 ## [0.6.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.6.0...v0.6.1) (2021-11-30)
 
