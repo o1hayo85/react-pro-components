@@ -91,7 +91,8 @@
   "scripts": {
     "start": "egenie-react-scripts start",
     "build": "egenie-react-scripts build",
-    "test": "egenie-test react",
+    "test": "egenie-test react -u",
+    "test-match": "egenie-test react -u --testMatch=",
     "commit": "git add . && cz",
     "lint-staged": "lint-staged --allow-empty",
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",
