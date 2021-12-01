@@ -4875,10 +4875,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-code-style@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/egenie-code-style/-/egenie-code-style-0.5.0.tgz#8d220c4d741537b0746c189c7534c2f00899fa65"
-  integrity sha512-CNOoCJdFj81uwAUmBomVSLRA0oPT0paMStcPFptyXZjft5CI9W1CXxiGFyUNwMocTAf94n9GQj2h932lPOBqZg==
+egenie-code-style@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/egenie-code-style/download/egenie-code-style-0.7.0.tgz#3a4658191769f09640df12753651875b1b9e96fe"
+  integrity sha512-PUFO+tfDRcK5nT9lHBtSmnJXP7GVxDjaG1KlkfzqYXBEdB2cdofl4fUapph5gv+clKnOHATtFMjimhuzS7nDBQ==
   dependencies:
     "@commitlint/config-conventional" "^13.2.0"
     "@typescript-eslint/eslint-plugin" "^5.2.0"
@@ -13149,10 +13149,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.4.4:
-  version "4.4.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
-  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
+typescript@4.2.4:
+  version "4.2.4"
+  resolved "https://registry.npmmirror.com/typescript/download/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
 
 uglify-js@^3.1.4:
   version "3.13.4"

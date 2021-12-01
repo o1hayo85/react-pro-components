@@ -12,12 +12,6 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
-        type: 'input',
-        name: 'projectName',
-        message: '项目名称',
-        default: this.appname,
-      },
-      {
         type: 'number',
         name: 'remUnit',
         message: 'rem单位(有单位则开启rem布局且自动引入amfe-flexible)',
