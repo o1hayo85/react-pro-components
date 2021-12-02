@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.3...v0.0.0) (2021-12-02)
 
+### Features
+
+- **packages:** remove reflect-metadata ([93b60fd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/93b60fda0164d1e6311d962fdebb3932d648b9a8))
+
 ## [0.7.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.2...v0.7.3) (2021-12-02)
 
 ### Features
