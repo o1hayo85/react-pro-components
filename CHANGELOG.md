@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.2...v0.0.0) (2021-12-02)
 
+### Features
+
+- **packages:** add reflect-metadata ([c019030](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c01903037211228de63ca5d7b5283a81d6103dad))
+
 ## [0.7.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.1...v0.7.2) (2021-12-01)
 
 ### Features
