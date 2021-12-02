@@ -60,12 +60,6 @@ module.exports = {
       amd: 'moment',
       root: 'moment',
     },
-    'reflect-metadata': {
-      commonjs: 'reflect-metadata',
-      commonjs2: 'reflect-metadata',
-      amd: 'reflect-metadata',
-      root: 'Reflect',
-    },
     'react-dnd': {
       commonjs: 'react-dnd',
       commonjs2: 'react-dnd',
