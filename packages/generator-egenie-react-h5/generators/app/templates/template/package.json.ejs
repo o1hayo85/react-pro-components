@@ -18,8 +18,8 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "11.2.2",
-    "@testing-library/user-event": "12.3.0",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "13.5.0",
     "@types/jest": "^26.0.16",
     "@types/lodash": "^4.14.165",
     "@types/mockjs": "^1.0.3",
@@ -29,7 +29,6 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.6",
-    "@types/react-test-renderer": "^17.0.1",
     "commitizen": "^4.2.2",
     "cross-env": "^7.0.3",
     "egenie-code-style": "0.7.0",
@@ -42,7 +41,6 @@
     "mockjs": "^1.1.0",
     "postcss": "8.3.11",
     "prettier": "2.2.1",
-    "react-test-renderer": "^17.0.1",
     "stylelint": "13.13.1",
     "typescript": "4.2.4",
     "validate-commit-msg": "^2.14.0"
@@ -88,8 +86,8 @@
   "scripts": {
     "start": "egenie-react-scripts start",
     "build": "egenie-react-scripts build",
-    "test": "egenie-test react -u",
-    "test-match": "egenie-test react -u --testMatch=",
+    "test": "egenie-test react",
+    "test-match": "egenie-test react --testMatch=",
     "commit": "git add . && cz",
     "lint-staged": "lint-staged --allow-empty",
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",

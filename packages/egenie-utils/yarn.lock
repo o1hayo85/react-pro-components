@@ -1876,19 +1876,19 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@testing-library/dom@^7.28.1":
-  version "7.31.2"
-  resolved "https://registry.npmmirror.com/@testing-library/dom/download/@testing-library/dom-7.31.2.tgz?cache=0&sync_timestamp=1636587977336&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40testing-library%2Fdom%2Fdownload%2F%40testing-library%2Fdom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
-  integrity sha1-3zYds49SEriFVQaKuBGfXYQajEo=
+"@testing-library/dom@^8.0.0":
+  version "8.11.1"
+  resolved "https://registry.npmmirror.com/@testing-library/dom/download/@testing-library/dom-8.11.1.tgz#03fa2684aa09ade589b460db46b4c7be9fc69753"
+  integrity sha512-3KQDyx9r0RKYailW2MiYrSSKEfH0GTkI51UGEvJenvcoDoeRYs0PZpi2SXqtnMClQvCqdtTTpOfFETDTVADpAg==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.12.5"
     "@types/aria-query" "^4.2.0"
-    aria-query "^4.2.2"
+    aria-query "^5.0.0"
     chalk "^4.1.0"
-    dom-accessibility-api "^0.5.6"
+    dom-accessibility-api "^0.5.9"
     lz-string "^1.4.4"
-    pretty-format "^26.6.2"
+    pretty-format "^27.0.2"
 
 "@testing-library/jest-dom@^5.11.6":
   version "5.15.1"
@@ -1905,20 +1905,20 @@
     lodash "^4.17.15"
     redent "^3.0.0"
 
-"@testing-library/react@11.2.2":
-  version "11.2.2"
-  resolved "https://registry.npmmirror.com/@testing-library/react/download/@testing-library/react-11.2.2.tgz#099c6c195140ff069211143cb31c0f8337bdb7b7"
-  integrity sha1-CZxsGVFA/waSERQ8sxwPgze9t7c=
+"@testing-library/react@12.1.2":
+  version "12.1.2"
+  resolved "https://registry.npmmirror.com/@testing-library/react/download/@testing-library/react-12.1.2.tgz#f1bc9a45943461fa2a598bb4597df1ae044cfc76"
+  integrity sha1-8byaRZQ0YfoqWYu0WX3xrgRM/HY=
   dependencies:
     "@babel/runtime" "^7.12.5"
-    "@testing-library/dom" "^7.28.1"
+    "@testing-library/dom" "^8.0.0"
 
-"@testing-library/user-event@12.3.0":
-  version "12.3.0"
-  resolved "https://registry.npmmirror.com/@testing-library/user-event/download/@testing-library/user-event-12.3.0.tgz#bd4edf544b70721e1996f3be36830e942c777b2b"
-  integrity sha1-vU7fVEtwch4ZlvO+NoMOlCx3eys=
+"@testing-library/user-event@13.5.0":
+  version "13.5.0"
+  resolved "https://registry.npmmirror.com/@testing-library/user-event/download/@testing-library/user-event-13.5.0.tgz#69d77007f1e124d55314a2b73fd204b333b13295"
+  integrity sha1-addwB/HhJNVTFKK3P9IEszOxMpU=
   dependencies:
-    "@babel/runtime" "^7.10.2"
+    "@babel/runtime" "^7.12.5"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -2107,13 +2107,6 @@
   version "17.0.3"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-17.0.3.tgz?cache=0&sync_timestamp=1616459857029&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-17.0.3.tgz#7fdf37b8af9d6d40127137865bb3fff8871d7ee1"
   integrity sha1-f983uK+dbUAScTeGW7P/+IcdfuE=
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-test-renderer@^17.0.1":
-  version "17.0.1"
-  resolved "https://registry.npmmirror.com/@types/react-test-renderer/download/@types/react-test-renderer-17.0.1.tgz#3120f7d1c157fba9df0118dae20cb0297ee0e06b"
-  integrity sha1-MSD30cFX+6nfARja4gywKX7g4Gs=
   dependencies:
     "@types/react" "*"
 
@@ -2507,6 +2500,11 @@ aria-query@^4.2.2:
   dependencies:
     "@babel/runtime" "^7.10.2"
     "@babel/runtime-corejs3" "^7.10.2"
+
+aria-query@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmmirror.com/aria-query/download/aria-query-5.0.0.tgz?cache=0&sync_timestamp=1633308113519&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Faria-query%2Fdownload%2Faria-query-5.0.0.tgz#210c21aaf469613ee8c9a62c7f86525e058db52c"
+  integrity sha1-IQwhqvRpYT7oyaYsf4ZSXgWNtSw=
 
 arr-diff@^1.0.1:
   version "1.1.0"
@@ -3877,7 +3875,7 @@ dnd-core@^11.1.3:
     "@react-dnd/invariant" "^2.0.0"
     redux "^4.0.4"
 
-dom-accessibility-api@^0.5.6:
+dom-accessibility-api@^0.5.6, dom-accessibility-api@^0.5.9:
   version "0.5.10"
   resolved "https://registry.npmmirror.com/dom-accessibility-api/download/dom-accessibility-api-0.5.10.tgz#caa6d08f60388d0bb4539dd75fe458a9a1d0014c"
   integrity sha1-yqbQj2A4jQu0U53XX+RYqaHQAUw=
@@ -3974,15 +3972,15 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.6.0.tgz#c883d8325a70853a47397e7a9d5c43403d567fb1"
-  integrity sha512-bbsimmUi12JVJhPDU7Lk+3ScTsCb13EIjpJkUAIFZGJpjVvOOq6Ks7iugoraXkVk0vlwDrJv38jKhx9qbvI8+g==
+egenie-common@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.7.3.tgz#1ae4176fea77f89ee0c57a11baa7b863a6c07594"
+  integrity sha512-2m4rt03fyTxZAPW64rTxcbNlZjm9eYyRtbZQgcq+nhh7WD5Vc8lgwtbW0fRh0kfhrKdvrMG8Ha33xMqi4hvYVA==
 
-egenie-config@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.6.2.tgz#542455ef502ff753131bd55a54901e29ff9b76f3"
-  integrity sha512-k/9ZT5CehkTLID+i124KFUZKgphKnOHLq65/eTLNYlhjkUjsyemXtGg6g1Qi+Ukn1JnR892vbpVVeSWIihSlcQ==
+egenie-config@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.7.3.tgz#51e81ed2ab5ba95ab8c9c2a4e9324f49406fafba"
+  integrity sha512-RpTBh8pKAuT93J3PwD9R4jOrCJzNRLTHt58RZhwq41BtgYStoEU6Bsc1u7pQ1uG/WXlur6WHFtftO0E92lJpNQ==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.14.5"
     "@babel/plugin-proposal-decorators" "^7.15.8"
@@ -4000,17 +3998,17 @@ egenie-config@^0.6.2:
     postcss-preset-env "6.7.0"
     px2rem "0.5.0"
 
-egenie-data-grid@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.6.1.tgz#6fd07101a1bb0de333fecc5326e221e506effccc"
-  integrity sha512-B2D85kjeDwGlughaaP1WnqplMStI439yImoa3h8AhL2ejs2ZAfpZCfBsJMDIVHWWJ1HaDulgSzPJgGdLlJrgRg==
+egenie-data-grid@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/egenie-data-grid/download/egenie-data-grid-0.7.0.tgz#e82d985b24369910eea81f98007169b12c220a85"
+  integrity sha512-idIcOy3pHiLzoAJQSlumf6GyJSyZEyxGaDAYlNahRV/W0Bh1vm11P/jKzlF8Z4Nq8W5iqvsYaLiyvTB0amw89g==
   dependencies:
     clsx "^1.1.1"
 
-egenie-test@0.6.1:
-  version "0.6.1"
-  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.6.1.tgz#edb8690c6b7a0b34fd8ab8cba1acb5ae25677ffe"
-  integrity sha512-1udKmKJPYAhT2b/OhSUXKi3fcdXL1EHQGeUwqGWrxQHffBd64f8kL7V1lJzJQ+0QZWWC+KElgukyyxg1MQxo0Q==
+egenie-test@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.7.0.tgz#cffd20d64a21711e19662794e054042c83772ded"
+  integrity sha512-FyHAdH8mGgdkWSk9oevQe9+rYbAZcQdxVCcQrDVLOtVpDxX6iFTZsX7tAPiPEaz157PYBBJeBhJWneKCgHfB4g==
   dependencies:
     babel-jest "^27.3.1"
     chalk "^4.1.2"
@@ -4023,7 +4021,7 @@ egenie-test@0.6.1:
     jest-transform-css "^2.1.0"
     jest-watch-typeahead "1.0.0"
     ts-jest "^27.0.7"
-    typescript "4.4.4"
+    typescript "4.2.4"
 
 electron-to-chromium@^1.3.896:
   version "1.3.898"
@@ -8216,7 +8214,7 @@ pretty-format@^27.0.0, pretty-format@^27.4.1:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-pretty-format@^27.4.2:
+pretty-format@^27.0.2, pretty-format@^27.4.2:
   version "27.4.2"
   resolved "https://registry.npmmirror.com/pretty-format/download/pretty-format-27.4.2.tgz#e4ce92ad66c3888423d332b40477c87d1dac1fb8"
   integrity sha512-p0wNtJ9oLuvgOQDEIZ9zQjZffK7KtyR6Si0jnXULIDwrlNF8Cuir3AZP0hHv0jmKuNN/edOnbMjnzd4uTcmWiw==
@@ -8745,18 +8743,10 @@ react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.nlark.com/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
-"react-is@^16.12.0 || ^17.0.0", react-is@^17.0.1, react-is@^17.0.2:
+react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.nlark.com/react-is/download/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA=
-
-react-shallow-renderer@^16.13.1:
-  version "16.14.1"
-  resolved "https://registry.npmmirror.com/react-shallow-renderer/download/react-shallow-renderer-16.14.1.tgz#bf0d02df8a519a558fd9b8215442efa5c840e124"
-  integrity sha1-vw0C34pRmlWP2bghVELvpchA4SQ=
-  dependencies:
-    object-assign "^4.1.1"
-    react-is "^16.12.0 || ^17.0.0"
 
 react-sortable-hoc@2.0.0:
   version "2.0.0"
@@ -8766,16 +8756,6 @@ react-sortable-hoc@2.0.0:
     "@babel/runtime" "^7.2.0"
     invariant "^2.2.4"
     prop-types "^15.5.7"
-
-react-test-renderer@^17.0.1:
-  version "17.0.2"
-  resolved "https://registry.npmmirror.com/react-test-renderer/download/react-test-renderer-17.0.2.tgz#4cd4ae5ef1ad5670fc0ef776e8cc7e1231d9866c"
-  integrity sha1-TNSuXvGtVnD8Dvd26Mx+EjHZhmw=
-  dependencies:
-    object-assign "^4.1.1"
-    react-is "^17.0.2"
-    react-shallow-renderer "^16.13.1"
-    scheduler "^0.20.2"
 
 react@17.0.1:
   version "17.0.1"
@@ -9259,7 +9239,7 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.20.1, scheduler@^0.20.2:
+scheduler@^0.20.1:
   version "0.20.2"
   resolved "https://registry.npmmirror.com/scheduler/download/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
   integrity sha1-S67jlDbjSqk7SHS93L8P6Li1DpE=
@@ -10155,7 +10135,7 @@ typescript@4.2.4:
   resolved "https://registry.npmmirror.com/typescript/download/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
   integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
 
-typescript@4.4.4, typescript@^4.0.5:
+typescript@^4.0.5:
   version "4.4.4"
   resolved "https://registry.npmmirror.com/typescript/download/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
   integrity sha1-LNAaGh8WBwTTEB/VpY/w+fy4Aww=
