@@ -3,7 +3,7 @@
 ### Features
 
 - 删除无用的 readme ([15bbb54](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15bbb5486f019ce631bf307f070be44e01f25cd4))
-- **egenie-common:** 打印辅助函数的测试 ([567ee5d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/567ee5df1efc01dec7d215b53449966c9bc79f16))
+- **egenie-common:** 打印辅助函数的测试 ([6be54da](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6be54dad49cffd92c98cebf79d1746fe6ffc87c1))
 
 ## [0.7.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.4...v0.7.5) (2021-12-02)
 
