@@ -2,7 +2,7 @@
 
 ### Features
 
-- **egenie-common:** 将打印辅助函数移到 utils ([7f89430](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7f8943032278779b28485136e077576617dfa3df))
+- **egenie-common:** 将打印辅助函数移到 utils ([cb51bff](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cb51bffa9f3e26cccf892062c437b05325a53453))
 
 ## [0.7.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.5...v0.7.6) (2021-12-03)
 
