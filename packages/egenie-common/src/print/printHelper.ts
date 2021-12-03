@@ -91,46 +91,6 @@ function formatPddData(printData: any[], courierPrintType: number) {
 }
 
 /**
- * 格式化条码数据
- * @param row 一页的行
- * @param col 一页的列
- * @param data 打印数据
- */
-export function formatBarcodeData(row: number, col: number, data: any[]): any[] {
-  if (!(Array.isArray(data) && data.length)) {
-    return [];
-  }
-
-  const height = row >>> 0;
-  const width = col >>> 0;
-
-  // 一页打多个条码
-  if (height >= 1 && width >= 1 && (height > 1 || width > 1)) {
-    const pageSize = width * height;
-    const totalPage = Math.ceil(data.length / pageSize);
-    const result = Array(totalPage)
-      .fill(null);
-
-    data.forEach((item, index) => {
-      const currentPage = (index / pageSize) >>> 0;
-      const pagePosition = index % pageSize;
-      const h = (pagePosition / width) >>> 0;
-      const w = pagePosition % width;
-      const itemKey = `item_${h}_${w}`;
-      if (result[currentPage]) {
-        result[currentPage][itemKey] = item;
-      } else {
-        result[currentPage] = { [itemKey]: item };
-      }
-    });
-
-    return result;
-  } else {
-    return data;
-  }
-}
-
-/**
  * lodop打印参数
  */
 export type LodopPrintParams = CommonPrintParams & { contents: any[]; };

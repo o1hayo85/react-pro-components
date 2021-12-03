@@ -2,7 +2,7 @@ import { message } from 'antd';
 import React from 'react';
 import type { LodopPrintParams } from './printHelper';
 import type { LodopItem, TemplateData } from './utils';
-import { EnumLodopItemType, getTemplateData, getUUID } from './utils';
+import { EnumLodopItemType, getTemplateData, getUUID, lodopItemGetText } from './utils';
 
 enum EnumJsLoadState {
   init,
@@ -32,45 +32,6 @@ function getCodeType(text: string): string {
   }
 }
 
-function get(data: any, path: string[]): any {
-  let value = data;
-  for (let i = 0; i < path.length; i++) {
-    if ((typeof value === 'object' && value !== null) || Array.isArray(value)) {
-      value = value[path[i]];
-    }
-  }
-
-  return value;
-}
-
-function getText(data: any, id: string): any {
-  const path: string[] = [];
-  const [
-    key1,
-    key2,
-  ] = id.split('-');
-
-  const key1Path: string[] = typeof key1 === 'string' ? key1.split('.') : [];
-  for (let i = 0; i < key1Path.length; i++) {
-    path.push(key1Path[i]);
-  }
-
-  const key2Path: string[] = typeof key2 === 'string' ? key2.split('.') : [];
-  for (let i = 0; i < key2Path.length; i++) {
-    path.push(key2Path[i]);
-  }
-
-  return get(data, path.filter(Boolean));
-
-  /*  if (typeof value === 'string') {
-      return value.replace('[$data]', '')
-        .replace('[&', '')
-        .replace(']', '');
-    } else {
-      return value;
-    }*/
-}
-
 function setSkuDetail(itemData: LodopItem, data: any): string {
   const {
     id,
@@ -85,7 +46,7 @@ function setSkuDetail(itemData: LodopItem, data: any): string {
   const trStr: string[] = userDataItem.map((item) => {
     return [
       '<tr>',
-      idArray.map((idItem) => `<td>${getText(item, idItem)}</td>`)
+      idArray.map((idItem) => `<td>${lodopItemGetText(item, idItem)}</td>`)
         .join(''),
       '</tr>',
     ].join('');
@@ -204,7 +165,7 @@ export class LodopPrint {
               hideText,
             } = idMap[currentId];
 
-            const cellText = getText(item, currentId.split('-')[1]);
+            const cellText = lodopItemGetText(item, currentId.split('-')[1]);
 
             if (txttype === EnumLodopItemType.detailQrCode || txttype === EnumLodopItemType.detailBarCode) {
               const idStr = `${id}-${getUUID()}`;
@@ -300,7 +261,7 @@ export class LodopPrint {
         txttype === EnumLodopItemType.tableInlineText ||
         txttype === EnumLodopItemType.printTime
       ) {
-        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== EnumLodopItemType.customText ? getText(data, id) : txt);
+        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== EnumLodopItemType.customText ? lodopItemGetText(data, id) : txt);
         this.instance.SET_PRINT_STYLEA(id, 'Alignment', alignment);
         this.instance.SET_PRINT_STYLEA(id, 'FontName', fontFamily);
         this.instance.SET_PRINT_STYLEA(id, 'FontSize', zero75(fontSize));
@@ -308,13 +269,13 @@ export class LodopPrint {
           this.instance.SET_PRINT_STYLEA(id, 'Bold', 1); // 1 粗体 0非粗
         }
       } else if (txttype === EnumLodopItemType.qrCode) {
-        this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', getText(data, id));
+        this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', lodopItemGetText(data, id));
       } else if (txttype === EnumLodopItemType.barCode) {
         const showBarText = hideText ? !hideText.includes('不显示码值') : true;
-        this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), getText(data, id));
+        this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), lodopItemGetText(data, id));
         this.instance.SET_PRINT_STYLEA(0, 'ShowBarText', showBarText);
       } else if (txttype === EnumLodopItemType.img) {
-        this.instance.ADD_PRINT_IMAGE(top, left, width, height, `<img src="${getText(data, id)}" height="${height}px" width="${width}px"/>`);
+        this.instance.ADD_PRINT_IMAGE(top, left, width, height, `<img src="${lodopItemGetText(data, id)}" height="${height}px" width="${width}px"/>`);
 
         // TODO:设置“text文本”时，1代表两端对齐，0代表不处理（默认）； 设置“barcode条码文字”时，0-两端对齐(默认)  1-左靠齐  2-居中  3-右靠齐；
         //    LODOP.SET_PRINT_STYLEA(0, 'AlignJustify', alignment);

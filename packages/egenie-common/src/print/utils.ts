@@ -146,6 +146,26 @@ export class LodopItem {
   public hideText?: string;
 }
 
+export function isSocketConnected(socket: WebSocket, openError: string): boolean {
+  if (null == socket) {
+    message.error({
+      content: openError,
+      key: openError,
+    });
+    return false;
+  }
+
+  if (socket.readyState === WebSocket.OPEN) {
+    return true;
+  } else {
+    message.warn({
+      key: '打印机正在连接',
+      content: '打印机正在连接',
+    });
+    return false;
+  }
+}
+
 export function getUUID(len?: number, radix?: number): string {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   const uuid = [];
@@ -217,22 +237,82 @@ export function sliceData(data: any[], count = 500): any[][] {
   return result;
 }
 
-export function isSocketConnected(socket: WebSocket, openError: string): boolean {
-  if (null == socket) {
-    message.error({
-      content: openError,
-      key: openError,
-    });
-    return false;
-  } else {
-    if (socket.readyState === WebSocket.OPEN) {
-      return true;
-    } else {
-      message.warn({
-        key: '打印机正在连接',
-        content: '打印机正在连接',
-      });
-      return false;
+export function get(data: any, path: string[]): any {
+  let value = data;
+  for (let i = 0; i < path.length; i++) {
+    if ((typeof value === 'object' && value !== null) || Array.isArray(value)) {
+      value = value[path[i]];
     }
+  }
+
+  return value;
+}
+
+// skuList-vendor_id-hz4692ym6 取前2个
+export function lodopItemGetText(data: any, id: string): any {
+  const path: string[] = [];
+  const [
+    key1,
+    key2,
+  ] = id.split('-');
+
+  const key1Path: string[] = typeof key1 === 'string' ? key1.split('.') : [];
+  for (let i = 0; i < key1Path.length; i++) {
+    path.push(key1Path[i]);
+  }
+
+  const key2Path: string[] = typeof key2 === 'string' ? key2.split('.') : [];
+  for (let i = 0; i < key2Path.length; i++) {
+    path.push(key2Path[i]);
+  }
+
+  return get(data, path.filter(Boolean));
+
+  /*  if (typeof value === 'string') {
+      return value.replace('[$data]', '')
+        .replace('[&', '')
+        .replace(']', '');
+    } else {
+      return value;
+    }*/
+}
+
+/**
+ * 格式化条码数据
+ * @param row 一页的行
+ * @param col 一页的列
+ * @param data 打印数据
+ */
+export function formatBarcodeData(row: number, col: number, data: any[]): any[] {
+  if (!(Array.isArray(data) && data.length)) {
+    return [];
+  }
+
+  const height = row >>> 0;
+  const width = col >>> 0;
+
+  // 一页打多个条码
+  if (height >= 1 && width >= 1 && (height > 1 || width > 1)) {
+    const pageSize = width * height;
+    const totalPage = Math.ceil(data.length / pageSize);
+    const result = Array(totalPage)
+      .fill(null);
+
+    data.forEach((item, index) => {
+      const currentPage = (index / pageSize) >>> 0;
+      const pagePosition = index % pageSize;
+      const h = (pagePosition / width) >>> 0;
+      const w = pagePosition % width;
+      const itemKey = `item_${h}_${w}`;
+      if (result[currentPage]) {
+        result[currentPage][itemKey] = item;
+      } else {
+        result[currentPage] = { [itemKey]: item };
+      }
+    });
+
+    return result;
+  } else {
+    return data;
   }
 }
