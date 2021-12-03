@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import type { RookiePrintParams } from './printHelper';
+import type { RookiePrintParams } from './types';
 import { getUUID, isSocketConnected } from './utils';
 
 interface RequestProtocol {

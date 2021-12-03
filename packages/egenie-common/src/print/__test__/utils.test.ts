@@ -1,4 +1,4 @@
-import { formatBarcodeData, formatPrintName, get, getTemplateData, lodopItemGetText, sliceData } from '../utils';
+import { formatBarcodeData, formatDyData, formatPddData, formatPrintName, formatRookieData, get, getTemplateData, lodopItemGetText, sliceData } from '../utils';
 
 describe('print utils', () => {
   test('getTemplateData', () => {
@@ -202,6 +202,135 @@ describe('print utils', () => {
         item_1_1: 8,
       },
       { item_0_0: 9 },
+    ]);
+  });
+
+  test('formatRookieData', () => {
+    expect(formatRookieData(null, null)).toEqual([]);
+
+    expect(formatRookieData([], { cainiaoTemp: '0' })).toEqual([]);
+
+    expect(formatRookieData([
+      {
+        value: 1,
+        templateURL: 1,
+        newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }),
+      },
+      {
+        value: 2,
+        templateURL: 2,
+      },
+    ], null)[0].contents).toEqual([
+      {
+        data: {
+          value: 1,
+          templateURL: 1,
+        },
+        templateURL: 1,
+      },
+      {
+        data: {
+          value: 2,
+          templateURL: 2,
+        },
+        templateURL: 2,
+      },
+    ]);
+
+    expect(formatRookieData([
+      {
+        value: 1,
+        templateURL: 1,
+        newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }),
+      },
+      {
+        value: 2,
+        templateURL: 2,
+      },
+    ], { cainiaoTemp: '1' })[0].contents).toEqual([
+      { caiNiaoDefaultData: 1 },
+      {
+        data: {
+          value: 1,
+          templateURL: 1,
+        },
+        templateURL: 1,
+      },
+      {
+        data: {
+          value: 2,
+          templateURL: 2,
+        },
+        templateURL: 2,
+      },
+    ]);
+  });
+
+  test('formatDyData', () => {
+    expect(formatDyData(null)).toEqual([]);
+
+    expect(formatDyData([])).toEqual([]);
+
+    expect(formatDyData([{ value: 1 }])).toEqual([]);
+
+    expect(formatDyData([{ dyData: { printData: JSON.stringify({ value: 1 }) }}])[0].contents).toEqual([{ value: 1 }]);
+
+    expect(formatDyData([
+      {
+        dyData: {
+          customTempUrl: 1,
+          customData: JSON.stringify({ value: 1 }),
+        },
+      },
+    ])[0].contents).toEqual([
+      {
+        data: { value: 1 },
+        templateURL: 1,
+      },
+    ]);
+
+    expect(formatDyData([
+      {
+        dyData: {
+          customTempUrl: 1,
+          customData: JSON.stringify({ value: 1 }),
+          printData: JSON.stringify({ value: 1 }),
+        },
+      },
+    ])[0].contents).toEqual([
+      { value: 1 },
+      {
+        data: { value: 1 },
+        templateURL: 1,
+      },
+    ]);
+  });
+
+  test('formatPddData', () => {
+    expect(formatPddData(null, null)).toEqual([]);
+
+    expect(formatPddData([], 1)).toEqual([]);
+
+    expect(formatPddData([{ newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }) }], 1)[0].contents).toEqual([{ caiNiaoDefaultData: 1 }]);
+
+    expect(formatPddData([{ pinduoduo: JSON.stringify({ value: 1 }) }], 1)[0].contents).toEqual([
+      {
+        data: { value: 1 },
+        templateURL: 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_yilian_template.xml',
+      },
+    ]);
+
+    expect(formatPddData([
+      {
+        newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }),
+        pinduoduo: JSON.stringify({ value: 1 }),
+      },
+    ], 0)[0].contents).toEqual([
+      { caiNiaoDefaultData: 1 },
+      {
+        data: { value: 1 },
+        templateURL: 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_seller_area_template.xml',
+      },
     ]);
   });
 });

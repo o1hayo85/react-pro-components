@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.5...v0.0.0) (2021-12-03)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.6...v0.0.0) (2021-12-03)
+
+### Features
+
+- **egenie-common:** 将打印辅助函数移到 utils ([7f89430](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7f8943032278779b28485136e077576617dfa3df))
+
+## [0.7.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.5...v0.7.6) (2021-12-03)
 
 ### Features
 

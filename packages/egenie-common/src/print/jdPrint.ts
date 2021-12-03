@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import type { JDParams } from './printHelper';
+import type { JDParams } from './types';
 import { getUUID } from './utils';
 
 interface IParameters {

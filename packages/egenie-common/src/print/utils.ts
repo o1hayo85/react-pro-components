@@ -1,150 +1,5 @@
 import { message } from 'antd';
-
-export enum EnumShopType {
-  rookie = 0,
-  pdd = 1,
-  jd = 2,
-  dy = 3,
-}
-
-export enum EnumLodopItemType {
-  customText = '0',
-  noTitleText = '1',
-  hasTitleText = '2',
-  tableInlineText = '3',
-  printTime = 'printTime',
-  qrCode = 'erweima',
-  detailQrCode = 'erweima-detail',
-  barCode = 'tiaoxingma',
-  detailBarCode = 'tiaoxingma-detail',
-  img = 'customImge',
-  horizontalLine = 'hengxian',
-  verticalLine = 'shuxian',
-  rect = 'juxing',
-  skuDetail = 'skudetail'
-}
-
-/**
- * 公共参数
- */
-export class CommonPrintParams {
-  /**
-   * 一次打印数据页数(默认500)
-   */
-  public count?: number;
-
-  /**
-   * 模版数据
-   */
-  public templateData?: TemplateData;
-
-  /**
-   * 是否预览
-   */
-  public preview: boolean;
-
-  /**
-   * 打印机
-   */
-  public printer?: string;
-}
-
-export class TemplateData {
-  public _id?: number | string;
-
-  public id?: number | string;
-
-  public defalt?: number;
-
-  public templateType?: any;
-
-  public colsCount?: string;
-
-  public ddlfontsize?: number;
-
-  public category_no?: string;
-
-  public pageHeight?: string;
-
-  public bkimgHeight?: string;
-
-  public pageWidth?: string;
-
-  public inRow?: string;
-
-  public empName?: string;
-
-  public cainiaoTempXml?: string;
-
-  public rowCount?: string;
-
-  public backgrd?: string;
-
-  public moren_fontfamliy?: string;
-
-  public courierNo?: any;
-
-  public tempType?: string;
-
-  public productType?: any;
-
-  public inCols?: string;
-
-  public textAlign?: string;
-
-  public printerName?: string;
-
-  public mysqlno?: string;
-
-  public updateTime?: string;
-
-  public mysqlid?: string | number;
-
-  public cainiaoTemp?: string;
-
-  /**
-   * 1---纵(正)向打印，固定纸张
-   * 2---横向打印，固定纸张
-   * 3---纵(正)向打印，宽度固定，高度按打印内容的高度自适应；
-   */
-  public intOrient?: 1 | 2 | 3;
-
-  public itemList?: LodopItem[];
-
-  public itemDetailList?: {[key: string]: LodopItem; };
-
-  public strPageName?: string;
-
-  public content?: TemplateData;
-}
-
-export class LodopItem {
-  public orderValue?: string;
-
-  public txt?: string;
-
-  public fontFamily?: string;
-
-  public top?: number;
-
-  public left?: number;
-
-  public width?: number;
-
-  public weight?: number;
-
-  public fontSize?: number;
-
-  public id?: string;
-
-  public txttype?: EnumLodopItemType;
-
-  public alignment?: string;
-
-  public height?: number;
-
-  public hideText?: string;
-}
+import type { TemplateData } from './types';
 
 export function isSocketConnected(socket: WebSocket, openError: string): boolean {
   if (null == socket) {
@@ -315,4 +170,87 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
   } else {
     return data;
   }
+}
+
+export function formatRookieData(printData: any[], printTemplate: TemplateData) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    if (Number(getTemplateData(printTemplate)?.cainiaoTemp) === 1 && item.newCaiNiao) {
+      documents.push(JSON.parse(item.newCaiNiao));
+    }
+
+    delete item.newCaiNiao;
+
+    documents.push({
+      data: item,
+      templateURL: item.templateURL ? item.templateURL : `${window.location.origin}/api/print/getCainiaoTempXml/${getTemplateData(printTemplate)?.id}`,
+    });
+  });
+
+  if (documents.length) {
+    return [
+      {
+        documentID: getUUID(),
+        contents: documents,
+      },
+    ];
+  } else {
+    return [];
+  }
+}
+
+export function formatDyData(printData: any[]) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+    if (item?.dyData?.printData) {
+      contents.push(JSON.parse(item?.dyData?.printData));
+    }
+
+    if (item?.dyData?.customData) {
+      contents.push({
+        data: JSON.parse(item?.dyData?.customData),
+        templateURL: item?.dyData?.customTempUrl ? item?.dyData?.customTempUrl : 'https://front.runscm.com/customer-source/printTemp/dy2.xml',
+      });
+    }
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+      });
+    }
+  });
+
+  return documents;
+}
+
+export function formatPddData(printData: any[], courierPrintType: number) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const content = [];
+    if (item.newCaiNiao) {
+      content.push(JSON.parse(item.newCaiNiao));
+    }
+    delete item.newCaiNiao;
+
+    if (item.pinduoduo) {
+      content.push({
+        data: JSON.parse(item.pinduoduo),
+        templateURL: courierPrintType ? 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_yilian_template.xml' : 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_seller_area_template.xml',
+      });
+    }
+
+    if (content.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents: content,
+      });
+    }
+  });
+
+  return documents;
 }

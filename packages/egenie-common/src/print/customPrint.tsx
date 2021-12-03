@@ -5,7 +5,7 @@ import React from 'react';
 import { destroyModal, renderModal } from '../renderModal';
 import { request } from '../request';
 import { printHelper } from './printHelper';
-import type { TemplateData } from './utils';
+import type { TemplateData } from './types';
 import { getTemplateData } from './utils';
 
 const tempTypeList = {

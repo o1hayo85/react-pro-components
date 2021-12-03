@@ -3,8 +3,8 @@ import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
 import { getWayBillSensitiveData } from './getPrivacyData';
 import { printHelper } from './printHelper';
-import type { TemplateData } from './utils';
-import { EnumShopType } from './utils';
+import type { TemplateData } from './types';
+import { EnumShopType } from './types';
 
 interface PrintData {
   cpCode?: string;

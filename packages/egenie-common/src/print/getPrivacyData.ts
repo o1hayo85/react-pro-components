@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import type { BaseData } from '../request';
 import { request } from '../request';
-import { EnumShopType } from './utils';
+import { EnumShopType } from './types';
 
 const APP_KEY = '4A7DD276D1A709CB16AF06DE925B8BF7';
 const CUSTOMER_ID = 11211;
