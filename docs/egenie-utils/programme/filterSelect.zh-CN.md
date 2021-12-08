@@ -65,12 +65,6 @@ order: 5
 - 类型: boolean
 - 默认值: false
 
-## `maxItemsLength`
-
-- 描述: 最多显示数量
-- 类型: number
-- 默认值: 1000
-
 ## `mode`
 
 - 描述: 模式。默认单选、`multiple为多选`

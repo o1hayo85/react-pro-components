@@ -1,8 +1,7 @@
 import { Button, Divider, Select } from 'antd';
-import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
+import { action, extendObservable, intercept, observable, toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import type { ValueAndLabelData } from './common';
 import { ENUM_FILTER_ITEM_TYPE, FilterBase, FilterItemLabel } from './common';
 
 function formatValue(oldValue: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
@@ -184,24 +183,9 @@ export class FilterSelect extends FilterBase {
   @observable public searchValue = '';
 
   /**
-   * 最多显示数量
-   */
-  @observable public maxItemsLength = 1000;
-
-  /**
    * 模式。默认单选、multiple为多选
    */
   @observable public mode: 'multiple' | undefined = undefined;
-
-  /**
-   * @internal
-   */
-  @computed
-  public get options(): ValueAndLabelData {
-    return this.data.filter((item) => item.label.toLowerCase()
-      .includes(this.searchValue.toLowerCase()))
-      .slice(0, this.maxItemsLength);
-  }
 
   /**
    * 是否显示下拉小箭头
@@ -215,7 +199,7 @@ export class FilterSelect extends FilterBase {
 @observer
 export class FilterSelectComponent extends React.Component<{ store: FilterSelect; }> {
   public handleChooseAll = () => {
-    this.props.store.onChange(this.props.store.options.map((item) => item.value));
+    this.props.store.onChange(this.props.store.data.map((item) => item.value));
   };
 
   render() {
@@ -228,7 +212,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       placeholder,
       allowClear,
       showSearch,
-      options,
+      data,
       searchValue,
       onSearch,
       mode,
@@ -275,13 +259,14 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           onChange={onChange}
           onSearch={onSearch}
           optionFilterProp="label"
-          options={options}
+          options={data}
           placeholder={placeholder}
           searchValue={searchValue}
           showArrow={showArrow}
           showSearch={showSearch}
           style={{ width: `calc(100% - ${labelWidth}px)` }}
           value={toJS(value)}
+          virtual
         />
       </div>
     );
