@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.7...v0.0.0) (2021-12-08)
 
+### Features
+
+- **utils/filterSelect:** 去掉 maxItemsLength 属性，改用默认的虚拟列表 ([d71f716](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d71f7168c847bd8b9421eb74a1eb50cdf9fb3986))
+
 ## [0.7.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.6...v0.7.7) (2021-12-03)
 
 ### Features
