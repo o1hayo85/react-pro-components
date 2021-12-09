@@ -17,29 +17,20 @@ export default defineConfig({
       'English',
     ],
   ],
-  navs: {
-    'zh-CN': [
-      null,
-      {
-        title: 'GitLab',
-        path: 'http://192.168.200.111:9980/egFrontend/egenie-utils',
-      },
-      {
-        title: '更新日志',
-        path: 'http://192.168.200.111:9980/egFrontend/egenie-utils/-/blob/master/CHANGELOG.md',
-      },
-    ],
-    'en-US': [
-      null,
-      {
-        title: 'GitLab',
-        path: 'http://192.168.200.111:9980/egFrontend/egenie-utils',
-      },
-      {
-        title: '更新日志',
-        path: 'http://192.168.200.111:9980/egFrontend/egenie-utils/-/blob/master/CHANGELOG.md',
-      },
-    ],
-  },
+  navs: [
+    null,
+    {
+      title: '分享',
+      path: 'http://192.168.200.93:11113',
+    },
+    {
+      title: 'GitLab',
+      path: 'http://192.168.200.111:9980/egFrontend/egenie-utils',
+    },
+    {
+      title: '更新日志',
+      path: 'http://192.168.200.111:9980/egFrontend/egenie-utils/-/blob/master/CHANGELOG.md',
+    },
+  ],
   exportStatic: {},
 });
