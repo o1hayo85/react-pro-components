@@ -110,6 +110,7 @@ export class ExportStore {
       });
       this.onClose();
       Modal.success({
+        closable: true,
         title: '导出',
         content: (
           <div>
