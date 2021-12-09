@@ -1,4 +1,14 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.8...v0.0.0) (2021-12-08)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.9...v0.0.0) (2021-12-09)
+
+### Bug Fixes
+
+- 导出成功提示 Modal 显示右上角关闭按钮 ([cbfb3c7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cbfb3c708913d85afc5ffccb7258700e65087e58))
+
+### Features
+
+- **code-style:** remove property-no-vendor-prefix ([e994e81](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e994e813bd1cf01f320b308b5d1a7739c89e1c61))
+
+## [0.7.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.8...v0.7.9) (2021-12-08)
 
 ## [0.7.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.7...v0.7.8) (2021-12-08)
 
