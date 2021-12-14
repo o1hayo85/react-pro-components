@@ -946,7 +946,7 @@ export class EgGridModel {
         const { username } = v;
         this.user = username;
       })
-        .then(this.getColumnsConfig);
+        .finally(this.getColumnsConfig);
     }
   });
 
@@ -968,11 +968,23 @@ export class EgGridModel {
           return;
         }
 
-        // 如果被删过某一列，不再操作，直接返回原始列
-        if (storage.length > copyColumns.length) {
+        // 如果被删过某一列，或改过某一列的key, 或增加了一列，不再操作，直接返回原始列
+        if (storage.length !== copyColumns.length) {
+          console.log('已缓存的列长，实际列长', storage.length, copyColumns.length);
           return;
+        } else {
+          let isSame = true;
+          copyColumns.forEach((el) => {
+            const item = storage.find((v) => v.key === el.key);
+            if (!item) {
+              console.log('已找到差异列', el);
+              isSame = false;
+            }
+          });
+          if (!isSame) {
+            return;
+          }
         }
-
         this.updateColumns(storage);
       })
     );

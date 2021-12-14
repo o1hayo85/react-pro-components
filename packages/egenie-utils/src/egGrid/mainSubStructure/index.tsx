@@ -163,7 +163,11 @@ const ButtonHeader = observer(
 
 const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
   if (!_buttons.length) {
-    return null;
+    return (
+      <span>
+        {' '}
+      </span>
+    );
   }
   return (
     <div
