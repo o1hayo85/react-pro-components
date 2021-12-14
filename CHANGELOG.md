@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.10...v0.0.0) (2021-12-14)
 
+### Features
+
+- **config:** 更改 modal 水平间距 ([3b4c82f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3b4c82f4dbd25d1ac7b9193c6ecd1ed94671c9c3))
+
 ## [0.7.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.9...v0.7.10) (2021-12-09)
 
 ### Bug Fixes
