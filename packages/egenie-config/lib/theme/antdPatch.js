@@ -47,12 +47,12 @@ module.exports = {
 
   // Modal-message
   'modal-header-padding-vertical': '13px',
-  'modal-header-padding-horizontal': '@egenie-spacing-lg',
+  'modal-header-padding-horizontal': '@egenie-spacing-md',
   'modal-header-close-size': '48px',
-  'modal-body-padding': '@egenie-spacing-sm',
+  'modal-body-padding': '@egenie-spacing-md',
   'modal-footer-padding-vertical': '@egenie-spacing-xs',
-  'modal-footer-padding-horizontal': '@egenie-spacing-lg',
-  'modal-confirm-body-padding': '@egenie-spacing-md @egenie-spacing-lg @egenie-spacing-xs @egenie-spacing-lg',
+  'modal-footer-padding-horizontal': '@egenie-spacing-md',
+  'modal-confirm-body-padding': '@egenie-spacing-md @egenie-spacing-md @egenie-spacing-xs @egenie-spacing-md',
   'message-notice-content-padding': '@egenie-spacing-xs @egenie-spacing-md',
   'zindex-message': 9999,
 
