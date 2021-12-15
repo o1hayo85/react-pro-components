@@ -1,5 +1,5 @@
+import type { ValueAndLabelData } from 'egenie-common';
 import type { BaseData } from '../request';
-import type { ValueAndLabelData } from './filterItems';
 import type { ProgrammeListItem } from './programme';
 
 interface FilterSetItem {

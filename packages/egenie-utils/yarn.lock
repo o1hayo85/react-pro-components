@@ -3972,10 +3972,12 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.7.11:
-  version "0.7.11"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.7.11.tgz#63b9e8bd4b027ce90ca25336ccf329ad44a1e60c"
-  integrity sha512-n0T9pASHTUmoxPZn9t0+8lKo6GOOZDYKJJJ0fx5TvcjwPy5Z+INkxLnogGYPYW0VbWLLYQJS3L9Or0963ifiPQ==
+egenie-common@^0.7.15:
+  version "0.7.15"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.7.15.tgz#7adc9770b85670dce31459b12bb8ed66d484fb96"
+  integrity sha512-sagzpGKUIg01uVs91VwgTFNmx9cPWgYbRDTm+V1R0PjI3Hw9B6DdZq2ecPsTmN2K3hrtfc/tLSA16F6OnnGiqw==
+  dependencies:
+    classnames "2.2.6"
 
 egenie-config@^0.7.11:
   version "0.7.11"

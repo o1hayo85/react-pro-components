@@ -1,11 +1,11 @@
+import type { NormalProgrammeParams, ValueAndLabelData } from 'egenie-common';
+import { NormalProgramme, NormalProgrammeComponent } from 'egenie-common';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import type { CSSProperties, ReactNode } from 'react';
 import React, { Component } from 'react';
 import type { IMainSubStructureModel } from '../egGrid';
 import { MainSubStructure, MainSubStructureModel } from '../egGrid';
-import type { NormalProgrammeParams, ValueAndLabelData } from '../programme';
-import { NormalProgramme, NormalProgrammeComponent } from '../programme';
 import styles from './index.less';
 
 interface IStore {

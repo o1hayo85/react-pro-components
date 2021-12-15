@@ -1,5 +1,7 @@
 import { Anchor, Button, Collapse, Dropdown, Layout, Menu, message, Modal, Popover, Typography } from 'antd';
 import classNames from 'classnames';
+import type { FilterItem, FilterItemOptions, FilterItemsParams } from 'egenie-common';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory, FilterItems } from 'egenie-common';
 import { action, autorun, computed, observable } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
 import React from 'react';
@@ -8,8 +10,6 @@ import { MainSubStructure } from '../egGrid';
 import type { BaseData } from '../request';
 import { request } from '../request';
 import { AddProgrammeModal } from './addProgrammeModal';
-import type { FilterItem, FilterItemOptions, FilterItemsParams } from './filterItems';
-import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory, FilterItems } from './filterItems';
 import type { FilterItemSettingItem } from './filterItemSetting';
 import { FilterItemSettingModal } from './filterItemSetting';
 import type { FilterConfigData } from './formatFilterConfigData';
