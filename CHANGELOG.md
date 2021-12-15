@@ -1,4 +1,22 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.11...v0.0.0) (2021-12-14)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.14...v0.0.0) (2021-12-15)
+
+### Features
+
+- **egenie-utils:** 迁移 filterItems ([eb01d92](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/eb01d92fd0f3a28be60eec3f63f1f1699ff90818))
+
+## [0.7.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.13...v0.7.14) (2021-12-14)
+
+### Bug Fixes
+
+- 添加依赖 ([74eca46](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/74eca46b3608c91d98480885b093ebd87ed8cbb7))
+
+## [0.7.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.12...v0.7.13) (2021-12-14)
+
+### Bug Fixes
+
+- 修复子表按钮样式&添加列不显示 ([2d08a1e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2d08a1ec585e1cf225e8866cf118b1a9e19a6179))
+
+## [0.7.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.11...v0.7.12) (2021-12-14)
 
 ## [0.7.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.10...v0.7.11) (2021-12-14)
 
