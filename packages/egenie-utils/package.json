@@ -38,7 +38,7 @@
   },
   "gitHead": "41a3d966453940034c23e7ec142f4b8e50375cb3",
   "scripts": {
-    "prepublish": "yarn run test && yarn run build",
+    "prepublish": "yarn run build",
     "build": "father-build",
     "test": "node node_modules/egenie-test/bin/egenie-test.js react",
     "test-match": "node node_modules/egenie-test/bin/egenie-test.js react --testMatch="
