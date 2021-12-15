@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.14...v0.0.0) (2021-12-15)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.15...v0.0.0) (2021-12-15)
+
+### Features
+
+- **egenie-utils:** 迁移 filterItems ([4add498](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4add498fbd93125057cb3616645ef73c633588b7))
+
+## [0.7.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.7.14...v0.7.15) (2021-12-15)
 
 ### Features
 
