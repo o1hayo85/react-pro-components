@@ -36,7 +36,7 @@
     "react-dom": "17.0.1",
     "typescript": "4.2.4"
   },
-  "gitHead": "41a3d966453940034c23e7ec142f4b8e50375cb3",
+  "gitHead": "110a29cb8eb29e2a18af106e6053c296d23c334e",
   "scripts": {
     "prepublish": "yarn run build",
     "build": "father-build",
