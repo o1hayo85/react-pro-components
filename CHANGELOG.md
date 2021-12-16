@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.2...v0.0.0) (2021-12-16)
 
+### Features
+
+- **react-scripts:** add esbuild-loader ([dede3db](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dede3dbc7371531e8afc7d6cc44f51a6025a638e))
+
 ## [0.8.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.0...v0.8.2) (2021-12-16)
 
 ### Features
