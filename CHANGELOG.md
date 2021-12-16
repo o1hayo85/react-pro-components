@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.5...v0.0.0) (2021-12-16)
 
+### Features
+
+- **react-scripts:** add esbuild-loader ([9651983](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/96519835a2a6f30ab5b5200c16435ddfe2047e27))
+
 ## [0.8.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.4...v0.8.5) (2021-12-16)
 
 ### Bug Fixes
