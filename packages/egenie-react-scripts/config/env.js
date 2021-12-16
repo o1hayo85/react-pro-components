@@ -66,14 +66,16 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '').split(path.delimiter).filt
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
-  const raw = Object.keys(process.env)
+  const raw = Object.keys(process.env).filter((key) => REACT_APP.test(key))
     .reduce(
       (env, key) => {
         env[key] = process.env[key];
         return env;
       },
       {
-      /*
+        USE_ESBUILD: process.env.USE_ESBUILD || 'NO',
+
+        /*
        * Useful for determining whether we’re running in production mode.
        * Most importantly, it switches React into the correct mode.
        */

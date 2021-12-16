@@ -1,4 +1,18 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.2...v0.0.0) (2021-12-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.5...v0.0.0) (2021-12-16)
+
+## [0.8.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.4...v0.8.5) (2021-12-16)
+
+### Bug Fixes
+
+- 更新 utils 依赖 ([3b87026](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3b87026693d96bd0c449f76146970dae23bede52))
+
+## [0.8.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.3...v0.8.4) (2021-12-16)
+
+### Bug Fixes
+
+- 修复字表勾选重置 ([dde5f75](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dde5f75d2b5409187aec864205c68ee0ea8bd3ca))
+
+## [0.8.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.2...v0.8.3) (2021-12-16)
 
 ### Features
 
