@@ -14,15 +14,8 @@ module.exports = function (isWeb = true) {
     require.resolve('@babel/preset-react'), // 转换jsx语法
     require.resolve('@babel/preset-typescript'),
   ];
-  const plugins = [
-    [
-      require.resolve('babel-plugin-import'),
-      {
-        libraryName: isWeb ? 'antd' : 'antd-mobile',
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
+
+  const basePlugins = [
     require.resolve('@babel/plugin-syntax-dynamic-import'), // 支持动态import
     [
       require.resolve('@babel/plugin-proposal-decorators'),
@@ -37,15 +30,26 @@ module.exports = function (isWeb = true) {
     [require.resolve('@babel/plugin-transform-runtime')],
   ];
 
+  const pluginImport = [[
+    require.resolve('babel-plugin-import'),
+    {
+      libraryName: isWeb ? 'antd' : 'antd-mobile',
+      libraryDirectory: 'es',
+      style: true,
+    },
+  ]];
+
+  const useEsBuild = typeof process.env.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES';
+
   return {
     env: {
       development: {
         presets,
-        plugins,
+        plugins: useEsBuild ? basePlugins : pluginImport.concat(basePlugins),
       },
       production: {
         presets,
-        plugins,
+        plugins: pluginImport.concat(basePlugins),
       },
       test: {
         presets: [
@@ -53,18 +57,12 @@ module.exports = function (isWeb = true) {
             require.resolve('@babel/preset-env'),
             {
               modules: 'commonjs', // modules预先将es6模块转成"amd" | "umd" | "systemjs" | "commonjs", 值为false则不转换
-              useBuiltIns: 'usage',
-              "targets": {"node": true},
-              corejs: {
-                version: 3,
-                proposals: true,
-              },
             },
           ],
           require.resolve('@babel/preset-react'), // 转换jsx语法
           require.resolve('@babel/preset-typescript'),
         ],
-        plugins: plugins.slice(1),
+        plugins: basePlugins,
       },
     },
   };
