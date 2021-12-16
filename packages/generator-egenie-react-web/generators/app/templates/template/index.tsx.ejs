@@ -8,6 +8,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { routes } from './routes';
 
+if (process.env.NODE_ENV === 'development' && typeof process.env.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES') {
+  import('antd/dist/antd.less').then(render);
+}
+
+if (process.env.NODE_ENV === 'production') {
+  render();
+}
+
 function render() {
   ReactDOM.render(
     <Locale>
@@ -20,8 +28,6 @@ function render() {
     document.getElementById('root')
   );
 }
-
-render();
 
 // @ts-ignore
 if (module.hot) {
