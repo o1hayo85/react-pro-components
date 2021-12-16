@@ -2,7 +2,7 @@
 
 ### Features
 
-- **react-scripts:** add esbuild-loader ([69a70c4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/69a70c4fd1eafe3c436ae09544de32e68b1d44f4))
+- **react-scripts:** add esbuild-loader ([3538a66](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3538a66573d411a70df37a1012064bf7a1eadecb))
 
 ## [0.8.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.5...v0.8.6) (2021-12-16)
 
