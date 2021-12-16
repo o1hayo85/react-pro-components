@@ -8,6 +8,13 @@ export default {
   cssModules: {generateScopedName: '[name]__[local]--[hash:base64:8]'},
   extractCSS: true,
   lessInRollupMode: {modifyVars: require('egenie-config/lib/theme/index.js')()},
+  extraBabelPlugins: [
+    ['babel-plugin-import', {
+      libraryName: 'antd',
+      libraryDirectory: 'es',
+      style: true,
+    }],
+  ],
   extraExternals: [
     'antd',
     'lodash',
