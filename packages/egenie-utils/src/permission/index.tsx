@@ -5,7 +5,7 @@ import { request } from '../request';
 
 export interface IPermission {
   permissionId: string;
-  children?: ReactNode;
+  children?: JSX.Element;
 }
 export const getPerms = async(): Promise<void> => {
   if (window.top.EgeniePermission?.permissionList.length) {
@@ -44,7 +44,7 @@ export const hasPermission = (permissionId: string): boolean => {
   }
 };
 
-export const Permission = (props: IPermission): ReactNode => {
+export const Permission = (props: IPermission): JSX.Element => {
   const [
     display,
     setDisplay,

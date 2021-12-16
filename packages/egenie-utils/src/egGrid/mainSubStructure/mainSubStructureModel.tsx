@@ -298,7 +298,9 @@ export class MainSubStructureModel {
     const table = listModel.find((el) => el.tab.value === activeTab);
     if (table) {
       const { gridModel } = table;
-      gridModel && gridModel.resetCursorRow && gridModel.resetCursorRow();
+      if (gridModel) {
+        gridModel.resetAll && gridModel.resetAll();
+      }
       table.onQuery();
     }
     this.api.onRowClick?.(id, row);

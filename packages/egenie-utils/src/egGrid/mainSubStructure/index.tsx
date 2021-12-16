@@ -244,28 +244,31 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
 
 const CollectDataView = observer(({ store: { collectData }}) => {
   return (
-    <div className={styles.collectWrap}>
-      {
-        collectData.map(({ name, value, color, style }, index) => {
-          return (
-            <div
-              className={styles.collectDataWrap}
-              key={name}
-              style={{
-                color: color || '#2b2e3e',
-                ...style,
-              }}
-            >
-              {name}
-              ：
-              {value}
-              {index + 1 < collectData.length ? (
-                <span className={`headerCollectSplit ${styles.collectSplit}`}/>
-              ) : null }
-            </div>
-          );
-        })
-      }
+    <div>
+      <div className={styles.collectWrap}>
+        {
+          collectData.map(({ name, value, color, style }, index) => {
+            return (
+              <div
+                className={styles.collectDataWrap}
+                key={name}
+                style={{
+                  color: color || '#2b2e3e',
+                  ...style,
+                }}
+              >
+                {name}
+                ：
+                {value}
+                {index + 1 < collectData.length ? (
+                  <span className={`headerCollectSplit ${styles.collectSplit}`}/>
+                ) : null }
+              </div>
+            );
+          })
+        }
+      </div>
+      <div className={styles.splitLine}/>
     </div>
   );
 });
