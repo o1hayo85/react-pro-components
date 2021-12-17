@@ -1,6 +1,6 @@
 {
   "name": "egenie-config",
-  "version": "0.8.3",
+  "version": "0.8.11",
   "description": "",
   "license": "MIT",
   "main": "lib/index.js",
