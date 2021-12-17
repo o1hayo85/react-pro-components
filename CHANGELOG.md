@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.9...v0.0.0) (2021-12-17)
 
+### Bug Fixes
+
+- **react-scripts:** 解决 esbuild 下热更新报错 ([2cc88be](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2cc88bec209883b50d74a88e2fb961e35b30bad9))
+
 ## [0.8.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.8...v0.8.9) (2021-12-17)
 
 ### Features
