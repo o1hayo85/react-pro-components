@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.7...v0.0.0) (2021-12-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.8...v0.0.0) (2021-12-17)
+
+### Features
+
+- 更改 generator 的 esbuild 引入兼容 ([2ff4a08](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2ff4a0800ff24b392878e4c416333bbff8975e41))
+
+## [0.8.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.7...v0.8.8) (2021-12-16)
 
 ### Features
 
