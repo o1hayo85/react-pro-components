@@ -117,7 +117,7 @@ function handleSuccess() {
        * Only dismiss it when we're sure it's a hot update.
        * Otherwise it would flicker right before the reload.
        */
-      // tryDismissErrorOverlay();
+      tryDismissErrorOverlay();
     });
   }
 }
