@@ -8,11 +8,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { routes } from './routes';
 
-if (process.env.NODE_ENV === 'development' && typeof process.env.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES') {
+if (typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development' && typeof process?.env?.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES') {
   import('antd/dist/antd.less').then(render);
-}
-
-if (process.env.NODE_ENV === 'production') {
+} else {
   render();
 }
 
