@@ -96,13 +96,15 @@ module.exports = function(utils) {
   - `SOURCEMAP`
     - sourcemap 方式
   - `ALLOW_ESLINT`
-    - 是否开启 eslint
+    - 是否开启 eslint-loading
     - NO 不开启
   - `IS_ANALYZE`
     - 是否开启打包大小分析
     - YES 开启
   - `USE_ESBUILD`
-    - 是否使用 esbuild-webpack-plugin
+    - 是否使用 esbuild
+    - development 开启 esbuild-loader
+    - production 开启 esbuild-webpack-plugin
     - YES 开启
   - `IS_COMPRESS`
     - 是否开启 gzip 和 br 压缩
