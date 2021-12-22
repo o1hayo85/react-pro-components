@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.10...v0.0.0) (2021-12-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.11...v0.0.0) (2021-12-22)
+
+### Bug Fixes
+
+- **config:** 更新 babel 配置 ([455cbe4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/455cbe4a4b7f7291944d6d2280417738c00b5810))
+
+## [0.8.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.10...v0.8.11) (2021-12-17)
 
 ### Bug Fixes
 
