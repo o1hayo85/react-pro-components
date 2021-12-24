@@ -96,7 +96,7 @@ module.exports = function(utils) {
   - `SOURCEMAP`
     - sourcemap 方式
   - `ALLOW_ESLINT`
-    - 是否开启 eslint-loading
+    - 是否开启 eslint-webpack-plugin
     - NO 不开启
   - `IS_ANALYZE`
     - 是否开启打包大小分析
