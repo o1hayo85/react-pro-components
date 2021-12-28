@@ -52,7 +52,7 @@ export class FilterCheckbox extends FilterBase {
     }
   }
 
-  public toParams(this: FilterCheckbox): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
@@ -60,7 +60,7 @@ export class FilterCheckbox extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterCheckbox): string[] {
+  public translateParams(): string[] {
     if (Array.isArray(this.value) && this.value.length) {
       return [
         this.label,
@@ -73,7 +73,7 @@ export class FilterCheckbox extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterCheckbox, value?: string | string[]): void {
+  public formatValue(value?: string | string[]): void {
     this.value = formatValue(value);
   }
 

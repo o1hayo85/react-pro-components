@@ -55,7 +55,7 @@ export class FilterRadio extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterRadio): string[] {
+  public translateParams(): string[] {
     const inputItem = this.data.find((item) => item.showInput);
     if (inputItem) {
       if (this.value == undefined) {
@@ -92,7 +92,7 @@ export class FilterRadio extends FilterBase {
     }
   }
 
-  public toParams(this: FilterRadio): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme() == undefined) {
       return {};
     } else {
@@ -114,7 +114,7 @@ export class FilterRadio extends FilterBase {
   };
 
   @action
-  public formatValue(this: FilterRadio, value?: string): void {
+  public formatValue(value?: string): void {
     const inputItem = this.data.find((item) => item.showInput);
     if (inputItem) {
       const item = this.data.find((item) => item.value === value);

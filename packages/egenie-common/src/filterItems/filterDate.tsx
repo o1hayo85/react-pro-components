@@ -261,7 +261,7 @@ export class FilterDate extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterDate): string[] {
+  public translateParams(): string[] {
     const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams)
       .replace(',', '至');
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
@@ -289,7 +289,7 @@ export class FilterDate extends FilterBase {
     }
   }
 
-  public toParams(this: FilterDate): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     const timeString = formatTime(this.startTime, this.endTime, this.format, this.formatParams);
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
       if (this.selectValue) {
@@ -314,7 +314,7 @@ export class FilterDate extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterDate, value?: string): void {
+  public formatValue(value?: string): void {
     const keyAndValues = _.toString(value)
       .split(',');
     if (this.type === ENUM_FILTER_ITEM_TYPE.date) {

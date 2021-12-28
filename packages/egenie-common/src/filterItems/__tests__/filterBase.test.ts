@@ -1,4 +1,5 @@
 import { FilterBase } from '../filterBase';
+import { trimWhiteSpace } from '../utils';
 
 class CommonBase extends FilterBase {
   constructor() {
@@ -26,8 +27,8 @@ class CommonBase extends FilterBase {
   }
 }
 
-describe('filterItemsCommon', () => {
-  test('filterItemsCommon init', () => {
+describe('filterBase', () => {
+  test('init', () => {
     const commonBase = new CommonBase();
     expect(commonBase.showItem)
       .toBeDefined();
@@ -53,5 +54,29 @@ describe('filterItemsCommon', () => {
       .toBeDefined();
     expect(commonBase.handleData)
       .toBeDefined();
+
+    commonBase.data = [
+      {
+        // @ts-ignore
+        value: 1,
+        label: 'a',
+      },
+    ];
+
+    expect(commonBase.data)
+      .toEqual([
+        {
+          value: '1',
+          label: 'a',
+        },
+      ]);
+  });
+
+  test('utils', () => {
+    expect(trimWhiteSpace('aa', false)).toBe('aa');
+    expect(trimWhiteSpace('aa', true)).toBe('aa');
+    expect(trimWhiteSpace(' aa', true)).toBe('aa');
+    expect(trimWhiteSpace('aa  ', true)).toBe('aa');
+    expect(trimWhiteSpace('  aa  ', true)).toBe('aa');
   });
 });

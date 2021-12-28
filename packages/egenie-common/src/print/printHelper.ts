@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import { JdPrint } from './jdPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
@@ -60,10 +60,33 @@ class PrintHelper {
   };
 
   /**
-   * 获取打印机列表
+   * 获取打印机列表。从任一一个插件获取到就可以，解决以前客户只是抖音、pdd、jd还需要安装菜鸟插件问题
    */
-  public getPrinters = (): Promise<string[]> => {
-    return this.state.getPrinters();
+  public getPrinters = async(): Promise<string[]> => {
+    const printPlugins: Array<RookieAndPddAndDyPrint | JdPrint | LodopPrint> = [
+      this.rookiePrint,
+      this.dyPrint,
+      this.pddPrint,
+      this.jdPrint,
+      this.lodopPrint,
+    ];
+
+    let printers: string[] = [];
+    for (let i = 0; i < printPlugins.length && printers.length === 0; i++) {
+      try {
+        printers = await printPlugins[i].getPrinters();
+      } catch (e) {
+        console.log(e, '尝试获取打印机错误，可忽略');
+      }
+    }
+
+    Modal.destroyAll();
+
+    if (printers.length) {
+      return printers;
+    } else {
+      throw new Error('打印机列表为空,查看是否安装对应插件');
+    }
   };
 
   /**

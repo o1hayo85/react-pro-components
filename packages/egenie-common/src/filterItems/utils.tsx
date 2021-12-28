@@ -3,9 +3,6 @@ import _ from 'lodash';
 import React from 'react';
 import type { ValueAndLabelData } from './types';
 
-/**
- * @internal
- */
 export function formatValueAndLabelData(data: ValueAndLabelData): ValueAndLabelData {
   if (Array.isArray(data)) {
     return data.map((item) => ({
@@ -19,9 +16,6 @@ export function formatValueAndLabelData(data: ValueAndLabelData): ValueAndLabelD
   }
 }
 
-/**
- * @internal
- */
 export function FilterItemLabel({
   labelWidth,
   label,
@@ -69,3 +63,5 @@ export function trimWhiteSpace(value: string, isTrimWhiteSpace: boolean): string
     return _.toString(value);
   }
 }
+
+export const throttleTime = 300;

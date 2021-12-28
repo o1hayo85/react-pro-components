@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel, trimWhiteSpace } from './utils';
+import { FilterItemLabel, throttleTime, trimWhiteSpace } from './utils';
 
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {
@@ -36,7 +36,7 @@ export class FilterInput extends FilterBase {
     }
   }
 
-  public toParams(this: FilterInput): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
@@ -44,7 +44,7 @@ export class FilterInput extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInput): string[] {
+  public translateParams(): string[] {
     if (this.toProgramme()) {
       return [
         this.label,
@@ -56,7 +56,7 @@ export class FilterInput extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterInput, value?: string): void {
+  public formatValue(value?: string): void {
     this.value = trimWhiteSpace(value, this.isTrimWhiteSpace);
   }
 
@@ -78,9 +78,6 @@ export class FilterInput extends FilterBase {
    */
   @observable public value = '';
 
-  /**
-   * @internal
-   */
   @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
     this.handleCallback();
@@ -112,16 +109,13 @@ export class FilterInput extends FilterBase {
   @observable public disabled = false;
 }
 
-/**
- * @internal
- */
 @observer
 export class FilterInputComponent extends React.Component<{ store: FilterInput; }> {
-  public handlePressEnter: React.KeyboardEventHandler = (event) => {
+  public handlePressEnter: React.KeyboardEventHandler = _.throttle((event) => {
     if (typeof this.props.store.onPressEnter === 'function') {
       this.props.store.onPressEnter();
     }
-  };
+  }, throttleTime);
 
   render() {
     const {

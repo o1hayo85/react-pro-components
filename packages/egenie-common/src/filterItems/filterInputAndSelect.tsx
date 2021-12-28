@@ -44,7 +44,7 @@ export class FilterInputAndSelect extends FilterBase {
     }
   }
 
-  public toParams(this: FilterInputAndSelect): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.selectValue) {
       if (trimWhiteSpace(this.inputValue, this.isTrimWhiteSpace)) {
         return { [this.selectValue]: trimWhiteSpace(this.inputValue, this.isTrimWhiteSpace) };
@@ -56,7 +56,7 @@ export class FilterInputAndSelect extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInputAndSelect): string[] {
+  public translateParams(): string[] {
     if (this.selectValue) {
       if (trimWhiteSpace(this.inputValue, this.isTrimWhiteSpace)) {
         return [
@@ -90,7 +90,7 @@ export class FilterInputAndSelect extends FilterBase {
   };
 
   @action
-  public formatValue(this: FilterInputAndSelect, value?: string): void {
+  public formatValue(value?: string): void {
     const keyAndValue = _.toString(value)
       .split(',');
     this.inputValue = trimWhiteSpace(keyAndValue[1], this.isTrimWhiteSpace);

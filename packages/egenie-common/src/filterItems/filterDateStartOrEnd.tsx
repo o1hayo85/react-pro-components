@@ -71,7 +71,7 @@ export class FilterDateStartOrEnd extends FilterBase {
     }
   }
 
-  public toParams(this: FilterDateStartOrEnd): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
@@ -79,7 +79,7 @@ export class FilterDateStartOrEnd extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterDateStartOrEnd): string[] {
+  public translateParams(): string[] {
     if (this.toProgramme()) {
       return [
         this.label,
@@ -91,7 +91,7 @@ export class FilterDateStartOrEnd extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterDateStartOrEnd, value?: string | moment.Moment | null): void {
+  public formatValue(value?: string | moment.Moment | null): void {
     if (!value) {
       this.value = null;
     } else if (typeof value === 'string') {

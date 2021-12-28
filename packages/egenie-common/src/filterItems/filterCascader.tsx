@@ -41,7 +41,7 @@ export class FilterCascader extends FilterBase {
     }
   }
 
-  public toParams(this: FilterCascader): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
@@ -49,7 +49,7 @@ export class FilterCascader extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterCascader): string[] {
+  public translateParams(): string[] {
     if (Array.isArray(this.value) && this.value.length) {
       const translatePath: string[] = [];
       let currentData = this.data;
@@ -74,7 +74,7 @@ export class FilterCascader extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterCascader, value?: string[] | string): void {
+  public formatValue(value?: string[] | string): void {
     if (Array.isArray(value)) {
       this.value = value;
     } else {

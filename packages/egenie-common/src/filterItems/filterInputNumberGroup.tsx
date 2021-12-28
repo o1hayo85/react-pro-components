@@ -70,7 +70,7 @@ export class FilterInputNumberGroup extends FilterBase {
     }
   }
 
-  public toParams(this: FilterInputNumberGroup): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     const numberString = formatNumberString(this.value);
     if (this.data.length > 1) {
       if (this.selectValue) {
@@ -91,7 +91,7 @@ export class FilterInputNumberGroup extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInputNumberGroup): string[] {
+  public translateParams(): string[] {
     const numberString = formatNumberString(this.value).replace(',', '至');
     if (this.data.length > 1) {
       if (this.selectValue) {
@@ -118,7 +118,7 @@ export class FilterInputNumberGroup extends FilterBase {
     }
   }
 
-  public formatValue(this: FilterInputNumberGroup, value?: string | [number, number]): void {
+  public formatValue(value?: string | [number, number]): void {
     if (Array.isArray(value)) {
       this.value = value;
     } else if (typeof value === 'string') {

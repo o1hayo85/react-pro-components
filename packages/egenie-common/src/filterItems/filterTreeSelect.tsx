@@ -58,7 +58,7 @@ export class FilterTreeSelect extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterTreeSelect): string[] {
+  public translateParams(): string[] {
     if (Array.isArray(this.value) && this.value.length) {
       const flattenTree = new Map<string, FilterTreeSelectItem>();
       (function dfs(data: FilterTreeSelectItem[]) {
@@ -92,7 +92,7 @@ export class FilterTreeSelect extends FilterBase {
     }
   }
 
-  public toParams(this: FilterTreeSelect): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme()) {
       return { [this.field]: this.toProgramme() };
     } else {
@@ -101,7 +101,7 @@ export class FilterTreeSelect extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterTreeSelect, value?: string[] | string): void {
+  public formatValue(value?: string[] | string): void {
     if (Array.isArray(value)) {
       this.value = value;
     } else {

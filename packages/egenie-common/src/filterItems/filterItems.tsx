@@ -17,7 +17,7 @@ import type { FilterItem, FilterItemOptions, FilterItemSettingItem, ValueAndLabe
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { formatValueAndLabelData } from './utils';
 
-function validParams(data: FilterItemOptions[]) {
+function validParams(data: FilterItemOptions[]): never | void {
   data.forEach((item) => {
     if (!(item.type in ENUM_FILTER_ITEM_TYPE)) {
       throw new Error(`当前type: ${item.type}。只支持${Object.values(ENUM_FILTER_ITEM_TYPE)
@@ -83,9 +83,6 @@ export function filterInstanceFactory(item: FilterItemOptions): FilterItem {
   }
 }
 
-/**
- * @internal
- */
 export function filterComponentFactory(item: FilterItem): React.ReactNode {
   switch (item.type) {
     case ENUM_FILTER_ITEM_TYPE.input:
@@ -230,9 +227,6 @@ export class FilterItems {
    */
   @observable public dict: FilterItemsParams['dict'] = {};
 
-  /**
-   * @internal
-   */
   public initSettingData: FilterItemSettingItem[] = [];
 
   @action private init = (data: FilterItemOptions[], dict: FilterItemsParams['dict']): void => {
@@ -253,7 +247,7 @@ export class FilterItems {
   };
 
   /**
-   * @internal
+   * 提供给外层交换顺序
    */
   @action public swap = (oldIndex: number, newIndex: number) => {
     if (oldIndex >= 0) {
@@ -327,12 +321,12 @@ export class FilterItems {
   }
 
   /**
-   * @internal
+   * 原始数据
    */
   @observable public originData: FilterItem[] = [];
 
   /**
-   * @internal
+   * 展现数据
    */
   @computed
   public get actualData(): FilterItem[] {
@@ -346,8 +340,6 @@ export class FilterItems {
   public get params(): {[key: string]: string; } {
     const params = this.actualData.reduce((prev, current) => ({
       ...prev,
-
-      // @ts-ignore
       ...current.toParams.call(current),
     }), {});
 
@@ -362,7 +354,6 @@ export class FilterItems {
    */
   @computed
   public get translateParamsList(): string[][] {
-    // @ts-ignore
     return this.actualData.map((item) => item.translateParams.call(item) as string[])
       .filter((item: string[]) => item.length);
   }

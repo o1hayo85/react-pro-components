@@ -67,7 +67,7 @@ export class FilterSelect extends FilterBase {
     }
   }
 
-  public toParams(this: FilterSelect): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme() == null) {
       return {};
     } else {
@@ -75,7 +75,7 @@ export class FilterSelect extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterSelect): string[] {
+  public translateParams(): string[] {
     if (this.toProgramme() == null) {
       return [];
     } else {
@@ -89,7 +89,7 @@ export class FilterSelect extends FilterBase {
   }
 
   @action
-  public formatValue(this: FilterSelect, value?: string | undefined | string[]): void {
+  public formatValue(value?: string | undefined | string[]): void {
     if (this.mode) {
       if (Array.isArray(value)) {
         this.value = value;

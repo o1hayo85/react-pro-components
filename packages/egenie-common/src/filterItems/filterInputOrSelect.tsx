@@ -41,7 +41,7 @@ export class FilterInputOrSelect extends FilterBase {
     }
   }
 
-  public toParams(this: FilterInputOrSelect): {[key: string]: string; } {
+  public toParams(): {[key: string]: string; } {
     if (this.toProgramme() == undefined) {
       return {};
     } else {
@@ -49,7 +49,7 @@ export class FilterInputOrSelect extends FilterBase {
     }
   }
 
-  public translateParams(this: FilterInputOrSelect): string[] {
+  public translateParams(): string[] {
     if (trimWhiteSpace(this.value, this.isTrimWhiteSpace)) {
       return [
         this.label,
@@ -81,7 +81,7 @@ export class FilterInputOrSelect extends FilterBase {
   };
 
   @action
-  public formatValue(this: FilterInputOrSelect, value?: string): void {
+  public formatValue(value?: string): void {
     const item = this.data.find((item) => item.value === value);
     if (item) {
       this.selectValue = item.value;
