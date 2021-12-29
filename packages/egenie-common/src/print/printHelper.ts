@@ -1,4 +1,4 @@
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 import { JdPrint } from './jdPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
@@ -76,11 +76,10 @@ class PrintHelper {
       try {
         printers = await printPlugins[i].getPrinters();
       } catch (e) {
+        message.destroy();
         console.log(e, '尝试获取打印机错误，可忽略');
       }
     }
-
-    Modal.destroyAll();
 
     if (printers.length) {
       return printers;
