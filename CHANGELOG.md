@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.12...v0.0.0) (2021-12-29)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.13...v0.0.0) (2021-12-29)
+
+### Features
+
+- **egenie-common:** add filterItem 测试 ([ef50a0f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ef50a0f73d9416494dba334ccccd8d96b5e9856c))
+- **react-scripts:** 更新 copyWebpackPlugin 配置 ([568c68b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/568c68bc752eff68c90a2e5b3952b64dbe36c42c))
+
+## [0.8.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.12...v0.8.13) (2021-12-29)
 
 ## [0.8.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.11...v0.8.12) (2021-12-22)
 

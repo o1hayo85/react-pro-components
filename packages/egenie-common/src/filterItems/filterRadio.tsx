@@ -1,9 +1,7 @@
-import { Input, Radio } from 'antd';
-import { action, extendObservable, observable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
+import type { Input } from 'antd';
+import { action, extendObservable, observable } from 'mobx';
 import React from 'react';
 import { FilterBase } from './filterBase';
-import styles from './filterItems.less';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
 export class FilterRadio extends FilterBase {
@@ -141,9 +139,6 @@ export class FilterRadio extends FilterBase {
    */
   @observable public inputValue = '';
 
-  /**
-   * @internal
-   */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.inputValue = event.target.value;
     if (typeof this.handleChangeCallback === 'function') {
@@ -156,9 +151,6 @@ export class FilterRadio extends FilterBase {
    */
   @observable public value: undefined | string = undefined;
 
-  /**
-   * @internal
-   */
   @action public handleSelectValue = (value: undefined | string) => {
     this.value = this.value === value ? undefined : value;
     if (this.value != undefined) {
@@ -177,9 +169,6 @@ export class FilterRadio extends FilterBase {
    */
   @observable public placeholder = '请输入';
 
-  /**
-   * @internal
-   */
   @observable.ref public inputRef = React.createRef<Input>();
 
   /**
@@ -192,74 +181,8 @@ export class FilterRadio extends FilterBase {
    */
   public handleChangeCallback: (value?: string | undefined) => void;
 
-  /**
-   * @internal
-   */
   @action public handleInputClick = () => {
     this.value = this.data.find((item) => item.showInput)?.value;
   };
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterRadioComponent extends React.Component<{ store: FilterRadio; }> {
-  public handlePressEnter: React.KeyboardEventHandler = (event) => {
-    if (typeof this.props.store.onPressEnter === 'function') {
-      this.props.store.onPressEnter();
-    }
-  };
-
-  render() {
-    const {
-      inputValue,
-      handleInputChange,
-      placeholder,
-      style,
-      className,
-      data,
-      handleSelectValue,
-      value,
-      inputRef,
-      handleInputClick,
-      disabled,
-    } = this.props.store;
-    return (
-      <div
-        className={`${styles.filterInputOrRadio} ${className}`}
-        style={toJS(style)}
-      >
-        <Radio.Group
-          disabled={disabled}
-          value={value}
-        >
-          {
-            data.map((item) => (
-              <Radio
-                key={item.value}
-                onClick={() => handleSelectValue(item.value)}
-                value={item.value}
-              >
-                {item.label}
-                {
-                  item.showInput ? (
-                    <Input
-                      onChange={handleInputChange}
-                      onClick={handleInputClick}
-                      onPressEnter={this.handlePressEnter}
-                      placeholder={placeholder}
-                      ref={inputRef}
-                      size="small"
-                      value={inputValue}
-                    />
-                  ) : null
-                }
-              </Radio>
-            ))
-          }
-        </Radio.Group>
-      </div>
-    );
-  }
-}

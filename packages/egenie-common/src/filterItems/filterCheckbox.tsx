@@ -1,9 +1,5 @@
-import { Checkbox } from 'antd';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
 import { FilterBase } from './filterBase';
-import styles from './filterItems.less';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
 function formatValue(value?: string[] | string): string[] {
@@ -95,9 +91,6 @@ export class FilterCheckbox extends FilterBase {
    */
   @observable public value: string [] = [];
 
-  /**
-   * @internal
-   */
   @action public onChange = (value: string[]) => {
     this.value = value || [];
     this.handleCallback();
@@ -114,34 +107,3 @@ export class FilterCheckbox extends FilterBase {
   @observable public disabled = false;
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterCheckboxComponent extends React.Component<{ store: FilterCheckbox; }> {
-  render() {
-    const {
-      value,
-      onChange,
-      disabled,
-      style,
-      className = '',
-      data,
-    } = this.props.store;
-    return (
-      <div
-        className={`${styles.filterCheckbox} ${className}`}
-        style={toJS(style)}
-      >
-        <Checkbox.Group
-          disabled={disabled}
-
-          // @ts-ignore
-          onChange={onChange}
-          options={data}
-          value={value}
-        />
-      </div>
-    );
-  }
-}

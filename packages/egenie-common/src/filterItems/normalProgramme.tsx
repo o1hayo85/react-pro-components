@@ -62,14 +62,8 @@ export class NormalProgramme {
 
   private searchCallback: NormalProgrammeParams['handleSearch'];
 
-  /**
-   * @internal
-   */
   @observable public isSearch = false;
 
-  /**
-   * @internal
-   */
   @action public handleSearch = () => {
     this.isSearch = true;
 
@@ -103,9 +97,6 @@ export class NormalProgramme {
 
   @observable public showButton = true;
 
-  /**
-   * @internal
-   */
   @action public reset = () => {
     this.filterItems.reset();
   };

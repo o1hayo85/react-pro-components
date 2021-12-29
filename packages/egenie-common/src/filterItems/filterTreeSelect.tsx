@@ -1,11 +1,8 @@
-import { TreeSelect } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
+import type React from 'react';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 /**
  * TreeData数据类型
@@ -125,9 +122,6 @@ export class FilterTreeSelect extends FilterBase {
    */
   @observable public value: string[] = [];
 
-  /**
-   * @internal
-   */
   @action public onChange = (value: string[]) => {
     if (Array.isArray(value)) {
       this.value = value;
@@ -147,9 +141,6 @@ export class FilterTreeSelect extends FilterBase {
    */
   public onChangeCallback: (value?: string[]) => void;
 
-  /**
-   * @internal
-   */
   @action public onSelect = (value: string) => {
     if (typeof value === 'string' || typeof value === 'number') {
       if (typeof this.onChangeCallback === 'function') {
@@ -296,9 +287,6 @@ export class FilterTreeSelect extends FilterBase {
    */
   @observable public virtual = true;
 
-  /**
-   * @internal
-   */
   @action public onTreeExpand = (treeExpandedKeys: string[]) => {
     if (Array.isArray(treeExpandedKeys)) {
       this.treeExpandedKeys = treeExpandedKeys;
@@ -308,93 +296,3 @@ export class FilterTreeSelect extends FilterBase {
   };
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterTreeSelectComponent extends React.Component<{ store: FilterTreeSelect; }> {
-  render() {
-    const {
-      value,
-      onChange,
-      placeholder,
-      allowClear,
-      disabled,
-      style,
-      className,
-      label,
-      showSearch,
-      labelWidth,
-      dropdownClassName,
-      dropdownMatchSelectWidth,
-      listHeight,
-      loadData,
-      multiple,
-      treeExpandedKeys,
-      treeNodeFilterProp,
-      treeData,
-      onTreeExpand,
-      treeCheckable,
-      showCheckedStrategy,
-      maxTagCount,
-      treeDataSimpleMode,
-      autoClearSearchValue,
-      dropdownStyle,
-      showArrow,
-      suffixIcon,
-      switcherIcon,
-      treeDefaultExpandAll,
-      treeDefaultExpandedKeys,
-      treeIcon,
-      onSelect,
-      required,
-    } = this.props.store;
-    return (
-      <div
-        className={`filterTreeSelect ${className}`}
-        style={toJS(style)}
-      >
-        <FilterItemLabel
-          label={label}
-          labelWidth={labelWidth}
-          required={required}
-        />
-        <section style={{ width: `calc(100% - ${labelWidth}px)` }}>
-          <TreeSelect
-            allowClear={allowClear}
-            autoClearSearchValue={autoClearSearchValue}
-            bordered={false}
-            disabled={disabled}
-            dropdownClassName={dropdownClassName}
-            dropdownMatchSelectWidth={dropdownMatchSelectWidth}
-            dropdownStyle={dropdownStyle}
-            listHeight={listHeight}
-            loadData={loadData}
-            maxTagCount={maxTagCount}
-            multiple={multiple}
-            onChange={onChange}
-            onSelect={onSelect}
-
-            // @ts-ignore
-            onTreeExpand={onTreeExpand}
-            placeholder={placeholder}
-            showArrow={showArrow}
-            showCheckedStrategy={showCheckedStrategy}
-            showSearch={showSearch}
-            suffixIcon={suffixIcon}
-            switcherIcon={switcherIcon}
-            treeCheckable={treeCheckable}
-            treeData={treeData}
-            treeDataSimpleMode={treeDataSimpleMode}
-            treeDefaultExpandAll={treeDefaultExpandAll}
-            treeDefaultExpandedKeys={treeDefaultExpandedKeys}
-            treeExpandedKeys={treeExpandedKeys}
-            treeIcon={treeIcon}
-            treeNodeFilterProp={treeNodeFilterProp}
-            value={value}
-          />
-        </section>
-      </div>
-    );
-  }
-}

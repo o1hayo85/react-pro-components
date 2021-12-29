@@ -1,14 +1,9 @@
-import { DatePicker, Row, Select, Tag } from 'antd';
-import classNames from 'classnames';
 import _ from 'lodash';
-import { action, observable, extendObservable, toJS, computed } from 'mobx';
-import { observer } from 'mobx-react';
+import { action, observable, extendObservable, computed } from 'mobx';
 import moment from 'moment';
 import React from 'react';
 import { FilterBase } from './filterBase';
-import styles from './filterItems.less';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 export enum FormatDateType {
   defaultFormat = 'YYYY-MM-DD HH:mm:ss',
@@ -401,9 +396,6 @@ export class FilterDate extends FilterBase {
    */
   public handleChangeCallback: (date?: [moment.Moment, moment.Moment]) => void;
 
-  /**
-   * @internal
-   */
   @action public handleSelectChange = (selectValue: string | undefined) => {
     this.selectValue = selectValue;
   };
@@ -423,17 +415,11 @@ export class FilterDate extends FilterBase {
    */
   @observable.ref public startTime: moment.Moment | null = null;
 
-  /**
-   * @internal
-   */
   @action public handleStartChange = (startTime: moment.Moment | null) => {
     this.startTime = startTime;
     this.handleCallback();
   };
 
-  /**
-   * @internal
-   */
   @action public handleRangeChange = (dates: [moment.Moment, moment.Moment]) => {
     this.startTime = dates?.[0];
     this.endTime = dates?.[1];
@@ -453,9 +439,6 @@ export class FilterDate extends FilterBase {
     false,
   ];
 
-  /**
-   * @internal
-   */
   @action public handleEndChange = (endTime: moment.Moment | null) => {
     this.endTime = endTime;
     this.handleCallback();
@@ -474,9 +457,6 @@ export class FilterDate extends FilterBase {
    */
   @observable.ref public dateDict: FilterDateDateItem[] = Object.values(filterDateDict);
 
-  /**
-   * @internal
-   */
   @computed
   public get realDateDict(): Array<{ value: string; label: FilterDateDict['label']; getTimes: FilterDateDict['getTimes']; }> {
     const result: Array<{ value: string; label: FilterDateDict['label']; getTimes: FilterDateDict['getTimes']; }> = [];
@@ -496,9 +476,6 @@ export class FilterDate extends FilterBase {
     return result;
   }
 
-  /**
-   * @internal
-   */
   @action public handleDateDictChange = (value: string) => {
     const item = this.realDateDict.find((item) => item.value === value);
     if (item.getTimes) {
@@ -517,22 +494,13 @@ export class FilterDate extends FilterBase {
     }
   };
 
-  /**
-   * @internal
-   */
   @observable public open: [boolean, boolean] = [
     false,
     false,
   ];
 
-  /**
-   * @internal
-   */
   @observable public containerRef = React.createRef<HTMLDivElement>();
 
-  /**
-   * @internal
-   */
   @action public fixPanelHideNotSetTime = (isOpen: boolean): void => {
     const containerRef = this.containerRef;
     const startPlaceHolder = this.placeholder[0];
@@ -554,261 +522,3 @@ export class FilterDate extends FilterBase {
   };
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterDateComponent extends React.Component<{ store: FilterDate; }> {
-  render() {
-    if (this.props.store.type === ENUM_FILTER_ITEM_TYPE.date) {
-      return <FilterDateNormal store={this.props.store}/>;
-    } else {
-      return <FilterDateRange store={this.props.store}/>;
-    }
-  }
-}
-
-/**
- * @internal
- */
-@observer
-class FilterDateNormal extends React.Component<{ store: FilterDate; }> {
-  /**
-   * @internal
-   */
-  public disableStartDate = (current: moment.Moment): boolean => {
-    const { endTime } = this.props.store;
-    if (endTime) {
-      if (current) {
-        return new Date(current.format(FormatDateType.defaultFormat)).valueOf() >= new Date(endTime.format(FormatDateType.defaultFormat)).valueOf();
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  };
-
-  public disableEndDate = (current: moment.Moment): boolean => {
-    const { startTime } = this.props.store;
-    if (startTime) {
-      if (current) {
-        return new Date(current.format(FormatDateType.defaultFormat)).valueOf() <= new Date(startTime.format(FormatDateType.defaultFormat)).valueOf();
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  };
-
-  render() {
-    const {
-      startTime,
-      endTime,
-      handleStartChange,
-      handleEndChange,
-      placeholder,
-      format,
-      handleSelectChange,
-      data,
-      selectValue,
-      label,
-      className,
-      style,
-      disabled,
-      labelWidth,
-      allowClear,
-      required,
-      open,
-      containerRef,
-      fixPanelHideNotSetTime,
-    } = this.props.store;
-    const newClassName = classNames('filterDateSelect', className);
-    return (
-      <div
-        className={newClassName}
-        ref={containerRef}
-        style={toJS(style)}
-      >
-        <header>
-          <FilterItemLabel
-            label={label}
-            labelWidth={labelWidth}
-            required={required}
-          />
-          <Select
-            bordered={false}
-            dropdownMatchSelectWidth={false}
-            getPopupContainer={(nodeItem) => nodeItem.parentElement}
-            onChange={handleSelectChange}
-            options={data}
-            placeholder="请选择"
-            style={{ width: `calc(100% - ${labelWidth}px)` }}
-            value={selectValue}
-          />
-        </header>
-        <section>
-          <DatePicker
-            allowClear={allowClear}
-            bordered={false}
-            disabled={disabled[0]}
-            disabledDate={this.disableStartDate}
-            dropdownClassName={styles.dropdownDate}
-            format={format}
-            onChange={handleStartChange}
-            onOpenChange={(isOpen: boolean) => {
-              fixPanelHideNotSetTime(isOpen);
-              this.props.store.open[0] = isOpen;
-            }}
-            open={open[0]}
-            placeholder={Array.isArray(placeholder) ? placeholder[0] : placeholder}
-            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
-            showNow={false}
-            showTime={format === FormatDateType.defaultFormat ? {
-              hideDisabledOptions: true,
-              defaultValue: moment('00:00:00', 'HH:mm:ss'),
-            } : false}
-            showToday={false}
-            suffixIcon={null}
-            value={startTime}
-          />
-          <div>
-            至
-          </div>
-          <DatePicker
-            allowClear={allowClear}
-            bordered={false}
-            disabled={disabled[1]}
-            disabledDate={this.disableEndDate}
-            dropdownClassName={styles.dropdownDate}
-            format={format}
-            onChange={handleEndChange}
-            onOpenChange={(isOpen: boolean) => {
-              fixPanelHideNotSetTime(isOpen);
-              this.props.store.open[1] = Boolean(isOpen);
-            }}
-            open={open[1]}
-            placeholder={Array.isArray(placeholder) ? placeholder[1] : placeholder}
-            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
-            showNow={false}
-            showTime={format === FormatDateType.defaultFormat ? {
-              hideDisabledOptions: true,
-              defaultValue: moment('23:59:59', 'HH:mm:ss'),
-            } : false}
-            showToday={false}
-            value={endTime}
-          />
-        </section>
-      </div>
-    );
-  }
-}
-
-/**
- * @internal
- */
-@observer
-class FilterDateRange extends React.Component<{ store: FilterDate; }> {
-  render() {
-    const {
-      allowEmpty,
-      startTime,
-      endTime,
-      placeholder,
-      format,
-      label,
-      className,
-      style,
-      disabled,
-      handleRangeChange,
-      labelWidth,
-      allowClear,
-      required,
-      open,
-      containerRef,
-      fixPanelHideNotSetTime,
-    } = this.props.store;
-    const newClassName = classNames('filterDateNormal', className);
-    return (
-      <div
-        className={newClassName}
-        ref={containerRef}
-        style={toJS(style)}
-      >
-        <header>
-          <FilterItemLabel
-            label={label}
-            labelWidth={labelWidth}
-            required={required}
-          />
-        </header>
-        <section>
-          <DatePicker.RangePicker
-            allowClear={allowClear}
-            allowEmpty={allowEmpty}
-            bordered={false}
-            disabled={disabled}
-            dropdownClassName={styles.dropdownDate}
-            format={format}
-            onChange={handleRangeChange}
-            onOpenChange={(isOpen: boolean) => {
-              fixPanelHideNotSetTime(isOpen);
-              this.props.store.open = [
-                Boolean(isOpen),
-                Boolean(isOpen),
-              ];
-            }}
-            open={open[0]}
-            placeholder={placeholder}
-            renderExtraFooter={() => <FilterDateDictComponent store={this.props.store}/>}
-            showTime={format === FormatDateType.defaultFormat ? {
-              hideDisabledOptions: true,
-              defaultValue: [
-                moment('00:00:00', 'HH:mm:ss'),
-                moment('23:59:59', 'HH:mm:ss'),
-              ],
-            } : false}
-            value={[
-              startTime,
-              endTime,
-            ]}
-          />
-        </section>
-      </div>
-    );
-  }
-}
-
-/**
- * @internal
- */
-@observer
-class FilterDateDictComponent extends React.Component<{ store: FilterDate; }> {
-  render() {
-    const {
-      handleDateDictChange,
-      realDateDict,
-    } = this.props.store;
-    return (
-      <Row
-        className={styles.dateSelect}
-        gutter={[
-          4,
-          4,
-        ]}
-      >
-        {realDateDict.map((item) => (
-          <Tag
-            className="egenie-secondary-content"
-            color="blue"
-            key={item.value}
-            onClick={() => handleDateDictChange(item.value)}
-          >
-            {item.label}
-          </Tag>
-        ))}
-      </Row>
-    );
-  }
-}

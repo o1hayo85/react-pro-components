@@ -1,13 +1,9 @@
-import { DatePicker } from 'antd';
-import classNames from 'classnames';
-import { action, observable, extendObservable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
+import { action, observable, extendObservable } from 'mobx';
 import moment from 'moment';
 import React from 'react';
 import { FilterBase } from './filterBase';
 import { FormatDateType } from './filterDate';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 function formatTime(value: moment.Moment | null, format: string, formatParams: string, type: string): string {
   if (!value) {
@@ -139,9 +135,6 @@ export class FilterDateStartOrEnd extends FilterBase {
    */
   @observable.ref public value: moment.Moment | null = null;
 
-  /**
-   * @internal
-   */
   @action public handleChange = (value: moment.Moment | null) => {
     this.value = value;
     this.handleCallback();
@@ -157,14 +150,8 @@ export class FilterDateStartOrEnd extends FilterBase {
    */
   @observable public placeholder = '';
 
-  /**
-   * @internal
-   */
   @observable public containerRef = React.createRef<HTMLDivElement>();
 
-  /**
-   * @internal
-   */
   @action public fixPanelHideNotSetTime = (isOpen: boolean): void => {
     const containerRef = this.containerRef;
     const placeholder = this.placeholder;
@@ -179,62 +166,3 @@ export class FilterDateStartOrEnd extends FilterBase {
     }
   };
 }
-
-/**
- * @internal
- */
-@observer
-export class FilterDateStartOrEndComponent extends React.Component<{ store: FilterDateStartOrEnd; }> {
-  render() {
-    const {
-      value,
-      handleChange,
-      placeholder,
-      format,
-      label,
-      className,
-      style,
-      disabled,
-      type,
-      labelWidth,
-      allowClear,
-      required,
-      containerRef,
-      fixPanelHideNotSetTime,
-    } = this.props.store;
-    const newClassName = classNames('filterDateNormal', className);
-    return (
-      <div
-        className={newClassName}
-        ref={containerRef}
-        style={toJS(style)}
-      >
-        <header>
-          <FilterItemLabel
-            label={label}
-            labelWidth={labelWidth}
-            required={required}
-          />
-        </header>
-        <section>
-          <DatePicker
-            allowClear={allowClear}
-            bordered={false}
-            disabled={disabled}
-            format={format}
-            onChange={handleChange}
-            onOpenChange={fixPanelHideNotSetTime}
-            placeholder={placeholder}
-            showTime={format === FormatDateType.defaultFormat ? {
-              hideDisabledOptions: true,
-              defaultValue: type === ENUM_FILTER_ITEM_TYPE.dateStart ? moment('00:00:00', 'HH:mm:ss') : moment('23:59:59', 'HH:mm:ss'),
-            } : false}
-            showToday
-            value={value}
-          />
-        </section>
-      </div>
-    );
-  }
-}
-

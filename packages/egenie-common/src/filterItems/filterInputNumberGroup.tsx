@@ -1,11 +1,7 @@
-import { InputNumber, Select } from 'antd';
 import { action, extendObservable, observable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
 import { formatNumber } from '../helper';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 function formatNumberString(value: [number, number]) {
   if (value[0] == null && value[1] == null) {
@@ -187,9 +183,6 @@ export class FilterInputNumberGroup extends FilterBase {
    */
   @observable public selectValue = '';
 
-  /**
-   * @internal
-   */
   @action public handleSelectValue = (selectedValue: string) => {
     this.selectValue = selectedValue;
     if (typeof this.handleSelectChangeCallback === 'function') {
@@ -215,9 +208,6 @@ export class FilterInputNumberGroup extends FilterBase {
     null,
   ];
 
-  /**
-   * @internal
-   */
   @action public onMinChange = (min: number | string | null) => {
     this.value[0] = typeof min === 'number' || typeof min === 'string' ? formatNumber(min) : null;
     if (typeof this.handleChangeCallback === 'function') {
@@ -228,9 +218,6 @@ export class FilterInputNumberGroup extends FilterBase {
     }
   };
 
-  /**
-   * @internal
-   */
   @action public onMaxChange = (max: number | string | null) => {
     this.value[1] = typeof max === 'number' || typeof max === 'string' ? formatNumber(max) : null;
     if (typeof this.handleChangeCallback === 'function') {
@@ -260,91 +247,3 @@ export class FilterInputNumberGroup extends FilterBase {
   @observable public step = 1;
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterInputNumberGroupComponent extends React.Component<{ store: FilterInputNumberGroup; }> {
-  public handlePressEnter: React.KeyboardEventHandler = (event) => {
-    if (typeof this.props.store.onPressEnter === 'function') {
-      this.props.store.onPressEnter();
-    }
-  };
-
-  render() {
-    const {
-      value,
-      placeholder,
-      onMinChange,
-      onMaxChange,
-      step,
-      disabled,
-      style,
-      className,
-      label,
-      data,
-      selectValue,
-      handleSelectValue,
-      labelWidth,
-      required,
-    } = this.props.store;
-    return (
-      <div
-        className={`filterInputNumberGroup ${className}`}
-        style={toJS(style)}
-      >
-        {
-          (() => {
-            return data.length > 1 ? (
-              <Select
-                bordered={false}
-                disabled={disabled}
-                dropdownMatchSelectWidth={false}
-                getPopupContainer={(nodeItem) => nodeItem.parentElement}
-                onChange={handleSelectValue}
-                options={data}
-                placeholder="请选择"
-                style={{
-                  width: labelWidth,
-                  maxWidth: labelWidth,
-                }}
-                value={selectValue}
-              />
-            ) : (
-              <FilterItemLabel
-                label={label}
-                labelWidth={labelWidth}
-                required={required}
-              />
-            );
-          })()
-        }
-
-        <div
-          className="filterInputNumberGroupContent"
-          style={{ borderRadius: data.length > 1 ? '0 2px 2px 0' : 2 }}
-        >
-          <InputNumber
-            bordered={false}
-            disabled={disabled}
-            onChange={onMinChange}
-            onPressEnter={this.handlePressEnter}
-            placeholder={placeholder[0]}
-            step={step}
-            value={value[0]}
-          />
-          <span/>
-          <InputNumber
-            bordered={false}
-            disabled={disabled}
-            onChange={onMaxChange}
-            onPressEnter={this.handlePressEnter}
-            placeholder={placeholder[1]}
-            step={step}
-            value={value[1]}
-          />
-        </div>
-      </div>
-    );
-  }
-}

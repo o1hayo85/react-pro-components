@@ -1,10 +1,8 @@
-import { Input, Select } from 'antd';
+import type { Input } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
+import { action, extendObservable, observable } from 'mobx';
 import React from 'react';
 import { FilterBase } from './filterBase';
-import styles from './filterItems.less';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { trimWhiteSpace } from './utils';
 
@@ -102,14 +100,8 @@ export class FilterInputAndSelect extends FilterBase {
    */
   @observable public inputValue = '';
 
-  /**
-   * @internal
-   */
   @observable.ref public inputRef = React.createRef<Input>();
 
-  /**
-   * @internal
-   */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.inputValue = event.target.value;
     if (typeof this.handleInputChangeCallback === 'function') {
@@ -127,9 +119,6 @@ export class FilterInputAndSelect extends FilterBase {
    */
   @observable public selectValue: string | undefined = '';
 
-  /**
-   * @internal
-   */
   @action public handleSelectChange = (selectValue: string | undefined) => {
     this.selectValue = selectValue;
     this.inputRef.current.focus();
@@ -164,62 +153,3 @@ export class FilterInputAndSelect extends FilterBase {
   @observable public isTrimWhiteSpace = true;
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterInputAndSelectComponent extends React.Component<{ store: FilterInputAndSelect; }> {
-  public handlePressEnter: React.KeyboardEventHandler = (event) => {
-    if (typeof this.props.store.onPressEnter === 'function') {
-      this.props.store.onPressEnter();
-    }
-  };
-
-  render() {
-    const {
-      inputValue,
-      handleInputChange,
-      placeholder,
-      style,
-      className,
-      data,
-      handleSelectChange,
-      selectValue,
-      inputRef,
-      disabled,
-      labelWidth,
-    } = this.props.store;
-    return (
-      <div
-        className={`filterInputAndSelect ${className}`}
-        style={toJS(style)}
-      >
-        <Select
-          bordered={false}
-          disabled={disabled}
-          dropdownMatchSelectWidth={false}
-          getPopupContainer={(nodeItem) => nodeItem.parentElement}
-          onChange={handleSelectChange}
-          options={data}
-          placeholder="请选择"
-          style={{
-            width: labelWidth,
-            maxWidth: labelWidth,
-          }}
-          value={selectValue}
-        />
-        <Input
-          allowClear
-          bordered={false}
-          className={`${styles.input}`}
-          disabled={disabled}
-          onChange={handleInputChange}
-          onPressEnter={this.handlePressEnter}
-          placeholder={placeholder}
-          ref={inputRef}
-          value={inputValue}
-        />
-      </div>
-    );
-  }
-}

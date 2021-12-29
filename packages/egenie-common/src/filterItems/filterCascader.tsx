@@ -1,11 +1,7 @@
-import { Cascader } from 'antd';
 import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 export class FilterCascader extends FilterBase {
   constructor(options: Partial<FilterCascader>) {
@@ -102,9 +98,6 @@ export class FilterCascader extends FilterBase {
    */
   @observable public value: string[] = [];
 
-  /**
-   * @internal
-   */
   @action public onChange = (value: string[]) => {
     if (Array.isArray(value)) {
       this.value = value;
@@ -153,56 +146,4 @@ export class FilterCascader extends FilterBase {
     value: 'value',
     children: 'children',
   };
-}
-
-/**
- * @internal
- */
-@observer
-export class FilterCascaderComponent extends React.Component<{ store: FilterCascader; }> {
-  render() {
-    const {
-      value,
-      data,
-      onChange,
-      placeholder,
-      allowClear,
-      disabled,
-      style,
-      className,
-      label,
-      showSearch,
-      loadData,
-      fieldNames,
-      labelWidth,
-      required,
-    } = this.props.store;
-
-    return (
-      <div
-        className={`filterCascader ${className}`}
-        style={toJS(style)}
-      >
-        <FilterItemLabel
-          label={label}
-          labelWidth={labelWidth}
-          required={required}
-        />
-        <Cascader
-          allowClear={allowClear}
-          bordered={false}
-          disabled={disabled}
-          fieldNames={fieldNames}
-          loadData={loadData}
-
-          // @ts-ignore
-          onChange={onChange}
-          options={toJS(data)}
-          placeholder={placeholder}
-          showSearch={showSearch}
-          value={value}
-        />
-      </div>
-    );
-  }
 }

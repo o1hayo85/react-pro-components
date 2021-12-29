@@ -3972,17 +3972,17 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.8.6:
-  version "0.8.3"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.8.3.tgz#a85d3f912996fbb73f0a78f0f6c2b43843b72400"
-  integrity sha512-52t6D3T/yyv3uHHzmzdSH2YXGNRveEloBuZXhT2FVQkc7ai/9GJUf086zh3NCqUmTjD/P9b9yL4TTzWlHXfnqA==
+egenie-common@0.8.14:
+  version "0.8.14"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.8.14.tgz#80897ce04a1bfe9b984484d7eed42465b098b61e"
+  integrity sha512-IDB98Yx4KRvnmNB3bRJTsS11neCK199s4WifC98m+CbtLEdtt9tOaJv3hOoroMtbw2tHZZyLHhycMOAB8B1j0g==
   dependencies:
     classnames "2.2.6"
 
-egenie-config@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.8.3.tgz#4650f9f33237e1555d3844b2879a4c066f6ac16e"
-  integrity sha512-yYE9mYn6klMchYecWJWL3Bg7MEqitUurj1sGbXETbsrsmouVnVlI643os6zYNZM/G2zFi3bkRMkdHnx6MZPIew==
+egenie-config@^0.8.12:
+  version "0.8.12"
+  resolved "https://registry.npmmirror.com/egenie-config/download/egenie-config-0.8.12.tgz#d198747c32b49667ce330f28ffd5dd479431eede"
+  integrity sha512-AGqxvjZ53TEiI6a7muJwEqUAJMmbJ9Kbfslv5un7VcL/EOhAs2HU+fFFAZJTMI/c+ey0O2IQejBXvJGd5xMsgg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.14.5"
     "@babel/plugin-proposal-decorators" "^7.15.8"
@@ -4007,10 +4007,10 @@ egenie-data-grid@^0.8.2:
   dependencies:
     clsx "^1.1.1"
 
-egenie-test@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.0.tgz#5401e472dc9fb4fe498d7c4900cc85cdb0a44072"
-  integrity sha512-7jIfpxfEO3GJ6kCFPFw2jpQgAnp7Q7iJKRBOKQhC1VcaI+1XYEY69dEF52HKlZNDbhk5VNfeP6PyGE6BzQn41g==
+egenie-test@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.1.tgz#484803d323dbcc7e9b732d306313856340f4c71e"
+  integrity sha512-nO/G5Xi429BeUP9ECP7IDd8Dd+snEtAmxpsqZb+zyTpPsmHE6K6Y4tPOuiD0B9YfQZidY2ejEpfAOzDm0XSGVg==
   dependencies:
     babel-jest "^27.3.1"
     chalk "^4.1.2"

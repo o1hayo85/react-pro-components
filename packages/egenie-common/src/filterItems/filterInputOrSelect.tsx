@@ -1,7 +1,5 @@
-import { Input, Select } from 'antd';
-import { action, extendObservable, observable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
+import { action, extendObservable, observable } from 'mobx';
+import type React from 'react';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { trimWhiteSpace } from './utils';
@@ -97,9 +95,6 @@ export class FilterInputOrSelect extends FilterBase {
    */
   @observable public value = '';
 
-  /**
-   * @internal
-   */
   @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.value = event.target.value;
     if (typeof this.handleChangeCallback === 'function') {
@@ -109,9 +104,6 @@ export class FilterInputOrSelect extends FilterBase {
 
   @observable public selectValue: string | undefined = undefined;
 
-  /**
-   * @internal
-   */
   @action public handleSelectChange = (selectValue: string | undefined) => {
     this.selectValue = selectValue;
     if (typeof this.handleChangeCallback === 'function') {
@@ -145,63 +137,3 @@ export class FilterInputOrSelect extends FilterBase {
   @observable public isTrimWhiteSpace = true;
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterInputOrSelectComponent extends React.Component<{ store: FilterInputOrSelect; }> {
-  public handlePressEnter: React.KeyboardEventHandler = (event) => {
-    if (typeof this.props.store.onPressEnter === 'function') {
-      this.props.store.onPressEnter();
-    }
-  };
-
-  render() {
-    const {
-      value,
-      handleInputChange,
-      placeholder,
-      style,
-      className,
-      data,
-      handleSelectChange,
-      selectValue,
-      allowClear,
-      disabled,
-      labelWidth,
-    } = this.props.store;
-    return (
-      <div
-        className={`filterInputOrSelect ${className}`}
-        style={toJS(style)}
-      >
-        <section>
-          <Input
-            allowClear={allowClear}
-            bordered={false}
-            disabled={disabled}
-            onChange={handleInputChange}
-            onPressEnter={this.handlePressEnter}
-            placeholder={placeholder}
-            value={value}
-          />
-          <Select
-            allowClear
-            bordered={false}
-            disabled={disabled}
-            dropdownMatchSelectWidth={false}
-            getPopupContainer={(nodeItem) => nodeItem.parentElement}
-            onChange={handleSelectChange}
-            options={data}
-            placeholder="请选择"
-            style={{
-              width: labelWidth,
-              maxWidth: labelWidth,
-            }}
-            value={selectValue}
-          />
-        </section>
-      </div>
-    );
-  }
-}

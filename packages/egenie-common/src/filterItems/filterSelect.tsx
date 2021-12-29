@@ -1,11 +1,7 @@
-import { Button, Divider, Select } from 'antd';
 import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
-import { observer } from 'mobx-react';
-import React from 'react';
 import { FilterBase } from './filterBase';
 import type { ValueAndLabelData } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 function formatValue(oldValue: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
   if (mode) {
@@ -127,9 +123,6 @@ export class FilterSelect extends FilterBase {
    */
   @observable.ref public value: string | undefined | string[] = undefined;
 
-  /**
-   * @internal
-   */
   @action public onChange = (value: string | string[]) => {
     this.value = value;
     this.handleCallback();
@@ -140,9 +133,6 @@ export class FilterSelect extends FilterBase {
    */
   public onChangeCallback: (value?: string | string[] | undefined) => void;
 
-  /**
-   * @internal
-   */
   @action public onSearch = (searchValue: string) => {
     this.searchValue = typeof searchValue === 'string' ? searchValue : '';
     if (typeof this.onSearchCallback === 'function') {
@@ -180,9 +170,6 @@ export class FilterSelect extends FilterBase {
    */
   @observable public showChooseAll = false;
 
-  /**
-   * @internal
-   */
   @observable public searchValue = '';
 
   /**
@@ -195,9 +182,6 @@ export class FilterSelect extends FilterBase {
    */
   @observable public mode: 'multiple' | undefined = undefined;
 
-  /**
-   * @internal
-   */
   @computed
   public get options(): ValueAndLabelData {
     return this.data.filter((item) => item.label.toLowerCase()
@@ -211,81 +195,3 @@ export class FilterSelect extends FilterBase {
   @observable public showArrow = true;
 }
 
-/**
- * @internal
- */
-@observer
-export class FilterSelectComponent extends React.Component<{ store: FilterSelect; }> {
-  public handleChooseAll = () => {
-    this.props.store.onChange(this.props.store.options.map((item) => item.value));
-  };
-
-  render() {
-    const {
-      value,
-      onChange,
-      disabled,
-      style,
-      className,
-      placeholder,
-      allowClear,
-      showSearch,
-      options,
-      searchValue,
-      onSearch,
-      mode,
-      showChooseAll,
-      label,
-      labelWidth,
-      required,
-      showArrow,
-    } = this.props.store;
-    return (
-      <div
-        className={`filterSelect ${className}`}
-        style={toJS(style)}
-      >
-        <FilterItemLabel
-          label={label}
-          labelWidth={labelWidth}
-          required={required}
-        />
-        <Select
-          allowClear={allowClear}
-          bordered={false}
-          disabled={disabled}
-          dropdownMatchSelectWidth={false}
-          dropdownRender={mode && showChooseAll ? (menu) => {
-            return (
-              <>
-                {menu}
-                <Divider style={{ margin: '4px 0' }}/>
-                <Button
-                  block
-                  onClick={this.handleChooseAll}
-                  size="small"
-                  type="primary"
-                >
-                  全选
-                </Button>
-              </>
-            );
-          } : null}
-          getPopupContainer={(nodeItem) => nodeItem.parentElement}
-          maxTagCount="responsive"
-          mode={mode}
-          onChange={onChange}
-          onSearch={onSearch}
-          optionFilterProp="label"
-          options={options}
-          placeholder={placeholder}
-          searchValue={searchValue}
-          showArrow={showArrow}
-          showSearch={showSearch}
-          style={{ width: `calc(100% - ${labelWidth}px)` }}
-          value={toJS(value)}
-        />
-      </div>
-    );
-  }
-}
