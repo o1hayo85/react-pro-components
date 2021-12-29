@@ -1,8 +1,12 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.13...v0.0.0) (2021-12-29)
 
+### Bug Fixes
+
+- **egenie-utils:** 没有导出 FilterConfigData ([b327322](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b3273227ca30850306a11eed38f11c96d7d64d90))
+
 ### Features
 
-- **egenie-common:** add filterItem 测试 ([ef50a0f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ef50a0f73d9416494dba334ccccd8d96b5e9856c))
+- **egenie-common:** add filterItem 测试 ([d1d7f39](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d1d7f394726608ac431518581596041b69a9ae8d))
 - **react-scripts:** 更新 copyWebpackPlugin 配置 ([568c68b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/568c68bc752eff68c90a2e5b3952b64dbe36c42c))
 
 ## [0.8.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.12...v0.8.13) (2021-12-29)
