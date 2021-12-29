@@ -1,5 +1,5 @@
 export { ProgrammeParams, Programme, ProgrammeComponent } from './programme';
-export { formatFilterConfigData } from './formatFilterConfigData';
+export { formatFilterConfigData, FilterConfigData } from './formatFilterConfigData';
 export { FilterDate } from 'egenie-common';
 export { FilterDateComponent } from 'egenie-common';
 export { FilterDateStartOrEnd } from 'egenie-common';
