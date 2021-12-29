@@ -1,7 +1,7 @@
 import { Button, Space } from 'antd';
 import type { ModalProps, UploadProps } from 'antd';
 import type { BaseData } from 'egenie-common';
-import { request } from 'egenie-utils';
+import { request } from 'egenie-common';
 import { action, observable, set } from 'mobx';
 import React from 'react';
 import type { ImportModelProps, ImportPercent, ImportConditionGroup } from './interface';

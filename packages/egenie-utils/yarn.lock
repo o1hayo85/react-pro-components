@@ -3972,10 +3972,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@0.8.14:
-  version "0.8.14"
-  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.8.14.tgz#80897ce04a1bfe9b984484d7eed42465b098b61e"
-  integrity sha512-IDB98Yx4KRvnmNB3bRJTsS11neCK199s4WifC98m+CbtLEdtt9tOaJv3hOoroMtbw2tHZZyLHhycMOAB8B1j0g==
+egenie-common@^0.8.15:
+  version "0.8.15"
+  resolved "https://registry.npmmirror.com/egenie-common/download/egenie-common-0.8.15.tgz#16a4f8ea8fe250aeda653ea79d2b59a70980387b"
+  integrity sha512-iSyNCmtSbNPuGYd6sKOg2H7Y/9kSwO6h6LT7WP9YwTPnwZE6eHugxWEbnBsrwkZDKTeCE/Y/RiQJ/JpLWJVbgA==
   dependencies:
     classnames "2.2.6"
 
@@ -4007,10 +4007,10 @@ egenie-data-grid@^0.8.2:
   dependencies:
     clsx "^1.1.1"
 
-egenie-test@0.8.1:
-  version "0.8.1"
-  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.1.tgz#484803d323dbcc7e9b732d306313856340f4c71e"
-  integrity sha512-nO/G5Xi429BeUP9ECP7IDd8Dd+snEtAmxpsqZb+zyTpPsmHE6K6Y4tPOuiD0B9YfQZidY2ejEpfAOzDm0XSGVg==
+egenie-test@^0.8.15:
+  version "0.8.15"
+  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.15.tgz#4eb81d654c40fbccd2f775f73fb7cce672677e76"
+  integrity sha512-ovcsET14pHS0mGBByqB/ciriRUpEfgUHgKH3yxM0Q9MVU3uvAS3Kg52M+ErmEqY5muYACj5n9S7ODHToBiwIfQ==
   dependencies:
     babel-jest "^27.3.1"
     chalk "^4.1.2"

@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.8.17",
+  "version": "0.8.18",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
@@ -37,7 +37,7 @@
     "react-dom": "17.0.1",
     "typescript": "4.2.4"
   },
-  "gitHead": "4c27fa80d5f541f416c79242a5bfed6be58fd21c",
+  "gitHead": "2ab1cbf15879f2598004e2a9066795109533f924",
   "scripts": {
     "prepublish": "yarn run build",
     "build": "father-build",
