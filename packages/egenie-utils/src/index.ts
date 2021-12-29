@@ -29,3 +29,4 @@ export * from './loginForm/registry';
 export * from './searchListStructure';
 export * from './permission';
 export * from './exportModal';
+export * from './importModal';
