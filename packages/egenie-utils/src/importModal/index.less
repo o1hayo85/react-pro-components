@@ -1,0 +1,108 @@
+.error {
+  padding: @egenie-spacing-xs @egenie-spacing-md;
+  margin-bottom: @egenie-spacing-md;
+  background: rgba(251, 7, 31, 0.05);
+  border-radius: 2px;
+  width: 182px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  .errorTitle {
+    font-size: @egenie-font-size-sm;
+    line-height: @egenie-line-height-sm;
+    height: @egenie-line-height-sm;
+    font-weight: 400;
+    color: @egenie-heading-color;
+    display: flex;
+    align-items: center;
+  }
+
+  .errorIcon {
+    font-size: 14px;
+    margin-right: @egenie-spacing-xss;
+    color: #FA6866;
+    transform: rotate(180deg);
+  }
+}
+.modalChildren {
+  padding: @egenie-spacing-xss 0 @egenie-spacing-xs 68px;
+  :global {
+    .ant-steps-item-subtitle {
+      display: block !important;
+      margin-left: unset;
+      margin-top: -6px;
+
+    }
+  }
+}
+.downloadOutlined {
+  color: #1978FF;
+}
+.upload {
+  display: flex;
+  align-items: center;
+  .fileName {
+    flex: 2;
+    height: @egenie-line-height-sm;
+    font-weight: 400;
+    color: #1978FF;
+    font-size: @egenie-font-size-sm;
+    line-height: @egenie-line-height-sm;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-left: @egenie-spacing-xs;
+
+  }
+}
+.renderBeingImported {
+  padding: 26px 5px 32px 5px;
+  display: flex;
+  flex-direction: column;
+  .icon {
+    font-size: 14px;
+    margin-right: @egenie-spacing-xss;
+    color: #1978FF;
+    transform: rotate(180deg);
+  }
+  .title {
+    justify-content: center;
+    width: 100%;
+    font-weight: 400;
+    color: #2B2E3E;
+    display: flex;
+    align-items: center;
+    font-size: @egenie-font-size-sm;
+    line-height: @egenie-line-height-sm;
+    height: 30px;
+    background: #EAF3FF;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    margin-bottom: @egenie-spacing-md;
+  }
+  .button {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+.importConditionGroup {
+  display: flex;
+  flex-direction: column;
+}
+.importParams {
+  display: flex;
+  align-items: center;
+  margin-bottom: @egenie-spacing-md;
+  .importTitle {
+    height: 22px;
+    margin: 0 @egenie-spacing-md;
+    line-height: 22px;
+  }
+  .explain {
+    height: 22px;
+    line-height: 22px;
+    align-items: center;
+    flex: 2;
+    overflow: hidden;
+  }
+}
