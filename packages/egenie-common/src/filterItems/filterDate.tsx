@@ -324,26 +324,26 @@ export class FilterDate extends FilterBase {
   }
 
   @action public validator = (): Promise<string> => {
-    if (this.required) {
-      if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
-        if (this.selectValue) {
-          if (this.startTime || this.endTime) {
-            return Promise.resolve('');
-          } else {
-            return Promise.reject('请选择时间范围');
-          }
+    if (this.required === false) {
+      return Promise.resolve('');
+    }
+
+    if (this.type === ENUM_FILTER_ITEM_TYPE.date) {
+      if (this.selectValue) {
+        if (this.startTime || this.endTime) {
+          return Promise.resolve('');
         } else {
-          return Promise.reject('请选择时间类型');
+          return Promise.reject('请选择时间范围');
         }
       } else {
-        if (this.toProgramme() == null) {
-          return Promise.reject(`请填写:${this.label}`);
-        } else {
-          return Promise.resolve('');
-        }
+        return Promise.reject('请选择时间类型');
       }
     } else {
-      return Promise.resolve('');
+      if (this.startTime || this.endTime) {
+        return Promise.resolve('');
+      } else {
+        return Promise.reject(`请填写:${this.label}`);
+      }
     }
   };
 
