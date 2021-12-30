@@ -6,7 +6,7 @@ import { getPerms } from '../permission';
 import type { BaseData } from '../request';
 import { request } from '../request';
 import type { API, Egenie, Menudata, Permission, Response, SrcParams, User } from './interface';
-import { EnumVersion } from './interface';
+import { EnumVersion, HomePageType } from './interface';
 
 function combineUrl(oldUrl: string, params: string): string {
   if (typeof oldUrl === 'string') {
@@ -60,6 +60,10 @@ export class LayoutStore {
   @observable public showPassord = false;
 
   @observable public passwordFormInstance: unknown;
+
+  @observable public homePageTypes: HomePageType[] = [];
+
+  @observable public homePageType = 0; // 首页(账户)类型，1:零售商,2:供应商
 
   public immutableStyle = {
     titleHeight: 16,
@@ -134,6 +138,21 @@ export class LayoutStore {
     window.top.EgeniePermission = EgeniePermission;
   };
 
+  @action public getHomePageTypes = async(): Promise<void> => {
+    const res: BaseData<HomePageType[]> = await request({ url: '/api/iac/resource/homePage/types' });
+    const currentHomePageType = res.data.find((item) => item.current);
+    this.homePageTypes = res.data;
+    this.homePageType = currentHomePageType ? currentHomePageType.homePageType : 0;
+  };
+
+  @action public switchHomePageType = async(): Promise<void> => {
+    const newType = this.homePageType === 1 ? 2 : 1;
+    const next = this.homePageTypes.find((item) => item.homePageType === newType);
+    this.homePageType = newType;
+    await request({ url: `/api/iac/resource/update/homePageType?homePageType=${newType}` });
+    next && window.location.replace(next.indexUrl);
+  };
+
   @action public toggleVersion: Egenie['toggleVersion'] = async(resourceId, versionType, params = '') => {
     let menuItem: Partial<Menudata>;
     (function dfs(data: Array<Partial<Menudata>>) {
@@ -186,6 +205,7 @@ export class LayoutStore {
 
   public handleInit = (project) => {
     this.getUserInfo();
+    this.getHomePageTypes();
     this.getMenuList();
     getPerms();
     this.handleDefaultOpenPage();
