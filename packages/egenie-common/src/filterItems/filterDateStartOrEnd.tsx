@@ -5,7 +5,7 @@ import { FilterBase } from './filterBase';
 import { FormatDateType } from './filterDate';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
-function formatTime(value: moment.Moment | null, format: string, formatParams: string, type: string): string {
+export function formatTime(type: FilterDateStartOrEnd['type'], value: moment.Moment | null, format: string, formatParams: string): string {
   if (!value) {
     return '';
   }
@@ -60,8 +60,8 @@ export class FilterDateStartOrEnd extends FilterBase {
   @observable public type: 'dateStart' | 'dateEnd' = ENUM_FILTER_ITEM_TYPE.dateStart;
 
   public toProgramme(): string | null {
-    if (formatTime(this.value, this.format, this.formatParams, this.type)) {
-      return formatTime(this.value, this.format, this.formatParams, this.type);
+    if (formatTime(this.type, this.value, this.format, this.formatParams)) {
+      return formatTime(this.type, this.value, this.format, this.formatParams);
     } else {
       return null;
     }

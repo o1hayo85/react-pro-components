@@ -65,10 +65,10 @@ class PrintHelper {
   public getPrinters = async(): Promise<string[]> => {
     const printPlugins: Array<RookieAndPddAndDyPrint | JdPrint | LodopPrint> = [
       this.rookiePrint,
+      this.lodopPrint,
       this.dyPrint,
       this.pddPrint,
       this.jdPrint,
-      this.lodopPrint,
     ];
 
     let printers: string[] = [];

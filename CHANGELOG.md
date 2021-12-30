@@ -2,6 +2,7 @@
 
 ### Features
 
+- **egenie-common:** add filterItem 测试 ([c4cb7b2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c4cb7b26c06703cd2395dc4829c2ad4cb357923a))
 - **egenie-common:** add filterItem 测试 ([86e9d26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86e9d26a561f255832a3807b20c5c54fdd6e7435))
 - 添加导入组件库 ([1ed45fd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1ed45fd7976d90e7e0c78fa762217e011d6101e4))
 
