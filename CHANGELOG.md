@@ -2,7 +2,8 @@
 
 ### Features
 
-- **egenie-common:** add filterItem 测试 ([e9d263d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e9d263d8a1807063a73e93d106c82e2101a2168b))
+- **egenie-common:** 更新包 ([15e56d3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e56d3f74635550eaf35e54641f5ea29903118e))
+- **egenie-common:** add filterItem 测试 ([a153f08](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a153f0894b96e4f81e715e6afae6799d5387c97b))
 - **egenie-common:** add filterItem 测试 ([4d77fe7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4d77fe7dce16f6ab2183b589a6207ad039a21fd8))
 - **egenie-common:** add filterItem 测试 ([c4cb7b2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c4cb7b26c06703cd2395dc4829c2ad4cb357923a))
 - **egenie-common:** add filterItem 测试 ([86e9d26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86e9d26a561f255832a3807b20c5c54fdd6e7435))
