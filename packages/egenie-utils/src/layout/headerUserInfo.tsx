@@ -115,7 +115,11 @@ export class HeaderUserInfo extends React.Component<any> {
     const {
       userInfo,
       showPassord,
+      homePageTypes,
+      homePageType,
+      switchHomePageType,
     } = this.props.layoutStore;
+    const current = homePageTypes.find((item) => item.homePageType === homePageType);
     return (
       <div id={styles.headerUser}>
         {/* 扩展  */}
@@ -127,13 +131,28 @@ export class HeaderUserInfo extends React.Component<any> {
           placement="bottomLeft"
         >
           <div>
+            <img src="https://front.runscm.com/egenie-common/images/avator.png"/>
             <span>
               {userInfo.name}
             </span>
-            <img src="https://front.runscm.com/egenie-common/images/avator.png"/>
           </div>
         </Dropdown>
-        
+        {homePageTypes.length > 1 && (
+          <>
+            <span className={styles.splitIcon}>
+              |
+            </span>
+            <span
+              className={styles.switchRoleWrapper}
+              onClick={switchHomePageType}
+            >
+              <span className={styles.switchRole}>
+                {current ? current.indexUserName : ''}
+                <img src="https://front.runscm.com/egenie-common/images/switchArrow.png"/>
+              </span>
+            </span>
+          </>
+        )}
         {showPassord && this.passwordModal()}
       </div>
     );

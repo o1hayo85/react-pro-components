@@ -96,3 +96,10 @@ export interface Project {
   name: string;
   value: string;
 }
+
+export interface HomePageType {
+  current: boolean;
+  homePageType: number;
+  indexUrl: string;
+  indexUserName: string;
+}
