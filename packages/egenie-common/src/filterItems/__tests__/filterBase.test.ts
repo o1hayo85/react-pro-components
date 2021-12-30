@@ -74,6 +74,9 @@ describe('filterBase', () => {
 
   test('utils', () => {
     expect(trimWhiteSpace('aa', false)).toBe('aa');
+    expect(trimWhiteSpace('  aa', false)).toBe('  aa');
+    expect(trimWhiteSpace('aa  ', false)).toBe('aa  ');
+    expect(trimWhiteSpace('  aa  ', false)).toBe('  aa  ');
     expect(trimWhiteSpace('aa', true)).toBe('aa');
     expect(trimWhiteSpace(' aa', true)).toBe('aa');
     expect(trimWhiteSpace('aa  ', true)).toBe('aa');

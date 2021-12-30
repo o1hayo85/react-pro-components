@@ -3,18 +3,22 @@ import { FilterBase } from './filterBase';
 import type { ValueAndLabelData } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
-function formatValue(oldValue: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
+function formatValue(value: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
   if (mode) {
-    if (Array.isArray(oldValue)) {
-      return oldValue.map((item) => String(item));
+    if (Array.isArray(value)) {
+      return value.map((item) => String(item));
+    } else if (typeof value === 'string' || typeof value === 'number') {
+      return String(value)
+        .split(',')
+        .filter(Boolean);
     } else {
       return [];
     }
   } else {
-    if (oldValue == null) {
+    if (value == null) {
       return undefined;
     } else {
-      return String(oldValue);
+      return String(value);
     }
   }
 }
@@ -86,23 +90,7 @@ export class FilterSelect extends FilterBase {
 
   @action
   public formatValue(value?: string | undefined | string[]): void {
-    if (this.mode) {
-      if (Array.isArray(value)) {
-        this.value = value;
-      } else if (value == null) {
-        this.value = [];
-      } else {
-        this.value = String(value)
-          .split(',')
-          .filter(Boolean);
-      }
-    } else {
-      if (value == null) {
-        this.value = undefined;
-      } else {
-        this.value = String(value);
-      }
-    }
+    this.value = formatValue(value, this.mode);
   }
 
   private snapshot: string | undefined | string[] = undefined;

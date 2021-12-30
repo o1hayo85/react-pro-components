@@ -127,6 +127,10 @@ describe('filterDate', () => {
     // eslint-disable-next-line jest/valid-expect
     expect(filterDate.validator()).rejects.toMatch(/请/);
 
+    filterDate.selectValue = 'a';
+    expect(filterDate.toProgramme()).toBe('a');
+    filterDate.selectValue = undefined;
+
     filterDate.endTime = moment(endTimeStr);
     expect(filterDate.toProgramme()).toBeNull();
     expect(filterDate.toParams()).toEqual({});

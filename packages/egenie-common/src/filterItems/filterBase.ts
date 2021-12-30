@@ -126,12 +126,12 @@ export abstract class FilterBase {
    * 自定义校验
    */
   @action public validator = (): Promise<string> => {
-    if (this.required) {
-      if (this.toProgramme() == null) {
-        return Promise.reject(`请填写:${this.label}`);
-      } else {
-        return Promise.resolve('');
-      }
+    if (this.required === false) {
+      return Promise.resolve('');
+    }
+
+    if (this.toProgramme() == null) {
+      return Promise.reject(`请填写:${this.label}`);
     } else {
       return Promise.resolve('');
     }

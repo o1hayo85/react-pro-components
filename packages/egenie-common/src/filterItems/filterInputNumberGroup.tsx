@@ -3,7 +3,7 @@ import { formatNumber } from '../helper';
 import { FilterBase } from './filterBase';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
-function formatNumberString(value: [number, number]) {
+export function formatNumberString(value: [number, number]) {
   if (value[0] == null && value[1] == null) {
     return '';
   }
@@ -117,6 +117,7 @@ export class FilterInputNumberGroup extends FilterBase {
   public formatValue(value?: string | [number, number]): void {
     if (Array.isArray(value)) {
       this.value = value;
+      this.selectValue = undefined;
     } else if (typeof value === 'string') {
       const array = String(value)
         .split(',');
@@ -135,6 +136,7 @@ export class FilterInputNumberGroup extends FilterBase {
           result[1] = formatNumber(array[2]);
         }
       } else {
+        this.selectValue = undefined;
         if (array[0]) {
           result[0] = formatNumber(array[0]);
         }

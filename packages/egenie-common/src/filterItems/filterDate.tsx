@@ -468,7 +468,6 @@ export class FilterDate extends FilterBase {
           getTimes: filterDateDict[item].getTimes,
         });
       } else {
-        // @ts-ignore
         result.push(item);
       }
     });
