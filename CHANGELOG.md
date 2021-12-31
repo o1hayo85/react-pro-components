@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.17...v0.0.0) (2021-12-30)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.19...v0.0.0) (2021-12-31)
+
+### Features
+
+- **egenie-common:** 增加 filterItem 测试 ([08d5409](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/08d5409d954cf426619d8cb9b623f57ba1feceb9))
+
+## [0.8.19](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.17...v0.8.19) (2021-12-30)
 
 ### Features
 

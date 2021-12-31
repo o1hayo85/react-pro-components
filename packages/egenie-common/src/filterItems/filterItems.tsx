@@ -1,32 +1,9 @@
 import { message } from 'antd';
 import { action, computed, observable, set } from 'mobx';
 import qs from 'qs';
-import React from 'react';
-import { FilterCascader } from './filterCascader';
-import { FilterCascaderComponent } from './filterCascaderComponent';
-import { FilterCheckbox } from './filterCheckbox';
-import { FilterCheckboxComponent } from './filterCheckboxComponent';
-import { FilterDate } from './filterDate';
-import { FilterDateComponent } from './filterDateComponent';
-import { FilterDateStartOrEnd } from './filterDateStartOrEnd';
-import { FilterDateStartOrEndComponent } from './filterDateStartOrEndComponent';
-import { FilterInput } from './filterInput';
-import { FilterInputAndSelect } from './filterInputAndSelect';
-import { FilterInputAndSelectComponent } from './filterInputAndSelectComponent';
-import { FilterInputComponent } from './filterInputComponent';
-import { FilterInputNumberGroup } from './filterInputNumberGroup';
-import { FilterInputNumberGroupComponent } from './filterInputNumberGroupComponent';
-import { FilterInputOrSelect } from './filterInputOrSelect';
-import { FilterInputOrSelectComponent } from './filterInputOrSelectComponent';
-import { FilterRadio } from './filterRadio';
-import { FilterRadioComponent } from './filterRadioComponent';
-import { FilterSelect } from './filterSelect';
-import { FilterSelectComponent } from './filterSelectComponent';
-import { FilterTreeSelect } from './filterTreeSelect';
-import { FilterTreeSelectComponent } from './filterTreeSelectComponent';
 import type { FilterItem, FilterItemOptions, FilterItemSettingItem, ValueAndLabelData } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { formatValueAndLabelData } from './utils';
+import { filterInstanceFactory, formatValueAndLabelData } from './utils';
 
 function validParams(data: FilterItemOptions[]): never | void {
   data.forEach((item) => {
@@ -50,133 +27,17 @@ function validParams(data: FilterItemOptions[]): never | void {
 
     data.forEach((item) => {
       fields[item.field] = (fields[item.field] >>> 0) + 1;
-      labels[item.field] = (labels[item.field] >>> 0) + 1;
+      labels[item.label] = (labels[item.label] >>> 0) + 1;
     });
 
     data.forEach((item) => {
       if (fields[item.field] > 1) {
         throw new Error(`field: ${item.field} 重复`);
       }
-      if (labels[item.field] > 1) {
+      if (labels[item.label] > 1) {
         throw new Error(`label: ${item.label} 重复`);
       }
     });
-  }
-}
-
-// @ts-ignore
-export function filterInstanceFactory(item: FilterItemOptions): FilterItem {
-  switch (item.type) {
-    case ENUM_FILTER_ITEM_TYPE.input:
-      return new FilterInput(item);
-    case ENUM_FILTER_ITEM_TYPE.inputNumberGroup:
-      return new FilterInputNumberGroup(item);
-    case ENUM_FILTER_ITEM_TYPE.select:
-      return new FilterSelect(item);
-    case ENUM_FILTER_ITEM_TYPE.radio:
-      return new FilterRadio(item);
-    case ENUM_FILTER_ITEM_TYPE.inputAndSelect:
-      return new FilterInputAndSelect(item);
-    case ENUM_FILTER_ITEM_TYPE.date:
-    case ENUM_FILTER_ITEM_TYPE.dateRange:
-      return new FilterDate(item);
-    case ENUM_FILTER_ITEM_TYPE.dateStart:
-    case ENUM_FILTER_ITEM_TYPE.dateEnd:
-      return new FilterDateStartOrEnd(item);
-    case ENUM_FILTER_ITEM_TYPE.checkbox:
-      return new FilterCheckbox(item);
-    case ENUM_FILTER_ITEM_TYPE.inputOrSelect:
-      return new FilterInputOrSelect(item);
-    case ENUM_FILTER_ITEM_TYPE.cascader:
-      return new FilterCascader(item);
-    case ENUM_FILTER_ITEM_TYPE.treeSelect:
-      return new FilterTreeSelect(item);
-  }
-}
-
-export function filterComponentFactory(item: FilterItem): React.ReactNode {
-  switch (item.type) {
-    case ENUM_FILTER_ITEM_TYPE.input:
-      return (
-        <FilterInputComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.inputNumberGroup:
-      return (
-        <FilterInputNumberGroupComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.select:
-      return (
-        <FilterSelectComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.radio:
-      return (
-        <FilterRadioComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.inputAndSelect:
-      return (
-        <FilterInputAndSelectComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.date:
-    case ENUM_FILTER_ITEM_TYPE.dateRange:
-      return (
-        <FilterDateComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.dateStart:
-    case ENUM_FILTER_ITEM_TYPE.dateEnd:
-      return (
-        <FilterDateStartOrEndComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.checkbox:
-      return (
-        <FilterCheckboxComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.inputOrSelect:
-      return (
-        <FilterInputOrSelectComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.cascader:
-      return (
-        <FilterCascaderComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    case ENUM_FILTER_ITEM_TYPE.treeSelect:
-      return (
-        <FilterTreeSelectComponent
-          key={item.field}
-          store={item}
-        />
-      );
-    default:
-      return null;
   }
 }
 

@@ -2,9 +2,10 @@ import { Button, Col, Row, Space } from 'antd';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { filterComponentFactory } from './filterComponentFactory';
 import { FormatDateType } from './filterDate';
 import type { FilterItemsParams } from './filterItems';
-import { filterComponentFactory, FilterItems } from './filterItems';
+import { FilterItems } from './filterItems';
 import styles from './normalProgramme.less';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 
