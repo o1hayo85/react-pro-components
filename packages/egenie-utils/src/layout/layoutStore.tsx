@@ -63,7 +63,7 @@ export class LayoutStore {
 
   @observable public homePageTypes: HomePageType[] = [];
 
-  @observable public homePageType = 0; // 首页(账户)类型，1:零售商,2:供应商
+  @observable public homePageType = null; // 首页(账户)类型，1:零售商,2:供应商
 
   public immutableStyle = {
     titleHeight: 16,
@@ -142,7 +142,7 @@ export class LayoutStore {
     const res: BaseData<HomePageType[]> = await request({ url: '/api/iac/resource/homePage/types' });
     const currentHomePageType = res.data.find((item) => item.current);
     this.homePageTypes = res.data;
-    this.homePageType = currentHomePageType ? currentHomePageType.homePageType : 0;
+    this.homePageType = currentHomePageType ? currentHomePageType.homePageType : null;
     this.getMenuList(this.homePageType);
   };
 
