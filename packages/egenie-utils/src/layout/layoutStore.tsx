@@ -5,8 +5,8 @@ import qs from 'qs';
 import { getPerms } from '../permission';
 import type { BaseData } from '../request';
 import { request } from '../request';
-import type { API, Egenie, Menudata, Permission, Response, SrcParams, User } from './interface';
-import { EnumVersion, HomePageType } from './interface';
+import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType } from './interface';
+import { EnumVersion } from './interface';
 
 function combineUrl(oldUrl: string, params: string): string {
   if (typeof oldUrl === 'string') {
@@ -143,6 +143,7 @@ export class LayoutStore {
     const currentHomePageType = res.data.find((item) => item.current);
     this.homePageTypes = res.data;
     this.homePageType = currentHomePageType ? currentHomePageType.homePageType : 0;
+    this.getMenuList(this.homePageType);
   };
 
   @action public switchHomePageType = async(): Promise<void> => {
@@ -206,7 +207,6 @@ export class LayoutStore {
   public handleInit = (project) => {
     this.getUserInfo();
     this.getHomePageTypes();
-    this.getMenuList();
     getPerms();
     this.handleDefaultOpenPage();
     this.handleWindow();
@@ -333,10 +333,12 @@ export class LayoutStore {
     this.tabList = list;
   };
 
-  public getMenuList = action(async() => {
+  public getMenuList = action(async(homePageType: number) => {
     const res = await request({
-      url: '/api/iac/resource/dashboard/dock2',
-      method: 'get',
+      url: '/api/iac/resource/dashboard/menu',
+      method: 'POST',
+      data: { homePageType },
+     
     });
     this.handleMenuItemHeight(res);
   });
