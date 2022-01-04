@@ -4808,10 +4808,10 @@ egenie-config@^0.8.12:
     postcss-preset-env "6.7.0"
     px2rem "0.5.0"
 
-egenie-test@0.8.1:
-  version "0.8.1"
-  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.1.tgz#484803d323dbcc7e9b732d306313856340f4c71e"
-  integrity sha512-nO/G5Xi429BeUP9ECP7IDd8Dd+snEtAmxpsqZb+zyTpPsmHE6K6Y4tPOuiD0B9YfQZidY2ejEpfAOzDm0XSGVg==
+egenie-test@^0.8.15:
+  version "0.8.15"
+  resolved "https://registry.npmmirror.com/egenie-test/download/egenie-test-0.8.15.tgz#4eb81d654c40fbccd2f775f73fb7cce672677e76"
+  integrity sha512-ovcsET14pHS0mGBByqB/ciriRUpEfgUHgKH3yxM0Q9MVU3uvAS3Kg52M+ErmEqY5muYACj5n9S7ODHToBiwIfQ==
   dependencies:
     babel-jest "^27.3.1"
     chalk "^4.1.2"

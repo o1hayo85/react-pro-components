@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.20...v0.0.0) (2021-12-31)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.21...v0.0.0) (2022-01-04)
+
+### Bug Fixes
+
+- 更改菜单 menu 接口 ([cb8f3ac](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cb8f3ace5e7ed8675a2081ddb8e2f30a94dd2788))
+- 修改 layout homePageType 默认值为 null ([dd5d085](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dd5d0855edb7b068eabad279273ca5408ae25681))
+
+## [0.8.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.20...v0.8.21) (2021-12-31)
 
 ### Features
 

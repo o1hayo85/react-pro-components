@@ -1,9 +1,10 @@
 import { message } from 'antd';
 import { action, computed, observable, set } from 'mobx';
 import qs from 'qs';
+import { filterInstanceFactory } from './filterInstanceFactory';
 import type { FilterItem, FilterItemOptions, FilterItemSettingItem, ValueAndLabelData } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { filterInstanceFactory, formatValueAndLabelData } from './utils';
+import { formatValueAndLabelData } from './utils';
 
 function validParams(data: FilterItemOptions[]): never | void {
   data.forEach((item) => {
