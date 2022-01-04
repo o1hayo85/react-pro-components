@@ -1019,7 +1019,6 @@ export class EgGridModel {
   });
 
   public updateColumns = action((columnsConfig) => {
-    console.log('🚀 ~ file: egGridModel.tsx ~ line 698 ~ EgGridModel ~ updateColumns=action ~ columnsConfig', columnsConfig);
     const { columns } = this;
     const tempColumns = [];
     const columnsMap = new Map();

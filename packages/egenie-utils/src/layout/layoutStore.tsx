@@ -338,7 +338,7 @@ export class LayoutStore {
       url: '/api/iac/resource/dashboard/menu',
       method: 'POST',
       data: { homePageType },
-     
+
     });
     this.handleMenuItemHeight(res);
   });
