@@ -1,4 +1,14 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.24...v0.0.0) (2022-01-06)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.25...v0.0.0) (2022-01-06)
+
+### Features
+
+- **react-scripts:** remove react-error-overlay ([a958fe7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a958fe72601857f091e3c7a3f805722ba53654fe))
+
+## [0.8.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.24...v0.8.25) (2022-01-06)
+
+### Bug Fixes
+
+- layout:零售商供应商角色切换按钮使用不同的背景颜色 ([8b3e7ff](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8b3e7ffad65ed7f47ba7430413458439b68c8bd6))
 
 ## [0.8.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.23...v0.8.24) (2022-01-04)
 
