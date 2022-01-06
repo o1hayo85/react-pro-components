@@ -120,6 +120,7 @@ export class HeaderUserInfo extends React.Component<any> {
       switchHomePageType,
     } = this.props.layoutStore;
     const current = homePageTypes.find((item) => item.homePageType === homePageType);
+    const imgName = homePageType === 1 ? 'switchArrowBlue.png' : 'switchArrow.png';
     return (
       <div id={styles.headerUser}>
         {/* 扩展  */}
@@ -143,12 +144,12 @@ export class HeaderUserInfo extends React.Component<any> {
               |
             </span>
             <span
-              className={styles.switchRoleWrapper}
+              className={homePageType === 1 ? `${styles.switchRoleWrapper} ${styles.bgBlue}` : styles.switchRoleWrapper}
               onClick={switchHomePageType}
             >
               <span className={styles.switchRole}>
                 {current ? current.indexUserName : ''}
-                <img src="https://front.runscm.com/egenie-common/images/switchArrow.png"/>
+                <img src={`https://front.runscm.com/egenie-common/images/${imgName}`}/>
               </span>
             </span>
           </>
