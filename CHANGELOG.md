@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.25...v0.0.0) (2022-01-06)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.26...v0.0.0) (2022-01-10)
+
+### Features
+
+- **egenie-common:** 更新 jd 解密逻辑 ([340d701](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/340d7015e16211b0c4fec2a0d9bf5d9254f5ff77))
+
+## [0.8.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.25...v0.8.26) (2022-01-06)
 
 ### Features
 
