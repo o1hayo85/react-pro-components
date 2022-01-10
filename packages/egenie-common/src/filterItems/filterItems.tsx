@@ -6,7 +6,7 @@ import type { FilterItem, FilterItemOptions, FilterItemSettingItem, ValueAndLabe
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { formatValueAndLabelData } from './utils';
 
-function validParams(data: FilterItemOptions[]): never | void {
+export function validParams(data: FilterItemOptions[]): never | void {
   data.forEach((item) => {
     if (!(item.type in ENUM_FILTER_ITEM_TYPE)) {
       throw new Error(`当前type: ${item.type}。只支持${Object.values(ENUM_FILTER_ITEM_TYPE)
@@ -42,10 +42,8 @@ function validParams(data: FilterItemOptions[]): never | void {
   }
 }
 
-function transformUrlQuery(instance: FilterItem): void {
-  const urlParams = qs.parse(location.search.replace(/^\?/, ''));
+function transformUrlQuery(instance: FilterItem, urlParams: {[key: string]: string; }): void {
   if (Object.prototype.hasOwnProperty.call(urlParams, instance.field)) {
-    // @ts-ignore
     instance.formatValue.call(instance, urlParams[instance.field]);
   }
 }
@@ -56,13 +54,13 @@ function transformDict(dict: FilterItemsParams['dict'], instance: FilterItem): v
   }
 }
 
-function transformDataToInstance(dict: FilterItemsParams['dict'], data: FilterItemOptions[]): FilterItem[] {
+function transformDataToInstance(dict: FilterItemsParams['dict'], data: FilterItemOptions[], urlParams: {[key: string]: string; }): FilterItem[] {
   validParams(data);
 
   return data.map((item) => {
     const instance = filterInstanceFactory(item);
 
-    transformUrlQuery(instance);
+    transformUrlQuery(instance, urlParams);
     transformDict(dict, instance);
     return instance;
   });
@@ -85,6 +83,7 @@ export interface ConnectListItem {
   toParams: () => {[key: string]: string; };
   reset?: () => void;
   validator?: () => Promise<string>;
+  [key: string]: unknown;
 }
 
 export class FilterItems {
@@ -108,7 +107,9 @@ export class FilterItems {
         this.dict[key] = formatValueAndLabelData(dict[key]);
       }
     }
-    this.originData = transformDataToInstance(dict, data);
+
+    const urlParams = qs.parse(location.search.replace(/^\?/, '')) as {[key: string]: string; };
+    this.originData = transformDataToInstance(dict, data, urlParams);
     this.initSettingData = this.originData.filter((item) => !item.isDynamic)
       .map((item) => ({
         field: item.field,
@@ -138,10 +139,9 @@ export class FilterItems {
 
   /**
    * 动态添加查询项。field、label、type必须
-   * @param data item数据
    */
   @action public addItem = (data: FilterItemOptions[]): void => {
-    transformDataToInstance(this.dict, data)
+    transformDataToInstance(this.dict, data, {})
       .forEach((item) => {
         item.isDynamic = true;
         this.originData.push(item);
@@ -150,7 +150,6 @@ export class FilterItems {
 
   /**
    * 动态添加字典数据
-   * @param dict 字典数据
    */
   @action public addDict = (dict: FilterItemsParams['dict']): void => {
     for (const key in dict) {
@@ -175,7 +174,6 @@ export class FilterItems {
 
   /**
    * 更新查询项的值。filed必须、type建议写、其它需要更新的字段
-   * @param data 更新数据
    */
   @action public updateFilterItem = (data: FilterItemOptions[]): void => {
     this.originData.forEach((item) => {

@@ -106,7 +106,6 @@ export abstract class FilterBase {
 
   /**
    * 设置查询项数据
-   * @param data 数据
    */
   @action public handleData = (data: ValueAndLabelData): void => {
     this.data = data;
