@@ -230,8 +230,7 @@ class PrintWayBill {
         docIds: waybillData.docIds,
       };
 
-      // (京东店铺-顺丰快递,打印用的是菜鸟打印,通过cpCode==='SF'和平台类型做判断)需要解密相关信息
-      await getWayBillSensitiveData(userData, cpCode);
+      await getWayBillSensitiveData(userData, cpCode, shopType);
 
       // 原来就有的逻辑,不知道啥用
       if (cpCode === 'JDQL') {

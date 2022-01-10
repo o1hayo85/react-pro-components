@@ -108,8 +108,9 @@ async function getShopToken(shopType: number | string, shopId: number | string):
   }
 }
 
-export async function getWayBillSensitiveData(userDataList: any[], cpCode: string): Promise<void> {
-  if (cpCodeSpecial === cpCode) {
+// 京东店铺-顺丰快递-不用jd打印组件(目前菜鸟组件)。需要解密相关信息
+export async function getWayBillSensitiveData(userDataList: any[], cpCode: string, shopType: EnumShopType): Promise<void> {
+  if (cpCodeSpecial === cpCode && shopType !== EnumShopType.jd) {
     const shopIdToPlatformOrderCode = userDataList.reduce((previous, current) => {
       const {
         shop_id,
