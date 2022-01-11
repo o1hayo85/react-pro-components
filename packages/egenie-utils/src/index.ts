@@ -18,7 +18,6 @@ export * from './batchReport';
 export * from './dragAndDropHOC';
 export * from './programme';
 export * from './egGrid';
-export * from './addGoodsModal';
 export * from './slideVerify';
 export * from './layout';
 export * from './fullModal';
