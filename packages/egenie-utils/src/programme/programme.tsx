@@ -1,5 +1,5 @@
 import { message, Modal } from 'antd';
-import type { FilterItem, FilterItemsParams } from 'egenie-common';
+import type { FilterItemsParams } from 'egenie-common';
 import { FilterItems } from 'egenie-common';
 import { action, computed, observable } from 'mobx';
 import React from 'react';
