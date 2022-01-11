@@ -13,8 +13,8 @@ order: 5
 // index
 import { ImportModal } from 'egenie-uitls'; // or from 'egenie-components'
 
-<ImportModal store={importModel} />;
-
+<ImportModal store={importModel} promptChildren={<div>注意事项</div>}/>;
+    
 // store
 import { ImportModel } from 'egenie-uitls'; // or from 'egenie-components'
 
@@ -34,6 +34,9 @@ this.importModel.openModal({
 ```
 
 ### `传参`
+
+#### `promptChildren?:ReactNode`
+导入时额外提示的信息(样式以及是否显示由外部自行控制)
 
 #### `sheetName: string`
 
