@@ -2,7 +2,7 @@
 
 ### Features
 
-- **egenie-utils:** 重构 programme ([3a28aa6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3a28aa6573f29448a9c43d0be3d770e868e56de7))
+- **egenie-utils:** 重构 programme ([9c79f4c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9c79f4c0610759f08a88ed4614688031c9cace17))
 
 ## [0.8.28](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.27...v0.8.28) (2022-01-11)
 
