@@ -7,7 +7,7 @@ import styles from './index.less';
 import type { ImportModelInterface } from './model';
 
 @observer
-export class ImportModal extends Component<{ store: ImportModelInterface; }> {
+export class ImportModal extends Component<{ store: ImportModelInterface; promptChildren?: ReactNode; }> {
   constructor(props) {
     super(props);
   }
@@ -155,6 +155,7 @@ export class ImportModal extends Component<{ store: ImportModelInterface; }> {
     return (
       <Modal {...importModalParams}>
         {type === 1 ? this.renderImport() : this.renderBeingImported()}
+        {type === 1 ? this.props?.promptChildren : undefined}
       </Modal>
     );
   }
