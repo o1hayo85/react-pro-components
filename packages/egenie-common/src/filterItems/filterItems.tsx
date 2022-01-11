@@ -83,7 +83,7 @@ export interface ConnectListItem {
   toParams: () => {[key: string]: string; };
   reset?: () => void;
   validator?: () => Promise<string>;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export class FilterItems {
