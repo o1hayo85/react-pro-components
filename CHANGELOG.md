@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.29...v0.0.0) (2022-01-11)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.30...v0.0.0) (2022-01-13)
+
+### Features
+
+- **egenie-test:** add esbuild-jest ([32e089d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/32e089d141d61488759ef8ac828d44964557d736))
+
+## [0.8.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.29...v0.8.30) (2022-01-11)
 
 ## [0.8.29](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.28...v0.8.29) (2022-01-11)
 
@@ -43,8 +49,8 @@
 
 ### Bug Fixes
 
-- 修改 layout homePageType 默认值为 null ([dd5d085](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dd5d0855edb7b068eabad279273ca5408ae25681))
 - 更改菜单 menu 接口 ([cb8f3ac](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cb8f3ace5e7ed8675a2081ddb8e2f30a94dd2788))
+- 修改 layout homePageType 默认值为 null ([dd5d085](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dd5d0855edb7b068eabad279273ca5408ae25681))
 
 ## [0.8.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.20...v0.8.21) (2021-12-31)
 
@@ -62,11 +68,11 @@
 
 ### Features
 
+- **egenie-common:** 更新包 ([15e56d3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e56d3f74635550eaf35e54641f5ea29903118e))
 - **egenie-common:** add filterItem 测试 ([a153f08](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a153f0894b96e4f81e715e6afae6799d5387c97b))
 - **egenie-common:** add filterItem 测试 ([4d77fe7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4d77fe7dce16f6ab2183b589a6207ad039a21fd8))
 - **egenie-common:** add filterItem 测试 ([c4cb7b2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c4cb7b26c06703cd2395dc4829c2ad4cb357923a))
 - **egenie-common:** add filterItem 测试 ([86e9d26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86e9d26a561f255832a3807b20c5c54fdd6e7435))
-- **egenie-common:** 更新包 ([15e56d3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/15e56d3f74635550eaf35e54641f5ea29903118e))
 - 添加导入组件库 ([1ed45fd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1ed45fd7976d90e7e0c78fa762217e011d6101e4))
 
 ## [0.8.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.16...v0.8.17) (2021-12-29)
@@ -519,10 +525,10 @@
 
 ### Features
 
-- add egenie-data-grid ([d40774e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d40774ee6953dbab176787a319e6412c4de8577c))
+- 添加阻止事件冒泡 ([64cbb26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/64cbb269c9e052460853d994d13a38878e0ebb7d))
 - 添加 rowhover 事件 ([e9abda9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e9abda986709631f5506b29a325388c2fd5ea1b6))
 - 添加 storybook ([8f208e5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8f208e5978131ef77ba13ecebf9c0c06c60845ce))
-- 添加阻止事件冒泡 ([64cbb26](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/64cbb269c9e052460853d994d13a38878e0ebb7d))
+- add egenie-data-grid ([d40774e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d40774ee6953dbab176787a319e6412c4de8577c))
 - **docs:** 增加 lodop 打印文档 ([d78101a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d78101abc6b399e8409b7694a0dd522ed752dd3f))
 
 ## [0.4.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.24...v0.4.25) (2021-09-27)
@@ -619,12 +625,12 @@
 
 - 完善文档 ([c0e1f28](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c0e1f28bff31d5ac565f314405264afa013e18af))
 - 完善文档 ([e2d9987](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e2d9987e6f9cf0491ffd98ebfcfe15cf619271f2))
+- **docs:** 迁移文档 ([66f546d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/66f546d3c70630575ee6067b937d510cd3b29f30))
+- **docs:** 增加打印文档 ([0ce328e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0ce328e58472848e7f05abefe8b71c8613734986))
 - **docs:** 增加 egenie-common 下 helper、request、history 文档 ([9d73567](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9d73567bec4ec699fd120f7907d47827860a71e1))
 - **docs:** 增加 egenie-utils 文档 ([a30253c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a30253cc34df6cdfd296f7e3e0bfb4ec7bda1f46))
-- **docs:** 增加打印文档 ([0ce328e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0ce328e58472848e7f05abefe8b71c8613734986))
-- **docs:** 迁移文档 ([66f546d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/66f546d3c70630575ee6067b937d510cd3b29f30))
-- **utils:** 增加方案 hover 显示翻译值 ([cc67be3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cc67be3ad80e6b2884864762a62c2e2ac43a83dd))
 - **utils:** 增加查询项设置查询值高亮 ([6332410](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/63324100ac7ecfc1a6e697c0553a4c0e247c5ae4))
+- **utils:** 增加方案 hover 显示翻译值 ([cc67be3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cc67be3ad80e6b2884864762a62c2e2ac43a83dd))
 
 ## [0.4.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.4.10...v0.4.11) (2021-08-25)
 
@@ -975,8 +981,8 @@
 
 ### Features
 
-- 更新表格保存 ([28b383e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/28b383ed74575d69fa037ce8bb187b5f16b30b59))
 - 更新表格版本 ([7477915](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/747791502cf8641e1337e4f2c0e060f9425321c2))
+- 更新表格保存 ([28b383e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/28b383ed74575d69fa037ce8bb187b5f16b30b59))
 
 ## [0.1.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.1.15...v0.1.16) (2021-07-02)
 
@@ -1159,16 +1165,16 @@
 
 ### Features
 
-- update packages ([41716db](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/41716dbf8875150bb57669fbb2a6663e58cc09d0))
 - 登录，注册新增 logo 和标题 props ([d47bfea](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d47bfeafdda64e0532730a873ab3ef2c2a24be6b))
 - 登录，注册新增 logo 和标题 props,样式 ([f440c82](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f440c82aa1febaf807d47e7cc1d9dcb76fdf3248))
+- update packages ([41716db](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/41716dbf8875150bb57669fbb2a6663e58cc09d0))
 
 ## [0.0.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32...v0.0.33) (2021-05-26)
 
 ### Features
 
-- **utils:** 修改用户默认配置，只保留修改密码&退出登录，店铺账户中心需要项目单独加 ([f70fc97](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f70fc97f09dc67e90c8257242634cb99dcbc0095))
 - **utils:** 新增登录组件 & 通用工具函数 ([51629dd](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51629ddd9c04da2b7d27b82d04224df371d311fd))
+- **utils:** 修改用户默认配置，只保留修改密码&退出登录，店铺账户中心需要项目单独加 ([f70fc97](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f70fc97f09dc67e90c8257242634cb99dcbc0095))
 
 ## [0.0.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.32-alpha.0...v0.0.32) (2021-05-26)
 
@@ -1225,8 +1231,8 @@
 
 ### Features
 
-- **utils:** add fullModal ([45c20c9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/45c20c98b81183c1271ea525ebaee404c39bc150))
 - **utils:** 扩展查询项 item ([6575f16](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6575f16083165651bf76be04ff15594f0b98621c))
+- **utils:** add fullModal ([45c20c9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/45c20c98b81183c1271ea525ebaee404c39bc150))
 
 ## [0.0.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.24...v0.0.25) (2021-05-14)
 
@@ -1284,8 +1290,8 @@
 ### Features
 
 - **react-scripts:** update cache type ([dad70a4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/dad70a45055871cf83f10dcec2f47d4a6d8a7d85))
-- **utils:** update index import ([e7cefb2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e7cefb20765d13a397935019b253781088429b42))
 - **utils:** 更新文档 ([764133f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/764133fcb78937620d469eb124cc39f26490c501))
+- **utils:** update index import ([e7cefb2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e7cefb20765d13a397935019b253781088429b42))
 
 ## [0.0.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.15...v0.0.16) (2021-05-08)
 
@@ -1308,8 +1314,8 @@
 ### Features
 
 - **babel-config:** remove plugin which included in preset-env ([ca27526](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ca27526b1895d30592d696e2ca12aac520daa7ce))
-- **react-scripts:** migrate eslint-loader to eslint-webpack-plugin ([97b6d9d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b6d9da3d6f73bfb7239fe2eeab5e09cd16aa8f))
 - **react-scripts:** 优化打包时间 ([b6c9719](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b6c9719d1f1346062e9e89402f55dd63ac157e7c))
+- **react-scripts:** migrate eslint-loader to eslint-webpack-plugin ([97b6d9d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/97b6d9da3d6f73bfb7239fe2eeab5e09cd16aa8f))
 - **utils:** 调整结构 ([8af23c5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8af23c584679073e4d19480c9de6870d0ec99407))
 
 ## [0.0.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.12...v0.0.13) (2021-04-29)
@@ -1322,8 +1328,8 @@
 
 ### Features
 
-- **react-scripts:** update config ([72fcd0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/72fcd0a65460d80e893a056dd34c02c8e3f9c4de))
 - **react-scripts:** 将 file-loader 换为 url-loader ([74ae9e1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/74ae9e1e71389e5a251ca2a8df9fd371e9c8ce46))
+- **react-scripts:** update config ([72fcd0a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/72fcd0a65460d80e893a056dd34c02c8e3f9c4de))
 
 ## [0.0.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.0.10...v0.0.11) (2021-04-21)
 
@@ -1391,5 +1397,5 @@
 
 ### Features
 
-- init ([4ddb871](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4ddb8718b7a5eaddd348f87bb1578cc9e45abab1))
 - 删除 lerna ([cd3e17e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cd3e17e7faf49b766e7551ac0e485552e484f862))
+- init ([4ddb871](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4ddb8718b7a5eaddd348f87bb1578cc9e45abab1))
