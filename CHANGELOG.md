@@ -1,4 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.31...v0.0.0) (2022-01-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.31...v0.0.0) (2022-01-14)
+
+### Features
+
+- **react-scripts:** remove clean-plugin ([3382ca9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3382ca9b33f1dbe537071f76e38652d1cbe06535))
 
 ## [0.8.31](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.30...v0.8.31) (2022-01-13)
 
