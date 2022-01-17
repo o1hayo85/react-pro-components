@@ -1,4 +1,6 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.31...v0.0.0) (2022-01-14)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.32...v0.0.0) (2022-01-17)
+
+## [0.8.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.31...v0.8.32) (2022-01-14)
 
 ### Features
 
