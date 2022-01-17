@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.33...v0.0.0) (2022-01-17)
 
+### Features
+
+- **react-scripts:** 更新 dev-server ([d73314e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d73314eba0a877e149f8ff33dd204f537f975aae))
+
 ## [0.8.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.32...v0.8.33) (2022-01-17)
 
 ### Features
