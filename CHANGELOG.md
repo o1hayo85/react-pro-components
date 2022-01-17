@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.32...v0.0.0) (2022-01-17)
 
+### Features
+
+- **react-scripts:** 去掉 cra 无用的插件 ([8073200](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8073200b53ca3018694ad73d1e731c4392edd5ae))
+
 ## [0.8.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.31...v0.8.32) (2022-01-14)
 
 ### Features
