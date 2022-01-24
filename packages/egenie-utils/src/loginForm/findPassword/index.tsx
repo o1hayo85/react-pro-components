@@ -12,7 +12,6 @@ import Content from './content';
     exact:true,
     component: FindPassword,
     loginPath: 'egenie-erp-home/login,
-    logoImg: 'https://fronts.runscm.com/egenie-common/images/bossBg.png',
     logoText: '衫数科技运营管理平台'
 }
 

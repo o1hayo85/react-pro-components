@@ -114,7 +114,7 @@ export class LayoutMenu extends React.Component<any> {
                 >
                   <img
                     id={styles.menuIcon}
-                    src={`https://front.runscm.com/egenie-cloud-wms/menu/${item.icon}`}
+                    src={`https://front.ejingling.cn/pc/ts/egenie-common/menu/${item.icon}`}
                   />
                   <span className={styles.menuName}>
                     {item.name}

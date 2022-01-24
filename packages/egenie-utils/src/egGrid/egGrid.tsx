@@ -6,8 +6,6 @@ import { DragAndDropHOC } from '../dragAndDropHOC';
 import { ColumnSettingModal } from './columnSetting';
 import type { EgGridModel } from './egGridModel';
 import styles from './egGridStyle.less';
-import empty from './img/empty.png';
-import searchEmpty from './img/searchEmpty.png';
 
 interface IProps {
   store?: EgGridModel;
@@ -78,7 +76,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                             <>
                               <Empty
                                 description="点击立即查询后，呈现数据！"
-                                image={searchEmpty}
+                                image="https://front.ejingling.cn/pc/ts/egenie-common/images/noMsg.png"
                               />
                               <Button
                                 onClick={onQuery}
@@ -94,7 +92,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                             showNoSearchEmpty && (
                               <Empty
                                 description="查询后，呈现数据！"
-                                image={searchEmpty}
+                                image="https://front.ejingling.cn/pc/ts/egenie-common/images/noMsg.png"
                               />
                             )
                           }
@@ -103,7 +101,7 @@ export const EgGrid = observer(({ store, children }: IProps) => {
                             showNormalEmpty && (
                               <Empty
                                 description="暂无数据哦！"
-                                image={empty}
+                                image="https://front.ejingling.cn/pc/ts/egenie-common/images/empty.png"
                               />
                             )
                           }

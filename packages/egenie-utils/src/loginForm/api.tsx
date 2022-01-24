@@ -1,6 +1,6 @@
 export const api = {
   // 静态资源
-  oss: 'https://front.runscm.com/egenie-common',
+  oss: 'https://front.ejingling.cn/pc/ts/egenie-common',
 
   // 用户信息
   user: '/api/dashboard/user', // 用户

@@ -2,8 +2,8 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   title: '衫数前端文档',
-  favicon: 'https://front.runscm.com/customer-source/common/favicon.ico',
-  logo: 'https://front.runscm.com/customer-source/common/favicon.ico',
+  favicon: 'https://front.ejingling.cn/customer-source/common/favicon.ico',
+  logo: 'https://front.ejingling.cn/customer-source/common/favicon.ico',
   outputPath: 'docs-dist',
   hash: true,
   mode: 'site',

@@ -212,7 +212,7 @@ export function formatDyData(printData: any[]) {
     if (item?.dyData?.customData) {
       contents.push({
         data: JSON.parse(item?.dyData?.customData),
-        templateURL: item?.dyData?.customTempUrl ? item?.dyData?.customTempUrl : 'https://front.runscm.com/customer-source/printTemp/dy2.xml',
+        templateURL: item?.dyData?.customTempUrl ? item?.dyData?.customTempUrl : 'https://front.ejingling.cn/customer-source/printTemp/dy2.xml',
       });
     }
 

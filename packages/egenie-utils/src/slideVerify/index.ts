@@ -85,7 +85,7 @@ function removeClass(element, className) {
 function getRandomImgSrc() {
   // return `https://picsum.photos/id/${getRandomNumberByRange(1, 14)}/${w}/${h}`
 
-  return `https://front.runscm.com//customer-source/verify/${getRandomNumberByRange(1, 14)}.jpg?x-oss-process=image/resize,w_${w},h_${h}/auto-orient,1/quality,q_90/format,jpg`;
+  return `https://front.ejingling.cn/customer-source/verify/${getRandomNumberByRange(1, 14)}.jpg?x-oss-process=image/resize,w_${w},h_${h}/auto-orient,1/quality,q_90/format,jpg`;
 }
 
 /**

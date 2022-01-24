@@ -17,7 +17,7 @@ const defaultOperations: Opera[] = [
   {
     id: 'exit',
     name: '退出登录',
-   
+
   },
 ];
 
@@ -132,7 +132,7 @@ export class HeaderUserInfo extends React.Component<any> {
           placement="bottomLeft"
         >
           <div>
-            <img src="https://front.runscm.com/egenie-common/images/avator.png"/>
+            <img src="https://front.ejingling.cn/pc/ts/egenie-common/images/avator.png"/>
             <span>
               {userInfo.name}
             </span>
@@ -149,7 +149,7 @@ export class HeaderUserInfo extends React.Component<any> {
             >
               <span className={styles.switchRole}>
                 {current ? current.indexUserName : ''}
-                <img src={`https://front.runscm.com/egenie-common/images/${imgName}`}/>
+                <img src={`https://front.ejingling.cn/pc/ts/egenie-common/images/${imgName}`}/>
               </span>
             </span>
           </>
