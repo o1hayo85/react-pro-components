@@ -1,4 +1,12 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.35...v0.0.0) (2022-01-18)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.36...v0.0.0) (2022-01-24)
+
+### Features
+
+- oss ([0608c87](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0608c87f11d925aecb4934be43d61c2ef6d1c1fe))
+- oss ([eed8956](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/eed8956e3dbb592b8e99b3e8bfb20f37692191f5))
+- oss ([b027947](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b02794775d068900d95569ecd4d0bb56f4839ddc))
+
+## [0.8.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.35...v0.8.36) (2022-01-18)
 
 ### Features
 

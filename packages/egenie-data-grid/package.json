@@ -1,6 +1,6 @@
 {
   "name": "egenie-data-grid",
-  "version": "0.8.2",
+  "version": "0.10.2",
   "license": "MIT",
   "description": "egenie表格组件库",
   "type": "module",
