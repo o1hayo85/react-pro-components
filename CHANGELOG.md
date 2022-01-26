@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.36...v0.0.0) (2022-01-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.10.2...v0.0.0) (2022-01-26)
+
+### Features
+
+- **utils:** 更改表格样式 ([23559ac](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/23559acbe3e3a2b6d63e0a788a0e0e38cd9fb21e))
+
+## [0.10.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.8.36...v0.10.2) (2022-01-24)
 
 ### Features
 
