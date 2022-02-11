@@ -4,6 +4,7 @@
 **.ts
 **.tsx
 packages/egenie-utils/docs
+packages/egenie-data-grid
 public
 dist
 coverage

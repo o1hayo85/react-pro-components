@@ -6,12 +6,6 @@ module.exports = {
       amd: 'lodash',
       root: '_',
     },
-    echarts: {
-      commonjs: 'echarts',
-      commonjs2: 'echarts',
-      amd: 'echarts',
-      root: 'echarts',
-    },
     qs: {
       commonjs: 'qs',
       commonjs2: 'qs',
@@ -59,18 +53,6 @@ module.exports = {
       commonjs2: 'moment',
       amd: 'moment',
       root: 'moment',
-    },
-    'react-dnd': {
-      commonjs: 'react-dnd',
-      commonjs2: 'react-dnd',
-      amd: 'react-dnd',
-      root: 'ReactDnD',
-    },
-    'react-dnd-html5-backend': {
-      commonjs: 'react-dnd-html5-backend',
-      commonjs2: 'react-dnd-html5-backend',
-      amd: 'react-dnd-html5-backend',
-      root: 'ReactDnDHTML5Backend',
     },
   },
 }

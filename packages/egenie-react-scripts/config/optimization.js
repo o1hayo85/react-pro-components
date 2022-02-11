@@ -83,14 +83,100 @@ module.exports = {
     minSize: utils.splitChunkMinSize,
     minChunks: 1,
     cacheGroups: {
-      vendors: {
-        // 拆分第三方库
-        test: /node_modules/,
+      jquery: {
+        test: /jquery/,
         chunks: 'all',
         minChunks: 1,
-        priority: 100,
+        priority: 111,
         enforce: true,
       },
+      'react-dnd': {
+        test: /react-dnd/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'react-dnd-html5-backend': {
+        test: /react-dnd-html5-backend/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'react-sortable-hoc': {
+        test: /react-sortable-hoc/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'egenie-data-grid': {
+        test: /egenie-data-grid/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      echarts: {
+        test: /echarts/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      pinyin: {
+        test: /pinyin/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'egenie-import-export': {
+        test: /egenie-import-export/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'ali-oss': {
+        test: /ali-oss/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 110,
+        enforce: true,
+      },
+      'egenie-common': {
+        test: /egenie-common/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 109,
+        enforce: true,
+      },
+
+      // 临时方案，后期会用babel打包
+      'egenie-utils': {
+        test: /egenie-utils/,
+        chunks: 'all',
+        minChunks: 1,
+        priority: 108,
+        enforce: true,
+      },
+
+      // 不拆node_modules里面的包
+      /*      vendors: {
+        test(module) {
+          return (
+            module.resource &&
+            module.resource.includes('node_modules') &&
+            !module.resource.includes('egenie-utils')
+          );
+        },
+        chunks: 'all',
+        minChunks: 3,
+        priority: 100,
+        enforce: true,
+      },*/
     },
   },
 };
