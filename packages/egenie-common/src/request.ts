@@ -21,9 +21,7 @@ const singleton = (function() {
       .use((config) => {
         const baseHeader: {[key: string]: number | string; } = {};
 
-        // @ts-ignore
         if (window.__config__ && window.__config__.originProject) {
-          // @ts-ignore
           baseHeader['Origin-Project'] = window.__config__.originProject;
         }
         config.headers = {
