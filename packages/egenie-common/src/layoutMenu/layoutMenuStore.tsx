@@ -171,7 +171,7 @@ export class LayoutMenuStore {
   };
 
   // 动画时间-毫秒
-  public animationDuration = 200;
+  public animationDuration = 16 * 12;
 
   @observable public paramsContainer: Array<(menuItem?: MenuItem) => string> = [];
 
@@ -196,6 +196,11 @@ export class LayoutMenuStore {
 
   @computed
   public get subMenuList(): MenuItem[][] {
+    // 关闭子菜单渲染延迟---菜单文字还在页面渲染
+    if (this.isHoverShowPanel === false) {
+      return [];
+    }
+
     const {
       titleHeight,
       titleMargin,
@@ -290,7 +295,7 @@ export class LayoutMenuStore {
   };
 
   @action public handleToggleSubMenu = (showSubMenu: boolean, id: MenuItem['id']): void => {
-    if (!this.isHoverShowPanel) {
+    if (this.isHoverShowPanel === false) {
       return;
     }
 
@@ -369,8 +374,8 @@ export class LayoutMenuStore {
     }
   };
 
-  @action public togglePanel = (flag: boolean): void => {
-    this.isHoverShowPanel = flag;
+  @action public togglePanel = (isHoverShowPanel: boolean): void => {
+    this.isHoverShowPanel = isHoverShowPanel;
   };
 
   public handleLogout = (): void => {

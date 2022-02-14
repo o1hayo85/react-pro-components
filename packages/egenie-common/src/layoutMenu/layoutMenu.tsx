@@ -57,6 +57,7 @@ class MenuComponent extends React.Component<{ layoutMenuStore?: LayoutMenuStore;
     return (
       <Menu
         mode="inline"
+        subMenuCloseDelay={0}
         theme="dark"
       >
         {
@@ -259,25 +260,26 @@ export const LayoutMenu: React.FC<LayoutMenuProps> = function(props) {
   } = props;
 
   return (
-    <div className="rootLayout">
-      <Layout hasSider>
-        <Layout.Sider
-          id={styles.rootSider}
-          width="60"
-        >
-          <Logo/>
-          <MenuComponent/>
-        </Layout.Sider>
-        <Layout className={styles.layoutRight}>
-          <Layout.Header className={styles.layoutHeader}>
-            <LayoutMenuHeaderTabs/>
-            {rightContent}
-          </Layout.Header>
-          <ContentComponent children={children}/>
-        </Layout>
-        <SubMenu/>
+    <Layout
+      className={styles.layoutMainContainer}
+      hasSider
+    >
+      <Layout.Sider
+        id={styles.rootSider}
+        width="60"
+      >
+        <Logo/>
+        <MenuComponent/>
+      </Layout.Sider>
+      <Layout className={styles.layoutRight}>
+        <Layout.Header className={styles.layoutHeader}>
+          <LayoutMenuHeaderTabs/>
+          {rightContent}
+        </Layout.Header>
+        <ContentComponent children={children}/>
       </Layout>
-    </div>
+      <SubMenu/>
+    </Layout>
   );
 };
 

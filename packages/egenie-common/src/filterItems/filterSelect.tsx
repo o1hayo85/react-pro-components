@@ -163,7 +163,7 @@ export class FilterSelect extends FilterBase {
   /**
    * 最多显示数量
    */
-  @observable public maxItemsLength = 1000;
+  @observable public maxItemsLength = 500;
 
   /**
    * 模式。默认单选、multiple为多选
