@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.2...v0.0.0) (2022-02-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.3...v0.0.0) (2022-02-16)
+
+### Bug Fixes
+
+- 表格空态图标容器高度修复 ([4082dfb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4082dfbd247f188132ca0b5a91f8b78dc2872584))
+
+## [0.11.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.2...v0.11.3) (2022-02-16)
 
 ## [0.11.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.1...v0.11.2) (2022-02-16)
 
