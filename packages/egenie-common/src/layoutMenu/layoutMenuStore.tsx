@@ -165,9 +165,14 @@ export class LayoutMenuStore {
     }
   };
 
+  @observable public permissionList: string[] = [];
+
   @action public getPerms = () => {
     request<BaseData<string[]>>({ url: '/api/iac/role/user/perms' })
-      .then((res) => window.top.EgeniePermission.permissionList = res.data || []);
+      .then((res) => {
+        this.permissionList = res.data || [];
+        window.top.EgeniePermission.permissionList = res.data || [];
+      });
   };
 
   // 动画时间-毫秒

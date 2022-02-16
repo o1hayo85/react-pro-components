@@ -116,13 +116,13 @@ export class LodopPrint {
     ],
   ];
 
-  private baseLeft = 0;
+  public baseLeft = 0;
 
-  private baseTop = 0;
+  public baseTop = 0;
 
   private jsLoadState: EnumJsLoadState = EnumJsLoadState.init;
 
-  private createTable(itemDetailList: {[key: string]: LodopItem; }, data: any): void {
+  public createTable(itemDetailList: {[key: string]: LodopItem; }, data: any): void {
     if (itemDetailList == null || Object.keys(itemDetailList).length === 0) {
       return;
     }
@@ -237,7 +237,7 @@ export class LodopPrint {
     this.instance.ADD_PRINT_TABLE(top, left, getTableWidth(orderValueList, restDetail), '100%', trimMultiLine(fullHtml));
   }
 
-  private createItem = (itemList: LodopItem[], data: any): void => {
+  public createItem = (itemList: LodopItem[], data: any): void => {
     for (let i = 0; i < itemList.length; i++) {
       const {
         id,
@@ -294,7 +294,7 @@ export class LodopPrint {
     }
   };
 
-  private initPageSize(templateData: TemplateData): void {
+  public initPageSize(templateData: TemplateData): void {
     const {
       pageWidth,
       pageHeight,
@@ -344,12 +344,12 @@ export class LodopPrint {
   /**
    * 插件instance(先调用init，再获取)
    */
-  private instance: any = null;
+  public instance: any = null;
 
   /**
    * 初始化
    */
-  private async init(): Promise<void> {
+  public async init(): Promise<void> {
     if (this.instance) {
       return;
     }
