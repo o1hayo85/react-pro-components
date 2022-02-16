@@ -371,6 +371,18 @@ export class LayoutMenuStore {
         icon: menuItem.icon,
         url: combineUrl(menuItem.url, params),
       });
+    } else {
+      request<BaseData<{ resource?: { resourceUrl?: string; resourceName?: string; icon: string; id: string | number; }; }>>({ url: `/api/iac/resource/getResource/${id}` })
+        .then((res) => {
+          if (res.data && res.data.resource) {
+            this.handleOpenActiveTab({
+              url: combineUrl(res.data.resource.resourceUrl, params),
+              id: res.data.resource.id,
+              name: res.data.resource.resourceName,
+              icon: res.data.resource.icon,
+            });
+          }
+        });
     }
   };
 

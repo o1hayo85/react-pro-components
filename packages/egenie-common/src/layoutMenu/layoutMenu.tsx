@@ -1,13 +1,55 @@
-import { Menu, Layout } from 'antd';
+import { Menu, Layout, Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import styles from './layoutMenu.less';
-import { LayoutMenuHeaderTabs } from './layoutMenuHeaderTabs';
-import type { LayoutMenuStore } from './layoutMenuStore';
 import { immutableStyle } from './layoutMenuStore';
+import type { LayoutMenuStore } from './layoutMenuStore';
 import type { MenuItem } from './types';
 
 let i = 0;
+
+@inject('layoutMenuStore')
+@observer
+class LayoutMenuHeaderTabs extends React.Component<{ layoutMenuStore?: LayoutMenuStore; }> {
+  render() {
+    const {
+      handleTabRemove,
+      tabList,
+      activeTabKey,
+      handleTabChange,
+    } = this.props.layoutMenuStore;
+    return (
+      <Tabs
+        activeKey={String(activeTabKey)}
+        hideAdd
+        id={styles.headerTabs}
+        onChange={handleTabChange}
+
+        // @ts-ignore
+        onEdit={handleTabRemove}
+        tabBarGutter={0}
+        type="editable-card"
+      >
+        {
+          tabList.map((item, index) => (
+            <Tabs.TabPane
+              closable={index !== 0}
+              key={item.id}
+              tab={(
+                <span className={styles.tabContent}>
+                  <span className={`${styles.tabIcon} icon-${item.icon}`}/>
+                  <span className={styles.headerTabItem}>
+                    {item.name}
+                  </span>
+                </span>
+              )}
+            />
+          ))
+        }
+      </Tabs>
+    );
+  }
+}
 
 @inject('layoutMenuStore')
 @observer
