@@ -293,18 +293,23 @@ class SubMenuItem extends React.Component<{ layoutMenuStore?: LayoutMenuStore; m
 
 export interface LayoutMenuProps {
   rightContent?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const LayoutMenu: React.FC<LayoutMenuProps> = function(props) {
   const {
     rightContent,
     children,
+    className,
+    style,
   } = props;
 
   return (
     <Layout
-      className={styles.layoutMainContainer}
+      className={className ? `${styles.layoutMainContainer} ${className}` : styles.layoutMainContainer}
       hasSider
+      style={style}
     >
       <Layout.Sider
         id={styles.rootSider}

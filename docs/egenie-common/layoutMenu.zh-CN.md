@@ -25,6 +25,14 @@ order: 4
   - 描述: 首页内容
   - 类型?: React.ReactNode
   - 默认值: 无
+- className
+  - 描述: layout 的 className
+  - 类型?: string
+  - 默认值: 无
+- style
+  - 描述: layout 的 style
+  - 类型?: React.CSSProperties
+  - 默认值: 无
 
 ## layoutMenuStore
 
