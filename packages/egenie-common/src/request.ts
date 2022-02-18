@@ -21,9 +21,9 @@ const singleton = (function() {
       .use((config) => {
         const baseHeader: {[key: string]: number | string; } = {};
 
-        if (window.__config__ && window.__config__.originProject) {
-          baseHeader['Origin-Project'] = window.__config__.originProject;
-        }
+        baseHeader['Origin-Project'] = process.env.REACT_APP_ORIGIN_PROJECT || undefined;
+        baseHeader['Api-Version'] = process.env.REACT_APP_API_VERSION || undefined;
+
         config.headers = {
           ...config.headers,
           ...baseHeader,
