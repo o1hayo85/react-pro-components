@@ -21,8 +21,13 @@ const singleton = (function() {
       .use((config) => {
         const baseHeader: {[key: string]: number | string; } = {};
 
-        baseHeader['Origin-Project'] = process.env.REACT_APP_ORIGIN_PROJECT || undefined;
-        baseHeader['Api-Version'] = process.env.REACT_APP_API_VERSION || undefined;
+        if (process.env.REACT_APP_ORIGIN_PROJECT) {
+          baseHeader['Origin-Project'] = process.env.REACT_APP_ORIGIN_PROJECT;
+        }
+
+        if (process.env.REACT_APP_API_VERSION) {
+          baseHeader['Api-Version'] = process.env.REACT_APP_API_VERSION;
+        }
 
         config.headers = {
           ...config.headers,
