@@ -36,7 +36,12 @@ class LayoutMenuHeaderTabs extends React.Component<{ layoutMenuStore?: LayoutMen
               closable={index !== 0}
               key={item.id}
               tab={(
-                <span className={styles.tabContent}>
+                <span
+                  className={styles.tabContent}
+                  data-icon={item.icon}
+                  data-id={item.id}
+                  data-url={item.url}
+                >
                   <span className={`${styles.tabIcon} icon-${item.icon}`}/>
                   <span className={styles.headerTabItem}>
                     {item.name}
