@@ -1,6 +1,7 @@
 import { Menu, Layout, Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
+import { getStaticResourceUrl } from '../helper';
 import styles from './layoutMenu.less';
 import { immutableStyle } from './layoutMenuStore';
 import type { LayoutMenuStore } from './layoutMenuStore';
@@ -122,7 +123,7 @@ class MenuComponent extends React.Component<{ layoutMenuStore?: LayoutMenuStore;
             >
               <img
                 id={styles.menuIcon}
-                src={`https://front.ejingling.cn/pc/ts/egenie-cloud-wms/menu/${item.icon}`}
+                src={getStaticResourceUrl(`pc/ts/egenie-cloud-wms/menu/${item.icon}`)}
               />
               <span className={styles.menuName}>
                 {item.name}

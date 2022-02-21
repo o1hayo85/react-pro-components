@@ -130,3 +130,8 @@ export function objToDict(obj: DictData): Array<{ value: string; label: string; 
       label,
     }));
 }
+
+export function getStaticResourceUrl(relativePath: string): string {
+  const urlPrefix = process.env.REACT_APP_OSS ? process.env.REACT_APP_OSS : 'https://front.ejingling.cn/';
+  return `${urlPrefix.replace(/(\/+)$/, '')}/${relativePath.replace(/^(\/+)/, '')}`;
+}

@@ -109,6 +109,10 @@ module.exports = function(utils) {
   - `IS_COMPRESS`
     - 是否开启 gzip 和 br 压缩
     - YES 开启
+  - `REACT_APP_ORIGIN_PROJECT`
+    - 项目名称(原先写在 window 下面的 originProject)
+  - `REACT_APP_OSS`
+    - oss 路径前缀（https://front.ejingling.cn/）
 
 ## `mock 数据`
 

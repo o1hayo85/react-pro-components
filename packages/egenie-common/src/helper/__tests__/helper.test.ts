@@ -1,4 +1,4 @@
-import { add, formatPrice, multiple, thousandthSeparator, subtract, toFixed, objToDict } from '../index';
+import { add, formatPrice, multiple, thousandthSeparator, subtract, toFixed, objToDict, getStaticResourceUrl } from '../index';
 
 describe('helper', () => {
   test('add', () => {
@@ -96,5 +96,12 @@ describe('helper', () => {
           label: 'b',
         },
       ]);
+  });
+
+  test('getStaticResourceUrl', () => {
+    expect(getStaticResourceUrl('a.js'))
+      .toBe('https://front.ejingling.cn/a.js');
+    expect(getStaticResourceUrl('//////a.js'))
+      .toBe('https://front.ejingling.cn/a.js');
   });
 });

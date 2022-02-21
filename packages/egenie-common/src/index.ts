@@ -1,6 +1,6 @@
 import type { Egenie, JsonReader, Permission, User } from './layoutMenu';
 
-export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict, DictData } from './helper';
+export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict, DictData, getStaticResourceUrl } from './helper';
 export { request, BaseData, PaginationData, BatchReportData, PureData } from './request';
 export { renderModal, destroyModal, destroyAllModal } from './renderModal';
 export { Locale } from './locale';
@@ -17,9 +17,5 @@ declare global {
     jsonReader: JsonReader;
     egenie: Egenie;
     EgeniePermission: Permission;
-    __config__: {
-      originProject: string;
-      [key: string]: any;
-    };
   }
 }
