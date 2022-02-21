@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#000000"/>
   <meta name="description" content="app"/>
   <title>web</title>
-  <link rel="icon" href="https://front.ejingling.cn/customer-source/common/favicon.ico">
-  <link rel="stylesheet" href="https://front.ejingling.cn/customer-source/font/style.css?v=<%= Date.now() %>">
+  <link rel="icon" href="<%= process.env.REACT_APP_OSS %>customer-source/common/favicon.ico">
+  <link rel="stylesheet" href="<%= process.env.REACT_APP_OSS %>customer-source/font/style.css?v=<%= Date.now() %>">
   <style>
     html,
     body,
@@ -176,24 +176,24 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/browserCompatible.min.js"></script>
+<script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/browserCompatible.min.js"></script>
 <% if (process.env.NODE_ENV === 'development') { %>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/react.development.min.js?v=17.0.1"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/react-dom.development.min.js?v=17.0.1"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobx.production.min.js?v=5.15.7"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobxReactLite.development.min.js?v=2.2.2"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobxReact.development.min.js?v=6.3.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/react.development.min.js?v=17.0.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/react-dom.development.min.js?v=17.0.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobx.production.min.js?v=5.15.7"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobxReactLite.development.min.js?v=2.2.2"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobxReact.development.min.js?v=6.3.1"></script>
 <% } %>
 <% if (process.env.NODE_ENV === 'production') { %>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/react.production.min.js?v=17.0.1"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/react-dom.production.min.js?v=17.0.1"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobx.production.min.js?v=5.15.7"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobxReactLite.production.min.js?v=2.2.2"></script>
-  <script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/mobxReact.production.min.js?v=6.3.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/react.production.min.js?v=17.0.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/react-dom.production.min.js?v=17.0.1"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobx.production.min.js?v=5.15.7"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobxReactLite.production.min.js?v=2.2.2"></script>
+  <script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/mobxReact.production.min.js?v=6.3.1"></script>
 <% } %>
-<script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/moment.min.js?v=2.29.1"></script>
-<script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/axios.min.js?v=0.21.0"></script>
-<script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/lodash.min.js?v=4.17.20"></script>
-<script type="text/javascript" src="https://front.ejingling.cn/customer-source/common/qs.min.js?v=6.9.4"></script>
+<script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/moment.min.js?v=2.29.1"></script>
+<script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/axios.min.js?v=0.21.0"></script>
+<script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/lodash.min.js?v=4.17.20"></script>
+<script type="text/javascript" src="<%= process.env.REACT_APP_OSS %>customer-source/common/qs.min.js?v=6.9.4"></script>
 </body>
 </html>
