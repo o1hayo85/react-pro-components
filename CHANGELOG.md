@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.9...v0.0.0) (2022-02-21)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.10...v0.0.0) (2022-02-22)
+
+### Features
+
+- **egenie-common:** 更改 pdd 打印模板 url ([7507876](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/75078760d661aa8977f6a043b79464946e5eadd2))
+
+## [0.11.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.9...v0.11.10) (2022-02-21)
 
 ## [0.11.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.8...v0.11.9) (2022-02-21)
 
