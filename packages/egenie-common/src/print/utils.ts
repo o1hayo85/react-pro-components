@@ -240,7 +240,7 @@ export function formatPddData(printData: any[], courierPrintType: number) {
     if (item.pinduoduo) {
       content.push({
         data: JSON.parse(item.pinduoduo),
-        templateURL: courierPrintType ? 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_yilian_template.xml' : 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_seller_area_template.xml',
+        templateURL: courierPrintType ? 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml' : 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_seller_area_template.xml',
       });
     }
 

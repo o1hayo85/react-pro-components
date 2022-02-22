@@ -316,7 +316,7 @@ describe('print utils', () => {
     expect(formatPddData([{ pinduoduo: JSON.stringify({ value: 1 }) }], 1)[0].contents).toEqual([
       {
         data: { value: 1 },
-        templateURL: 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_yilian_template.xml',
+        templateURL: 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml',
       },
     ]);
 
@@ -329,7 +329,7 @@ describe('print utils', () => {
       { caiNiaoDefaultData: 1 },
       {
         data: { value: 1 },
-        templateURL: 'https://egenie.oss-cn-beijing.aliyuncs.com/pdd/pdd_waybill_seller_area_template.xml',
+        templateURL: 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_seller_area_template.xml',
       },
     ]);
   });
