@@ -2,7 +2,7 @@
 
 ### Features
 
-- **print:** 增加打印自定义模板的环境变量 ([fa91ea2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fa91ea21763e2244e64a29d4bc0c45ca9739aa93))
+- **print:** 增加打印自定义模板的环境变量 ([cedc287](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cedc2876c90fffd06b53be676e4ae0370e071fa8))
 
 ## [0.11.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.12...v0.11.13) (2022-03-01)
 
