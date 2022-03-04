@@ -26,6 +26,38 @@ order: 2
 - `printWayBill处理快递单打印逻辑`。不需要在外部做解密快递单数据逻辑
 - `一次打印页数可配`
 
+## 自定义 url
+
+### 前提
+
+- `egenie-common版本大于等于0.11.14`
+
+### 抖音自定义模板
+
+- 默认: https://front.ejingling.cn/customer-source/printTemp/dy2.xml
+- 可配环境变量: REACT_APP_DY_CUSTOM_TEMPLATE_URL
+
+### 京东自定义模板
+
+- 默认: https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt
+- 可配环境变量: REACT_APP_JD_CUSTOM_TEMPLATE_URL
+
+### 京东青龙模板
+
+- 默认: http://cloudprint.cainiao.com/template/standard/297499/5
+- 可配环境变量: REACT_APP_JDQL_TEMPLATE_URL
+
+### pdd 自定义模板
+
+- courierPrintType 等于 1
+
+  - 默认: https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml
+  - 可配环境变量: REACT_APP_PDD_TEMPLATE_URL_1
+
+- courierPrintType 等于 0
+  - 默认: https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_seller_area_template.xml
+  - 可配环境变量: REACT_APP_PDD_TEMPLATE_URL_0
+
 ## `获取打印机`
 
 - 返回值: `Promise<string[]>`

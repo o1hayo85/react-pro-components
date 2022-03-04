@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { getStaticResourceUrl } from '../helper';
 import type { TemplateData } from './types';
 
 export function isSocketConnected(socket: WebSocket, openError: string): boolean {
@@ -212,7 +213,7 @@ export function formatDyData(printData: any[]) {
     if (item?.dyData?.customData) {
       contents.push({
         data: JSON.parse(item?.dyData?.customData),
-        templateURL: item?.dyData?.customTempUrl ? item?.dyData?.customTempUrl : 'https://front.ejingling.cn/customer-source/printTemp/dy2.xml',
+        templateURL: item?.dyData?.customTempUrl || process.env.REACT_APP_DY_CUSTOM_TEMPLATE_URL || getStaticResourceUrl('customer-source/printTemp/dy2.xml'),
       });
     }
 
@@ -240,7 +241,7 @@ export function formatPddData(printData: any[], courierPrintType: number) {
     if (item.pinduoduo) {
       content.push({
         data: JSON.parse(item.pinduoduo),
-        templateURL: courierPrintType ? 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml' : 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_seller_area_template.xml',
+        templateURL: courierPrintType ? process.env.REACT_APP_PDD_TEMPLATE_URL_1 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_yilian_template.xml') : process.env.REACT_APP_PDD_TEMPLATE_URL_0 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_seller_area_template.xml'),
       });
     }
 

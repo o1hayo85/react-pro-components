@@ -60,9 +60,6 @@ export class JdPrint {
 
   private openError: string;
 
-  // 标准模板数据 实例
-  public standTempUrl = 'http://storage.jd.com/print-tmpl/template-88dc5829-f419-4ab7-b8ae-feb32605a189.1606983912784.txt';
-
   // eslint-disable-next-line @typescript-eslint/ban-types
   private taskRequest = new Map<string, { request: RequestProtocol; resolve?: Function; reject?: Function; }>();
 

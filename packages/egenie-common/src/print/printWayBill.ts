@@ -120,6 +120,7 @@ interface PrintWayBillParams {
    * 更新回掉的参数
    */
   checkSku?: boolean;
+
   [key: string]: any;
 }
 
@@ -260,7 +261,7 @@ class PrintWayBill {
             receiverName: receiver_name,
             receiverPhone: receiver_mobile || receiver_phone,
             remark: seller_note,
-            templateURL: 'http://cloudprint.cainiao.com/template/standard/297499/5', // 写死的
+            templateURL: process.env.REACT_APP_JDQL_TEMPLATE_URL || 'http://cloudprint.cainiao.com/template/standard/297499/5', // 写死的
           });
         });
       }
