@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.14...v0.0.0) (2022-03-08)
 
+### Features
+
+- **egenie-config:** 抽取 ts 配置 ([4de5c29](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4de5c29415208116db6351363a8e32fea84ef882))
+
 ## [0.11.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.13...v0.11.14) (2022-03-04)
 
 ### Features
