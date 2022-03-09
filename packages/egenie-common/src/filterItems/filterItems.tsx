@@ -80,7 +80,7 @@ export interface FilterItemsParams {
 }
 
 export interface ConnectListItem {
-  toParams: () => {[key: string]: string; };
+  toParams: () => {[key: string]: string | string[]; };
   reset?: () => void;
   validator?: () => Promise<string>;
   [key: string]: any;
@@ -208,7 +208,7 @@ export class FilterItems {
    * 获取查询项的查询参数
    */
   @computed
-  public get params(): {[key: string]: string; } {
+  public get params(): {[key: string]: string | string[]; } {
     const params = this.actualData.reduce((prev, current) => ({
       ...prev,
       ...current.toParams.call(current),

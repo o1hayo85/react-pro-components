@@ -225,7 +225,7 @@ export class MainSubStructureModel {
   /**
    * 查询方案注入此方法，可通过gridModel.getFilterParams获取参数
    */
-  public getFilterParams: () => {[key: string]: string; };
+  public getFilterParams: () => {[key: string]: string | string[]; };
 
   constructor({ ...options }: IMainSubStructureModel) {
     set(this, { ...(options || {}) });

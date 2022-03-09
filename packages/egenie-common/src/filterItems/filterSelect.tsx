@@ -67,13 +67,22 @@ export class FilterSelect extends FilterBase {
     }
   }
 
-  public toParams(): {[key: string]: string; } {
+  public toParams(): {[key: string]: string | string[]; } {
     if (this.toProgramme() == null) {
       return {};
+    }
+
+    if (this.mode && this.isParamList) {
+      return { [this.field]: toJS(this.value) };
     } else {
       return { [this.field]: this.toProgramme() };
     }
   }
+
+  /**
+   * 是否将参数转化为Array,原来只支持转为string
+   */
+  @observable public isParamList = false;
 
   public translateParams(): string[] {
     if (this.toProgramme() == null) {

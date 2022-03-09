@@ -9,6 +9,13 @@ order: 5
 - 类型: 'select'
 - 默认值: 'select'
 
+## `isParamList`
+
+- 前提: `egenie-common、egenie-utils版本大于等于0.12.0`
+- 描述: 是否将参数转化为 Array(mode 等于 multiple),原来只支持转为 string
+- 类型: boolean
+- 默认值: false
+
 ## `data`
 
 - 描述: `下拉框数据`

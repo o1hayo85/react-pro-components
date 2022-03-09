@@ -9,6 +9,13 @@ order: 9
 - 类型: 'checkbox'
 - 默认值: 'checkbox'
 
+## `isParamList`
+
+- 前提: `egenie-common、egenie-utils版本大于等于0.12.0`
+- 描述: 是否将参数转化为 Array,原来只支持转为 string
+- 类型: boolean
+- 默认值: false
+
 ## `data`
 
 - 描述: `多选框数据`

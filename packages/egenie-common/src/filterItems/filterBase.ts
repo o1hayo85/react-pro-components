@@ -24,7 +24,7 @@ export abstract class FilterBase {
    * 对外暴露的params的处理
    * 外层一般不需要重写
    */
-  public abstract toParams(): {[key: string]: string; };
+  public abstract toParams(): {[key: string]: string | string[]; };
 
   /**
    * 格式化查询项值

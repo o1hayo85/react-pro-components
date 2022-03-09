@@ -88,9 +88,7 @@ export class Programme {
     this.gridModel.getFilterParams = this.getParams;
   }
 
-  @action private getParams = () => {
-    return this.filterItems.params;
-  };
+  @action private getParams = () => this.filterItems.params;
 
   @action private getProgrammeList = (dictList = '', itemList = '', fieldMap = {}) => {
     request<FilterConfigData>({

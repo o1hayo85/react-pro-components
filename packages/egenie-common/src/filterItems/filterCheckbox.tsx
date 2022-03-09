@@ -48,13 +48,22 @@ export class FilterCheckbox extends FilterBase {
     }
   }
 
-  public toParams(): {[key: string]: string; } {
-    if (this.toProgramme()) {
-      return { [this.field]: this.toProgramme() };
-    } else {
+  public toParams(): {[key: string]: string | string[]; } {
+    if (this.toProgramme() == null) {
       return {};
     }
+
+    if (this.isParamList) {
+      return { [this.field]: toJS(this.value) };
+    } else {
+      return { [this.field]: this.toProgramme() };
+    }
   }
+
+  /**
+   * 是否将参数转化为Array,原来只支持转为string
+   */
+  @observable public isParamList = false;
 
   public translateParams(): string[] {
     if (Array.isArray(this.value) && this.value.length) {
