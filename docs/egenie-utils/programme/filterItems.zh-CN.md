@@ -62,7 +62,7 @@ order: 14
 ### `params`
 
 - 描述: 获取查询项的查询参数(`计算属性`)
-- 类型: `{[p: string]: string; };`
+- 类型: `{[p: string]: string | string[]; };`
 - 默认值: {}
 
 ### `translateParamsList`
