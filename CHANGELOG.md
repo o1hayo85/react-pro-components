@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.15...v0.0.0) (2022-03-09)
 
+### Features
+
+- **egenie-common:** 更新 filterItems 的 toParams 类型 ([a96a99b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a96a99b16ab1d38c4e161d7cf8369f5021341dd4))
+
 ## [0.11.15](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.14...v0.11.15) (2022-03-08)
 
 ### Features
