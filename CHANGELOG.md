@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.1...v0.0.0) (2022-03-10)
 
+### Features
+
+- **react-scripts:** 更改静态资源配置,用 asset 代替 url-loader ([af2deb9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/af2deb97ed026d5cc010fa27bcf0bde5d2c4ad81))
+
 ## [0.12.1](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.0...v0.12.1) (2022-03-10)
 
 ### Features
