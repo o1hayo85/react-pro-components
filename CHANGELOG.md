@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.0...v0.0.0) (2022-03-10)
 
+### Features
+
+- **react-scripts:** 增加对 sass 的支持,兼容老的 js 项目 ([7f44b78](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7f44b7812558ff54066fe9ef8b3e81df9b8596ad))
+
 # [0.12.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.11.15...v0.12.0) (2022-03-09)
 
 ### Features
