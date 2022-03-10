@@ -40,6 +40,9 @@ function getGlobalStyle(suffix) {
   return path.resolve(paths.appSrc, `global.${suffix}`);
 }
 
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
+
 module.exports = [
   {
     test: /\.module\.css$/,
@@ -68,4 +71,14 @@ module.exports = [
     exclude: getGlobalStyle('less'),
     use: getStyleLoaders({ modules: { localIdentName: '[name]__[local]--[hash:base64:8]' }}, 'less-loader'),
   },
-];
+  utils.allowSass && {
+    test: sassModuleRegex,
+    include: [paths.appSrc],
+    use: getStyleLoaders({ modules: { localIdentName: '[name]__[local]--[hash:base64:8]' }}, 'sass-loader'),
+  },
+  utils.allowSass && {
+    test: sassRegex,
+    exclude: [sassModuleRegex],
+    use: getStyleLoaders({}, 'sass-loader'),
+  },
+].filter(Boolean);

@@ -62,6 +62,7 @@ function getPerformanceConfig(oldConfig) {
   const isAnalyze = typeof process.env.IS_ANALYZE === 'string' && process.env.IS_ANALYZE.toLocaleUpperCase() === 'YES';
   const useEsBuild = typeof process.env.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES';
   const isCompress = typeof process.env.IS_COMPRESS === 'string' && process.env.IS_COMPRESS.toLocaleUpperCase() === 'YES';
+  const allowSass = typeof process.env.ALLOW_SASS === 'string' && process.env.ALLOW_SASS.toLocaleUpperCase() === 'YES';
 
   return {
     ...oldConfig,
@@ -72,6 +73,7 @@ function getPerformanceConfig(oldConfig) {
     isAnalyze,
     useEsBuild,
     isCompress,
+    allowSass,
   };
 }
 
