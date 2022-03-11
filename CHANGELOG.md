@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.1...v0.0.0) (2022-03-10)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.2...v0.0.0) (2022-03-11)
+
+### Bug Fixes
+
+- **egenie-common:** 解决 antd 日期组件 bug ([c682fb9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c682fb942bdad51d190ffb8d4277b153fa589941))
+- **egenie-common:** 解决 antd 日期组件 bug ([d675825](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d67582552a67ed9b7c6d21de029e1ab604f33e03))
+
+## [0.12.2](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.1...v0.12.2) (2022-03-10)
 
 ### Features
 
