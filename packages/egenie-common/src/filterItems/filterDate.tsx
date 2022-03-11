@@ -508,14 +508,18 @@ export class FilterDate extends FilterBase {
     if (!isOpen) {
       if (containerRef.current) {
         const startElement: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${startPlaceHolder}]`);
-        if (startElement && startElement.value) {
-          this.startTime = moment(startElement.value);
-        }
-
         const endElement: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${endPlaceHolder}]`);
-        if (endElement && endElement.value) {
-          this.endTime = moment(endElement.value);
-        }
+
+        // 解决antd的日期组件bug,先选择2个时间,再打开时间框,然后点清除按钮(清除不掉,估计内部设置了时间的值自动把时间框打开,onOpenChange事件调了2次)
+        setTimeout(() => {
+          if (startElement && startElement.value) {
+            this.startTime = moment(startElement.value);
+          }
+
+          if (endElement && endElement.value) {
+            this.endTime = moment(endElement.value);
+          }
+        });
       }
     }
   };
