@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.3...v0.0.0) (2022-03-15)
 
+### Bug Fixes
+
+- **egenie-common/lodopPrint:** 解决插件端口加载问题 ([684d6b4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/684d6b4ea752f452d0ae24d5757d5fe2abd3a63f))
+
 ## [0.12.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.2...v0.12.3) (2022-03-11)
 
 ### Bug Fixes
