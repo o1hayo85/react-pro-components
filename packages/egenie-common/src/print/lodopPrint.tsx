@@ -103,6 +103,8 @@ function notifyUserDownloadPlugin() {
 export class LodopPrint {
   public static url8000 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
 
+  public static url8001 = 'http://localhost:8000/CLodopfuncs.js';
+
   public static url18000 = 'http://localhost:18000/CLodopfuncs.js';
 
   public static licenses: Array<[string, string]> = [
@@ -357,34 +359,45 @@ export class LodopPrint {
     if (this.jsLoadState === EnumJsLoadState.finish) {
       notifyUserDownloadPlugin();
       return Promise.reject();
-    } else {
-      try {
-        console.log('开始加载lodop文件');
+    }
 
-        // 加载js
-        await loadScripts(LodopPrint.url8000);
-        await loadScripts(LodopPrint.url18000);
-        console.log('加载lodop文件结束');
-
-        // 获取instance
-        // @ts-ignore
-        this.instance = window.getCLodop();
-        console.log('获取lodop插件instance成功');
-
-        // 设置注册信息
-        this.instance.SET_LICENSES(LodopPrint.licenses[0][0], LodopPrint.licenses[0][1], LodopPrint.licenses[1][0], LodopPrint.licenses[1][1]);
-
-        console.log(`当前有WEB打印服务C-Lodop可用!\n C-Lodop版本:${this.instance.CVERSION}(内含Lodop${this.instance.VERSION})`);
-
-        // 更新状态
-        this.jsLoadState = EnumJsLoadState.finish;
-      } catch (e) {
-        console.log(e);
-
-        // 更新状态
-        this.jsLoadState = EnumJsLoadState.finish;
-        return Promise.reject();
+    try {
+      const pluginUrls = [
+        LodopPrint.url8000,
+        LodopPrint.url8001,
+        LodopPrint.url18000,
+      ];
+      console.log('开始加载lodop文件');
+      for (let i = 0; i < pluginUrls.length; i++) {
+        try {
+          await loadScripts(LodopPrint.url18000);
+        } catch (e) {
+          if (i === pluginUrls.length - 1) {
+            throw new Error(e);
+          }
+        }
       }
+
+      console.log('加载lodop文件结束');
+
+      // 获取instance
+      // @ts-ignore
+      this.instance = window.getCLodop();
+      console.log('获取lodop插件instance成功');
+
+      // 设置注册信息
+      this.instance.SET_LICENSES(LodopPrint.licenses[0][0], LodopPrint.licenses[0][1], LodopPrint.licenses[1][0], LodopPrint.licenses[1][1]);
+
+      console.log(`当前有WEB打印服务C-Lodop可用!\n C-Lodop版本:${this.instance.CVERSION}(内含Lodop${this.instance.VERSION})`);
+
+      // 更新状态
+      this.jsLoadState = EnumJsLoadState.finish;
+    } catch (e) {
+      console.log(e);
+
+      // 更新状态
+      this.jsLoadState = EnumJsLoadState.finish;
+      return Promise.reject();
     }
   }
 
