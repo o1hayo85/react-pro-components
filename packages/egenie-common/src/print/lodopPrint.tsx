@@ -368,14 +368,20 @@ export class LodopPrint {
         LodopPrint.url18000,
       ];
       console.log('开始加载lodop文件');
+      let isLoadSuccess = false;
       for (let i = 0; i < pluginUrls.length; i++) {
-        try {
-          await loadScripts(LodopPrint.url18000);
-        } catch (e) {
-          if (i === pluginUrls.length - 1) {
-            throw new Error(e);
+        if (isLoadSuccess === false) {
+          try {
+            await loadScripts(pluginUrls[i]);
+            isLoadSuccess = true;
+          } catch (e) {
+            console.log(e);
           }
         }
+      }
+
+      if (isLoadSuccess === false) {
+        throw new Error('加载lodop文件失败');
       }
 
       console.log('加载lodop文件结束');
