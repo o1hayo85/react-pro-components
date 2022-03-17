@@ -103,7 +103,7 @@ function notifyUserDownloadPlugin() {
 export class LodopPrint {
   public static url8000 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
 
-  public static url8001 = 'http://localhost:8000/CLodopfuncs.js';
+  public static url8001 = 'http://localhost:8001/CLodopfuncs.js';
 
   public static url18000 = 'http://localhost:18000/CLodopfuncs.js';
 
