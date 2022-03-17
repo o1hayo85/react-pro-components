@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.5...v0.0.0) (2022-03-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.6...v0.0.0) (2022-03-17)
+
+### Features
+
+- 更改 lodop 打印 url ([20025fb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/20025fb0ad913c4eff7f22b25cfd25accd1d5132))
+- test ([523b81c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/523b81ca9eeb0aba0a0782811ee663c50fdbeb33))
+
+## [0.12.6](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.5...v0.12.6) (2022-03-17)
 
 ### Bug Fixes
 
