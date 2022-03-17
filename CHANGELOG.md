@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.5...v0.0.0) (2022-03-17)
 
+### Bug Fixes
+
+- **egenie-common/layoutMenu:** 解决菜单高度计算问题 ([8d88d90](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8d88d9036c92080e5c89d5904ce08d9fc2a1b1bb))
+
 ## [0.12.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.4...v0.12.5) (2022-03-16)
 
 ### Bug Fixes
