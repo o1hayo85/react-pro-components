@@ -219,19 +219,13 @@ export class LayoutMenuStore {
     (this.menuData.find((item) => item.id === this.activeMenuId)?.children || []).forEach((child) => {
       const currentSubMenuHeight = titleHeight + child.children.length * itemHeight;
 
-      if (currentRowHeight + currentSubMenuHeight > contentHeight) {
+      if (currentRow > -1 && currentRow < subMenuList.length && currentRowHeight + currentSubMenuHeight <= contentHeight) {
+        subMenuList[currentRow].push(child);
+        currentRowHeight += currentSubMenuHeight;
+      } else {
         currentRow++;
         currentRowHeight = currentSubMenuHeight;
         subMenuList[currentRow] = [child];
-      } else {
-        if (currentRow > -1 && currentRow < subMenuList.length) {
-          subMenuList[currentRow].push(child);
-          currentRowHeight += currentSubMenuHeight;
-        } else {
-          currentRow++;
-          currentRowHeight = currentSubMenuHeight;
-          subMenuList[currentRow] = [child];
-        }
       }
     });
     return subMenuList;
