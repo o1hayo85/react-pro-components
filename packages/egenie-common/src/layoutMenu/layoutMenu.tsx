@@ -204,21 +204,24 @@ class SubMenu extends React.Component<{ layoutMenuStore?: LayoutMenuStore; }> {
               <div
                 className={styles.rootSubMenuLine}
                 key={i++}
-                style={{ paddingTop: immutableStyle.subMenuTop }}
+                style={{
+                  paddingBottom: immutableStyle.blockVerticalGap,
+                  paddingLeft: immutableStyle.blockHorizontalGap,
+                  width: immutableStyle.blockWidth,
+                }}
               >
                 {
                   list?.map((item) => (
                     <div
                       className={styles.rootSubMenuBlock}
                       key={String(item.id)}
-                      style={{ width: immutableStyle.blockWidth }}
                     >
                       <div
                         className={styles.rootSubMenuBlockTitle}
                         style={{
-                          marginBottom: `${immutableStyle.titleMargin}px`,
-                          fontSize: `${immutableStyle.titleHeight}px`,
-                          lineHeight: `${immutableStyle.titleHeight}px`,
+                          paddingTop: `${immutableStyle.blockVerticalGap}px`,
+                          height: `${immutableStyle.titleHeight}px`,
+                          fontSize: `${immutableStyle.titleSize}px`,
                         }}
                       >
                         {item.name}
@@ -228,7 +231,7 @@ class SubMenu extends React.Component<{ layoutMenuStore?: LayoutMenuStore; }> {
                           <div
                             className={styles.rootSubMenuBlockList}
                             key={menuItem.id}
-                            style={{ marginBottom: `${immutableStyle.itemMargin}px` }}
+                            style={{ height: `${immutableStyle.itemHeight}px` }}
                           >
                             <div className={`${styles.rootSubMenuBlockIcon} icon-${menuItem.icon}`}/>
                             <SubMenuItem menuItem={menuItem}/>
@@ -263,10 +266,7 @@ class SubMenuItem extends React.Component<{ layoutMenuStore?: LayoutMenuStore; m
       layoutMenuStore: { handleOpenActiveTab },
       menuItem,
     } = this.props;
-    const commonStyle = {
-      fontSize: `${immutableStyle.itemHeight}px`,
-      lineHeight: `${immutableStyle.itemHeight}px`,
-    };
+    const commonStyle = { fontSize: `${immutableStyle.itemSize}px` };
 
     if (menuItem.url?.includes('http')) {
       return (

@@ -49,13 +49,13 @@ export interface LayoutMenuStoreParams {
 }
 
 export const immutableStyle = {
-  titleHeight: 16,
-  titleMargin: 30,
-  itemHeight: 14,
-  itemMargin: 24,
-  blockMargin: 86,
-  blockWidth: 240,
-  subMenuTop: 74,
+  titleHeight: 120,
+  titleSize: 16,
+  blockVerticalGap: 76,
+  blockHorizontalGap: 40,
+  blockWidth: 280,
+  itemHeight: 40,
+  itemSize: 14,
 };
 
 export class LayoutMenuStore {
@@ -208,32 +208,29 @@ export class LayoutMenuStore {
 
     const {
       titleHeight,
-      titleMargin,
       itemHeight,
-      itemMargin,
-      blockMargin,
-      subMenuTop,
+      blockVerticalGap,
     } = immutableStyle;
-    const titleTotalHeight = titleHeight + titleMargin;
-    const itemTotalHeight = itemHeight + itemMargin;
-    const contentHeight = window.innerHeight - subMenuTop;
+    const contentHeight = window.innerHeight - blockVerticalGap;
 
     const subMenuList: MenuItem[][] = [];
-    let currentRow = 0;
-    let currentHeight = 0;
+    let currentRow = -1;
+    let currentRowHeight = 0;
     (this.menuData.find((item) => item.id === this.activeMenuId)?.children || []).forEach((child) => {
-      const currentSubMenuHeight = titleTotalHeight + child.children.length * itemTotalHeight + blockMargin;
-      currentHeight += currentSubMenuHeight;
+      const currentSubMenuHeight = titleHeight + child.children.length * itemHeight;
 
-      if (currentHeight > contentHeight) {
-        currentRow += 1;
-        currentHeight = 0;
-        subMenuList.push([child]);
+      if (currentRowHeight + currentSubMenuHeight > contentHeight) {
+        currentRow++;
+        currentRowHeight = currentSubMenuHeight;
+        subMenuList[currentRow] = [child];
       } else {
-        if (subMenuList[currentRow]) {
+        if (currentRow > -1 && currentRow < subMenuList.length) {
           subMenuList[currentRow].push(child);
+          currentRowHeight += currentSubMenuHeight;
         } else {
-          subMenuList.push([child]);
+          currentRow++;
+          currentRowHeight = currentSubMenuHeight;
+          subMenuList[currentRow] = [child];
         }
       }
     });
