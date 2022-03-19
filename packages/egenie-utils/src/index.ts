@@ -4,7 +4,11 @@ declare global {
   interface Window {
     user: User;
     jsonReader: JsonReader;
+
+    // @ts-ignore
     egenie: Egenie;
+
+    // @ts-ignore
     EgeniePermission: Permission;
   }
 }
