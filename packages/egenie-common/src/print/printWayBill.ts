@@ -374,7 +374,7 @@ class PrintWayBill {
           printer: params.printer,
           preview: params.preview,
           customData,
-          customTempUrl: customTempUrl || 'https://storage.jd.com/jdl-template/customs-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1647669903839.txt',
+          customTempUrl: customTempUrl || 'https://storage.jd.com/jdl-template/customs-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1647672401897.txt',
           printData: [printData],
           tempUrl,
           templateData: tempData, // FIXME: 是否需要这个字段来获取默认打印机？
