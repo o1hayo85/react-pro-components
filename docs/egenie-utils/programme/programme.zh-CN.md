@@ -127,9 +127,7 @@ export class Store {
 
 const store = new Store();
 
-export default class extends React.Component {
-  render() {
-    return <ProgrammeComponent store={store.programme} />;
-  }
+export default function () {
+  return <ProgrammeComponent store={store.programme} />;
 }
 ```

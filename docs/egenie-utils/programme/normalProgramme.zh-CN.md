@@ -56,7 +56,7 @@ import { Card } from 'antd';
 import { NormalProgramme, NormalProgrammeComponent } from 'egenie-utils';
 import React from 'react';
 
-const programme = new NormalProgramme({
+const normalProgramme = new NormalProgramme({
   filterItems: [],
   handleSearch: () => Promise.resolve(),
   count: 6
@@ -64,6 +64,6 @@ const programme = new NormalProgramme({
 
 // 外层布局请自写。一般用antd的Card
 <Card>
-  <NormalProgrammeComponent store={programme}/>
+  <NormalProgrammeComponent store={normalProgramme}/>
 <Card/>
 ```

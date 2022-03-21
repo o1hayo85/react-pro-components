@@ -1,4 +1,23 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.6...v0.0.0) (2022-03-17)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.9...v0.0.0) (2022-03-21)
+
+### Features
+
+- **egenie-common:** 更改 request ([d504d06](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d504d065a62b9f9f11f4dd99f8bd4b8e43d6c530))
+
+## [0.12.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.8...v0.12.9) (2022-03-19)
+
+### Bug Fixes
+
+- 0.12.8 ([c7b7588](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c7b758802c0d5e623340bc7797cbe920c738b32c))
+- 更新 jd URL ([e93d77f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e93d77f5c2211366d1535914375f95bf5fcc1a49))
+
+## [0.12.8](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.7...v0.12.8) (2022-03-19)
+
+### Features
+
+- 京东模板兼容后端没传自定义模板 ([89e9385](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/89e9385f4ec35a3dd9c003ec9b861833c1a9f62a))
+
+## [0.12.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.6...v0.12.7) (2022-03-17)
 
 ### Features
 

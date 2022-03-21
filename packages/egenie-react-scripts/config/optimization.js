@@ -154,7 +154,6 @@ module.exports = {
         enforce: true,
       },
 
-      // 临时方案，后期会用babel打包
       'egenie-utils': {
         test: /egenie-utils/,
         chunks: 'all',
@@ -162,21 +161,6 @@ module.exports = {
         priority: 108,
         enforce: true,
       },
-
-      // 不拆node_modules里面的包
-      /*      vendors: {
-        test(module) {
-          return (
-            module.resource &&
-            module.resource.includes('node_modules') &&
-            !module.resource.includes('egenie-utils')
-          );
-        },
-        chunks: 'all',
-        minChunks: 3,
-        priority: 100,
-        enforce: true,
-      },*/
     },
   },
 };

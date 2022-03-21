@@ -156,15 +156,7 @@ export class PaginationData<T = unknown> {
 
   public errorCode?: number;
 
-  public data: {
-    list: T[];
-    totalCount: number;
-    page: number;
-    pageSize: number;
-    totalPageCount: number;
-    calTotalPageCount: number;
-    first: number;
-  };
+  public data?: PureData<T>;
 }
 
 /**
