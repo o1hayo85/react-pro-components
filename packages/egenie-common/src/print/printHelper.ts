@@ -95,12 +95,11 @@ class PrintHelper {
   public print = async(params: RookiePrintParams | PddPrintParams | JDParams | DyPrintParams | LodopPrintParams): Promise<any> => {
     if (this.state === this.jdPrint) {
       const newParams: JDParams = params;
-      const customTempUrl = process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
       await this.state.print({
         preview: newParams.preview,
         printer: formatPrintName(newParams.templateData, newParams.printer),
         customData: newParams.customData ? [JSON.parse(newParams.customData)] : newParams.customData,
-        customTempUrl: newParams.customTempUrl || customTempUrl,
+        customTempUrl: newParams.customTempUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt',
         printData: newParams.printData,
         tempUrl: newParams.tempUrl,
       });
