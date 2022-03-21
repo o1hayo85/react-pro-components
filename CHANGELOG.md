@@ -2,7 +2,8 @@
 
 ### Features
 
-- **egenie-common:** 更改 request ([d504d06](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d504d065a62b9f9f11f4dd99f8bd4b8e43d6c530))
+- **egenie-common:** 更改 jd 打印自定义模板 url ([e309a0c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e309a0c6b500e9993670c7a5513b639c43b0086c))
+- **egenie-common:** 更改 request ([df71005](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/df71005f5ae0484a7d5d70358de2fdd3b8ceb760))
 
 ## [0.12.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.8...v0.12.9) (2022-03-19)
 
