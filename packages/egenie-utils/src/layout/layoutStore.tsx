@@ -146,7 +146,6 @@ export class LayoutStore {
     const currentHomePageType = res.data.find((item) => item.current);
     this.homePageTypes = res.data;
     this.homePageType = currentHomePageType ? currentHomePageType.homePageType : null;
-    this.getMenuList(this.homePageType);
   };
 
   @action public switchHomePageType = async(): Promise<void> => {
@@ -208,6 +207,7 @@ export class LayoutStore {
   };
 
   public handleInit = () => {
+    this.getMenuList();
     this.getHomePageTypes();
     this.getUserInfo();
     getPerms();
@@ -339,12 +339,11 @@ export class LayoutStore {
     this.tabList = list;
   };
 
-  public getMenuList = action(async(homePageType: number) => {
+  public getMenuList = action(async() => {
     const res = await request({
       url: '/api/iac/resource/dashboard/menu',
       method: 'POST',
-      data: { homePageType },
-
+      data: {},
     });
     this.handleMenuItemHeight(res);
   });
