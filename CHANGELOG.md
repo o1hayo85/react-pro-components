@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.9...v0.0.0) (2022-03-21)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.10...v0.0.0) (2022-03-24)
+
+### Bug Fixes
+
+- **egenie-common:** 解决 FilterSelect 在限制条数数量过来，页面跳转带参数,页面直接显示 id(数据索引在限制数量的后面) ([05a9cdb](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/05a9cdb031dfff3dd95ca8f5e6c1e29aa8116f0f))
+
+## [0.12.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.9...v0.12.10) (2022-03-21)
 
 ### Features
 
