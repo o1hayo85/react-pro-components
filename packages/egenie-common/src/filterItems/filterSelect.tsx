@@ -181,9 +181,19 @@ export class FilterSelect extends FilterBase {
 
   @computed
   public get options(): ValueAndLabelData {
-    return this.data.filter((item) => item.label.toLowerCase()
-      .includes(this.searchValue.toLowerCase()))
+    let selectValue: string[] = [];
+    if (this.mode === 'multiple') {
+      selectValue = this.value as string[];
+    } else {
+      selectValue = this.value == null ? [] : [this.value as string];
+    }
+
+    const selectOptions = this.data.filter((item) => selectValue.includes(item.value));
+    const limitOptions = this.data.filter((item) => !selectValue.includes(item.value))
+      .filter((item) => item.label.toLowerCase().includes(this.searchValue.toLowerCase()))
       .slice(0, this.maxItemsLength);
+
+    return selectOptions.concat(limitOptions);
   }
 
   /**
