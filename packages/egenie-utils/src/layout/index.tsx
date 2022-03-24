@@ -1,5 +1,5 @@
 import { Provider } from 'mobx-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { SrcParams, Opera, Project } from './interface';
 import { LayoutMenu } from './layoutMenu';
 import { layoutStore } from './layoutStore';
@@ -44,6 +44,9 @@ export interface Props {
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
   layoutStore.srcParams = props.srcParams || [];
+  useEffect(() => {
+    layoutStore.setProject(props?.project);
+  }, []);
   return (
     <Provider layoutStore={layoutStore}>
       <LayoutMenu

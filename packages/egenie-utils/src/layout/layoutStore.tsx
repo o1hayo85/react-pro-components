@@ -25,6 +25,9 @@ function combineUrl(oldUrl: string, params: string): string {
 }
 
 export class LayoutStore {
+  constructor() {
+    this.handleInit();
+  }
   public srcParams: SrcParams[] = [];
 
   @observable public project = {
@@ -204,16 +207,19 @@ export class LayoutStore {
     }
   };
 
-  public handleInit = (project) => {
-    this.getUserInfo();
+  public handleInit = () => {
     this.getHomePageTypes();
+    this.getUserInfo();
     getPerms();
     this.handleDefaultOpenPage();
     this.handleWindow();
+
+  };
+  public setProject = action((project) => {
     if (project) {
       this.project = project;
     }
-  };
+  });
 
   public getUserInfo = action(async() => {
     const res: User = await request({ url: '/api/dashboard/user' });
