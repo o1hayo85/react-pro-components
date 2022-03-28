@@ -1,4 +1,17 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.10...v0.0.0) (2022-03-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.12...v0.0.0) (2022-03-28)
+
+### Features
+
+- **react-scripts:** 更改 start 关闭配置 ([82fdd9b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/82fdd9b3e9195cde8acf5bdb739a8659d0a3716d))
+
+## [0.12.12](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.11...v0.12.12) (2022-03-24)
+
+### Features
+
+- 首页菜单栏优化 ([2145655](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/214565510117e42ba3b0da4c2861f059a4ed4423))
+- 优化首页菜单加载速度 ([4628b96](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4628b961391b9004391bcc43a6f0e438f847dcaf))
+
+## [0.12.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.10...v0.12.11) (2022-03-24)
 
 ### Bug Fixes
 
