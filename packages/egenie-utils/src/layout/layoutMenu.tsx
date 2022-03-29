@@ -16,7 +16,6 @@ const {
 @inject('layoutStore')
 @observer
 export class LayoutMenu extends React.Component<any> {
-
   public openNewPage = (child: Partial<{ url: string; name: string; }>): JSX.Element => {
     const {
       immutableStyle,

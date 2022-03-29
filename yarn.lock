@@ -4875,10 +4875,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-code-style@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.npmmirror.com/egenie-code-style/download/egenie-code-style-0.7.0.tgz#3a4658191769f09640df12753651875b1b9e96fe"
-  integrity sha512-PUFO+tfDRcK5nT9lHBtSmnJXP7GVxDjaG1KlkfzqYXBEdB2cdofl4fUapph5gv+clKnOHATtFMjimhuzS7nDBQ==
+egenie-code-style@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npmmirror.com/egenie-code-style/-/egenie-code-style-0.12.0.tgz#c8e98ae287c87a7555d1c4ea3fb5ebbbff14cc65"
+  integrity sha512-L7qcxwetOZ0l9coBSx5pz11DSa2xueXiBnmi73INxQoIRbVDBszXt+y9lE5Cv9d9LqraeZQ5bwcQT5hcg55FiA==
   dependencies:
     "@commitlint/config-conventional" "^13.2.0"
     "@typescript-eslint/eslint-plugin" "^5.2.0"

@@ -28,6 +28,7 @@ export class LayoutStore {
   constructor() {
     this.handleInit();
   }
+
   public srcParams: SrcParams[] = [];
 
   @observable public project = {
@@ -213,8 +214,8 @@ export class LayoutStore {
     getPerms();
     this.handleDefaultOpenPage();
     this.handleWindow();
-
   };
+
   public setProject = action((project) => {
     if (project) {
       this.project = project;
