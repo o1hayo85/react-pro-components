@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.12...v0.0.0) (2022-03-28)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.13...v0.0.0) (2022-03-30)
+
+### Features
+
+- **layoutMenu:** 页面切换清除 notification,message ([d930e4c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d930e4c0b48909a122a5844d4e61a40b9f4cf59d))
+
+## [0.12.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.12...v0.12.13) (2022-03-28)
 
 ### Features
 
