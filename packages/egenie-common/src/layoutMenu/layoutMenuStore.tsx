@@ -1,3 +1,4 @@
+import { message, notification } from 'antd';
 import { action, computed, observable } from 'mobx';
 import type { BaseData } from '../request';
 import { request } from '../request';
@@ -315,6 +316,10 @@ export class LayoutMenuStore {
       ...item,
       url: this.paramsContainer.reduce((prev, current) => combineUrl(prev, current(item)), item.url),
     };
+
+    // 清除notification、message
+    message.destroy();
+    notification.destroy();
 
     if (this.checkTabIsOpened(item.id)) {
       setTimeout(() => {
