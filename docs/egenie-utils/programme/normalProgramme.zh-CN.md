@@ -65,5 +65,5 @@ const normalProgramme = new NormalProgramme({
 // 外层布局请自写。一般用antd的Card
 <Card>
   <NormalProgrammeComponent store={normalProgramme}/>
-<Card/>
+</Card>
 ```
