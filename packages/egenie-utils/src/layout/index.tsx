@@ -1,11 +1,16 @@
 import { Provider } from 'mobx-react';
-import React, { useEffect } from 'react';
-import type { SrcParams, Opera, Project } from './interface';
+import React from 'react';
+import type { Opera } from './interface';
 import { LayoutMenu } from './layoutMenu';
-import { layoutStore } from './layoutStore';
+import type { ILayoutStore } from './layoutStore';
 
 export interface Props {
   children?: React.ReactNode;
+
+  /**
+   * 状态模型
+   */
+  store: ILayoutStore;
 
   /**
    * 扩展头部左侧
@@ -28,36 +33,21 @@ export interface Props {
   haveDashboard?: boolean;
 
   /**
-   * iframe页面src携带参数
-   */
-  srcParams?: SrcParams[];
-
-  /**
-   * 项目信息
-   */
-  project?: Project;
-
-  /**
    * log图片
    */
   logoImg?: React.ReactNode;
 }
 export const LayoutGuide: React.FC<Props> = (props: Props) => {
-  layoutStore.srcParams = props.srcParams || [];
-  useEffect(() => {
-    layoutStore.setProject(props?.project);
-  }, []);
   return (
-    <Provider layoutStore={layoutStore}>
+    <Provider layoutStore={props.store}>
       <LayoutMenu
         defaultDashboard={props.defaultDashboard}
         haveDashboard={props.haveDashboard}
         logoImg={props.logoImg}
-        project={props.project}
-        srcParams={props.srcParams}
         userInfoLeft={props.userInfoLeft}
         userInfoRight={props.userInfoRight || []}
       />
     </Provider>
   );
 };
+export * from './layoutStore';

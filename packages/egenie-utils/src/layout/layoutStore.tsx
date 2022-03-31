@@ -5,7 +5,7 @@ import qs from 'qs';
 import { getPerms } from '../permission';
 import type { BaseData } from '../request';
 import { request } from '../request';
-import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType } from './interface';
+import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType, LayoutStoreInitParams } from './interface';
 import { EnumVersion } from './interface';
 
 function combineUrl(oldUrl: string, params: string): string {
@@ -25,8 +25,8 @@ function combineUrl(oldUrl: string, params: string): string {
 }
 
 export class LayoutStore {
-  constructor() {
-    this.handleInit();
+  constructor(props?: LayoutStoreInitParams) {
+    this.setProject(props?.project);
   }
 
   public srcParams: SrcParams[] = [];
@@ -490,10 +490,15 @@ export class LayoutStore {
     this.isHoverShowPanel = flag;
   };
 
+  @action public setSrcParams = (srcParams: SrcParams[]) => {
+    if (srcParams?.length) {
+      this.srcParams = srcParams;
+    }
+  };
+
   public handleLogout = (): void => {
     window.location.href = `/logout?project=${this.project?.value}`;
   };
 }
-
-export const layoutStore = new LayoutStore();
+export type ILayoutStore = LayoutStore;
 

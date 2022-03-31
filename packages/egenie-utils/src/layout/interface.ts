@@ -103,3 +103,11 @@ export interface HomePageType {
   indexUrl: string;
   indexUserName: string;
 }
+
+export interface LayoutStoreInitParams {
+
+  /**
+   * 项目信息
+   */
+  project?: Project;
+}
