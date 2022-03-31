@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.16...v0.0.0) (2022-03-31)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.17...v0.0.0) (2022-03-31)
+
+### Features
+
+- 修改 srcParams 取值方式 ([7d3a786](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7d3a7867df009f403580dce03c16c441de8c2997))
+
+## [0.12.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.16...v0.12.17) (2022-03-31)
 
 ## [0.12.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.15...v0.12.16) (2022-03-31)
 
