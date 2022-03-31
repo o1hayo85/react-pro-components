@@ -1,8 +1,9 @@
 import type { Input } from 'antd';
 import _ from 'lodash';
-import { action, extendObservable, observable } from 'mobx';
+import { action, computed, extendObservable, observable } from 'mobx';
 import React from 'react';
 import { FilterBase } from './filterBase';
+import type { ENUM_SPLIT_SYMBOL } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { trimWhiteSpace } from './utils';
 
@@ -102,8 +103,8 @@ export class FilterInputAndSelect extends FilterBase {
 
   @observable.ref public inputRef = React.createRef<Input>();
 
-  @action public handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    this.inputValue = event.target.value;
+  @action public handleInputChange = (inputValue: string): void => {
+    this.inputValue = inputValue;
     if (typeof this.handleInputChangeCallback === 'function') {
       this.handleInputChangeCallback(trimWhiteSpace(this.inputValue, this.isTrimWhiteSpace));
     }
@@ -151,5 +152,15 @@ export class FilterInputAndSelect extends FilterBase {
    * 是否去掉输入框左右空格
    */
   @observable public isTrimWhiteSpace = true;
+
+  @computed public get isMultipleSearch(): boolean {
+    return Boolean(this.data.find((item) => item.value === this.selectValue)?.isMultipleSearch === true);
+  }
+
+  /**
+   * 批量查询切分符号
+   * 前置条件: isMultipleSearch = true
+   */
+  @observable public splitSymbol: ENUM_SPLIT_SYMBOL = ',';
 }
 

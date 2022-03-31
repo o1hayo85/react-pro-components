@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import type { FilterInputAndSelect } from './filterInputAndSelect';
-import styles from './filterItems.less';
+import { MultipleSearch } from './multipleSearch';
 import { throttleTime } from './utils';
 
 @observer
@@ -28,6 +28,8 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
       inputRef,
       disabled,
       labelWidth,
+      isMultipleSearch,
+      splitSymbol,
     } = this.props.store;
     return (
       <div
@@ -51,12 +53,18 @@ export class FilterInputAndSelectComponent extends React.Component<{ store: Filt
         <Input
           allowClear
           bordered={false}
-          className={`${styles.input}`}
           disabled={disabled}
-          onChange={handleInputChange}
+          onChange={(event) => handleInputChange(event.target.value)}
           onPressEnter={this.handlePressEnter}
           placeholder={placeholder}
           ref={inputRef}
+          suffix={isMultipleSearch ? (
+            <MultipleSearch
+              callback={handleInputChange}
+              splitSymbol={splitSymbol}
+              value={inputValue}
+            />
+          ) : null}
           value={inputValue}
         />
       </div>

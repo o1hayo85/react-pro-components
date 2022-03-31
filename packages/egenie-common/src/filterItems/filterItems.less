@@ -84,26 +84,13 @@
   }
 
   .filterInput {
-    position: relative;
     display: flex;
     align-items: center;
 
-    > span {
-      flex-grow: 1;
-      padding: 0;
-    }
-
-    .ant-input-suffix {
-      position: absolute;
-      top: 0;
-      right: 18px;
-      bottom: 0;
-      margin: auto;
-    }
-
-    input {
-      width: 100%;
-      padding: 0 @egenie-spacing-sm !important;
+    .ant-input-affix-wrapper {
+      height: @egenie-height-md !important;
+      padding-top: 0;
+      padding-bottom: 0;
       border: 1px solid @egenie-border-color-base !important;
     }
   }
@@ -227,21 +214,6 @@
       border: 1px solid @egenie-border-color-base;
       border-radius: @egenie-border-radius-base;
 
-      .input {
-        flex-grow: 1;
-        height: 100%;
-        padding-top: 0;
-        padding-bottom: 0;
-        background: #fff;
-        border-radius: 0;
-
-        :global {
-          .ant-input {
-            width: 100%;
-          }
-        }
-      }
-
       :global {
         .ant-select {
           border-left: 1px solid @egenie-border-color-base;
@@ -260,24 +232,16 @@
     border: 1px solid @egenie-border-color-base;
     border-radius: @egenie-border-radius-base;
 
-    .input {
-      flex-grow: 1;
-      height: 100%;
-      padding-top: 0;
-      padding-bottom: 0;
-      background: #fff;
-      border-radius: 0;
-
-      :global {
-        .ant-input {
-          width: 100%;
-        }
-      }
-    }
-
     :global {
       .ant-select-selector {
         padding: 0 @egenie-spacing-xss !important;
+      }
+
+      .ant-input-affix-wrapper {
+        height: @egenie-height-md !important;
+        padding-top: 0;
+        padding-bottom: 0;
+        border: none !important;
       }
 
       .ant-select {
@@ -389,4 +353,26 @@
       padding-left: @egenie-spacing-xss;
     }
   }
+}
+
+.multipleInputWrapper {
+  &.active {
+    background: #ddebff;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: @egenie-combine-filter-bg;
+  border-radius: 2px;
+  transition: all 0.3s linear;
+}
+
+.multipleInputFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: @egenie-height-md;
 }

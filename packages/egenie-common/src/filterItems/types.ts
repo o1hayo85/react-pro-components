@@ -30,6 +30,11 @@ export enum ENUM_FILTER_ITEM_TYPE {
 }
 
 /**
+ * 批量查询拆分符号
+ */
+export type ENUM_SPLIT_SYMBOL = ' ' | ',';
+
+/**
  * 查询项data的统一格式
  */
 export type ValueAndLabelData = Array<{ value: string; label: string; [key: string]: any; }>;

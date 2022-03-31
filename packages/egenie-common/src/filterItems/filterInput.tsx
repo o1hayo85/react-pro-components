@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import { action, extendObservable, observable } from 'mobx';
-import type React from 'react';
 import { FilterBase } from './filterBase';
+import type { ENUM_SPLIT_SYMBOL } from './types';
 import { ENUM_FILTER_ITEM_TYPE } from './types';
 import { trimWhiteSpace } from './utils';
 
@@ -62,7 +61,7 @@ export class FilterInput extends FilterBase {
 
   @action private handleCallback = () => {
     if (typeof this.onChangeCallback === 'function') {
-      this.onChangeCallback(_.toString(this.value));
+      this.onChangeCallback(trimWhiteSpace(this.value, this.isTrimWhiteSpace));
     }
   };
 
@@ -76,8 +75,8 @@ export class FilterInput extends FilterBase {
    */
   @observable public value = '';
 
-  @action public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    this.value = event.target.value;
+  @action public onChange = (value: string): void => {
+    this.value = value;
     this.handleCallback();
   };
 
@@ -105,4 +104,15 @@ export class FilterInput extends FilterBase {
    * 是否禁止
    */
   @observable public disabled = false;
+
+  /**
+   * 是否批量查询
+   */
+  @observable public isMultipleSearch = false;
+
+  /**
+   * 批量查询切分符号
+   * 前置条件: isMultipleSearch = true
+   */
+  @observable public splitSymbol: ENUM_SPLIT_SYMBOL = ',';
 }
