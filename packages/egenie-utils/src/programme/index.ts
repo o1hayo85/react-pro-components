@@ -27,6 +27,5 @@ export { FilterTreeSelect } from 'egenie-common';
 export { FilterTreeSelectComponent } from 'egenie-common';
 export { FilterItems, filterInstanceFactory, filterComponentFactory } from 'egenie-common';
 export { FilterBase } from 'egenie-common';
-export { ENUM_FILTER_ITEM_TYPE } from 'egenie-common';
 export { NormalProgramme, NormalProgrammeComponent } from 'egenie-common';
-export type { NormalProgrammeParams, FilterItemOptions, FilterItemsParams, FilterItem, ValueAndLabelData } from 'egenie-common';
+export type { ENUM_FILTER_ITEM_TYPE, NormalProgrammeParams, FilterItemOptions, FilterItemsParams, FilterItem, ValueAndLabelData } from 'egenie-common';
