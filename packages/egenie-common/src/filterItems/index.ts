@@ -25,6 +25,7 @@ export type { FilterItemsParams } from './filterItems';
 export { filterComponentFactory } from './filterComponentFactory';
 export { filterInstanceFactory } from './filterInstanceFactory';
 export { FilterBase } from './filterBase';
-export type { FilterItemOptions, FilterItem, ValueAndLabelData, ENUM_FILTER_ITEM_TYPE } from './types';
+export { ENUM_FILTER_ITEM_TYPE } from './types';
+export type { FilterItemOptions, FilterItem, ValueAndLabelData } from './types';
 export type { NormalProgrammeParams } from './normalProgramme';
 export { NormalProgramme, NormalProgrammeComponent } from './normalProgramme';
