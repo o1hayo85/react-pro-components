@@ -5,7 +5,7 @@ import qs from 'qs';
 import { getPerms } from '../permission';
 import type { BaseData } from '../request';
 import { request } from '../request';
-import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType } from './interface';
+import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType, LayoutStoreInitParams } from './interface';
 import { EnumVersion } from './interface';
 
 function combineUrl(oldUrl: string, params: string): string {
@@ -25,8 +25,8 @@ function combineUrl(oldUrl: string, params: string): string {
 }
 
 export class LayoutStore {
-  constructor() {
-    this.handleInit();
+  constructor(props?: LayoutStoreInitParams) {
+    this.setProject(props?.project);
   }
 
   public srcParams: SrcParams[] = [];
@@ -142,22 +142,22 @@ export class LayoutStore {
     window.top.EgeniePermission = EgeniePermission;
   };
 
-  @action public getHomePageTypes = async(): Promise<void> => {
-    const res: BaseData<HomePageType[]> = await request({ url: '/api/iac/resource/homePage/types' });
+  @action public getHomePageTypes = async (): Promise<void> => {
+    const res: BaseData<HomePageType[]> = await request({url: '/api/iac/resource/homePage/types'});
     const currentHomePageType = res.data.find((item) => item.current);
     this.homePageTypes = res.data;
     this.homePageType = currentHomePageType ? currentHomePageType.homePageType : null;
   };
 
-  @action public switchHomePageType = async(): Promise<void> => {
+  @action public switchHomePageType = async (): Promise<void> => {
     const newType = this.homePageType === 1 ? 2 : 1;
     const next = this.homePageTypes.find((item) => item.homePageType === newType);
     this.homePageType = newType;
-    await request({ url: `/api/iac/resource/update/homePageType?homePageType=${newType}` });
+    await request({url: `/api/iac/resource/update/homePageType?homePageType=${newType}`});
     next && window.location.replace(next.indexUrl);
   };
 
-  @action public toggleVersion: Egenie['toggleVersion'] = async(resourceId, versionType, params = '') => {
+  @action public toggleVersion: Egenie['toggleVersion'] = async (resourceId, versionType, params = '') => {
     let menuItem: Partial<Menudata>;
     (function dfs(data: Array<Partial<Menudata>>) {
       (data || []).forEach((item) => {
@@ -222,15 +222,15 @@ export class LayoutStore {
     }
   });
 
-  public getUserInfo = action(async() => {
-    const res: User = await request({ url: '/api/dashboard/user' });
+  public getUserInfo = action(async () => {
+    const res: User = await request({url: '/api/dashboard/user'});
     top.user = res;
     this.userInfo = res;
   });
 
   // 别的页面跳到erp & 带有菜单参数
   public handleDefaultOpenPage = action(() => {
-    const { href } = window.location;
+    const {href} = window.location;
     const hrefArr = href.split('?');
     const params = qs.parse(hrefArr[1]);
     if (!params.pageId) {
@@ -241,16 +241,16 @@ export class LayoutStore {
 
   // 根据菜单id 打开菜单
   public handleOpenTabId = action((id: number, params?: string) => {
-    request<BaseData<{ resource?: { resourceUrl?: string; resourceName?: string; icon: string; id: string | number; }; }>>({ url: `/api/iac/resource/getResource/${id}` })
+    request<BaseData<{ resource?: { resourceUrl?: string; resourceName?: string; icon: string; id: string | number; }; }>>({url: `/api/iac/resource/getResource/${id}`})
       .then((res): void => {
         if (!res.data || !res.data.resource) {
           return;
         }
-        const { resource } = res.data;
+        const {resource} = res.data;
         this.handleOpenTab(`${resource.resourceUrl}?${params}`, resource.id, resource.resourceName, resource.icon);
       })
       .catch(() => {
-        return { resource: null };
+        return {resource: null};
       });
   });
 
@@ -320,7 +320,7 @@ export class LayoutStore {
 
   public handleRefresh = (item: Menudata): void => {
     const pageWindow: Partial<HTMLIFrameElement> = document.getElementById(`${item.id}`);
-    const { contentWindow } = pageWindow;
+    const {contentWindow} = pageWindow;
 
     const list = this.tabList.map((tab) => {
       if (tab.id == item.id) {
@@ -340,7 +340,7 @@ export class LayoutStore {
     this.tabList = list;
   };
 
-  public getMenuList = action(async() => {
+  public getMenuList = action(async () => {
     const res = await request({
       url: '/api/iac/resource/dashboard/menu',
       method: 'POST',
@@ -390,7 +390,7 @@ export class LayoutStore {
     if (jsessionId && jsessionId.includes('JSESSIONID=') && jsessionId.length > 11) {
       document.cookie = `${jsessionId};path=/`;
     }
-    request({ url: `/api/iac/role/user/perms?${jsessionId}` })
+    request({url: `/api/iac/role/user/perms?${jsessionId}`})
       .then((res: API) => {
         window.top.EgeniePermission.permissionList = res.data;
       });
@@ -458,7 +458,7 @@ export class LayoutStore {
 
   public handleChangePassword = action((formInstance) => {
     formInstance.current.validateFields()
-      .then(async(values) => {
+      .then(async (values) => {
         const {
           oldPassword,
           newPassword,
@@ -489,11 +489,14 @@ export class LayoutStore {
   @action public togglePanel = (flag: boolean): void => {
     this.isHoverShowPanel = flag;
   };
-
+  @action public setSrcParams = (srcParams: SrcParams[]) => {
+    if (srcParams?.length) {
+      this.srcParams = srcParams;
+    }
+  };
   public handleLogout = (): void => {
     window.location.href = `/logout?project=${this.project?.value}`;
   };
 }
-
-export const layoutStore = new LayoutStore();
+export type ILayoutStore = LayoutStore;
 
