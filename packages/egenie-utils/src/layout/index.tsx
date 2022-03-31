@@ -6,6 +6,7 @@ import type { ILayoutStore } from './layoutStore';
 
 export interface Props {
   children?: React.ReactNode;
+
   /**
    * 状态模型
    */
