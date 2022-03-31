@@ -20,6 +20,7 @@ export class LayoutMenu extends React.Component<any> {
     const {
       immutableStyle,
       getActiveSubMenu,
+      srcParams,
     } = this.props.layoutStore;
     const commonStyle = {
       fontSize: `${immutableStyle.itemHeight}px`,
@@ -41,7 +42,7 @@ export class LayoutMenu extends React.Component<any> {
     ) : (
       <div
         className={styles.rootSubMenuBlockItem}
-        onClick={getActiveSubMenu.bind(this, child, this.props.srcParams)}
+        onClick={getActiveSubMenu.bind(this, child, srcParams)}
         style={commonStyle}
       >
         {child.name}
