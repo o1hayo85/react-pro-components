@@ -1,5 +1,10 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.14...v0.0.0) (2022-03-31)
 
+### Features
+
+- 代码格式化 ([92ba874](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/92ba87423d88066d578b45f961cc6e56921f7575))
+- 修改 layoutStore 实例化节点 ([76ffce9](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/76ffce925a98a43312f0e3c76645273bfac86110))
+
 ## [0.12.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.13...v0.12.14) (2022-03-30)
 
 ### Features
