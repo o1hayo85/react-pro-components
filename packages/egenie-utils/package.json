@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.12.16",
+  "version": "0.12.17",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
@@ -24,7 +24,7 @@
     "antd": "4.12.2",
     "axios": "0.21.0",
     "babel-plugin-import": "^1.13.3",
-    "egenie-common": "^0.12.15",
+    "egenie-common": "^0.12.17",
     "egenie-config": "^0.8.26",
     "egenie-test": "^0.12.0",
     "father-build": "1.19.8",
