@@ -15,12 +15,11 @@ order: 6
 - 类型: [ValueAndLabelData](./filter-base#valueandlabeldata)
 - 默认值: []
 
-```ts
+```json
 {
-	value: 'aaa',
-	label: 'bbb',
-	// 此项为可选可输入
-	showInput: true,
+  "value": "aaa",
+  "label": "bbb",
+  "showInput": true // 此项为可选可输入
 }
 ```
 

@@ -59,11 +59,11 @@ import React from 'react';
 const normalProgramme = new NormalProgramme({
   filterItems: [],
   handleSearch: () => Promise.resolve(),
-  count: 6
+  count: 6,
 });
 
 // 外层布局请自写。一般用antd的Card
 <Card>
-  <NormalProgrammeComponent store={normalProgramme}/>
-</Card>
+  <NormalProgrammeComponent store={normalProgramme} />
+</Card>;
 ```
