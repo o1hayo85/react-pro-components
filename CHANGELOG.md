@@ -1,4 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.18...v0.0.0) (2022-03-31)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.18...v0.0.0) (2022-04-01)
+
+### Features
+
+- **filterItems:** 增加批量查询 ([e1d33c7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e1d33c7984ff256190f3753fc7af942d5fe4178c))
 
 ## [0.12.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.17...v0.12.18) (2022-03-31)
 
