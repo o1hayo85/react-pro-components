@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.18...v0.0.0) (2022-04-01)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.19...v0.0.0) (2022-04-06)
+
+### Features
+
+- 更改面单打印自定义 url 逻辑 ([01d9ded](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/01d9dedc27b50774d44097a879391f040fab672d))
+
+## [0.12.19](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.18...v0.12.19) (2022-04-01)
 
 ### Features
 
