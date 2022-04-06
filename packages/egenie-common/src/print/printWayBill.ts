@@ -5,6 +5,7 @@ import { getWayBillSensitiveData } from './getPrivacyData';
 import { printHelper } from './printHelper';
 import type { TemplateData } from './types';
 import { EnumShopType } from './types';
+import { getJdCustomTemplateUrl, getJdqlTemplateUrl } from './utils';
 
 interface PrintData {
   cpCode?: string;
@@ -261,7 +262,7 @@ class PrintWayBill {
             receiverName: receiver_name,
             receiverPhone: receiver_mobile || receiver_phone,
             remark: seller_note,
-            templateURL: process.env.REACT_APP_JDQL_TEMPLATE_URL || 'http://cloudprint.cainiao.com/template/standard/297499/5', // 写死的
+            templateURL: getJdqlTemplateUrl(),
           });
         });
       }
@@ -374,7 +375,7 @@ class PrintWayBill {
           printer: params.printer,
           preview: params.preview,
           customData,
-          customTempUrl,
+          customTempUrl: getJdCustomTemplateUrl(customTempUrl),
           printData: [printData],
           tempUrl,
           templateData: tempData, // FIXME: 是否需要这个字段来获取默认打印机？

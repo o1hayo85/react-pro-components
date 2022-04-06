@@ -99,7 +99,7 @@ class PrintHelper {
         preview: newParams.preview,
         printer: formatPrintName(newParams.templateData, newParams.printer),
         customData: newParams.customData ? [JSON.parse(newParams.customData)] : newParams.customData,
-        customTempUrl: newParams.customTempUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt',
+        customTempUrl: newParams.customTempUrl,
         printData: newParams.printData,
         tempUrl: newParams.tempUrl,
       });

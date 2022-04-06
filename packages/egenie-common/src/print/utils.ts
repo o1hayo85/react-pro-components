@@ -52,10 +52,8 @@ export function getTemplateData(tempData: TemplateData): Omit<TemplateData, 'con
 
     const newContent = {};
     for (const contentKey in content) {
-      if (Object.prototype.hasOwnProperty.call(content, contentKey)) {
-        if (content[contentKey]) {
-          newContent[contentKey] = content[contentKey];
-        }
+      if (Object.prototype.hasOwnProperty.call(content, contentKey) && content[contentKey] != null && content[contentKey] !== '') {
+        newContent[contentKey] = content[contentKey];
       }
     }
 
@@ -123,14 +121,6 @@ export function lodopItemGetText(data: any, id: string): any {
   }
 
   return get(data, path.filter(Boolean));
-
-  /*  if (typeof value === 'string') {
-      return value.replace('[$data]', '')
-        .replace('[&', '')
-        .replace(']', '');
-    } else {
-      return value;
-    }*/
 }
 
 /**
@@ -232,26 +222,36 @@ export function formatPddData(printData: any[], courierPrintType: number) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
-    const content = [];
+    const contents = [];
     if (item.newCaiNiao) {
-      content.push(JSON.parse(item.newCaiNiao));
+      contents.push(JSON.parse(item.newCaiNiao));
     }
     delete item.newCaiNiao;
 
     if (item.pinduoduo) {
-      content.push({
+      contents.push({
         data: JSON.parse(item.pinduoduo),
         templateURL: courierPrintType ? process.env.REACT_APP_PDD_TEMPLATE_URL_1 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_yilian_template.xml') : process.env.REACT_APP_PDD_TEMPLATE_URL_0 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_seller_area_template.xml'),
       });
     }
 
-    if (content.length) {
+    if (contents.length) {
       documents.push({
         documentID: getUUID(),
-        contents: content,
+        contents,
       });
     }
   });
 
   return documents;
+}
+
+export function getJdqlTemplateUrl(customUrl?: string): string {
+  const defaultUrl = 'http://cloudprint.cainiao.com/template/standard/297499/5';
+  return customUrl || process.env.REACT_APP_JDQL_TEMPLATE_URL || defaultUrl;
+}
+
+export function getJdCustomTemplateUrl(customUrl?: string): string {
+  const defaultUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
+  return customUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || defaultUrl;
 }
