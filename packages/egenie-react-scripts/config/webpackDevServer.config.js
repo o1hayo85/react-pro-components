@@ -53,10 +53,6 @@ module.exports = function createDevServerConfig() {
     },
 
     setupMiddlewares(middlewares, devServer) {
-      if (fs.existsSync(paths.proxySetup)) {
-        require(paths.proxySetup)(devServer.app, require('http-proxy-middleware'));
-      }
-
       if (utils.isMock) {
         middlewares.push(bodyParser.json({
           limit: '5mb',
@@ -70,7 +66,11 @@ module.exports = function createDevServerConfig() {
           })
         );
 
-        require('./mock')(devServer);
+        require('./mock')(middlewares);
+      }
+
+      if (fs.existsSync(paths.proxySetup)) {
+        require(paths.proxySetup)(devServer.app, require('http-proxy-middleware'));
       }
 
       return middlewares;
