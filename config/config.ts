@@ -20,8 +20,8 @@ export default defineConfig({
   navs: [
     null,
     {
-      title: '分享',
-      path: 'http://192.168.200.93:11113',
+      title: 'RN',
+      path: 'http://192.168.200.93:11114/',
     },
     {
       title: 'GitLab',
