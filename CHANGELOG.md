@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.20...v0.0.0) (2022-04-07)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.21...v0.0.0) (2022-04-07)
+
+### Features
+
+- **react-scripts:** update mockMiddleware ([65fea70](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/65fea700102c0bb9694845043bcebc8ffabf92b3))
+
+## [0.12.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.20...v0.12.21) (2022-04-07)
 
 ### Features
 
