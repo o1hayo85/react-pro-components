@@ -56,7 +56,7 @@ order: 3
 
 - 前提 1: `egenie-common,egenie-utils版本大于等于0.12.19`
 - 前提 2: `isMultipleSearch = true`
-- 描述: 批量查询切分符号
+- 描述: 批量查询切分符号(转化为参数)
 - 类型: ' ' | ','(空格或者逗号)
 - 默认值: ,(逗号)
 
