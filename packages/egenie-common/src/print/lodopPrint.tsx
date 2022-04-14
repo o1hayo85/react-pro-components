@@ -396,6 +396,10 @@ export class LodopPrint {
 
       console.log(`当前有WEB打印服务C-Lodop可用!\n C-Lodop版本:${this.instance.CVERSION}(内含Lodop${this.instance.VERSION})`);
 
+      console.log('校验socket状态开始');
+      await this.heartBeatCheck();
+      console.log('校验socket状态结束');
+
       // 更新状态
       this.jsLoadState = EnumJsLoadState.finish;
     } catch (e) {
@@ -420,6 +424,30 @@ export class LodopPrint {
     }
     return printers;
   }
+
+  /**
+   * 获取lodop实列后,检验内部socket是否链接(不校验，第一次发送的数据可能会失败)
+   */
+  private heartBeatCheck = async(delay = 250) => {
+    // 校验socket的连接状态
+    if (this.instance.webskt && this.instance.webskt.readyState == 1) {
+      return;
+    }
+
+    // 延迟时间超过16s秒判断失败
+    if (delay > 16 * 1000) {
+      message.error('lodop打印组件连接失败');
+      throw new Error('lodop打印组件连接失败');
+    }
+
+    // sleep
+    await new Promise((resolve) => {
+      setTimeout(resolve, delay);
+    });
+
+    // 延迟时间 * 2
+    await this.heartBeatCheck(delay * 2);
+  };
 
   /**
    * 打印
