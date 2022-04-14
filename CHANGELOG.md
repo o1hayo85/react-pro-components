@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.22...v0.0.0) (2022-04-12)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.23...v0.0.0) (2022-04-14)
+
+### Features
+
+- **lodopPrint:** 处理线上 lodop 打印机，连接问题 ([c2d0272](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c2d0272894d28ddf17b42ab19d7e526a9b5620ed))
+- **lodopPrint:** 处理线上 lodop 打印机，连接问题 ([8744f51](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8744f510b39c69150b4853100aeab13bd23c9737))
+
+## [0.12.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.22...v0.12.23) (2022-04-12)
 
 ### Features
 
