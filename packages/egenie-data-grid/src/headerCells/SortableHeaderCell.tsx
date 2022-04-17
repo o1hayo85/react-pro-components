@@ -3,6 +3,7 @@ import type { HeaderRendererProps } from '../types';
 const headerSortCell = css`
   cursor: pointer;
   display: flex;
+  align-items: center;
 `;
 
 const headerSortCellClassname = `rdg-header-sort-cell ${headerSortCell}`;
@@ -35,8 +36,9 @@ export default function SortableHeaderCell<R, SR>({
     sortText = '\u25B2';
   } else if (sortDirection === 'DESC') {
     sortText = '\u25BC';
+  } else {
+    sortText = '\u2b0d';
   }
-
   return (
     <span className={headerSortCellClassname} onClick={(e) => {
       console.log('react-data-grid组件，点击了表头排序')
@@ -44,7 +46,7 @@ export default function SortableHeaderCell<R, SR>({
     }}>
       <span className={headerSortNameClassname}>{children}</span>
       <span>
-        {sortText}
+        <span className='rdg-header-sort-icon' style={{fontSize: sortDirection ? '12px' : '16px', marginLeft: '3px'}}>{sortText}</span>
         {priority}
       </span>
     </span>
