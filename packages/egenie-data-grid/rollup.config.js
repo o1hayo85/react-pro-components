@@ -28,14 +28,14 @@ export default {
   ],
   external: (id) => !id.startsWith('.') && !id.startsWith('@linaria:') && !isAbsolute(id),
   plugins: [
-    // linaria({
-    //   classNameSlug(hash) {
-    //     // We add the package version as suffix to avoid style conflicts
-    //     // between multiple versions of RDG on the same page.
-    //     console.log(pkg.version, hash, '----')
-    //     return `${hash}${pkg.version.replaceAll('.', '')}`;
-    //   }
-    // }),
+    linaria({
+      classNameSlug(hash) {
+        // We add the package version as suffix to avoid style conflicts
+        // between multiple versions of RDG on the same page.
+        console.log(pkg.version, hash, '----')
+        return `${hash}${pkg.version.replaceAll('.', '')}`;
+      }
+    }),
     linaria(),
     postcss({ minimize: true }),
     babel({
