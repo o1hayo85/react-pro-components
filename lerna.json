@@ -1,13 +1,21 @@
 {
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "npmClient": "yarn",
-  "version": "0.12.19",
+  "version": "0.12.20-alpha.0",
   "command": {
     "publish": {
-      "ignoreChanges": ["ignored-file", "*.md"],
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ],
       "message": "chore(release): publish",
       "registry": "https://registry.npmjs.org/"
     }
   },
-  "ignoreChanges": ["**/*.md", "**/__tests__/**"]
+  "ignoreChanges": [
+    "**/*.md",
+    "**/__tests__/**"
+  ]
 }
