@@ -161,6 +161,17 @@ export type RookiePrintParams = {
 } & CommonPrintParams;
 
 /**
+ * 快手打印参数
+ */
+export type KSPrintParams = {
+
+  /**
+   * 打印数据
+   */
+  contents?: any[];
+} & CommonPrintParams;
+
+/**
  * 抖音打印参数
  */
 export type DyPrintParams = {

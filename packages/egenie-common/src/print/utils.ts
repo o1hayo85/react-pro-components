@@ -191,6 +191,35 @@ export function formatRookieData(printData: any[], printTemplate: TemplateData) 
   }
 }
 
+export function formatKsData(printData: any[]) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+    if (item?.printData) {
+      contents.push(JSON.parse(item?.printData));
+    }
+
+    if (item?.customData) {
+      contents.push({
+        customData: JSON.parse(item?.customData),
+        templateURL: item?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || getStaticResourceUrl('customer-source/printTemp/dy2.xml'),
+      });
+    }
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+        waybillCode: 'waybillCode',
+        ksOrderFlag: true,
+      });
+    }
+  });
+
+  return documents;
+}
+
 export function formatDyData(printData: any[]) {
   const documents: any[] = [];
 

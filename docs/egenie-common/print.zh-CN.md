@@ -47,6 +47,11 @@ order: 2
 - 默认: http://cloudprint.cainiao.com/template/standard/297499/5
 - 可配环境变量: REACT_APP_JDQL_TEMPLATE_URL
 
+### 快手模板
+
+- 默认: 待定
+- 可配环境变量: REACT_APP_KS_CUSTOM_TEMPLATE_URL
+
 ### pdd 自定义模板
 
 - courierPrintType 等于 1
