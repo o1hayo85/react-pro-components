@@ -78,6 +78,32 @@ const moduleName = 'egenieCloudWmsIndex';
 - 类型: `MainSubStructureModel`
 - 默认值: 无
 
+## 组件 props
+
+### `store`
+
+- 描述: 方案 store
+- 类型: `Programme`
+
+### `className`
+
+- 描述: 类名
+- 类型?: `string`
+- 默认值: 无
+
+### `style`
+
+- 描述: style
+- 类型?: `React.CSSProperties`
+- 默认值: 无
+
+### `summaryStatistic`
+
+- 前提: `egenie-common,egenie-utils版本大于等于0.12.25`
+- 描述: 概括统计
+- 类型?: `React.ReactNode`
+- 默认值: 无
+
 ## 示例
 
 ```ts

@@ -14,8 +14,15 @@ import styles from './programme.less';
 
 let id = 0;
 
+interface ProgrammeProps {
+  store: Programme;
+  className?: string;
+  style?: React.CSSProperties;
+  summaryStatistic?: React.ReactNode;
+}
+
 @observer
-export class ProgrammeComponent extends React.Component<{ store: Programme; className?: string; style?: React.CSSProperties; }> {
+export class ProgrammeComponent extends React.Component<ProgrammeProps> {
   componentDidMount() {
     this.initParamsBgActive();
 
@@ -63,6 +70,7 @@ export class ProgrammeComponent extends React.Component<{ store: Programme; clas
     const {
       className = '',
       style = {},
+      summaryStatistic,
       store: {
         scrollContainerRef,
         handleScroll,
@@ -100,6 +108,7 @@ export class ProgrammeComponent extends React.Component<{ store: Programme; clas
             <Footer/>
           </Layout.Sider>
           <Layout.Content>
+            {summaryStatistic}
             <ProgrammeList/>
             <div className={styles.tableWrapper}>
               <MainSubStructure store={gridModel}/>
@@ -372,7 +381,8 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
 @inject('programme')
 @observer
 class FilterItemsTranslate extends React.Component<{ programme?: Programme; schemeName: string; schemeValue: string; }> {
-  @computed public get translateData(): string[][] {
+  @computed
+  public get translateData(): string[][] {
     if (this.props.schemeName === this.props.programme.activeProgramme) {
       return this.props.programme.filterItems.translateParamsList;
     } else {
