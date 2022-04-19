@@ -3,6 +3,7 @@
 ### Features
 
 - **egenie-common:** add ksPrint ([7d2e4cf](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7d2e4cf38a9768f52adeb721df4ac3559108d97d))
+- **programme:** 查询方案新增类型 ([0d4b1d6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0d4b1d6ed3b6b000fd5dd2af07671e64012c5041))
 
 ## [0.12.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.23...v0.12.24) (2022-04-14)
 
