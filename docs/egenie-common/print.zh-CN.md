@@ -49,7 +49,7 @@ order: 2
 
 ### 快手模板
 
-- 默认: 待定
+- 默认: https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml
 - 可配环境变量: REACT_APP_KS_CUSTOM_TEMPLATE_URL
 
 ### pdd 自定义模板

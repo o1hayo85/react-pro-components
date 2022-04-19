@@ -203,7 +203,7 @@ export function formatKsData(printData: any[]) {
     if (item?.customData) {
       contents.push({
         customData: JSON.parse(item?.customData),
-        templateURL: item?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || getStaticResourceUrl('customer-source/printTemp/dy2.xml'),
+        templateURL: item?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || 'https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml',
       });
     }
 
