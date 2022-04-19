@@ -3,7 +3,7 @@ title: 左右查询方案
 order: 16
 ---
 
-## `参数`
+## Programme`参数`
 
 ### `filterItems`
 
@@ -64,7 +64,7 @@ const moduleName = 'egenieCloudWmsIndex';
 - 类型?: `MainSubStructureModel`
 - 默认值: {}
 
-## `实例属性和方法`
+## Programme`实例属性和方法`
 
 ### `filterItems`
 
@@ -78,7 +78,7 @@ const moduleName = 'egenieCloudWmsIndex';
 - 类型: `MainSubStructureModel`
 - 默认值: 无
 
-## 组件 props
+## ProgrammeComponent 的 props
 
 ### `store`
 
