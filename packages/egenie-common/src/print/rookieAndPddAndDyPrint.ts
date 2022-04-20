@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import type { RookiePrintParams } from './types';
-import { getUUID, isSocketConnected } from './utils';
+import { getUUID, isSocketConnected, validateData } from './utils';
 
 interface RequestProtocol {
   cmd: string;
@@ -158,32 +158,24 @@ export class RookieAndPddAndDyPrint {
    * @param contents 打印数据
    * @param printer 打印机
    */
-  public print = ({
+  public print = async({
     preview,
     contents,
     printer,
   }: Omit<RookiePrintParams, 'count'>): Promise<any> => {
-    if (Array.isArray(contents) && contents.length) {
-      const request = {
-        cmd: 'print',
-        requestID: getUUID(),
-        version: '1.0',
-        task: {
-          taskID: getUUID(),
-          preview: Boolean(preview),
-          previewType: 'pdf',
-          printer,
-          notifyType: ['render'],
-          documents: contents,
-        },
-      };
-      return this.sendToPrinter<any>(request);
-    } else {
-      message.warning({
-        key: '没数据',
-        content: '没数据',
-      });
-      return Promise.reject();
-    }
+    await validateData(contents);
+    return this.sendToPrinter<any>({
+      cmd: 'print',
+      requestID: getUUID(),
+      version: '1.0',
+      task: {
+        taskID: getUUID(),
+        preview: Boolean(preview),
+        previewType: 'pdf',
+        printer,
+        notifyType: ['render'],
+        documents: contents,
+      },
+    });
   };
 }

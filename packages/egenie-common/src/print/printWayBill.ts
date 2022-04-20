@@ -5,7 +5,7 @@ import { getWayBillSensitiveData } from './getPrivacyData';
 import { printHelper } from './printHelper';
 import type { TemplateData } from './types';
 import { EnumShopType } from './types';
-import { getJdCustomTemplateUrl, getJdqlTemplateUrl } from './utils';
+import { getJdCustomTemplateUrl, getJdqlTemplateUrl, validateData } from './utils';
 
 interface PrintData {
   cpCode?: string;
@@ -194,16 +194,12 @@ class PrintWayBill {
       method: 'post',
     });
 
-    if (Array.isArray(printData.data) && printData.data.length) {
-      await this.executePrint({
-        ...data,
-        preview,
-        printer,
-      }, printData.data);
-    } else {
-      message.error('没有数据');
-      return Promise.reject('没有数据');
-    }
+    await validateData(printData.data);
+    await this.executePrint({
+      ...data,
+      preview,
+      printer,
+    }, printData.data);
   };
 
   /**
@@ -212,10 +208,7 @@ class PrintWayBill {
    * @param printData
    */
   public executePrint = async(params: PrintWayBillParams, printData: PrintData[]): Promise<void> => {
-    if (!(printData && Array.isArray(printData) && printData.length)) {
-      message.error('没有数据');
-      return Promise.reject('没有数据');
-    }
+    await validateData(printData);
 
     for (let i = 0; i < printData.length; i++) {
       const waybillData = printData[i].waybillData;
@@ -276,6 +269,8 @@ class PrintWayBill {
           await this.handleRookiePrint(params, userData, tempData);
         } else if (shopType === EnumShopType.dy) {
           await this.handleDyPrint(params, userData, tempData);
+        } else if (shopType === EnumShopType.ks) {
+          await this.handleKsPrint(params, userData, tempData);
         } else {
           message.error({
             key: `店铺类型:${shopType}不存在`,
@@ -357,6 +352,19 @@ class PrintWayBill {
     };
 
     printHelper.toggleToRookie();
+    await printHelper.print(printerData);
+  };
+
+  // 快手打印逻辑处理
+  private handleKsPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    const printerData = {
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    };
+
+    printHelper.toggleToKs();
     await printHelper.print(printerData);
   };
 

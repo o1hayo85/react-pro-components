@@ -196,14 +196,15 @@ export function formatKsData(printData: any[]) {
 
   (printData || []).forEach((item) => {
     const contents = [];
-    if (item?.printData) {
-      contents.push(JSON.parse(item?.printData));
+
+    if (item?.ksData?.printData) {
+      contents.push(JSON.parse(item?.ksData?.printData));
     }
 
-    if (item?.customData) {
+    if (item?.ksData?.customData) {
       contents.push({
-        customData: JSON.parse(item?.customData),
-        templateURL: item?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || 'https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml',
+        customData: JSON.parse(item?.ksData?.customData),
+        templateURL: item?.ksData?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || 'https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml',
       });
     }
 
@@ -211,7 +212,6 @@ export function formatKsData(printData: any[]) {
       documents.push({
         documentID: getUUID(),
         contents,
-        waybillCode: 'waybillCode',
         ksOrderFlag: true,
       });
     }
@@ -283,4 +283,16 @@ export function getJdqlTemplateUrl(customUrl?: string): string {
 export function getJdCustomTemplateUrl(customUrl?: string): string {
   const defaultUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
   return customUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || defaultUrl;
+}
+
+export function validateData(data?: any[]): Promise<void> {
+  if (Array.isArray(data) && data.length > 0) {
+    return Promise.resolve();
+  } else {
+    message.warning({
+      key: '没数据',
+      content: '没数据',
+    });
+    return Promise.reject();
+  }
 }

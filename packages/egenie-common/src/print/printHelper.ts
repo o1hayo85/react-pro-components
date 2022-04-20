@@ -4,21 +4,9 @@ import { KsPrint } from './ksPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
 import type { DyPrintParams, JDParams, KSPrintParams, LodopPrintParams, PddPrintParams, RookiePrintParams } from './types';
-import { formatDyData, formatKsData, formatPddData, formatPrintName, formatRookieData, sliceData } from './utils';
+import { formatDyData, formatKsData, formatPddData, formatPrintName, formatRookieData, sliceData, validateData } from './utils';
 
 const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
-
-function validateData(pageData?: any[]): Promise<void> {
-  if (Array.isArray(pageData) && pageData.length > 0) {
-    return Promise.resolve();
-  } else {
-    message.warning({
-      key: '没数据',
-      content: '没数据',
-    });
-    return Promise.reject();
-  }
-}
 
 class PrintHelper {
   constructor() {
@@ -155,8 +143,8 @@ class PrintHelper {
     } else if (this.state === this.ksPrint) {
       const newParams: KSPrintParams = params;
 
-      // 快手的建议10条以内
-      const pageData = sliceData(newParams.contents, newParams.count || 10);
+      // 快手建议10条以内
+      const pageData = sliceData(newParams.contents, 10);
       await validateData(pageData);
 
       for (let i = 0; i < pageData.length; i++) {

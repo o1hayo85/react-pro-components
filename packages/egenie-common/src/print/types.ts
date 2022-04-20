@@ -3,6 +3,7 @@ export enum EnumShopType {
   pdd = 1,
   jd = 2,
   dy = 3,
+  ks = 4,
 }
 
 export enum EnumLodopItemType {
