@@ -2,7 +2,7 @@ import { message } from 'antd';
 import React from 'react';
 import type { LodopItem, LodopPrintParams, TemplateData } from './types';
 import { EnumLodopItemType } from './types';
-import { getTemplateData, getUUID, lodopItemGetText } from './utils';
+import { getTemplateData, getUUID, lodopItemGetText, validateData } from './utils';
 
 enum EnumJsLoadState {
   init,
@@ -458,13 +458,7 @@ export class LodopPrint {
     templateData,
     contents,
   }: Omit<LodopPrintParams, 'count'>): Promise<void> {
-    if (!(Array.isArray(contents) && contents.length)) {
-      message.warning({
-        key: '没数据',
-        content: '没数据',
-      });
-      return Promise.reject();
-    }
+    await validateData(contents);
 
     await this.sendToPrinter({
       preview,
