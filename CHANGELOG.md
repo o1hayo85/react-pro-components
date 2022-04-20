@@ -2,6 +2,7 @@
 
 ### Features
 
+- **egenie-common:** 增加快手打印 ([beda4d1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/beda4d124d28094f0ac3ac7df92dc2052c7af02d))
 - **print:** 增加快手打印自定义模板 url ([86ef840](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86ef8402548d13c051920b196d6d0a595dc99255))
 
 ## [0.12.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.24...v0.12.25) (2022-04-19)
