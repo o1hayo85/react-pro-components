@@ -170,6 +170,7 @@ export type KSPrintParams = {
    * 打印数据
    */
   contents?: any[];
+  cpCode?: string;
 } & CommonPrintParams;
 
 /**

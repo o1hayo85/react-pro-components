@@ -191,7 +191,7 @@ export function formatRookieData(printData: any[], printTemplate: TemplateData) 
   }
 }
 
-export function formatKsData(printData: any[]) {
+export function formatKsData(printData: any[], cpCode?: string): any[] {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -204,7 +204,7 @@ export function formatKsData(printData: any[]) {
     if (item?.ksData?.customData) {
       contents.push({
         customData: JSON.parse(item?.ksData?.customData),
-        templateURL: item?.ksData?.customTempUrl || process.env.REACT_APP_KS_CUSTOM_TEMPLATE_URL || 'https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml',
+        templateURL: getKslTemplateUrl(item?.ksData?.customTempUrl, cpCode),
       });
     }
 
@@ -273,6 +273,18 @@ export function formatPddData(printData: any[], courierPrintType: number) {
   });
 
   return documents;
+}
+
+export function getKslTemplateUrl(customUrl?: string, cpCode?: string): string {
+  if (customUrl) {
+    return customUrl;
+  }
+
+  if (cpCode === 'SF') {
+    return process.env.REACT_APP_KS_SF_CUSTOM_TEMPLATE_URL || getStaticResourceUrl('customer-source/printTemp/ks_sf_custom_template.xml');
+  } else {
+    return process.env.REACT_APP_KS_OTHER_CUSTOM_TEMPLATE_URL || getStaticResourceUrl('customer-source/printTemp/ks_other_custom_template.xml');
+  }
 }
 
 export function getJdqlTemplateUrl(customUrl?: string): string {

@@ -47,10 +47,15 @@ order: 2
 - 默认: http://cloudprint.cainiao.com/template/standard/297499/5
 - 可配环境变量: REACT_APP_JDQL_TEMPLATE_URL
 
-### 快手模板
+### 快手顺丰自定义模板
 
-- 默认: https://s2-11586.kwimgs.com/kos/nlav11586/template/custom/EBCT-EBCTO3136.xml
-- 可配环境变量: REACT_APP_KS_CUSTOM_TEMPLATE_URL
+- 默认: https://front.ejingling.cn/customer-source/printTemp/ks_sf_custom_template.xml
+- 可配环境变量: REACT_APP_KS_SF_CUSTOM_TEMPLATE_URL
+
+### 快手其它自定义模板
+
+- 默认: https://front.ejingling.cn/customer-source/printTemp/ks_other_custom_template.xml
+- 可配环境变量: REACT_APP_KS_OTHER_CUSTOM_TEMPLATE_URL
 
 ### pdd 自定义模板
 

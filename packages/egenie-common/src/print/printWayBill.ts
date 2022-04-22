@@ -270,7 +270,7 @@ class PrintWayBill {
         } else if (shopType === EnumShopType.dy) {
           await this.handleDyPrint(params, userData, tempData);
         } else if (shopType === EnumShopType.ks) {
-          await this.handleKsPrint(params, userData, tempData);
+          await this.handleKsPrint(params, userData, tempData, cpCode);
         } else {
           message.error({
             key: `店铺类型:${shopType}不存在`,
@@ -356,12 +356,13 @@ class PrintWayBill {
   };
 
   // 快手打印逻辑处理
-  private handleKsPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+  private handleKsPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, cpCode: string) => {
     const printerData = {
       printer: params.printer,
       preview: params.preview,
       contents: userData,
       templateData: tempData,
+      cpCode,
     };
 
     printHelper.toggleToKs();

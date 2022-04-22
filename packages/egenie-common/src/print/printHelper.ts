@@ -148,7 +148,7 @@ class PrintHelper {
       await validateData(pageData);
 
       for (let i = 0; i < pageData.length; i++) {
-        const contents = formatKsData(pageData[i]);
+        const contents = formatKsData(pageData[i], newParams.cpCode);
         await this.state.print({
           preview: newParams.preview,
           contents,
