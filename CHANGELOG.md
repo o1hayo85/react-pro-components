@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.25...v0.0.0) (2022-04-20)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.26...v0.0.0) (2022-04-22)
+
+### Features
+
+- **egenie-common:** 更新快手打印自定义区域模板默认 url ([9d0a7b2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9d0a7b2a33725be5727be09c193bdad8e4f0cf3a))
+- **egenie-common:** 增加快手打印 ([bd6e184](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bd6e184b62db7d8254eedb8f13d310f455ff9e46))
+
+## [0.12.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.25...v0.12.26) (2022-04-20)
 
 ### Features
 
