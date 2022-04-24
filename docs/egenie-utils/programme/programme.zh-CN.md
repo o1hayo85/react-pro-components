@@ -64,6 +64,14 @@ const moduleName = 'egenieCloudWmsIndex';
 - 类型?: `MainSubStructureModel`
 - 默认值: {}
 
+## `showProgrammeCount`
+
+- 前提 1: `egenie-common版本大于等于0.12.27`
+- 前提 2: `egenie-utils版本大于等于0.12.28`
+- 描述: 是否显示查询方案数量角标
+- 类型: boolean
+- 默认值: false
+
 ## Programme`实例属性和方法`
 
 ### `filterItems`

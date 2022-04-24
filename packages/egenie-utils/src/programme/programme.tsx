@@ -62,6 +62,11 @@ export interface ProgrammeParams extends FilterItemsParams {
    * 表格配置
    */
   gridModel: MainSubStructureModel;
+
+  /**
+   * 查询方案数字角标
+   */
+  showProgrammeCount: boolean;
 }
 
 export class Programme {
@@ -79,9 +84,11 @@ export class Programme {
 
     // programme
     this.moduleName = options.moduleName;
+    this.showProgrammeCount = Boolean(options.showProgrammeCount);
     this.collapsed = window.localStorage.getItem(`${filterItemsCollapsePrefix}${this.moduleName}`) === 'true';
     this.getProgrammeList(options.dictList, options.itemList, options.fieldMap);
     this.getDefaultSetting();
+    this.getProgrammeCount();
 
     // gridModel
     this.gridModel = options.gridModel;
@@ -126,6 +133,21 @@ export class Programme {
   public gridModel: MainSubStructureModel;
 
   public moduleName: string;
+
+  public showProgrammeCount = false;
+
+  @observable public programmeCount: Record<string, number> = {};
+
+  @action public getProgrammeCount = () => {
+    if (this.showProgrammeCount) {
+      request<BaseData<Record<string, number>>>({
+        url: '/api/boss/baseinfo/rest/filterSet/count',
+        method: 'post',
+        data: { module: this.moduleName },
+      })
+        .then((info) => this.programmeCount = info.data || {});
+    }
+  };
 
   @observable public showProgramme = false;
 

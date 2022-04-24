@@ -216,6 +216,8 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
       activeProgramme,
       handleItemClick,
       handleItemDelete,
+      showProgrammeCount,
+      programmeCount,
     } = this.props.programme;
 
     return (
@@ -257,6 +259,14 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
                     >
                       {item.schemeName}
                     </Typography.Text>
+                    {
+                      showProgrammeCount ? (
+                        <span className={styles.programmeCount}>
+                          {programmeCount[item.id] || 0}
+                        </span>
+                      ) : null
+                    }
+
                     <span
                       className={styles.del}
                       onClick={(event) => {
