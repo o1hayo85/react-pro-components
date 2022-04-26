@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.28...v0.0.0) (2022-04-26)
 
+### Bug Fixes
+
+- **react-types:** 临时解决 react18 类型不兼容 ([833542b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/833542bf7aa1ef5470e987defa375d9374b0abf8))
+
 ## [0.12.28](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.27...v0.12.28) (2022-04-24)
 
 ### Features
