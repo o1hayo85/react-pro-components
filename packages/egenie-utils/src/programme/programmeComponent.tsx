@@ -1,9 +1,9 @@
 import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Typography } from 'antd';
 import classNames from 'classnames';
-import type { FilterItem, FilterItemOptions, FilterItems } from 'egenie-common';
+import type { FilterItem, FilterItemOptions } from 'egenie-common';
 import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory } from 'egenie-common';
 import { autorun, computed } from 'mobx';
-import { inject, observer, Provider } from 'mobx-react';
+import { observer } from 'mobx-react';
 import React from 'react';
 import { MainSubStructure } from '../egGrid';
 import { AddProgrammeModal } from './addProgrammeModal';
@@ -71,58 +71,52 @@ export class ProgrammeComponent extends React.Component<ProgrammeProps> {
       className = '',
       style = {},
       summaryStatistic,
-      store: {
-        scrollContainerRef,
-        handleScroll,
-        collapsed,
-        filterItems,
-        handleCollapsed,
-        gridModel,
-      },
+      store,
     } = this.props;
+    const {
+      scrollContainerRef,
+      handleScroll,
+      collapsed,
+      handleCollapsed,
+      gridModel,
+    } = store;
     return (
-      <Provider
-        filterItems={filterItems}
-        programme={this.props.store}
+      <Layout
+        className={`${styles.container} ${className}`}
+        style={style}
       >
-        <Layout
-          className={`${styles.container} ${className}`}
-          style={style}
+        <Layout.Sider
+          collapsed={collapsed}
+          collapsedWidth={0}
+          collapsible
+          onCollapse={handleCollapsed}
+          theme="light"
+          width="300"
         >
-          <Layout.Sider
-            collapsed={collapsed}
-            collapsedWidth={0}
-            collapsible
-            onCollapse={handleCollapsed}
-            theme="light"
-            width="300"
+          <div
+            className={`${styles.filterContent} ${styles.filterContentBase}`}
+            onScroll={handleScroll}
+            ref={scrollContainerRef}
           >
-            <div
-              className={`${styles.filterContent} ${styles.filterContentBase}`}
-              onScroll={handleScroll}
-              ref={scrollContainerRef}
-            >
-              <FilterItemsComponent/>
-            </div>
-            <FilterItemsScroll/>
-            <Footer/>
-          </Layout.Sider>
-          <Layout.Content>
-            {summaryStatistic}
-            <ProgrammeList/>
-            <div className={styles.tableWrapper}>
-              <MainSubStructure store={gridModel}/>
-            </div>
-          </Layout.Content>
-        </Layout>
-      </Provider>
+            <FilterItemsComponent programme={store}/>
+          </div>
+          <FilterItemsScroll programme={store}/>
+          <Footer programme={store}/>
+        </Layout.Sider>
+        <Layout.Content>
+          {summaryStatistic}
+          <ProgrammeList programme={store}/>
+          <div className={styles.tableWrapper}>
+            <MainSubStructure store={gridModel}/>
+          </div>
+        </Layout.Content>
+      </Layout>
     );
   }
 }
 
-@inject('programme')
 @observer
-class Footer extends React.Component<{ programme?: Programme; }> {
+class Footer extends React.Component<{ programme: Programme; }> {
   render() {
     const {
       filterItems: {
@@ -207,9 +201,8 @@ class Footer extends React.Component<{ programme?: Programme; }> {
   }
 }
 
-@inject('programme')
 @observer
-class ProgrammeList extends React.Component<{ programme?: Programme; }> {
+class ProgrammeList extends React.Component<{ programme: Programme; }> {
   render() {
     const {
       programmeList,
@@ -240,6 +233,7 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
                 <Popover
                   content={(
                     <FilterItemsTranslate
+                      programme={this.props.programme}
                       schemeName={item.schemeName}
                       schemeValue={item.schemeValue}
                     />
@@ -287,9 +281,8 @@ class ProgrammeList extends React.Component<{ programme?: Programme; }> {
   }
 }
 
-@inject('programme')
 @observer
-class FilterItemsScroll extends React.Component<{ programme?: Programme; }> {
+class FilterItemsScroll extends React.Component<{ programme: Programme; }> {
   render() {
     const {
       showScroll,
@@ -322,11 +315,10 @@ class FilterItemsScroll extends React.Component<{ programme?: Programme; }> {
   }
 }
 
-@inject('filterItems')
 @observer
-class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; }> {
+class FilterItemsComponent extends React.Component<{ programme: Programme; }> {
   render() {
-    const { actualData } = this.props.filterItems;
+    const { actualData } = this.props.programme.filterItems;
     return (
       <div className={styles.filterItemMainContainer}>
         {actualData.map((item) => {
@@ -388,9 +380,8 @@ class FilterItemsComponent extends React.Component<{ filterItems?: FilterItems; 
   }
 }
 
-@inject('programme')
 @observer
-class FilterItemsTranslate extends React.Component<{ programme?: Programme; schemeName: string; schemeValue: string; }> {
+class FilterItemsTranslate extends React.Component<{ programme: Programme; schemeName: string; schemeValue: string; }> {
   @computed
   public get translateData(): string[][] {
     if (this.props.schemeName === this.props.programme.activeProgramme) {
