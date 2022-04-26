@@ -161,19 +161,13 @@ const ButtonHeader = observer(
   }
 );
 
-const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
-  if (!_buttons.length) {
-    return (
-      <span>
-        {' '}
-      </span>
-    );
-  }
+const ButtonsOfSubTable = observer(({ store, store: { _buttons, subbtnExtra }}) => {
   return (
     <div
       className={`${styles.subTableHeaderButtonWrap}`}
     >
-      {_buttons.map((el, index) => {
+      {subbtnExtra}
+      {_buttons.length ? _buttons.map((el, index) => {
         const { group } = el;
         return group ? (
           <Dropdown.Button
@@ -237,7 +231,7 @@ const ButtonsOfSubTable = observer(({ store, store: { _buttons }}) => {
             {el.text}
           </Button>
         );
-      })}
+      }) : null}
     </div>
   );
 });

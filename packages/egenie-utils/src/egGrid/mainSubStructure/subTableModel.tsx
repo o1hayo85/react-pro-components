@@ -25,6 +25,7 @@ export interface ISubTableModel {
   allFilterItemsInOneGroup?: boolean;
   clearAfterChangeFilterItem?: boolean;
   buttons?: (subTable: SubTableModel) => IButton[];
+  subbtnExtra?: React.ReactNode;
   filterItems?: IFilterItems[];
 }
 

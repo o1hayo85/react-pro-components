@@ -151,6 +151,14 @@ export interface CellRendererProps<TRow, TSummaryRow>
     | undefined
     | null;
   selectCell: SelectCellFn;
+//   onMouseInRow:
+//   | ((rowIdx: number, row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void)
+//   | undefined
+//   | null;
+// onMouseOutRow:
+//   | ((rowIdx: number, row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void)
+//   | undefined
+//   | null;
 }
 
 export interface RowRendererProps<TRow, TSummaryRow = unknown>
@@ -173,8 +181,14 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
   rowClass: ((row: TRow) => string | undefined | null) | undefined | null;
   setDraggedOverRowIdx: ((overRowIdx: number) => void) | undefined;
   selectCell: SelectCellFn;
-  onMouseInRow: ((rowIdx: number, row: TRow, event?: React.UIEvent<HTMLDivElement>) => void) | undefined | null;
-  onMouseOutRow: ((rowIdx: number, row: TRow, event?: React.UIEvent<HTMLDivElement>) => void) | undefined | null;
+  onMouseInRow:
+  | ((rowIdx: number, row: TRow, event: React.UIEvent<HTMLDivElement>) => void)
+  | undefined
+  | null;
+  onMouseOutRow:
+  | ((rowIdx: number, row: TRow, event: React.UIEvent<HTMLDivElement>) => void)
+  | undefined
+  | null;
 }
 
 export interface RowsChangeData<R, SR = unknown> {

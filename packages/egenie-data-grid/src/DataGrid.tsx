@@ -32,7 +32,7 @@ import {
   isCtrlKeyHeldDown,
   isDefaultCellInput,
   getColSpan,
-  // max,
+  max,
   sign
 } from './utils';
 
@@ -168,10 +168,9 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   rowClass?: ((row: R) => string | undefined | null) | null;
 
   /** Function called whenever a row is out or in. */
-  onMouseInRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
-  onMouseOutRow?: ((rowIdx: number, row: R, event?: React.UIEvent<HTMLDivElement>) => void) | null;
+  onMouseInRow?: ((rowIdx: number, row: R, event: React.UIEvent<HTMLDivElement>) => void) | null;
+  onMouseOutRow?: ((rowIdx: number, row: R, event: React.UIEvent<HTMLDivElement>) => void) | null;
 
-  /** 是否启用表格滚动 */
   enableCellScroll?: boolean;
 }
 
@@ -228,7 +227,7 @@ function DataGrid<R, SR, K extends Key>(
     'aria-describedby': ariaDescribedBy,
     onMouseInRow,
     onMouseOutRow,
-    enableCellScroll
+    enableCellScroll,
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
 ) {
@@ -780,7 +779,6 @@ function DataGrid<R, SR, K extends Key>(
     const { current } = gridRef;
     if (!current) return;
     if (!enableCellScroll) return;
-
     if (typeof idx === 'number' && idx > lastFrozenColumnIndex) {
       rowIdx ??= selectedPosition.rowIdx;
       if (!isCellWithinBounds({ rowIdx, idx })) return;
@@ -1126,7 +1124,7 @@ function DataGrid<R, SR, K extends Key>(
             onKeyDown={handleKeyDown}
             onFocus={onGridFocus}
           />
-          {/* <div style={{ height: max(totalRowHeight, clientHeight) }} /> */}
+          <div style={{ height: max(totalRowHeight, clientHeight) }} />
           <RowSelectionChangeProvider value={selectRowLatest}>
             {getViewportRows()}
           </RowSelectionChangeProvider>
