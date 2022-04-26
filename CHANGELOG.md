@@ -1,4 +1,20 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.28...v0.0.0) (2022-04-26)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.29...v0.0.0) (2022-04-26)
+
+### Features
+
+- 12beat 版本 ([eca791f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/eca791fceffcafda8dba46f799827104fde4acd6))
+
+## [0.12.20-alpha.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.24...v0.12.20-alpha.0) (2022-04-17)
+
+### Bug Fixes
+
+- 排序列添加标记&修复滚动条闪动 ([d0b415f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d0b415ff709111ef10e62935cd9660031a56a049))
+
+### Features
+
+- 更新版本及 grid 打包脚本 ([99f4884](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/99f4884b772987a353900eb33d8c6f64d1f02dc2))
+
+## [0.12.29](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.28...v0.12.29) (2022-04-26)
 
 ### Bug Fixes
 
@@ -24,12 +40,53 @@
 - **egenie-common:** 增加快手打印 ([beda4d1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/beda4d124d28094f0ac3ac7df92dc2052c7af02d))
 - **print:** 增加快手打印自定义模板 url ([86ef840](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86ef8402548d13c051920b196d6d0a595dc99255))
 
-## [0.12.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.24...v0.12.25) (2022-04-19)
+## [0.12.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.20-alpha.0...v0.12.25) (2022-04-19)
 
 ### Features
 
 - **egenie-common:** add ksPrint ([7d2e4cf](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/7d2e4cf38a9768f52adeb721df4ac3559108d97d))
 - **programme:** 查询方案新增类型 ([0d4b1d6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0d4b1d6ed3b6b000fd5dd2af07671e64012c5041))
+
+## [0.12.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.23...v0.12.24) (2022-04-14)
+
+### Features
+
+- **lodopPrint:** 处理线上 lodop 打印机，连接问题 ([c2d0272](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c2d0272894d28ddf17b42ab19d7e526a9b5620ed))
+- **lodopPrint:** 处理线上 lodop 打印机，连接问题 ([8744f51](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8744f510b39c69150b4853100aeab13bd23c9737))
+
+## [0.12.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.22...v0.12.23) (2022-04-12)
+
+### Features
+
+- **react-scripts:** update mockMiddleware ([2a1efb8](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2a1efb8d0ea31d7093e9ea7775e8a50e78d067bd))
+
+## [0.12.22](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.21...v0.12.22) (2022-04-07)
+
+### Features
+
+- **react-scripts:** update mockMiddleware ([65fea70](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/65fea700102c0bb9694845043bcebc8ffabf92b3))
+
+## [0.12.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.20...v0.12.21) (2022-04-07)
+
+### Features
+
+- **react-scripts:** update mockMiddleware ([5a95c36](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5a95c36dab0d6201880ed1ccf5e136c5814a0a2d))
+
+## [0.12.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.19...v0.12.20) (2022-04-06)
+
+### Features
+
+- 更改面单打印自定义 url 逻辑 ([01d9ded](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/01d9dedc27b50774d44097a879391f040fab672d))
+
+## [0.12.20-alpha.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.24...v0.12.20-alpha.0) (2022-04-17)
+
+### Bug Fixes
+
+- 排序列添加标记&修复滚动条闪动 ([d0b415f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d0b415ff709111ef10e62935cd9660031a56a049))
+
+### Features
+
+- 更新版本及 grid 打包脚本 ([99f4884](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/99f4884b772987a353900eb33d8c6f64d1f02dc2))
 
 ## [0.12.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.23...v0.12.24) (2022-04-14)
 
