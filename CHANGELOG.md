@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.29...v0.0.0) (2022-04-26)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.30...v0.0.0) (2022-04-26)
+
+### Features
+
+- **utils:** 去掉 programme 的 provider ([83e0674](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/83e0674c444f73343d9c3e279e490faa5885c19b))
+
+## [0.12.30](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.29...v0.12.30) (2022-04-26)
 
 ### Features
 
