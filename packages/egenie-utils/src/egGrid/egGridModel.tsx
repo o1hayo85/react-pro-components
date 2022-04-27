@@ -481,7 +481,7 @@ export class EgGridModel {
    * 获取排序方式
    */
   @computed public get sortType() {
-    const { sortColumns } = this;
+    const { sortColumns, sortColumnKey } = this;
     if (!sortColumns.length) {
       return {
         sord: '',
@@ -491,7 +491,7 @@ export class EgGridModel {
     const { columnKey, direction } = sortColumns[0];
     return {
       sord: direction,
-      sidx: columnKey,
+      sidx: sortColumnKey || columnKey,
     };
   }
 
@@ -770,6 +770,17 @@ export class EgGridModel {
     });
   };
 
+  public twoLevelClone = (columnArr: any[]): any[] => {
+    if (!Array.isArray(columnArr)) {
+      return columnArr;
+    }
+    const tempArr = [];
+    for (const el of columnArr) {
+      tempArr.push({ ...el });
+    }
+    return tempArr;
+  };
+
   /**
    * 交换顺序之后的回调
    */
@@ -794,7 +805,7 @@ export class EgGridModel {
     );
     console.log(toJS(reorderedColumns), '交换顺序');
     this.columns = reorderedColumns;
-    const storage = this.getStorageParam(_.cloneDeep(reorderedColumns));
+    const storage = this.getStorageParam(this.twoLevelClone(reorderedColumns));
     this.saveColumnsConfig(storage);
   });
 
@@ -802,13 +813,13 @@ export class EgGridModel {
    * 拖拽列大小之后的回调
    */
   public onColumnResize = action(_.debounce(((index, width) => {
-    const _columns = _.cloneDeep(this._columns);
+    const _columns = this.twoLevelClone(this._columns);
     const columns = this.columns;
     const key = _columns[index].key;
     const item = columns.find((v) => v.key === key);
     item.width = width;
 
-    const storage = this.getStorageParam(_.cloneDeep(columns));
+    const storage = this.getStorageParam(this.twoLevelClone(columns));
     this.saveColumnsConfig(storage);
   }), 500));
 
@@ -820,6 +831,7 @@ export class EgGridModel {
     this.sortColumns = sortColumns;
     if (!sortColumns.length) {
       this.rows = toJS(this.defaultRows);
+      this.sortColumnKey = '';
       return;
     }
     const { columnKey, direction } = sortColumns[0];
@@ -857,15 +869,16 @@ export class EgGridModel {
     this.sortColumns = sortColumns;
     if (sortColumns.length) {
       const { columnKey, direction } = sortColumns[0];
-      this.sortColumnKey = columnKey;
       this.sortDirection = direction;
       const col = this.columns.find((v) => v.key === columnKey);
       const realSortColumn = col && col.sidx ? col.sidx : columnKey;
+      this.sortColumnKey = realSortColumn;
       param = {
         sidx: realSortColumn,
         sord: direction.toLowerCase(),
       };
     } else {
+      this.sortColumnKey = '';
       param = {
         sidx: '',
         sord: '',
@@ -1038,7 +1051,7 @@ export class EgGridModel {
       }
     }
     this.columns = tempColumns;
-    this.columnSettingModel.pannelItems = _.cloneDeep(tempColumns);
+    this.columnSettingModel.pannelItems = this.twoLevelClone(tempColumns);
   });
 }
 

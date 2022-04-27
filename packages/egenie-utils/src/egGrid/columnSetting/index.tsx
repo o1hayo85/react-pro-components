@@ -1,5 +1,4 @@
 import { Modal, Switch, Button } from 'antd';
-import _ from 'lodash';
 import { observable, set, action, extendObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
@@ -25,8 +24,8 @@ export class ColumnSettingModel {
 
   constructor(options) {
     set(this, {
-      pannelItems: _.cloneDeep(options.parent.columns),
-      noSavePannelItems: _.cloneDeep(options.parent.columns),
+      pannelItems: options.parent.twoLevelClone(options.parent.columns),
+      noSavePannelItems: options.parent.twoLevelClone(options.parent.columns),
       ...(options || {}),
     });
   }
@@ -35,7 +34,7 @@ export class ColumnSettingModel {
 
   @action public handleCancel = (): void => {
     this.isModalVisible = false;
-    this.pannelItems = _.cloneDeep(this.parent.columns);
+    this.pannelItems = this.parent.twoLevelClone(this.parent.columns);
   };
 
   @action public openColumnSetting = (): void => {
@@ -50,7 +49,7 @@ export class ColumnSettingModel {
   };
 
   @action public handleResetOrder = (): void => {
-    this.pannelItems = _.cloneDeep(this.noSavePannelItems);
+    this.pannelItems = this.parent.twoLevelClone(this.noSavePannelItems);
   };
 
   @action public onSortEnd: SortEndHandler = ({ oldIndex, newIndex }): void => {
@@ -82,7 +81,7 @@ export class ColumnSettingModel {
 
   // 拖拽列的方法
   @action private arrayMove = (array, previousIndex, newIndex) => {
-    const cloneItemsArray = _.cloneDeep(array);
+    const cloneItemsArray = this.parent.twoLevelClone(array);
     if (newIndex >= cloneItemsArray.length) {
       let k = newIndex - cloneItemsArray.length;
       while (k-- + 1) {
