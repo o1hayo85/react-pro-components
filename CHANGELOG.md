@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.32...v0.0.0) (2022-05-06)
 
+### Features
+
+- **egenie-common:** 更新 lodop 打印配置 ([805bcaa](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/805bcaae8c6c3ecc419ee79b33fba309203f740b))
+
 ## [0.12.32](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.31...v0.12.32) (2022-04-27)
 
 ### Bug Fixes
