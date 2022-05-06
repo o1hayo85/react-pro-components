@@ -170,7 +170,7 @@ class PrintHelper {
       }
     } else if (this.state === this.lodopPrint) {
       const newParams: LodopPrintParams = params as LodopPrintParams;
-      const pageData = sliceData(newParams.contents, newParams.count);
+      const pageData = sliceData(newParams.contents, newParams.count || 30);
       await validateData(pageData);
 
       for (let i = 0; i < pageData.length; i++) {

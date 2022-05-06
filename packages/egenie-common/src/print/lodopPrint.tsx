@@ -272,6 +272,9 @@ export class LodopPrint {
         }
       } else if (txttype === EnumLodopItemType.qrCode) {
         this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', lodopItemGetText(data, id));
+
+        // 保持二维码宽度一致
+        this.instance.SET_PRINT_STYLEA(0, 'QRCodeVersion', 7);
       } else if (txttype === EnumLodopItemType.barCode) {
         const showBarText = hideText ? !hideText.includes('不显示码值') : true;
         this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), lodopItemGetText(data, id));
