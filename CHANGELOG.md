@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.33...v0.0.0) (2022-05-07)
 
+### Features
+
+- **egenie-utils:** 增加查询方案角标数量刷新 ([89961f2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/89961f2bb03b63849ee4915e9b50999de0cd1cf0))
+
 ## [0.12.33](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.32...v0.12.33) (2022-05-06)
 
 ### Features
