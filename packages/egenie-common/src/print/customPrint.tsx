@@ -80,22 +80,6 @@ class CustomPrintModel {
       dataIndex: 'mysqlno',
       title: '模版编号',
       width: 200,
-      render: (text: string, row: TemplateData) => {
-        return (
-          <a
-            onClick={() => {
-              try {
-                // @ts-ignore
-                window.top.egenie.openTab(`/page/print/printView/index.html?tempType=${row.tempType}&tempShow=${row.mysqlid}&category_no=`, 'printTemp', `编辑[${tempTypeList[row.tempType]}]模板`);
-              } catch (e) {
-                console.log(e);
-              }
-            }}
-          >
-            {row.mysqlno}
-          </a>
-        );
-      },
     },
     {
       ellipsis: true,

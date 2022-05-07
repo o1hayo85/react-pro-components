@@ -1,11 +1,10 @@
 import { message, Modal } from 'antd';
 import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
-import { getWayBillSensitiveData } from './getPrivacyData';
 import { printHelper } from './printHelper';
 import type { TemplateData } from './types';
 import { EnumShopType } from './types';
-import { getJdCustomTemplateUrl, getJdqlTemplateUrl, validateData } from './utils';
+import { getJdCustomTemplateUrl, validateData } from './utils';
 
 interface PrintData {
   cpCode?: string;
@@ -224,41 +223,6 @@ class PrintWayBill {
         printSrc: params.printSrc,
         docIds: waybillData.docIds,
       };
-
-      await getWayBillSensitiveData(userData, cpCode, shopType);
-
-      // 原来就有的逻辑,不知道啥用
-      if (cpCode === 'JDQL') {
-        userData.forEach((item) => {
-          const {
-            jdqlData = {},
-            wmsOrder: {
-              seller_note,
-              receiver_address_detail,
-              receiver_mobile,
-              receiver_name,
-              receiver_phone,
-              orderSender: {
-                sender_address,
-                sender_mobile,
-                sender_name,
-                sender_phone,
-              },
-            },
-          } = item;
-          Object.assign(item, {
-            ...jdqlData,
-            senderAddress: sender_address,
-            senderName: sender_name,
-            senderPhone: sender_mobile || sender_phone,
-            receiverAddress: receiver_address_detail,
-            receiverName: receiver_name,
-            receiverPhone: receiver_mobile || receiver_phone,
-            remark: seller_note,
-            templateURL: getJdqlTemplateUrl(),
-          });
-        });
-      }
 
       if (await this.handleNotify(waybillData)) {
         if (shopType === EnumShopType.jd) {
