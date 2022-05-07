@@ -211,10 +211,15 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
       handleItemDelete,
       showProgrammeCount,
       programmeCount,
+      getProgrammeCount,
+      isProgrammeCountLoading,
     } = this.props.programme;
 
     return (
-      <div className={styles.programmeList}>
+      <div
+        className={styles.programmeList}
+        style={showProgrammeCount ? { paddingRight: 64 } : {}}
+      >
         <section
           className={classNames({ [styles.active]: programmeList[0].schemeName === activeProgramme })}
           onClick={() => handleItemClick(programmeList[0])}
@@ -274,6 +279,20 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
                 </Popover>
               );
             })
+        }
+        {
+          showProgrammeCount ? (
+            <div className={styles.programmeCountRefresh}>
+              <Button
+                icon={<i className="icon-replace"/>}
+                loading={isProgrammeCountLoading}
+                onClick={getProgrammeCount}
+                type="link"
+              >
+                刷新
+              </Button>
+            </div>
+          ) : null
         }
         <div className={styles.emptyBorder}/>
       </div>

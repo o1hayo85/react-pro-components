@@ -138,14 +138,18 @@ export class Programme {
 
   @observable public programmeCount: Record<string, number> = {};
 
+  @observable public isProgrammeCountLoading = false;
+
   @action public getProgrammeCount = () => {
     if (this.showProgrammeCount) {
+      this.isProgrammeCountLoading = true;
       request<BaseData<Record<string, number>>>({
         url: '/api/boss/baseinfo/rest/filterSet/count',
         method: 'post',
         data: { module: this.moduleName },
       })
-        .then((info) => this.programmeCount = info.data || {});
+        .then((info) => this.programmeCount = info.data || {})
+        .finally(() => this.isProgrammeCountLoading = false);
     }
   };
 

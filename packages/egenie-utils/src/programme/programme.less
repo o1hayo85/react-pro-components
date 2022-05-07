@@ -53,6 +53,7 @@
   }
 
   .programmeList {
+    position: relative;
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
@@ -63,6 +64,17 @@
     margin-bottom: @egenie-spacing-xss;
     overflow-x: auto;
     border-radius: @egenie-border-radius-base @egenie-border-radius-base 0 0;
+
+    .programmeCountRefresh {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 64px;
+      height: @egenie-height-md;
+    }
 
     > section {
       &.active {
@@ -93,9 +105,10 @@
 
       position: relative;
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       max-width: 280px;
-      height: 100%;
+      height: @egenie-height-md;
       margin-right: -1px;
       padding-right: @egenie-spacing-xl;
       padding-left: @egenie-spacing-md;
@@ -121,8 +134,10 @@
     }
 
     .emptyBorder {
-      flex-grow: 1;
-      height: 100%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
       border-bottom: 1px solid @egenie-border-color-base;
     }
   }

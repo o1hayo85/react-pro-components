@@ -66,8 +66,8 @@ const moduleName = 'egenieCloudWmsIndex';
 
 ## `showProgrammeCount`
 
-- 前提 1: `egenie-common版本大于等于0.12.27`
-- 前提 2: `egenie-utils版本大于等于0.12.28`
+- 前提 1: `egenie-common版本大于等于0.12.33`
+- 前提 2: `egenie-utils版本大于等于0.12.34`
 - 描述: 是否显示查询方案数量角标
 - 类型: boolean
 - 默认值: false
