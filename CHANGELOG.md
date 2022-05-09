@@ -1,40 +1,8 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.39...v0.0.0) (2022-05-23)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.0.0) (2022-05-09)
 
 ### Features
 
-- **filterItems:** 下拉多选增加左匹配 ([5e7af67](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5e7af67b980d14a18c2af09098af051e727e349a))
-
-## [0.12.39](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.38...v0.12.39) (2022-05-19)
-
-### Bug Fixes
-
-- 修复按钮组样式 ([c0e4075](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c0e4075f534594d557e9f8d9982a2ae9d6e8dfbd))
-
-## [0.12.38](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.37...v0.12.38) (2022-05-16)
-
-### Bug Fixes
-
-- 修复排序字段浅拷贝问题 ([9235724](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/92357246e7771a4037f039b14d23739ffa654d6c))
-
-## [0.12.37](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.36...v0.12.37) (2022-05-13)
-
-### Features
-
-- **filterItems:** 解决 inputAndSelect 组件,跳转页面 input 带入逗号,格式化参数只有第一个逗号的数据 ([069972f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/069972f26b715a34b5fdf0512f92e2ea44083e04))
-
-## [0.12.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.35...v0.12.36) (2022-05-13)
-
-### Features
-
-- 增加 lodop 的 https 加载 url ([cbe6b5e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cbe6b5edf14f26d864bb1052c4b5657685dda89d))
-- 增加 lodop 的 https 加载 url ([bbc5606](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bbc56067c461faf7c207973f2628a655dd8e0f79))
-
-## [0.12.35](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.12.35) (2022-05-13)
-
-### Features
-
-- 增加 lodop 的 https 加载 url ([c25edd4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c25edd483e361f973a889e009035c45d6ae478f0))
-- 增加 lodop 的 https 加载 url ([926764f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/926764f5338e771dcacf11e0235593d24991b706))
+- **5853:** 打印快递单改造 ([ee8a46b](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ee8a46be43a3d48e795f22ca2e9baee52fdafd1b))
 - **egenie-common/print:** 去掉 jd 单子用菜鸟打的自定义数据、解密逻辑，去掉自定义打印跳转到编辑页面逻辑。已经和 rein、alan 确认了 ([5147703](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51477035b1671e72e7d056e0d82cdadfcee3ffcd))
 
 ## [0.12.34](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.33...v0.12.34) (2022-05-07)

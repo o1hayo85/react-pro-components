@@ -1,4 +1,4 @@
-import { formatBarcodeData, formatDyData, formatPddData, formatPrintName, formatRookieData, get, getTemplateData, lodopItemGetText, sliceData } from '../utils';
+import { formatBarcodeData, formatDyDataOld, formatPddDataOld, formatPrintName, formatRookieDataOld, get, getTemplateData, lodopItemGetText, sliceData } from '../utils';
 
 describe('print utils', () => {
   test('getTemplateData', () => {
@@ -206,11 +206,11 @@ describe('print utils', () => {
   });
 
   test('formatRookieData', () => {
-    expect(formatRookieData(null, null)).toEqual([]);
+    expect(formatRookieDataOld(null, null)).toEqual([]);
 
-    expect(formatRookieData([], { cainiaoTemp: '0' })).toEqual([]);
+    expect(formatRookieDataOld([], { cainiaoTemp: '0' })).toEqual([]);
 
-    expect(formatRookieData([
+    expect(formatRookieDataOld([
       {
         value: 1,
         templateURL: 1,
@@ -237,7 +237,7 @@ describe('print utils', () => {
       },
     ]);
 
-    expect(formatRookieData([
+    expect(formatRookieDataOld([
       {
         value: 1,
         templateURL: 1,
@@ -267,15 +267,15 @@ describe('print utils', () => {
   });
 
   test('formatDyData', () => {
-    expect(formatDyData(null)).toEqual([]);
+    expect(formatDyDataOld(null)).toEqual([]);
 
-    expect(formatDyData([])).toEqual([]);
+    expect(formatDyDataOld([])).toEqual([]);
 
-    expect(formatDyData([{ value: 1 }])).toEqual([]);
+    expect(formatDyDataOld([{ value: 1 }])).toEqual([]);
 
-    expect(formatDyData([{ dyData: { printData: JSON.stringify({ value: 1 }) }}])[0].contents).toEqual([{ value: 1 }]);
+    expect(formatDyDataOld([{ dyData: { printData: JSON.stringify({ value: 1 }) }}])[0].contents).toEqual([{ value: 1 }]);
 
-    expect(formatDyData([
+    expect(formatDyDataOld([
       {
         dyData: {
           customTempUrl: 1,
@@ -289,7 +289,7 @@ describe('print utils', () => {
       },
     ]);
 
-    expect(formatDyData([
+    expect(formatDyDataOld([
       {
         dyData: {
           customTempUrl: 1,
@@ -307,20 +307,20 @@ describe('print utils', () => {
   });
 
   test('formatPddData', () => {
-    expect(formatPddData(null, null)).toEqual([]);
+    expect(formatPddDataOld(null, null)).toEqual([]);
 
-    expect(formatPddData([], 1)).toEqual([]);
+    expect(formatPddDataOld([], 1)).toEqual([]);
 
-    expect(formatPddData([{ newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }) }], 1)[0].contents).toEqual([{ caiNiaoDefaultData: 1 }]);
+    expect(formatPddDataOld([{ newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }) }], 1)[0].contents).toEqual([{ caiNiaoDefaultData: 1 }]);
 
-    expect(formatPddData([{ pinduoduo: JSON.stringify({ value: 1 }) }], 1)[0].contents).toEqual([
+    expect(formatPddDataOld([{ pinduoduo: JSON.stringify({ value: 1 }) }], 1)[0].contents).toEqual([
       {
         data: { value: 1 },
         templateURL: 'https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml',
       },
     ]);
 
-    expect(formatPddData([
+    expect(formatPddDataOld([
       {
         newCaiNiao: JSON.stringify({ caiNiaoDefaultData: 1 }),
         pinduoduo: JSON.stringify({ value: 1 }),

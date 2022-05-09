@@ -1,6 +1,32 @@
 import { message } from 'antd';
-import type { JDParams } from './types';
+import type { CommonPrintParams } from './types';
 import { getUUID } from './utils';
+
+interface JdParams {
+
+  /**
+   * 京东打印自定义数据
+   */
+  customData?: any;
+
+  /**
+   * 京东打印自定义模板URL
+   */
+  customTempUrl?: string;
+
+  /**
+   * 京东打印固定数据
+   */
+  printData?: any;
+
+  /**
+   * 京东固定模板
+   */
+  tempUrl?: string;
+
+  preview: CommonPrintParams['preview'];
+  printer: CommonPrintParams['printer'];
+}
 
 interface IParameters {
   printName: string;
@@ -52,25 +78,22 @@ function downloadImage(imgSrc: string, name?: string): void {
 }
 
 export class JdPrint {
-  constructor(host: string, port: number, openError: string) {
-    this.openError = openError;
+  constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
   }
 
   private JDSocket: WebSocket;
-
-  private openError: string;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   private taskRequest = new Map<string, { request: RequestProtocol; resolve?: Function; reject?: Function; }>();
 
   private taskQueue = [] as RequestProtocol[];
 
-  private connect = (ipStr = '127.0.0.1') => {
+  private connect = () => {
     if (this.JDSocket) {
       return;
     }
 
-    this.JDSocket = new WebSocket(`ws://${ipStr}:9113`);
+    this.JDSocket = new WebSocket(`ws://${this.host}:${this.port}`);
 
     // 打开Socket
     this.JDSocket.onopen = (event) => {
@@ -191,7 +214,7 @@ export class JdPrint {
     customTempUrl,
     printData,
     tempUrl,
-  }: JDParams) => {
+  }: JdParams) => {
     return this.sendToPrinter(this.getPrintParam(preview ? 'PRE_View' : 'PRINT', {
       printName: printer,
       customData,

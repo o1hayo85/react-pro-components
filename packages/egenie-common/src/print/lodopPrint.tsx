@@ -1,10 +1,10 @@
 import { message } from 'antd';
 import React from 'react';
-import type { LodopItem, LodopPrintParams, TemplateData } from './types';
-import { EnumLodopItemType } from './types';
+import type { CommonPrintParams, LodopItem, TemplateData } from './types';
+import { ENUM_LODOP_ITEM_TYPE } from './types';
 import { getTemplateData, getUUID, lodopItemGetText, validateData } from './utils';
 
-enum EnumJsLoadState {
+enum ENUM_JS_LOAD_STATE {
   init,
   finish
 }
@@ -124,7 +124,7 @@ export class LodopPrint {
 
   public baseTop = 0;
 
-  private jsLoadState: EnumJsLoadState = EnumJsLoadState.init;
+  private jsLoadState: ENUM_JS_LOAD_STATE = ENUM_JS_LOAD_STATE.init;
 
   public createTable(itemDetailList: {[key: string]: LodopItem; }, data: any): void {
     if (itemDetailList == null || Object.keys(itemDetailList).length === 0) {
@@ -171,9 +171,9 @@ export class LodopPrint {
 
             const cellText = lodopItemGetText(item, currentId.split('-')[1]);
 
-            if (txttype === EnumLodopItemType.detailQrCode || txttype === EnumLodopItemType.detailBarCode) {
+            if (txttype === ENUM_LODOP_ITEM_TYPE.detailQrCode || txttype === ENUM_LODOP_ITEM_TYPE.detailBarCode) {
               const idStr = `${id}-${getUUID()}`;
-              const codeType = txttype === EnumLodopItemType.detailQrCode ? 'QRCode' : getCodeType(txt);
+              const codeType = txttype === ENUM_LODOP_ITEM_TYPE.detailQrCode ? 'QRCode' : getCodeType(txt);
               return [
                 '<td >',
                 `<object id="${idStr}" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="${width}px" height="${height}px"><param name="Color" value="white"></object>`,
@@ -259,43 +259,43 @@ export class LodopPrint {
       } = itemList[i];
 
       if (
-        txttype === EnumLodopItemType.customText ||
-        txttype === EnumLodopItemType.noTitleText ||
-        txttype === EnumLodopItemType.hasTitleText ||
-        txttype === EnumLodopItemType.tableInlineText ||
-        txttype === EnumLodopItemType.printTime
+        txttype === ENUM_LODOP_ITEM_TYPE.customText ||
+        txttype === ENUM_LODOP_ITEM_TYPE.noTitleText ||
+        txttype === ENUM_LODOP_ITEM_TYPE.hasTitleText ||
+        txttype === ENUM_LODOP_ITEM_TYPE.tableInlineText ||
+        txttype === ENUM_LODOP_ITEM_TYPE.printTime
       ) {
-        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== EnumLodopItemType.customText ? lodopItemGetText(data, id) : txt);
+        this.instance.ADD_PRINT_TEXTA(id, top, left, width, height, txttype !== ENUM_LODOP_ITEM_TYPE.customText ? lodopItemGetText(data, id) : txt);
         this.instance.SET_PRINT_STYLEA(id, 'Alignment', alignment);
         this.instance.SET_PRINT_STYLEA(id, 'FontName', fontFamily);
         this.instance.SET_PRINT_STYLEA(id, 'FontSize', zero75(fontSize));
         if (weight > 400) {
           this.instance.SET_PRINT_STYLEA(id, 'Bold', 1); // 1 粗体 0非粗
         }
-      } else if (txttype === EnumLodopItemType.qrCode) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.qrCode) {
         this.instance.ADD_PRINT_BARCODE(top, left, width, height, 'QRCode', lodopItemGetText(data, id));
 
         // 保持二维码宽度一致
         this.instance.SET_PRINT_STYLEA(0, 'QRCodeVersion', 7);
-      } else if (txttype === EnumLodopItemType.barCode) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.barCode) {
         const showBarText = hideText ? !hideText.includes('不显示码值') : true;
         this.instance.ADD_PRINT_BARCODE(top, left, width, height, getCodeType(txt), lodopItemGetText(data, id));
         this.instance.SET_PRINT_STYLEA(0, 'ShowBarText', showBarText);
-      } else if (txttype === EnumLodopItemType.img) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.img) {
         this.instance.ADD_PRINT_IMAGE(top, left, width, height, `<img src="${lodopItemGetText(data, id)}" height="${height}px" width="${width}px"/>`);
 
         // TODO:设置“text文本”时，1代表两端对齐，0代表不处理（默认）； 设置“barcode条码文字”时，0-两端对齐(默认)  1-左靠齐  2-居中  3-右靠齐；
         //    LODOP.SET_PRINT_STYLEA(0, 'AlignJustify', alignment);
         this.instance.SET_PRINT_STYLEA(0, 'FontSize', zero75(fontSize));
-      } else if (txttype === EnumLodopItemType.verticalLine) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.verticalLine) {
         // 竖线 intLineStyle 0--实线 1--破折线 2--点线 3--点划线 4--双点划线 intLineWidth 线条宽，整数型，单位是(打印)像素，缺省值是1，非实线的线条宽也是0
         // ADD_PRINT_LINE(Top1,Left1, Top2, Left2,intLineStyle, intLineWidth)
         this.instance.ADD_PRINT_LINE(top, left, top + height, left, 0, 1);
-      } else if (txttype === EnumLodopItemType.horizontalLine) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.horizontalLine) {
         this.instance.ADD_PRINT_LINE(top, left, top, left + width, 0, 1);
-      } else if (txttype === EnumLodopItemType.rect) {
+      } else if (txttype === ENUM_LODOP_ITEM_TYPE.rect) {
         this.instance.ADD_PRINT_RECT(top, left, width, height, 0, 1);
-      } else if (txttype == EnumLodopItemType.skuDetail) {
+      } else if (txttype == ENUM_LODOP_ITEM_TYPE.skuDetail) {
         this.instance.ADD_PRINT_TABLE(top, left, width, height, setSkuDetail(itemList[i], data));
       }
     }
@@ -320,7 +320,7 @@ export class LodopPrint {
     printer,
     templateData,
     contents,
-  }: Omit<LodopPrintParams, 'count'>): Promise<void> => {
+  }: Omit<CommonPrintParams, 'count'>): Promise<void> => {
     await this.init();
 
     this.initPageSize(templateData);
@@ -361,7 +361,7 @@ export class LodopPrint {
       return;
     }
 
-    if (this.jsLoadState === EnumJsLoadState.finish) {
+    if (this.jsLoadState === ENUM_JS_LOAD_STATE.finish) {
       notifyUserDownloadPlugin();
       return Promise.reject();
     }
@@ -407,12 +407,12 @@ export class LodopPrint {
       console.log('校验socket状态结束');
 
       // 更新状态
-      this.jsLoadState = EnumJsLoadState.finish;
+      this.jsLoadState = ENUM_JS_LOAD_STATE.finish;
     } catch (e) {
       console.log(e);
 
       // 更新状态
-      this.jsLoadState = EnumJsLoadState.finish;
+      this.jsLoadState = ENUM_JS_LOAD_STATE.finish;
       return Promise.reject();
     }
   }
@@ -463,7 +463,7 @@ export class LodopPrint {
     printer,
     templateData,
     contents,
-  }: Omit<LodopPrintParams, 'count'>): Promise<void> {
+  }: Omit<CommonPrintParams, 'count'>): Promise<void> {
     await validateData(contents);
 
     await this.sendToPrinter({

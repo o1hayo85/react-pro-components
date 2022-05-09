@@ -1,27 +1,17 @@
 import { message } from 'antd';
-import type { KSPrintParams } from './types';
+import type { KsPrintParamsOld } from './types';
 import { getUUID, isSocketConnected, validateData } from './utils';
 
 interface RequestProtocol {
   cmd: string;
   version: string;
   requestID: string;
-
   [key: string]: any;
 }
 
 export class KsPrint {
-  constructor(host: string, port: number, openError: string) {
-    this.host = host;
-    this.port = port;
-    this.openError = openError;
+  constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
   }
-
-  private openError: string;
-
-  private readonly host: string;
-
-  private readonly port: number;
 
   private socket: WebSocket;
 
@@ -148,7 +138,7 @@ export class KsPrint {
     preview,
     contents,
     printer,
-  }: Omit<KSPrintParams, 'count'>): Promise<any> => {
+  }: KsPrintParamsOld): Promise<any> => {
     await validateData(contents);
     return this.sendToPrinter<any>({
       cmd: 'print',

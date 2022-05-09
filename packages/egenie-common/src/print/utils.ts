@@ -163,7 +163,7 @@ export function formatBarcodeData(row: number, col: number, data: any[]): any[] 
   }
 }
 
-export function formatRookieData(printData: any[], printTemplate: TemplateData) {
+export function formatRookieDataOld(printData: any[], printTemplate: TemplateData) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -191,7 +191,7 @@ export function formatRookieData(printData: any[], printTemplate: TemplateData) 
   }
 }
 
-export function formatKsData(printData: any[], cpCode?: string): any[] {
+export function formatKsDataOld(printData: any[], cpCode?: string): any[] {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -204,7 +204,7 @@ export function formatKsData(printData: any[], cpCode?: string): any[] {
     if (item?.ksData?.customData) {
       contents.push({
         customData: JSON.parse(item?.ksData?.customData),
-        templateURL: getKslTemplateUrl(item?.ksData?.customTempUrl, cpCode),
+        templateURL: getKslTemplateUrlOld(item?.ksData?.customTempUrl, cpCode),
       });
     }
 
@@ -220,7 +220,7 @@ export function formatKsData(printData: any[], cpCode?: string): any[] {
   return documents;
 }
 
-export function formatDyData(printData: any[]) {
+export function formatDyDataOld(printData: any[]) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -247,7 +247,7 @@ export function formatDyData(printData: any[]) {
   return documents;
 }
 
-export function formatPddData(printData: any[], courierPrintType: number) {
+export function formatPddDataOld(printData: any[], courierPrintType: number) {
   const documents: any[] = [];
 
   (printData || []).forEach((item) => {
@@ -275,7 +275,7 @@ export function formatPddData(printData: any[], courierPrintType: number) {
   return documents;
 }
 
-export function getKslTemplateUrl(customUrl?: string, cpCode?: string): string {
+export function getKslTemplateUrlOld(customUrl?: string, cpCode?: string): string {
   if (customUrl) {
     return customUrl;
   }
@@ -287,12 +287,7 @@ export function getKslTemplateUrl(customUrl?: string, cpCode?: string): string {
   }
 }
 
-export function getJdqlTemplateUrl(customUrl?: string): string {
-  const defaultUrl = 'http://cloudprint.cainiao.com/template/standard/297499/5';
-  return customUrl || process.env.REACT_APP_JDQL_TEMPLATE_URL || defaultUrl;
-}
-
-export function getJdCustomTemplateUrl(customUrl?: string): string {
+export function getJdCustomTemplateUrlOld(customUrl?: string): string {
   const defaultUrl = 'https://storage.360buyimg.com/jdl-template/custom-1d208dda-02c0-4a31-a3ae-6d88b2f256f3.1624851609527.txt';
   return customUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || defaultUrl;
 }
