@@ -3,83 +3,90 @@ import { JdPrint } from './jdPrint';
 import { KsPrint } from './ksPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
-import type { DyPrintParams, JDParams, KSPrintParams, LodopPrintParams, PddPrintParams, RookiePrintParams } from './types';
-import { formatDyData, formatKsData, formatPddData, formatPrintName, formatRookieData, sliceData, validateData } from './utils';
+import type { CommonPrintParams, KsPrintParamsOld, PddPrintParamsOld } from './types';
+import { ENUM_PRINT_PLUGIN_TYPE } from './types';
+import { formatDyDataOld, formatKsDataOld, formatPddDataOld, formatPrintName, formatRookieDataOld, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
 
-const openError = (platform: string) => `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
+function openError(platform: string): string {
+  return `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
+}
 
 class PrintHelper {
-  constructor() {
-    this.toggleToRookie();
-  }
+  private state: ENUM_PRINT_PLUGIN_TYPE = ENUM_PRINT_PLUGIN_TYPE.rookieOld;
 
-  private state: RookieAndPddAndDyPrint | JdPrint | LodopPrint | KsPrint;
+  private readonly rookiePrintPlugin = new RookieAndPddAndDyPrint('127.0.0.1', 13528, openError('CAINIAO'));
 
-  private rookiePrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13528, openError('CAINIAO'));
+  private readonly pddPrintPlugin = new RookieAndPddAndDyPrint('127.0.0.1', 5000, openError('拼多多'));
 
-  private pddPrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 5000, openError('拼多多'));
+  private readonly dyPrintPlugin = new RookieAndPddAndDyPrint('127.0.0.1', 13888, openError('抖音'));
 
-  private dyPrint: RookieAndPddAndDyPrint = new RookieAndPddAndDyPrint('127.0.0.1', 13888, openError('抖音'));
+  private readonly jdPrintPlugin = new JdPrint('127.0.0.1', 9113, openError('京东'));
 
-  private jdPrint: JdPrint = new JdPrint('127.0.0.1', 9113, openError('京东'));
+  private readonly ksPrintPlugin = new KsPrint('127.0.0.1', 16888, openError('快手'));
 
-  private ksPrint: KsPrint = new KsPrint('127.0.0.1', 16888, openError('快手'));
-
-  private lodopPrint: LodopPrint = new LodopPrint();
+  private readonly lodopPrintPlugin = new LodopPrint();
 
   /**
    * 切换到lodop
    */
-  public toggleToLodop = () => {
-    this.state = this.lodopPrint;
+  public readonly toggleToLodop = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.lodop;
   };
 
   /**
-   * 切换到菜鸟
+   * 切换到菜鸟(旧版可以打面单、小票等)
    */
-  public toggleToRookie = () => {
-    this.state = this.rookiePrint;
+  public readonly toggleToRookie = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.rookieOld;
   };
 
-  /**
-   * 切换到pdd
-   */
-  public toggleToPdd = () => {
-    this.state = this.pddPrint;
+  public readonly toggleToRookieNew = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.rookieNew;
   };
 
-  /**
-   * 切换到jd
-   */
-  public toggleToJd = () => {
-    this.state = this.jdPrint;
+  public readonly toggleToPddOld = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.pddOld;
   };
 
-  /**
-   * 切换到dy
-   */
-  public toggleToDy = () => {
-    this.state = this.dyPrint;
+  public readonly toggleToPddNew = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.pddNew;
   };
 
-  /**
-   * 切换到快手
-   */
-  public toggleToKs = () => {
-    this.state = this.ksPrint;
+  public readonly toggleToJdOld = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.jdOld;
+  };
+
+  public readonly toggleToJdNew = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.jdNew;
+  };
+
+  public readonly toggleToDyOld = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.dyOld;
+  };
+
+  public readonly toggleToDyNew = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.dyNew;
+  };
+
+  public readonly toggleToKsOld = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.ksOld;
+  };
+
+  public readonly toggleToKsNew = () => {
+    this.state = ENUM_PRINT_PLUGIN_TYPE.ksNew;
   };
 
   /**
    * 获取打印机列表。从任一一个插件获取到就可以，解决以前客户只是抖音、pdd、jd还需要安装菜鸟插件问题
    */
-  public getPrinters = async(): Promise<string[]> => {
+  public readonly getPrinters = async(): Promise<string[]> => {
     const printPlugins = [
-      this.lodopPrint,
-      this.rookiePrint,
-      this.dyPrint,
-      this.pddPrint,
-      this.jdPrint,
-      this.ksPrint,
+      this.lodopPrintPlugin,
+      this.rookiePrintPlugin,
+      this.dyPrintPlugin,
+      this.pddPrintPlugin,
+      this.jdPrintPlugin,
+      this.ksPrintPlugin,
     ];
 
     let printers: string[] = [];
@@ -101,88 +108,101 @@ class PrintHelper {
 
   /**
    * 打印(先切换打印机类型,否则后果自负)
-   * @param params
    */
-  public print = async(params: RookiePrintParams | PddPrintParams | JDParams | DyPrintParams | LodopPrintParams): Promise<any> => {
-    if (this.state === this.jdPrint) {
-      const newParams: JDParams = params;
-      await this.state.print({
-        preview: newParams.preview,
-        printer: formatPrintName(newParams.templateData, newParams.printer),
-        customData: newParams.customData ? [JSON.parse(newParams.customData)] : newParams.customData,
-        customTempUrl: newParams.customTempUrl,
-        printData: newParams.printData,
-        tempUrl: newParams.tempUrl,
-      });
-    } else if (this.state === this.rookiePrint) {
-      const newParams: RookiePrintParams = params;
-      const pageData = sliceData(newParams.contents, newParams.count);
-      await validateData(pageData);
+  public readonly print = async(params: CommonPrintParams | PddPrintParamsOld | KsPrintParamsOld): Promise<any> => {
+    switch (this.state) {
+      case ENUM_PRINT_PLUGIN_TYPE.jdOld:
+        await validateData(params.contents);
+        for (let j = 0; j < params.contents.length; j++) {
+          const { jdqlData } = params.contents[j];
+          if (jdqlData) {
+            await this.jdPrintPlugin.print({
+              preview: params.preview,
+              printer: formatPrintName(params.templateData, params.printer),
+              customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
+              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
+              printData: [jdqlData.printData],
+              tempUrl: jdqlData.tempUrl,
+            });
+          }
+        }
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.rookieOld: {
+        const pageData = sliceData(params.contents, params.count);
+        await validateData(pageData);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatRookieData(pageData[i], newParams.templateData);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
-        });
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatRookieDataOld(pageData[i], params.templateData);
+          await this.rookiePrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
+          });
+        }
       }
-    } else if (this.state === this.dyPrint) {
-      const newParams: DyPrintParams = params;
-      const pageData = sliceData(newParams.contents, newParams.count);
-      await validateData(pageData);
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.dyOld: {
+        const pageData = sliceData(params.contents, params.count);
+        await validateData(pageData);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatDyData(pageData[i]);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
-        });
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatDyDataOld(pageData[i]);
+          await this.dyPrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
+          });
+        }
       }
-    } else if (this.state === this.ksPrint) {
-      const newParams: KSPrintParams = params;
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.ksOld: {
+        const newParams: KsPrintParamsOld = params;
 
-      // 快手建议10条以内
-      const pageData = sliceData(newParams.contents, 10);
-      await validateData(pageData);
+        // 快手建议10条以内
+        const pageData = sliceData(newParams.contents, 10);
+        await validateData(pageData);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatKsData(pageData[i], newParams.cpCode);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
-        });
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatKsDataOld(pageData[i], newParams.cpCode);
+          await this.ksPrintPlugin.print({
+            preview: newParams.preview,
+            contents,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
       }
-    } else if (this.state === this.pddPrint) {
-      const newParams: PddPrintParams = params;
-      const pageData = sliceData(newParams.contents, newParams.count);
-      await validateData(pageData);
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.pddOld: {
+        const newParams: PddPrintParamsOld = params;
+        const pageData = sliceData(newParams.contents, newParams.count);
+        await validateData(pageData);
 
-      for (let i = 0; i < pageData.length; i++) {
-        const contents = formatPddData(pageData[i], newParams.courierPrintType);
-        await this.state.print({
-          preview: newParams.preview,
-          contents,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
-        });
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatPddDataOld(pageData[i], newParams.courierPrintType);
+          await this.pddPrintPlugin.print({
+            preview: newParams.preview,
+            contents,
+            printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
       }
-    } else if (this.state === this.lodopPrint) {
-      const newParams: LodopPrintParams = params as LodopPrintParams;
-      const pageData = sliceData(newParams.contents, newParams.count || 30);
-      await validateData(pageData);
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.lodop: {
+        const pageData = sliceData(params.contents, params.count || 30);
+        await validateData(pageData);
 
-      for (let i = 0; i < pageData.length; i++) {
-        await this.state.print({
-          preview: newParams.preview,
-          printer: formatPrintName(newParams.templateData, newParams.printer),
-          contents: pageData[i],
-          templateData: newParams.templateData,
-        });
+        for (let i = 0; i < pageData.length; i++) {
+          await this.lodopPrintPlugin.print({
+            preview: params.preview,
+            printer: formatPrintName(params.templateData, params.printer),
+            contents: pageData[i],
+            templateData: params.templateData,
+          });
+        }
       }
-    } else {
-      return Promise.reject();
+        break;
+      default:
+        throw new Error('插件类型不存在,在外部被非法改掉');
     }
   };
 }

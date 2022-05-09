@@ -3,12 +3,13 @@ import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
 import { printHelper } from './printHelper';
 import type { TemplateData } from './types';
-import { EnumShopType } from './types';
-import { getJdCustomTemplateUrl, validateData } from './utils';
+import { ENUM_SHOP_TYPE } from './types';
+import { validateData } from './utils';
 
 interface PrintData {
   cpCode?: string;
-  type?: EnumShopType;
+  type?: ENUM_SHOP_TYPE;
+  newPrint?: boolean;
   courierPrintType?: number;
   waybillData?: {
     tempData?: TemplateData;
@@ -127,10 +128,8 @@ interface PrintWayBillParams {
 class PrintWayBill {
   /**
    * 前置打印
-   * @param preview
-   * @param rest
    */
-  public frontPrint = async({
+  public readonly frontPrint = async({
     preview,
     ...rest
   }: PrintWayBillParams): Promise<void> => {
@@ -157,9 +156,8 @@ class PrintWayBill {
 
   /**
    * 自定义打印
-   * @param params
    */
-  public customPrint = async(params: PrintWayBillParams): Promise<void> => {
+  public readonly customPrint = async(params: PrintWayBillParams): Promise<void> => {
     const customParams = await getCustomPrintParam('0');
 
     await this.getDataAndPrint({
@@ -170,11 +168,8 @@ class PrintWayBill {
 
   /**
    * 获取数据并且打印
-   * @param preview
-   * @param printer
-   * @param rest
    */
-  public getDataAndPrint = async({
+  public readonly getDataAndPrint = async({
     preview,
     printer,
     ...rest
@@ -203,10 +198,8 @@ class PrintWayBill {
 
   /**
    * 有数据,直接打印
-   * @param params
-   * @param printData
    */
-  public executePrint = async(params: PrintWayBillParams, printData: PrintData[]): Promise<void> => {
+  public readonly executePrint = async(params: PrintWayBillParams, printData: PrintData[]): Promise<void> => {
     await validateData(printData);
 
     for (let i = 0; i < printData.length; i++) {
@@ -214,6 +207,7 @@ class PrintWayBill {
       const tempData = waybillData.tempData;
       const userData = waybillData.userData;
       const shopType = printData[i].type;
+      const newPrint = printData[i].newPrint;
       const courierPrintType = printData[i].courierPrintType;
       const cpCode = printData[i].cpCode;
 
@@ -225,24 +219,49 @@ class PrintWayBill {
       };
 
       if (await this.handleNotify(waybillData)) {
-        if (shopType === EnumShopType.jd) {
-          await this.handleJDPrint(params, userData, tempData, cpCode);
-        } else if (shopType === EnumShopType.pdd) {
-          await this.handlePddPrint(params, userData, tempData, courierPrintType);
-        } else if (shopType === EnumShopType.rookie) {
-          await this.handleRookiePrint(params, userData, tempData);
-        } else if (shopType === EnumShopType.dy) {
-          await this.handleDyPrint(params, userData, tempData);
-        } else if (shopType === EnumShopType.ks) {
-          await this.handleKsPrint(params, userData, tempData, cpCode);
-        } else {
-          message.error({
-            key: `店铺类型:${shopType}不存在`,
-            content: `店铺类型:${shopType}不存在`,
-          });
-          throw new Error(`店铺类型:${shopType}不存在`);
+        switch (shopType) {
+          case ENUM_SHOP_TYPE.jd:
+            if (newPrint) {
+              // TODO
+            } else {
+              await this.handleJDPrintOld(params, userData, tempData);
+            }
+            break;
+          case ENUM_SHOP_TYPE.pdd:
+            if (newPrint) {
+              // TODO
+            } else {
+              await this.handlePddPrintOld(params, userData, tempData, courierPrintType);
+            }
+            break;
+          case ENUM_SHOP_TYPE.rookie:
+            if (newPrint) {
+              // TODO
+            } else {
+              await this.handleRookiePrintOld(params, userData, tempData);
+            }
+            break;
+          case ENUM_SHOP_TYPE.dy:
+            if (newPrint) {
+              // TODO
+            } else {
+              await this.handleDyPrintOld(params, userData, tempData);
+            }
+            break;
+          case ENUM_SHOP_TYPE.ks:
+            if (newPrint) {
+              // TODO
+            } else {
+              await this.handleKsPrintOld(params, userData, tempData, cpCode);
+            }
+            break;
+          default:
+            message.error({
+              key: `店铺类型:${shopType}不存在`,
+              content: `店铺类型:${shopType}不存在`,
+            });
+            throw new Error(`店铺类型:${shopType}不存在`);
         }
-
         await this.updateStatus(callbackData);
       }
     }
@@ -279,85 +298,56 @@ class PrintWayBill {
     return step1 && step2;
   };
 
-  // pdd打印逻辑处理
-  private handlePddPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, courierPrintType: number) => {
-    const printerData = {
+  private handlePddPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, courierPrintType: number) => {
+    printHelper.toggleToPddOld();
+    await printHelper.print({
       printer: params.printer,
       preview: params.preview,
       contents: userData,
       templateData: tempData,
       courierPrintType,
-    };
-
-    printHelper.toggleToPdd();
-    await printHelper.print(printerData);
+    });
   };
 
-  // 抖音打印逻辑处理
-  private handleDyPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    const printerData = {
+  private handleDyPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToDyOld();
+    await printHelper.print({
       printer: params.printer,
       preview: params.preview,
       contents: userData,
       templateData: tempData,
-    };
-
-    printHelper.toggleToDy();
-    await printHelper.print(printerData);
+    });
   };
 
-  // 菜鸟打印逻辑处理
-  private handleRookiePrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    const printerData = {
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    };
-
+  private handleRookiePrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
     printHelper.toggleToRookie();
-    await printHelper.print(printerData);
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
   };
 
-  // 快手打印逻辑处理
-  private handleKsPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, cpCode: string) => {
-    const printerData = {
+  private handleKsPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, cpCode: string) => {
+    printHelper.toggleToKsOld();
+    await printHelper.print({
       printer: params.printer,
       preview: params.preview,
       contents: userData,
       templateData: tempData,
       cpCode,
-    };
-
-    printHelper.toggleToKs();
-    await printHelper.print(printerData);
+    });
   };
 
-  // 京东打印逻辑处理
-  private handleJDPrint = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, cpCode: string) => {
-    for (let j = 0; j < userData.length; j++) {
-      const { jdqlData } = userData[j];
-      if (jdqlData) {
-        const {
-          customData,
-          customTempUrl,
-          printData,
-          tempUrl,
-        } = jdqlData;
-        const jdPrinterData = {
-          printer: params.printer,
-          preview: params.preview,
-          customData,
-          customTempUrl: getJdCustomTemplateUrl(customTempUrl),
-          printData: [printData],
-          tempUrl,
-          templateData: tempData, // FIXME: 是否需要这个字段来获取默认打印机？
-        };
-
-        printHelper.toggleToJd();
-        await printHelper.print(jdPrinterData);
-      }
-    }
+  private handleJDPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToJdOld();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
   };
 
   private updateStatus = (data: {

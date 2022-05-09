@@ -1,4 +1,4 @@
-export enum EnumShopType {
+export enum ENUM_SHOP_TYPE {
   rookie = 0,
   pdd = 1,
   jd = 2,
@@ -6,7 +6,21 @@ export enum EnumShopType {
   ks = 4,
 }
 
-export enum EnumLodopItemType {
+export enum ENUM_PRINT_PLUGIN_TYPE {
+  rookieOld = 0,
+  rookieNew,
+  pddOld,
+  pddNew,
+  dyOld,
+  dyNew,
+  jdOld,
+  jdNew,
+  ksOld,
+  ksNew,
+  lodop,
+}
+
+export enum ENUM_LODOP_ITEM_TYPE {
   customText = '0',
   noTitleText = '1',
   hasTitleText = '2',
@@ -26,26 +40,32 @@ export enum EnumLodopItemType {
 /**
  * 公共参数
  */
-export class CommonPrintParams {
+export interface CommonPrintParams {
+
   /**
    * 一次打印数据页数(默认500)
    */
-  public count?: number;
+  count?: number;
 
   /**
    * 模版数据
    */
-  public templateData?: TemplateData;
+  templateData?: TemplateData;
 
   /**
    * 是否预览
    */
-  public preview: boolean;
+  preview: boolean;
 
   /**
    * 打印机
    */
-  public printer?: string;
+  printer?: string;
+
+  /**
+   * 打印数据
+   */
+  contents?: any[];
 }
 
 export class TemplateData {
@@ -136,7 +156,7 @@ export class LodopItem {
 
   public id?: string;
 
-  public txttype?: EnumLodopItemType;
+  public txttype?: ENUM_LODOP_ITEM_TYPE;
 
   public alignment?: string;
 
@@ -146,82 +166,19 @@ export class LodopItem {
 }
 
 /**
- * lodop打印参数
- */
-export type LodopPrintParams = CommonPrintParams & { contents: any[]; };
-
-/**
- * 菜鸟打印参数
- */
-export type RookiePrintParams = {
-
-  /**
-   * 打印数据
-   */
-  contents?: any[];
-} & CommonPrintParams;
-
-/**
  * 快手打印参数
  */
-export type KSPrintParams = {
-
-  /**
-   * 打印数据
-   */
-  contents?: any[];
+export type KsPrintParamsOld = {
   cpCode?: string;
-} & CommonPrintParams;
-
-/**
- * 抖音打印参数
- */
-export type DyPrintParams = {
-
-  /**
-   * 打印数据
-   */
-  contents?: any[];
 } & CommonPrintParams;
 
 /**
  * pdd打印参数
  */
-export type PddPrintParams = {
-
-  /**
-   * 打印数据
-   */
-  contents?: any[];
+export type PddPrintParamsOld = {
 
   /**
    * 快递类型
    */
   courierPrintType?: number;
-} & CommonPrintParams;
-
-/**
- * jd打印参数
- */
-export type JDParams = {
-
-  /**
-   * 京东打印自定义数据
-   */
-  customData?: any;
-
-  /**
-   * 京东打印自定义模板URL
-   */
-  customTempUrl?: string;
-
-  /**
-   * 京东打印固定数据
-   */
-  printData?: any;
-
-  /**
-   * 京东固定模板
-   */
-  tempUrl?: string;
 } & CommonPrintParams;
