@@ -1,6 +1,6 @@
 {
   "name": "egenie-common",
-  "version": "0.12.40",
+  "version": "0.13.0-alpha.0",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
@@ -27,7 +27,7 @@
     "axios": "0.21.0",
     "babel-plugin-import": "^1.13.3",
     "egenie-config": "^0.8.26",
-    "egenie-test": "^0.12.32",
+    "egenie-test": "^0.13.0-alpha.0",
     "father-build": "^1.19.8",
     "lodash": "4.17.20",
     "mobx": "5.15.7",
@@ -38,7 +38,7 @@
     "react-router-dom": "5.2.0",
     "typescript": "4.2.4"
   },
-  "gitHead": "5a0320c4a2bd4f162aeaee02ee65df7ebe792844",
+  "gitHead": "881ccd8242925f599a9a08d4768cefadbd7cd464",
   "scripts": {
     "prepublish": "yarn run test && yarn run build",
     "build": "father-build",
