@@ -191,6 +191,32 @@ export function formatRookieDataOld(printData: any[], printTemplate: TemplateDat
   }
 }
 
+export function formatRookieDataNew(printData: any[]) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    if (item.newCaiNiao) {
+      documents.push(JSON.parse(item.newCaiNiao));
+    }
+
+    documents.push({
+      data: getCustomDataNew(item),
+      templateURL: getCustomTemplateUrlNew(item),
+    });
+  });
+
+  if (documents.length) {
+    return [
+      {
+        documentID: getUUID(),
+        contents: documents,
+      },
+    ];
+  } else {
+    return [];
+  }
+}
+
 export function formatKsDataOld(printData: any[], cpCode?: string): any[] {
   const documents: any[] = [];
 
@@ -207,6 +233,33 @@ export function formatKsDataOld(printData: any[], cpCode?: string): any[] {
         templateURL: getKslTemplateUrlOld(item?.ksData?.customTempUrl, cpCode),
       });
     }
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+        ksOrderFlag: true,
+      });
+    }
+  });
+
+  return documents;
+}
+
+export function formatKsDataNew(printData: any[]): any[] {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+
+    if (item?.ksData?.printData) {
+      contents.push(JSON.parse(item?.ksData?.printData));
+    }
+
+    contents.push({
+      customData: getCustomDataNew(item),
+      templateURL: getCustomTemplateUrlNew(item),
+    });
 
     if (contents.length) {
       documents.push({
@@ -247,6 +300,31 @@ export function formatDyDataOld(printData: any[]) {
   return documents;
 }
 
+export function formatDyDataNew(printData: any[]) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+    if (item?.dyData?.printData) {
+      contents.push(JSON.parse(item?.dyData?.printData));
+    }
+
+    contents.push({
+      data: getCustomDataNew(item),
+      templateURL: getCustomTemplateUrlNew(item),
+    });
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+      });
+    }
+  });
+
+  return documents;
+}
+
 export function formatPddDataOld(printData: any[], courierPrintType: number) {
   const documents: any[] = [];
 
@@ -263,6 +341,31 @@ export function formatPddDataOld(printData: any[], courierPrintType: number) {
         templateURL: courierPrintType ? process.env.REACT_APP_PDD_TEMPLATE_URL_1 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_yilian_template.xml') : process.env.REACT_APP_PDD_TEMPLATE_URL_0 || getStaticResourceUrl('customer-source/printTemp/pdd_waybill_seller_area_template.xml'),
       });
     }
+
+    if (contents.length) {
+      documents.push({
+        documentID: getUUID(),
+        contents,
+      });
+    }
+  });
+
+  return documents;
+}
+
+export function formatPddDataNew(printData: any[]) {
+  const documents: any[] = [];
+
+  (printData || []).forEach((item) => {
+    const contents = [];
+    if (item.newCaiNiao) {
+      contents.push(JSON.parse(item.newCaiNiao));
+    }
+
+    contents.push({
+      data: getCustomDataNew(item),
+      templateURL: getCustomTemplateUrlNew(item),
+    });
 
     if (contents.length) {
       documents.push({
@@ -292,14 +395,31 @@ export function getJdCustomTemplateUrlOld(customUrl?: string): string {
   return customUrl || process.env.REACT_APP_JD_CUSTOM_TEMPLATE_URL || defaultUrl;
 }
 
+export function getCustomTemplateUrlNew(listItem: any): string {
+  const result = listItem?.customTempUrl;
+  if (!result) {
+    console.error('新版打印面单的自定义模板url不存在,请先配置');
+  }
+  return result;
+}
+
+export function getCustomDataNew(listItem: any): any {
+  const result = listItem?.wmsOrder;
+  if (!result) {
+    console.error('新版打印面单自定义数据不存在,请检查接口');
+  }
+  return result;
+}
+
 export function validateData(data?: any[]): Promise<void> {
   if (Array.isArray(data) && data.length > 0) {
     return Promise.resolve();
   } else {
     message.warning({
-      key: '没数据',
-      content: '没数据',
+      key: '没数据,请检验数据是否为空或者传入的mobx的observable',
+      content: '没数据,请检验数据是否为空或者传入的mobx的observable',
     });
+    console.error(data);
     return Promise.reject();
   }
 }

@@ -5,7 +5,7 @@ import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyPrint } from './rookieAndPddAndDyPrint';
 import type { CommonPrintParams, KsPrintParamsOld, PddPrintParamsOld } from './types';
 import { ENUM_PRINT_PLUGIN_TYPE } from './types';
-import { formatDyDataOld, formatKsDataOld, formatPddDataOld, formatPrintName, formatRookieDataOld, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
+import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomDataNew, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
 
 function openError(platform: string): string {
   return `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
@@ -113,16 +113,32 @@ class PrintHelper {
     switch (this.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
         await validateData(params.contents);
-        for (let j = 0; j < params.contents.length; j++) {
-          const { jdqlData } = params.contents[j];
+        for (let i = 0; i < params.contents.length; i++) {
+          const { jdqlData } = params.contents[i];
           if (jdqlData) {
             await this.jdPrintPlugin.print({
               preview: params.preview,
               printer: formatPrintName(params.templateData, params.printer),
-              customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
-              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
+              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
+              customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
+            });
+          }
+        }
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.jdNew:
+        await validateData(params.contents);
+        for (let i = 0; i < params.contents.length; i++) {
+          const { jdqlData } = params.contents[i];
+          if (jdqlData) {
+            await this.jdPrintPlugin.print({
+              preview: params.preview,
+              printer: formatPrintName(params.templateData, params.printer),
+              printData: [jdqlData.printData],
+              tempUrl: jdqlData.tempUrl,
+              customTempUrl: getCustomTemplateUrlNew(params.contents[i]),
+              customData: getCustomDataNew(params.contents[i]),
             });
           }
         }
@@ -141,12 +157,40 @@ class PrintHelper {
         }
       }
         break;
+      case ENUM_PRINT_PLUGIN_TYPE.rookieNew: {
+        const pageData = sliceData(params.contents, params.count);
+        await validateData(pageData);
+
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatRookieDataNew(pageData[i]);
+          await this.rookiePrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
+          });
+        }
+      }
+        break;
       case ENUM_PRINT_PLUGIN_TYPE.dyOld: {
         const pageData = sliceData(params.contents, params.count);
         await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           const contents = formatDyDataOld(pageData[i]);
+          await this.dyPrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
+          });
+        }
+      }
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.dyNew: {
+        const pageData = sliceData(params.contents, params.count);
+        await validateData(pageData);
+
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatDyDataNew(pageData[i]);
           await this.dyPrintPlugin.print({
             preview: params.preview,
             contents,
@@ -172,6 +216,21 @@ class PrintHelper {
         }
       }
         break;
+      case ENUM_PRINT_PLUGIN_TYPE.ksNew: {
+        // 快手建议10条以内
+        const pageData = sliceData(params.contents, 10);
+        await validateData(pageData);
+
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatKsDataNew(pageData[i]);
+          await this.ksPrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
+          });
+        }
+      }
+        break;
       case ENUM_PRINT_PLUGIN_TYPE.pddOld: {
         const newParams: PddPrintParamsOld = params;
         const pageData = sliceData(newParams.contents, newParams.count);
@@ -183,6 +242,20 @@ class PrintHelper {
             preview: newParams.preview,
             contents,
             printer: formatPrintName(newParams.templateData, newParams.printer),
+          });
+        }
+      }
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.pddNew: {
+        const pageData = sliceData(params.contents, params.count);
+        await validateData(pageData);
+
+        for (let i = 0; i < pageData.length; i++) {
+          const contents = formatPddDataNew(pageData[i]);
+          await this.pddPrintPlugin.print({
+            preview: params.preview,
+            contents,
+            printer: formatPrintName(params.templateData, params.printer),
           });
         }
       }

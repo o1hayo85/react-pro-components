@@ -222,35 +222,35 @@ class PrintWayBill {
         switch (shopType) {
           case ENUM_SHOP_TYPE.jd:
             if (newPrint) {
-              // TODO
+              await this.handleJDPrintNew(params, userData, tempData);
             } else {
               await this.handleJDPrintOld(params, userData, tempData);
             }
             break;
           case ENUM_SHOP_TYPE.pdd:
             if (newPrint) {
-              // TODO
+              await this.handlePddPrintNew(params, userData, tempData);
             } else {
               await this.handlePddPrintOld(params, userData, tempData, courierPrintType);
             }
             break;
           case ENUM_SHOP_TYPE.rookie:
             if (newPrint) {
-              // TODO
+              await this.handleRookiePrintNew(params, userData, tempData);
             } else {
               await this.handleRookiePrintOld(params, userData, tempData);
             }
             break;
           case ENUM_SHOP_TYPE.dy:
             if (newPrint) {
-              // TODO
+              await this.handleDyPrintNew(params, userData, tempData);
             } else {
               await this.handleDyPrintOld(params, userData, tempData);
             }
             break;
           case ENUM_SHOP_TYPE.ks:
             if (newPrint) {
-              // TODO
+              await this.handleKsPrintNew(params, userData, tempData);
             } else {
               await this.handleKsPrintOld(params, userData, tempData, cpCode);
             }
@@ -309,6 +309,16 @@ class PrintWayBill {
     });
   };
 
+  private handlePddPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToPddNew();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
+  };
+
   private handleDyPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
     printHelper.toggleToDyOld();
     await printHelper.print({
@@ -319,8 +329,28 @@ class PrintWayBill {
     });
   };
 
+  private handleDyPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToDyNew();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
+  };
+
   private handleRookiePrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
     printHelper.toggleToRookie();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
+  };
+
+  private handleRookiePrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToRookieNew();
     await printHelper.print({
       printer: params.printer,
       preview: params.preview,
@@ -340,8 +370,28 @@ class PrintWayBill {
     });
   };
 
+  private handleKsPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToKsNew();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
+  };
+
   private handleJDPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
     printHelper.toggleToJdOld();
+    await printHelper.print({
+      printer: params.printer,
+      preview: params.preview,
+      contents: userData,
+      templateData: tempData,
+    });
+  };
+
+  private handleJDPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
+    printHelper.toggleToJdNew();
     await printHelper.print({
       printer: params.printer,
       preview: params.preview,
