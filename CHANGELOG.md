@@ -2,7 +2,7 @@
 
 ### Features
 
-- **5853:** 打印快递单改造 ([8d9e421](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8d9e4218d3892cf3ec92fce2526e8daad93b5248))
+- **5853:** 打印快递单改造 ([e1c99da](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e1c99da80e1c298674d0cc13c23d7aad51f8f6d2))
 - **5853:** 打印快递单改造 ([2ee9fec](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2ee9fecd7b4cdb1ec6536155a2018ae25706e64e))
 - **egenie-common/print:** 去掉 jd 单子用菜鸟打的自定义数据、解密逻辑，去掉自定义打印跳转到编辑页面逻辑。已经和 rein、alan 确认了 ([5147703](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51477035b1671e72e7d056e0d82cdadfcee3ffcd))
 
