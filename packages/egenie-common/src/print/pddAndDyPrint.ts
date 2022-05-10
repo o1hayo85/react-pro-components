@@ -9,7 +9,7 @@ interface RequestProtocol {
   [key: string]: any;
 }
 
-export class RookieAndPddAndDyPrint {
+export class PddAndDyPrint {
   constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
   }
 
