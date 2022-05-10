@@ -162,6 +162,10 @@ module.exports = {
         multiline: true,
         minProperties: 2,
       },
+      ObjectPattern: {
+        multiline: true,
+        minProperties: 2,
+      },
       ImportDeclaration: 'never',
       ExportDeclaration: 'never',
     },

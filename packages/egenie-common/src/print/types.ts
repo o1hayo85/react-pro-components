@@ -7,7 +7,7 @@ export enum ENUM_SHOP_TYPE {
 }
 
 export enum ENUM_PRINT_PLUGIN_TYPE {
-  rookieOld = 0,
+  rookieOld,
   rookieNew,
   pddOld,
   pddNew,
