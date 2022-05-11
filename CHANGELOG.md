@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.1-alpha.0...v0.0.0) (2022-05-10)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.2-alpha.0...v0.0.0) (2022-05-11)
+
+### Features
+
+- **5853:** 打印快递单改造 ([1ad4223](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1ad42232cfe29abe91b34f184e37a946fee68364))
+
+## [0.13.2-alpha.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.1-alpha.0...v0.13.2-alpha.0) (2022-05-10)
 
 ### Features
 

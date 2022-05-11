@@ -6,11 +6,12 @@ interface RequestProtocol {
   cmd: string;
   version: string;
   requestID: string;
+
   [key: string]: any;
 }
 
-export class PddAndDyPrint {
-  constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
+export class RookieAndPddAndDyAndKsPrint {
+  constructor(private readonly socketUrl: string, private readonly openError: string) {
   }
 
   private socket: WebSocket;
@@ -43,7 +44,7 @@ export class PddAndDyPrint {
       return;
     }
 
-    this.socket = new WebSocket(`ws://${this.host}:${this.port}`);
+    this.socket = new WebSocket(this.socketUrl);
 
     // open
     this.socket.onopen = (event) => {
@@ -91,45 +92,37 @@ export class PddAndDyPrint {
   private onmessage = (event: MessageEvent) => {
     const response = JSON.parse(event.data);
     const requestIDItem = this.taskRequest.get(response.requestID);
-    if (response.status === 'failed') {
-      if ([
-        'notifyPrintResult',
-        'PrintResultNotify',
-      ].includes(response.cmd)) {
-        const msg = response?.printStatus?.[0]?.msg ?? '请求失败';
-        message.error(msg);
-        if (requestIDItem && requestIDItem.reject) {
-          requestIDItem.reject(msg);
+    if (requestIDItem == null) {
+      return;
+    }
+
+    if (response.cmd === 'getPrinters') {
+      requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
+      this.taskRequest.delete(response.requestID);
+    } else if (response.cmd === 'print') {
+      if (response.status === 'success') {
+        // 快手无此字段
+        if (response.previewURL) {
+          requestIDItem.resolve(response.previewURL);
+          window.open(response.previewURL);
+          this.taskRequest.delete(response.requestID);
         }
       } else {
         const msg = response?.msg ?? '请求失败';
         message.error(msg);
-        if (requestIDItem && requestIDItem.reject) {
-          requestIDItem.reject(msg);
-        }
+        requestIDItem.reject(msg);
+        this.taskRequest.delete(response.requestID);
       }
-    } else if (response.status === 'success') {
-      if (response.cmd === 'print') {
-        if (response.previewURL) {
-          if (requestIDItem && requestIDItem.resolve) {
-            requestIDItem.resolve(response.previewURL);
-          }
-          window.open(response.previewURL);
-        } else {
-          if (requestIDItem && requestIDItem.resolve) {
-            requestIDItem.resolve(response);
-          }
-        }
-      } else if (response.cmd === 'getPrinters') {
-        if (requestIDItem && requestIDItem.resolve) {
-          requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
-        }
+    } else if (response.cmd === 'notifyPrintResult' || response.cmd === 'PrintResultNotify') {
+      if (response.taskStatus !== 'printed') {
+        const msg = response?.printStatus?.[0]?.msg ?? '请求失败';
+        message.error(msg);
+        requestIDItem.reject(msg);
       } else {
-        // 暂时只考虑获取打印机列表和打印成功
+        requestIDItem.resolve();
       }
+      this.taskRequest.delete(response.requestID);
     }
-
-    this.taskRequest.delete(response?.requestID);
   };
 
   /**
@@ -145,9 +138,6 @@ export class PddAndDyPrint {
 
   /**
    * 打印
-   * @param preview 是否预览
-   * @param contents 打印数据
-   * @param printer 打印机
    */
   public print = async({
     preview,
@@ -161,11 +151,13 @@ export class PddAndDyPrint {
       version: '1.0',
       task: {
         taskID: getUUID(),
+        documents: contents,
+        printer,
+
+        // 快手无此字段
         preview: Boolean(preview),
         previewType: 'pdf',
-        printer,
-        notifyType: ['render'],
-        documents: contents,
+        notifyType: ['print'],
       },
     });
   };
