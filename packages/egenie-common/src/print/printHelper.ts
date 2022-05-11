@@ -1,9 +1,7 @@
 import { message } from 'antd';
 import { JdPrint } from './jdPrint';
-import { KsPrint } from './ksPrint';
 import { LodopPrint } from './lodopPrint';
-import { PddAndDyPrint } from './pddAndDyPrint';
-import { RookiePrint } from './rookiePrint';
+import { RookieAndPddAndDyAndKsPrint } from './rookieAndPddAndDyAndKsPrint';
 import type { CommonPrintParams, KsPrintParamsOld, PddPrintParamsOld } from './types';
 import { ENUM_PRINT_PLUGIN_TYPE } from './types';
 import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomDataNew, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
@@ -15,15 +13,15 @@ function openError(platform: string): string {
 class PrintHelper {
   private state: ENUM_PRINT_PLUGIN_TYPE = ENUM_PRINT_PLUGIN_TYPE.rookieOld;
 
-  private readonly rookiePrintPlugin = new RookiePrint('127.0.0.1', 13528, openError('CAINIAO'));
+  private readonly rookiePrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:13528', openError('CAINIAO'));
 
-  private readonly pddPrintPlugin = new PddAndDyPrint('127.0.0.1', 5000, openError('拼多多'));
+  private readonly pddPrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:5000', openError('拼多多'));
 
-  private readonly dyPrintPlugin = new PddAndDyPrint('127.0.0.1', 13888, openError('抖音'));
+  private readonly dyPrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:13888', openError('抖音'));
+
+  private readonly ksPrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:16888/ks/printer', openError('快手'));
 
   private readonly jdPrintPlugin = new JdPrint('127.0.0.1', 9113, openError('京东'));
-
-  private readonly ksPrintPlugin = new KsPrint('127.0.0.1', 16888, openError('快手'));
 
   private readonly lodopPrintPlugin = new LodopPrint();
 

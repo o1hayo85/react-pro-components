@@ -81,7 +81,7 @@ export class JdPrint {
   constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
   }
 
-  private JDSocket: WebSocket;
+  private socket: WebSocket;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   private taskRequest = new Map<string, { request: RequestProtocol; resolve?: Function; reject?: Function; }>();
@@ -89,28 +89,28 @@ export class JdPrint {
   private taskQueue = [] as RequestProtocol[];
 
   private connect = () => {
-    if (this.JDSocket) {
+    if (this.socket) {
       return;
     }
 
-    this.JDSocket = new WebSocket(`ws://${this.host}:${this.port}`);
+    this.socket = new WebSocket(`ws://${this.host}:${this.port}`);
 
     // 打开Socket
-    this.JDSocket.onopen = (event) => {
+    this.socket.onopen = (event) => {
       console.log(`京东打印 onopen event:${JSON.stringify(event)}`);
       this.refresh();
     };
 
     // 监听消息
-    this.JDSocket.onmessage = this.onmessage;
+    this.socket.onmessage = this.onmessage;
 
     // 监听Socket的关闭
-    this.JDSocket.onclose = (event) => {
+    this.socket.onclose = (event) => {
       console.log(`京东打印 onclose event:${JSON.stringify(event)}`);
     };
 
     // JDprint error
-    this.JDSocket.onerror = (event): void => {
+    this.socket.onerror = (event): void => {
       console.log(`browser onerror event:${JSON.stringify(event)}`);
       message.error({
         content: this.openError,
@@ -170,7 +170,7 @@ export class JdPrint {
   };
 
   private isSocketConnected = () => {
-    return this.JDSocket && this.JDSocket.readyState === 1;
+    return this.socket && this.socket.readyState === 1;
   };
 
   private refresh = () => {
@@ -178,7 +178,7 @@ export class JdPrint {
       const taskQueue = this.taskQueue;
       this.taskQueue = [];
       taskQueue.forEach((item) => {
-        this.JDSocket.send(JSON.stringify(item));
+        this.socket.send(JSON.stringify(item));
       });
     }
   };
@@ -194,7 +194,7 @@ export class JdPrint {
       });
 
       if (this.isSocketConnected()) {
-        this.JDSocket.send(JSON.stringify(request));
+        this.socket.send(JSON.stringify(request));
       } else {
         this.taskQueue.push(request);
       }
