@@ -404,11 +404,10 @@ export function getCustomTemplateUrlNew(listItem: any): string {
 }
 
 export function getCustomDataNew(listItem: any): any {
-  const result = listItem?.wmsOrder;
-  if (!result) {
+  if (!listItem) {
     console.error('新版打印面单自定义数据不存在,请检查接口');
   }
-  return result;
+  return listItem;
 }
 
 export function validateData(data?: any[]): Promise<void> {
