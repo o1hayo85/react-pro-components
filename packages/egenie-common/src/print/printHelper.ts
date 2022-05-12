@@ -21,9 +21,9 @@ class PrintHelper {
 
   private readonly ksPrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:16888/ks/printer', openError('快手'));
 
-  private readonly jdPrintPlugin = new JdPrint('127.0.0.1', 9113, openError('京东'));
+  private readonly jdPrintPlugin = new JdPrint('ws://127.0.0.1:9113', openError('京东'));
 
-  private readonly lodopPrintPlugin = new LodopPrint();
+  public readonly lodopPrintPlugin = new LodopPrint();
 
   /**
    * 切换到lodop
@@ -123,6 +123,12 @@ class PrintHelper {
               customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
               customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
             });
+          } else {
+            message.error({
+              key: '没有京东打印数据',
+              content: '没有京东打印数据',
+            });
+            throw new Error('没有京东打印数据');
           }
         }
         break;
@@ -137,8 +143,14 @@ class PrintHelper {
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
               customTempUrl: getCustomTemplateUrlNew(params.contents[i]),
-              customData: getCustomDataNew(params.contents[i]),
+              customData: [getCustomDataNew(params.contents[i])],
             });
+          } else {
+            message.error({
+              key: '没有京东打印数据',
+              content: '没有京东打印数据',
+            });
+            throw new Error('没有京东打印数据');
           }
         }
         break;
