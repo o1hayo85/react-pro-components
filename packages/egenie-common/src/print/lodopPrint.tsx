@@ -9,15 +9,6 @@ enum ENUM_JS_LOAD_STATE {
   finish
 }
 
-/*
-function isWindows(): boolean {
-  return navigator.platform == 'Win32' || navigator.platform == 'Windows';
-}
-
-function is64(): boolean {
-  return /x64/i.test(navigator.userAgent);
-}*/
-
 function zero75(size: number): number {
   return size * 0.75;
 }

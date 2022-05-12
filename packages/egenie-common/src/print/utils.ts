@@ -199,10 +199,12 @@ export function formatRookieDataNew(printData: any[]) {
       documents.push(JSON.parse(item.newCaiNiao));
     }
 
-    documents.push({
-      data: getCustomDataNew(item),
-      templateURL: getCustomTemplateUrlNew(item),
-    });
+    if (getCustomTemplateUrlNew(item)) {
+      documents.push({
+        data: getCustomDataNew(item),
+        templateURL: getCustomTemplateUrlNew(item),
+      });
+    }
   });
 
   if (documents.length) {
@@ -256,10 +258,12 @@ export function formatKsDataNew(printData: any[]): any[] {
       contents.push(JSON.parse(item?.ksData?.printData));
     }
 
-    contents.push({
-      customData: getCustomDataNew(item),
-      templateURL: getCustomTemplateUrlNew(item),
-    });
+    if (getCustomTemplateUrlNew(item)) {
+      contents.push({
+        customData: getCustomDataNew(item),
+        templateURL: getCustomTemplateUrlNew(item),
+      });
+    }
 
     if (contents.length) {
       documents.push({
@@ -309,10 +313,12 @@ export function formatDyDataNew(printData: any[]) {
       contents.push(JSON.parse(item?.dyData?.printData));
     }
 
-    contents.push({
-      data: getCustomDataNew(item),
-      templateURL: getCustomTemplateUrlNew(item),
-    });
+    if (getCustomTemplateUrlNew(item)) {
+      contents.push({
+        data: getCustomDataNew(item),
+        templateURL: getCustomTemplateUrlNew(item),
+      });
+    }
 
     if (contents.length) {
       documents.push({
@@ -362,10 +368,12 @@ export function formatPddDataNew(printData: any[]) {
       contents.push(JSON.parse(item.newCaiNiao));
     }
 
-    contents.push({
-      data: getCustomDataNew(item),
-      templateURL: getCustomTemplateUrlNew(item),
-    });
+    if (getCustomTemplateUrlNew(item)) {
+      contents.push({
+        data: getCustomDataNew(item),
+        templateURL: getCustomTemplateUrlNew(item),
+      });
+    }
 
     if (contents.length) {
       documents.push({
@@ -414,7 +422,7 @@ export function validateData(data?: any[]): Promise<void> {
   if (Array.isArray(data) && data.length > 0) {
     return Promise.resolve();
   } else {
-    message.warning({
+    message.error({
       key: '没数据,请检验数据是否为空或者传入的mobx的observable',
       content: '没数据,请检验数据是否为空或者传入的mobx的observable',
     });

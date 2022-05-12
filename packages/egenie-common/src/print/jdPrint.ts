@@ -78,7 +78,7 @@ function downloadImage(imgSrc: string, name?: string): void {
 }
 
 export class JdPrint {
-  constructor(private readonly host: string, private readonly port: number, private readonly openError: string) {
+  constructor(private readonly socketUrl: string, private readonly openError: string) {
   }
 
   private socket: WebSocket;
@@ -93,7 +93,7 @@ export class JdPrint {
       return;
     }
 
-    this.socket = new WebSocket(`ws://${this.host}:${this.port}`);
+    this.socket = new WebSocket(this.socketUrl);
 
     // 打开Socket
     this.socket.onopen = (event) => {
