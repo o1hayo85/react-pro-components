@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.0.0) (2022-05-07)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.0.0) (2022-05-13)
+
+### Features
+
+- 增加 lodop 的 https 加载 url ([c25edd4](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c25edd483e361f973a889e009035c45d6ae478f0))
+- 增加 lodop 的 https 加载 url ([926764f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/926764f5338e771dcacf11e0235593d24991b706))
+- **egenie-common/print:** 去掉 jd 单子用菜鸟打的自定义数据、解密逻辑，去掉自定义打印跳转到编辑页面逻辑。已经和 rein、alan 确认了 ([5147703](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/51477035b1671e72e7d056e0d82cdadfcee3ffcd))
 
 ## [0.12.34](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.33...v0.12.34) (2022-05-07)
 
