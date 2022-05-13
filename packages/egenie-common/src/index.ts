@@ -6,7 +6,7 @@ export { renderModal, destroyModal, destroyAllModal } from './renderModal';
 export { Locale } from './locale';
 export { RenderRoutes, MenuDataItem } from './renderRoutes';
 export { history } from './history';
-export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getSensitiveData, getCustomPrintParamByDefaultTemplate, LodopPrint, getUUID } from './print';
+export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getCustomPrintParamByDefaultTemplate, LodopPrint, getUUID } from './print';
 export { playVoice, getAndPlayVoice } from './voice';
 export * from './filterItems';
 export * from './layoutMenu';
