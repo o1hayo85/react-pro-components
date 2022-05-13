@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.0.0) (2022-05-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.35...v0.0.0) (2022-05-13)
+
+### Features
+
+- 增加 lodop 的 https 加载 url ([cbe6b5e](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/cbe6b5edf14f26d864bb1052c4b5657685dda89d))
+- 增加 lodop 的 https 加载 url ([bbc5606](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/bbc56067c461faf7c207973f2628a655dd8e0f79))
+
+## [0.12.35](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.34...v0.12.35) (2022-05-13)
 
 ### Features
 
