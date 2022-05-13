@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.36...v0.0.0) (2022-05-13)
 
+### Features
+
+- **filterItems:** 解决 inputAndSelect 组件,跳转页面 input 带入逗号,格式化参数只有第一个逗号的数据 ([069972f](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/069972f26b715a34b5fdf0512f92e2ea44083e04))
+
 ## [0.12.36](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.35...v0.12.36) (2022-05-13)
 
 ### Features
