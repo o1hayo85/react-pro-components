@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { set, observable, action, computed, toJS } from 'mobx';
 import type { ReactEventHandler, CSSProperties, ReactNode } from 'react';
 import { getPerms } from '../../permission';
@@ -363,7 +364,7 @@ export class MainSubStructureModel {
 
   public queryDataAndSetState = action((data, flagOfRefresh = {}): Promise<unknown> => {
     this.gridModel.loading = true;
-    this.history = { ...data };
+    this.history = _.cloneDeep(data);
 
     // 原来promise在catch时没有被reject
     if (this.api.onQuery) {
