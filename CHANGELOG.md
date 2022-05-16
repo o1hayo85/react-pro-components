@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.36...v0.0.0) (2022-05-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.37...v0.0.0) (2022-05-16)
+
+### Bug Fixes
+
+- 修复排序字段浅拷贝问题 ([9235724](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/92357246e7771a4037f039b14d23739ffa654d6c))
+
+## [0.12.37](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.36...v0.12.37) (2022-05-13)
 
 ### Features
 
