@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import type { CommonPrintParams } from './types';
+import type { PrintAbstract, CommonPrintParams } from './types';
 import { getUUID } from './utils';
 
 interface JdParams {
@@ -77,7 +77,7 @@ function downloadImage(imgSrc: string, name?: string): void {
   image.src = imgSrc;
 }
 
-export class JdPrint {
+export class JdPrint implements PrintAbstract {
   constructor(private readonly socketUrl: string, private readonly openError: string) {
   }
 
@@ -202,7 +202,7 @@ export class JdPrint {
   };
 
   // 打印机列表
-  public getPrinters = () => {
+  public getPrinters = (): Promise<string[]> => {
     return this.sendToPrinter(this.getPrintParam('GET_Printers'));
   };
 
