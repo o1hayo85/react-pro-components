@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import React from 'react';
-import type { CommonPrintParams, LodopItem, TemplateData } from './types';
+import type { CommonPrintParams, LodopItem, TemplateData, PrintAbstract } from './types';
 import { ENUM_LODOP_ITEM_TYPE } from './types';
 import { getTemplateData, getUUID, lodopItemGetText, validateData } from './utils';
 
@@ -91,7 +91,7 @@ function notifyUserDownloadPlugin() {
   });
 }
 
-export class LodopPrint {
+export class LodopPrint implements PrintAbstract {
   public static url8000 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
 
   public static url8001 = 'http://localhost:8001/CLodopfuncs.js';

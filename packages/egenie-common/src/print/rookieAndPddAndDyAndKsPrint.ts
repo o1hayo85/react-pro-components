@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import type { CommonPrintParams } from './types';
+import type { PrintAbstract, CommonPrintParams } from './types';
 import { getUUID, isSocketConnected, validateData } from './utils';
 
 interface RequestProtocol {
@@ -10,7 +10,7 @@ interface RequestProtocol {
   [key: string]: any;
 }
 
-export class RookieAndPddAndDyAndKsPrint {
+export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
   constructor(private readonly socketUrl: string, private readonly openError: string) {
   }
 
@@ -21,7 +21,7 @@ export class RookieAndPddAndDyAndKsPrint {
 
   private taskQueue: RequestProtocol[] = [];
 
-  private sendToPrinter<T = unknown>(request: RequestProtocol): Promise<T> {
+  private sendToPrinter(request: RequestProtocol): Promise<any> {
     this.doConnect();
 
     return new Promise((resolve, reject) => {
@@ -129,7 +129,7 @@ export class RookieAndPddAndDyAndKsPrint {
    * 获取打印机列表
    */
   public getPrinters = (): Promise<string[]> => {
-    return this.sendToPrinter<string[]>({
+    return this.sendToPrinter({
       requestID: getUUID(),
       version: '1.0',
       cmd: 'getPrinters',
@@ -145,7 +145,7 @@ export class RookieAndPddAndDyAndKsPrint {
     printer,
   }: CommonPrintParams): Promise<any> => {
     await validateData(contents);
-    return this.sendToPrinter<any>({
+    return this.sendToPrinter({
       cmd: 'print',
       requestID: getUUID(),
       version: '1.0',

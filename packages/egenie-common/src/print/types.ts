@@ -182,3 +182,8 @@ export type PddPrintParamsOld = {
    */
   courierPrintType?: number;
 } & CommonPrintParams;
+
+export interface PrintAbstract {
+  getPrinters: () => Promise<string[]>;
+  print: (...arg: any[]) => Promise<any>;
+}
