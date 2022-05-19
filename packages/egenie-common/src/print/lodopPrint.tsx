@@ -4,9 +4,10 @@ import type { CommonPrintParams, LodopItem, TemplateData, PrintAbstract } from '
 import { ENUM_LODOP_ITEM_TYPE } from './types';
 import { getTemplateData, getUUID, lodopItemGetText, validateData } from './utils';
 
-enum ENUM_JS_LOAD_STATE {
+enum ENUM_LOAD_STATE {
   init,
-  finish
+  loading,
+  finish,
 }
 
 function zero75(size: number): number {
@@ -91,6 +92,12 @@ function notifyUserDownloadPlugin() {
   });
 }
 
+function sleep(delay: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+
 export class LodopPrint implements PrintAbstract {
   public static url8000 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
 
@@ -113,7 +120,7 @@ export class LodopPrint implements PrintAbstract {
 
   public baseTop = 0;
 
-  private jsLoadState: ENUM_JS_LOAD_STATE = ENUM_JS_LOAD_STATE.init;
+  private loadState: ENUM_LOAD_STATE = ENUM_LOAD_STATE.init;
 
   public createTable(itemDetailList: {[key: string]: LodopItem; }, data: any): void {
     if (itemDetailList == null || Object.keys(itemDetailList).length === 0) {
@@ -350,7 +357,13 @@ export class LodopPrint implements PrintAbstract {
       return;
     }
 
-    if (this.jsLoadState === ENUM_JS_LOAD_STATE.finish) {
+    if (this.loadState === ENUM_LOAD_STATE.init) {
+      this.loadState = ENUM_LOAD_STATE.loading;
+    } else if (this.loadState === ENUM_LOAD_STATE.loading) {
+      console.log('并发了,等待上次init');
+      await sleep(125);
+      return this.init();
+    } else if (this.loadState === ENUM_LOAD_STATE.finish) {
       notifyUserDownloadPlugin();
       return Promise.reject();
     }
@@ -395,12 +408,12 @@ export class LodopPrint implements PrintAbstract {
       console.log('校验socket状态结束');
 
       // 更新状态
-      this.jsLoadState = ENUM_JS_LOAD_STATE.finish;
+      this.loadState = ENUM_LOAD_STATE.finish;
     } catch (e) {
       console.log(e);
 
       // 更新状态
-      this.jsLoadState = ENUM_JS_LOAD_STATE.finish;
+      this.loadState = ENUM_LOAD_STATE.finish;
       return Promise.reject();
     }
   }
@@ -422,9 +435,9 @@ export class LodopPrint implements PrintAbstract {
   /**
    * 获取lodop实列后,检验内部socket是否链接(不校验，第一次发送的数据可能会失败)
    */
-  private heartBeatCheck = async(delay = 250) => {
+  private heartBeatCheck = async(delay = 125) => {
     // 校验socket的连接状态
-    if (this.instance.webskt && this.instance.webskt.readyState == 1) {
+    if (this?.instance?.webskt?.readyState == 1) {
       return;
     }
 
@@ -434,10 +447,7 @@ export class LodopPrint implements PrintAbstract {
       throw new Error('lodop打印组件连接失败');
     }
 
-    // sleep
-    await new Promise((resolve) => {
-      setTimeout(resolve, delay);
-    });
+    await sleep(delay);
 
     // 延迟时间 * 2
     await this.heartBeatCheck(delay * 2);
