@@ -103,8 +103,6 @@ export class LodopPrint implements PrintAbstract {
 
   public static url8001 = 'http://localhost:8001/CLodopfuncs.js';
 
-  public static url8443 = 'https://localhost.lodop.net:8443/CLodopfuncs.js';
-
   public static url18000 = 'http://localhost:18000/CLodopfuncs.js';
 
   public static licenses: Array<[string, string]> = [
@@ -351,6 +349,30 @@ export class LodopPrint implements PrintAbstract {
    */
   public instance: any = null;
 
+  private loadScripts = async() => {
+    const pluginUrls = [
+      LodopPrint.url8000,
+      LodopPrint.url8001,
+      LodopPrint.url18000,
+    ];
+    console.log('开始加载lodop文件');
+    let isLoadSuccess = false;
+    for (let i = 0; i < pluginUrls.length && isLoadSuccess === false; i++) {
+      try {
+        await loadScripts(pluginUrls[i]);
+        isLoadSuccess = true;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (isLoadSuccess === false) {
+      throw new Error('加载lodop文件失败');
+    }
+
+    console.log('加载lodop文件结束');
+  };
+
   /**
    * 初始化
    */
@@ -371,30 +393,7 @@ export class LodopPrint implements PrintAbstract {
     }
 
     try {
-      const pluginUrls = [
-        LodopPrint.url18000,
-        LodopPrint.url8443,
-        LodopPrint.url8000,
-        LodopPrint.url8001,
-      ];
-      console.log('开始加载lodop文件');
-      let isLoadSuccess = false;
-      for (let i = 0; i < pluginUrls.length; i++) {
-        if (isLoadSuccess === false) {
-          try {
-            await loadScripts(pluginUrls[i]);
-            isLoadSuccess = true;
-          } catch (e) {
-            console.log(e);
-          }
-        }
-      }
-
-      if (isLoadSuccess === false) {
-        throw new Error('加载lodop文件失败');
-      }
-
-      console.log('加载lodop文件结束');
+      await this.loadScripts();
 
       // 获取instance
       // @ts-ignore
