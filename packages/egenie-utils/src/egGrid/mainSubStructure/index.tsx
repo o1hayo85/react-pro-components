@@ -88,7 +88,10 @@ const ButtonHeader = observer(
                 onClick={el.handleClick.bind(store)}
                 overlay={overlay(group)}
                 size="small"
-                style={{ marginRight: 10 }}
+                style={{
+                  marginRight: 10,
+                  ...el.style,
+                }}
               >
                 {el.icon ? (
                   <i
