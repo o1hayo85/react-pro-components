@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.37...v0.0.0) (2022-05-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.38...v0.0.0) (2022-05-19)
+
+### Bug Fixes
+
+- 修复按钮组样式 ([c0e4075](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c0e4075f534594d557e9f8d9982a2ae9d6e8dfbd))
+
+## [0.12.38](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.37...v0.12.38) (2022-05-16)
 
 ### Bug Fixes
 
