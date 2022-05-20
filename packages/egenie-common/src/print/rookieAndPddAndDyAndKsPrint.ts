@@ -103,25 +103,17 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
       if (response.status === 'success') {
         // 快手无此字段
         if (response.previewURL) {
-          requestIDItem.resolve(response.previewURL);
           window.open(response.previewURL);
-          this.taskRequest.delete(response.requestID);
         }
+
+        this.taskRequest.delete(response.requestID);
+        requestIDItem.resolve(response.previewURL);
       } else {
         const msg = response?.msg ?? '请求失败';
         message.error(msg);
         requestIDItem.reject(msg);
         this.taskRequest.delete(response.requestID);
       }
-    } else if (response.cmd === 'notifyPrintResult' || response.cmd === 'PrintResultNotify') {
-      if (response.taskStatus !== 'printed') {
-        const msg = response?.printStatus?.[0]?.msg ?? '请求失败';
-        message.error(msg);
-        requestIDItem.reject(msg);
-      } else {
-        requestIDItem.resolve();
-      }
-      this.taskRequest.delete(response.requestID);
     }
   };
 
@@ -157,7 +149,7 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
         // 快手无此字段
         preview: Boolean(preview),
         previewType: 'pdf',
-        notifyType: ['print'],
+        notifyType: ['render'],
       },
     });
   };
