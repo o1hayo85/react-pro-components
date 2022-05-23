@@ -1,16 +1,13 @@
-import { Button, Divider, Select } from 'antd';
+import { Button, Select, Switch } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import styles from './filterItems.less';
 import type { FilterSelect } from './filterSelect';
 import { FilterItemLabel } from './utils';
 
 @observer
 export class FilterSelectComponent extends React.Component<{ store: FilterSelect; }> {
-  public handleChooseAll = () => {
-    this.props.store.onChange(this.props.store.options.map((item) => item.value));
-  };
-
   render() {
     const {
       value,
@@ -25,11 +22,13 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       searchValue,
       onSearch,
       mode,
-      showChooseAll,
       label,
       labelWidth,
       required,
       showArrow,
+      showChooseAll,
+      isLeftMatch,
+      handleLeftMatch,
     } = this.props.store;
     return (
       <div
@@ -50,15 +49,25 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
             return (
               <>
                 {menu}
-                <Divider style={{ margin: '4px 0' }}/>
-                <Button
-                  block
-                  onClick={this.handleChooseAll}
-                  size="small"
-                  type="primary"
-                >
-                  全选
-                </Button>
+                <div className={styles.filterSelectChooseAll}>
+                  <section>
+                    搜索左匹配&nbsp;
+                    <Switch
+                      checked={isLeftMatch}
+                      onChange={handleLeftMatch}
+                      size="small"
+                    />
+                  </section>
+                  <section>
+                    <Button
+                      onClick={() => onChange(options.map((item) => item.value))}
+                      size="small"
+                      type="primary"
+                    >
+                      全选
+                    </Button>
+                  </section>
+                </div>
               </>
             );
           } : null}

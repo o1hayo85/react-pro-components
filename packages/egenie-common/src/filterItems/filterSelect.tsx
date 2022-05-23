@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
 import { FilterBase } from './filterBase';
 import type { ValueAndLabelData } from './types';
@@ -167,6 +168,12 @@ export class FilterSelect extends FilterBase {
    */
   @observable public showChooseAll = false;
 
+  @observable public isLeftMatch = false;
+
+  @action public handleLeftMatch = (isLeftMatch: boolean) => {
+    this.isLeftMatch = isLeftMatch;
+  };
+
   @observable public searchValue = '';
 
   /**
@@ -181,17 +188,21 @@ export class FilterSelect extends FilterBase {
 
   @computed
   public get options(): ValueAndLabelData {
-    let selectValue: string[] = [];
+    let selectValue: Set<string>;
     if (this.mode === 'multiple') {
-      selectValue = this.value as string[];
+      selectValue = new Set(this.value);
     } else {
-      selectValue = this.value == null ? [] : [this.value as string];
+      selectValue = new Set(this.value == null ? [] : [this.value as string]);
     }
 
-    const selectOptions = this.data.filter((item) => selectValue.includes(item.value));
-    const limitOptions = this.data.filter((item) => !selectValue.includes(item.value))
-      .filter((item) => item.label.toLowerCase().includes(this.searchValue.toLowerCase()))
-      .slice(0, this.maxItemsLength);
+    const selectOptions = this.data.filter((item) => selectValue.has(item.value));
+    const limitOptions = this.data.filter((item) => !selectValue.has(item.value))
+      .filter((item) => {
+        const text = item.label.toLowerCase();
+        const search = this.searchValue.toLowerCase();
+        return this.isLeftMatch ? _.startsWith(text, search) : _.includes(text, search);
+      })
+      .slice(0, Math.max(this.maxItemsLength - selectOptions.length, 0));
 
     return selectOptions.concat(limitOptions);
   }

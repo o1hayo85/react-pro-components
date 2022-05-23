@@ -68,7 +68,8 @@ order: 5
 
 ## `showChooseAll`
 
-- 描述: 是否可以选中全部。多选才能生效
+- 前提: `egenie-common和egenie-utils版本大于等于0.12.40`
+- 描述: 是否可以选中全部和显示左匹配。多选才能生效
 - 类型: boolean
 - 默认值: false
 
