@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.39...v0.0.0) (2022-05-23)
 
+### Features
+
+- **filterItems:** 下拉多选增加左匹配 ([5e7af67](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5e7af67b980d14a18c2af09098af051e727e349a))
+
 ## [0.12.39](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.38...v0.12.39) (2022-05-19)
 
 ### Bug Fixes
