@@ -418,15 +418,15 @@ export function getCustomDataNew(listItem: any): any {
   return listItem;
 }
 
-export function validateData(data?: any[]): Promise<void> {
-  if (Array.isArray(data) && data.length > 0) {
-    return Promise.resolve();
-  } else {
+// @ts-ignore
+export function validateData(data?: any[]) {
+  const error = '没数据,请检验数据是否为空或者传入的mobx的observable';
+  if (!(Array.isArray(data) && data.length > 0)) {
     message.error({
-      key: '没数据,请检验数据是否为空或者传入的mobx的observable',
-      content: '没数据,请检验数据是否为空或者传入的mobx的observable',
+      key: error,
+      content: error,
     });
     console.error(data);
-    return Promise.reject();
+    throw new Error(error);
   }
 }

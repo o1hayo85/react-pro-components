@@ -188,7 +188,7 @@ class PrintWayBill {
       method: 'post',
     });
 
-    await validateData(printData.data);
+    validateData(printData.data);
     await this.executePrint({
       ...data,
       preview,
@@ -200,7 +200,7 @@ class PrintWayBill {
    * 有数据,直接打印
    */
   public readonly executePrint = async(params: PrintWayBillParams, printData: PrintData[]): Promise<void> => {
-    await validateData(printData);
+    validateData(printData);
 
     for (let i = 0; i < printData.length; i++) {
       const waybillData = printData[i].waybillData;

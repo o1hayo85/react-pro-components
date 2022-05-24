@@ -464,7 +464,7 @@ export class LodopPrint implements PrintAbstract {
     templateData,
     contents,
   }: Omit<CommonPrintParams, 'count'>): Promise<void> {
-    await validateData(contents);
+    validateData(contents);
 
     await this.sendToPrinter({
       preview,

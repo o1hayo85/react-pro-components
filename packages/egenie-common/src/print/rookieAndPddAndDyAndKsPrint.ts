@@ -146,8 +146,9 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
     preview,
     contents,
     printer,
+    // eslint-disable-next-line require-await
   }: CommonPrintParams): Promise<any> => {
-    await validateData(contents);
+    validateData(contents);
     return this.sendToPrinter({
       cmd: 'print',
       requestID: getUUID(),

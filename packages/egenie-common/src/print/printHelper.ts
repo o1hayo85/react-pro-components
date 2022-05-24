@@ -109,31 +109,11 @@ class PrintHelper {
    * 打印(先切换打印机类型,否则后果自负)
    */
   public readonly print = async(params: CommonPrintParams | PddPrintParamsOld | KsPrintParamsOld): Promise<any> => {
+    validateData(params.contents);
+
     switch (this.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
-        await validateData(params.contents);
-        for (let i = 0; i < params.contents.length; i++) {
-          const { jdqlData } = params.contents[i];
-          if (jdqlData) {
-            await this.jdPrintPlugin.print({
-              preview: params.preview,
-              printer: formatPrintName(params.templateData, params.printer),
-              printData: [jdqlData.printData],
-              tempUrl: jdqlData.tempUrl,
-              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
-              customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
-            });
-          } else {
-            message.error({
-              key: '没有京东打印数据',
-              content: '没有京东打印数据',
-            });
-            throw new Error('没有京东打印数据');
-          }
-        }
-        break;
       case ENUM_PRINT_PLUGIN_TYPE.jdNew:
-        await validateData(params.contents);
         for (let i = 0; i < params.contents.length; i++) {
           const { jdqlData } = params.contents[i];
           if (jdqlData) {
@@ -142,8 +122,8 @@ class PrintHelper {
               printer: formatPrintName(params.templateData, params.printer),
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
-              customTempUrl: getCustomTemplateUrlNew(params.contents[i]),
               customData: [getCustomDataNew(params.contents[i])],
+              customTempUrl: this.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
             });
           } else {
             message.error({
@@ -154,26 +134,12 @@ class PrintHelper {
           }
         }
         break;
-      case ENUM_PRINT_PLUGIN_TYPE.rookieOld: {
-        const pageData = sliceData(params.contents, params.count);
-        await validateData(pageData);
-
-        for (let i = 0; i < pageData.length; i++) {
-          const contents = formatRookieDataOld(pageData[i], params.templateData);
-          await this.rookiePrintPlugin.print({
-            preview: params.preview,
-            contents,
-            printer: formatPrintName(params.templateData, params.printer),
-          });
-        }
-      }
-        break;
+      case ENUM_PRINT_PLUGIN_TYPE.rookieOld:
       case ENUM_PRINT_PLUGIN_TYPE.rookieNew: {
         const pageData = sliceData(params.contents, params.count);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
-          const contents = formatRookieDataNew(pageData[i]);
+          const contents = this.state === ENUM_PRINT_PLUGIN_TYPE.rookieOld ? formatRookieDataOld(pageData[i], params.templateData) : formatRookieDataNew(pageData[i]);
           await this.rookiePrintPlugin.print({
             preview: params.preview,
             contents,
@@ -182,26 +148,12 @@ class PrintHelper {
         }
       }
         break;
-      case ENUM_PRINT_PLUGIN_TYPE.dyOld: {
-        const pageData = sliceData(params.contents, params.count);
-        await validateData(pageData);
-
-        for (let i = 0; i < pageData.length; i++) {
-          const contents = formatDyDataOld(pageData[i]);
-          await this.dyPrintPlugin.print({
-            preview: params.preview,
-            contents,
-            printer: formatPrintName(params.templateData, params.printer),
-          });
-        }
-      }
-        break;
+      case ENUM_PRINT_PLUGIN_TYPE.dyOld:
       case ENUM_PRINT_PLUGIN_TYPE.dyNew: {
         const pageData = sliceData(params.contents, params.count);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
-          const contents = formatDyDataNew(pageData[i]);
+          const contents = this.state === ENUM_PRINT_PLUGIN_TYPE.dyOld ? formatDyDataOld(pageData[i]) : formatDyDataNew(pageData[i]);
           await this.dyPrintPlugin.print({
             preview: params.preview,
             contents,
@@ -215,7 +167,6 @@ class PrintHelper {
 
         // 快手建议10条以内
         const pageData = sliceData(newParams.contents, 10);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           const contents = formatKsDataOld(pageData[i], newParams.cpCode);
@@ -230,7 +181,6 @@ class PrintHelper {
       case ENUM_PRINT_PLUGIN_TYPE.ksNew: {
         // 快手建议10条以内
         const pageData = sliceData(params.contents, 10);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           const contents = formatKsDataNew(pageData[i]);
@@ -245,7 +195,6 @@ class PrintHelper {
       case ENUM_PRINT_PLUGIN_TYPE.pddOld: {
         const newParams: PddPrintParamsOld = params;
         const pageData = sliceData(newParams.contents, newParams.count);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           const contents = formatPddDataOld(pageData[i], newParams.courierPrintType);
@@ -259,7 +208,6 @@ class PrintHelper {
         break;
       case ENUM_PRINT_PLUGIN_TYPE.pddNew: {
         const pageData = sliceData(params.contents, params.count);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           const contents = formatPddDataNew(pageData[i]);
@@ -273,7 +221,6 @@ class PrintHelper {
         break;
       case ENUM_PRINT_PLUGIN_TYPE.lodop: {
         const pageData = sliceData(params.contents, params.count || 30);
-        await validateData(pageData);
 
         for (let i = 0; i < pageData.length; i++) {
           await this.lodopPrintPlugin.print({
