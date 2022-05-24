@@ -92,29 +92,40 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
   private onmessage = (event: MessageEvent) => {
     const response = JSON.parse(event.data);
     const requestIDItem = this.taskRequest.get(response.requestID);
-    if (requestIDItem == null) {
-      return;
-    }
 
     if (response.cmd === 'getPrinters') {
-      requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
-      this.taskRequest.delete(response.requestID);
+      if (requestIDItem) {
+        requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
+      }
     } else if (response.cmd === 'print') {
       if (response.status === 'success') {
-        // 快手无此字段
         if (response.previewURL) {
           window.open(response.previewURL);
         }
 
-        this.taskRequest.delete(response.requestID);
-        requestIDItem.resolve(response.previewURL);
+        if (requestIDItem) {
+          requestIDItem.resolve(response.previewURL);
+        }
       } else {
         const msg = response?.msg ?? '请求失败';
         message.error(msg);
-        requestIDItem.reject(msg);
-        this.taskRequest.delete(response.requestID);
+
+        if (requestIDItem) {
+          requestIDItem.reject(msg);
+        }
+      }
+    } else if (response.cmd === 'notifyPrintResult' || response.cmd === 'PrintResultNotify') {
+      if (response.status === 'failed') {
+        const msg = response?.printStatus?.[0]?.msg || response?.msg || '请求失败';
+        message.error(msg);
+      } else {
+        if (response.previewURL) {
+          window.open(response.previewURL);
+        }
       }
     }
+
+    this.taskRequest.delete(response.requestID);
   };
 
   /**
