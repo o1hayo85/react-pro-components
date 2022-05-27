@@ -113,6 +113,26 @@ class PrintHelper {
 
     switch (this.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
+        for (let i = 0; i < params.contents.length; i++) {
+          const { jdqlData } = params.contents[i];
+          if (jdqlData) {
+            await this.jdPrintPlugin.print({
+              preview: params.preview,
+              printer: formatPrintName(params.templateData, params.printer),
+              printData: [jdqlData.printData],
+              tempUrl: jdqlData.tempUrl,
+              customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
+              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
+            });
+          } else {
+            message.error({
+              key: '没有京东打印数据',
+              content: '没有京东打印数据',
+            });
+            throw new Error('没有京东打印数据');
+          }
+        }
+        break;
       case ENUM_PRINT_PLUGIN_TYPE.jdNew:
         for (let i = 0; i < params.contents.length; i++) {
           const { jdqlData } = params.contents[i];
@@ -123,7 +143,7 @@ class PrintHelper {
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
               customData: [getCustomDataNew(params.contents[i])],
-              customTempUrl: this.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
+              customTempUrl: getCustomTemplateUrlNew(params.contents[i]),
             });
           } else {
             message.error({
