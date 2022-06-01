@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.39...v0.0.0) (2022-05-23)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.40...v0.0.0) (2022-06-01)
+
+### Features
+
+- 子表增加时间查询条件 ([8b1df59](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/8b1df599b3e562088f3cac07ae3d8129934f084c))
+
+## [0.12.40](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.39...v0.12.40) (2022-05-23)
 
 ### Features
 
