@@ -1,12 +1,14 @@
 import { InfoCircleOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons';
-import { Button, Tabs, Menu, Dropdown, Badge, Select, Input } from 'antd';
+import { Button, Tabs, Menu, Dropdown, Badge, Select, Input, DatePicker } from 'antd';
 import { observer } from 'mobx-react';
+import moment from 'moment';
 import React, { useEffect } from 'react';
 import styles from '../egGridStyle.less';
 import { EgGrid } from '../index';
 
 let i = 0;
 const { TabPane } = Tabs;
+const { RangePicker } = DatePicker;
 
 const ButtonHeader = observer(
   ({
@@ -283,6 +285,63 @@ const FilterItemsOfSubTable = observer(
       getDisplayValueOfFilterItem,
     },
   }) => {
+    let cursorFilterItemDom: React.ReactNode;
+    switch (cursorFilterItem?.type) {
+      case 'select': {
+        cursorFilterItemDom = (
+          <Select
+            allowClear
+            className={styles.filterSelect}
+            key="2"
+            onChange={onFilterValueChange.bind(this, cursorFilterItem.field)}
+            size="small"
+            style={{ marginRight: 10 }}
+            value={cursorFilterItem.value}
+          >
+            {cursorFilterItem.options.map((el) => {
+              const { value, label } = el;
+              return (
+                <Select.Option
+                  key={value}
+                  label={label}
+                  value={value}
+                >
+                  {
+                    label
+                  }
+                </Select.Option>
+              );
+            })}
+          </Select>
+        );
+        break;
+      }
+      case 'date': {
+        cursorFilterItemDom = (
+          <RangePicker
+            allowEmpty={[
+              true,
+              true,
+            ]}
+            key="3"
+            onChange={(dates, dateStrings) => onFilterValueChange(cursorFilterItem.field, dateStrings)}
+            showTime={{
+              defaultValue: [
+                moment('00:00:00', 'HH:mm:ss'),
+                moment('11:59:59', 'HH:mm:ss'),
+              ],
+            }}
+            size="small"
+            style={{ marginRight: 10 }}
+            value={cursorFilterItem.value ? [
+              cursorFilterItem.value[0] && moment(cursorFilterItem.value[0]),
+              cursorFilterItem.value[1] && moment(cursorFilterItem.value[1]),
+            ] : undefined}
+          />
+        );
+        break;
+      }
+    }
     return filterItems && filterItems.length ? (
       <div className={styles.filterWrap}>
         {allFilterItemsInOneGroup
@@ -338,47 +397,23 @@ const FilterItemsOfSubTable = observer(
                 })}
               </Select>
             </Badge>,
-            cursorFilterItem && cursorFilterItem.type === 'select' ? (
-              <Select
-                allowClear
-                className={styles.filterSelect}
-                key="2"
-                onChange={onFilterValueChange.bind(this, cursorFilterItem.field)}
-                size="small"
-                style={{ marginRight: 10 }}
-                value={cursorFilterItem.value}
-              >
-                {cursorFilterItem.options.map((el) => {
-                  const { value, label } = el;
-                  return (
-                    <Select.Option
-                      key={value}
-                      label={label}
-                      value={value}
-                    >
-                      {
-                        label
-                      }
-                    </Select.Option>
-                  );
-                })}
-              </Select>
-            ) : (
-              <Input
-                className={styles.filterSelect}
-                key="2"
-                onChange={(e) => onFilterValueChange(cursorFilterItem?.field, e.target.value)}
-                onKeyUp={(e) => {
-                  e.stopPropagation();
-                  if (e.keyCode == 13) {
-                    onSearch();
-                  }
-                }}
-                size="small"
-                style={{ marginRight: 10 }}
-                value={cursorFilterItem?.value || ''}
-              />
-            ),
+            cursorFilterItem && cursorFilterItem.type !== 'input'
+              ? cursorFilterItemDom : (
+                <Input
+                  className={styles.filterSelect}
+                  key="2"
+                  onChange={(e) => onFilterValueChange(cursorFilterItem?.field, e.target.value)}
+                  onKeyUp={(e) => {
+                    e.stopPropagation();
+                    if (e.keyCode == 13) {
+                      onSearch();
+                    }
+                  }}
+                  size="small"
+                  style={{ marginRight: 10 }}
+                  value={cursorFilterItem?.value || ''}
+                />
+              ),
           ]
           : filterItems.map((el, index) => {
             const { label, field, type, value, options } = el;
@@ -390,7 +425,7 @@ const FilterItemsOfSubTable = observer(
                   whiteSpace: 'nowrap',
                   alignItems: 'center',
                   marginRight: 10,
-                  width: 170,
+                  width: type === 'date' ? 400 : 170,
                 }}
               >
                 {`${label }:`}
@@ -420,6 +455,26 @@ const FilterItemsOfSubTable = observer(
                       );
                     })}
                   </Select>
+                ) : type === 'date' ? (
+                  <RangePicker
+                    allowEmpty={[
+                      true,
+                      true,
+                    ]}
+                    onChange={(dates, dateStrings) => onFilterValueChange(field, dateStrings)}
+                    showTime={{
+                      defaultValue: [
+                        moment('00:00:00', 'HH:mm:ss'),
+                        moment('11:59:59', 'HH:mm:ss'),
+                      ],
+                    }}
+                    size="small"
+                    style={{ marginRight: 10 }}
+                    value={value ? [
+                      value[0] && moment(value[0]),
+                      value[1] && moment(value[1]),
+                    ] : undefined}
+                  />
                 ) : (
                   <Input
                     onChange={(e) => onFilterValueChange(field, e.target.value)}
