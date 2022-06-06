@@ -968,6 +968,7 @@ export class EgGridModel {
       action((v: { data?: string; }) => {
         console.log('获取列配置', v);
         const copyColumns = this.columns.slice();
+        
         const res = v.data;
         cache.setStorage({
           cacheKey: this.cacheKeyForColumnsConfig,
@@ -976,29 +977,44 @@ export class EgGridModel {
         if (!res) {
           return;
         }
-        const storage = JSON.parse(res);
-        if (!storage || (storage && !storage.length)) {
+        const _res = JSON.parse(res);
+        if (!_res || (_res && !_res.length)) {
           return;
         }
+  
+        // 如果被删过某一列，或改过某一列的key, 或增加了一列
+        // 修改列：key相同 name不同  ||  name相同  key不同
+        // 新增  key/name都不同  新增列都放在最后
 
-        // 如果被删过某一列，或改过某一列的key, 或增加了一列，不再操作，直接返回原始列
-        if (storage.length !== copyColumns.length) {
-          console.log('已缓存的列长，实际列长', storage.length, copyColumns.length);
-          return;
-        } else {
-          let isSame = true;
-          copyColumns.forEach((el) => {
-            const item = storage.find((v) => v.key === el.key);
-            if (!item) {
-              console.log('已找到差异列', el);
-              isSame = false;
-            }
-          });
-          if (!isSame) {
-            return;
+        // 找到新增列  以本地列为基准
+        for (let i = 0; i < copyColumns.length; i++) {
+          const el = copyColumns[i];
+          const addItem = _res.find((v) => (v.key === el.key || v.name === el.name));
+          console.log('addcolumns', toJS(addItem));
+          if (!addItem) {
+            _res.push(el);
           }
         }
-        this.updateColumns(storage);
+
+        // 找出差异列 以线上的保存的列为基准
+        for (let i = _res.length - 1; i >= 0; i--) {
+          const el = _res[i];
+
+          // 修改列
+          const changeItem = copyColumns.find((v) => (v.key === el.key && v.name !== el.name) || (v.key !== el.key && v.name === el.name));
+          if (changeItem) {
+            changeItem.width = _res[i].width;// 修改列记录上次保存的宽度
+            _res[i] = changeItem;
+          }
+
+          // 删除列
+          const delItem = copyColumns.find((v) => v.key === el.key || v.name === el.name);
+          if (!delItem) {
+            _res.splice(i, 1);
+          }
+        }
+        console.log('_res1', toJS(_res));
+        this.updateColumns(_res);
       })
     );
   });
@@ -1009,6 +1025,8 @@ export class EgGridModel {
       const { width, ejlHidden, frozen, key, name } = columns[k];
       storage.push({
         key,
+
+        name,
         frozen: frozen || false,
         ejlHidden: ejlHidden || false,
         ...(width ? { width: Math.floor(Number(width)) } : {}),
