@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import { observable, action, computed, set, toJS } from 'mobx';
 import type { IObservableObject } from 'mobx';
+import moment from 'moment';
 import type { IObj, IEgGridModel, IEgGridApi, StrOrNum } from '../egGridModel';
 import { EgGridModel } from '../egGridModel';
 import type { MainSubStructureModel, IButton } from './mainSubStructureModel';
@@ -29,12 +30,13 @@ export interface ISubTableModel {
   filterItems?: IFilterItems[];
 }
 
-type INumOrStr = string | number | string[] | number[];
+type INumOrStr = string | number | string[] | number[] | [moment.Moment, moment.Moment];
+
 export interface IFilterItems {
   label: string;
   field: string;
   value?: INumOrStr;
-  type?: 'select' | 'input';
+  type?: 'select' | 'input' | 'date';
   options?: Array<{ label: string; value: INumOrStr; }>;
 }
 
@@ -128,7 +130,8 @@ export class SubTableModel {
    * 当前已选择条件的数量
    */
   @computed public get numOfHasValue(): number {
-    return this.filterItems?.reduce((res, el) => Number(Boolean(el.value)) + res, 0);
+    // @ts-ignore
+    return this.filterItems?.reduce((res, el) => Number(Boolean(Array.isArray(el.value) ? el.value?.filter((item) => item)?.length : el.value)) + res, 0);
   }
 
   /**
@@ -528,6 +531,10 @@ export class SubTableModel {
     const { type, value, options } = item;
     if (type === 'select') {
       return (options.find((el) => el.value === value) || {}).label || '';
+    }
+    if (type === 'date') {
+      return value?.map((item) => item && moment(item)?.format('YYYY-MM-DD HH:mm:ss')).filter((item) => item)
+        ?.join(',');
     }
     return value || '';
   }
