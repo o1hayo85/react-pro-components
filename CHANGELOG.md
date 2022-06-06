@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.40...v0.0.0) (2022-06-01)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.41...v0.0.0) (2022-06-06)
+
+### Bug Fixes
+
+- 更改 babel 的 polyfill 方案,360 极速浏览器 URLSearchParams 导致 content-type 异常 ([c374301](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/c374301f60d6679f7c2b9f2ea2d5d446b3b00740))
+
+## [0.12.41](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.12.40...v0.12.41) (2022-06-01)
 
 ### Features
 

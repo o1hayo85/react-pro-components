@@ -1,6 +1,6 @@
 {
   "name": "egenie-code-style",
-  "version": "0.12.32",
+  "version": "0.12.42",
   "description": "code style rule",
   "main": "lib/index.js",
   "keywords": [
