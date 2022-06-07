@@ -4,7 +4,7 @@ import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyAndKsPrint } from './rookieAndPddAndDyAndKsPrint';
 import type { CommonPrintParams, KsPrintParamsOld, PddPrintParamsOld } from './types';
 import { ENUM_PRINT_PLUGIN_TYPE } from './types';
-import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomDataNew, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
+import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
 
 function openError(platform: string): string {
   return `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
@@ -122,28 +122,7 @@ class PrintHelper {
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
               customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
-              customTempUrl: getJdCustomTemplateUrlOld(jdqlData.customTempUrl),
-            });
-          } else {
-            message.error({
-              key: '没有京东打印数据',
-              content: '没有京东打印数据',
-            });
-            throw new Error('没有京东打印数据');
-          }
-        }
-        break;
-      case ENUM_PRINT_PLUGIN_TYPE.jdNew:
-        for (let i = 0; i < params.contents.length; i++) {
-          const { jdqlData } = params.contents[i];
-          if (jdqlData) {
-            await this.jdPrintPlugin.print({
-              preview: params.preview,
-              printer: formatPrintName(params.templateData, params.printer),
-              printData: [jdqlData.printData],
-              tempUrl: jdqlData.tempUrl,
-              customData: [getCustomDataNew(params.contents[i])],
-              customTempUrl: getCustomTemplateUrlNew(params.contents[i]),
+              customTempUrl: this.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
             });
           } else {
             message.error({
