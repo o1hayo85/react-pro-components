@@ -113,6 +113,7 @@ class PrintHelper {
 
     switch (this.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
+      case ENUM_PRINT_PLUGIN_TYPE.jdNew:
         for (let i = 0; i < params.contents.length; i++) {
           const { jdqlData } = params.contents[i];
           if (jdqlData) {
