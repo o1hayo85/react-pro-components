@@ -9,13 +9,11 @@ import { RenderRoutes, history } from './utils';
 
 function render() {
   ReactDOM.render(
-    <React.StrictMode>
-      <RenderRoutes
-        history={history}
-        loading=""
-        routes={routes}
-      />
-    </React.StrictMode>,
+    <RenderRoutes
+      history={history}
+      loading=""
+      routes={routes}
+    />,
     document.getElementById('root')
   );
 }
