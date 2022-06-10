@@ -30,8 +30,8 @@ const singleton = (function() {
         }
 
         config.headers = {
-          ...config.headers,
           ...baseHeader,
+          ...config.headers,
         };
         return config;
       }, (error: AxiosError) => {
