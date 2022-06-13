@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.4...v0.0.0) (2022-06-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.5...v0.0.0) (2022-06-13)
+
+### Bug Fixes
+
+- **22675:** 自定义模板选中功能优化 ([570f7a3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/570f7a36dcb56c9613b2a74c1b0196a67aa1fe81))
+
+## [0.13.5](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.4...v0.13.5) (2022-06-13)
 
 ### Bug Fixes
 
