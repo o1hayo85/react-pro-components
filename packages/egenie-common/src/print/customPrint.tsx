@@ -1,5 +1,5 @@
 import { Button, Input, message, Modal, Row, Select, Table } from 'antd';
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, toJS } from 'mobx';
 import { Observer, observer } from 'mobx-react';
 import React from 'react';
 import { destroyModal, renderModal } from '../renderModal';
@@ -59,6 +59,7 @@ class CustomPrintModel {
   @observable public rowSelection: { selectedRowKeys: number[]; onChange: (selectedRowKeys: number[]) => void; type: string; fixed: boolean; } = {
     selectedRowKeys: [],
     onChange: (selectedRowKeys: number[]) => {
+      console.log(selectedRowKeys);
       this.rowSelection.selectedRowKeys = selectedRowKeys || [];
     },
     type: 'radio',
@@ -73,6 +74,11 @@ class CustomPrintModel {
       return null;
     }
   }
+
+  @action public handleRowClick = (item: TemplateData): void => {
+    // @ts-ignore
+    this.rowSelection.selectedRowKeys = this.rowSelection.selectedRowKeys.length > 0 ? [] : [item.id];
+  };
 
   public columns = [
     {
@@ -296,6 +302,7 @@ export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
       columns,
       loading,
       rowSelection,
+      handleRowClick,
     } = this.store;
     const { handleCancel } = this.props;
     return (
@@ -350,11 +357,12 @@ export class CustomPrintModal extends React.Component<CustomPrintModalProps> {
             columns={columns}
             dataSource={dataSource}
             loading={loading}
+            onRow={(record) => ({ onClick: () => handleRowClick(record) })}
             pagination={false}
             rowKey="id"
 
             // @ts-ignore
-            rowSelection={rowSelection}
+            rowSelection={toJS(rowSelection)}
             scroll={{ y: 300 }}
             size="small"
           />
