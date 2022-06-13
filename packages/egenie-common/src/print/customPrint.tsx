@@ -77,7 +77,7 @@ class CustomPrintModel {
 
   @action public handleRowClick = (item: TemplateData): void => {
     // 点击自身且原来已经设置
-    if (this.rowSelection.selectedRowKeys.length > 0 && item.id === this.selectedRows[0]) {
+    if (this.rowSelection.selectedRowKeys.length > 0 && item.id === this.rowSelection.selectedRowKeys[0]) {
       this.rowSelection.selectedRowKeys = [];
     } else {
       // @ts-ignore
