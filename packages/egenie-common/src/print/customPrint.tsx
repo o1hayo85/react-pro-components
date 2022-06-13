@@ -76,8 +76,13 @@ class CustomPrintModel {
   }
 
   @action public handleRowClick = (item: TemplateData): void => {
-    // @ts-ignore
-    this.rowSelection.selectedRowKeys = this.rowSelection.selectedRowKeys.length > 0 ? [] : [item.id];
+    // 点击自身且原来已经设置
+    if (this.rowSelection.selectedRowKeys.length > 0 && item.id === this.selectedRows[0]) {
+      this.rowSelection.selectedRowKeys = [];
+    } else {
+      // @ts-ignore
+      this.rowSelection.selectedRowKeys = [item.id];
+    }
   };
 
   public columns = [
