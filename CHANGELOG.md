@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.6...v0.0.0) (2022-06-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.7...v0.0.0) (2022-06-14)
+
+### Features
+
+- 菜单栏 layout 支持从外部传入 homePageType ([f015ffe](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f015ffea5424a2319bd31197cffad0ef21f89c93))
+
+## [0.13.7](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.6...v0.13.7) (2022-06-13)
 
 ### Bug Fixes
 
