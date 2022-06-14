@@ -5,7 +5,7 @@ import qs from 'qs';
 import { getPerms } from '../permission';
 import type { BaseData } from '../request';
 import { request } from '../request';
-import type { API, Egenie, Menudata, Permission, Response, SrcParams, User, HomePageType, LayoutStoreInitParams } from './interface';
+import type { API, Egenie, HomePageType, LayoutStoreInitParams, Menudata, Permission, Response, SrcParams, User } from './interface';
 import { EnumVersion } from './interface';
 
 function combineUrl(oldUrl: string, params: string): string {
@@ -27,6 +27,7 @@ function combineUrl(oldUrl: string, params: string): string {
 export class LayoutStore {
   constructor(props?: LayoutStoreInitParams) {
     this.setProject(props?.project);
+    this.setHomePageType(props?.homePageType);
   }
 
   public srcParams: SrcParams[] = [];
@@ -222,6 +223,12 @@ export class LayoutStore {
     }
   });
 
+  public setHomePageType = action((homePageType) => {
+    if (homePageType) {
+      this.homePageType = homePageType;
+    }
+  });
+
   public getUserInfo = action(async() => {
     const res: User = await request({ url: '/api/dashboard/user' });
     top.user = res;
@@ -344,7 +351,7 @@ export class LayoutStore {
     const res = await request({
       url: '/api/iac/resource/dashboard/menu',
       method: 'POST',
-      data: {},
+      data: { homePageType: this.homePageType || undefined },
     });
     this.handleMenuItemHeight(res);
   });

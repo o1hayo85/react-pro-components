@@ -110,4 +110,5 @@ export interface LayoutStoreInitParams {
    * 项目信息
    */
   project?: Project;
+  homePageType?: number;
 }
