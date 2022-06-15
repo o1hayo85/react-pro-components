@@ -156,34 +156,8 @@ export class LodopPrint implements PrintAbstract {
           '<tr>',
           `<td class="orderNum">${index + 1}</td>`,
           idArray.map((currentId) => {
-            const {
-              id,
-              height,
-              txttype,
-              width,
-              txt,
-              hideText,
-            } = idMap[currentId];
-
             const cellText = lodopItemGetText(item, currentId.split('-')[1]);
-
-            if (txttype === ENUM_LODOP_ITEM_TYPE.detailQrCode || txttype === ENUM_LODOP_ITEM_TYPE.detailBarCode) {
-              const idStr = `${id}-${getUUID()}`;
-              const codeType = txttype === ENUM_LODOP_ITEM_TYPE.detailQrCode ? 'QRCode' : getCodeType(txt);
-              return [
-                '<td >',
-                `<object id="${idStr}" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="${width}px" height="${height}px"><param name="Color" value="white"></object>`,
-                '<script>',
-                `let _lodop = document.getElementById(${idStr});`,
-                `_lodop.PRINT_INITA(0,0,${width},${height},${cellText});`,
-                `_lodop.ADD_PRINT_BARCODE(0,0,${width},${height},${codeType},${cellText});`,
-                `_lodop.SET_PRINT_STYLEA(0, 'ShowBarText', Boolean(${hideText}));`,
-                '</script>',
-                '</td>',
-              ].join('');
-            } else {
-              return `<td style="${getCellStyle(idMap[currentId])}">${cellText}</td>`;
-            }
+            return `<td style="${getCellStyle(idMap[currentId])}">${cellText}</td>`;
           })
             .join(''),
           '</tr>',
