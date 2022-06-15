@@ -136,21 +136,16 @@ class PrintWayBill {
     await new Promise((resolve, reject) => {
       Modal.confirm({
         content: preview ? '确定预览' : '确定打印',
-        onOk: async() => {
-          try {
-            await this.getDataAndPrint({
-              preview,
-              ...rest,
-              printSrc: '1',
-              checkPrint: true,
-            });
-            resolve(true);
-          } catch (e) {
-            reject();
-          }
-        },
+        onOk: () => resolve(true),
         onCancel: () => reject(),
       });
+    });
+
+    await this.getDataAndPrint({
+      printSrc: '1',
+      checkPrint: true,
+      preview,
+      ...rest,
     });
   };
 
