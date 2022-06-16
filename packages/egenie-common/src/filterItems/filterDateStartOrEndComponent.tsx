@@ -51,11 +51,12 @@ export class FilterDateStartOrEndComponent extends React.Component<{ store: Filt
             onChange={handleChange}
             onOpenChange={fixPanelHideNotSetTime}
             placeholder={placeholder}
+            showNow={false}
             showTime={format === FormatDateType.defaultFormat ? {
               hideDisabledOptions: true,
               defaultValue: type === ENUM_FILTER_ITEM_TYPE.dateStart ? moment('00:00:00', 'HH:mm:ss') : moment('23:59:59', 'HH:mm:ss'),
             } : false}
-            showToday
+            showToday={false}
             value={value}
           />
         </section>

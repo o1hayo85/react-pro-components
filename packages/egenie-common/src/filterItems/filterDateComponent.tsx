@@ -189,7 +189,9 @@ class FilterDateRange extends React.Component<{ store: FilterDate; }> {
         </header>
         <section>
           <DatePicker.RangePicker
-            allowClear={allowClear}
+
+            // 必选先选择了才能清除,否则和fixPanelHideNotSetTime这个函数冲突
+            allowClear={open[0] ? false : allowClear}
             allowEmpty={allowEmpty}
             bordered={false}
             disabled={disabled}

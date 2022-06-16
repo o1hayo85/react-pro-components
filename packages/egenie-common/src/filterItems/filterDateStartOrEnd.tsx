@@ -159,8 +159,9 @@ export class FilterDateStartOrEnd extends FilterBase {
     if (!isOpen) {
       if (containerRef.current) {
         const element: HTMLInputElement = containerRef.current.querySelector(`.ant-picker input[placeholder=${placeholder}]`);
-        if (element && element.value) {
-          this.value = moment(element.value);
+        const value = element?.value;
+        if (value) {
+          this.value = moment(value);
         }
       }
     }
