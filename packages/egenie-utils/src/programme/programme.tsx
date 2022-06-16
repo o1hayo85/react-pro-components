@@ -212,23 +212,21 @@ export class Programme {
   @observable public activeProgramme = defaultProgrammeName;
 
   @action public handleItemClick = (item: ProgrammeListItem) => {
-    if (this.activeProgramme !== item.schemeName) {
-      this.activeProgramme = item.schemeName;
-      this.filterItems.reset();
-      if (item.schemeValue) {
-        try {
-          const schemeValue = JSON.parse(item.schemeValue) || {};
-          this.filterItems.originData.forEach((item) => {
-            if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
-              item.formatValue.call(item, schemeValue[item.field]);
-            }
-          });
-        } catch (e) {
-          console.log(e);
-        }
+    this.activeProgramme = item.schemeName;
+    this.filterItems.reset();
+    if (item.schemeValue) {
+      try {
+        const schemeValue = JSON.parse(item.schemeValue) || {};
+        this.filterItems.originData.forEach((item) => {
+          if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
+            item.formatValue.call(item, schemeValue[item.field]);
+          }
+        });
+      } catch (e) {
+        console.log(e);
       }
-      this.handleSearch();
     }
+    this.handleSearch();
   };
 
   @action public handleItemDelete = (item: ProgrammeListItem) => {
@@ -358,4 +356,3 @@ export class Programme {
     this.showScroll = true;
   };
 }
-
