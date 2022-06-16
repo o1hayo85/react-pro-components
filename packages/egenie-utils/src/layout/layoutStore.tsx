@@ -286,10 +286,6 @@ export class LayoutStore {
 
   // 增加 & 更新菜单Tab
   public getActiveSubMenu = action((item, srcParams?: SrcParams[]) => {
-    if (item.module) {
-      window.open(`/api/iam/module/switch?module=${item.module}`);
-      return;
-    }
     this.activeSubMenuId = item.id;
     this.activeTabKey = item.id;
     this.showSubMenu = false;
