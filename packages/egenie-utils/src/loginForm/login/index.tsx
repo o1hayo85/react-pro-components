@@ -29,19 +29,15 @@ export interface Prop {
   * 自定义忘记密码，暂无
  */
   customRegistry?: JSX.Element;
-
-  shopId: string | number; // 店铺id
 }
 
 const store = new Store();
 export const LoginForm: React.FC<Prop> = (props: Prop) => {
-  store.shopId = props.shopId;
   return (
     <Provider store={store}>
       <Login
         changePasswordPath={props.changePasswordPath}
         registryPath={props.registryPath}
-        shopId={props.shopId}
       />
     </Provider>
   );

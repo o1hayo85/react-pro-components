@@ -8,7 +8,6 @@ export interface Props {
   loginPath?: string;
   customChangePassword?: JSX.Element;
   customRegistry?: JSX.Element;
-  shopId: string | number;
 }
 
 export interface Response {
@@ -30,7 +29,6 @@ export interface LoginParams {
   smsCode?: string; // 验证码
   authImage?: string; // 验证图
   mobile?: string;
-  shopId?: number;
 }
 
 export interface LoginForm {
