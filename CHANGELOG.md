@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.9...v0.0.0) (2022-06-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.10...v0.0.0) (2022-06-16)
+
+### Features
+
+- **programme:** 重复点击查询方案执行查询 ([0601606](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/06016069e75d101a5337caed4ddc2d904432c3c3))
+
+## [0.13.10](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.9...v0.13.10) (2022-06-16)
 
 ### Bug Fixes
 
