@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { history } from 'egenie-common';
 import { inject, observer } from 'mobx-react';
 import React from 'react';

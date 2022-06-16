@@ -5,7 +5,7 @@ import qs from 'qs';
 import React from 'react';
 import { request } from '../../index';
 import { api } from '../api';
-import type { LoginParams, Response, LoginForm } from '../interface';
+import type { LoginForm, LoginParams, Response } from '../interface';
 
 export class Store {
   @observable public username: string;
@@ -22,6 +22,8 @@ export class Store {
 
   @observable public validateImage: number = new Date().getTime();
 
+  @observable public shopId = undefined; // 店铺id
+
   @action public init = (): void => {
     this.authimageneed = false;
     this.errorInfo = '';
@@ -37,6 +39,7 @@ export class Store {
     const params: LoginParams = {
       ...data,
       browserCode: localStorage.browserCode,
+      shopId: this.shopId ? Number(this.shopId) : undefined,
     };
     request({
       method: 'post',
