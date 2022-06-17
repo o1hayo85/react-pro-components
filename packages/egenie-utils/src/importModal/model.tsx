@@ -220,11 +220,6 @@ export class ImportModel {
       console.error(e);
     }
   };
-  importParam:{
-    otherParams: {
-      shopId: 'xxx',
-    },
-  }
 
   public get getImportParams() {
     const importParam = {
