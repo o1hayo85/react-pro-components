@@ -10,6 +10,7 @@ export interface ImportConditionGroup {
 export interface ImportModelProps {
   sheetName: string;
   importConditionGroup?: ImportConditionGroup[] ;
+  otherParams?: {[key: string]: any; };
 }
 
 export interface StartImportingParams {

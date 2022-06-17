@@ -27,6 +27,8 @@ export class ImportModel {
 
   @observable public type = 1;
 
+  @observable public otherParams = {};
+
   @observable public importConditionGroup: ImportConditionGroup[] = [];
 
   public interval;
@@ -51,6 +53,7 @@ export class ImportModel {
     this.sheetName = params.sheetName;
     if (params.importConditionGroup?.length) {
       this.importConditionGroup = params.importConditionGroup;
+      this.otherParams = params?.otherParams || {};
     }
   };
 
@@ -219,7 +222,9 @@ export class ImportModel {
   };
 
   public get getImportParams() {
-    const importParam = {};
+    const importParam = {
+      otherParams: this.otherParams,
+    };
     const importParamShow = [];
     this.importConditionGroup?.map((item) => {
       importParam[item.key] = item.value ? '1' : '0';
