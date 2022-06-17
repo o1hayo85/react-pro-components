@@ -51,9 +51,9 @@ export class ImportModel {
   @action public openModal = (params: ImportModelProps) => {
     this.visible = true;
     this.sheetName = params.sheetName;
+    this.otherParams = params?.otherParams || {};
     if (params.importConditionGroup?.length) {
       this.importConditionGroup = params.importConditionGroup;
-      this.otherParams = params?.otherParams || {};
     }
   };
 
@@ -220,6 +220,11 @@ export class ImportModel {
       console.error(e);
     }
   };
+  importParam:{
+    otherParams: {
+      shopId: 'xxx',
+    },
+  }
 
   public get getImportParams() {
     const importParam = {
