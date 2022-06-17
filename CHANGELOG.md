@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.10...v0.0.0) (2022-06-16)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.11...v0.0.0) (2022-06-17)
+
+### Bug Fixes
+
+- 点击菜单项新开窗口可指定 url ([d47e622](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d47e622d35b0ed590c2d9d19dba5630c115dc0c4))
+
+## [0.13.11](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.10...v0.13.11) (2022-06-16)
 
 ### Features
 
