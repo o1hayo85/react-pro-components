@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.14...v0.0.0) (2022-06-20)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.15-alpha.0...v0.0.0) (2022-06-20)
+
+### Features
+
+- **programme:** 查询方案宽度超出优化 ([86890a1](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/86890a16761037bd9066d4c94d98afc8c174d664))
+- **programme:** 查询方案宽度超出优化 ([ac415e3](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ac415e3e9d61e61c6ebb802eef2a6fbd53d088e8))
+
+## [0.13.15-alpha.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.14...v0.13.15-alpha.0) (2022-06-20)
 
 ### Features
 
