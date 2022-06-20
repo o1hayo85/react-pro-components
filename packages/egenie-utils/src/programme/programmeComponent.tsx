@@ -1,4 +1,4 @@
-import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Typography } from 'antd';
+import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Tabs, Typography } from 'antd';
 import classNames from 'classnames';
 import type { FilterItem, FilterItemOptions } from 'egenie-common';
 import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory } from 'egenie-common';
@@ -132,7 +132,7 @@ class Footer extends React.Component<{ programme: Programme; }> {
       showSetting,
       handleSettingSave,
       originSettingData,
-      activeProgramme,
+      activeProgrammeId,
       programmeList,
       editProgramme,
     } = this.props.programme;
@@ -143,7 +143,7 @@ class Footer extends React.Component<{ programme: Programme; }> {
             <i className="icon-btn_sz"/>
           </a>
           {
-            activeProgramme === programmeList[0].schemeName ? (
+            activeProgrammeId === programmeList[0].id ? (
               <Button onClick={() => handleShowProgramme(true)}>
                 生成方案
               </Button>
@@ -206,7 +206,7 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
   render() {
     const {
       programmeList,
-      activeProgramme,
+      activeProgrammeId,
       handleItemClick,
       handleItemDelete,
       showProgrammeCount,
@@ -216,84 +216,94 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
     } = this.props.programme;
 
     return (
-      <div
-        className={styles.programmeList}
-        style={showProgrammeCount ? { paddingRight: 64 } : {}}
-      >
-        <section
-          className={classNames({ [styles.active]: programmeList[0].schemeName === activeProgramme })}
-          onClick={() => handleItemClick(programmeList[0])}
-        >
-          <Typography.Text
-            ellipsis
-            title={programmeList[0].schemeName}
+      <div className={styles.programmeList}>
+        <div className={styles.leftContainer}>
+          <Tabs
+            activeKey={activeProgrammeId}
+            onTabClick={handleItemClick}
+            size="small"
+            type="card"
           >
-            {programmeList[0].schemeName}
-          </Typography.Text>
-        </section>
-        {
-          programmeList.slice(1)
-            .map((item) => {
-              return (
-                <Popover
-                  content={(
-                    <FilterItemsTranslate
-                      programme={this.props.programme}
-                      schemeName={item.schemeName}
-                      schemeValue={item.schemeValue}
-                    />
-                  )}
-                  destroyTooltipOnHide
-                  key={id++}
-                  placement="bottom"
-                >
-                  <section
-                    className={classNames({ [styles.active]: item.schemeName === activeProgramme })}
-                    onClick={() => handleItemClick(item)}
-                    style={item.schemeName === activeProgramme ? { borderLeftColor: '#e2e2e5' } : {}}
+            <Tabs.TabPane
+              key={programmeList[0].id}
+              tab={(
+                <section className={classNames(styles.programmeContentContainer, { [styles.active]: programmeList[0].id === activeProgrammeId })}>
+                  <Typography.Text
+                    ellipsis
+                    title={programmeList[0].schemeName}
                   >
-                    <Typography.Text
-                      ellipsis
-                      title={item.schemeName}
-                    >
-                      {item.schemeName}
-                    </Typography.Text>
-                    {
-                      showProgrammeCount ? (
-                        <span className={styles.programmeCount}>
-                          {programmeCount[item.id] || 0}
-                        </span>
-                      ) : null
-                    }
-
-                    <span
-                      className={styles.del}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleItemDelete(item);
-                      }}
-                    >
-                      x
-                    </span>
-                  </section>
-                </Popover>
-              );
-            })
-        }
-        {
-          showProgrammeCount ? (
-            <div className={styles.programmeCountRefresh}>
-              <Button
-                icon={<i className="icon-replace"/>}
-                loading={isProgrammeCountLoading}
-                onClick={getProgrammeCount}
-                type="link"
-              >
-                刷新
-              </Button>
-            </div>
-          ) : null
-        }
+                    {programmeList[0].schemeName}
+                  </Typography.Text>
+                </section>
+              )}
+            />
+            {
+              programmeList.slice(1)
+                .map((item) => {
+                  return (
+                    <Tabs.TabPane
+                      key={item.id}
+                      tab={(
+                        <Popover
+                          content={(
+                            <FilterItemsTranslate
+                              id={`${item.id}`}
+                              programme={this.props.programme}
+                              schemeValue={item.schemeValue}
+                            />
+                          )}
+                          destroyTooltipOnHide
+                          key={id++}
+                          placement="bottom"
+                        >
+                          <section className={classNames(styles.programmeContentContainer, { [styles.active]: `${item.id}` === activeProgrammeId })}>
+                            <Typography.Text
+                              ellipsis
+                              title={item.schemeName}
+                            >
+                              {item.schemeName}
+                            </Typography.Text>
+                            {
+                              showProgrammeCount ? (
+                                <span className={styles.programmeCount}>
+                                  {programmeCount[item.id] || 0}
+                                </span>
+                              ) : null
+                            }
+                            <span
+                              className={styles.del}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                handleItemDelete(item);
+                              }}
+                            >
+                              x
+                            </span>
+                          </section>
+                        </Popover>
+                      )}
+                    />
+                  );
+                })
+            }
+          </Tabs>
+        </div>
+        <div className={styles.rightContainer}>
+          {
+            showProgrammeCount ? (
+              <div className={styles.programmeCountRefresh}>
+                <Button
+                  icon={<i className="icon-replace"/>}
+                  loading={isProgrammeCountLoading}
+                  onClick={getProgrammeCount}
+                  type="link"
+                >
+                  刷新
+                </Button>
+              </div>
+            ) : null
+          }
+        </div>
         <div className={styles.emptyBorder}/>
       </div>
     );
@@ -400,10 +410,10 @@ class FilterItemsComponent extends React.Component<{ programme: Programme; }> {
 }
 
 @observer
-class FilterItemsTranslate extends React.Component<{ programme: Programme; schemeName: string; schemeValue: string; }> {
+class FilterItemsTranslate extends React.Component<{ programme: Programme; id: string; schemeValue: string; }> {
   @computed
   public get translateData(): string[][] {
-    if (this.props.schemeName === this.props.programme.activeProgramme) {
+    if (`${this.props.id}` === this.props.programme.activeProgrammeId) {
       return this.props.programme.filterItems.translateParamsList;
     } else {
       try {

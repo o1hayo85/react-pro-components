@@ -15,6 +15,7 @@ const filterItemsSettingPrefix = 'filterItemsSettingPrefix_';
 const defaultProgrammeName = '默认方案';
 const defaultProgramme = [
   {
+    id: '-100000',
     schemeName: defaultProgrammeName,
     schemeValue: JSON.stringify({}),
     displaySetting: JSON.stringify({}),
@@ -29,7 +30,7 @@ function validParams(params?: Partial<ProgrammeParams>) {
 }
 
 export interface ProgrammeListItem {
-  id?: number;
+  id: string;
   schemeName: string;
   schemeValue: string;
   displaySetting: string;
@@ -198,8 +199,8 @@ export class Programme {
           displaySetting: JSON.stringify({}),
           module: this.moduleName,
           schemeValue: JSON.stringify(schemeValue),
-          schemeName: this.activeProgramme,
-          id: this.programmeList.find((item) => item.schemeName === this.activeProgramme)?.id,
+          schemeName: this.programmeList.find((item) => `${item.id}` === this.activeProgrammeId)?.schemeName,
+          id: this.activeProgrammeId,
         },
       })
         .then(() => {
@@ -209,24 +210,27 @@ export class Programme {
     });
   };
 
-  @observable public activeProgramme = defaultProgrammeName;
+  @observable public activeProgrammeId = defaultProgramme[0].id;
 
-  @action public handleItemClick = (item: ProgrammeListItem) => {
-    this.activeProgramme = item.schemeName;
-    this.filterItems.reset();
-    if (item.schemeValue) {
-      try {
-        const schemeValue = JSON.parse(item.schemeValue) || {};
-        this.filterItems.originData.forEach((item) => {
-          if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
-            item.formatValue.call(item, schemeValue[item.field]);
-          }
-        });
-      } catch (e) {
-        console.log(e);
+  @action public handleItemClick = (id: string) => {
+    this.activeProgrammeId = `${id}`;
+    const item = this.programmeList.find((val) => `${val.id}` == id);
+    if (item) {
+      this.filterItems.reset();
+      if (item.schemeValue) {
+        try {
+          const schemeValue = JSON.parse(item.schemeValue) || {};
+          this.filterItems.originData.forEach((item) => {
+            if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
+              item.formatValue.call(item, schemeValue[item.field]);
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
+      this.handleSearch();
     }
-    this.handleSearch();
   };
 
   @action public handleItemDelete = (item: ProgrammeListItem) => {
@@ -238,12 +242,13 @@ export class Programme {
         data: {
           name: item.schemeName,
           module: this.moduleName,
+          id: item.id,
         },
       })
         .then(action(() => {
           message.success('删除成功');
-          if (this.activeProgramme === item.schemeName) {
-            this.activeProgramme = defaultProgrammeName;
+          if (this.activeProgrammeId === `${item.id}`) {
+            this.activeProgrammeId = defaultProgramme[0].id;
             this.filterItems.reset();
             this.handleSearch();
           }
@@ -356,3 +361,4 @@ export class Programme {
     this.showScroll = true;
   };
 }
+
