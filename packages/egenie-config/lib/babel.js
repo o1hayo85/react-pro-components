@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (isWeb = true) {
   const presets = [
     [
       require.resolve('@babel/preset-env'),
@@ -16,14 +16,6 @@ module.exports = function () {
   ];
 
   const basePlugins = [
-    [
-      require.resolve('babel-plugin-import'),
-      {
-        libraryName: ['antd', 'antd-mobile'],
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
     require.resolve('@babel/plugin-syntax-dynamic-import'), // 支持动态import
     [
       require.resolve('@babel/plugin-proposal-decorators'),
@@ -38,15 +30,24 @@ module.exports = function () {
     require.resolve('@babel/plugin-transform-runtime'),
   ];
 
+  const pluginImport = [[
+    require.resolve('babel-plugin-import'),
+    {
+      libraryName: isWeb ? 'antd' : 'antd-mobile',
+      libraryDirectory: 'es',
+      style: true,
+    },
+  ]];
+
   return {
     env: {
       development: {
         presets,
-        plugins: basePlugins,
+        plugins: pluginImport.concat(basePlugins),
       },
       production: {
         presets,
-        plugins: basePlugins,
+        plugins: pluginImport.concat(basePlugins),
       },
       test: {
         presets: [
