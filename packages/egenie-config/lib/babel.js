@@ -1,4 +1,4 @@
-module.exports = function (isWeb = true) {
+module.exports = function () {
   const presets = [
     [
       require.resolve('@babel/preset-env'),
@@ -16,6 +16,14 @@ module.exports = function (isWeb = true) {
   ];
 
   const basePlugins = [
+    [
+      require.resolve('babel-plugin-import'),
+      {
+        libraryName: ['antd', 'antd-mobile'],
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
     require.resolve('@babel/plugin-syntax-dynamic-import'), // 支持动态import
     [
       require.resolve('@babel/plugin-proposal-decorators'),
@@ -30,26 +38,15 @@ module.exports = function (isWeb = true) {
     require.resolve('@babel/plugin-transform-runtime'),
   ];
 
-  const pluginImport = [[
-    require.resolve('babel-plugin-import'),
-    {
-      libraryName: isWeb ? 'antd' : 'antd-mobile',
-      libraryDirectory: 'es',
-      style: true,
-    },
-  ]];
-
-  const useEsBuild = typeof process.env.USE_ESBUILD === 'string' && process.env.USE_ESBUILD.toLocaleUpperCase() === 'YES';
-
   return {
     env: {
       development: {
         presets,
-        plugins: useEsBuild ? basePlugins : pluginImport.concat(basePlugins),
+        plugins: basePlugins,
       },
       production: {
         presets,
-        plugins: pluginImport.concat(basePlugins),
+        plugins: basePlugins,
       },
       test: {
         presets: [
