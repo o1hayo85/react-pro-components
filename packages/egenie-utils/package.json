@@ -1,6 +1,6 @@
 {
   "name": "egenie-utils",
-  "version": "0.13.14",
+  "version": "0.13.15-alpha.0",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
