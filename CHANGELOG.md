@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.16...v0.0.0) (2022-06-20)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.17...v0.0.0) (2022-06-21)
+
+### Bug Fixes
+
+- **isMultipleSearch:** 解决批量查询多个逗号冲突问题 ([ef454d2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ef454d20aee0c156483cb61b7df7090578c9668f))
+
+## [0.13.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.16...v0.13.17) (2022-06-20)
 
 ## [0.13.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.16-alpha.0...v0.13.16) (2022-06-20)
 
