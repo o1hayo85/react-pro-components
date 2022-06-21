@@ -7,7 +7,7 @@ const singleton = (function() {
 
   function init(): AxiosInstance {
     const axiosInstance: AxiosInstance = axios.create({
-      timeout: 30000,
+      timeout: 1000 * 60 * 10,
       timeoutErrorMessage: '请求超时',
       withCredentials: true,
 
