@@ -92,7 +92,7 @@ export class FilterInputAndSelect extends FilterBase {
   public formatValue(value?: string): void {
     const keyAndValue = _.toString(value)
       .split(',');
-    this.inputValue = trimWhiteSpace(keyAndValue.slice(1).join(''), this.isTrimWhiteSpace);
+    this.inputValue = trimWhiteSpace(keyAndValue.slice(1).join(','), this.isTrimWhiteSpace);
     this.selectValue = keyAndValue[0] ? keyAndValue[0] : undefined;
   }
 
