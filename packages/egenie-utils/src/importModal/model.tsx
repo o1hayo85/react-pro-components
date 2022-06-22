@@ -222,9 +222,7 @@ export class ImportModel {
   };
 
   public get getImportParams() {
-    const importParam = {
-      otherParams: this.otherParams,
-    };
+    const importParam = { otherParams: this.otherParams };
     const importParamShow = [];
     this.importConditionGroup?.map((item) => {
       importParam[item.key] = item.value ? '1' : '0';

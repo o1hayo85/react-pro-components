@@ -1025,8 +1025,7 @@ export class EgGridModel {
       const { width, ejlHidden, frozen, key, name } = columns[k];
       storage.push({
         key,
-
-        name,
+        name: name.toString(),
         frozen: frozen || false,
         ejlHidden: ejlHidden || false,
         ...(width ? { width: Math.floor(Number(width)) } : {}),

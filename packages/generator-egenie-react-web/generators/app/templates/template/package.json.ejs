@@ -1,15 +1,15 @@
 {
-  "sideEffects": [
-    "*.less"
-  ],
-  "dependencies": {
-    "antd": "4.12.2",
+"sideEffects": [
+"*.less"
+],
+"dependencies": {
+"antd": "4.12.2",
 <% if (remUnit) { %>
-    "amfe-flexible": "2.2.1",
-<% } %>
+  "amfe-flexible": "2.2.1",
+  <% } %>
     "axios": "0.21.0",
     "classnames": "^2.2.6",
-    "egenie-utils": "0.13.19",
+    "egenie-utils": "0.13.20",
     "egenie-common": "0.13.19",
     "lodash": "4.17.20",
     "mobx": "5.15.7",
@@ -20,8 +20,8 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "17.0.1",
     "react-router-dom": "5.2.0"
-  },
-  "devDependencies": {
+    },
+    "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "12.1.2",
@@ -50,41 +50,41 @@
     "stylelint": "13.13.1",
     "typescript": "4.2.4",
     "validate-commit-msg": "^2.14.0"
-  },
-  "browserslist": [
+    },
+    "browserslist": [
     "Chrome >= 54",
     "Firefox >= 47",
     "Edge >= 12",
     "Explorer >= 11",
     "Safari >= 10.1",
     "Opera >= 41"
-  ],
-  "husky": {
+    ],
+    "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && validate-commit-msg"
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && validate-commit-msg"
     }
-  },
-  "lint-staged": {
+    },
+    "lint-staged": {
     "**/*.less": [
-      "npm run lint:style-less",
-      "git add ."
+    "npm run lint:style-less",
+    "git add ."
     ],
     "**/*.{js,jsx,ts,tsx}": [
-      "npm run lint:js",
-      "git add ."
+    "npm run lint:js",
+    "git add ."
     ],
     "**/*.{css,md,html,json}": [
-      "prettier --write",
-      "git add ."
+    "prettier --write",
+    "git add ."
     ]
-  },
-  "config": {
+    },
+    "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+    "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "scripts": {
+    },
+    "scripts": {
     "start": "egenie-react-scripts start",
     "build": "egenie-react-scripts build",
     "test": "egenie-test react",
@@ -94,5 +94,5 @@
     "lint:style-less": "stylelint --fix \"src/**/*.less\" --syntax less",
     "lint:js": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx .",
     "prettier": "prettier -c --write \"**/*.{css,md,html,json}\""
-  }
-}
+    }
+    }
