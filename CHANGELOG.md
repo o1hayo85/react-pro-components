@@ -1,8 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.19...v0.0.0) (2022-06-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.19...v0.0.0) (2022-06-23)
 
 ### Bug Fixes
 
 - 修改列顺序兼容表头复杂结构 ([e8bcbaa](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e8bcbaa576ce341939314f6a8cf3a32adc4a549d))
+
+### Features
+
+- **lodopPrint:** 更改插件下载通知 ([f2e9c18](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/f2e9c18854674583251c411e01762759d4b20993))
+- publish ([9de2b37](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/9de2b3755cc793cc277e506a8ed875e61b23d8ec))
 
 ## [0.13.19](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.18...v0.13.19) (2022-06-21)
 
