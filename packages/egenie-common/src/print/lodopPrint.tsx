@@ -68,6 +68,7 @@ function loadScripts(src: string): Promise<void> {
 
 function notifyUserDownloadPlugin() {
   message.info({
+    key: 'lodop通知下载',
     content: (
       <div>
         打印控件未启动或者未安装，点击这里
@@ -387,6 +388,7 @@ export class LodopPrint implements PrintAbstract {
       this.loadState = ENUM_LOAD_STATE.finish;
     } catch (e) {
       console.log(e);
+      notifyUserDownloadPlugin();
 
       // 更新状态
       this.loadState = ENUM_LOAD_STATE.finish;
