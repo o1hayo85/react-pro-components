@@ -21,7 +21,7 @@ export default class Index extends React.Component<Props> {
                 src={logoImg || `${api.oss}/images/logo.png`}
               />
               <span className={styles.title}>
-                {logoText || '最专业的服装供应链服务商'}
+                {logoText || '专业服装供应链服务商'}
               </span>
             </div>
             <span
