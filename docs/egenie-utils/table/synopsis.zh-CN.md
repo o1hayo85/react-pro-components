@@ -15,24 +15,29 @@ group:
 - 默认值: []
 
 ### `hiddenSubTable`
+
 - 描述: 是否显示子表
 - 类型: Boolean
 - 默认值:
 
 ### `btnExtraLeft`
-- 描述: 主表button 左侧警告提示，跟在按钮后面
+
+- 描述: 主表 button 左侧警告提示，跟在按钮后面
 - 类型?: [BtnExtraLeft](./ieg-grid-types#BtnExtraLeft)[]
 - 默认值:
 
 ### `btnExtraRight`
-- 描述: 主表button 右侧信息展示，位置在按钮最后一行右侧
+
+- 描述: 主表 button 右侧信息展示，位置在按钮最后一行右侧
 - 类型: ReactNode
 
 ### `pageId`
-- 描述: 页面pageId,请求按钮权限使用
+
+- 描述: 页面 pageId,请求按钮权限使用
 - 类型: String
 
 ### `collectData`
+
 - 描述: 按钮上方的数据汇总行
 - 类型?: [CollectData](./ieg-grid-types#CollectData)[]
 - 默认值:[]
@@ -40,7 +45,7 @@ group:
 ### `grid`
 
 - 描述: 表格配置，当使用
-- 类型: [IEgGridModel](./ieg-grid-model#columns) 
+- 类型: [IEgGridModel](./ieg-grid-model#columns)
 - 默认值: {}
 
 ### `api`
@@ -49,9 +54,9 @@ group:
 - 类型: [IEgGridApi](./ieg-grid-api#onRowClick)
 - 默认值: {}
 
-
 ### `subTables`
-- 描述: 子表配置，hiddenSubTable为true时生效
+
+- 描述: 子表配置，hiddenSubTable 为 true 时生效
 - 类型: `{}`
 - 默认值: {}
 
@@ -61,7 +66,6 @@ group:
 
 - 描述: 方案 store
 - 类型: `MainSubStructureModel`
-
 
 ## 示例
 
@@ -111,7 +115,7 @@ export default function () {
 }
 ```
 
-
 ### `EgGridModel`
+
 - 类型: [IEgGridModel](./ieg-grid-model#columns)
 - 默认值: {}

@@ -4,21 +4,19 @@ order: 3
 ---
 
 ### `StrOrNum`
+
 - 类型: number | string
 
 ### `IObj`
+
 - 类型:{[key: string]: any;}
 
-
 ### `SubRowAction`
-- 类型: {
-  type: 'toggleSubRow' | 'deleteSubRow';
-  id: [StrOrNum](#StrOrNum);
-  primaryKeyField: [StrOrNum](#StrOrNum);
-  isBatch?: boolean;
-  }
+
+- 类型: { type: 'toggleSubRow' | 'deleteSubRow'; id: [StrOrNum](#StrOrNum); primaryKeyField: [StrOrNum](#StrOrNum); isBatch?: boolean; }
 
 ### `Columns`
+
 ```ts
 interface {
   /** 列的名称。默认情况下，它将显示在标题单元格中 */
@@ -100,12 +98,12 @@ interface {
 }
 ```
 
-
-
 ### `SortDirection`
+
 - 类型: 'ASC' | 'DESC'
 
 ### `CollectData`
+
 ```ts
 interface {
   /** 名称*/
@@ -118,6 +116,7 @@ interface {
 ```
 
 ### `BtnExtraLeft`
+
 ```ts
 interface {
   /** 是否显示警告图标*/
@@ -131,6 +130,6 @@ interface {
 }
 ```
 
-
 ### `TSummaryRows`
+
 - 类型: string[] | [IObj](#IObj)[] | ((rows?: [IObj](./ieg-grid-types#IObj)[]) => [IObj](./ieg-grid-types#IObj)[])

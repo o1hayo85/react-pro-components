@@ -33,7 +33,7 @@ order: 2
 
 ### 前提
 
-- `egenie-common版本大于等于0.11.14`
+- `旧版打印面单,新版没用`
 
 ### 抖音自定义模板
 
@@ -57,7 +57,7 @@ order: 2
 
 ### pdd 自定义模板
 
-- courierPrintType 等于 1
+- courierPrintType 存在
 
   - 默认: https://front.ejingling.cn/customer-source/printTemp/pdd_waybill_yilian_template.xml
   - 可配环境变量: REACT_APP_PDD_TEMPLATE_URL_1
@@ -115,7 +115,6 @@ getCustomPrintParam('27');
 
 ## `获取打印参数(默认模版)`
 
-- `确保egenie-common版本大于等于0.4.29`
 - 参数: 模版类型`string`
 - 返回值: `Promise<CustomPrintParam>`
 
@@ -269,31 +268,31 @@ interface PrintWayBillParams {
 
   /**
    * 打印来源
-   *  PRINT_0(0, "未知来源打印"),
-   *  PRINT_1(1, "前置打印"),
-   *  PRINT_2(2, "分拣打印"),
-   *  PRINT_3(3, "分拣补打"),
-   *  PRINT_4(4, "收尾打印"),
-   *  PRINT_5(5, "波次管理打印"),
-   *  PRINT_6(6, "配齐墙单个打印"),
-   *  PRINT_7(7, "配齐墙批量打印"),
-   *  PRINT_8(8, "打包发货补打打印"),
-   *  PRINT_9(9, "PDA分拣配齐后打印"),
-   *  PRINT_10(10, "强制拆单打印"),
-   *  PRINT_11(11, "分拣打印"),
-   *  PRINT_12(12, "多包裹打印"),
-   *  PRINT_13(13, "快速分拣打印"),
-   *  PRINT_14(14, "快速分拣补打打印"),
-   *  PRINT_15(15, "快速分拣配齐墙单个打印"),
-   *  PRINT_16(16, "快速分拣配齐墙批量打印"),
-   *  PRINT_17(17, "批量分拣打印"),
-   *  PRINT_18(18, "确认退货打印"),
-   *  PRINT_19(19, "分拣重打");
+   *  '0': "未知来源打印"
+   *  '1': "前置打印"
+   *  '2': "分拣打印"
+   *  '3': "分拣补打"
+   *  '4': "收尾打印"
+   *  '5': "波次管理打印"
+   *  '6': "配齐墙单个打印"
+   *  '7': "配齐墙批量打印"
+   *  '8': "打包发货补打打印"
+   *  '9': "PDA分拣配齐后打印"
+   *  '10': "强制拆单打印"
+   *  '11': "分拣打印"
+   *  '12': "多包裹打印"
+   *  '13': "快速分拣打印"
+   *  '14': "快速分拣补打打印"
+   *  '15': "快速分拣配齐墙单个打印"
+   *  '16': "快速分拣配齐墙批量打印"
+   *  '17': "批量分拣打印"
+   *  '18': "确认退货打印"
+   *  '19': "分拣重打"
    */
   printSrc?: string | number;
 
   /**
-   * 排序(暂没有排序策略，不支持，默认可不传)
+   * 排序策略
    */
   orderBy?: string;
 
@@ -399,7 +398,6 @@ printWayBill.executePrint(
 
 ## lodop 打印
 
-- `确保egenie-common版本大于等于0.4.29`
 - 此打印比较特殊。不属于上面流程图。简单概括`加载clodop的js文件`--->`获取插件实例`--->`请求数据`--->`根据模版数据调用插件api`--->`返回Promise`
 - [官方文档](http://lodop.net/LodopDemo.html)
 

@@ -164,8 +164,6 @@ request<BaseData<string>>({
 
 ## 声音
 
-- 前提: `egenie-common版本大于等于0.4.46`
-
 ### playVoice
 
 - 描述: 播放声音
@@ -195,7 +193,6 @@ getAndPlayVoice('通过');
 
 ## getStaticResourceUrl
 
-- 前提: `egenie-common版本大于等于0.10.9`
 - 描述: 获取静态资源 url(路由前缀由环境变量给)
 - 类型: (relativePath: string) => string
   - relativePath: 资源的相对路径
