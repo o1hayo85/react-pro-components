@@ -250,12 +250,14 @@ class PrintWayBill {
               await this.handleKsPrintOld(params, userData, tempData, cpCode);
             }
             break;
-          default:
+          default: {
+            const error = `店铺类型:${shopType}不存在`;
             message.error({
-              key: `店铺类型:${shopType}不存在`,
-              content: `店铺类型:${shopType}不存在`,
+              key: error,
+              content: error,
             });
-            throw new Error(`店铺类型:${shopType}不存在`);
+            throw new Error(error);
+          }
         }
         await this.updateStatus(callbackData);
       }
