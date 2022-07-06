@@ -1,7 +1,9 @@
 ---
-title: IEgGridTypes
-order: 3
+title: 配置类型
+order: 6
 ---
+
+# `EgGridModel配置类型`
 
 ### `StrOrNum`
 

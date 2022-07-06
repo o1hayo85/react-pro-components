@@ -1,7 +1,8 @@
 ---
-title: IEgGridApi
+title: 表格回调方法
 order: 2
 ---
+# `EgGridModel配置api中的回调`
 
 ## `onRowClick`
 

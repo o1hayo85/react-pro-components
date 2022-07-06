@@ -1,7 +1,8 @@
 ---
-title: IEgGridModel
+title: 表格配置参数
 order: 4
 ---
+# `EgGridModel表格配置`
 
 ## `columns`
 
@@ -133,27 +134,27 @@ order: 4
 - 描述: 查询参数
 - 默认值:{}
 
-#### pageSize
+  #### `pageSize`
 
-- 描述: 每页条数
-- 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
+  - 描述: 每页条数
+  - 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
 
-#### page
+  #### `page`
 
-- 描述: 当前页
-- 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
+  - 描述: 当前页
+  - 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
 
-#### sord
+   #### `sord`
 
-- 描述: 升排或降排
-- 类型: [SortDirection](./ieg-grid-types#SortDirection)
+  - 描述: 升排或降排
+  - 类型: [SortDirection](./ieg-grid-types#SortDirection)
 
-#### sidx
+  #### `sidx`
 
-- 描述: 排序字段
-- 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
+  - 描述: 排序字段
+  - 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
 
-#### filterParams
+#### `filterParams`
 
 - 描述: 查询方案的值
 - 类型: [IObj](./ieg-grid-types#IObj)

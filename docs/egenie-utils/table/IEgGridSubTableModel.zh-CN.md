@@ -1,8 +1,8 @@
 ---
-title: IEgGridSubTableModel
+title: 子表配置参数
 order: 5
 ---
-
+# `EgGridModel子表配置`
 ## `activeTab`
 
 - 默认选中的子表

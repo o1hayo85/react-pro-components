@@ -1,13 +1,13 @@
 ---
-title: 表格
+title: 表格配置
 order: 1
 group:
-  title: 表格配置
+  title: 表格
   order: 2
 ---
 
 ## `MainSubStructureModel`
-
+- 描述: 使用左右及上下查询方案时的表格配置
 ### `buttons`
 
 - 描述: 按钮配置
@@ -66,9 +66,6 @@ group:
 
 - 描述: 方案 store
 - 类型: `MainSubStructureModel`
-
-## 示例
-
 ```ts
 import { MainSubStructureModel, MainSubStructure } from 'egenie-utils';
 import React from 'react';
@@ -115,7 +112,7 @@ export default function () {
 }
 ```
 
-### `EgGridModel`
-
+## `EgGridModel`
+- 描述: 纯表格
 - 类型: [IEgGridModel](./ieg-grid-model#columns)
 - 默认值: {}
