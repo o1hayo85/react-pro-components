@@ -24,6 +24,46 @@ function combineUrl(oldUrl: string, params: string): string {
   }
 }
 
+function getBusiness(params: string): {[key: string]: string; } {
+  const business = {};
+  if (params && typeof params === 'string') {
+    try {
+      params.split('&').forEach((item) => {
+        const [
+          key,
+          value,
+        ] = item.split('=');
+        business[key] = value;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return business;
+}
+function buriedPoint(url: string, name: string, type: 'openPage' | 'closePage', params?: string): void {
+  import('egenie-monitor-web').then((defaultkey) => {
+    if (!defaultkey?._global) {
+      return;
+    }
+    defaultkey?.setStack([
+      {
+        business: getBusiness(params),
+        clientBase: {
+          page: url,
+          client: defaultkey?.breadcrumb?.client,
+          url,
+          deviceId: defaultkey?.breadcrumb?.deviceId,
+          version: navigator?.appVersion,
+          name,
+          time: defaultkey?.getTimestamp(),
+          type,
+        },
+      },
+    ]);
+  });
+}
+
 export class LayoutStore {
   constructor(props?: LayoutStoreInitParams) {
     this.setProject(props?.project);
@@ -322,6 +362,7 @@ export class LayoutStore {
         ...this.tabList,
         result,
       ];
+      buriedPoint(item.url, item.name, 'openPage', haveParams?.params);
     }, 500);
   });
 
@@ -404,6 +445,12 @@ export class LayoutStore {
   };
 
   public handleTabRemove = action((key: string) => {
+    this.tabList.forEach((item) => {
+      if (`${item.id}` === key) {
+        buriedPoint(item.url, item.name, 'closePage');
+      }
+    });
+
     // tab.id 可能是数字(菜单栏)，可能是字符串(自定义的)
     const panes = this.tabList.filter((tab) => tab.id != key);
     if (!panes.length || this.activeTabKey != key) {
@@ -425,7 +472,17 @@ export class LayoutStore {
   });
 
   public handleTabChange = action(((key: string) => {
-    this.activeTabKey = key;
+    this.tabList.forEach((item) => {
+      if (`${item.id}` === key) {
+        buriedPoint(item.url, item.name, 'openPage');
+      }
+      if (`${item.id}` === this.activeTabKey) {
+        buriedPoint(item.url, item.name, 'closePage');
+      }
+    });
+    setTimeout(() => {
+      this.activeTabKey = key;
+    });
   }));
 
   /* 其他方式打开页面
