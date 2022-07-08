@@ -4236,9 +4236,9 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.13.21:
+egenie-common@^0.13.22:
   version "0.13.21"
-  resolved "https://registry.npmjs.org/egenie-common/-/egenie-common-0.13.21.tgz#8c7ae1c94cf56cf558470f2982c41e3ddf6bcb8d"
+  resolved "https://registry.npmmirror.com/egenie-common/-/egenie-common-0.13.21.tgz#8c7ae1c94cf56cf558470f2982c41e3ddf6bcb8d"
   integrity sha512-SO1iiHRBfm+Vt/E9kJnWj+bqnu6tj4vtJhz1jKxehJAQ2bFVIzmodzRY5MFPMQAmIvk0vJHJY4kNdG4/bFf0KQ==
   dependencies:
     classnames "2.2.6"
