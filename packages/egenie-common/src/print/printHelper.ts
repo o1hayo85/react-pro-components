@@ -11,9 +11,9 @@ function openError(platform: string): string {
 }
 
 class PrintHelper {
-  private state: ENUM_PRINT_PLUGIN_TYPE = ENUM_PRINT_PLUGIN_TYPE.rookieOld;
+  private state: ENUM_PRINT_PLUGIN_TYPE = ENUM_PRINT_PLUGIN_TYPE.rookieOld | ENUM_PRINT_PLUGIN_TYPE.lodop;
 
-  private readonly rookiePrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:13528', openError('CAINIAO'));
+  private readonly rookiePrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:13528', openError('菜鸟'));
 
   private readonly pddPrintPlugin = new RookieAndPddAndDyAndKsPrint('ws://127.0.0.1:5000', openError('拼多多'));
 
@@ -26,57 +26,22 @@ class PrintHelper {
   public readonly lodopPrintPlugin = new LodopPrint();
 
   /**
-   * 切换到lodop
+   * 切换到lodop---兼容原来
    */
   public readonly toggleToLodop = () => {
     this.state = ENUM_PRINT_PLUGIN_TYPE.lodop;
   };
 
   /**
-   * 切换到菜鸟(旧版可以打面单、小票等)
+   * 切换到菜鸟(旧版可以打面单、小票等)---兼容原来
    */
   public readonly toggleToRookie = () => {
     this.state = ENUM_PRINT_PLUGIN_TYPE.rookieOld;
   };
 
-  public readonly toggleToRookieNew = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.rookieNew;
-  };
-
-  public readonly toggleToPddOld = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.pddOld;
-  };
-
-  public readonly toggleToPddNew = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.pddNew;
-  };
-
-  public readonly toggleToJdOld = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.jdOld;
-  };
-
-  public readonly toggleToJdNew = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.jdNew;
-  };
-
-  public readonly toggleToDyOld = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.dyOld;
-  };
-
-  public readonly toggleToDyNew = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.dyNew;
-  };
-
-  public readonly toggleToKsOld = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.ksOld;
-  };
-
-  public readonly toggleToKsNew = () => {
-    this.state = ENUM_PRINT_PLUGIN_TYPE.ksNew;
-  };
-
   /**
-   * 获取打印机列表。从任一一个插件获取到就可以，解决以前客户只是抖音、pdd、jd还需要安装菜鸟插件问题
+   * 获取打印机列表代理
+   * 从任一一个插件获取到就可以，解决以前客户只是抖音、pdd、jd还需要安装菜鸟插件问题
    */
   public readonly getPrinters = async(): Promise<string[]> => {
     const printPlugins = [
@@ -106,12 +71,19 @@ class PrintHelper {
   };
 
   /**
-   * 打印(先切换打印机类型,否则后果自负)
+   * 打印代理
+   * 菜鸟旧版和lodop先切换打印类型,否则后果自负
    */
   public readonly print = async(params: CommonPrintParams | PddPrintParamsOld | KsPrintParamsOld): Promise<any> => {
     validateData(params.contents);
+    params = {
+      ...params,
 
-    switch (this.state) {
+      // 类型缩减需要
+      state: params.state != null ? params.state : this.state,
+    };
+
+    switch (params.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
       case ENUM_PRINT_PLUGIN_TYPE.jdNew:
         for (let i = 0; i < params.contents.length; i++) {
@@ -126,11 +98,12 @@ class PrintHelper {
               customTempUrl: this.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
             });
           } else {
+            const error = '没有京东打印数据';
             message.error({
-              key: '没有京东打印数据',
-              content: '没有京东打印数据',
+              key: error,
+              content: error,
             });
-            throw new Error('没有京东打印数据');
+            throw new Error(error);
           }
         }
         break;

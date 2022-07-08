@@ -2,8 +2,8 @@ import { message, Modal } from 'antd';
 import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
 import { printHelper } from './printHelper';
-import type { TemplateData } from './types';
-import { ENUM_SHOP_TYPE } from './types';
+import type { BasePrintParams, TemplateData } from './types';
+import { ENUM_PRINT_PLUGIN_TYPE, ENUM_SHOP_TYPE } from './types';
 import { validateData } from './utils';
 
 interface PrintData {
@@ -88,7 +88,7 @@ interface PrintWayBillParams {
   printSrc?: string | number;
 
   /**
-   * 排序(暂没有排序策略，不支持，默认可不传)
+   * 排序策略
    */
   orderBy?: string;
 
@@ -213,41 +213,80 @@ class PrintWayBill {
         docIds: waybillData.docIds,
       };
 
+      const commonPrintData: BasePrintParams = {
+        printer: params.printer,
+        preview: params.preview,
+        contents: userData,
+        templateData: tempData,
+      };
+
       if (await this.handleNotify(waybillData)) {
         switch (shopType) {
           case ENUM_SHOP_TYPE.jd:
             if (newPrint) {
-              await this.handleJDPrintNew(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.jdNew,
+              });
             } else {
-              await this.handleJDPrintOld(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.jdOld,
+              });
             }
             break;
           case ENUM_SHOP_TYPE.pdd:
             if (newPrint) {
-              await this.handlePddPrintNew(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.pddNew,
+              });
             } else {
-              await this.handlePddPrintOld(params, userData, tempData, courierPrintType);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.pddOld,
+                courierPrintType,
+              });
             }
             break;
           case ENUM_SHOP_TYPE.rookie:
             if (newPrint) {
-              await this.handleRookiePrintNew(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.rookieNew,
+              });
             } else {
-              await this.handleRookiePrintOld(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.rookieOld,
+              });
             }
             break;
           case ENUM_SHOP_TYPE.dy:
             if (newPrint) {
-              await this.handleDyPrintNew(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.dyNew,
+              });
             } else {
-              await this.handleDyPrintOld(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.dyOld,
+              });
             }
             break;
           case ENUM_SHOP_TYPE.ks:
             if (newPrint) {
-              await this.handleKsPrintNew(params, userData, tempData);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.ksNew,
+              });
             } else {
-              await this.handleKsPrintOld(params, userData, tempData, cpCode);
+              await printHelper.print({
+                ...commonPrintData,
+                state: ENUM_PRINT_PLUGIN_TYPE.ksOld,
+                cpCode,
+              });
             }
             break;
           default: {
@@ -264,7 +303,7 @@ class PrintWayBill {
     }
   };
 
-  private handleNotify = async(waybillData: PrintData['waybillData']) => {
+  private handleNotify = async(waybillData: PrintData['waybillData']): Promise<boolean> => {
     const notHaveCourierNo = waybillData.notHaveCourierNo;
     const havePrintList = waybillData.havePrintList;
     let step1 = true;
@@ -293,108 +332,6 @@ class PrintWayBill {
     }
 
     return step1 && step2;
-  };
-
-  private handlePddPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, courierPrintType: number) => {
-    printHelper.toggleToPddOld();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-      courierPrintType,
-    });
-  };
-
-  private handlePddPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToPddNew();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleDyPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToDyOld();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleDyPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToDyNew();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleRookiePrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToRookie();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleRookiePrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToRookieNew();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleKsPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData, cpCode: string) => {
-    printHelper.toggleToKsOld();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-      cpCode,
-    });
-  };
-
-  private handleKsPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToKsNew();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleJDPrintOld = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToJdOld();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
-  };
-
-  private handleJDPrintNew = async(params: PrintWayBillParams, userData: any[], tempData: TemplateData) => {
-    printHelper.toggleToJdNew();
-    await printHelper.print({
-      printer: params.printer,
-      preview: params.preview,
-      contents: userData,
-      templateData: tempData,
-    });
   };
 
   private updateStatus = (data: {

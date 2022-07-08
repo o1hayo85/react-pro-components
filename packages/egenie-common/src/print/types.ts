@@ -37,37 +37,6 @@ export enum ENUM_LODOP_ITEM_TYPE {
   skuDetail = 'skudetail'
 }
 
-/**
- * 公共参数
- */
-export interface CommonPrintParams {
-
-  /**
-   * 一次打印数据页数(默认500)
-   */
-  count?: number;
-
-  /**
-   * 模版数据
-   */
-  templateData?: TemplateData;
-
-  /**
-   * 是否预览
-   */
-  preview: boolean;
-
-  /**
-   * 打印机
-   */
-  printer?: string;
-
-  /**
-   * 打印数据
-   */
-  contents?: any[];
-}
-
 export class TemplateData {
   public _id?: number | string;
 
@@ -166,22 +135,64 @@ export class LodopItem {
 }
 
 /**
- * 快手打印参数
+ * 基本打印参数
  */
-export type KsPrintParamsOld = {
-  cpCode?: string;
-} & CommonPrintParams;
+export interface BasePrintParams {
+
+  /**
+   * 一次打印数据页数(默认500)
+   */
+  count?: number;
+
+  /**
+   * 模版数据
+   */
+  templateData?: TemplateData;
+
+  /**
+   * 是否预览
+   */
+  preview: boolean;
+
+  /**
+   * 打印机
+   */
+  printer?: string;
+
+  /**
+   * 打印数据
+   */
+  contents?: any[];
+}
 
 /**
- * pdd打印参数
+ * 公共参数
  */
-export type PddPrintParamsOld = {
+export interface CommonPrintParams extends BasePrintParams {
+  state?: ENUM_PRINT_PLUGIN_TYPE.rookieOld
+  | ENUM_PRINT_PLUGIN_TYPE.rookieNew
+  | ENUM_PRINT_PLUGIN_TYPE.jdOld
+  | ENUM_PRINT_PLUGIN_TYPE.jdNew
+  | ENUM_PRINT_PLUGIN_TYPE.dyOld
+  | ENUM_PRINT_PLUGIN_TYPE.dyNew
+  | ENUM_PRINT_PLUGIN_TYPE.pddNew
+  | ENUM_PRINT_PLUGIN_TYPE.ksNew
+  | ENUM_PRINT_PLUGIN_TYPE.lodop;
+}
+
+export interface KsPrintParamsOld extends BasePrintParams {
+  state: ENUM_PRINT_PLUGIN_TYPE.ksOld;
+  cpCode?: string;
+}
+
+export interface PddPrintParamsOld extends BasePrintParams {
+  state: ENUM_PRINT_PLUGIN_TYPE.pddOld;
 
   /**
    * 快递类型
    */
   courierPrintType?: number;
-} & CommonPrintParams;
+}
 
 export interface PrintAbstract {
   getPrinters: () => Promise<string[]>;

@@ -10,6 +10,16 @@ interface RequestProtocol {
   [key: string]: any;
 }
 
+interface Response {
+  requestID: string;
+  cmd: 'getPrinters' | 'print' | 'notifyPrintResult' | 'PrintResultNotify';
+  status: 'success' | 'failed';
+  previewURL?: string;
+  msg?: string;
+  printers?: Array<{ name?: string; }>;
+  printStatus?: Array<{ msg?: string; }>;
+}
+
 export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
   constructor(private readonly socketUrl: string, private readonly openError: string) {
   }
@@ -90,13 +100,11 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
   };
 
   private onmessage = (event: MessageEvent) => {
-    const response = JSON.parse(event.data);
+    const response: Response = JSON.parse(event.data);
     const requestIDItem = this.taskRequest.get(response.requestID);
 
-    if (response.cmd === 'getPrinters') {
-      if (requestIDItem) {
-        requestIDItem.resolve((response.printers || []).map((item: { name: string; }) => item.name));
-      }
+    if (response.cmd === 'getPrinters' && requestIDItem) {
+      requestIDItem.resolve((response.printers || []).map((item) => item.name));
     } else if (response.cmd === 'print') {
       if (response.status === 'success') {
         if (response.previewURL) {
@@ -118,10 +126,8 @@ export class RookieAndPddAndDyAndKsPrint implements PrintAbstract {
       if (response.status === 'failed') {
         const msg = response?.printStatus?.[0]?.msg || response?.msg || '请求失败';
         message.error(msg);
-      } else {
-        if (response.previewURL) {
-          window.open(response.previewURL);
-        }
+      } else if (response.previewURL) {
+        window.open(response.previewURL);
       }
     }
 
