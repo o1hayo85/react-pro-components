@@ -1,6 +1,6 @@
 {
   "name": "egenie-common",
-  "version": "0.13.22",
+  "version": "0.13.23",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
@@ -27,7 +27,7 @@
     "axios": "0.21.0",
     "babel-plugin-import": "^1.13.3",
     "egenie-config": "^0.8.26",
-    "egenie-test": "^0.13.17",
+    "egenie-test": "^0.13.23",
     "father-build": "^1.19.8",
     "lodash": "4.17.20",
     "mobx": "5.15.7",
