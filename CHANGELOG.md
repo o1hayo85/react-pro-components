@@ -2,6 +2,7 @@
 
 ### Features
 
+- 表格列增加 key 重复提示 ([0a83c6d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0a83c6d5e74aab44d42bce703b9932d93839edd7))
 - **6501:** url 替换 ([ee21849](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ee218492ecb315051d1708fd18f580df527696e1))
 
 ## [0.13.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.22...v0.13.23) (2022-07-08)
