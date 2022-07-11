@@ -91,7 +91,7 @@ export default class LoginContent extends React.Component<Props> {
                     />
                     <img
                       onClick={changeAuthImage}
-                      src={`/api/iac/authImage/anon/getAuthImage?${validateImage}`}
+                      src={`/api/iam/authImage/anon/getAuthImage?${validateImage}`}
                       title="看不清，换一张"
                     />
                   </div>

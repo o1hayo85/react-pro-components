@@ -10,7 +10,7 @@ export const api = {
 
   // 登录
   login: '/user_login', // 登录
-  getAuthImage: '/api/iac/authImage/anon/getAuthImage', // 获取图片验证码
+  getAuthImage: '/api/iam/authImage/anon/getAuthImage', // 获取图片验证码
 
   // 字典
   getDict: '/api/gim/anon/dict', // {type}
@@ -27,7 +27,7 @@ export const api = {
 
   // 忘记密码
   checkUserName: '/api/iac/user/anon/findByUsername', // 验证用户是否存在
-  sendCode: '/api/iac/validCode/anon/send', // 发送验证码
+  sendCode: '/api/iam/validCode/anon/send', // 发送验证码
   validateCode: '/api/iac/validCode/anon/password/reset/validate', // 验证手机号验证码
   newPassword: '/api/iac/user/anon/password/reset', // 修改密码
 };
