@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import type { Column, HeaderRendererProps, SortDirection, SortColumn, RowHeightArgs } from 'egenie-data-grid';
 import { SelectColumn } from 'egenie-data-grid';
 import _ from 'lodash';
@@ -979,6 +980,14 @@ export class EgGridModel {
         }
         const _res = JSON.parse(res);
         if (!_res || (_res && !_res.length)) {
+          return;
+        }
+
+        // 判断本地列是否有重复的key
+        const keyArr = copyColumns.map((el) => el.key);
+        const keySet = new Set(keyArr);
+        if (Array.from(keySet).length !== copyColumns.length) {
+          message.error('表格列key重复');
           return;
         }
   
