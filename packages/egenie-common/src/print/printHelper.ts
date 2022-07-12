@@ -82,6 +82,7 @@ class PrintHelper {
       // 类型缩减需要
       state: params.state != null ? params.state : this.state,
     };
+    const printer = formatPrintName(params.templateData, params.printer);
 
     switch (params.state) {
       case ENUM_PRINT_PLUGIN_TYPE.jdOld:
@@ -91,7 +92,7 @@ class PrintHelper {
           if (jdqlData) {
             await this.jdPrintPlugin.print({
               preview: params.preview,
-              printer: formatPrintName(params.templateData, params.printer),
+              printer,
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
               customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
@@ -116,7 +117,7 @@ class PrintHelper {
           await this.rookiePrintPlugin.print({
             preview: params.preview,
             contents,
-            printer: formatPrintName(params.templateData, params.printer),
+            printer,
           });
         }
       }
@@ -130,7 +131,7 @@ class PrintHelper {
           await this.dyPrintPlugin.print({
             preview: params.preview,
             contents,
-            printer: formatPrintName(params.templateData, params.printer),
+            printer,
           });
         }
       }
@@ -160,7 +161,7 @@ class PrintHelper {
           await this.ksPrintPlugin.print({
             preview: params.preview,
             contents,
-            printer: formatPrintName(params.templateData, params.printer),
+            printer,
           });
         }
       }
@@ -187,7 +188,7 @@ class PrintHelper {
           await this.pddPrintPlugin.print({
             preview: params.preview,
             contents,
-            printer: formatPrintName(params.templateData, params.printer),
+            printer,
           });
         }
       }
@@ -198,7 +199,7 @@ class PrintHelper {
         for (let i = 0; i < pageData.length; i++) {
           await this.lodopPrintPlugin.print({
             preview: params.preview,
-            printer: formatPrintName(params.templateData, params.printer),
+            printer,
             contents: pageData[i],
             templateData: params.templateData,
           });
