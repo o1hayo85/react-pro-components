@@ -91,6 +91,7 @@ export class ProgrammeComponent extends React.Component<ProgrammeProps> {
           collapsible
           onCollapse={handleCollapsed}
           theme="light"
+          trigger={<i className={collapsed ? 'icon-sq' : 'icon-zk'}/>}
           width="300"
         >
           <div
