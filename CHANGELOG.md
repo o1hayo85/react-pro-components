@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.23...v0.0.0) (2022-07-11)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.24...v0.0.0) (2022-07-13)
+
+### Features
+
+- **egenie-config:** 增加滚动条样式 ([b2a4f59](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b2a4f59cec07435fb2caf22908c9f559cec21f11))
+
+## [0.13.24](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.23...v0.13.24) (2022-07-11)
 
 ### Features
 
