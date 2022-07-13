@@ -188,23 +188,61 @@ export class FilterSelect extends FilterBase {
 
   @computed
   public get options(): ValueAndLabelData {
-    let selectValue: Set<string>;
-    if (this.mode === 'multiple') {
-      selectValue = new Set(this.value);
-    } else {
-      selectValue = new Set(this.value == null ? [] : [this.value as string]);
+    function handleSelectValue(mode: FilterSelect['mode'], value: FilterSelect['value']): Set<string> {
+      if (mode === 'multiple') {
+        return new Set(value);
+      } else {
+        return new Set(value == null ? [] : [value as string]);
+      }
     }
 
-    const selectOptions = this.data.filter((item) => selectValue.has(item.value));
-    const limitOptions = this.data.filter((item) => !selectValue.has(item.value))
-      .filter((item) => {
-        const text = item.label.toLowerCase();
-        const search = this.searchValue.toLowerCase();
-        return this.isLeftMatch ? _.startsWith(text, search) : _.includes(text, search);
-      })
-      .slice(0, Math.max(this.maxItemsLength - selectOptions.length, 0));
+    function handleAllMatchData(data: ValueAndLabelData, searchValue: string, isLeftMatch: boolean): ValueAndLabelData {
+      return data.filter((item) => {
+        if (selectValue.has(item.value)) {
+          return true;
+        }
 
-    return selectOptions.concat(limitOptions);
+        const text = (item.label || '').toLowerCase();
+        const search = (searchValue || '').toLowerCase();
+        if (isLeftMatch) {
+          return _.startsWith(text, search);
+        } else {
+          return _.includes(text, search);
+        }
+      });
+    }
+
+    function handleValueMatch(data: ValueAndLabelData, maxItemsLength: number): number {
+      let valueMatchLimit = 0;
+      data.forEach((item, index) => {
+        if (selectValue.has(item.value)) {
+          if (valueMatchLimit < maxItemsLength) {
+            valueMatchLimit++;
+          } else {
+            data[index] = null;
+          }
+        }
+      });
+      return valueMatchLimit;
+    }
+
+    function handleSearchMatch(data: ValueAndLabelData, valueMatchLimit: number, maxItemsLength: number) {
+      let searchMatchCount = 0;
+      data.forEach((item, index) => {
+        if (item !== null && !selectValue.has(item.value)) {
+          if (searchMatchCount + valueMatchLimit < maxItemsLength) {
+            searchMatchCount++;
+          } else {
+            data[index] = null;
+          }
+        }
+      });
+    }
+
+    const selectValue = handleSelectValue(this.mode, this.value);
+    const allMatchData = handleAllMatchData(this.data, this.searchValue, this.isLeftMatch);
+    handleSearchMatch(allMatchData, handleValueMatch(allMatchData, this.maxItemsLength), this.maxItemsLength);
+    return allMatchData.filter(Boolean);
   }
 
   /**
