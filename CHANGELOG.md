@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.25...v0.0.0) (2022-07-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.26...v0.0.0) (2022-07-13)
+
+### Features
+
+- **egenie-common:** 下拉框搜素优化 ([59d9316](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/59d9316002d35b6daf55ab3ce7749a83fdf98605))
+- **egenie-common:** 下拉框选择项优化 ([775061c](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/775061c25a18fbb98a40b86655787602dca26c7a))
+
+## [0.13.26](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.25...v0.13.26) (2022-07-13)
 
 ## [0.13.25](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.24...v0.13.25) (2022-07-13)
 
