@@ -96,7 +96,7 @@ class PrintHelper {
               printData: [jdqlData.printData],
               tempUrl: jdqlData.tempUrl,
               customData: jdqlData.customData ? [JSON.parse(jdqlData.customData)] : jdqlData.customData,
-              customTempUrl: this.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
+              customTempUrl: params.state === ENUM_PRINT_PLUGIN_TYPE.jdOld ? getJdCustomTemplateUrlOld(jdqlData.customTempUrl) : getCustomTemplateUrlNew(params.contents[i]),
             });
           } else {
             const error = '没有京东打印数据';
@@ -113,7 +113,7 @@ class PrintHelper {
         const pageData = sliceData(params.contents, params.count);
 
         for (let i = 0; i < pageData.length; i++) {
-          const contents = this.state === ENUM_PRINT_PLUGIN_TYPE.rookieOld ? formatRookieDataOld(pageData[i], params.templateData) : formatRookieDataNew(pageData[i]);
+          const contents = params.state === ENUM_PRINT_PLUGIN_TYPE.rookieOld ? formatRookieDataOld(pageData[i], params.templateData) : formatRookieDataNew(pageData[i]);
           await this.rookiePrintPlugin.print({
             preview: params.preview,
             contents,
@@ -127,7 +127,7 @@ class PrintHelper {
         const pageData = sliceData(params.contents, params.count);
 
         for (let i = 0; i < pageData.length; i++) {
-          const contents = this.state === ENUM_PRINT_PLUGIN_TYPE.dyOld ? formatDyDataOld(pageData[i]) : formatDyDataNew(pageData[i]);
+          const contents = params.state === ENUM_PRINT_PLUGIN_TYPE.dyOld ? formatDyDataOld(pageData[i]) : formatDyDataNew(pageData[i]);
           await this.dyPrintPlugin.print({
             preview: params.preview,
             contents,
