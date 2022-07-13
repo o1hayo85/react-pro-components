@@ -28,4 +28,5 @@ export { FilterBase } from './filterBase';
 export { ENUM_FILTER_ITEM_TYPE } from './types';
 export type { FilterItemOptions, FilterItem, ValueAndLabelData } from './types';
 export type { NormalProgrammeParams } from './normalProgramme';
-export { NormalProgramme, NormalProgrammeComponent } from './normalProgramme';
+export { NormalProgramme } from './normalProgramme';
+export { NormalProgrammeComponent } from './normalProgrammeComponent';

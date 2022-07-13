@@ -27,6 +27,7 @@ export function FilterItemLabel({
       style={{
         width: labelWidth,
         maxWidth: labelWidth,
+        ...(labelWidth > 0 ? {} : { padding: 0 }),
       }}
       title={label}
     >
