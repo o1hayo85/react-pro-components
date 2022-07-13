@@ -1,4 +1,4 @@
-@footer-height: 65px;
+@footer-height: 46px;
 @param-active: #ddebff;
 @field-active: rgba(red(@egenie-primary-color), green(@egenie-primary-color), blue(@egenie-primary-color), 0.6);
 
@@ -28,7 +28,7 @@
     .ant-layout-content {
       display: flex;
       flex-direction: column;
-      padding-left: @egenie-spacing-md;
+      padding-left: @egenie-spacing-sm;
     }
   }
 
@@ -38,7 +38,7 @@
     justify-content: space-between;
     width: 100%;
     height: @footer-height;
-    padding: 0 @egenie-spacing-md;
+    padding: 0 @egenie-spacing-xs;
     border-top: 1px solid @egenie-border-color-base;
 
     > a > i {
@@ -61,7 +61,6 @@
     width: 100%;
     max-width: 100%;
     height: @egenie-height-md;
-    margin-bottom: @egenie-spacing-xss;
     overflow-x: auto;
     border-radius: @egenie-border-radius-base @egenie-border-radius-base 0 0;
 
@@ -193,7 +192,7 @@
   height: 100%;
 
   .filterItemContainer {
-    padding-bottom: @egenie-spacing-xs;
+    padding-bottom: @egenie-spacing-xss;
 
     &.paramActive {
       :global {
@@ -294,9 +293,9 @@
 
 .filterContent {
   position: relative;
-  height: calc(100% - @footer-height - @egenie-spacing-md);
-  margin-top: @egenie-spacing-md;
-  padding: 0 @egenie-spacing-md;
+  height: calc(100% - @footer-height - @egenie-spacing-xs);
+  margin-top: @egenie-spacing-xs;
+  padding: 0 @egenie-spacing-xs;
   overflow-y: auto;
 
   :global {

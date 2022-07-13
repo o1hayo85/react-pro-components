@@ -1,4 +1,4 @@
-import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Tabs, Typography } from 'antd';
+import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Space, Tabs, Typography } from 'antd';
 import classNames from 'classnames';
 import type { FilterItem, FilterItemOptions } from 'egenie-common';
 import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory } from 'egenie-common';
@@ -142,41 +142,41 @@ class Footer extends React.Component<{ programme: Programme; }> {
           <a onClick={() => handleShowSetting(true)}>
             <i className="icon-btn_sz"/>
           </a>
-          {
-            activeProgrammeId === programmeList[0].id ? (
-              <Button onClick={() => handleShowProgramme(true)}>
-                生成方案
-              </Button>
-            ) : (
-              <Dropdown.Button
-                onClick={() => handleShowProgramme(true)}
-                overlay={(
-                  <Menu onClick={() => editProgramme()}>
-                    <Menu.Item key="1">
-                      更新方案
-                    </Menu.Item>
-                  </Menu>
-                )}
-                placement="topCenter"
-                trigger={['click']}
-              >
-                生成方案
-              </Dropdown.Button>
-            )
-          }
-          <Button
-            className="ghost-bg-btn"
-            onClick={reset}
-          >
-            重置
-          </Button>
-          <Button
-            loading={isSearch}
-            onClick={handleSearch}
-            type="primary"
-          >
-            查询
-          </Button>
+          <Space size={4}>
+            {
+              activeProgrammeId === programmeList[0].id ? (
+                <Button onClick={() => handleShowProgramme(true)}>
+                  生成方案
+                </Button>
+              ) : (
+                <Dropdown.Button
+                  onClick={() => handleShowProgramme(true)}
+                  overlay={(
+                    <Menu onClick={() => editProgramme()}>
+                      <Menu.Item key="1">
+                        更新方案
+                      </Menu.Item>
+                    </Menu>
+                  )}
+                  placement="topCenter"
+                  trigger={['click']}
+                >
+                  生成方案
+                </Dropdown.Button>
+              )
+            }
+            <Button onClick={reset}>
+              重置
+            </Button>
+            <Button
+              loading={isSearch}
+              onClick={handleSearch}
+              type="primary"
+            >
+              查询
+            </Button>
+          </Space>
+
         </div>
         {
           showProgramme ? (
