@@ -42,6 +42,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
         />
         <Select
           allowClear={allowClear}
+          autoClearSearchValue
           bordered={false}
           disabled={disabled}
           dropdownMatchSelectWidth={false}
@@ -75,6 +76,11 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           maxTagCount="responsive"
           mode={mode}
           onChange={onChange}
+          onDropdownVisibleChange={(open) => {
+            if (!open) {
+              onSearch('');
+            }
+          }}
           onSearch={onSearch}
           optionFilterProp="label"
           options={options}
