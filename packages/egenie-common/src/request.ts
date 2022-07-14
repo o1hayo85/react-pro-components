@@ -52,11 +52,6 @@ const singleton = (function() {
       .response
       .use(responseBaseInterceptors, undefined);
 
-    axiosInstance
-      .interceptors
-      .response
-      .use(wmsResponseInterceptors, undefined);
-
     function responseBaseInterceptors(info: AxiosResponse) {
       const successfulTag = [
         'RESULT',
@@ -84,19 +79,6 @@ const singleton = (function() {
             key: errorMsg,
             content: errorMsg,
           });
-          return Promise.reject(info);
-        }
-      } else {
-        return Promise.resolve(info);
-      }
-    }
-
-    function wmsResponseInterceptors(info: AxiosResponse) {
-      if (info.data && Object.prototype.hasOwnProperty.call(info.data, 'success')) {
-        if (info.data.success === true) {
-          return Promise.resolve(info);
-        } else {
-          message.error(info.data.errorMsg || '请求失败');
           return Promise.reject(info);
         }
       } else {
