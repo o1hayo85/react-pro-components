@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.27...v0.0.0) (2022-07-13)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.28...v0.0.0) (2022-07-14)
+
+### Features
+
+- **egenie-common:** 去掉 wms 的 interceptors ([d576105](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/d576105dfffd33f1b6cd82454d56ee4c5493a14c))
+
+## [0.13.28](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.27...v0.13.28) (2022-07-13)
 
 ### Features
 
