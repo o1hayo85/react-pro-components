@@ -1,7 +1,19 @@
-import { action, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import type React from 'react';
+import { FormatDateType } from './filterDate';
 import type { FilterItemsParams } from './filterItems';
 import { FilterItems } from './filterItems';
+import { ENUM_FILTER_ITEM_TYPE } from './types';
+import type { FilterItem } from './types';
+
+interface FilterItemTransformItem {
+  filterItem: FilterItem;
+
+  /**
+   * 某项所占位置多少个
+   */
+  itemCount: number;
+}
 
 export interface NormalProgrammeParams extends FilterItemsParams {
 
@@ -28,31 +40,27 @@ export interface NormalProgrammeParams extends FilterItemsParams {
 
 export class NormalProgramme {
   constructor(options: Partial<NormalProgrammeParams> = {}) {
-    const initFilterItems = () => {
-      this.filterItems = new FilterItems({
-        filterItems: (options.filterItems || []).map((item) => ({
-          ...item,
-          onPressEnter: this.handleSearch,
-        })),
-        dict: options.dict,
-      });
+    this.filterItems = new FilterItems({
+      filterItems: (options.filterItems || []).map((item) => ({
+        onPressEnter: this.handleSearch,
+        ...item,
+      })),
+      dict: options.dict,
+    });
 
-      this.searchCallback = options.handleSearch;
+    this.searchCallback = options.handleSearch;
 
-      if (options.count) {
-        this.count = options.count;
-      }
+    if (options.count) {
+      this.count = options.count >>> 0;
+    }
 
-      if (options.button) {
-        this.button = options.button;
-      }
+    if (options.button) {
+      this.button = options.button;
+    }
 
-      if (options.showButton != null) {
-        this.showButton = options.showButton;
-      }
-    };
-
-    initFilterItems();
+    if (options.showButton != null) {
+      this.showButton = options.showButton;
+    }
   }
 
   private searchCallback: NormalProgrammeParams['handleSearch'];
@@ -95,5 +103,54 @@ export class NormalProgramme {
   @action public reset = () => {
     this.filterItems.reset();
   };
+
+  @computed
+  public get notCollapseData(): FilterItemTransformItem[] {
+    let notIncludedBtnCount = 2 * this.count - 1;
+    const result: FilterItemTransformItem[] = [];
+
+    for (let i = 0; i < this.filterItems.actualData.length && notIncludedBtnCount > 0; i++) {
+      const item = this.filterItems.actualData[i];
+      const isDateComponentNeedDoubleCount = (item.type === ENUM_FILTER_ITEM_TYPE.date || item.type === ENUM_FILTER_ITEM_TYPE.dateRange) &&
+        item.format === FormatDateType.defaultFormat &&
+        this.count >= 6;
+
+      if (isDateComponentNeedDoubleCount) {
+        if (notIncludedBtnCount >= 2) {
+          result.push({
+            filterItem: item,
+            itemCount: 2,
+          });
+        }
+        notIncludedBtnCount -= 2;
+      } else {
+        if (notIncludedBtnCount >= 1) {
+          result.push({
+            filterItem: item,
+            itemCount: 1,
+          });
+        }
+        notIncludedBtnCount -= 1;
+      }
+    }
+
+    return result;
+  }
+
+  @computed
+  public get notCollapseActualBtnCount(): number {
+    const notCollapseActualTotalCount = this.notCollapseData.reduce((prev, current) => prev + current.itemCount, 0);
+    return this.count - (notCollapseActualTotalCount % this.count);
+  }
+
+  @computed
+  public get collapseData(): FilterItemTransformItem[] {
+    const notCollapseFields = this.notCollapseData.map((item) => item.filterItem.field);
+    return this.filterItems.actualData.filter((item) => !notCollapseFields.includes(item.field))
+      .map((filterItem) => ({
+        filterItem,
+        itemCount: 1,
+      }));
+  }
 }
 
