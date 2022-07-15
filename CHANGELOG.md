@@ -1,4 +1,13 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.28...v0.0.0) (2022-07-14)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.29...v0.0.0) (2022-07-15)
+
+### Features
+
+- **egenie-common:** 上下查询方案支持更多 ([2e13ce2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/2e13ce21bc9ec1cdee6e76fddd6946f5ee2dc511))
+- **egenie-common:** 上下查询方案支持更多 ([ae0b117](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/ae0b117721a05ad2d99731e943df0d0867bb38c9))
+- **egenie-common:** 上下查询方案支持更多 ([a6e9c34](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/a6e9c3456196529767eda72ed7009d15d266ab6e))
+- **egenie-common:** 上下查询方案支持更多 ([901c8f6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/901c8f68cbacdadb072dee643dd6c19df110b547))
+
+## [0.13.29](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.28...v0.13.29) (2022-07-14)
 
 ### Features
 
