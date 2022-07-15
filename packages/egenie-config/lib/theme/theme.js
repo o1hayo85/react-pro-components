@@ -100,6 +100,15 @@ const font = {
 };
 
 const spacing = {
+  // 菜单header高度
+  'egenie-header-height': '40px',
+
+  // 菜单内容padding
+  'egenie-content-padding': '8px',
+
+  // 菜单sider宽度
+  'egenie-sider-width': '60px',
+
   // 超大间距
   'egenie-spacing-xxl': '40px',
 
