@@ -1,7 +1,7 @@
 import { action, extendObservable, observable, toJS } from 'mobx';
-import { formatNumber } from '../helper';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { formatNumber } from '../../helper';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
 export function formatNumberString(value: [number, number]) {
   if (value[0] == null && value[1] == null) {

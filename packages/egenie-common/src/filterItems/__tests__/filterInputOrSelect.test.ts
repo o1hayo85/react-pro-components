@@ -1,4 +1,4 @@
-import { FilterInputOrSelect } from '../filterInputOrSelect';
+import { FilterInputOrSelect } from '../filterInputOrSelect/filterInputOrSelect';
 
 describe('filterInputAndSelect', () => {
   test('init', () => {

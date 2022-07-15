@@ -4,11 +4,11 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
-import type { FilterDate } from './filterDate';
+import styles from '../filterItems.less';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import { FilterItemLabel } from '../utils';
 import { FormatDateType } from './filterDate';
-import styles from './filterItems.less';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
+import type { FilterDate } from './filterDate';
 
 @observer
 export class FilterDateComponent extends React.Component<{ store: FilterDate; }> {

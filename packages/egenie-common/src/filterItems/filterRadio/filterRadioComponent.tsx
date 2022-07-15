@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import styles from './filterItems.less';
+import styles from '../filterItems.less';
+import { throttleTime } from '../utils';
 import type { FilterRadio } from './filterRadio';
-import { throttleTime } from './utils';
 
 @observer
 export class FilterRadioComponent extends React.Component<{ store: FilterRadio; }> {

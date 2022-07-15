@@ -1,4 +1,4 @@
-import { FilterInputNumberGroup, formatNumberString } from '../filterInputNumberGroup';
+import { FilterInputNumberGroup, formatNumberString } from '../filterInputNumberGroup/filterInputNumberGroup';
 
 describe('filterInputNumberGroup', () => {
   test('init', () => {

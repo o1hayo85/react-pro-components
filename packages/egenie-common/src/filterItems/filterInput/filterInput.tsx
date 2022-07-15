@@ -1,8 +1,8 @@
 import { action, extendObservable, observable } from 'mobx';
-import { FilterBase } from './filterBase';
-import type { ENUM_SPLIT_SYMBOL } from './types';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { trimWhiteSpace } from './utils';
+import { FilterBase } from '../filterBase';
+import type { ENUM_SPLIT_SYMBOL } from '../types';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import { trimWhiteSpace } from '../utils';
 
 export class FilterInput extends FilterBase {
   constructor(options: Partial<FilterInput>) {

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
 import type React from 'react';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
 /**
  * TreeData数据类型

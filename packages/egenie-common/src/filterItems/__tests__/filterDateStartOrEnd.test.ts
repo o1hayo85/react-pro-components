@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { FilterDateStartOrEnd, formatTime } from '../filterDateStartOrEnd';
+import { FilterDateStartOrEnd, formatTime } from '../filterDate/filterDateStartOrEnd';
 
 describe('dateStartOrEnd', () => {
   test('init', () => {

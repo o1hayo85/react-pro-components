@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { FilterDate, formatTime } from '../filterDate';
+import { FilterDate, formatTime } from '../filterDate/filterDate';
 
 describe('filterDate', () => {
   test('init', () => {

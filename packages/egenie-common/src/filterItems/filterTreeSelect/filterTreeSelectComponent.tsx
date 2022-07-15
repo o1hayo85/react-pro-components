@@ -2,8 +2,8 @@ import { TreeSelect } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { FilterItemLabel } from '../utils';
 import type { FilterTreeSelect } from './filterTreeSelect';
-import { FilterItemLabel } from './utils';
 
 @observer
 export class FilterTreeSelectComponent extends React.Component<{ store: FilterTreeSelect; }> {

@@ -1,8 +1,8 @@
 import { action, extendObservable, observable } from 'mobx';
 import type React from 'react';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { trimWhiteSpace } from './utils';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import { trimWhiteSpace } from '../utils';
 
 export class FilterInputOrSelect extends FilterBase {
   constructor(options: Partial<FilterInputOrSelect>) {

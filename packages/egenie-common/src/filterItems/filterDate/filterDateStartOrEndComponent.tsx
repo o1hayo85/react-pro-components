@@ -4,10 +4,10 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import React from 'react';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import { FilterItemLabel } from '../utils';
 import { FormatDateType } from './filterDate';
 import type { FilterDateStartOrEnd } from './filterDateStartOrEnd';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { FilterItemLabel } from './utils';
 
 @observer
 export class FilterDateStartOrEndComponent extends React.Component<{ store: FilterDateStartOrEnd; }> {

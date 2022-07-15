@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { FilterItemLabel, throttleTime } from '../utils';
 import type { FilterInputNumberGroup } from './filterInputNumberGroup';
-import { FilterItemLabel, throttleTime } from './utils';
 
 @observer
 export class FilterInputNumberGroupComponent extends React.Component<{ store: FilterInputNumberGroup; }> {

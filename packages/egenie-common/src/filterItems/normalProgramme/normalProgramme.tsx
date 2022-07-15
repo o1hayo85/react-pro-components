@@ -1,10 +1,10 @@
 import { action, computed, observable } from 'mobx';
 import type React from 'react';
-import { FormatDateType } from './filterDate';
-import type { FilterItemsParams } from './filterItems';
-import { FilterItems } from './filterItems';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import type { FilterItem } from './types';
+import { FormatDateType } from '../filterDate/filterDate';
+import type { FilterItemsParams } from '../filterItems';
+import { FilterItems } from '../filterItems';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import type { FilterItem } from '../types';
 
 interface FilterItemTransformItem {
   filterItem: FilterItem;

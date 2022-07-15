@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { action, computed, extendObservable, intercept, observable, toJS } from 'mobx';
-import { FilterBase } from './filterBase';
-import type { ValueAndLabelData } from './types';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { FilterBase } from '../filterBase';
+import type { ValueAndLabelData } from '../types';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
 function formatValue(value: FilterSelect['value'], mode: FilterSelect['mode']): FilterSelect['value'] {
   if (mode) {

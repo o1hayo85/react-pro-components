@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { action, observable, extendObservable, computed } from 'mobx';
 import moment from 'moment';
 import React from 'react';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
 export enum FormatDateType {
   defaultFormat = 'YYYY-MM-DD HH:mm:ss',

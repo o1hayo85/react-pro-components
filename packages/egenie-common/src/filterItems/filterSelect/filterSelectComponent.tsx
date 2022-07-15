@@ -2,9 +2,9 @@ import { Button, Select, Switch } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import styles from './filterItems.less';
+import styles from '../filterItems.less';
+import { FilterItemLabel } from '../utils';
 import type { FilterSelect } from './filterSelect';
-import { FilterItemLabel } from './utils';
 
 @observer
 export class FilterSelectComponent extends React.Component<{ store: FilterSelect; }> {

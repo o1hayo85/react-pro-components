@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { throttleTime } from '../utils';
 import type { FilterInputOrSelect } from './filterInputOrSelect';
-import { throttleTime } from './utils';
 
 @observer
 export class FilterInputOrSelectComponent extends React.Component<{ store: FilterInputOrSelect; }> {

@@ -1,8 +1,8 @@
 import type { Input } from 'antd';
 import { action, extendObservable, observable } from 'mobx';
 import React from 'react';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
 export class FilterRadio extends FilterBase {
   constructor(options: Partial<FilterRadio>) {

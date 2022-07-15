@@ -1,10 +1,20 @@
-import _ from 'lodash';
 import { action, intercept, observable, extendObservable, toJS } from 'mobx';
-import { FilterBase } from './filterBase';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
+import { FilterBase } from '../filterBase';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
 
-export class FilterCascader extends FilterBase {
-  constructor(options: Partial<FilterCascader>) {
+function formatValue(value?: string[] | string): string[] {
+  if (Array.isArray(value)) {
+    return value;
+  } else if (typeof value === 'string') {
+    return value.split(',')
+      .filter(Boolean);
+  } else {
+    return [];
+  }
+}
+
+export class FilterCheckbox extends FilterBase {
+  constructor(options: Partial<FilterCheckbox>) {
     super(options);
     const {
       data,
@@ -13,8 +23,9 @@ export class FilterCascader extends FilterBase {
 
     extendObservable(this, {
       ...rest,
-      showCollapse: false,
+      showCollapse: true,
     });
+
     this.formatValue(this.value);
     this.snapshot = this.value;
 
@@ -27,7 +38,7 @@ export class FilterCascader extends FilterBase {
   /**
    * 类型标志
    */
-  @observable public type: 'cascader' = ENUM_FILTER_ITEM_TYPE.cascader;
+  @observable public type: 'checkbox' = ENUM_FILTER_ITEM_TYPE.checkbox;
 
   public toProgramme(): string | null {
     if (Array.isArray(this.value) && this.value.length) {
@@ -56,22 +67,10 @@ export class FilterCascader extends FilterBase {
 
   public translateParams(): string[] {
     if (Array.isArray(this.value) && this.value.length) {
-      const translatePath: string[] = [];
-      let currentData = this.data;
-      for (let i = 0; i < this.value.length; i++) {
-        const item = currentData.find((val) => val.value === this.value[i]);
-        if (item) {
-          currentData = item.children || [];
-          translatePath.push(item.label);
-        } else {
-          currentData = [];
-          translatePath.push('');
-        }
-      }
-
       return [
         this.label,
-        translatePath.join(','),
+        this.value.map((item) => this.data.find((val) => val.value === item)?.label || '')
+          .join(','),
       ];
     } else {
       return [];
@@ -79,14 +78,8 @@ export class FilterCascader extends FilterBase {
   }
 
   @action
-  public formatValue(value?: string[] | string): void {
-    if (Array.isArray(value)) {
-      this.value = value;
-    } else {
-      this.value = _.toString(value)
-        .split(',')
-        .filter(Boolean);
-    }
+  public formatValue(value?: string | string[]): void {
+    this.value = formatValue(value);
   }
 
   private snapshot: string[] = [];
@@ -103,56 +96,23 @@ export class FilterCascader extends FilterBase {
   };
 
   /**
-   * 选择的值
+   * 选中值
    */
-  @observable public value: string[] = [];
+  @observable public value: string [] = [];
 
   @action public onChange = (value: string[]) => {
-    if (Array.isArray(value)) {
-      this.value = value;
-    } else {
-      this.value = [];
-    }
-
+    this.value = value || [];
     this.handleCallback();
   };
 
   /**
-   * 动态加载选项
-   */
-  public loadData: (selectedOptions: unknown) => void;
-
-  /**
-   * 值改回掉
+   * 改变值回掉
    */
   public onChangeCallback: (value?: string[]) => void;
-
-  /**
-   * 输入框提示文字
-   */
-  @observable public placeholder = '请选择';
-
-  /**
-   * 是否可清除
-   */
-  @observable public allowClear = true;
 
   /**
    * 是否禁止
    */
   @observable public disabled = false;
-
-  /**
-   * 是否显示搜索框
-   */
-  @observable public showSearch = true;
-
-  /**
-   * 自定义 options 中 label name children 的字段
-   */
-  @observable public fieldNames: { value: string; label: string; children: string; } = {
-    label: 'label',
-    value: 'value',
-    children: 'children',
-  };
 }
+

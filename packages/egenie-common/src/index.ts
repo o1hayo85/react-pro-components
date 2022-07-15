@@ -8,6 +8,7 @@ export { RenderRoutes, MenuDataItem } from './renderRoutes';
 export { history } from './history';
 export { printHelper, formatBarcodeData, printWayBill, CustomPrintModal, getCustomPrintParam, getCustomPrintParamByDefaultTemplate, LodopPrint, getUUID } from './print';
 export { playVoice, getAndPlayVoice } from './voice';
+export { RenderByCondition } from './renderByCondition';
 export * from './filterItems';
 export * from './layoutMenu';
 

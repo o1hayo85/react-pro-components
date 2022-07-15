@@ -2,8 +2,8 @@ import { Checkbox } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import styles from '../filterItems.less';
 import type { FilterCheckbox } from './filterCheckbox';
-import styles from './filterItems.less';
 
 @observer
 export class FilterCheckboxComponent extends React.Component<{ store: FilterCheckbox; }> {

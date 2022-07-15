@@ -1,4 +1,4 @@
-import { FilterCascader } from '../filterCascader';
+import { FilterCascader } from '../filterCascader/filterCascader';
 
 describe('filterCascader', () => {
   test('init', () => {

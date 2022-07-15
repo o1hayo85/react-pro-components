@@ -1,4 +1,4 @@
-import { FilterCheckbox } from '../filterCheckbox';
+import { FilterCheckbox } from '../filterCheckbox/filterCheckbox';
 
 describe('filterCheckbox', () => {
   test('init', () => {

@@ -2,10 +2,10 @@ import type { Input } from 'antd';
 import _ from 'lodash';
 import { action, computed, extendObservable, observable } from 'mobx';
 import React from 'react';
-import { FilterBase } from './filterBase';
-import type { ENUM_SPLIT_SYMBOL } from './types';
-import { ENUM_FILTER_ITEM_TYPE } from './types';
-import { trimWhiteSpace } from './utils';
+import { FilterBase } from '../filterBase';
+import type { ENUM_SPLIT_SYMBOL } from '../types';
+import { ENUM_FILTER_ITEM_TYPE } from '../types';
+import { trimWhiteSpace } from '../utils';
 
 export class FilterInputAndSelect extends FilterBase {
   constructor(options: Partial<FilterInputAndSelect>) {

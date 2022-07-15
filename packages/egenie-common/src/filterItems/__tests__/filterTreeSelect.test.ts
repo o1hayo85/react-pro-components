@@ -1,4 +1,4 @@
-import { FilterTreeSelect } from '../filterTreeSelect';
+import { FilterTreeSelect } from '../filterTreeSelect/filterTreeSelect';
 
 describe('filterTreeSelect', () => {
   test('init', () => {

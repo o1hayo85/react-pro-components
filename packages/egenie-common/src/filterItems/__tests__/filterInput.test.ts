@@ -1,4 +1,4 @@
-import { FilterInput } from '../filterInput';
+import { FilterInput } from '../filterInput/filterInput';
 
 describe('filterInput', () => {
   test('init', () => {

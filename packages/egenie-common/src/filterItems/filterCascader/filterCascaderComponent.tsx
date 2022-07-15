@@ -2,8 +2,8 @@ import { Cascader } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { FilterItemLabel } from '../utils';
 import type { FilterCascader } from './filterCascader';
-import { FilterItemLabel } from './utils';
 
 @observer
 export class FilterCascaderComponent extends React.Component<{ store: FilterCascader; }> {

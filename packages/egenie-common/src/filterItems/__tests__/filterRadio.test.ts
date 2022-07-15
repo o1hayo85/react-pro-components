@@ -1,4 +1,4 @@
-import { FilterRadio } from '../filterRadio';
+import { FilterRadio } from '../filterRadio/filterRadio';
 
 describe('filterRadio', () => {
   test('init', () => {

@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { MultipleSearch } from '../multipleSearch';
+import { throttleTime } from '../utils';
 import type { FilterInputAndSelect } from './filterInputAndSelect';
-import { MultipleSearch } from './multipleSearch';
-import { throttleTime } from './utils';
 
 @observer
 export class FilterInputAndSelectComponent extends React.Component<{ store: FilterInputAndSelect; }> {
