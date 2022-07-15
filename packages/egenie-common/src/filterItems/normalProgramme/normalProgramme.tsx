@@ -36,6 +36,11 @@ export interface NormalProgrammeParams extends FilterItemsParams {
    * 是否显示button
    */
   showButton?: boolean;
+
+  /**
+   * 是否显示折叠
+   */
+  showCollapse?: boolean;
 }
 
 export class NormalProgramme {
@@ -61,9 +66,15 @@ export class NormalProgramme {
     if (options.showButton != null) {
       this.showButton = options.showButton;
     }
+
+    if (options.showCollapse != null) {
+      this.showCollapse = Boolean(options.showCollapse);
+    }
   }
 
   private searchCallback: NormalProgrammeParams['handleSearch'];
+
+  @observable public showCollapse = true;
 
   @observable public isSearch = false;
 
@@ -106,6 +117,14 @@ export class NormalProgramme {
 
   @computed
   public get notCollapseData(): FilterItemTransformItem[] {
+    // 不折叠的原路返回,兼容可能是竖直方向一个一行
+    if (!this.showCollapse) {
+      return this.filterItems.actualData.map((item) => ({
+        filterItem: item,
+        itemCount: 1,
+      }));
+    }
+
     let notIncludedBtnCount = 2 * this.count - 1;
     const result: FilterItemTransformItem[] = [];
 
@@ -122,7 +141,6 @@ export class NormalProgramme {
             itemCount: 2,
           });
         }
-        notIncludedBtnCount -= 2;
       } else {
         if (notIncludedBtnCount >= 1) {
           result.push({
