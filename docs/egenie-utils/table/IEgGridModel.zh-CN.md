@@ -2,6 +2,7 @@
 title: 表格配置参数
 order: 4
 ---
+
 # `EgGridModel表格配置`
 
 ## `columns`
@@ -144,7 +145,7 @@ order: 4
   - 描述: 当前页
   - 类型: [StrOrNum](./ieg-grid-types#StrOrNum)
 
-   #### `sord`
+  #### `sord`
 
   - 描述: 升排或降排
   - 类型: [SortDirection](./ieg-grid-types#SortDirection)

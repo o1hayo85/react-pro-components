@@ -3,7 +3,7 @@ title: 导出
 order: 1
 nav:
   title: egenie-utils
-  order: 4
+  order: 3
 ---
 
 ## 导出 ExportModal

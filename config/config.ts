@@ -20,10 +20,6 @@ export default defineConfig({
   navs: [
     null,
     {
-      title: 'RN',
-      path: 'http://192.168.200.93:11114/',
-    },
-    {
       title: 'GitLab',
       path: 'http://192.168.200.111:9980/egFrontend/egenie-utils',
     },

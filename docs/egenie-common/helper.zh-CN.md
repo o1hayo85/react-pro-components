@@ -3,7 +3,7 @@ title: 数字处理
 order: 1
 nav:
   title: egenie-common
-  order: 3
+  order: 2
 ---
 
 # `下面所有方法不需要在外部对数字做任何转换(内部已经处理)`
