@@ -17,6 +17,7 @@ npm install -g generator-egenie-react-web
 ## 生成
 
 ```bash
-mkdir 目录名称 && cd 目录名称
+mkdir 目录名称
+cd 目录名称
 yo egenie-react-web
 ```

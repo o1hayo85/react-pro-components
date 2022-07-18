@@ -9,6 +9,7 @@ First, install [Yeoman](http://yeoman.io) generator-egenie-react-h5 using [npm](
 
 ```bash
 npm install -g yo@3.1.0
+
 # 下载最新generator-egenie-react-h5。存在则更新
 npm install -g generator-egenie-react-h5
 ```
@@ -16,6 +17,7 @@ npm install -g generator-egenie-react-h5
 ## 生成
 
 ```bash
-mkdir 目录名称 && cd 目录名称
+mkdir 目录名称
+cd 目录名称
 yo egenie-react-h5
 ```
