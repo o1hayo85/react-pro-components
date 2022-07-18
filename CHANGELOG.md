@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.29...v0.0.0) (2022-07-15)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.0...v0.0.0) (2022-07-18)
+
+### Features
+
+- **egenie-common:** 查询方案样展开折叠优化 ([6251869](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/6251869089bf8cd697a39b98f226514669808717))
+
+# [0.14.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.13.29...v0.14.0) (2022-07-15)
 
 ### Features
 
