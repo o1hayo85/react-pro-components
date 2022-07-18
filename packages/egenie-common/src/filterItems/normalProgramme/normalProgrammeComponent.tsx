@@ -76,47 +76,48 @@ class ButtonContainer extends React.Component<{ store: NormalProgramme; }> {
         >
           <RenderByCondition show={!button}>
             <Space size={4}>
-              <RenderByCondition show={collapseData.length > 0}>
-                <Popover
-                  arrowPointAtCenter
-                  content={(
-                    <Row
-                      className={styles.collapseContainer}
-                      gutter={[
-                        8,
-                        8,
-                      ]}
-                    >
-                      {
-                        collapseData.map((item) => (
-                          <Col
-                            key={item.filterItem.field}
-                            style={{ width: '50%' }}
-                          >
-                            {filterComponentFactory(item.filterItem)}
-                          </Col>
-                        ))
-                      }
-                    </Row>
-                  )}
-                  overlayInnerStyle={{ width: 752 }}
-                  placement="bottomRight"
-                  title={null}
-                  trigger="click"
-                >
-                  <Button
-                    style={{
-                      paddingLeft: 4,
-                      paddingRight: 4,
-                    }}
-                    type="text"
+              {
+                collapseData.length > 0 ? (
+                  <Popover
+                    arrowPointAtCenter
+                    content={(
+                      <Row
+                        className={styles.collapseContainer}
+                        gutter={[
+                          8,
+                          8,
+                        ]}
+                      >
+                        {
+                          collapseData.map((item) => (
+                            <Col
+                              key={item.filterItem.field}
+                              style={{ width: '50%' }}
+                            >
+                              {filterComponentFactory(item.filterItem)}
+                            </Col>
+                          ))
+                        }
+                      </Row>
+                    )}
+                    overlayInnerStyle={{ width: 752 }}
+                    placement="bottomRight"
+                    title={null}
+                    trigger="click"
                   >
-                    更多&nbsp;
-                    <i className="icon-arrow_pulldown"/>
-                  </Button>
-                </Popover>
-              </RenderByCondition>
-
+                    <Button
+                      style={{
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                      }}
+                      type="text"
+                    >
+                      更多&nbsp;
+                      <i className="icon-arrow_pulldown"/>
+                    </Button>
+                  </Popover>
+                ) : null
+              }
               <Button
                 onClick={reset}
                 style={{
@@ -137,26 +138,30 @@ class ButtonContainer extends React.Component<{ store: NormalProgramme; }> {
               >
                 查询
               </Button>
-              <RenderByCondition show={false}>
-                <Tooltip
-                  arrowPointAtCenter
-                  placement="bottomRight"
-                  title="查询项设置"
-                >
-                  <Button
-                    style={{
-                      paddingLeft: 4,
-                      paddingRight: 4,
-                    }}
-                    type="text"
+              {
+
+                // 暂时不显示
+                collapseData.length < -100000 ? (
+                  <Tooltip
+                    arrowPointAtCenter
+                    placement="bottomRight"
+                    title="查询项设置"
                   >
-                    <i
-                      className="icon-sz01"
-                      style={{ fontSize: 14 }}
-                    />
-                  </Button>
-                </Tooltip>
-              </RenderByCondition>
+                    <Button
+                      style={{
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                      }}
+                      type="text"
+                    >
+                      <i
+                        className="icon-sz01"
+                        style={{ fontSize: 14 }}
+                      />
+                    </Button>
+                  </Tooltip>
+                ) : null
+              }
             </Space>
           </RenderByCondition>
         </Col>
