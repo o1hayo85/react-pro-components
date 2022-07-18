@@ -59,7 +59,7 @@ order: 15
 
 ## 示例
 
-```ts
+```tsx | pure
 import { Card } from 'antd';
 import { NormalProgramme, NormalProgrammeComponent } from 'egenie-utils';
 import React from 'react';

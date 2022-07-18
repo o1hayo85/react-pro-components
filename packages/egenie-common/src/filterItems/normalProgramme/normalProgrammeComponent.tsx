@@ -54,7 +54,7 @@ export class NormalProgrammeComponent extends React.Component<NormalProgrammeCom
 }
 
 @observer
-export class ButtonContainer extends React.Component<{ store: NormalProgramme; }> {
+class ButtonContainer extends React.Component<{ store: NormalProgramme; }> {
   render() {
     const {
       store: {
