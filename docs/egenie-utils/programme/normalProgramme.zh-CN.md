@@ -41,6 +41,14 @@ order: 15
 - 类型?: boolean
 - 默认值: true
 
+### `showCollapse`
+
+- 前提: `egenie-common和egenie-utils版本大于等于0.14.0`
+- 描述: 当查询项数量多余 2 行是否显示折叠
+- 注意: `如果用此组件来竖直布局(竖直方向一行显示一个)不需要开启折叠`
+- 类型?: boolean
+- 默认值: true
+
 ## `实例属性和方法`
 
 ### `filterItems`
