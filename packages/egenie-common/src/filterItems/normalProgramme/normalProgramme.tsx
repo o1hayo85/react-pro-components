@@ -141,6 +141,7 @@ export class NormalProgramme {
             itemCount: 2,
           });
         }
+        notIncludedBtnCount -= 2;
       } else {
         if (notIncludedBtnCount >= 1) {
           result.push({
