@@ -129,13 +129,10 @@ class PrintWayBill {
   /**
    * 前置打印
    */
-  public readonly frontPrint = async({
-    preview,
-    ...rest
-  }: PrintWayBillParams): Promise<void> => {
+  public readonly frontPrint = async(params: PrintWayBillParams): Promise<void> => {
     await new Promise((resolve, reject) => {
       Modal.confirm({
-        content: preview ? '确定预览' : '确定打印',
+        content: params.preview ? '确定预览' : '确定打印',
         onOk: () => resolve(true),
         onCancel: () => reject(),
       });
@@ -144,8 +141,7 @@ class PrintWayBill {
     await this.getDataAndPrint({
       printSrc: '1',
       checkPrint: true,
-      preview,
-      ...rest,
+      ...params,
     });
   };
 
@@ -164,31 +160,23 @@ class PrintWayBill {
   /**
    * 获取数据并且打印
    */
-  public readonly getDataAndPrint = async({
-    preview,
-    printer,
-    ...rest
-  }: PrintWayBillParams): Promise<void> => {
-    const data = {
+  public readonly getDataAndPrint = async(params: PrintWayBillParams): Promise<void> => {
+    const newParams = {
       checkPrint: false,
       clearCell: false,
       sortingWall: false,
       orderBy: 'sku_no',
-      ...rest,
+      ...params,
     };
 
     const printData = await request<{ data: PrintData[]; }>({
       url: '/api/print/wms/waybill/queryWaybillPrintData',
-      data,
+      data: newParams,
       method: 'post',
     });
 
     validateData(printData.data);
-    await this.executePrint({
-      ...data,
-      preview,
-      printer,
-    }, printData.data);
+    await this.executePrint(newParams, printData.data);
   };
 
   /**
