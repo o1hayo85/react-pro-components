@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.3...v0.0.0) (2022-07-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.4...v0.0.0) (2022-07-25)
+
+### Features
+
+- **egenie-common:** 更改打印快递单传递 preview 参数 ([5bde48d](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/5bde48dc748662f513a1f6c1bebc75b8a0f0d37b))
+
+## [0.14.4](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.3...v0.14.4) (2022-07-22)
 
 ## [0.14.3](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.2...v0.14.3) (2022-07-21)
 
