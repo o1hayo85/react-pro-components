@@ -73,7 +73,6 @@ export class Store {
   });
 
   public dealLoginResult = (result: Response, type: string, info: LoginParams): void => {
-    console.log('result......', result);
     const index = result.data.indexOf('@@@');
     const urlStr = result.data.substring(0, index);
     const url = urlStr.indexOf('http://') === -1 && urlStr.indexOf('https://') === -1 ? (`http://${urlStr}`) : urlStr;

@@ -28,7 +28,6 @@ export default class LoginContent extends React.Component<Props> {
   render(): JSX.Element {
     const { errorInfo, loginFormRef, authimageneed, validateImage, changeAuthImage, handleFieldsChange } = this.props.store;
     const { registryPath, changePasswordPath } = this.props;
-    console.log('this..prfffff', this.props);
     return (
       <div className={styles.loginForm}>
         <div className={styles.content}>

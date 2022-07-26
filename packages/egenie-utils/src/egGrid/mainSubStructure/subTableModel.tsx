@@ -194,7 +194,6 @@ export class SubTableModel {
         ...el,
         idx: index + 1,
       }));
-      console.log('group的idx-------:', ret);
       return ret;
     });
     if (!permissionOfButton) {
@@ -346,7 +345,6 @@ export class SubTableModel {
 
   // 子表查询值改变
   public onFilterValueChange = action((key, value) => {
-    console.log(key, value);
     if (this.allFilterItemsInOneGroup) {
       return this.cursorFilterItem && (this.cursorFilterItem.value = value);
     }
@@ -411,7 +409,6 @@ export class SubTableModel {
       this.gridModel.resetAllSelectedRows(); // 重置表头的勾选框
       this.gridModel.loading = true;
       const data = this.searchData;
-      console.log(data, '点击子表搜索1');
       const page = '1';
       const { pageSize = '50', sidx, sord } = this.history;
       if (!this.gridModel.showPager) {
@@ -427,7 +424,6 @@ export class SubTableModel {
       }
     } else {
       const data = this.searchData;
-      console.log(data, '点击子表搜索2');
       const page = '1';
       const { pageSize = '50', sidx, sord } = this.history;
       this.queryDataAndSetState({
@@ -505,7 +501,6 @@ export class SubTableModel {
         }).then(
           action((v: IObj) => {
             // gridModel用于设置动态列columns
-            console.log('调用自定义内容查询');
             const searched = this.top.subTablesModel.tabsFlag.searched;
             this.top.subTablesModel.tabsFlag.searched = {
               ...searched,

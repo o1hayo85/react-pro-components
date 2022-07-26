@@ -596,7 +596,6 @@ export class EgGridModel {
   public batchToggleOrDeleteSubRow = action((isExpanded: boolean) => {
     const { rows, primaryKeyField } = this;
     const type = isExpanded ? 'toggleSubRow' : 'deleteSubRow';
-    console.log(type, '全部展开');
 
     if (isExpanded) {
       let _rows = toJS(rows);
@@ -804,7 +803,6 @@ export class EgGridModel {
       0,
       reorderedColumns.splice(sourceColumnIndex, 1)[0]
     );
-    console.log(toJS(reorderedColumns), '交换顺序');
     this.columns = reorderedColumns;
     const storage = this.getStorageParam(this.twoLevelClone(reorderedColumns));
     this.saveColumnsConfig(storage);
@@ -828,7 +826,6 @@ export class EgGridModel {
    * 本地排序
    */
   public localSort = action((sortColumns: SortColumn[]) => {
-    console.log(sortColumns, '排序字段和方式');
     this.sortColumns = sortColumns;
     if (!sortColumns.length) {
       this.rows = toJS(this.defaultRows);
@@ -865,7 +862,6 @@ export class EgGridModel {
    * 远端排序
    */
   public remoteSort = action((sortColumns: SortColumn[]) => {
-    console.log('远端排序sortColumns', sortColumns);
     let param: { sidx?: string; sord?: string; } = {};
     this.sortColumns = sortColumns;
     if (sortColumns.length) {
@@ -967,9 +963,8 @@ export class EgGridModel {
   public getColumnsConfig = action(() => {
     getColumnsConfig(this.cacheKeyForColumnsConfig).then(
       action((v: { data?: string; }) => {
-        console.log('获取列配置', v);
         const copyColumns = this.columns.slice();
-        
+
         const res = v.data;
         cache.setStorage({
           cacheKey: this.cacheKeyForColumnsConfig,
@@ -990,7 +985,7 @@ export class EgGridModel {
           message.error('表格列key重复');
           return;
         }
-  
+
         // 如果被删过某一列，或改过某一列的key, 或增加了一列
         // 修改列：key相同 name不同  ||  name相同  key不同
         // 新增  key/name都不同  新增列都放在最后
@@ -999,7 +994,6 @@ export class EgGridModel {
         for (let i = 0; i < copyColumns.length; i++) {
           const el = copyColumns[i];
           const addItem = _res.find((v) => (v.key === el.key || v.name === el.name));
-          console.log('addcolumns', toJS(addItem));
           if (!addItem) {
             _res.push(el);
           }
@@ -1022,7 +1016,6 @@ export class EgGridModel {
             _res.splice(i, 1);
           }
         }
-        console.log('_res1', toJS(_res));
         this.updateColumns(_res);
       })
     );

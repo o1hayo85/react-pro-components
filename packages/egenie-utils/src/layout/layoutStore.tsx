@@ -154,7 +154,6 @@ export class LayoutStore {
         if (!resourceId) {
           return;
         }
-        console.log(resourceId, 'resourceId');
         const ele = iframe.document.querySelectorAll('[permission]');
         ele.forEach((item) => {
           const id = item.getAttribute('permission');
@@ -501,7 +500,6 @@ export class LayoutStore {
 
   // 右上角用户信息等
   public handleUserOpertion = action((data, item) => {
-    console.log('item.....', data, item);
     switch (data.key) {
       case 'password':
         this.togglePassword(true);

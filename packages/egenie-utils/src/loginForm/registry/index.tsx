@@ -20,7 +20,6 @@ import Content from './content';
 * @inner logoText:string 登录系统标题
 */
 export const Registry: React.FC = (props: Props) => {
-  console.log('findpas...r', props);
   return (
     <Frame {...props}>
       <Content/>

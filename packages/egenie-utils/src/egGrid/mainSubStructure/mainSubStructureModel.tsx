@@ -131,7 +131,6 @@ export class MainSubStructureModel {
 
   @computed public get _buttons(): IMainSubStructureModel['buttons'] {
     const { permissionOfButton, buttons } = this;
-    console.log('按钮权限配置', permissionOfButton);
     if (!buttons.length) {
       return buttons;
     }

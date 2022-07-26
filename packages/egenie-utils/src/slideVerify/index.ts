@@ -339,7 +339,6 @@ export class SlideVerify {
       typeof this.onRefresh === 'function' && this.onRefresh();
     };
     this.closeIcon.onclick = () => {
-      console.log('点击清除');
       this.clear();
     };
 

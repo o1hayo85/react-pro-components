@@ -13,7 +13,6 @@ export class Store {
     this.loginPath = options.route?.loginPath;
     this.logoImg = options.route?.logoImg;
     this.logoText = options.route?.logoText;
-    console.log('options.....', options.route);
   }
 
   public loginPath: string;
@@ -439,7 +438,6 @@ export class Store {
         tenantModule = 100018;
         break;
     }
-    console.log(tenantModule);
     request({
       url: api.register,
       method: 'post',
@@ -533,7 +531,6 @@ export class Store {
       message.error('请输入手机号');
       return;
     }
-    console.log('x,y', x, y);
     new SlideVerify({
       width: 240,
       height: 120,

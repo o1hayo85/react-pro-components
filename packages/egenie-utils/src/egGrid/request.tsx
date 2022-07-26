@@ -36,7 +36,6 @@ export const cache = observable({
       try {
         localStorage.setItem(cacheKey, cacheValue);
       } catch (e) {
-        console.log('🚀 ~ file: request.tsx ~ line 35 ~ setStorage:action ~ e', e);
         localStorage.clear();
         localStorage.setItem(cacheKey, cacheValue);
       }

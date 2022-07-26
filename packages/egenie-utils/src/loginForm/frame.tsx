@@ -10,7 +10,6 @@ export default class Index extends React.Component<Props> {
 
   render(): JSX.Element {
     const { goToLogin, logoImg, logoText } = this.store;
-    console.log('this.frame......', this.props, logoImg, logoText);
     return (
       <Provider store={this.store}>
         <div className={styles.frame}>

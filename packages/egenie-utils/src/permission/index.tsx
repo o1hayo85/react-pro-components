@@ -9,12 +9,10 @@ export interface IPermission {
 }
 export const getPerms = async(): Promise<void> => {
   if (window.top.EgeniePermission?.permissionList.length) {
-    console.log('getPerms', window.top.EgeniePermission?.permissionList.length);
     return;
   }
   await request<BaseData<string[]>>({ url: '/api/iac/role/user/perms' })
     .then((res) => {
-      console.log('res', res);
       if (!window.top.EgeniePermission) {
         window.top.EgeniePermission = {
           checkPermit: () => {
@@ -36,7 +34,6 @@ export const getPerms = async(): Promise<void> => {
 
 export const hasPermission = (permissionId: string): boolean => {
   if (!window.top.EgeniePermission?.permissionList.length) {
-    console.log('hasPermission', window.top.EgeniePermission?.permissionList.length);
     getPerms();
     return false;
   } else {

@@ -53,7 +53,6 @@ export class ColumnSettingModel {
   };
 
   @action public onSortEnd: SortEndHandler = ({ oldIndex, newIndex }): void => {
-    console.log('🚀 ~ file: index.tsx ~ line 35 ~ ColumnSettingModel ~ oldIndex, newIndex', oldIndex, newIndex);
     if (oldIndex !== newIndex) {
       const { firstIndexOfHiddenItem } = this;
       const { ejlHidden } = this.pannelItems[oldIndex];
@@ -72,7 +71,6 @@ export class ColumnSettingModel {
   };
 
   @action public onSwitch = (index, checked): void => {
-    console.log('🚀 ~ file: index.tsx ~ line 39 ~ ColumnSettingModel ~ index,checked', index, checked);
     const { firstIndexOfHiddenItem } = this;
     this.pannelItems[index].ejlHidden = !checked;
 
@@ -89,7 +87,6 @@ export class ColumnSettingModel {
       }
     }
     cloneItemsArray.splice(newIndex, 0, cloneItemsArray.splice(previousIndex, 1)[0]);
-    console.log(cloneItemsArray, 'array');
 
     this.pannelItems = cloneItemsArray;
     return array;
