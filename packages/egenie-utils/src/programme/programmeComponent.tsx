@@ -351,60 +351,51 @@ class FilterItemsComponent extends React.Component<{ programme: Programme; }> {
     const { actualData } = this.props.programme.filterItems;
     return (
       <div className={styles.filterItemMainContainer}>
-        {actualData.map((item) => {
-          return (
-            <div
-              className={styles.filterItemContainer}
-              id={`${filterItemsCollapsePrefix}${item.field}`}
-              key={item.field}
-            >
-              {
-                (() => {
-                  if (item.showCollapse) {
-                    return (
-                      <Collapse
-                        activeKey={String(Number(item.isCollapse))}
-                        expandIconPosition="right"
-                        ghost
-                        onChange={() => item.toggleCollapse()}
+        {
+          actualData.map((item) => {
+            return (
+              <div
+                className={styles.filterItemContainer}
+                id={`${filterItemsCollapsePrefix}${item.field}`}
+                key={item.field}
+              >
+                {
+                  item.type === ENUM_FILTER_ITEM_TYPE.radio || item.type === ENUM_FILTER_ITEM_TYPE.checkbox ? (
+                    <Collapse
+                      defaultActiveKey="1"
+                      expandIconPosition="right"
+                      ghost
+                    >
+                      <Collapse.Panel
+                        header={(
+                          <>
+                            {
+                              item.required ? (
+                                <span style={{
+                                  color: '#ff4d4f',
+                                  paddingTop: 4,
+                                }}
+                                >
+                                  *
+                                </span>
+                              ) : null
+                            }
+                            <span>
+                              {item.label}
+                            </span>
+                          </>
+                        )}
+                        key="1"
                       >
-                        <Collapse.Panel
-                          header={(
-                            <>
-                              {
-                                item.required ? (
-                                  <span style={{
-                                    color: '#ff4d4f',
-                                    paddingTop: 4,
-                                  }}
-                                  >
-                                    *
-                                  </span>
-                                ) : null
-                              }
-                              <span>
-                                {item.label}
-                              </span>
-                            </>
-                          )}
-                          key="0"
-                        >
-                          {filterComponentFactory(item)}
-                        </Collapse.Panel>
-                      </Collapse>
-                    );
-                  } else {
-                    return (
-                      <>
                         {filterComponentFactory(item)}
-                      </>
-                    );
-                  }
-                })()
-              }
-            </div>
-          );
-        })}
+                      </Collapse.Panel>
+                    </Collapse>
+                  ) : filterComponentFactory(item)
+                }
+              </div>
+            );
+          })
+        }
       </div>
     );
   }

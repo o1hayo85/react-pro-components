@@ -5,10 +5,8 @@ describe('filterInputNumberGroup', () => {
     const filterInputNumberGroup = new FilterInputNumberGroup({
       field: 'inputNumberGroup',
       label: 'inputNumberGroup',
-      showCollapse: true,
     });
 
-    expect(filterInputNumberGroup.showCollapse).toBeFalsy();
     expect(filterInputNumberGroup.selectValue).toBeUndefined();
     expect(filterInputNumberGroup.value).toEqual([
       null,

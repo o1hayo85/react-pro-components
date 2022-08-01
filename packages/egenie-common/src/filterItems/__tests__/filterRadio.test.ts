@@ -5,11 +5,9 @@ describe('filterRadio', () => {
     const filterRadio = new FilterRadio({
       field: 'filterRadio',
       label: 'filterRadio',
-      showCollapse: false,
       value: 'a',
     });
 
-    expect(filterRadio.showCollapse).toBeTruthy();
     expect(filterRadio.value).toBe('a');
     expect(filterRadio.inputValue).toBe('a');
 

@@ -29,10 +29,7 @@ export class FilterTreeSelect extends FilterBase {
       ...rest
     } = options;
 
-    extendObservable(this, {
-      ...rest,
-      showCollapse: false,
-    });
+    extendObservable(this, { ...rest });
     this.formatValue(this.value);
     this.snapshot = this.value;
 

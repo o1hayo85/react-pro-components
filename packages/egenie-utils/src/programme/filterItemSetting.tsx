@@ -10,8 +10,6 @@ export interface FilterItemSettingItem {
   field: string;
   label: string;
   showItem: boolean;
-  showCollapse: boolean;
-  isCollapse: boolean;
 }
 
 const DragableBodyRow = ({
@@ -131,36 +129,6 @@ export class FilterItemSetting {
         dataIndex: 'label',
         key: 'label',
         width: 200,
-      },
-      {
-        title: '内容展开/折叠',
-        dataIndex: 'showCollapse',
-        key: 'showCollapse',
-        width: 200,
-        render: (text, row: FilterItemSettingItem, index) => {
-          if (!row.showCollapse) {
-            return '--';
-          } else {
-            return (
-              <Observer>
-                {() => (
-                  <Select
-                    bordered={false}
-                    onChange={() => this.dataSource[index].isCollapse = !row.isCollapse}
-                    value={String(row.isCollapse)}
-                  >
-                    <Select.Option value="false">
-                      展开
-                    </Select.Option>
-                    <Select.Option value="true">
-                      折叠
-                    </Select.Option>
-                  </Select>
-                )}
-              </Observer>
-            );
-          }
-        },
       },
     ];
   }

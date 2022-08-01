@@ -6,10 +6,8 @@ describe('dateStartOrEnd', () => {
     const filterDateStartOrEnd = new FilterDateStartOrEnd({
       field: 'dateStart',
       label: 'dateStart',
-      showCollapse: true,
     });
 
-    expect(filterDateStartOrEnd.showCollapse).toBeFalsy();
     expect(filterDateStartOrEnd.value).toBeNull();
 
     filterDateStartOrEnd.value = moment();

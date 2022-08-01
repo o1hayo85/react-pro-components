@@ -34,12 +34,6 @@ describe('filterBase', () => {
       .toBeDefined();
     expect(commonBase.labelWidth)
       .toBeDefined();
-    expect(commonBase.showCollapse)
-      .toBeDefined();
-    expect(commonBase.isCollapse)
-      .toBeDefined();
-    expect(commonBase.toggleCollapse)
-      .toBeDefined();
     expect(commonBase.field)
       .toBeDefined();
     expect(commonBase.label)

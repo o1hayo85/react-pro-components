@@ -32,18 +32,6 @@ order: 2
 - 类型: number
 - 默认值: 92
 
-### showCollapse
-
-- 描述: 查询项是否可以收缩。`现在不需要传，内置了`
-- 类型: boolean
-- 默认值: false
-
-### isCollapse
-
-- 描述: 查询项是否收缩。必须 showCollapse 为 true 才生效
-- 类型: boolean
-- 默认值: false
-
 ### `type`
 
 - 描述: `查询项类型`

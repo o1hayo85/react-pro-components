@@ -31,10 +31,7 @@ export class FilterSelect extends FilterBase {
       data,
       ...rest
     } = options;
-    extendObservable(this, {
-      ...rest,
-      showCollapse: false,
-    });
+    extendObservable(this, { ...rest });
     if (!this.placeholder) {
       this.placeholder = this.mode ? '请选择(可多选)' : '请选择';
     }

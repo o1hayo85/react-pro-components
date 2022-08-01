@@ -6,14 +6,12 @@ describe('filterDate', () => {
     const filterDate = new FilterDate({
       field: 'date',
       label: 'date',
-      showCollapse: true,
       open: [
         true,
         true,
       ],
     });
 
-    expect(filterDate.showCollapse).toBeFalsy();
     expect(filterDate.selectValue).toBeUndefined();
     expect(filterDate.startTime).toBeNull();
     expect(filterDate.endTime).toBeNull();

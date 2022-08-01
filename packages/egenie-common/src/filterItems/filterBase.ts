@@ -55,23 +55,6 @@ export abstract class FilterBase {
   @observable public labelWidth = 92;
 
   /**
-   * 查询项是否可以收缩。现在不需要传，内置了
-   */
-  @observable public showCollapse = false;
-
-  /**
-   * 查询项是否收缩。必须showCollapse为true才生效
-   */
-  @observable public isCollapse = false;
-
-  /**
-   * 切换收缩状态
-   */
-  @action public toggleCollapse = () => {
-    this.isCollapse = !this.isCollapse;
-  };
-
-  /**
    * 查询项标识。必须且不能重复否则报错
    */
   @observable public field = '';
@@ -112,7 +95,7 @@ export abstract class FilterBase {
   };
 
   /**
-   * 是否是动态添加字段（方案保存、方案设置等需要过滤）
+   * 是否是动态添加字段(方案保存、方案设置等需要过滤)
    */
   @observable public isDynamic = false;
 

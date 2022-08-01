@@ -5,11 +5,9 @@ describe('filterTreeSelect', () => {
     const filterTreeSelect = new FilterTreeSelect({
       field: 'treeSelect',
       label: 'treeSelect',
-      showCollapse: true,
       value: ['11'],
     });
 
-    expect(filterTreeSelect.showCollapse).toBeFalsy();
     expect(filterTreeSelect.value).toEqual(['11']);
 
     filterTreeSelect.value = [];

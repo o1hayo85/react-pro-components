@@ -5,14 +5,11 @@ describe('filterSelect', () => {
     const filterSelect = new FilterSelect({
       field: 'select',
       label: 'select',
-      showCollapse: true,
 
       // @ts-ignore
       value: 11,
     });
 
-    expect(filterSelect.showCollapse)
-      .toBeFalsy();
     expect(filterSelect.value)
       .toBe('11');
     expect(filterSelect.placeholder)

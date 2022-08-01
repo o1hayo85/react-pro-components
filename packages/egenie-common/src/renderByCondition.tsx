@@ -1,13 +1,13 @@
-import React from 'react';
+import type React from 'react';
 
-export const RenderByCondition: React.FC<{ show: boolean; }> = function({
+interface RenderByConditionProps {
+  children: React.ReactElement;
+  show: boolean;
+}
+
+export const RenderByCondition = function({
   children,
   show,
-}) {
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      { show ? children : null}
-    </>
-  );
+}: RenderByConditionProps): React.ReactElement {
+  return show ? children : null;
 };

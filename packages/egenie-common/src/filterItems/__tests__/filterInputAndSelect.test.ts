@@ -5,12 +5,10 @@ describe('filterInputAndSelect', () => {
     const filterInputAndSelect = new FilterInputAndSelect({
       field: 'inputAndSelect',
       label: 'inputAndSelect',
-      showCollapse: true,
       inputValue: '1',
       selectValue: '2',
     });
 
-    expect(filterInputAndSelect.showCollapse).toBeFalsy();
     expect(filterInputAndSelect.inputValue).toBe('1');
     expect(filterInputAndSelect.selectValue).toBe('2');
 

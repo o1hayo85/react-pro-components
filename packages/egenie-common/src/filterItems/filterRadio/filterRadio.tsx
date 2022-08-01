@@ -11,10 +11,7 @@ export class FilterRadio extends FilterBase {
       data,
       ...rest
     } = options;
-    extendObservable(this, {
-      ...rest,
-      showCollapse: true,
-    });
+    extendObservable(this, { ...rest });
 
     this.formatValue(this.inputValue || this.value);
     this.snapshot = {

@@ -204,3 +204,17 @@ import { getStaticResourceUrl } from 'egenie-common';
 
 getStaticResourceUrl('customer-source/ring/di.mp3');
 ```
+
+## egeniePcTheme
+
+- 描述: pc 的主题(原来 egenie-config 下的 less 的 theme 变量)
+- 前提: `egenie-common大于等于0.14.9`
+  > `示例:`
+
+```ts
+import { egeniePcTheme } from 'egenie-common';
+
+console.log(egeniePcTheme.color);
+console.log(egeniePcTheme.font);
+console.log(egeniePcTheme.spacing);
+```

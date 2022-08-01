@@ -25,10 +25,7 @@ export class FilterInputNumberGroup extends FilterBase {
       ...rest
     } = options;
 
-    extendObservable(this, {
-      ...rest,
-      showCollapse: false,
-    });
+    extendObservable(this, { ...rest });
 
     if (this.data.length > 1) {
       this.formatValue(`${this.selectValue},${formatNumberString(this.value)}`);

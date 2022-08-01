@@ -219,10 +219,7 @@ export class FilterDate extends FilterBase {
       ...rest
     } = options;
 
-    extendObservable(this, {
-      ...rest,
-      showCollapse: false,
-    });
+    extendObservable(this, { ...rest });
     this.snapshot = {
       selectValue: this.selectValue,
       startTime: this.startTime,

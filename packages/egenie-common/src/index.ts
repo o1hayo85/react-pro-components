@@ -1,6 +1,6 @@
 import type { Egenie, JsonReader, Permission, User } from './layoutMenu';
 
-export { egeniePcConfig } from './theme';
+export { egeniePcTheme } from './theme';
 export { formatNumber, add, subtract, multiple, toFixed, formatPrice, thousandthSeparator, objToDict, DictData, getStaticResourceUrl } from './helper';
 export { request, BaseData, PaginationData, BatchReportData, PureData } from './request';
 export { renderModal, destroyModal, destroyAllModal } from './renderModal';

@@ -67,6 +67,4 @@ export interface FilterItemSettingItem {
   field: string;
   label: string;
   showItem: boolean;
-  showCollapse: boolean;
-  isCollapse: boolean;
 }

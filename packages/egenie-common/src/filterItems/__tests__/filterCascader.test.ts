@@ -5,10 +5,7 @@ describe('filterCascader', () => {
     const filterCascader = new FilterCascader({
       field: 'cascader',
       label: 'cascader',
-      showCollapse: true,
     });
-
-    expect(filterCascader.showCollapse).toBeFalsy();
 
     // @ts-ignore
     filterCascader.value = 11;

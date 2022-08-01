@@ -336,8 +336,6 @@ export class Programme {
       field: item.field,
       label: item.label,
       showItem: item.showItem,
-      showCollapse: item.showCollapse,
-      isCollapse: item.isCollapse,
     }));
   }
 

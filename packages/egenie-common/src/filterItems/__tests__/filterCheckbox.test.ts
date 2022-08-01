@@ -5,13 +5,11 @@ describe('filterCheckbox', () => {
     const filterCheckbox = new FilterCheckbox({
       field: 'checkbox',
       label: 'checkbox',
-      showCollapse: false,
 
       // @ts-ignore
       value: 11,
     });
 
-    expect(filterCheckbox.showCollapse).toBeTruthy();
     expect(filterCheckbox.value).toEqual([]);
 
     filterCheckbox.value = ['11'];

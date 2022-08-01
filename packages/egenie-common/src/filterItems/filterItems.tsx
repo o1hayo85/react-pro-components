@@ -115,8 +115,6 @@ export class FilterItems {
         field: item.field,
         label: item.label,
         showItem: item.showItem,
-        showCollapse: item.showCollapse,
-        isCollapse: item.isCollapse,
       }));
   };
 

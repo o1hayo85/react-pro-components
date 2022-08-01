@@ -21,10 +21,7 @@ export class FilterCheckbox extends FilterBase {
       ...rest
     } = options;
 
-    extendObservable(this, {
-      ...rest,
-      showCollapse: true,
-    });
+    extendObservable(this, { ...rest });
 
     this.formatValue(this.value);
     this.snapshot = this.value;

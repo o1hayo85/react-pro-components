@@ -15,10 +15,7 @@ export class FilterInputAndSelect extends FilterBase {
       ...rest
     } = options;
 
-    extendObservable(this, {
-      ...rest,
-      showCollapse: false,
-    });
+    extendObservable(this, { ...rest });
     this.formatValue(`${_.toString(this.selectValue)},${_.toString(this.inputValue)}`);
     this.snapshot = {
       inputValue: this.inputValue,

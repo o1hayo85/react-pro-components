@@ -5,11 +5,8 @@ describe('filterInput', () => {
     const filterInput = new FilterInput({
       field: 'input',
       label: 'input',
-      showCollapse: true,
       value: '  aa  ',
     });
-
-    expect(filterInput.showCollapse).toBeFalsy();
 
     filterInput.value = 'bb';
     filterInput.reset();
