@@ -146,7 +146,7 @@ const spacing = {
   'egenie-border-radius-base': '2px',
 };
 
-export const egeniePcTheme = {
+export const egeniePcTheme: { color: typeof color; font: typeof font; spacing: typeof spacing; } = {
   color,
   font,
   spacing,
