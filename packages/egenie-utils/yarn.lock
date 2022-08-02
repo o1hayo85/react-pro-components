@@ -4236,10 +4236,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-egenie-common@^0.13.22:
-  version "0.13.21"
-  resolved "https://registry.npmmirror.com/egenie-common/-/egenie-common-0.13.21.tgz#8c7ae1c94cf56cf558470f2982c41e3ddf6bcb8d"
-  integrity sha512-SO1iiHRBfm+Vt/E9kJnWj+bqnu6tj4vtJhz1jKxehJAQ2bFVIzmodzRY5MFPMQAmIvk0vJHJY4kNdG4/bFf0KQ==
+egenie-common@^0.14.10:
+  version "0.14.10"
+  resolved "https://registry.npmjs.org/egenie-common/-/egenie-common-0.14.10.tgz#2c912a47b91038f312a4d3bd1b0fe46a6c1f2e2f"
+  integrity sha512-qV6r3+GtVIp1ydVKagIcC5s/nvUj3cqyCzMRvSpLHWh9TfxAIsCmK/e3J9sVMyAnNhDmO2ggcV+pwSCwWzlWeQ==
   dependencies:
     classnames "2.2.6"
 
@@ -4264,10 +4264,10 @@ egenie-config@^0.8.26:
     postcss-preset-env "6.7.0"
     px2rem "0.5.0"
 
-egenie-data-grid@^0.13.17:
-  version "0.13.17"
-  resolved "https://registry.npmjs.org/egenie-data-grid/-/egenie-data-grid-0.13.17.tgz#877f9924ef15a26b0384d6cacdb47843ec286272"
-  integrity sha512-Q3MNJ8NtRdNwzoE658zZMKsmHrXQ7658geQHz6OOjXuVLxGr+T+DvSO+WWbFqWokd+upSv/0xfNMcxzttCKNHw==
+egenie-data-grid@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.npmjs.org/egenie-data-grid/-/egenie-data-grid-0.14.0.tgz#710672f836876e0bad75e647fc1661e85a1f4753"
+  integrity sha512-FY0NS8Q+vuIgT26800qwhdG7ynGgJff2YmUz5ulkBpF6G4+4YP5rOyMVYQlVvXxBcm+RAngezPRmc4iOHP4AxQ==
   dependencies:
     clsx "^1.1.1"
 
@@ -4333,10 +4333,10 @@ egenie-monitor-web@^0.1.0:
     egenie-monitor-browser "0.1.0"
     egenie-monitor-react "0.1.0"
 
-egenie-test@^0.13.17:
-  version "0.13.17"
-  resolved "https://registry.npmjs.org/egenie-test/-/egenie-test-0.13.17.tgz#95ac5a2506ae51e3422d2e319bdbc3bb8460f1e6"
-  integrity sha512-ccTv32QjLdIFe8G9YjNse7b+tTDA1cCRu6/OxGKA9Kg7qFFYclhmUsFn2trwX7EXKMiw1PMxNqyDD9ne20VV6A==
+egenie-test@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.npmjs.org/egenie-test/-/egenie-test-0.14.0.tgz#e130bc59177ff02be42d7c73cd5e0ffa3fd74545"
+  integrity sha512-PQSMJK187VOsNL74TI3vWuE4q0Luc92XX5bbrd9d/ZBM0dY2EIA2XpZrpidRZjfeT+xJUlzp+cEZZXE4CHWVVg==
   dependencies:
     babel-jest "^27.3.1"
     chalk "^4.1.2"
