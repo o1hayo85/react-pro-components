@@ -10,16 +10,20 @@ export class ProgrammeFilterItemsSettingStore {
   constructor(private parent: Programme) {
   }
 
-  @action private handleSettingChange = (params: FilterItemSettingItem[]) => {
-    this.parent.filterItems.updateFilterItem(params);
+  @action private handleSettingChange = (settingData: FilterItemSettingItem[]) => {
+    this.parent.filterItems.updateFilterItem(settingData);
+
+    const settingMatchFields: string[] = settingData.filter((item) => this.parent.filterItems.originData.find((val) => val.field === item.field))
+      .map((item) => item.field);
     const settingMatchFilterItems: FilterItem[] = [];
     const restFilterItems: FilterItem[] = [];
-    const paramsFields: string[] = Array.from(new Set(params.map((item) => item.field)));
+
+    settingMatchFields.forEach((field) => {
+      settingMatchFilterItems.push(this.parent.filterItems.originData.find((item) => item.field === field));
+    });
 
     this.parent.filterItems.originData.forEach((item) => {
-      if (paramsFields.includes(item.field)) {
-        settingMatchFilterItems.push(item);
-      } else {
+      if (!settingMatchFields.includes(item.field)) {
         restFilterItems.push(item);
       }
     });
