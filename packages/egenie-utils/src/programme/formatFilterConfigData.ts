@@ -1,16 +1,6 @@
 import type { ValueAndLabelData } from 'egenie-common';
-import type { BaseData } from '../request';
-import type { ProgrammeListItem } from './programme';
+import type { FilterConfigData } from './types';
 
-interface FilterSetItem {
-  oldSet?: ProgrammeListItem[];
-  item_list?: {[key: string]: {[key: string]: string; }; };
-  itemList?: {[key: string]: {[key: string]: string; }; };
-  dict_list?: {[key: string]: Array<{[key: string]: string; }>; };
-  dictList?: {[key: string]: Array<{[key: string]: string; }>; };
-}
-
-export type FilterConfigData = BaseData<FilterSetItem>;
 type FilterConfigTransformData = Array<{ field: string; data: ValueAndLabelData; }>;
 
 export function formatFilterConfigData(info: FilterConfigData, fieldMap: {[key: string]: string | string[]; }): FilterConfigTransformData {

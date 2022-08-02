@@ -1,7 +1,6 @@
 export type { ProgrammeParams } from './programme';
 export { Programme } from './programme';
 export { ProgrammeComponent } from './programmeComponent';
-export type { FilterConfigData } from './formatFilterConfigData';
 export { formatFilterConfigData } from './formatFilterConfigData';
 export { FilterDate } from 'egenie-common';
 export { FilterDateComponent } from 'egenie-common';
@@ -29,3 +28,4 @@ export { FilterItems, filterInstanceFactory, filterComponentFactory } from 'egen
 export { FilterBase } from 'egenie-common';
 export { NormalProgramme, NormalProgrammeComponent, ENUM_FILTER_ITEM_TYPE } from 'egenie-common';
 export type { NormalProgrammeParams, FilterItemOptions, FilterItemsParams, FilterItem, ValueAndLabelData } from 'egenie-common';
+export { FilterConfigData } from './types';

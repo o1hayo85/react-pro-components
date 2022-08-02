@@ -1,16 +1,11 @@
-import { Button, Col, Modal, Row, Select, Space, Table } from 'antd';
+import { Button, Col, Modal, Row, Space, Table } from 'antd';
 import { action, observable, toJS } from 'mobx';
-import { observer, Observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { DragAndDropHOC } from '../dragAndDropHOC';
 import styles from './programme.less';
-
-export interface FilterItemSettingItem {
-  field: string;
-  label: string;
-  showItem: boolean;
-}
+import type { FilterItemSettingItem } from './types';
 
 const DragableBodyRow = ({
   index,
@@ -64,6 +59,14 @@ const DragableBodyRow = ({
   );
 };
 
+interface FilterItemSettingModalProps {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onCancel: Function;
+  originData: FilterItemSettingItem[];
+  initSettingData: FilterItemSettingItem[];
+  callback: (params: FilterItemSettingItem[]) => Promise<unknown>;
+}
+
 export class FilterItemSetting {
   constructor(originData: FilterItemSettingItem[], initSettingData: FilterItemSettingItem[], callback: FilterItemSettingModalProps['callback']) {
     this.originData = JSON.parse(JSON.stringify(originData));
@@ -98,11 +101,6 @@ export class FilterItemSetting {
       .map((item) => item.field);
   };
 
-  @action public handleSort = () => {
-    this.dataSource = this.dataSource.filter((item) => this.selectedRowKeys.includes(item.field))
-      .concat(this.dataSource.filter((item) => !this.selectedRowKeys.includes(item.field)));
-  };
-
   @observable public isSave = false;
 
   @action public handleSave = () => {
@@ -125,21 +123,14 @@ export class FilterItemSetting {
   public get columns() {
     return [
       {
-        title: '查询条件',
+        title: '名称',
         dataIndex: 'label',
         key: 'label',
         width: 200,
+        ellipsis: true,
       },
     ];
   }
-}
-
-interface FilterItemSettingModalProps {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onCancel: Function;
-  originData: FilterItemSettingItem[];
-  initSettingData: FilterItemSettingItem[];
-  callback: (params: FilterItemSettingItem[]) => Promise<unknown>;
 }
 
 @observer
@@ -158,7 +149,6 @@ export class FilterItemSettingModal extends React.Component<FilterItemSettingMod
       dataSource,
       selectedRowKeys,
       onChange,
-      handleSort,
       isSave,
       handleSave,
       moveRow,
@@ -177,13 +167,7 @@ export class FilterItemSettingModal extends React.Component<FilterItemSettingMod
                     className="ghost-bg-btn"
                     onClick={handleInit}
                   >
-                    恢复出厂方案
-                  </Button>
-                  <Button
-                    className="ghost-bg-btn"
-                    onClick={handleSort}
-                  >
-                    一键排序
+                    恢复默认
                   </Button>
                 </Space>
               </Col>

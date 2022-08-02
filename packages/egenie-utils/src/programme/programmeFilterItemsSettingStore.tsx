@@ -1,0 +1,83 @@
+import type { FilterItem } from 'egenie-common';
+import { action, observable } from 'mobx';
+import type { BaseData } from '../request';
+import { request } from '../request';
+import { FILTER_ITEMS_SETTING_PREFIX } from './constants';
+import type { Programme } from './programme';
+import type { FilterItemSettingItem } from './types';
+
+export class ProgrammeFilterItemsSettingStore {
+  constructor(private parent: Programme) {
+  }
+
+  @action private handleSettingChange = (params: FilterItemSettingItem[]) => {
+    this.parent.filterItems.updateFilterItem(params);
+    const settingMatchFilterItems: FilterItem[] = [];
+    const restFilterItems: FilterItem[] = [];
+    const paramsFields: string[] = Array.from(new Set(params.map((item) => item.field)));
+
+    this.parent.filterItems.originData.forEach((item) => {
+      if (paramsFields.includes(item.field)) {
+        settingMatchFilterItems.push(item);
+      } else {
+        restFilterItems.push(item);
+      }
+    });
+
+    let i = 0;
+    while (i < settingMatchFilterItems.length) {
+      this.parent.filterItems.originData[i] = settingMatchFilterItems[i];
+      i++;
+    }
+
+    while (i < restFilterItems.length) {
+      this.parent.filterItems.originData[i] = restFilterItems[i];
+      i++;
+    }
+  };
+
+  @action public getDefaultSetting = (): void => {
+    request<BaseData<string>>({
+      url: '/api/dashboard/cache/get',
+      params: { cacheKey: `${FILTER_ITEMS_SETTING_PREFIX}${this.parent.moduleName}` },
+    })
+      .then((info) => {
+        try {
+          const data: FilterItemSettingItem[] = JSON.parse(info.data);
+          if (Array.isArray(data)) {
+            this.handleSettingChange(data);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      });
+  };
+
+  @action public handleSettingSave = (params: FilterItemSettingItem[]) => {
+    return request({
+      url: '/api/dashboard/cache/save',
+      method: 'post',
+      data: new URLSearchParams(Object.entries({
+        cacheKey: `${FILTER_ITEMS_SETTING_PREFIX}${this.parent.moduleName}`,
+        cacheValue: JSON.stringify(params.map((item) => {
+          const newItem = { ...item };
+
+          // 不保存label
+          delete newItem.label;
+          return newItem;
+        })),
+      })),
+    })
+      .then(() => {
+        this.handleShowSetting(false);
+        this.handleSettingChange(params);
+        this.parent.handleSearch();
+      });
+  };
+
+  @observable public showSetting = false;
+
+  @action public handleShowSetting = (showSetting: boolean) => {
+    this.showSetting = showSetting;
+  };
+}

@@ -1,15 +1,15 @@
 import { Anchor, Button, Collapse, Dropdown, Layout, Menu, Popover, Space, Tabs, Typography } from 'antd';
 import classNames from 'classnames';
 import type { FilterItem, FilterItemOptions } from 'egenie-common';
-import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory } from 'egenie-common';
-import { autorun, computed } from 'mobx';
+import { ENUM_FILTER_ITEM_TYPE, filterComponentFactory, filterInstanceFactory, RenderByCondition } from 'egenie-common';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { MainSubStructure } from '../egGrid';
 import { AddProgrammeModal } from './addProgrammeModal';
+import { DEFAULT_PROGRAMME, FILTER_ITEMS_COLLAPSE_PREFIX } from './constants';
 import { FilterItemSettingModal } from './filterItemSetting';
 import type { Programme } from './programme';
-import { filterItemsCollapsePrefix } from './programme';
 import styles from './programme.less';
 
 let id = 0;
@@ -24,47 +24,34 @@ interface ProgrammeProps {
 @observer
 export class ProgrammeComponent extends React.Component<ProgrammeProps> {
   componentDidMount() {
-    this.initParamsBgActive();
+    const {
+      handleFilterItemsValueChangeObserver,
+      clickPreventCloseScroll,
+      clickCloseScroll,
+    } = this.props.store.programmeInteractiveStore;
+
+    handleFilterItemsValueChangeObserver();
 
     document.querySelector(`.${styles.scrollContainer}`)
-      ?.addEventListener('click', this.props.store.clickPreventCloseScroll);
-    window.addEventListener('click', this.props.store.clickCloseScroll, true);
+      ?.addEventListener('click', clickPreventCloseScroll);
+    window.addEventListener('click', clickCloseScroll, true);
   }
 
   componentWillUnmount() {
-    if (this.paramsDisposer) {
-      this.paramsDisposer();
+    const {
+      handleFilterItemsValueChangeDisposer,
+      clickPreventCloseScroll,
+      clickCloseScroll,
+    } = this.props.store.programmeInteractiveStore;
+
+    if (handleFilterItemsValueChangeDisposer) {
+      handleFilterItemsValueChangeDisposer();
     }
 
     document.querySelector(`.${styles.scrollContainer}`)
-      ?.removeEventListener('click', this.props.store.clickPreventCloseScroll);
-    window.removeEventListener('click', this.props.store.clickCloseScroll);
+      ?.removeEventListener('click', clickPreventCloseScroll);
+    window.removeEventListener('click', clickCloseScroll);
   }
-
-  private paramsDisposer?: () => void;
-
-  public initParamsBgActive = () => {
-    this.paramsDisposer = autorun(() => {
-      const totalField: string[] = this.props.store.filterItems.actualData.map((item) => item.field);
-      const paramsField: string[] = this.props.store.filterItems.actualData.filter((item) => Object.keys(item.toParams.call(item)).length > 0)
-        .map((item) => item.field);
-      const paramsActiveClassName = styles.paramActive;
-
-      totalField.forEach((field) => {
-        const element: HTMLDivElement = document.querySelector(`#${filterItemsCollapsePrefix}${field}`);
-        if (element) {
-          element.classList.remove(paramsActiveClassName);
-        }
-      });
-
-      paramsField.forEach((field) => {
-        const element: HTMLDivElement = document.querySelector(`#${filterItemsCollapsePrefix}${field}`);
-        if (element) {
-          element.classList.add(paramsActiveClassName);
-        }
-      });
-    });
-  };
 
   render() {
     const {
@@ -74,10 +61,12 @@ export class ProgrammeComponent extends React.Component<ProgrammeProps> {
       store,
     } = this.props;
     const {
-      scrollContainerRef,
-      handleScroll,
-      collapsed,
-      handleCollapsed,
+      programmeInteractiveStore: {
+        scrollContainerRef,
+        handleScroll,
+        collapsed,
+        handleCollapsed,
+      },
       gridModel,
     } = store;
     return (
@@ -124,17 +113,18 @@ class Footer extends React.Component<{ programme: Programme; }> {
         reset,
         initSettingData,
       },
+      programmeFilterItemsSettingStore: {
+        handleShowSetting,
+        showSetting,
+        handleSettingSave,
+      },
       isSearch,
       handleSearch,
       createProgramme,
-      handleShowProgramme,
-      showProgramme,
-      handleShowSetting,
-      showSetting,
-      handleSettingSave,
+      handleShowAddProgramme,
+      showAddProgramme,
       originSettingData,
       activeProgrammeId,
-      programmeList,
       editProgramme,
     } = this.props.programme;
     return (
@@ -145,15 +135,15 @@ class Footer extends React.Component<{ programme: Programme; }> {
           </a>
           <Space size={4}>
             {
-              activeProgrammeId === programmeList[0].id ? (
-                <Button onClick={() => handleShowProgramme(true)}>
+              activeProgrammeId === DEFAULT_PROGRAMME.id ? (
+                <Button onClick={() => handleShowAddProgramme(true)}>
                   生成方案
                 </Button>
               ) : (
                 <Dropdown.Button
-                  onClick={() => handleShowProgramme(true)}
+                  onClick={() => handleShowAddProgramme(true)}
                   overlay={(
-                    <Menu onClick={() => editProgramme()}>
+                    <Menu onClick={editProgramme}>
                       <Menu.Item key="1">
                         更新方案
                       </Menu.Item>
@@ -179,24 +169,20 @@ class Footer extends React.Component<{ programme: Programme; }> {
           </Space>
 
         </div>
-        {
-          showProgramme ? (
-            <AddProgrammeModal
-              callback={createProgramme}
-              onCancel={() => handleShowProgramme(false)}
-            />
-          ) : null
-        }
-        {
-          showSetting ? (
-            <FilterItemSettingModal
-              callback={handleSettingSave}
-              initSettingData={initSettingData}
-              onCancel={() => handleShowSetting(false)}
-              originData={originSettingData}
-            />
-          ) : null
-        }
+        <RenderByCondition show={showAddProgramme}>
+          <AddProgrammeModal
+            callback={createProgramme}
+            onCancel={() => handleShowAddProgramme(false)}
+          />
+        </RenderByCondition>
+        <RenderByCondition show={showSetting}>
+          <FilterItemSettingModal
+            callback={handleSettingSave}
+            initSettingData={initSettingData}
+            onCancel={() => handleShowSetting(false)}
+            originData={originSettingData}
+          />
+        </RenderByCondition>
       </>
     );
   }
@@ -210,10 +196,12 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
       activeProgrammeId,
       handleItemClick,
       handleItemDelete,
-      showProgrammeCount,
-      programmeCount,
-      getProgrammeCount,
-      isProgrammeCountLoading,
+      programmeCountStore: {
+        showProgrammeCount,
+        programmeCount,
+        getProgrammeCount,
+        isProgrammeCountLoading,
+      },
     } = this.props.programme;
 
     return (
@@ -226,51 +214,49 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
             type="card"
           >
             <Tabs.TabPane
-              key={programmeList[0].id}
+              key={DEFAULT_PROGRAMME.id}
               tab={(
-                <section className={classNames(styles.programmeContentContainer, { [styles.active]: programmeList[0].id === activeProgrammeId })}>
+                <section className={classNames(styles.programmeContentContainer, { [styles.active]: DEFAULT_PROGRAMME.id === activeProgrammeId })}>
                   <Typography.Text
                     ellipsis
-                    title={programmeList[0].schemeName}
+                    title={DEFAULT_PROGRAMME.schemeName}
                   >
-                    {programmeList[0].schemeName}
+                    {DEFAULT_PROGRAMME.schemeName}
                   </Typography.Text>
                 </section>
               )}
             />
             {
-              programmeList.slice(1)
-                .map((item) => {
-                  return (
-                    <Tabs.TabPane
-                      key={item.id}
-                      tab={(
-                        <Popover
-                          content={(
-                            <FilterItemsTranslate
-                              id={`${item.id}`}
-                              programme={this.props.programme}
-                              schemeValue={item.schemeValue}
-                            />
-                          )}
-                          destroyTooltipOnHide
-                          key={id++}
-                          placement="bottom"
-                        >
-                          <section className={classNames(styles.programmeContentContainer, { [styles.active]: `${item.id}` === activeProgrammeId })}>
-                            <Typography.Text
-                              ellipsis
-                              title={item.schemeName}
-                            >
-                              {item.schemeName}
-                            </Typography.Text>
-                            {
-                              showProgrammeCount ? (
-                                <span className={styles.programmeCount}>
-                                  {programmeCount[item.id] || 0}
-                                </span>
-                              ) : null
-                            }
+              programmeList.map((item) => {
+                return (
+                  <Tabs.TabPane
+                    key={item.id}
+                    tab={(
+                      <Popover
+                        content={(
+                          <FilterItemsTranslate
+                            id={`${item.id}`}
+                            programme={this.props.programme}
+                            schemeValue={item.schemeValue}
+                          />
+                        )}
+                        destroyTooltipOnHide
+                        key={id++}
+                        placement="bottom"
+                      >
+                        <section className={classNames(styles.programmeContentContainer, { [styles.active]: `${item.id}` === activeProgrammeId })}>
+                          <Typography.Text
+                            ellipsis
+                            title={item.schemeName}
+                          >
+                            {item.schemeName}
+                          </Typography.Text>
+                          <RenderByCondition show={showProgrammeCount}>
+                            <span className={styles.programmeCount}>
+                              {programmeCount[item.id] || 0}
+                            </span>
+                          </RenderByCondition>
+                          <RenderByCondition show={!item.sysSetting}>
                             <span
                               className={styles.del}
                               onClick={(event) => {
@@ -280,30 +266,30 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
                             >
                               x
                             </span>
-                          </section>
-                        </Popover>
-                      )}
-                    />
-                  );
-                })
+                          </RenderByCondition>
+                        </section>
+                      </Popover>
+                    )}
+                  />
+                );
+              })
             }
           </Tabs>
         </div>
         <div className={styles.rightContainer}>
-          {
-            showProgrammeCount ? (
-              <div className={styles.programmeCountRefresh}>
+          <Space size={4}>
+            {
+              showProgrammeCount ? (
                 <Button
-                  icon={<i className="icon-replace"/>}
                   loading={isProgrammeCountLoading}
                   onClick={getProgrammeCount}
-                  type="link"
+                  type="text"
                 >
-                  刷新
+                  <i className="icon-cxsc"/>
                 </Button>
-              </div>
-            ) : null
-          }
+              ) : null
+            }
+          </Space>
         </div>
         <div className={styles.emptyBorder}/>
       </div>
@@ -315,8 +301,10 @@ class ProgrammeList extends React.Component<{ programme: Programme; }> {
 class FilterItemsScroll extends React.Component<{ programme: Programme; }> {
   render() {
     const {
-      showScroll,
-      scrollContainerRef,
+      programmeInteractiveStore: {
+        showScroll,
+        scrollContainerRef,
+      },
       filterItems: { actualData },
     } = this.props.programme;
     return (
@@ -333,7 +321,7 @@ class FilterItemsScroll extends React.Component<{ programme: Programme; }> {
           <Anchor getContainer={scrollContainerRef.current ? () => scrollContainerRef.current : undefined}>
             {actualData.map((item) => (
               <Anchor.Link
-                href={`#${filterItemsCollapsePrefix}${item.field}`}
+                href={`#${FILTER_ITEMS_COLLAPSE_PREFIX}${item.field}`}
                 key={item.field}
                 title={item.label}
               />
@@ -356,7 +344,7 @@ class FilterItemsComponent extends React.Component<{ programme: Programme; }> {
             return (
               <div
                 className={styles.filterItemContainer}
-                id={`${filterItemsCollapsePrefix}${item.field}`}
+                id={`${FILTER_ITEMS_COLLAPSE_PREFIX}${item.field}`}
                 key={item.field}
               >
                 {
@@ -407,39 +395,39 @@ class FilterItemsTranslate extends React.Component<{ programme: Programme; id: s
   public get translateData(): string[][] {
     if (`${this.props.id}` === this.props.programme.activeProgrammeId) {
       return this.props.programme.filterItems.translateParamsList;
-    } else {
-      try {
-        const result: FilterItem[] = [];
-        const parsedValue = JSON.parse(this.props.schemeValue);
-        const originFilterItems = this.props.programme.filterItems.originData;
-        originFilterItems.forEach((item) => {
-          if (item.field in parsedValue && parsedValue[item.field] !== null && parsedValue[item.field] !== undefined) {
-            const options: FilterItemOptions = {
-              field: item.field,
-              type: item.type,
-              label: item.label,
-              data: item.data,
-            };
+    }
 
-            const instance = filterInstanceFactory(options);
-            instance.formatValue.call(instance, parsedValue[item.field]);
-            if (item.type === ENUM_FILTER_ITEM_TYPE.treeSelect && instance.type === ENUM_FILTER_ITEM_TYPE.treeSelect) {
-              instance.treeData = item.treeData;
-            }
+    try {
+      const result: FilterItem[] = [];
+      const parsedValue = JSON.parse(this.props.schemeValue);
+      const originFilterItems = this.props.programme.filterItems.originData;
+      originFilterItems.forEach((item) => {
+        if (item.field in parsedValue && parsedValue[item.field] !== null && parsedValue[item.field] !== undefined) {
+          const options: FilterItemOptions = {
+            field: item.field,
+            type: item.type,
+            label: item.label,
+            data: item.data,
+          };
 
-            if (item.type === ENUM_FILTER_ITEM_TYPE.select && instance.type === ENUM_FILTER_ITEM_TYPE.select) {
-              instance.mode = item.mode;
-            }
-            result.push(instance);
+          const instance = filterInstanceFactory(options);
+          instance.formatValue.call(instance, parsedValue[item.field]);
+          if (item.type === ENUM_FILTER_ITEM_TYPE.treeSelect && instance.type === ENUM_FILTER_ITEM_TYPE.treeSelect) {
+            instance.treeData = item.treeData;
           }
-        });
 
-        return result.map((item) => item.translateParams.call(item) as string[])
-          .filter((item) => item.length);
-      } catch (e) {
-        console.log(e);
-        return [];
-      }
+          if (item.type === ENUM_FILTER_ITEM_TYPE.select && instance.type === ENUM_FILTER_ITEM_TYPE.select) {
+            instance.mode = item.mode;
+          }
+          result.push(instance);
+        }
+      });
+
+      return result.map((item) => item.translateParams.call(item) as string[])
+        .filter((item) => item.length);
+    } catch (e) {
+      console.log(e);
+      return [];
     }
   }
 

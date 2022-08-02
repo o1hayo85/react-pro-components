@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.8...v0.0.0) (2022-08-01)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.9...v0.0.0) (2022-08-02)
+
+### Features
+
+- **egenie-common:** 去掉查询方案折叠属性 ([33944f7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/33944f771e131483dc1a2b38497d0b737cf7da98))
+- **egenie-common:** 去掉查询方案折叠属性 ([1216909](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1216909b236b4446f5fdb25a3c15d802a204e1fb))
+
+## [0.14.9](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.8...v0.14.9) (2022-08-01)
 
 ### Features
 

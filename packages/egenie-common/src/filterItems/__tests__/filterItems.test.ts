@@ -90,10 +90,6 @@ describe('filterItems', () => {
     expect(filterItems.originData[0].isDynamic).toBeFalsy();
     expect(filterItems.originData[1].isDynamic).toBeFalsy();
 
-    filterItems.swap(0, 1);
-    expect(filterItems.originData[0].field).toBe('select');
-    expect(filterItems.originData[1].field).toBe('input');
-
     filterItems.addItem([
       {
         type: 'radio',

@@ -119,23 +119,6 @@ export class FilterItems {
   };
 
   /**
-   * 提供给外层交换顺序
-   */
-  @action public swap = (oldIndex: number, newIndex: number) => {
-    if (oldIndex >= 0) {
-      if (oldIndex < this.originData.length) {
-        if (newIndex >= 0) {
-          if (newIndex < this.originData.length) {
-            const tmp = this.originData[oldIndex];
-            this.originData[oldIndex] = this.originData[newIndex];
-            this.originData[newIndex] = tmp;
-          }
-        }
-      }
-    }
-  };
-
-  /**
    * 动态添加查询项。field、label、type必须
    */
   @action public addItem = (data: FilterItemOptions[]): void => {

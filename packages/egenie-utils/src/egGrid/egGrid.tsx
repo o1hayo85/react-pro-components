@@ -279,7 +279,7 @@ const Pager = observer(({ store, children }: IProps) => {
             className={styles.refreshWrap}
             onClick={onRefresh}
           >
-            <i className={`${styles.edgBlue} icon-replace`}/>
+            <i className={`${styles.edgBlue} icon-cxsc`}/>
             刷新
           </span>
         )}
