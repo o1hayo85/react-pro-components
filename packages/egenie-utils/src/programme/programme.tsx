@@ -187,8 +187,10 @@ export class Programme {
   @action public handleItemClick = (id: string) => {
     this.activeProgrammeId = `${id}`;
     const item = this.programmeList.find((val) => `${val.id}` == id);
+
+    this.filterItems.reset();
+
     if (item) {
-      this.filterItems.reset();
       if (item.schemeValue) {
         try {
           const schemeValue = JSON.parse(item.schemeValue) || {};
@@ -201,8 +203,9 @@ export class Programme {
           console.log(e);
         }
       }
-      this.handleSearch();
     }
+
+    this.handleSearch();
   };
 
   @action public handleItemDelete = (item: ProgrammeListItem) => {
