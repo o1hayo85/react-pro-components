@@ -2,6 +2,7 @@
 
 ### Features
 
+- **egenie-common:** 去掉查询方案折叠属性 ([4a2d243](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/4a2d243d351005689c111c979345f4fa3681e5fd))
 - **egenie-common:** 去掉查询方案折叠属性 ([33944f7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/33944f771e131483dc1a2b38497d0b737cf7da98))
 - **egenie-common:** 去掉查询方案折叠属性 ([1216909](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1216909b236b4446f5fdb25a3c15d802a204e1fb))
 
