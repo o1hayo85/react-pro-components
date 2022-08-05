@@ -6,6 +6,7 @@ import type { FilterInput } from './filterInput/filterInput';
 import type { FilterInputAndSelect } from './filterInputAndSelect/filterInputAndSelect';
 import type { FilterInputNumberGroup } from './filterInputNumberGroup/filterInputNumberGroup';
 import type { FilterInputOrSelect } from './filterInputOrSelect/filterInputOrSelect';
+import type { FilterPatternSearch } from './filterPatternSearch/filterPatternSearch';
 import type { FilterRadio } from './filterRadio/filterRadio';
 import type { FilterSelect } from './filterSelect/filterSelect';
 import type { FilterTreeSelect } from './filterTreeSelect/filterTreeSelect';
@@ -27,6 +28,7 @@ export enum ENUM_FILTER_ITEM_TYPE {
   inputOrSelect = 'inputOrSelect',
   cascader = 'cascader',
   treeSelect = 'treeSelect',
+  patternSearch = 'patternSearch',
 }
 
 /**
@@ -53,6 +55,7 @@ export type FilterItem =
   | FilterInputOrSelect
   | FilterCascader
   | FilterDateStartOrEnd
+  | FilterPatternSearch
   | FilterTreeSelect;
 
 /**

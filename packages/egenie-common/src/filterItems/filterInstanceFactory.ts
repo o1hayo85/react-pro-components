@@ -6,6 +6,7 @@ import { FilterInput } from './filterInput/filterInput';
 import { FilterInputAndSelect } from './filterInputAndSelect/filterInputAndSelect';
 import { FilterInputNumberGroup } from './filterInputNumberGroup/filterInputNumberGroup';
 import { FilterInputOrSelect } from './filterInputOrSelect/filterInputOrSelect';
+import { FilterPatternSearch } from './filterPatternSearch/filterPatternSearch';
 import { FilterRadio } from './filterRadio/filterRadio';
 import { FilterSelect } from './filterSelect/filterSelect';
 import { FilterTreeSelect } from './filterTreeSelect/filterTreeSelect';
@@ -39,5 +40,7 @@ export function filterInstanceFactory(item: FilterItemOptions): FilterItem {
       return new FilterCascader(item);
     case ENUM_FILTER_ITEM_TYPE.treeSelect:
       return new FilterTreeSelect(item);
+    case ENUM_FILTER_ITEM_TYPE.patternSearch:
+      return new FilterPatternSearch(item);
   }
 }

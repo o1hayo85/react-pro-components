@@ -7,6 +7,7 @@ import { FilterInputComponent } from './filterInput/filterInputComponent';
 import { FilterInputAndSelectComponent } from './filterInputAndSelect/filterInputAndSelectComponent';
 import { FilterInputNumberGroupComponent } from './filterInputNumberGroup/filterInputNumberGroupComponent';
 import { FilterInputOrSelectComponent } from './filterInputOrSelect/filterInputOrSelectComponent';
+import { FilterPatternSearchComponent } from './filterPatternSearch/filterPatternSearchComponent';
 import { FilterRadioComponent } from './filterRadio/filterRadioComponent';
 import { FilterSelectComponent } from './filterSelect/filterSelectComponent';
 import { FilterTreeSelectComponent } from './filterTreeSelect/filterTreeSelectComponent';
@@ -91,6 +92,13 @@ export function filterComponentFactory(item: FilterItem): React.ReactNode {
     case ENUM_FILTER_ITEM_TYPE.treeSelect:
       return (
         <FilterTreeSelectComponent
+          key={item.field}
+          store={item}
+        />
+      );
+    case ENUM_FILTER_ITEM_TYPE.patternSearch:
+      return (
+        <FilterPatternSearchComponent
           key={item.field}
           store={item}
         />

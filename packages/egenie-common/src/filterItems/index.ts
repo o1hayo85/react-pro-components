@@ -20,6 +20,8 @@ export { FilterCascader } from './filterCascader/filterCascader';
 export { FilterCascaderComponent } from './filterCascader/filterCascaderComponent';
 export { FilterTreeSelect } from './filterTreeSelect/filterTreeSelect';
 export { FilterTreeSelectComponent } from './filterTreeSelect/filterTreeSelectComponent';
+export { FilterPatternSearch } from './filterPatternSearch/filterPatternSearch';
+export { FilterPatternSearchComponent } from './filterPatternSearch/filterPatternSearchComponent';
 export { FilterItems } from './filterItems';
 export type { FilterItemsParams } from './filterItems';
 export { filterComponentFactory } from './filterComponentFactory';

@@ -67,8 +67,8 @@ export abstract class FilterBase {
   /**
    * 按回车的回掉函数
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types,@typescript-eslint/no-empty-function
-  @action public onPressEnter: Function = () => {
+  @action public onPressEnter: (...arg: any[]) => any = () => {
+    //
   };
 
   /**
