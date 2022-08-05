@@ -45,7 +45,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           autoClearSearchValue
           bordered={false}
           disabled={disabled}
-          dropdownMatchSelectWidth={false}
+          dropdownMatchSelectWidth
           dropdownRender={mode && showChooseAll ? (menu) => {
             return (
               <>
