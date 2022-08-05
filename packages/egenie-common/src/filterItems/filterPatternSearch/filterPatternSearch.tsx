@@ -4,7 +4,7 @@ import React from 'react';
 import { FilterBase } from '../filterBase';
 import type { ENUM_SPLIT_SYMBOL } from '../types';
 import { ENUM_FILTER_ITEM_TYPE } from '../types';
-import { trimWhiteSpace } from '../utils';
+import { formatValueAndLabelData, trimWhiteSpace } from '../utils';
 
 interface FilterPatternSearchData {
   value: string;
@@ -18,12 +18,13 @@ interface FilterPatternSearchData {
 
 export class FilterPatternSearch extends FilterBase {
   constructor(options: Partial<FilterPatternSearch>) {
-    super(options);
+    super();
     const {
       data,
       ...rest
     } = options;
     extendObservable(this, { ...rest });
+    this.data = formatValueAndLabelData(data);
 
     this.formatValue(this.selectValue == null ? null : `${this.selectValue},${this.inputValue || ''}`);
     this.snapshot = {

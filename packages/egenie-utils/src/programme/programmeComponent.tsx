@@ -348,7 +348,7 @@ class FilterItemsComponent extends React.Component<{ programme: Programme; }> {
                 key={item.field}
               >
                 {
-                  item.type === ENUM_FILTER_ITEM_TYPE.radio || item.type === ENUM_FILTER_ITEM_TYPE.checkbox ? (
+                  item.type === ENUM_FILTER_ITEM_TYPE.radio || item.type === ENUM_FILTER_ITEM_TYPE.checkbox || item.type === ENUM_FILTER_ITEM_TYPE.patternSearch ? (
                     <Collapse
                       defaultActiveKey="1"
                       expandIconPosition="right"
