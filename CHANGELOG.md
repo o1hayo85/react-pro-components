@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.13...v0.0.0) (2022-08-05)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.14...v0.0.0) (2022-08-05)
+
+### Features
+
+- **egenie-utils:** 修复组件库查询方案排序问题 ([1a62819](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/1a628197a1bc36cf447412a6135db3379e982d44))
+
+## [0.14.14](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.13...v0.14.14) (2022-08-05)
 
 ## [0.14.13](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.12...v0.14.13) (2022-08-02)
 
