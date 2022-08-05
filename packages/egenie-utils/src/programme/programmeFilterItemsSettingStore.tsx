@@ -29,14 +29,16 @@ export class ProgrammeFilterItemsSettingStore {
     });
 
     let i = 0;
+    let j = 0;
     while (i < settingMatchFilterItems.length) {
       this.parent.filterItems.originData[i] = settingMatchFilterItems[i];
       i++;
     }
 
-    while (i < restFilterItems.length) {
-      this.parent.filterItems.originData[i] = restFilterItems[i];
+    while (j < restFilterItems.length) {
+      this.parent.filterItems.originData[i] = restFilterItems[j];
       i++;
+      j++;
     }
   };
 
