@@ -521,7 +521,7 @@ export class Store {
     })
       .catch((res: Response) => {
         message.destroy();
-        this.errorInfo = res.data ? res.data.data : '账号不存在';
+        this.errorInfo = res.data ? res.data.info : '账号不存在';
       });
   });
 
