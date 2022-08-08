@@ -11,7 +11,7 @@ order: 2
 ## `FilterItem`
 
 - 查询项种类
-- 类型: [FilterInput](./filter-input) | [FilterInputNumberGroup](./filter-input-number-group) | [FilterSelect](./filter-select) | [FilterRadio](./filter-radio) | [FilterInputAndSelect](./filter-input-and-select) | [FilterDate](./filter-date) | [FilterCheckbox](./filter-checkbox) | [FilterInputOrSelect](./filter-input-or-select) | [FilterCascader](./filter-cascader) | [FilterDateStartOrEnd](./filter-date-start-or-end) | [FilterTreeSelect](./filter-tree-select);
+- 类型: [FilterInput](./filter-input) | [FilterInputNumberGroup](./filter-input-number-group) | [FilterSelect](./filter-select) | [FilterRadio](./filter-radio) | [FilterInputAndSelect](./filter-input-and-select) | [FilterDate](./filter-date) | [FilterCheckbox](./filter-checkbox) | [FilterInputOrSelect](./filter-input-or-select) | [FilterCascader](./filter-cascader) | [FilterDateStartOrEnd](./filter-date-start-or-end) | [FilterTreeSelect](./filter-tree-select) | [FilterPatternSearch](./filter-pattern-search);
 
 ## `FilterItemOptions`
 
@@ -35,7 +35,7 @@ order: 2
 ### `type`
 
 - 描述: `查询项类型`
-- 类型: 'input' | 'inputAndSelect' | 'inputNumberGroup' | 'radio' | 'select' | 'date' | 'dateRange' | 'dateStart' | 'dateEnd' | 'checkbox' | 'inputOrSelect' | 'cascader' | 'treeSelect'
+- 类型: 'input' | 'inputAndSelect' | 'inputNumberGroup' | 'radio' | 'select' | 'date' | 'dateRange' | 'dateStart' | 'dateEnd' | 'checkbox' | 'inputOrSelect' | 'cascader' | 'treeSelect' | 'filterPatternSearch'
 - 默认值: 无
 
 ### `field`

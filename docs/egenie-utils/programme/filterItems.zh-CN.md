@@ -1,6 +1,6 @@
 ---
 title: FilterItems
-order: 14
+order: 97
 ---
 
 # `此类为上下、左右查询方案model层核心。在查询方案里的用法和下面的用法大体一致(获取实例有所区别)`
@@ -178,9 +178,10 @@ filterItems.validator().then(() => {
 - url 如: ?key1=value1&key2=value2
 - `key就是查询项的field,value为查询项的值(多个以,分隔)`
 - 特殊值:
-  - inputNumberGroup: min,max
-  - date: 时间类型(下拉框的值),开始时间字符串,结束时间字符串
-  - inputAndSelect: type(下拉框的值),value(输入框的值)
+  - `inputNumberGroup`: min,max
+  - `date`: 时间类型(下拉框的值),开始时间字符串,结束时间字符串
+  - `inputAndSelect`: type(下拉框的值),value(输入框的值)
+  - `patternSearch`: selectValue(下拉框的值),inputValue(输入框的值)
 
 ```ts
 const search = '?select_field=a,b';
