@@ -1,5 +1,9 @@
 # [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.16...v0.0.0) (2022-08-08)
 
+### Bug Fixes
+
+- 找回密码：账号不存在时显示问题 ([deb9094](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/deb9094309fb3b21a4bf8f4d2d410bfb61e6b8fa))
+
 ## [0.14.16](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.15...v0.14.16) (2022-08-08)
 
 ### Features
