@@ -195,5 +195,10 @@ export class FilterPatternSearch extends FilterBase {
    * 前置条件: isMultipleSearch = true
    */
   @observable public splitSymbol: ENUM_SPLIT_SYMBOL = ',';
+
+  /**
+   * 是否可清除
+   */
+  @observable public allowClear = true;
 }
 

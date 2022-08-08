@@ -40,28 +40,6 @@
   }
 }
 
-.filterPatternSearch {
-  :global {
-    .ant-radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-
-      .ant-radio-wrapper {
-        display: flex;
-        align-items: center;
-        height: @egenie-height-sm;
-      }
-    }
-
-    .ant-input {
-      display: block;
-      width: 100%;
-      margin-top: @egenie-spacing-xs;
-    }
-  }
-}
-
 .filterRadio {
   :global {
     .ant-radio-group {
@@ -114,6 +92,27 @@
       padding-top: 0;
       padding-bottom: 0;
       border: 1px solid @egenie-border-color-base !important;
+    }
+  }
+
+  .filterPatternSearch {
+    .ant-radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .ant-radio-wrapper {
+        display: flex;
+        align-items: center;
+        height: @egenie-height-sm;
+      }
+    }
+
+    .ant-input-affix-wrapper {
+      height: @egenie-height-md !important;
+      margin-top: @egenie-spacing-xss;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 

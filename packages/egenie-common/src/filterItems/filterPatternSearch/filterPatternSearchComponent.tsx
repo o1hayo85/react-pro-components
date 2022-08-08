@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import styles from '../filterItems.less';
 import { MultipleSearch } from '../multipleSearch';
 import { throttleTime } from '../utils';
 import type { FilterPatternSearch } from './filterPatternSearch';
@@ -30,10 +29,11 @@ export class FilterPatternSearchComponent extends React.Component<{ store: Filte
       selectValue,
       isMultipleSearch,
       splitSymbol,
+      allowClear,
     } = this.props.store;
     return (
       <div
-        className={`${styles.filterPatternSearch} ${className}`}
+        className={`filterPatternSearch ${className}`}
         style={toJS(style)}
       >
         <Radio.Group value={selectValue}>
@@ -50,6 +50,7 @@ export class FilterPatternSearchComponent extends React.Component<{ store: Filte
           }
         </Radio.Group>
         <Input
+          allowClear={allowClear}
           disabled={inputDisabled}
           onChange={(event) => handleInputChange(event.target.value)}
           onPressEnter={this.handlePressEnter}
