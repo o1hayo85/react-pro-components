@@ -23,7 +23,7 @@ interface FilterPatternSearchData {
 }
 ```
 
-- 描述: 输入的值
+- 描述: 选择的数据
 - 类型: FilterPatternSearchData[]
 - 默认值: []
 - `clearInputValue`: 当选中此值是否清除输入框的值。默认 false
