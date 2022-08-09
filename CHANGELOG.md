@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.16...v0.0.0) (2022-08-08)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.17...v0.0.0) (2022-08-09)
+
+### Bug Fixes
+
+- **Select:** 去掉下拉框默认虚拟滚动,key 相同时滑动会导致选项全部为一个 ([11818ec](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/11818eca8ed9f8287b7b297d252600773f76e276))
+
+## [0.14.17](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.16...v0.14.17) (2022-08-08)
 
 ### Bug Fixes
 
