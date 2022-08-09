@@ -90,6 +90,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
           showSearch={showSearch}
           style={{ width: `calc(100% - ${labelWidth}px)` }}
           value={toJS(value)}
+          virtual={false}
         />
       </div>
     );
