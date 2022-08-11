@@ -171,6 +171,10 @@ export class FilterSelect extends FilterBase {
     this.isLeftMatch = isLeftMatch;
   };
 
+  @action public handleChooseAll = () => {
+    this.onChange(this.allMatchData.map((item) => item.value));
+  };
+
   @observable public searchValue = '';
 
   /**
@@ -184,32 +188,34 @@ export class FilterSelect extends FilterBase {
   @observable public mode: 'multiple' | undefined = undefined;
 
   @computed
-  public get options(): ValueAndLabelData {
-    function handleSelectValue(mode: FilterSelect['mode'], value: FilterSelect['value']): Set<string> {
-      if (mode === 'multiple') {
-        return new Set(value);
-      } else {
-        return new Set(value == null ? [] : [value as string]);
+  private get selectValueSet(): Set<string> {
+    if (this.mode === 'multiple') {
+      return new Set(this.value);
+    } else {
+      return new Set(this.value == null ? [] : [this.value as string]);
+    }
+  }
+
+  @computed
+  private get allMatchData(): ValueAndLabelData {
+    return this.data.filter((item) => {
+      if (this.selectValueSet.has(item.value)) {
+        return true;
       }
-    }
 
-    function handleAllMatchData(data: ValueAndLabelData, searchValue: string, isLeftMatch: boolean): ValueAndLabelData {
-      return data.filter((item) => {
-        if (selectValue.has(item.value)) {
-          return true;
-        }
+      const text = (item.label || '').toLowerCase();
+      const search = (this.searchValue || '').toLowerCase();
+      if (this.isLeftMatch) {
+        return _.startsWith(text, search);
+      } else {
+        return _.includes(text, search);
+      }
+    });
+  }
 
-        const text = (item.label || '').toLowerCase();
-        const search = (searchValue || '').toLowerCase();
-        if (isLeftMatch) {
-          return _.startsWith(text, search);
-        } else {
-          return _.includes(text, search);
-        }
-      });
-    }
-
-    function handleValueMatch(data: ValueAndLabelData, maxItemsLength: number): number {
+  @computed
+  public get options(): ValueAndLabelData {
+    function handleValueMatch(data: ValueAndLabelData, maxItemsLength: number, selectValue: Set<string>): number {
       let valueMatchLimit = 0;
       data.forEach((item, index) => {
         if (selectValue.has(item.value)) {
@@ -223,7 +229,7 @@ export class FilterSelect extends FilterBase {
       return valueMatchLimit;
     }
 
-    function handleSearchMatch(data: ValueAndLabelData, valueMatchLimit: number, maxItemsLength: number) {
+    function handleSearchMatch(data: ValueAndLabelData, valueMatchLimit: number, maxItemsLength: number, selectValue: Set<string>) {
       let searchMatchCount = 0;
       data.forEach((item, index) => {
         if (item !== null && !selectValue.has(item.value)) {
@@ -236,9 +242,8 @@ export class FilterSelect extends FilterBase {
       });
     }
 
-    const selectValue = handleSelectValue(this.mode, this.value);
-    const allMatchData = handleAllMatchData(this.data, this.searchValue, this.isLeftMatch);
-    handleSearchMatch(allMatchData, handleValueMatch(allMatchData, this.maxItemsLength), this.maxItemsLength);
+    const allMatchData = this.allMatchData.slice();
+    handleSearchMatch(allMatchData, handleValueMatch(allMatchData, this.maxItemsLength, this.selectValueSet), this.maxItemsLength, this.selectValueSet);
     return allMatchData.filter(Boolean);
   }
 

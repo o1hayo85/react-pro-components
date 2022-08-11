@@ -29,6 +29,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
       showChooseAll,
       isLeftMatch,
       handleLeftMatch,
+      handleChooseAll,
     } = this.props.store;
     return (
       <div
@@ -61,7 +62,7 @@ export class FilterSelectComponent extends React.Component<{ store: FilterSelect
                   </section>
                   <section>
                     <Button
-                      onClick={() => onChange(options.map((item) => item.value))}
+                      onClick={handleChooseAll}
                       size="small"
                       type="primary"
                     >
