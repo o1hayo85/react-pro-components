@@ -420,7 +420,7 @@ export function getCustomDataNew(listItem: any): any {
 
 // @ts-ignore
 export function validateData(data?: any[]) {
-  const error = '没数据,请检验数据是否为空或者传入的mobx的observable';
+  const error = '没数据,请检验数据是否为空';
   if (!(Array.isArray(data) && data.length > 0)) {
     message.error({
       key: error,

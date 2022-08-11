@@ -38,7 +38,7 @@
     "react-router-dom": "5.2.0",
     "typescript": "4.2.4"
   },
-  "gitHead": "0771df5e39300fb858739e2297e7aabaa2a66c3e",
+  "gitHead": "df20d3040795867aebaec85bed994dc2a634b11f",
   "scripts": {
     "prepublish": "yarn run test && yarn run build",
     "build": "father-build",
