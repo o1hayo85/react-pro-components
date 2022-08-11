@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.17...v0.0.0) (2022-08-09)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.18...v0.0.0) (2022-08-11)
+
+### Features
+
+- **egenie-common:** 更改下拉框全选逻辑 ([0c9baf7](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/0c9baf7c21a48b8539440da0de1434faf76fc4e6))
+
+## [0.14.18](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.17...v0.14.18) (2022-08-09)
 
 ### Bug Fixes
 
