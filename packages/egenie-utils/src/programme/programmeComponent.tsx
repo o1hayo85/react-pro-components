@@ -8,9 +8,9 @@ import React from 'react';
 import { MainSubStructure } from '../egGrid';
 import { AddProgrammeModal } from './addProgrammeModal';
 import { DEFAULT_PROGRAMME, FILTER_ITEMS_COLLAPSE_PREFIX } from './constants';
-import { FilterItemSettingModal } from './filterItemSetting';
 import type { Programme } from './programme';
 import styles from './programme.less';
+import { SortAndDisplaySettingView } from './sortAndDisplaySetting/sortAndDisplaySettingView';
 
 let id = 0;
 
@@ -176,7 +176,7 @@ class Footer extends React.Component<{ programme: Programme; }> {
           />
         </RenderByCondition>
         <RenderByCondition show={showSetting}>
-          <FilterItemSettingModal
+          <SortAndDisplaySettingView
             callback={handleSettingSave}
             initSettingData={initSettingData}
             onCancel={() => handleShowSetting(false)}

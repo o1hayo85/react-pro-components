@@ -4,13 +4,13 @@ import type { BaseData } from '../request';
 import { request } from '../request';
 import { FILTER_ITEMS_SETTING_PREFIX } from './constants';
 import type { Programme } from './programme';
-import type { FilterItemSettingItem } from './types';
+import type { SortAndDisplaySettingItem } from './sortAndDisplaySetting/types';
 
 export class ProgrammeFilterItemsSettingStore {
   constructor(private parent: Programme) {
   }
 
-  @action private handleSettingChange = (settingData: FilterItemSettingItem[]) => {
+  @action private handleSettingChange = (settingData: SortAndDisplaySettingItem[]) => {
     this.parent.filterItems.updateFilterItem(settingData);
 
     const settingMatchFields: string[] = settingData.filter((item) => this.parent.filterItems.originData.find((val) => val.field === item.field))
@@ -49,7 +49,7 @@ export class ProgrammeFilterItemsSettingStore {
     })
       .then((info) => {
         try {
-          const data: FilterItemSettingItem[] = JSON.parse(info.data);
+          const data: SortAndDisplaySettingItem[] = JSON.parse(info.data);
           if (Array.isArray(data)) {
             this.handleSettingChange(data);
           }
@@ -59,7 +59,7 @@ export class ProgrammeFilterItemsSettingStore {
       });
   };
 
-  @action public handleSettingSave = (params: FilterItemSettingItem[]) => {
+  @action public handleSettingSave = (params: SortAndDisplaySettingItem[]) => {
     return request({
       url: '/api/dashboard/cache/save',
       method: 'post',

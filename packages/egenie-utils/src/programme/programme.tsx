@@ -10,7 +10,8 @@ import { formatFilterConfigData } from './formatFilterConfigData';
 import { ProgrammeCountStore } from './programmeCountStore';
 import { ProgrammeFilterItemsSettingStore } from './programmeFilterItemsSettingStore';
 import { ProgrammeInteractiveStore } from './programmeInteractiveStore';
-import type { FilterConfigData, FilterItemSettingItem, ProgrammeListItem } from './types';
+import type { SortAndDisplaySettingItem } from './sortAndDisplaySetting/types';
+import type { FilterConfigData, ProgrammeListItem } from './types';
 
 export interface ProgrammeParams extends FilterItemsParams {
 
@@ -96,7 +97,7 @@ export class Programme {
   public programmeInteractiveStore: ProgrammeInteractiveStore = new ProgrammeInteractiveStore(this);
 
   @computed
-  public get originSettingData(): FilterItemSettingItem[] {
+  public get originSettingData(): SortAndDisplaySettingItem[] {
     return this.filterItems.originData.map((item) => ({
       field: item.field,
       label: item.label,

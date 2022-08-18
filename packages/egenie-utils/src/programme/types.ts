@@ -1,11 +1,5 @@
 import type { BaseData } from '../request';
 
-export interface FilterItemSettingItem {
-  field: string;
-  label: string;
-  showItem: boolean;
-}
-
 export interface ProgrammeListItem {
   id: string;
   schemeName: string;
