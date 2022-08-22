@@ -430,3 +430,17 @@ export function validateData(data?: any[]) {
     throw new Error(error);
   }
 }
+
+export function loadScripts(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const element = document.createElement('script');
+    element.src = src;
+    element.onload = function() {
+      resolve();
+    };
+    element.onerror = function(e) {
+      reject(e);
+    };
+    document.head.appendChild(element);
+  });
+}

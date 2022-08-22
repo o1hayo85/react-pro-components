@@ -1,9 +1,10 @@
-export enum ENUM_SHOP_TYPE {
+export enum ENUM_WAY_BILL_TYPE {
   rookie = 0,
   pdd = 1,
   jd = 2,
   dy = 3,
   ks = 4,
+  dw = 5,
 }
 
 export enum ENUM_PRINT_PLUGIN_TYPE {
@@ -18,6 +19,7 @@ export enum ENUM_PRINT_PLUGIN_TYPE {
   ksOld,
   ksNew,
   lodop,
+  dw,
 }
 
 export enum ENUM_LODOP_ITEM_TYPE {
@@ -177,7 +179,8 @@ export interface CommonPrintParams extends BasePrintParams {
   | ENUM_PRINT_PLUGIN_TYPE.dyNew
   | ENUM_PRINT_PLUGIN_TYPE.pddNew
   | ENUM_PRINT_PLUGIN_TYPE.ksNew
-  | ENUM_PRINT_PLUGIN_TYPE.lodop;
+  | ENUM_PRINT_PLUGIN_TYPE.lodop
+  | ENUM_PRINT_PLUGIN_TYPE.dw;
 }
 
 export interface KsPrintParamsOld extends BasePrintParams {

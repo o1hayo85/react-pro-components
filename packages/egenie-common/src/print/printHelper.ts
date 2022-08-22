@@ -1,13 +1,20 @@
 import { message } from 'antd';
+import { getStaticResourceUrl } from '../helper';
 import { JdPrint } from './jdPrint';
 import { LodopPrint } from './lodopPrint';
 import { RookieAndPddAndDyAndKsPrint } from './rookieAndPddAndDyAndKsPrint';
 import type { CommonPrintParams, KsPrintParamsOld, PddPrintParamsOld } from './types';
 import { ENUM_PRINT_PLUGIN_TYPE } from './types';
-import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, sliceData, validateData } from './utils';
+import { formatDyDataNew, formatDyDataOld, formatKsDataNew, formatKsDataOld, formatPddDataNew, formatPddDataOld, formatPrintName, formatRookieDataNew, formatRookieDataOld, getCustomTemplateUrlNew, getJdCustomTemplateUrlOld, loadScripts, sliceData, validateData } from './utils';
 
 function openError(platform: string): string {
   return `系统未连接打印控件\n。请在首页安装${platform}且正常启动打印组件后重启浏览器`;
+}
+
+declare global {
+  interface Window {
+    ZPL_JSSDK: any;
+  }
 }
 
 class PrintHelper {
@@ -205,6 +212,24 @@ class PrintHelper {
           });
         }
       }
+        break;
+      case ENUM_PRINT_PLUGIN_TYPE.dw:
+        if (!window.ZPL_JSSDK) {
+          await loadScripts(getStaticResourceUrl('customer-source/printTemp/dw.js'));
+        }
+
+        for (let i = 0; i < params.contents.length; i++) {
+          const item = (params.contents)[i];
+          if (item?.dwData?.printData) {
+            window.ZPL_JSSDK.tmsPrint(JSON.parse(item.dwData.printData), (err: string) => {
+              console.log(err);
+              message.error({
+                key: String(err),
+                content: String(err),
+              });
+            });
+          }
+        }
         break;
       default:
         throw new Error('插件类型不存在,在外部被非法改掉');

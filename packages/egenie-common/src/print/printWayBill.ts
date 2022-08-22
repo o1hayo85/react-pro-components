@@ -3,12 +3,12 @@ import { request } from '../request';
 import { getCustomPrintParam } from './customPrint';
 import { printHelper } from './printHelper';
 import type { BasePrintParams, TemplateData } from './types';
-import { ENUM_PRINT_PLUGIN_TYPE, ENUM_SHOP_TYPE } from './types';
+import { ENUM_PRINT_PLUGIN_TYPE, ENUM_WAY_BILL_TYPE } from './types';
 import { validateData } from './utils';
 
 interface PrintData {
   cpCode?: string;
-  type?: ENUM_SHOP_TYPE;
+  type?: ENUM_WAY_BILL_TYPE;
   newPrint?: boolean;
   courierPrintType?: number;
   waybillData?: {
@@ -216,7 +216,7 @@ class PrintWayBill {
 
       if (await this.handleNotify(waybillData)) {
         switch (waybillType) {
-          case ENUM_SHOP_TYPE.jd:
+          case ENUM_WAY_BILL_TYPE.jd:
             if (newPrint) {
               await printHelper.print({
                 ...commonPrintData,
@@ -229,7 +229,7 @@ class PrintWayBill {
               });
             }
             break;
-          case ENUM_SHOP_TYPE.pdd:
+          case ENUM_WAY_BILL_TYPE.pdd:
             if (newPrint) {
               await printHelper.print({
                 ...commonPrintData,
@@ -243,7 +243,7 @@ class PrintWayBill {
               });
             }
             break;
-          case ENUM_SHOP_TYPE.rookie:
+          case ENUM_WAY_BILL_TYPE.rookie:
             if (newPrint) {
               await printHelper.print({
                 ...commonPrintData,
@@ -256,7 +256,7 @@ class PrintWayBill {
               });
             }
             break;
-          case ENUM_SHOP_TYPE.dy:
+          case ENUM_WAY_BILL_TYPE.dy:
             if (newPrint) {
               await printHelper.print({
                 ...commonPrintData,
@@ -269,7 +269,7 @@ class PrintWayBill {
               });
             }
             break;
-          case ENUM_SHOP_TYPE.ks:
+          case ENUM_WAY_BILL_TYPE.ks:
             if (newPrint) {
               await printHelper.print({
                 ...commonPrintData,
@@ -282,6 +282,12 @@ class PrintWayBill {
                 cpCode,
               });
             }
+            break;
+          case ENUM_WAY_BILL_TYPE.dw:
+            await printHelper.print({
+              ...commonPrintData,
+              state: ENUM_PRINT_PLUGIN_TYPE.dw,
+            });
             break;
           default: {
             const error = `面单渠道类型:${waybillType}不存在`;

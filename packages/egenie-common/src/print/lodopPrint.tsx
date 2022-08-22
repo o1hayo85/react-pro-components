@@ -1,8 +1,8 @@
 import { message } from 'antd';
 import React from 'react';
-import type { CommonPrintParams, LodopItem, TemplateData, PrintAbstract } from './types';
+import type { CommonPrintParams, LodopItem, PrintAbstract, TemplateData } from './types';
 import { ENUM_LODOP_ITEM_TYPE } from './types';
-import { getTemplateData, getUUID, lodopItemGetText, validateData } from './utils';
+import { getTemplateData, getUUID, loadScripts, lodopItemGetText, validateData } from './utils';
 
 enum ENUM_LOAD_STATE {
   init,
@@ -50,20 +50,6 @@ function setSkuDetail(itemData: LodopItem, data: any): string {
     trStr.join(''),
     '</table>',
   ].join('');
-}
-
-function loadScripts(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const element = document.createElement('script');
-    element.src = src;
-    element.onload = function() {
-      resolve();
-    };
-    element.onerror = function(e) {
-      reject(e);
-    };
-    document.head.appendChild(element);
-  });
 }
 
 function notifyUserDownloadPlugin() {
