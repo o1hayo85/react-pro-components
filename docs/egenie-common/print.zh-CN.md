@@ -252,6 +252,11 @@ interface PrintWayBillParams {
   preview?: boolean;
 
   /**
+   * 一次打印数量(默认500)
+   */
+  count?: number;
+
+  /**
    * 打印机
    */
   printer?: string;

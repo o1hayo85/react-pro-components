@@ -194,7 +194,7 @@ class PrintHelper {
       }
         break;
       case ENUM_PRINT_PLUGIN_TYPE.lodop: {
-        const pageData = sliceData(params.contents, params.count || 30);
+        const pageData = sliceData(params.contents, params.count);
 
         for (let i = 0; i < pageData.length; i++) {
           await this.lodopPrintPlugin.print({

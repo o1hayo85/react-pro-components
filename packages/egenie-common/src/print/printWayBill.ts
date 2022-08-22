@@ -88,6 +88,11 @@ interface PrintWayBillParams {
   printSrc?: string | number;
 
   /**
+   * 一次打印数量(默认500)
+   */
+  count?: number;
+
+  /**
    * 排序策略
    */
   orderBy?: string;
@@ -189,7 +194,7 @@ class PrintWayBill {
       const waybillData = printData[i].waybillData;
       const tempData = waybillData.tempData;
       const userData = waybillData.userData;
-      const shopType = printData[i].type;
+      const waybillType = printData[i].type;
       const newPrint = printData[i].newPrint;
       const courierPrintType = printData[i].courierPrintType;
       const cpCode = printData[i].cpCode;
@@ -204,12 +209,13 @@ class PrintWayBill {
       const commonPrintData: BasePrintParams = {
         printer: params.printer,
         preview: params.preview,
+        count: params.count,
         contents: userData,
         templateData: tempData,
       };
 
       if (await this.handleNotify(waybillData)) {
-        switch (shopType) {
+        switch (waybillType) {
           case ENUM_SHOP_TYPE.jd:
             if (newPrint) {
               await printHelper.print({
@@ -278,7 +284,7 @@ class PrintWayBill {
             }
             break;
           default: {
-            const error = `店铺类型:${shopType}不存在`;
+            const error = `面单渠道类型:${waybillType}不存在`;
             message.error({
               key: error,
               content: error,
