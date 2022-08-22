@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.20...v0.0.0) (2022-08-15)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.21...v0.0.0) (2022-08-22)
+
+### Features
+
+- **egenie-common:** 增加打印面单一次打印可配数量 ([fa0e2c2](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/fa0e2c2dcf8634bf8d4ec427f359fd86ff7cc144))
+- **egenie-utils:** 抽离查询方案配置弹框 ([3ef6eb6](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/3ef6eb6e7578cf7791ae1aeb5a52a6ba1fa47cda))
+
+## [0.14.21](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.20...v0.14.21) (2022-08-15)
 
 ## [0.14.20](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.19...v0.14.20) (2022-08-11)
 
