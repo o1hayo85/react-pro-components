@@ -1,4 +1,10 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.21...v0.0.0) (2022-08-22)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.22...v0.0.0) (2022-08-24)
+
+### Features
+
+- **egenie-common:** 增加得物打印 ([b238a44](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/b238a4424e15291714a773037dc62875146d7373))
+
+## [0.14.22](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.21...v0.14.22) (2022-08-22)
 
 ### Features
 
