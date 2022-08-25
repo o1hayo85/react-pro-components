@@ -99,7 +99,7 @@ export class Programme {
   @computed
   public get originSettingData(): SortAndDisplaySettingItem[] {
     return this.filterItems.originData.map((item) => ({
-      field: item.field,
+      primaryKey: item.field,
       label: item.label,
       showItem: item.showItem,
     }));

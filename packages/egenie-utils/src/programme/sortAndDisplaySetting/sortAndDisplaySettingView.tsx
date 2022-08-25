@@ -75,7 +75,7 @@ export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySet
       columns,
       dataSource,
       selectedRowKeys,
-      onChange,
+      handleSelectedRowKeysChange,
       isSave,
       handleSave,
       moveRow,
@@ -117,7 +117,7 @@ export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySet
           onClose={onCancel}
           title="查询项设置"
           visible
-          width={500}
+          width={480}
         >
           <Table
             columns={columns}
@@ -130,10 +130,10 @@ export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySet
               moveRow,
             })}
             pagination={false}
-            rowKey="field"
+            rowKey="primaryKey"
             rowSelection={{
               selectedRowKeys,
-              onChange,
+              onChange: handleSelectedRowKeysChange,
             }}
             size="small"
             style={{ height: '100%' }}

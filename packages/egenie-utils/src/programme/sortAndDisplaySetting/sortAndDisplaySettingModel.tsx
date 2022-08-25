@@ -2,19 +2,30 @@ import { action, observable, toJS } from 'mobx';
 import React from 'react';
 import type { SortAndDisplaySettingItem, SortAndDisplaySettingViewProps } from './types';
 
+function cloneData(data: SortAndDisplaySettingItem[]): SortAndDisplaySettingItem[] {
+  return (data || []).map((item) => ({
+    primaryKey: item.primaryKey,
+    label: item.label,
+    showItem: Boolean(item.showItem),
+    frozen: Boolean(item.frozen),
+  }));
+}
+
 export class SortAndDisplaySettingModel {
   constructor(originData: SortAndDisplaySettingItem[], initSettingData: SortAndDisplaySettingItem[], callback: SortAndDisplaySettingViewProps['callback']) {
-    this.originData = JSON.parse(JSON.stringify(originData));
-    this.initSettingData = JSON.parse(JSON.stringify(initSettingData));
+    this.originData = cloneData(originData);
+    this.initSettingData = cloneData(initSettingData);
+    this.dataSource = cloneData(this.originData);
+    this.selectedRowKeys = this.originData.filter((item) => item.showItem)
+      .map((item) => item.primaryKey);
     this.callback = callback;
-    this.handleReset();
   }
 
   private callback: SortAndDisplaySettingViewProps['callback'];
 
   @observable public selectedRowKeys: string[] = [];
 
-  @action public onChange = (selectedRowKeys: string[]): void => {
+  @action public handleSelectedRowKeysChange = (selectedRowKeys: string[]): void => {
     this.selectedRowKeys = selectedRowKeys;
   };
 
@@ -24,16 +35,10 @@ export class SortAndDisplaySettingModel {
 
   @observable public dataSource: SortAndDisplaySettingItem[] = [];
 
-  @action public handleReset = () => {
-    this.dataSource = JSON.parse(JSON.stringify(this.originData));
-    this.selectedRowKeys = this.originData.filter((item) => item.showItem)
-      .map((item) => item.field);
-  };
-
   @action public handleInit = () => {
-    this.dataSource = JSON.parse(JSON.stringify(this.initSettingData));
+    this.dataSource = cloneData(this.initSettingData);
     this.selectedRowKeys = this.initSettingData.filter((item) => item.showItem)
-      .map((item) => item.field);
+      .map((item) => item.primaryKey);
   };
 
   @observable public isSave = false;
@@ -43,7 +48,7 @@ export class SortAndDisplaySettingModel {
     const data = this.dataSource.map((item) => toJS(item))
       .map((item) => ({
         ...item,
-        showItem: this.selectedRowKeys.includes(item.field),
+        showItem: this.selectedRowKeys.includes(item.primaryKey),
       }));
     this.callback(data)
       .finally(() => this.isSave = false);
@@ -55,15 +60,13 @@ export class SortAndDisplaySettingModel {
     this.dataSource.splice(hoverIndex, 0, tmp);
   };
 
-  public get columns() {
-    return [
-      {
-        title: '名称',
-        dataIndex: 'label',
-        key: 'label',
-        width: 200,
-        ellipsis: true,
-      },
-    ];
-  }
+  public columns = [
+    {
+      title: '名称',
+      dataIndex: 'label',
+      key: 'label',
+      width: 200,
+      ellipsis: true,
+    },
+  ];
 }

@@ -178,7 +178,11 @@ class Footer extends React.Component<{ programme: Programme; }> {
         <RenderByCondition show={showSetting}>
           <SortAndDisplaySettingView
             callback={handleSettingSave}
-            initSettingData={initSettingData}
+            initSettingData={initSettingData.map((item) => ({
+              primaryKey: item.field,
+              label: item.label,
+              showItem: item.showItem,
+            }))}
             onCancel={() => handleShowSetting(false)}
             originData={originSettingData}
           />

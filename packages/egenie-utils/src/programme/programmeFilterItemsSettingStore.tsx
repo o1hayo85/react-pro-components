@@ -5,12 +5,13 @@ import { request } from '../request';
 import { FILTER_ITEMS_SETTING_PREFIX } from './constants';
 import type { Programme } from './programme';
 import type { SortAndDisplaySettingItem } from './sortAndDisplaySetting/types';
+import type { FieldSettingItem } from './types';
 
 export class ProgrammeFilterItemsSettingStore {
   constructor(private parent: Programme) {
   }
 
-  @action private handleSettingChange = (settingData: SortAndDisplaySettingItem[]) => {
+  @action private handleSettingChange = (settingData: FieldSettingItem[]) => {
     this.parent.filterItems.updateFilterItem(settingData);
 
     const settingMatchFields: string[] = settingData.filter((item) => this.parent.filterItems.originData.find((val) => val.field === item.field))
@@ -49,7 +50,7 @@ export class ProgrammeFilterItemsSettingStore {
     })
       .then((info) => {
         try {
-          const data: SortAndDisplaySettingItem[] = JSON.parse(info.data);
+          const data: FieldSettingItem[] = JSON.parse(info.data);
           if (Array.isArray(data)) {
             this.handleSettingChange(data);
           }
@@ -60,23 +61,23 @@ export class ProgrammeFilterItemsSettingStore {
   };
 
   @action public handleSettingSave = (params: SortAndDisplaySettingItem[]) => {
+    const data: FieldSettingItem[] = params.map((item) => ({
+      field: item.primaryKey,
+      label: item.label,
+      showItem: Boolean(item.showItem),
+    }));
+
     return request({
       url: '/api/dashboard/cache/save',
       method: 'post',
       data: new URLSearchParams(Object.entries({
         cacheKey: `${FILTER_ITEMS_SETTING_PREFIX}${this.parent.moduleName}`,
-        cacheValue: JSON.stringify(params.map((item) => {
-          const newItem = { ...item };
-
-          // 不保存label
-          delete newItem.label;
-          return newItem;
-        })),
+        cacheValue: JSON.stringify(data),
       })),
     })
       .then(() => {
         this.handleShowSetting(false);
-        this.handleSettingChange(params);
+        this.handleSettingChange(data);
         this.parent.handleSearch();
       });
   };

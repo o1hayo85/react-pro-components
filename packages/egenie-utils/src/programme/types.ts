@@ -17,3 +17,9 @@ export interface FilterSetItem {
 }
 
 export type FilterConfigData = BaseData<FilterSetItem>;
+
+export interface FieldSettingItem {
+  field: string;
+  label: string;
+  showItem: boolean;
+}
