@@ -13,6 +13,7 @@ const DragableBodyRow = ({
   moveRow,
   className,
   style,
+  frozenLastIndex,
   ...restProps
 }) => {
   const ref = React.useRef();
@@ -26,9 +27,10 @@ const DragableBodyRow = ({
     accept: 'DragableBodyRow',
     collect: (monitor) => {
       const { index: dragIndex } = monitor.getItem() || {};
-      if (dragIndex === index) {
+      if (dragIndex === index || dragIndex <= frozenLastIndex) {
         return {};
       }
+
       return {
         isOver: monitor.isOver(),
         dropClassName: dragIndex < index ? ` ${styles.dropOverDownward}` : ` ${styles.dropOverUpward}`,
@@ -64,22 +66,30 @@ const DragableBodyRow = ({
 export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySettingViewProps> {
   constructor(props: SortAndDisplaySettingViewProps) {
     super(props);
-    this.store = new SortAndDisplaySettingModel(props.originData, props.initSettingData, props.callback);
+    this.store = new SortAndDisplaySettingModel({
+      originData: props.originData,
+      initSettingData: props.initSettingData,
+      callback: props.callback,
+      renderLabel: props.renderLabel,
+    });
   }
 
   public store: SortAndDisplaySettingModel;
 
   render() {
-    const { onCancel } = this.props;
+    const {
+      onCancel,
+      title,
+      description,
+    } = this.props;
     const {
       columns,
       dataSource,
-      selectedRowKeys,
-      handleSelectedRowKeysChange,
       isSave,
       handleSave,
       moveRow,
       handleInit,
+      frozenLastIndex,
     } = this.store;
     return (
       <DragAndDropHOC>
@@ -115,13 +125,28 @@ export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySet
           )}
           maskClosable={false}
           onClose={onCancel}
-          title="查询项设置"
+          title={title}
           visible
           width={480}
         >
+          <section className={styles.descriptionContainer}>
+            <i className="icon-note_zs"/>
+            {description}
+          </section>
           <Table
+
+            // @ts-ignore
             columns={columns}
-            components={{ body: { row: DragableBodyRow }}}
+            components={{
+              body: {
+                row: (props) => (
+                  <DragableBodyRow
+                    {...props}
+                    frozenLastIndex={frozenLastIndex}
+                  />
+                ),
+              },
+            }}
             dataSource={toJS(dataSource)}
 
             // @ts-ignore
@@ -131,12 +156,8 @@ export class SortAndDisplaySettingView extends React.Component<SortAndDisplaySet
             })}
             pagination={false}
             rowKey="primaryKey"
-            rowSelection={{
-              selectedRowKeys,
-              onChange: handleSelectedRowKeysChange,
-            }}
+            showHeader={false}
             size="small"
-            style={{ height: '100%' }}
           />
         </Drawer>
       </DragAndDropHOC>

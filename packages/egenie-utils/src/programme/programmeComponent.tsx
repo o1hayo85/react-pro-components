@@ -178,6 +178,7 @@ class Footer extends React.Component<{ programme: Programme; }> {
         <RenderByCondition show={showSetting}>
           <SortAndDisplaySettingView
             callback={handleSettingSave}
+            description="勾选显示查询项,支持拖动排序"
             initSettingData={initSettingData.map((item) => ({
               primaryKey: item.field,
               label: item.label,
@@ -185,6 +186,7 @@ class Footer extends React.Component<{ programme: Programme; }> {
             }))}
             onCancel={() => handleShowSetting(false)}
             originData={originSettingData}
+            title="查询项设置"
           />
         </RenderByCondition>
       </>

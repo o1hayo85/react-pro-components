@@ -191,18 +191,16 @@ export class Programme {
 
     this.filterItems.reset();
 
-    if (item) {
-      if (item.schemeValue) {
-        try {
-          const schemeValue = JSON.parse(item.schemeValue) || {};
-          this.filterItems.originData.forEach((item) => {
-            if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
-              item.formatValue.call(item, schemeValue[item.field]);
-            }
-          });
-        } catch (e) {
-          console.log(e);
-        }
+    if (item && item.schemeValue) {
+      try {
+        const schemeValue = JSON.parse(item.schemeValue) || {};
+        this.filterItems.originData.forEach((item) => {
+          if (Object.prototype.hasOwnProperty.call(schemeValue, item.field)) {
+            item.formatValue.call(item, schemeValue[item.field]);
+          }
+        });
+      } catch (e) {
+        console.log(e);
       }
     }
 
