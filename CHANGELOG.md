@@ -1,4 +1,11 @@
-# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.22...v0.0.0) (2022-08-24)
+# [0.0.0](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.23...v0.0.0) (2022-08-26)
+
+### Features
+
+- **egenie-utils:** 查询方案排序显隐弹框内部改造 ([e8b61d5](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/e8b61d5e0710f7c780b6f4b4a76e668c63324b25))
+- **egenie-utils:** 查询方案排序显隐弹框内部改造 ([995264a](http://192.168.200.111:9980/egFrontend/egenie-utils/commits/995264a0d8b9669cac0057efb9cdbdd8858801d9))
+
+## [0.14.23](http://192.168.200.111:9980/egFrontend/egenie-utils/compare/v0.14.22...v0.14.23) (2022-08-24)
 
 ### Features
 
