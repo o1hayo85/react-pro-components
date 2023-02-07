@@ -24,7 +24,7 @@ export interface ButtonProps extends BaseButtonProps {
   btnType?: ButtonType;
   ghost?: boolean;
   href?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Button: FC<ButtonProps> = (props) => {
