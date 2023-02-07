@@ -4,5 +4,8 @@
 /* 样式重置文件 */
 @import "./reboot";
 
+/* 组件混入样式 */
+@import './mixin';
+
 /* 按钮样式 */
 @import '../components//Button//styles';

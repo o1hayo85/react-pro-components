@@ -6,13 +6,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <Button>
+        <Button onClick={(e) => console.log(e)}>
+          hello
+        </Button>
+        <Button
+          btnType={ButtonType.Primary}
+          ghost
+          size={ButtonSize.Small}
+        >
           hello
         </Button>
         <Button
           btnType={ButtonType.Primary}
           size={ButtonSize.Large}
           disabled
+        >
+          hello
+        </Button>
+        <Button
+          btnType={ButtonType.Danger}
         >
           hello
         </Button>
