@@ -1,9 +1,12 @@
 import React from 'react';
 import Button, { ButtonSize, ButtonType } from './components/Button/button';
+import Alert from './components/Alert';
 
 function App() {
   return (
-    <div className="App">
+    <div style={{
+      margin: '50px'
+    }} className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <Button onClick={(e) => console.log(e)}>
@@ -35,17 +38,30 @@ function App() {
         >
           hello
         </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <hr />
+        <Alert 
+          type='success'
+          message='Success Tips'
+          closable={true}
+          afterClose={() => {alert('closed')}}
+        />
+        <Alert 
+          message='info Tips'
+          description="Additional description and information about copywriting."
+          closable={true}
+          afterClose={() => {alert('closed')}}
+        />
+        <Alert 
+          type='warning'
+          message='info Tips'
+        />
+        <Alert 
+          type='error'
+          message='info Tips'
+          description="Additional description and information about copywriting."
+          closable={true}
+          afterClose={() => {alert('closed')}}
+        />
       </header>
     </div>
   );

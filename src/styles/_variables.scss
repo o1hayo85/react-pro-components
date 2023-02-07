@@ -66,7 +66,7 @@ $h6-font-size:                $font-size-base !default;
 $link-color:                              $primary !default;
 $link-decoration:                         none !default;
 $link-hover-color:                        darken($link-color, 15%) !default;
-$link-hover-decoration:                   underline !default;
+$link-hover-decoration:                   under  !default;
 
 // body
 $body-bg:                   $white !default;
@@ -76,6 +76,9 @@ $body-text-align:           null !default;
 
 // Spacing
 $spacer: 1rem !default;
+$spacer-sm: $spacer * 0.5 !default;
+$spacer-md: $spacer * 0.75 !default;
+$spacer-lg: $spacer !default;
 
 $headings-margin-bottom:      $spacer / 2 !default;
 $headings-font-family:        null !default;
@@ -158,6 +161,7 @@ $border-color:                $gray-300 !default;
 $border-radius:               .25rem !default;
 $border-radius-lg:            .3rem !default;
 $border-radius-sm:            .2rem !default;
+$border-radius-xl:            .5rem !default;
 
 // 不同类型的 box shadow
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;

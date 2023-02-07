@@ -1,0 +1,51 @@
+.alert {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px 12px;
+  line-height: $line-height-base;
+  color: $body-color;
+  border-radius: $border-radius-xl;
+  font-size: $font-size-sm;
+  border: 1px solid transparent;
+
+  & .alert-content {
+    flex: 1;
+    min-width: 0;
+
+    & .alert-width-description {
+      display: block;
+      margin-bottom: $spacer-sm;
+      font-size: $font-size-base;
+    }
+  }
+
+  & .alert-close-icon {
+    margin-inline-start: 8px;
+    padding: 0;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 12px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+
+.alert-success {
+  @include alert-style($success)
+}
+
+.alert-info {
+  @include alert-style($primary)
+}
+
+.alert-warning {
+  @include alert-style($warning)
+}
+
+.alert-error {
+  @include alert-style($danger)
+}
