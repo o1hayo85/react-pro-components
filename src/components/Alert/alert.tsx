@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type AlertType = 'success' | 'info' | 'warning' | 'error'
 
-interface AlertProps {
+export interface AlertProps {
   type?: AlertType;
   message?: string;
   description?: string;
@@ -41,10 +41,10 @@ const Alert: FC<AlertProps> = (props) => {
   }
 
   return (
-    <div className={rootClasses}>
-      <div className='alert-content'>
+    <div role="alert" className={rootClasses}>
+      <div data-testid="alert-content" className='alert-content'>
         <div className={classNames({'alert-width-description': Boolean(description)})}>{message}</div>
-        <div>{description}</div>
+        {description && <div>{description}</div>}
       </div>
       {closable &&
         (<button
