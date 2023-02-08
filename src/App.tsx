@@ -1,6 +1,9 @@
 import React from 'react';
 import Button, { ButtonSize, ButtonType } from './components/Button/button';
 import Alert from './components/Alert';
+import Menu from './components/Menu';
+
+const { Item } = Menu;
 
 function App() {
   return (
@@ -62,6 +65,18 @@ function App() {
           closable={true}
           afterClose={() => {alert('closed')}}
         />
+        <hr/>
+        <Menu onSelect={(index) => alert(index)}>
+          <Item>
+            first item
+          </Item>
+          <Item>
+            second item
+          </Item>
+          <Item disabled>
+            third item
+          </Item>
+        </Menu>
       </header>
     </div>
   );
