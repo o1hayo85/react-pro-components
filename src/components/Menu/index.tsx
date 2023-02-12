@@ -9,4 +9,5 @@ interface MenuInterface {
 const Menu = MenuComponent as MenuInterface;
 Menu.Item = MenuItemComponent;
 
+export * from './menu';
 export default Menu;
