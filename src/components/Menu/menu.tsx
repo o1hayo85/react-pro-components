@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { MenuItemProps } from './menuItem';
 
-type MenuMode = 'horizontal' | 'vertical';
+export type MenuMode = 'horizontal' | 'vertical';
 export interface MenuProps {
   defaultIndex?: string;
   className?: string;
@@ -66,7 +66,7 @@ const Menu: FC<MenuProps> = (props) => {
     return React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>;
       const { displayName } = childElement.type;
-      if(displayName === 'MenuItem') {
+      if(displayName === 'MenuItem' || displayName === 'SubMenu') {
         return React.cloneElement(childElement, { index:  index.toString()})
       } else {
         console.error('invalid MenuItem in Menu component', childElement)
@@ -84,7 +84,7 @@ const Menu: FC<MenuProps> = (props) => {
 }
 
 Menu.defaultProps = {
-  mode: 'vertical'
+  mode: 'horizontal'
 };
 
 export default Menu;

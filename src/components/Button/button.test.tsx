@@ -20,8 +20,8 @@ describe('test button component', () => {
 
   test('should render correct component based on different props', () => {
     const testProps:ButtonProps = {
-      btnType: ButtonType.Primary,
-      size: ButtonSize.Large,
+      btnType: 'primary',
+      size: 'lg',
       className: 'btn-test'
     }
     render(<Button {...testProps}>Nice</Button>)
@@ -31,7 +31,7 @@ describe('test button component', () => {
   })
 
   test('should render a link when btnType equals link and href is provided', () => {
-    render(<Button btnType={ButtonType.Link} href="baidu.com">link</Button>)
+    render(<Button btnType={'link'} href="baidu.com">link</Button>)
     const element = screen.getByText('link');
     expect(element).toBeInTheDocument();
     expect(element.tagName).toEqual('A');

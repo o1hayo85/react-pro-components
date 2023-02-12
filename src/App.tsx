@@ -1,11 +1,12 @@
-import React from 'react';
-import Button, { ButtonSize, ButtonType } from './components/Button/button';
+import React, { useState } from 'react';
+import Button from './components/Button/button';
 import Alert from './components/Alert';
-import Menu from './components/Menu';
+import Menu, { MenuMode } from './components/Menu';
 
-const { Item } = Menu;
+const { Item, SubMenu } = Menu;
 
 function App() {
+  const [menuMode, setMenuMode] = useState<MenuMode>('horizontal');
   return (
     <div style={{
       margin: '50px'
@@ -16,26 +17,26 @@ function App() {
           hello
         </Button>
         <Button
-          btnType={ButtonType.Primary}
+          btnType='primary'
           ghost
-          size={ButtonSize.Small}
+          size='sm'
         >
           hello
         </Button>
         <Button
-          btnType={ButtonType.Primary}
-          size={ButtonSize.Large}
+          btnType='primary'
+          size='lg'
           disabled
         >
           hello
         </Button>
         <Button
-          btnType={ButtonType.Danger}
+          btnType='danger'
         >
           hello
         </Button>
         <Button
-          btnType={ButtonType.Link}
+          btnType='link'
           href="http://www.baidu.com"
           disabled
         >
@@ -66,7 +67,9 @@ function App() {
           afterClose={() => {alert('closed')}}
         />
         <hr/>
-        <Menu onSelect={(index) => alert(index)}>
+        <Button size='sm' btnType='primary' onClick={() => setMenuMode('horizontal')}>horizontal</Button>
+        <Button size='sm' btnType='primary' onClick={() => setMenuMode('vertical')}>vertical</Button>
+        <Menu mode={menuMode} onSelect={(index) => console.log(index)}>
           <Item>
             first item
           </Item>
@@ -76,6 +79,14 @@ function App() {
           <Item disabled>
             third item
           </Item>
+          <SubMenu title='subMenu'>
+            <Item disabled>
+              1 item
+            </Item>
+            <Item >
+              2 item
+          </Item>
+          </SubMenu>
         </Menu>
       </header>
     </div>

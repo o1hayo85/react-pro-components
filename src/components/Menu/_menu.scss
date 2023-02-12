@@ -15,6 +15,7 @@
     &:hover,
     &:focus {
       text-decoration: none;
+      border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
     }
 
     &.menu-item-disabled {
@@ -28,11 +29,53 @@
       border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
     }
   }
+
+  .subMenu-item {
+    position: relative;
+
+    .subMenu-title {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .menu-submenu {
+    list-style:none;
+    padding-left: 0;
+    white-space: nowrap;
+    >.menu-item {
+      padding: $menu-item-padding-y $menu-item-padding-x;
+      cursor: pointer;
+      transition: $menu-transition;
+      color: $body-color;
+      &.menu-item-active,
+      &:hover {
+        color: $menu-item-active-color !important;
+      }
+
+      &.menu-item-disabled {
+        color: $menu-item-disabled-color;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 .menu-horizontal {
   >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
+  }
+
+  .menu-submenu {
+    position: absolute;
+    background: $white;
+    z-index: 100;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: $menu-border-width solid $menu-border-color;
+    box-shadow: $submenu-box-shadow;
   }
 }
 
