@@ -1,0 +1,23 @@
+{
+  "name": "mini-component",
+  "private": false,
+  "version": "1.0.0",
+  "description": "test component",
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/bundle.cjs.js",
+    "module": "dist/bundle.es.js",
+    "typings": "dist/index.d.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
