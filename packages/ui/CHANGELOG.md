@@ -1,5 +1,11 @@
 # mini-component-ui
 
+## 2.0.6
+
+### Patch Changes
+
+- 增加 rollup 打包样式文件内容
+
 ## 2.0.5
 
 ### Patch Changes

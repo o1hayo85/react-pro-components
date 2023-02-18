@@ -1,5 +1,12 @@
 # playground
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - mini-component-ui@2.0.6
+
 ## 0.0.9
 
 ### Patch Changes

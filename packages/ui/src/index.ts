@@ -1,4 +1,4 @@
-import Button from './Button/index';
+import Button from './component/Button/index';
 
 export {
   Button

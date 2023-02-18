@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.less';
 
 export interface ButtonProps {
   children: React.ReactNode
@@ -6,7 +7,7 @@ export interface ButtonProps {
 const Button:React.FC<ButtonProps> = (props) => {
   const { children } = props;
   return (
-    <button>
+    <button className='mini-button'>
       {children}
     </button>
   )
