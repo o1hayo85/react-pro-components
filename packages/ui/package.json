@@ -1,7 +1,7 @@
 {
   "name": "mini-component-ui",
   "private": false,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "test component",
   "type": "module",
   "main": "src/index.ts",
@@ -12,13 +12,18 @@
     "typings": "dist/index.d.ts"
   },
   "files": [
+    "package.json",
     "dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && rollup -c"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "component",
+    "ui"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
