@@ -6,7 +6,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm --filter playground dev"
+    "dev": "pnpm --filter playground dev",
+    "changeset": "changeset",
+    "update:version": "changeset version",
+    "release": "changeset publish"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "rimraf": "^4.1.2",
