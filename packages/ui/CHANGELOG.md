@@ -1,5 +1,11 @@
 # mini-component-ui
 
+## 2.0.4
+
+### Patch Changes
+
+- package.json 文件修改
+
 ## 2.0.3
 
 ### Patch Changes
