@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm --filter playground dev",
+    "build": "pnpm --filter mini-component-ui build",
     "changeset": "changeset",
     "update:version": "changeset version",
     "release": "changeset publish"

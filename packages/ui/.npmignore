@@ -3,3 +3,4 @@ node_modules
 CHANGELOG.MD
 rollup.config.js
 tsconfig.build.json
+package.json
