@@ -1,5 +1,11 @@
 # mini-component-ui
 
+## 2.0.5
+
+### Patch Changes
+
+- 增加 npmignore 项
+
 ## 2.0.4
 
 ### Patch Changes

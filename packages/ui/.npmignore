@@ -1,4 +1,4 @@
-src
+src/index.ts
 node_modules
 CHANGELOG.MD
 rollup.config.js
