@@ -21,12 +21,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx lint-staged",
-      "commit-msg": "npx --no -- commitlint --edit $1"
-    }
-  },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "pnpm lint:js",
