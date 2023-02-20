@@ -7,7 +7,6 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -25,13 +24,11 @@
   },
   "plugins": [
     "react",
-    "prettier",
     "@typescript-eslint"
   ],
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "endOfLine": 0,
-    "prettier/prettier": 0,
-    "react/jsx-no-target-blank": 0
+    "react/jsx-no-target-blank": 0,
+    "@typescript-eslint/no-unused-vars": 2
   }
 }
