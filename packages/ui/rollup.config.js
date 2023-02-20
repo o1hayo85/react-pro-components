@@ -10,51 +10,52 @@ import cssnanoPlugin from 'cssnano';
 
 const generatePath = (filePath) => {
   const cwd = process.cwd();
-  return path.join(cwd, filePath)
-}
+  return path.join(cwd, filePath);
+};
 
-export default [{
-  input: './src/index.ts',
-  external: ['react', 'react-dom'],
-  output: [
-    {
-      file: generatePath('/dist/bundle.cjs.js'),
-      format: "cjs",
-    },
-    {
-      file: generatePath('/dist/bundle.es.js'),
-      format: "es",
-    }
-  ],
-  plugins: [
-    postcss({
-      plugins: [autoprefixer, cssnanoPlugin],
-       extensions: [ '.css', '.less' ],
-       extract: generatePath('/dist/bundle.css')
-      }),
-    resolve(),
-    commonjs(),
-    typescript(
+export default [
+  {
+    input: './src/index.ts',
+    external: ['react', 'react-dom'],
+    output: [
       {
-        tsconfig: generatePath('/tsconfig.build.json')
-      }
-    ),
-    filesize()
-  ]
-}, {
-  input: './src/index.ts',
-  output: [
-    {
-      file: generatePath('/dist/index.d.ts'),
-      format: "es",
-    }
-  ],
-  plugins: [
-    postcss({
-      plugins: [autoprefixer, cssnanoPlugin],
-      extensions: [ '.css', '.less' ],
-      extract: generatePath('/dist/bundle.css')
-     }),
-    dts()
-  ]
-}]
+        file: generatePath('/dist/bundle.cjs.js'),
+        format: 'cjs',
+      },
+      {
+        file: generatePath('/dist/bundle.es.js'),
+        format: 'es',
+      },
+    ],
+    plugins: [
+      postcss({
+        plugins: [autoprefixer, cssnanoPlugin],
+        extensions: ['.css', '.less'],
+        extract: generatePath('/dist/bundle.css'),
+      }),
+      resolve(),
+      commonjs(),
+      typescript({
+        tsconfig: generatePath('/tsconfig.build.json'),
+      }),
+      filesize(),
+    ],
+  },
+  {
+    input: './src/index.ts',
+    output: [
+      {
+        file: generatePath('/dist/index.d.ts'),
+        format: 'es',
+      },
+    ],
+    plugins: [
+      postcss({
+        plugins: [autoprefixer, cssnanoPlugin],
+        extensions: ['.css', '.less'],
+        extract: generatePath('/dist/bundle.css'),
+      }),
+      dts(),
+    ],
+  },
+];

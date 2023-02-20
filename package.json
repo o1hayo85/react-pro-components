@@ -10,7 +10,8 @@
     "build": "pnpm --filter mini-component-ui build",
     "changeset": "changeset",
     "update:version": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "lint": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx ."
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,13 @@
     "@changesets/cli": "^2.26.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4",
     "rimraf": "^4.1.2",
     "rollup": "^3.15.0",
     "typescript": "^4.9.5"
