@@ -13,7 +13,8 @@
     "release": "changeset publish",
     "lint:js": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx .",
     "lint-staged": "lint-staged --allow-empty",
-    "commit": "cz"
+    "prepare": "husky install",
+    "commit": "git add . && cz"
   },
   "config": {
     "commitizen": {
@@ -22,8 +23,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add . && lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && validate-commit-msg"
+      "pre-commit": "npx lint-staged",
+      "commit-msg": "npx --no -- commitlint --edit $1"
     }
   },
   "lint-staged": {
@@ -54,12 +55,10 @@
     "commitizen": "^4.3.0",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "^3.3.0",
-    "cz-conventional-changelog-zh": "^0.0.2",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "husk": "^0.5.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",

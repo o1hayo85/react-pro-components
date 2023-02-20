@@ -14,12 +14,10 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-cli: ^2.2.2
       cz-conventional-changelog: ^3.3.0
-      cz-conventional-changelog-zh: ^0.0.2
       eslint: ^8.34.0
       eslint-config-prettier: ^8.6.0
       eslint-plugin-prettier: ^4.2.1
       eslint-plugin-react: ^7.32.2
-      husk: ^0.5.3
       husky: ^8.0.3
       lint-staged: ^13.1.2
       prettier: ^2.8.4
@@ -42,12 +40,10 @@ importers:
       commitizen: 4.3.0
       conventional-changelog-cli: 2.2.2
       cz-conventional-changelog: 3.3.0
-      cz-conventional-changelog-zh: 0.0.2
       eslint: 8.34.0
       eslint-config-prettier: 8.6.0_eslint@8.34.0
       eslint-plugin-prettier: 4.2.1_u5wnrdwibbfomslmnramz52buy
       eslint-plugin-react: 7.32.2_eslint@8.34.0
-      husk: 0.5.3
       husky: 8.0.3
       lint-staged: 13.1.2
       prettier: 2.8.4
@@ -1618,12 +1614,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /async-stream-flow/1.0.2:
-    resolution: {integrity: sha512-Iy1ynz7dKRhlvypxRm3zLbPDJsYaeKOQRfxRhZEM3ZZCNq3N0jR/T6KRUJxWVf9AHi5ynj/Wp4L7gATeLGSW9g==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: true
@@ -2428,24 +2418,6 @@ packages:
       csv-parse: 4.16.3
       csv-stringify: 5.6.5
       stream-transform: 2.1.3
-    dev: true
-
-  /cz-conventional-changelog-zh/0.0.2:
-    resolution: {integrity: sha512-rXy2HiG/0M7xChuodAN1L9qHDWTBInGTljaE59AlyqrXQAv0srg147vjep5CO7mGtxVYJQJi9TVP5KVZMWxDqQ==}
-    engines: {node: '>= 10'}
-    dependencies:
-      chalk: 2.4.2
-      commitizen: 4.3.0
-      conventional-commit-types: 3.0.0
-      lodash.assign: 4.2.0
-      lodash.map: 4.6.0
-      longest: 2.0.1
-      word-wrap: 1.2.3
-    optionalDependencies:
-      '@commitlint/load': 17.4.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
     dev: true
 
   /cz-conventional-changelog/3.3.0:
@@ -3260,13 +3232,6 @@ packages:
       universalify: 2.0.0
     dev: true
 
-  /fs-flow/1.0.2:
-    resolution: {integrity: sha512-AUYZEh7fNmZFHm8w2S4rs0oaJg0l/a8AXLAAFqu/ulmpbPoIxkovrfw/j9GcAYxIc3Oj7eRIibTX82s5+nCtag==}
-    dependencies:
-      async-stream-flow: 1.0.2
-      through3: 1.1.7
-    dev: true
-
   /fs-minipass/2.1.0:
     resolution: {integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==}
     engines: {node: '>= 8'}
@@ -3671,53 +3636,6 @@ packages:
     resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}
     dependencies:
       ms: 2.1.2
-    dev: true
-
-  /husk-async/1.0.3:
-    resolution: {integrity: sha512-VW6/vJKdnhbybdeh4e0ITZ1azI50xmTUrfBSuZhOcTxTOyinJLt1/RsegJXmK+c92MzcOr9WsOJpSt6EZW11xg==}
-    dependencies:
-      async-stream-flow: 1.0.2
-    dev: true
-
-  /husk-core/1.0.4:
-    resolution: {integrity: sha512-duZv9ZJFlUt44vwEGLW1HvnzL9kS6AQklydtOYRJ4BT9O9aZ1Aixtt0sBv7b2dTicchYMpSkdJJNVpC8BKT0cA==}
-    dependencies:
-      husk-print: 1.0.3
-      husk-through: 1.0.2
-    dev: true
-
-  /husk-exec/1.0.4:
-    resolution: {integrity: sha512-eHZH+pYbDGFZXxvvvUhi0Jj8QA4963XpjuYk11ytK/oF2LcLGp9dzng7OUytHa9Y+EucdfGl+7js9Klurwntyw==}
-    dependencies:
-      process-flow: 1.0.2
-    dev: true
-
-  /husk-fs/1.0.3:
-    resolution: {integrity: sha512-OizyOaE/FlV/11SOWUOvgBmIvZD3/bGghKQafzNtq4I6VePWZ2kH3q1zuck1cLfhOcYztdVdZaOaRC+rFHOcBg==}
-    dependencies:
-      fs-flow: 1.0.2
-    dev: true
-
-  /husk-print/1.0.3:
-    resolution: {integrity: sha512-paJ8IGpFoS9vKdWHS4tqtiwoF6dX48Il4z1/yP+9ulEwm6RTpC42mkKAj6MtD+CIYAxCLAwYvkTwMqh1Vg/KWg==}
-    dependencies:
-      print-flow: 1.0.2
-    dev: true
-
-  /husk-through/1.0.2:
-    resolution: {integrity: sha512-hm0xz/MkfZDxHm0PFm07sb+FuHTHCtPHeXNcBtf0Kl/vKx2hQoliYU1NC5JVjO+fe79z4uCBfI9/l3rFctIFwg==}
-    dependencies:
-      through-flow: 1.0.2
-    dev: true
-
-  /husk/0.5.3:
-    resolution: {integrity: sha512-4rLByTytY2LtiuyiRQ20C4AmSZ0+/imh1557r92TFcgAgeTgcsVwHlGLi2nO4QNiEKhvhlPj9HuCjKWfwNtwYA==}
-    dependencies:
-      husk-async: 1.0.3
-      husk-core: 1.0.4
-      husk-exec: 1.0.4
-      husk-fs: 1.0.3
-      zephyr: 1.2.8
     dev: true
 
   /husky/8.0.3:
@@ -4340,10 +4258,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-    dev: true
-
-  /lodash.assign/4.2.0:
-    resolution: {integrity: sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==}
     dev: true
 
   /lodash.camelcase/4.3.0:
@@ -5695,18 +5609,6 @@ packages:
     hasBin: true
     dev: true
 
-  /print-flow/1.0.2:
-    resolution: {integrity: sha512-yg5dgWP8pvtV0vWEQNXP47Nwnmt+3gOJg0EgH6mXfrUUlz/fVX7Xkif5gGMiSDMq3QGwswE3RoTlgzSMpRLs1g==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
-  /process-flow/1.0.2:
-    resolution: {integrity: sha512-MJGNN728wtacWIPgp+bsUKwtNX9aKOw2HZVD+jrnZkTMCf4jrhvZnZnEaz6NUHKEy7rEFmz6sVDmz7O2k06xvQ==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: true
@@ -6602,12 +6504,6 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /through-flow/1.0.2:
-    resolution: {integrity: sha512-j6IAxjqlbQAdQ45aQ2qw/TLdOsh3mzsaOtnMnw2ceW6N+zowlQZX3EXLhnqoa6Sz+NUdZdxzAEQhLTXSXHVoNw==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
@@ -6623,10 +6519,6 @@ packages:
     resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
     dependencies:
       readable-stream: 3.6.0
-    dev: true
-
-  /through3/1.1.7:
-    resolution: {integrity: sha512-9bUZXDGridMzC3uqRKw+ilb4n4S0Fo6AQNi9wM9zBYHJpQVsfI4JaroFSACXmDKViL+upDI3+V/io3UwlCTmtA==}
     dev: true
 
   /tmp/0.0.33:
@@ -7114,8 +7006,4 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
-
-  /zephyr/1.2.8:
-    resolution: {integrity: sha512-Evw01lEec5dp3gUlyKrCSRlZpcO2FpRq+SgpA1Ha9YgGKY2kFkGh6S3nVgzCagN9HtD//vmET/fQzojiK+NYog==}
     dev: true
