@@ -5,7 +5,7 @@
   "fixed": [],
   "linked": [["mini-component-ui"]],
   "access": "public",
-  "baseBranch": "master",
+  "baseBranch": "mini-component",
   "updateInternalDependencies": "patch",
   "ignore": ["playground"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
