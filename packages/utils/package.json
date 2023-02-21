@@ -1,6 +1,6 @@
 {
   "name": "mini-component-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "utils function lib",
   "private": false,
   "type": "module",
@@ -16,6 +16,9 @@
   },
   "keywords": [
     "utils"
+  ],
+  "files": [
+    "dist"
   ],
   "author": "",
   "license": "ISC",
