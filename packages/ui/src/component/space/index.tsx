@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { useFlexGapSupport } from '../../hooks/useFlexGapSupport';
 
 import SpaceItem from './item';
 import './index.less';
@@ -48,7 +49,7 @@ const Space: React.FC<SpaceProps> = (props) => {
     ...otherProps
   } = props;
 
-  const supportFlexGap = true;
+  const supportFlexGap = useFlexGapSupport();
 
   const alignMerged = align === undefined && direction === 'horizontal' ? 'center' : align;
 
@@ -103,7 +104,12 @@ const Space: React.FC<SpaceProps> = (props) => {
   }
 
   if (wrap) {
-    gapStyle.flexWrap = 'wrap'
+    gapStyle.flexWrap = 'wrap';
+
+    // WHY ???
+    if(!supportFlexGap) {
+      gapStyle.marginBottom = -verticalSize;
+    }
   }
 
   if (supportFlexGap) {

@@ -12,19 +12,32 @@ export interface SpaceItemProps {
 }
 
 const Item:React.FC<SpaceItemProps> = (props) => {
-  const { latestIndex } = React.useContext(SpaceContext);
+  const { latestIndex, verticalSize, horizontalSize, supportFlexGap } = React.useContext(SpaceContext);
 
   const { 
     className,
     children,
     index,
-    // direction,
-    // marginDirection,
+    direction,
+    marginDirection,
     split,
-    // wrap
+    wrap
    } = props;
 
-  const style: React.CSSProperties = {};
+  let style: React.CSSProperties = {};
+
+  if(!supportFlexGap) {
+    if(direction === 'vertical') {
+      if(index < latestIndex) {
+        style = { marginBottom: horizontalSize / (split ? 2 : 1) }
+      }
+    } else {
+      style = {
+        ...(index < latestIndex && { [marginDirection]: horizontalSize / (split ? 2 : 1) }),
+        ...(wrap && { paddingBottom: verticalSize })
+      }
+    }
+  }
    
 
   return (

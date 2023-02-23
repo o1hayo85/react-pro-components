@@ -1,12 +1,12 @@
 
-let flexGapSupport: boolean | undefined;
+let flexGapSupported: boolean | undefined;
 export function detectFlexGapSupported() {
-  if (!window.document.documentElement) {
-    return false
+  if (flexGapSupported !== undefined) {
+    return flexGapSupported;
   }
 
-  if (flexGapSupport !== undefined) {
-    return flexGapSupport;
+  if (!window.document.documentElement) {
+    return false
   }
 
   const flex = document.createElement('div');
@@ -16,4 +16,8 @@ export function detectFlexGapSupported() {
 
   flex.appendChild(document.createElement('div'))
   flex.appendChild(document.createElement('div'))
+
+  document.body.append(flex);
+  flexGapSupported = flex.scrollHeight === 1; // 判断是否rowGap生效
+  return flexGapSupported
 }

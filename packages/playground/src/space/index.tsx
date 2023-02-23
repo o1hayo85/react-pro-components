@@ -5,8 +5,9 @@ const SpaceDemo:React.FC<unknown> = () => {
   return (
     <Space
       size="middle"
-      direction='vertical'
-      align='end'
+      direction='horizontal'
+      align='center'
+      split="|"
     >
       <Button>测试1</Button>
       <Button>测试2</Button>
